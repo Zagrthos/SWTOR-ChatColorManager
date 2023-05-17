@@ -108,7 +108,9 @@ namespace ChatManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Es wurde eine aktive SWTOR Instanz gefunden, bitte schließe sie zuerst!.
+        ///   Looks up a localized string similar to Es wurde eine aktive SWTOR Instanz gefunden, bitte schließe das Spiel zuerst!
+        ///
+        ///Andernfalls kann die korrekte Funktion der Änderungen nicht garantiert werden..
         /// </summary>
         internal static string Warn_SWTORrunning {
             get {

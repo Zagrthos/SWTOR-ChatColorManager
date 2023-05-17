@@ -18,20 +18,20 @@ namespace ChatManager.Services
         // Check if SWTOR is running
         public static bool CheckSWTORprocessFound()
         {
+            bool found = false;
+
             // Check all Processes for SWTOR
             foreach (Process process in Process.GetProcesses())
             {
-                // Check for ProcessNames
-                return process.ProcessName switch
+                // If found set true and stop loop
+                if (process.ProcessName == "swtor")
                 {
-                    "swtor" => true,
-                    "BsSndRpt64" => true,
-                    _ => false,
-                };
+                    found = true;
+                    break;
+                }
             }
 
-            // If nothing found return false
-            return false;
+            return found;
         }
 
         // Check if Path exists

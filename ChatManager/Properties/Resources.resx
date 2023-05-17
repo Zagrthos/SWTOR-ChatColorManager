@@ -135,7 +135,9 @@
 Ist das Spiel installiert?</value>
   </data>
   <data name="Warn_SWTORrunning" xml:space="preserve">
-    <value>Es wurde eine aktive SWTOR Instanz gefunden, bitte schließe sie zuerst!</value>
+    <value>Es wurde eine aktive SWTOR Instanz gefunden, bitte schließe das Spiel zuerst!
+
+Andernfalls kann die korrekte Funktion der Änderungen nicht garantiert werden.</value>
   </data>
   <data name="Warn_TextBoxEmpty" xml:space="preserve">
     <value>Es muss zuerst eine Datei importiert werden!</value>
