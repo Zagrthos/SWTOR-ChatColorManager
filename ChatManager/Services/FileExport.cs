@@ -60,16 +60,22 @@ namespace ChatManager.Services
         {
             Logging.Write(LogEvent.Method, ProgramClass.FileExport, "WriteContentToFile entered").ConfigureAwait(false);
 
+            // Check if backupDir exists and if not show a warning Box
             if (!backupDir)
             {
                 ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_BackupDirMissing);
             }
 
+            // Check if the user selected any characters
             if (fileNames.Length != 0)
             {
                 Logging.Write(LogEvent.Info, ProgramClass.FileExport, "fileNames Array selected").ConfigureAwait(false);
+                
+                // Get the Array from the association
                 string[,] name = AssociateFileWithServer();
 
+                // Debug Purposes only
+                // Log every entry if it's not null or empty
                 for (int i = 0; i < 100; i++)
                 {
                     if (!string.IsNullOrEmpty(name[i, 0]) && !string.IsNullOrEmpty(name[i, 1]))
@@ -81,6 +87,7 @@ namespace ChatManager.Services
                     Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current name[{i}, 1] is: {name[i, 1]}").ConfigureAwait(false);
                 }
 
+                // Loop through the arrayCounter and Copy all files in the array to the backup position
                 for (int i = 0; i < arrayCounter; i++)
                 {
                     Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current i is: {i}").ConfigureAwait(false);
@@ -96,8 +103,16 @@ namespace ChatManager.Services
                         string newPath = $"{backupPath}\\{fileName}";
                         Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current newPath is: {newPath}").ConfigureAwait(false);
 
-                        File.Copy(path, newPath, true);
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"File {name[i, 0]} copied to: {newPath}").ConfigureAwait(false);
+                        // Copy only if the dir is present
+                        if (backupDir)
+                        {
+                            File.Copy(path, newPath, true);
+                            Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"File {name[i, 0]} copied to: {newPath}").ConfigureAwait(false);
+                        }
+                        else
+                        {
+                            Logging.Write(LogEvent.Warning, ProgramClass.FileExport, $"File {name[i, 0]} NOT copied to: {newPath}!").ConfigureAwait(false);
+                        }
                     }
                     else
                     {
