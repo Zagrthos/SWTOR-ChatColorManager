@@ -78,6 +78,7 @@ namespace ChatManager
         private void ToolStripMenuHandler(object sender, EventArgs e)
         {
             Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ToolStripMainMenuHandler entered").ConfigureAwait(false);
+
             // Check if sender is a ToolStripMenuItem
             if (sender is ToolStripMenuItem menuItem)
             {
@@ -86,6 +87,7 @@ namespace ChatManager
                 {
                     "charFolderToolStripMenuItem" => FileImport.GetCharPath,
                     "logFolderToolStripMenuItem" => Logging.GetLogPath,
+                    "backupToolStripMenuItem" => FileExport.GetBackupPath,
                     _ => "%SYSTEMDRIVE%",
                 };
 
@@ -215,7 +217,21 @@ namespace ChatManager
             {
                 await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "SWTOR is not running!").ConfigureAwait(false);
             }
-            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm is starting").ConfigureAwait(false);
+
+            FileExport fileExport = new();
+
+            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if BackupPath is available").ConfigureAwait(false);
+            if (!FileExport.GetBackupAvailable)
+            {
+                backupToolStripMenuItem.Enabled = false;
+                await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "BackupPath is not available!").ConfigureAwait(false);
+            }
+            else
+            {
+                await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "BackupPath is available!").ConfigureAwait(false);
+            }
+
+            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm is loading").ConfigureAwait(false);
         }
 
         // When the Form is closing, log it

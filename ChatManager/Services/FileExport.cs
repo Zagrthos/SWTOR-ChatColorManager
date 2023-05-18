@@ -26,6 +26,9 @@ namespace ChatManager.Services
         // Is used for positioning the characters in the array
         private static int arrayCounter = 0;
 
+        public static bool GetBackupAvailable => backupDir;
+        public static string GetBackupPath => backupPath;
+
         private static void BackupDirectory()
         {
             Logging.Write(LogEvent.Method, ProgramClass.FileExport, "BackupDirectory entered").ConfigureAwait(false);

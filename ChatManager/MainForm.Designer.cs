@@ -52,6 +52,7 @@
             selectAllToolStripMenuItem = new ToolStripMenuItem();
             toolsToolStripMenuItem = new ToolStripMenuItem();
             charFolderToolStripMenuItem = new ToolStripMenuItem();
+            backupToolStripMenuItem = new ToolStripMenuItem();
             logFolderToolStripMenuItem = new ToolStripMenuItem();
             optionsToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
@@ -283,7 +284,7 @@
             // toolsToolStripMenuItem
             // 
             toolsToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { charFolderToolStripMenuItem, logFolderToolStripMenuItem, optionsToolStripMenuItem });
+            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { charFolderToolStripMenuItem, backupToolStripMenuItem, logFolderToolStripMenuItem, optionsToolStripMenuItem });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new Size(46, 20);
             toolsToolStripMenuItem.Text = "Tools";
@@ -291,14 +292,21 @@
             // charFolderToolStripMenuItem
             // 
             charFolderToolStripMenuItem.Name = "charFolderToolStripMenuItem";
-            charFolderToolStripMenuItem.Size = new Size(203, 22);
+            charFolderToolStripMenuItem.Size = new Size(209, 22);
             charFolderToolStripMenuItem.Text = "Charakter Ordner öffnen";
             charFolderToolStripMenuItem.Click += ToolStripMenuHandler;
+            // 
+            // backupToolStripMenuItem
+            // 
+            backupToolStripMenuItem.Name = "backupToolStripMenuItem";
+            backupToolStripMenuItem.Size = new Size(209, 22);
+            backupToolStripMenuItem.Text = "Backupverzeichnis öffnen";
+            backupToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // logFolderToolStripMenuItem
             // 
             logFolderToolStripMenuItem.Name = "logFolderToolStripMenuItem";
-            logFolderToolStripMenuItem.Size = new Size(203, 22);
+            logFolderToolStripMenuItem.Size = new Size(209, 22);
             logFolderToolStripMenuItem.Text = "Log Dateien öffnen";
             logFolderToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
@@ -306,7 +314,7 @@
             // 
             optionsToolStripMenuItem.Enabled = false;
             optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            optionsToolStripMenuItem.Size = new Size(203, 22);
+            optionsToolStripMenuItem.Size = new Size(209, 22);
             optionsToolStripMenuItem.Text = "Einstellungen";
             optionsToolStripMenuItem.Visible = false;
             // 
@@ -1040,5 +1048,6 @@
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem logFolderToolStripMenuItem;
         private ToolStripMenuItem supportToolStripMenuItem;
+        private ToolStripMenuItem backupToolStripMenuItem;
     }
 }
