@@ -129,6 +129,11 @@
   <data name="MessageBoxWarn" xml:space="preserve">
     <value>Warnung</value>
   </data>
+  <data name="Warn_BackupDirMissing" xml:space="preserve">
+    <value>Es konnte kein Backup Verzeichnis erstellt werden!
+
+Fortfahren auf eigene Gefahr!</value>
+  </data>
   <data name="Warn_SWTORpathNotFound" xml:space="preserve">
     <value>Der Pfad für die lokalen Dateien von SWTOR wurde nicht gefunden!
 

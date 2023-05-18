@@ -97,6 +97,17 @@ namespace ChatManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Es konnte kein Backup Verzeichnis erstellt werden!
+        ///
+        ///Fortfahren auf eigene Gefahr!.
+        /// </summary>
+        internal static string Warn_BackupDirMissing {
+            get {
+                return ResourceManager.GetString("Warn_BackupDirMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Der Pfad für die lokalen Dateien von SWTOR wurde nicht gefunden!
         ///
         ///Ist das Spiel installiert?.

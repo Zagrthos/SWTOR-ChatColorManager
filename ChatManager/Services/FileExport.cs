@@ -1,4 +1,5 @@
 ﻿using ChatManager.Forms;
+using ChatManager.Properties;
 
 namespace ChatManager.Services
 {
@@ -21,6 +22,8 @@ namespace ChatManager.Services
 
         private static readonly string[] selectedServers = FileSelectorForm.GetSelectedServers;
         private static readonly string[] fileNames = FileSelectorForm.GetListBoxMulti.ToArray();
+        
+        // Is used for positioning the characters in the array
         private static int arrayCounter = 0;
 
         private static void BackupDirectory()
@@ -33,6 +36,7 @@ namespace ChatManager.Services
                 Logging.Write(LogEvent.Info, ProgramClass.FileExport, "Backup does not exist, creating it").ConfigureAwait(false);
                 Directory.CreateDirectory(backupPath);
 
+                Logging.Write(LogEvent.Info, ProgramClass.FileExport, "Checking again if Backup Dir exists").ConfigureAwait(false);
                 if (Directory.Exists(backupPath))
                 {
                     Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Backup Dir created at: {backupPath}").ConfigureAwait(false);
@@ -55,6 +59,11 @@ namespace ChatManager.Services
         public void WriteContentToFile(/*string content*/)
         {
             Logging.Write(LogEvent.Method, ProgramClass.FileExport, "WriteContentToFile entered").ConfigureAwait(false);
+
+            if (!backupDir)
+            {
+                ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_BackupDirMissing);
+            }
 
             if (fileNames.Length != 0)
             {
@@ -128,7 +137,9 @@ namespace ChatManager.Services
                 // Loop through and check them
                 for (int i = 0; i < fileNames.Length-1; i++)
                 {
-                    // If name is not filled and counter is same length as selected chars stop it
+                    // i is used to identify the name of the available characters
+
+                    // If name is not filled stop it
                     if (string.IsNullOrEmpty(name[arrayCounter, 0]))
                     {
                         break;
@@ -136,28 +147,43 @@ namespace ChatManager.Services
 
                     Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"name[{arrayCounter}, 0] is: {name[arrayCounter, 0]}").ConfigureAwait(false);
 
-                    // Compare the current fileName with the current Name of the Array
+                    // Loop through all fileNames
                     for (int j = 0; j < fileNames.Length; j++)
                     {
+                        // j is used to identify the selected filename by the user
+
+                        // Get the path
                         string file = fileNames[j];
                         Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current file is: {file}").ConfigureAwait(false);
 
+                        // Get the filename
                         string fileName = Path.GetFileName(name[i, 1]);
                         Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current fileName is: {fileName}").ConfigureAwait(false);
 
+                        // If file or fileName is null or empty stop it
                         if (string.IsNullOrEmpty(name[i, 0]) && string.IsNullOrEmpty(fileName))
                         {
                             break;
                         }
 
+                        // Check if the name of the character is the same as the one that was selected
+                        // and check if the fileName starts with the server prefix
                         if (name[j, 0] == file && fileName.StartsWith(Checks.ServerNameIdentifier(server)))
                         {
                             Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"arrayCounter is: {arrayCounter}").ConfigureAwait(false);
 
+                            // If the entry in the array is not null or empty do it,
+                            // insert the data in the array, set the counter one up
+                            // and then stop if it was inserted in the array
                             if (!string.IsNullOrEmpty(name[i, 1]))
                             {
+                                // the fileName
                                 namesWithServers[arrayCounter, 0] = fileNames[arrayCounter];
+
+                                // the filePath
                                 namesWithServers[arrayCounter, 1] = name[i, 1];
+
+                                // the server
                                 namesWithServers[arrayCounter, 2] = server;
 
                                 Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"{fileNames[arrayCounter]}").ConfigureAwait(false);
