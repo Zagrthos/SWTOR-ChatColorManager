@@ -52,30 +52,53 @@ namespace ChatManager.Services
             }
         }
 
-        public async void WriteContentToFile(/*string content*/)
+        public void WriteContentToFile(/*string content*/)
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.FileExport, "WriteContentToFile entered").ConfigureAwait(false);
+            Logging.Write(LogEvent.Method, ProgramClass.FileExport, "WriteContentToFile entered").ConfigureAwait(false);
 
             if (fileNames.Length != 0)
             {
-                await Logging.Write(LogEvent.Info, ProgramClass.FileExport, "fileNames Array selected").ConfigureAwait(false);
+                Logging.Write(LogEvent.Info, ProgramClass.FileExport, "fileNames Array selected").ConfigureAwait(false);
                 string[,] name = AssociateFileWithServer();
+
+                for (int i = 0; i < 100; i++)
+                {
+                    if (!string.IsNullOrEmpty(name[i, 0]) && !string.IsNullOrEmpty(name[i, 1]))
+                    {
+                        break;
+                    }
+
+                    Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current name[{i}, 0] is: {name[i, 0]}").ConfigureAwait(false);
+                    Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current name[{i}, 1] is: {name[i, 1]}").ConfigureAwait(false);
+                }
 
                 for (int i = 0; i < arrayCounter; i++)
                 {
-                    if (name[i, 0] != null && name[i, 1] != null)
+                    Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current i is: {i}").ConfigureAwait(false);
+
+                    if (!string.IsNullOrEmpty(name[i, 0]) && !string.IsNullOrEmpty(name[i, 1]))
                     {
                         string path = name[i, 1];
+                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current path is: {path}").ConfigureAwait(false);
+
                         string fileName = Path.GetFileName(name[i, 1]);
+                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current fileName is: {fileName}").ConfigureAwait(false);
+
                         string newPath = $"{backupPath}\\{fileName}";
+                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current newPath is: {newPath}").ConfigureAwait(false);
+
                         File.Copy(path, newPath, true);
-                        await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"File {name[i, 0]} copied to: {newPath}").ConfigureAwait(false);
+                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"File {name[i, 0]} copied to: {newPath}").ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current i: {i} is null or empty").ConfigureAwait(false);
                     }
                 }
             }
             else
             {
-                await Logging.Write(LogEvent.Warning, ProgramClass.FileExport, "fileNames Array is empty").ConfigureAwait(false);
+                Logging.Write(LogEvent.Warning, ProgramClass.FileExport, "fileNames Array is empty!").ConfigureAwait(false);
             }
         }
 
@@ -97,35 +120,59 @@ namespace ChatManager.Services
                     break;
                 }
 
-                // Create a counter how many files are imported
-                int counter = 0;
+                Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current server is: {server}").ConfigureAwait(false);
 
                 // Get the names from all characters on this server
                 string[,] name = fileImport.GetArray(server);
 
                 // Loop through and check them
-                for (int i = 0; i < name.Length; i++)
+                for (int i = 0; i < fileNames.Length-1; i++)
                 {
                     // If name is not filled and counter is same length as selected chars stop it
-                    if (string.IsNullOrEmpty(name[i, 0]) && counter == fileNames.Length)
+                    if (string.IsNullOrEmpty(name[arrayCounter, 0]))
                     {
                         break;
                     }
 
-                    foreach (string file in fileNames)
+                    Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"name[{arrayCounter}, 0] is: {name[arrayCounter, 0]}").ConfigureAwait(false);
+
+                    // Compare the current fileName with the current Name of the Array
+                    for (int j = 0; j < fileNames.Length; j++)
                     {
-                        if (name[i, 0] == file)
+                        string file = fileNames[j];
+                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current file is: {file}").ConfigureAwait(false);
+
+                        string fileName = Path.GetFileName(name[i, 1]);
+                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current fileName is: {fileName}").ConfigureAwait(false);
+
+                        if (string.IsNullOrEmpty(name[i, 0]) && string.IsNullOrEmpty(fileName))
                         {
-                            namesWithServers[counter, 0] = fileNames[counter];
-                            namesWithServers[counter, 1] = name[counter, 1];
-                            namesWithServers[counter, 2] = server;
-                            counter++;
+                            break;
+                        }
+
+                        if (name[j, 0] == file && fileName.StartsWith(Checks.ServerNameIdentifier(server)))
+                        {
+                            Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"arrayCounter is: {arrayCounter}").ConfigureAwait(false);
+
+                            if (!string.IsNullOrEmpty(name[i, 1]))
+                            {
+                                namesWithServers[arrayCounter, 0] = fileNames[arrayCounter];
+                                namesWithServers[arrayCounter, 1] = name[i, 1];
+                                namesWithServers[arrayCounter, 2] = server;
+
+                                Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"{fileNames[arrayCounter]}").ConfigureAwait(false);
+
+                                arrayCounter++;
+
+                                break;
+                            }
+                            else
+                            {
+                                Logging.Write(LogEvent.Variable, ProgramClass.FileExport, "Already done or null").ConfigureAwait(false);
+                            }
                         }
                     }
                 }
-
-                // Set the counter so we don't have to loop through every entry
-                arrayCounter = counter;
             }
 
             return namesWithServers;

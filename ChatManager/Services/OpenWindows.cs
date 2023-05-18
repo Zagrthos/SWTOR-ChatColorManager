@@ -60,7 +60,7 @@ namespace ChatManager.Services
 
             FileExport fileExport = new();
             fileExport.WriteContentToFile();
-            
+
             fileSelector.Dispose();
         }
 

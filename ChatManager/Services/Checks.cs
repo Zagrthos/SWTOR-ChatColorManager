@@ -45,5 +45,26 @@ namespace ChatManager.Services
                 return false;
             }
         }
+
+        // Associate server name to identifier
+        public static string ServerNameIdentifier(string name)
+        {
+            if (!string.IsNullOrEmpty(name))
+            {
+                return name switch
+                {
+                    "StarForge" => "he3000",
+                    "SateleShan" => "he3001",
+                    "DarthMalgus" => "he4000",
+                    "TulakHord" => "he4001",
+                    "TheLeviathan" => "he4002",
+                    _ => string.Empty,
+                };
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
     }
 }
