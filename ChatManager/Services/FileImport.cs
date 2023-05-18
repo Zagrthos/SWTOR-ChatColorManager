@@ -16,11 +16,11 @@
         private static readonly string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SWTOR\\swtor\\settings");
         private static readonly List<string> serverList = new();
 
-        private static readonly string[,] starForgeArray = new string[100, 100];
-        private static readonly string[,] sateleShanArray = new string[100, 100];
-        private static readonly string[,] darthMalgusArray = new string[100, 100];
-        private static readonly string[,] tulakHordArray = new string[100, 100];
-        private static readonly string[,] theLeviathanArray = new string[100, 100];
+        private static readonly string[,] starForgeArray = new string[100, 2];
+        private static readonly string[,] sateleShanArray = new string[100, 2];
+        private static readonly string[,] darthMalgusArray = new string[100, 2];
+        private static readonly string[,] tulakHordArray = new string[100, 2];
+        private static readonly string[,] theLeviathanArray = new string[100, 2];
 
         // Get Methods to exchange data to other parts of the program
         public static string GetCharPath => filePath;
@@ -44,18 +44,18 @@
         }
 
         // Get the local files
-        private async void GetLocalFiles()
+        private static void GetLocalFiles()
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetLocalFiles entered").ConfigureAwait(false);
-            await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePath: {filePath}").ConfigureAwait(false);
+            Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetLocalFiles entered").ConfigureAwait(false);
+            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePath: {filePath}").ConfigureAwait(false);
 
             // Search the given Path for files
             string[] charFilePaths = Directory.GetFiles(filePath);
-            await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePaths: {charFilePaths.Length}").ConfigureAwait(false);
+            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePaths: {charFilePaths.Length}").ConfigureAwait(false);
 
             // Convert all filePaths to fileNames
             string?[] charFileNames = charFilePaths.Select(Path.GetFileName).ToArray();
-            await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"files: {charFileNames.Length}").ConfigureAwait(false);
+            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"files: {charFileNames.Length}").ConfigureAwait(false);
 
             byte starForgeCounter = 0;
             byte sateleShanCounter = 0;
@@ -117,7 +117,7 @@
                 }
             }
 
-            await Logging.Write(LogEvent.Info, ProgramClass.FileImport, "Select the servers by files").ConfigureAwait(false);
+            Logging.Write(LogEvent.Info, ProgramClass.FileImport, "Select the servers by files").ConfigureAwait(false);
 
             // Select the servers by files
             if (starForgeArray[0, 0] != null && starForgeArray[0, 0] != string.Empty)
@@ -141,11 +141,11 @@
                 serverList.Add("TheLeviathan");
             }
 
-            await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"serverList.Count = {serverList.Count}").ConfigureAwait(false);
+            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"serverList.Count = {serverList.Count}").ConfigureAwait(false);
 
             // Set the once runner true
             filesChecked = true;
-            await Logging.Write(LogEvent.Info, ProgramClass.FileImport, $"Set filesChecked = {filesChecked}").ConfigureAwait(false);
+            Logging.Write(LogEvent.Info, ProgramClass.FileImport, $"Set filesChecked = {filesChecked}").ConfigureAwait(false);
         }
 
         // Get the colors from the given File

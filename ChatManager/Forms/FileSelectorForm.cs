@@ -18,13 +18,15 @@ namespace ChatManager.Forms
         }
 
         private readonly bool isSave = false;
-        private string listBoxString = string.Empty;
-        private string listBoxName = string.Empty;
-        private readonly string[] selectedServers = new string[5];
-        private readonly List<string> listBoxMulti = new();
+        private static string listBoxString = string.Empty;
+        private static string listBoxName = string.Empty;
+        private static readonly string[] selectedServers = new string[5];
+        private static readonly List<string> listBoxMulti = new();
 
-        public string GetListBoxString => listBoxString;
-        public string GetListBoxName => listBoxName;
+        public static string GetListBoxString => listBoxString;
+        public static string GetListBoxName => listBoxName;
+        public static string[] GetSelectedServers => selectedServers;
+        public static List<string> GetListBoxMulti => listBoxMulti;
 
         // Remove the not needed servers from the List
         private async void SetTabs(List<string> servers)
@@ -190,6 +192,7 @@ namespace ChatManager.Forms
             }
         }
 
+        // On Click of the Button "Select"
         private async void ListBoxClick(object sender, EventArgs e)
         {
             await Logging.Write(LogEvent.Method, ProgramClass.FileSelectorForm, "ListBoxClick entered").ConfigureAwait(false);
@@ -225,16 +228,16 @@ namespace ChatManager.Forms
                             CheckedListBox? checkedListBox = getControl as CheckedListBox;
                             await Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"CheckedListBox is: {checkedListBox!.Name}").ConfigureAwait(false);
 
-                            // Set the selectedServers to the correct name
-                            selectedServers[counter] = checkedListBox.Name.Substring(4);
-                            await Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"selectedServers[{counter}] is: {selectedServers[counter]}").ConfigureAwait(false);
-
-                            // Count the CheckedListBoxes
-                            counter++;
-
                             // Check if the Controls have ANY checkedItem
                             if (checkedListBox.CheckedItems.Count > 0)
                             {
+                                // Set the selectedServers to the correct name
+                                selectedServers[counter] = checkedListBox.Name.Substring(4);
+                                await Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"selectedServers[{counter}] is: {selectedServers[counter]}").ConfigureAwait(false);
+
+                                // Count the CheckedListBoxes
+                                counter++;
+
                                 // If yes get them all
                                 foreach (var item in checkedListBox.CheckedItems)
                                 {

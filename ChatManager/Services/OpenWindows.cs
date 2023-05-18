@@ -41,8 +41,8 @@ namespace ChatManager.Services
             FileSelectorForm fileSelector = new(fileImport.GetServerList(), false);
             fileSelector.ShowDialog();
 
-            string listBoxString = fileSelector.GetListBoxString;
-            string listBoxName = fileSelector.GetListBoxName;
+            string listBoxString = FileSelectorForm.GetListBoxString;
+            string listBoxName = FileSelectorForm.GetListBoxName;
 
             fileSelector.Dispose();
 
@@ -58,6 +58,9 @@ namespace ChatManager.Services
             FileSelectorForm fileSelector = new(fileImport.GetServerList(), true);
             fileSelector.ShowDialog();
 
+            FileExport fileExport = new();
+            fileExport.WriteContentToFile();
+            
             fileSelector.Dispose();
         }
 
