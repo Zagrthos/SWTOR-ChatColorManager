@@ -1,5 +1,4 @@
 ﻿using System.Timers;
-using Windows.Media.Core;
 
 namespace ChatManager.Services
 {
@@ -33,11 +32,9 @@ namespace ChatManager.Services
     internal static class Logging
     {
         private static readonly string LogSession = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd_HH-mm-ss");
-        private static readonly string LogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Logs");
+        private static readonly string LogPath = GetSetSettings.GetLogPath;
         private static StreamWriter? logWriter;
         private static System.Timers.Timer? timer;
-
-        public static string GetLogPath => LogPath;
 
         internal static async Task Initialize()
         {

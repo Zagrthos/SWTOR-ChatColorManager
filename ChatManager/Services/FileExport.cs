@@ -8,17 +8,10 @@ namespace ChatManager.Services
         public FileExport()
         {
             Logging.Write(LogEvent.Info, ProgramClass.FileExport, "FileExport Constructor created").ConfigureAwait(false);
-
-            if (backupDir != true)
-            {
-                Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"backupDir = {backupDir}").ConfigureAwait(false);
-                BackupDirectory();
-            }
         }
 
-        private static bool backupDir = false;
-        private static readonly string filePath = FileImport.GetCharPath;
-        private static readonly string backupPath = filePath + "\\Backups";
+        private static readonly bool backupAvailability = GetSetSettings.GetBackupAvailability;
+        private static readonly string backupPath = GetSetSettings.GetBackupPath;
 
         private static readonly string[] selectedServers = FileSelectorForm.GetSelectedServers;
         private static readonly string[] fileNames = FileSelectorForm.GetListBoxMulti.ToArray();
@@ -26,45 +19,12 @@ namespace ChatManager.Services
         // Is used for positioning the characters in the array
         private static int arrayCounter = 0;
 
-        public static bool GetBackupAvailable => backupDir;
-        public static string GetBackupPath => backupPath;
-
-        private static void BackupDirectory()
-        {
-            Logging.Write(LogEvent.Method, ProgramClass.FileExport, "BackupDirectory entered").ConfigureAwait(false);
-
-            Logging.Write(LogEvent.Info, ProgramClass.FileExport, "Checking if Backup Dir exists").ConfigureAwait(false);
-            if (!Directory.Exists(backupPath))
-            {
-                Logging.Write(LogEvent.Info, ProgramClass.FileExport, "Backup does not exist, creating it").ConfigureAwait(false);
-                Directory.CreateDirectory(backupPath);
-
-                Logging.Write(LogEvent.Info, ProgramClass.FileExport, "Checking again if Backup Dir exists").ConfigureAwait(false);
-                if (Directory.Exists(backupPath))
-                {
-                    Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Backup Dir created at: {backupPath}").ConfigureAwait(false);
-                    backupDir = true;
-                    Logging.Write(LogEvent.Method, ProgramClass.FileExport, $"Set backupDir to: {backupDir}").ConfigureAwait(false);
-                }
-                else
-                {
-                    Logging.Write(LogEvent.Warning, ProgramClass.FileExport, $"Could not create backup dir!").ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Backup Dir exists at: {backupPath}").ConfigureAwait(false);
-                backupDir = true;
-                Logging.Write(LogEvent.Method, ProgramClass.FileExport, $"Set backupDir to: {backupDir}").ConfigureAwait(false);
-            }
-        }
-
         public void WriteContentToFile(/*string content*/)
         {
             Logging.Write(LogEvent.Method, ProgramClass.FileExport, "WriteContentToFile entered").ConfigureAwait(false);
 
             // Check if backupDir exists and if not show a warning Box
-            if (!backupDir)
+            if (!backupAvailability)
             {
                 ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_BackupDirMissing);
             }
@@ -107,7 +67,7 @@ namespace ChatManager.Services
                         Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current newPath is: {newPath}").ConfigureAwait(false);
 
                         // Copy only if the dir is present
-                        if (backupDir)
+                        if (backupAvailability)
                         {
                             File.Copy(path, newPath, true);
                             Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"File {name[i, 0]} copied to: {newPath}").ConfigureAwait(false);

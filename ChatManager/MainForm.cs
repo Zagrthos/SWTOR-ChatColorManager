@@ -7,7 +7,10 @@ namespace ChatManager
     {
         public MainForm()
         {
+            GetSetSettings.InitSettings();
             InitializeComponent();
+            // TODO: Write own Settings Framework
+            // TODO: Otherwise nothing will work
         }
 
         // Button Click Handler for every button next to the TextBox
@@ -85,9 +88,9 @@ namespace ChatManager
                 // Initialize variable and declare path based on the name of the menuItem
                 string path = menuItem.Name switch
                 {
-                    "charFolderToolStripMenuItem" => FileImport.GetCharPath,
-                    "logFolderToolStripMenuItem" => Logging.GetLogPath,
-                    "backupToolStripMenuItem" => FileExport.GetBackupPath,
+                    "charFolderToolStripMenuItem" => GetSetSettings.GetLocalPath,
+                    "logFolderToolStripMenuItem" => GetSetSettings.GetLogPath,
+                    "backupToolStripMenuItem" => GetSetSettings.GetBackupPath,
                     _ => "%SYSTEMDRIVE%",
                 };
 
@@ -218,17 +221,15 @@ namespace ChatManager
                 await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "SWTOR is not running!").ConfigureAwait(false);
             }
 
-            FileExport fileExport = new();
-
-            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if BackupPath is available").ConfigureAwait(false);
-            if (!FileExport.GetBackupAvailable)
+            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Set BackupOption in Menu").ConfigureAwait(false);
+            if (!Checks.BackupDirectory())
             {
                 backupToolStripMenuItem.Enabled = false;
-                await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "BackupPath is not available!").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "BackupOption is not available!").ConfigureAwait(false);
             }
             else
             {
-                await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "BackupPath is available!").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "BackupOption is available!").ConfigureAwait(false);
             }
 
             await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm is loading").ConfigureAwait(false);

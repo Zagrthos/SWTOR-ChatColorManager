@@ -13,7 +13,7 @@
         }
 
         private static bool filesChecked = false;
-        private static readonly string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SWTOR\\swtor\\settings");
+        private static readonly string filePath = GetSetSettings.GetLocalPath;
         private static readonly List<string> serverList = new();
 
         private static readonly string[,] starForgeArray = new string[100, 2];
@@ -23,8 +23,6 @@
         private static readonly string[,] theLeviathanArray = new string[100, 2];
 
         // Get Methods to exchange data to other parts of the program
-        public static string GetCharPath => filePath;
-
         public string[,] GetArray(string name)
         {
             return name switch

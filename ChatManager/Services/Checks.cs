@@ -66,5 +66,39 @@ namespace ChatManager.Services
                 return string.Empty;
             }
         }
+
+        public static bool BackupDirectory()
+        {
+            Logging.Write(LogEvent.Method, ProgramClass.Checks, "BackupDirectory entered").ConfigureAwait(false);
+
+            string backupPath = GetSetSettings.GetBackupPath;
+
+            Logging.Write(LogEvent.Info, ProgramClass.Checks, "Checking if Backup Dir exists").ConfigureAwait(false);
+            if (!Directory.Exists(backupPath))
+            {
+                Logging.Write(LogEvent.Info, ProgramClass.Checks, "Backup does not exist, creating it").ConfigureAwait(false);
+                Directory.CreateDirectory(backupPath);
+
+                Logging.Write(LogEvent.Info, ProgramClass.Checks, "Checking again if Backup Dir exists").ConfigureAwait(false);
+                if (Directory.Exists(backupPath))
+                {
+                    Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Backup Dir created at: {backupPath}").ConfigureAwait(false);
+                    GetSetSettings.SaveSettings("backupAvailability", true);
+                    Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set backupDir to: {true}").ConfigureAwait(false);
+                }
+                else
+                {
+                    Logging.Write(LogEvent.Warning, ProgramClass.Checks, $"Could not create backup dir!").ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Backup Dir exists at: {backupPath}").ConfigureAwait(false);
+                GetSetSettings.SaveSettings("backupAvailability", true);
+                Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set backupDir to: {true}").ConfigureAwait(false);
+            }
+
+            return GetSetSettings.GetBackupAvailability;
+        }
     }
 }
