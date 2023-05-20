@@ -20,5 +20,8 @@
     <Setting Name="logPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="supportPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://github.com/Zagrthos/SWTOR-ChatManager/issues</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -1,5 +1,6 @@
 using ChatManager.Properties;
 using ChatManager.Services;
+using Windows.Media.Playback;
 
 namespace ChatManager
 {
@@ -89,8 +90,17 @@ namespace ChatManager
                     "charFolderToolStripMenuItem" => GetSetSettings.GetLocalPath,
                     "logFolderToolStripMenuItem" => GetSetSettings.GetLogPath,
                     "backupToolStripMenuItem" => GetSetSettings.GetBackupPath,
+                    "supportToolStripMenuItem" => GetSetSettings.GetSupportPath,
                     _ => "%SYSTEMDRIVE%",
                 };
+
+                // Check if item is support Link then open browser and finish
+                if (menuItem.Name == "supportToolStripMenuItem")
+                {
+                    Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Support Site requested").ConfigureAwait(false);
+                    OpenWindows.OpenLinksInBrowser(path);
+                    return;
+                }
 
                 Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if local Path exists").ConfigureAwait(false);
                 if (Checks.CheckIfPathExists(path))
@@ -222,12 +232,6 @@ namespace ChatManager
             string newIndexes = string.Join(";", colorIndexes);
 
             OpenWindows.OpenFileExportSelector(newIndexes);
-        }
-
-        private async void OpenSupportSite(object sender, EventArgs e)
-        {
-            await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "OpenSupportSite entered").ConfigureAwait(false);
-            OpenWindows.OpenLinksInBrowser("https://github.com/");
         }
 
         private async void CloseApplication(object sender, EventArgs e)

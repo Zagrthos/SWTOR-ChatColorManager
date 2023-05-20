@@ -329,9 +329,9 @@
             // supportToolStripMenuItem
             // 
             supportToolStripMenuItem.Name = "supportToolStripMenuItem";
-            supportToolStripMenuItem.Size = new Size(116, 22);
+            supportToolStripMenuItem.Size = new Size(180, 22);
             supportToolStripMenuItem.Text = "Support";
-            supportToolStripMenuItem.Click += OpenSupportSite;
+            supportToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // toolStripSeparator5
             // 

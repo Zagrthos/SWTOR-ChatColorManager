@@ -94,5 +94,17 @@ namespace ChatManager.Properties {
                 this["logPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatManager/issues")]
+        public string supportPath {
+            get {
+                return ((string)(this["supportPath"]));
+            }
+            set {
+                this["supportPath"] = value;
+            }
+        }
     }
 }
