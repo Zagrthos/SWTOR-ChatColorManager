@@ -9,8 +9,6 @@ namespace ChatManager
         {
             GetSetSettings.InitSettings();
             InitializeComponent();
-            // TODO: Write own Settings Framework
-            // TODO: Otherwise nothing will work
         }
 
         // Button Click Handler for every button next to the TextBox
@@ -168,30 +166,62 @@ namespace ChatManager
         {
             await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ExportFiles entered").ConfigureAwait(false);
 
-            string[] colorIndexes = new string[21];
-            colorIndexes[0] = tbTrade.Text;
-            colorIndexes[1] = tbPvP.Text;
-            colorIndexes[2] = tbGeneral.Text;
-            colorIndexes[3] = tbEmote.Text;
-            colorIndexes[4] = tbYell.Text;
-            colorIndexes[5] = tbOfficer.Text;
-            colorIndexes[6] = tbGuild.Text;
-            colorIndexes[7] = tbSay.Text;
-            colorIndexes[8] = tbWhisper.Text;
-            colorIndexes[9] = tbOps.Text;
-            colorIndexes[10] = tbOpsLead.Text;
-            colorIndexes[11] = tbGroup.Text;
-            colorIndexes[12] = tbOpsAnnou.Text;
+            string[] colorIndexes = new string[51];
+            colorIndexes[0] = tbSay.Text;
+            colorIndexes[1] = tbYell.Text;
+            colorIndexes[2] = tbEmote.Text;
+            colorIndexes[3] = tbWhisper.Text;
+            colorIndexes[4] = "";
+            colorIndexes[5] = "";
+            colorIndexes[6] = tbGeneral.Text;
+            colorIndexes[7] = tbTrade.Text;
+            colorIndexes[8] = tbPvP.Text;
+            colorIndexes[9] = tbGroup.Text;
+            colorIndexes[10] = tbGuild.Text;
+            colorIndexes[11] = tbOfficer.Text;
+            colorIndexes[12] = tbOps.Text;
             colorIndexes[13] = tbOpsOfficer.Text;
-            colorIndexes[14] = tbCombat.Text;
-            colorIndexes[15] = tbConv.Text;
-            colorIndexes[16] = tbLogin.Text;
-            colorIndexes[17] = tbOpsInfo.Text;
+            colorIndexes[14] = "";
+            colorIndexes[15] = "";
+            colorIndexes[16] = "";
+            colorIndexes[17] = "";
             colorIndexes[18] = tbSystem.Text;
-            colorIndexes[19] = tbGuildInfo.Text;
-            colorIndexes[20] = tbGroupInfo.Text;
+            colorIndexes[19] = tbConv.Text;
+            colorIndexes[20] = tbLogin.Text;
+            colorIndexes[21] = "";
+            colorIndexes[22] = "";
+            colorIndexes[23] = "";
+            colorIndexes[24] = "";
+            colorIndexes[25] = "";
+            colorIndexes[26] = "";
+            colorIndexes[27] = "";
+            colorIndexes[28] = "";
+            colorIndexes[29] = tbOpsLead.Text;
+            colorIndexes[30] = "";
+            colorIndexes[31] = "";
+            colorIndexes[32] = tbOpsAnnou.Text;
+            colorIndexes[33] = tbOpsInfo.Text;
+            colorIndexes[34] = tbGroupInfo.Text;
+            colorIndexes[35] = tbGuildInfo.Text;
+            colorIndexes[36] = tbCombat.Text;
+            colorIndexes[37] = "";
+            colorIndexes[38] = "";
+            colorIndexes[39] = "";
+            colorIndexes[40] = "";
+            colorIndexes[41] = "";
+            colorIndexes[42] = "";
+            colorIndexes[43] = "";
+            colorIndexes[44] = "";
+            colorIndexes[45] = "";
+            colorIndexes[46] = "";
+            colorIndexes[47] = "";
+            colorIndexes[48] = "";
+            colorIndexes[49] = "";
+            colorIndexes[50] = "";
 
-            OpenWindows.OpenFileExportSelector(colorIndexes);
+            string newIndexes = string.Join(";", colorIndexes);
+
+            OpenWindows.OpenFileExportSelector(newIndexes);
         }
 
         private async void OpenSupportSite(object sender, EventArgs e)

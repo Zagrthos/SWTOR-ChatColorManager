@@ -50,7 +50,7 @@ namespace ChatManager.Services
         }
 
         // Open the FileSelector but with the export Settings
-        public static void OpenFileExportSelector(string[] values)
+        public static void OpenFileExportSelector(string values)
         {
             Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenFileExportSelector Entered").ConfigureAwait(false);
 
@@ -59,7 +59,7 @@ namespace ChatManager.Services
             fileSelector.ShowDialog();
 
             FileExport fileExport = new();
-            fileExport.WriteContentToFile();
+            fileExport.BackupFilesAndWrite(values);
 
             fileSelector.Dispose();
         }

@@ -193,24 +193,24 @@ namespace ChatManager.Forms
         }
 
         // On Click of the Button "Select"
-        private async void ListBoxClick(object sender, EventArgs e)
+        private void ListBoxClick(object sender, EventArgs e)
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.FileSelectorForm, "ListBoxClick entered").ConfigureAwait(false);
-            await Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Sender is: {sender}").ConfigureAwait(false);
+            Logging.Write(LogEvent.Method, ProgramClass.FileSelectorForm, "ListBoxClick entered").ConfigureAwait(false);
+            Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Sender is: {sender}").ConfigureAwait(false);
 
             // If the sender is a Button initialize it as button
             if (sender is Button button)
             {
-                await Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Button is: {button.Name}").ConfigureAwait(false);
+                Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Button is: {button.Name}").ConfigureAwait(false);
 
                 // If the button has a Tag initialize it as targetTextBox
                 if (button.Tag is string targetListBox)
                 {
-                    await Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Button Tag is: {button.Tag}").ConfigureAwait(false);
+                    Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Button Tag is: {button.Tag}").ConfigureAwait(false);
 
                     // Find the Control...
                     Control? control = Controls.Find(targetListBox, true).FirstOrDefault();
-                    await Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Control is: {control!.GetType()}").ConfigureAwait(false);
+                    Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Control is: {control!.GetType()}").ConfigureAwait(false);
 
                     // ... and if it is a CheckedListBox search for the correct panel
                     if (control is CheckedListBox)
@@ -226,14 +226,14 @@ namespace ChatManager.Forms
                         {
                             // Convert them to a CheckListBox
                             CheckedListBox? checkedListBox = getControl as CheckedListBox;
-                            await Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"CheckedListBox is: {checkedListBox!.Name}").ConfigureAwait(false);
+                            Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"CheckedListBox is: {checkedListBox!.Name}").ConfigureAwait(false);
 
                             // Check if the Controls have ANY checkedItem
                             if (checkedListBox.CheckedItems.Count > 0)
                             {
                                 // Set the selectedServers to the correct name
                                 selectedServers[counter] = checkedListBox.Name.Substring(4);
-                                await Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"selectedServers[{counter}] is: {selectedServers[counter]}").ConfigureAwait(false);
+                                Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"selectedServers[{counter}] is: {selectedServers[counter]}").ConfigureAwait(false);
 
                                 // Count the CheckedListBoxes
                                 counter++;
@@ -241,7 +241,7 @@ namespace ChatManager.Forms
                                 // If yes get them all
                                 foreach (var item in checkedListBox.CheckedItems)
                                 {
-                                    await Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Current item is: {item}").ConfigureAwait(false);
+                                    Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Current item is: {item}").ConfigureAwait(false);
 
                                     if (item != null)
                                     {
@@ -254,7 +254,7 @@ namespace ChatManager.Forms
                     // ... and if it is a ListBox initialize it as listBox
                     else if (control is ListBox listBox)
                     {
-                        await Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"ListBox is: {listBox.Name}").ConfigureAwait(false);
+                        Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"ListBox is: {listBox.Name}").ConfigureAwait(false);
 
                         string charName = listBox.SelectedItem!.ToString()!;
                         string listBoxNaming = listBox.Name;
