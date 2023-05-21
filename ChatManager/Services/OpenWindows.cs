@@ -50,40 +50,41 @@ namespace ChatManager.Services
         }
 
         // Open the FileSelector but with the export Settings
-        public static void OpenFileExportSelector(string[] values)
+        public static async Task OpenFileExportSelector(string[] values)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenFileExportSelector Entered").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenFileExportSelector Entered");
 
             FileImport fileImport = new();
             FileSelectorForm fileSelector = new(fileImport.GetServerList(), true);
             fileSelector.ShowDialog();
 
             FileExport fileExport = new();
-            fileExport.BackupFilesAndWrite(values);
+            await fileExport.BackupFilesAndWrite(values);
 
             fileSelector.Dispose();
         }
 
         // Open Explorer Window with a specified path
-        public static void OpenExplorer(string path)
+        public static async Task OpenExplorer(string path)
         {
-            Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start explorer.exe with path: {path}").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start explorer.exe with path: {path}");
 
             try
             {
                 Process.Start("explorer.exe", path);
-                Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"explorer.exe started with path: {path}").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"explorer.exe started with path: {path}");
             }
             catch (Exception ex)
             {
-                Logging.Write(LogEvent.Error, ProgramClass.OpenWindows, "explorer.exe failed to start!").ConfigureAwait(false);
-                Logging.Write(LogEvent.ExMessage, ProgramClass.OpenWindows, ex.Message).ConfigureAwait(false);
+                await Logging.Write(LogEvent.Error, ProgramClass.OpenWindows, "explorer.exe failed to start!");
+                await Logging.Write(LogEvent.ExMessage, ProgramClass.OpenWindows, ex.Message);
+                await ShowMessageBox.ShowBug();
             }
         }
 
-        public static void OpenLinksInBrowser(string url)
+        public static async Task OpenLinksInBrowser(string url)
         {
-            Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start default Browser with url: {url}").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start default Browser with url: {url}");
 
             try
             {
@@ -91,12 +92,13 @@ namespace ChatManager.Services
                 {
                     UseShellExecute = true
                 });
-                Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Browser started with url: {url}").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Browser started with url: {url}");
             }
             catch (Exception ex)
             {
-                Logging.Write(LogEvent.Error, ProgramClass.OpenWindows, "Browser failed to start!").ConfigureAwait(false);
-                Logging.Write(LogEvent.ExMessage, ProgramClass.OpenWindows, ex.Message).ConfigureAwait(false);
+                await Logging.Write(LogEvent.Error, ProgramClass.OpenWindows, "Browser failed to start!");
+                await Logging.Write(LogEvent.ExMessage, ProgramClass.OpenWindows, ex.Message);
+                await ShowMessageBox.ShowBug();
             }
         }
     }

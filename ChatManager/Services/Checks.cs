@@ -67,35 +67,36 @@ namespace ChatManager.Services
             }
         }
 
-        public static bool BackupDirectory()
+        public static async Task<bool> BackupDirectory()
         {
-            Logging.Write(LogEvent.Method, ProgramClass.Checks, "BackupDirectory entered").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Method, ProgramClass.Checks, "BackupDirectory entered");
 
             string backupPath = GetSetSettings.GetBackupPath;
 
-            Logging.Write(LogEvent.Info, ProgramClass.Checks, "Checking if Backup Dir exists").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.Checks, "Checking if Backup Dir exists");
             if (!Directory.Exists(backupPath))
             {
-                Logging.Write(LogEvent.Info, ProgramClass.Checks, "Backup does not exist, creating it").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Info, ProgramClass.Checks, "Backup does not exist, creating it");
                 Directory.CreateDirectory(backupPath);
 
-                Logging.Write(LogEvent.Info, ProgramClass.Checks, "Checking again if Backup Dir exists").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Info, ProgramClass.Checks, "Checking again if Backup Dir exists");
                 if (Directory.Exists(backupPath))
                 {
-                    Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Backup Dir created at: {backupPath}").ConfigureAwait(false);
+                    await Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Backup Dir created at: {backupPath}");
                     GetSetSettings.SaveSettings("backupAvailability", true);
-                    Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set backupDir to: {true}").ConfigureAwait(false);
+                    await Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set backupDir to: {true}");
                 }
                 else
                 {
-                    Logging.Write(LogEvent.Warning, ProgramClass.Checks, $"Could not create backup dir!").ConfigureAwait(false);
+                    await Logging.Write(LogEvent.Warning, ProgramClass.Checks, $"Could not create backup dir!");
+                    await ShowMessageBox.ShowBug();
                 }
             }
             else
             {
-                Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Backup Dir exists at: {backupPath}").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Backup Dir exists at: {backupPath}");
                 GetSetSettings.SaveSettings("backupAvailability", true);
-                Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set backupDir to: {true}").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set backupDir to: {true}");
             }
 
             return GetSetSettings.GetBackupAvailability;

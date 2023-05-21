@@ -55,18 +55,19 @@ namespace ChatManager
                         else
                         {
                             await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "String is empty! Not starting conversion process");
-                            ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_TextBoxEmpty);
+                            await ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_TextBoxEmpty);
                         }
-
                     }
                     else
                     {
                         await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, $"TextBox: {targetTextBox} not found!");
+                        await ShowMessageBox.ShowBug();
                     }
                 }
                 else
                 {
                     await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, $"Button: {button.Name} has no Tag!");
+                    await ShowMessageBox.ShowBug();
                 }
             }
             else
@@ -98,14 +99,14 @@ namespace ChatManager
                 if (menuItem.Name == "supportToolStripMenuItem")
                 {
                     await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Support Site requested");
-                    OpenWindows.OpenLinksInBrowser(path);
+                    await OpenWindows.OpenLinksInBrowser(path);
                     return;
                 }
 
                 if (menuItem.Name == "bugToolStripMenuItem")
                 {
                     await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Bug report Site requested");
-                    OpenWindows.OpenLinksInBrowser(path);
+                    await OpenWindows.OpenLinksInBrowser(path);
                     return;
                 }
 
@@ -114,14 +115,18 @@ namespace ChatManager
                 {
                     // Open Explorer in given path
                     await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Local Path exists!");
-                    OpenWindows.OpenExplorer(path);
+                    await OpenWindows.OpenExplorer(path);
                 }
                 else
                 {
                     await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "Local Path does not exist!");
-                    ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_SWTORpathNotFound);
+                    await ShowMessageBox.ShowBug();
                 }
 
+            }
+            else
+            {
+                await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, $"Sender: {sender} is not a ToolStripMenuItem!");
             }
         }
 
@@ -142,7 +147,7 @@ namespace ChatManager
                 string[,] filePaths = fileImport.GetArray($"{selectedListBox.Substring(3)}");
                 string[] colorIndexes;
 
-                // Loop through and save the colors to the corresponding textBox
+                // Loop through and set the colors to the corresponding textBox
                 for (int i = 0; i < 100; i++)
                 {
                     if (selectedFile == filePaths[i, 0])
@@ -285,7 +290,7 @@ namespace ChatManager
             colorIndexes[98] = "";
             colorIndexes[99] = "";
 
-            OpenWindows.OpenFileExportSelector(colorIndexes);
+            await OpenWindows.OpenFileExportSelector(colorIndexes);
         }
 
         private async void CloseApplication(object sender, EventArgs e)
@@ -302,7 +307,7 @@ namespace ChatManager
             if (Checks.CheckSWTORprocessFound())
             {
                 await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "SWTOR is running!");
-                ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_SWTORrunning);
+                await ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_SWTORrunning);
             }
             else
             {
@@ -310,7 +315,7 @@ namespace ChatManager
             }
 
             await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Set BackupOption in Menu");
-            if (!Checks.BackupDirectory())
+            if (!await Checks.BackupDirectory())
             {
                 backupToolStripMenuItem.Enabled = false;
                 await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "BackupOption is not available!");

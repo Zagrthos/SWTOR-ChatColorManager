@@ -8,7 +8,7 @@
             if (filesChecked != true)
             {
                 Logging.Write(LogEvent.Info, ProgramClass.FileImport, $"filesChecked = {filesChecked}").ConfigureAwait(false);
-                GetLocalFiles();
+                GetLocalFiles().ConfigureAwait(false);
             }
         }
 
@@ -42,18 +42,18 @@
         }
 
         // Get the local files
-        private static void GetLocalFiles()
+        private static async Task GetLocalFiles()
         {
-            Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetLocalFiles entered").ConfigureAwait(false);
-            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePath: {filePath}").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetLocalFiles entered");
+            await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePath: {filePath}");
 
             // Search the given Path for files
             string[] charFilePaths = Directory.GetFiles(filePath);
-            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePaths: {charFilePaths.Length}").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePaths: {charFilePaths.Length}");
 
             // Convert all filePaths to fileNames
             string?[] charFileNames = charFilePaths.Select(Path.GetFileName).ToArray();
-            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"files: {charFileNames.Length}").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"files: {charFileNames.Length}");
 
             byte starForgeCounter = 0;
             byte sateleShanCounter = 0;
@@ -115,7 +115,7 @@
                 }
             }
 
-            Logging.Write(LogEvent.Info, ProgramClass.FileImport, "Select the servers by files").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.FileImport, "Select the servers by files");
 
             // Select the servers by files
             if (starForgeArray[0, 0] != null && starForgeArray[0, 0] != string.Empty)
@@ -139,11 +139,11 @@
                 serverList.Add("TheLeviathan");
             }
 
-            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"serverList.Count = {serverList.Count}").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"serverList.Count = {serverList.Count}");
 
             // Set the once runner true
             filesChecked = true;
-            Logging.Write(LogEvent.Info, ProgramClass.FileImport, $"Set filesChecked = {filesChecked}").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.FileImport, $"Set filesChecked = {filesChecked}");
         }
 
         // Get the colors from the given File
@@ -161,7 +161,7 @@
             string[] fileLines = await File.ReadAllLinesAsync(colorIndex[0]);
 
             // Initialize new Array and search for the correct line in the File
-            string colorLine = String.Empty;
+            string colorLine = string.Empty;
             foreach (string line in fileLines)
             {
                 if (line.StartsWith("ChatColors"))

@@ -3,7 +3,7 @@
     internal class Updater
     {
         private static readonly string currentVersion = Application.ProductVersion;
-        private static readonly string updateCheckURL = "https://raw.githubusercontent.com/Zagrthos/Test-Link/public/version.txt";
+        private static readonly string updateCheckURL = "https://github.com/Zagrthos/SWTOR-ChatManager/blob/master/ChatManager/Update/version.txt";
         private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatManager/releases/download/";
         private static readonly string tempPath = Path.GetTempPath();
         private static bool updateAvailable = false;
@@ -64,6 +64,7 @@
                 {
                     await Logging.Write(LogEvent.Error, ProgramClass.Updater, "Update download failed!");
                     await Logging.Write(LogEvent.ExMessage, ProgramClass.Updater, $"{ex.Message}");
+                    await ShowMessageBox.ShowBug();
                 }
             }
         }

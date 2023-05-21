@@ -70,6 +70,16 @@ namespace ChatManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Da ist was schief gelaufen!
+        ///Möchtest du den Bug melden?.
+        /// </summary>
+        internal static string Error_IsDetected {
+            get {
+                return ResourceManager.GetString("Error_IsDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fehler.
         /// </summary>
         internal static string MessageBoxError {
@@ -88,11 +98,30 @@ namespace ChatManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update verfügbar!.
+        /// </summary>
+        internal static string MessageBoxUpdate {
+            get {
+                return ResourceManager.GetString("MessageBoxUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Warnung.
         /// </summary>
         internal static string MessageBoxWarn {
             get {
                 return ResourceManager.GetString("MessageBoxWarn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Möchtest du jetzt aktualisieren?
+        ///Es ist ein Update auf folgende Version verfügbar:.
+        /// </summary>
+        internal static string Update_IsAvailable {
+            get {
+                return ResourceManager.GetString("Update_IsAvailable", resourceCulture);
             }
         }
         

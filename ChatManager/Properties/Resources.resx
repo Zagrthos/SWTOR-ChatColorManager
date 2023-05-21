@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Error_IsDetected" xml:space="preserve">
+    <value>Da ist was schief gelaufen!
+Möchtest du den Bug melden?</value>
+  </data>
   <data name="Err_ColorNotHex" xml:space="preserve">
     <value>Die angegebene Farbe in der Textbox entspricht nicht dem HEX-Standard.</value>
   </data>
@@ -126,8 +130,15 @@
   <data name="MessageBoxInfo" xml:space="preserve">
     <value>Information</value>
   </data>
+  <data name="MessageBoxUpdate" xml:space="preserve">
+    <value>Update verfügbar!</value>
+  </data>
   <data name="MessageBoxWarn" xml:space="preserve">
     <value>Warnung</value>
+  </data>
+  <data name="Update_IsAvailable" xml:space="preserve">
+    <value>Möchtest du jetzt aktualisieren?
+Es ist ein Update auf folgende Version verfügbar:</value>
   </data>
   <data name="Warn_BackupDirMissing" xml:space="preserve">
     <value>Es konnte kein Backup Verzeichnis erstellt werden!

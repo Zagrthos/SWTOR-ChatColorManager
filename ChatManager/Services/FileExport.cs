@@ -19,35 +19,36 @@ namespace ChatManager.Services
         // Is used for positioning the characters in the array
         private static int arrayCounter = 0;
 
-        public void BackupFilesAndWrite(string[] content)
+        public async Task BackupFilesAndWrite(string[] content)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.FileExport, "BackupFilesAndWrite entered").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Method, ProgramClass.FileExport, "BackupFilesAndWrite entered");
 
             // Check if backupDir exists and if not show a warning Box
             if (!backupAvailability)
             {
-                ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_BackupDirMissing);
+                await ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_BackupDirMissing);
             }
 
             // Check if the user selected any characters
             if (fileNames.Length != 0)
             {
-                Logging.Write(LogEvent.Info, ProgramClass.FileExport, "fileNames Array selected").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Info, ProgramClass.FileExport, "fileNames Array selected");
 
                 string timestamp = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd_HH-mm-ss");
 
                 string deeperBackup = Path.Combine(backupPath, timestamp);
-                Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Create new backup Folder with timestamp: {deeperBackup}").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Create new backup Folder with timestamp: {deeperBackup}");
 
                 Directory.CreateDirectory(deeperBackup);
 
                 if (Directory.Exists(deeperBackup))
                 {
-                    Logging.Write(LogEvent.Info, ProgramClass.FileExport, "Backup Folder created").ConfigureAwait(false);
+                    await Logging.Write(LogEvent.Info, ProgramClass.FileExport, "Backup Folder created");
                 }
                 else
                 {
-                    Logging.Write(LogEvent.Warning, ProgramClass.FileExport, "Backup Folder could NOT be created!").ConfigureAwait(false);
+                    await Logging.Write(LogEvent.Warning, ProgramClass.FileExport, "Backup Folder could NOT be created!");
+                    await ShowMessageBox.ShowBug();
                 }
 
                 // Get the Array from the association
@@ -59,8 +60,8 @@ namespace ChatManager.Services
                 {
                     if (!string.IsNullOrEmpty(name[i, 0]) && !string.IsNullOrEmpty(name[i, 1]))
                     {
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current name[{i}, 0] is: {name[i, 0]}").ConfigureAwait(false);
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current name[{i}, 1] is: {name[i, 1]}").ConfigureAwait(false);
+                        await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current name[{i}, 0] is: {name[i, 0]}");
+                        await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current name[{i}, 1] is: {name[i, 1]}");
                     }
                     else
                     {
@@ -71,24 +72,24 @@ namespace ChatManager.Services
                 // Loop through the arrayCounter and Copy all files in the array to the backup position
                 for (int i = 0; i < arrayCounter; i++)
                 {
-                    Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current i is: {i}").ConfigureAwait(false);
+                    await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current i is: {i}");
 
                     if (!string.IsNullOrEmpty(name[i, 0]) && !string.IsNullOrEmpty(name[i, 1]))
                     {
                         string path = name[i, 1];
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current path is: {path}").ConfigureAwait(false);
+                        await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current path is: {path}");
 
                         string fileName = Path.GetFileName(name[i, 1]);
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current fileName is: {fileName}").ConfigureAwait(false);
+                        await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current fileName is: {fileName}");
 
                         string newPath = $"{deeperBackup}\\{fileName}";
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current newPath is: {newPath}").ConfigureAwait(false);
+                        await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current newPath is: {newPath}");
 
                         // Copy only if the dir is present
                         if (backupAvailability)
                         {
                             File.Copy(path, newPath, true);
-                            Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"File {name[i, 0]} copied to: {newPath}").ConfigureAwait(false);
+                            await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"File {name[i, 0]} copied to: {newPath}");
 
                             string[] lines = File.ReadAllLines(path);
 
@@ -109,7 +110,7 @@ namespace ChatManager.Services
                             // It assumes it starts with a "ChatColors = "
                             string colorLine = lines[lineNumber].Split("=")[1].TrimStart();
 
-                            Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current ChatColors: {colorLine}").ConfigureAwait(false);
+                            await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current ChatColors: {colorLine}");
 
                             // Split it again to the get colors in an array
                             string[] colorLines = colorLine.Split(";");
@@ -140,27 +141,29 @@ namespace ChatManager.Services
                             // Change the line to the new Array of colors
                             lines[lineNumber] = $"ChatColors = {colorIndexes}";
 
-                            Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"New ChatColors: {lines[lineNumber]}").ConfigureAwait(false);
+                            await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"New ChatColors: {lines[lineNumber]}");
 
                             // Write it all back
                             File.WriteAllLines(path, lines);
 
-                            Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"File {name[i, 0]} written back").ConfigureAwait(false);
+                            await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"File {name[i, 0]} written back");
                         }
                         else
                         {
-                            Logging.Write(LogEvent.Warning, ProgramClass.FileExport, $"File {name[i, 0]} NOT copied to: {newPath}!").ConfigureAwait(false);
+                            await Logging.Write(LogEvent.Warning, ProgramClass.FileExport, $"File {name[i, 0]} NOT copied to: {newPath}!");
+                            await ShowMessageBox.ShowBug();
                         }
                     }
                     else
                     {
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current i: {i} is null or empty").ConfigureAwait(false);
+                        await Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current i: {i} is null or empty");
                     }
                 }
             }
             else
             {
-                Logging.Write(LogEvent.Warning, ProgramClass.FileExport, "fileNames Array is empty!").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Warning, ProgramClass.FileExport, "fileNames Array is empty!");
+                await ShowMessageBox.ShowBug();
             }
         }
 

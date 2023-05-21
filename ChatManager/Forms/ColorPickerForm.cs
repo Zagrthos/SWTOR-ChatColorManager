@@ -21,20 +21,20 @@ namespace ChatManager.Forms
 
         private async void ColorPickerForm_Load(object sender, EventArgs e)
         {
-            await Logging.Write(LogEvent.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm is starting as: {Text}").ConfigureAwait(false);
-            await Logging.Write(LogEvent.Variable, ProgramClass.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm is starting as: {Text}");
+            await Logging.Write(LogEvent.Variable, ProgramClass.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
         }
 
         private async void ColorPickerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await Logging.Write(LogEvent.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm: {Text} is closing").ConfigureAwait(false);
-            await Logging.Write(LogEvent.Variable, ProgramClass.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm: {Text} is closing");
+            await Logging.Write(LogEvent.Variable, ProgramClass.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
             hexColor = await Converter.RGBtoHexAsync(colorEditor.Color);
         }
 
         private async void ColorPickerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            await Logging.Write(LogEvent.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm: {Text} closed").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm: {Text} closed");
         }
     }
 }
