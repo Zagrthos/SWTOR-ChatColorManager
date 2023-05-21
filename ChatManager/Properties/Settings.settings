@@ -23,5 +23,8 @@
     <Setting Name="supportPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://github.com/Zagrthos/SWTOR-ChatManager/issues</Value>
     </Setting>
+    <Setting Name="bugPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://github.com/Zagrthos/SWTOR-ChatManager/issues/new/choose</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

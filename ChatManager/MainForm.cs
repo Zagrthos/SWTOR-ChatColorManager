@@ -1,6 +1,5 @@
 using ChatManager.Properties;
 using ChatManager.Services;
-using Windows.Media.Playback;
 
 namespace ChatManager
 {
@@ -15,18 +14,18 @@ namespace ChatManager
         // Button Click Handler for every button next to the TextBox
         private async void ClickChangeColorButton(object sender, EventArgs e)
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ClickChangeColorButton Entered").ConfigureAwait(false);
-            await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Sender is: {sender}").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ClickChangeColorButton Entered");
+            await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Sender is: {sender}");
 
             // If the sender is a Button initialize it as button
             if (sender is Button button)
             {
-                await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Button is: {button.Name}").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Button is: {button.Name}");
 
                 // If the button has a Tag initialize it as targetTextBox
                 if (button.Tag is string targetTextBox)
                 {
-                    await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Button Tag is: {button.Tag}").ConfigureAwait(false);
+                    await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Button Tag is: {button.Tag}");
 
                     // Find the TextBox...
                     Control? control = Controls.Find(targetTextBox, true).FirstOrDefault();
@@ -34,16 +33,16 @@ namespace ChatManager
                     // ... and initialize it as textBox
                     if (control is TextBox textBox)
                     {
-                        await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"TextBox is: {textBox.Name}").ConfigureAwait(false);
-                        await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"TextBox.Text is: {textBox.Text}").ConfigureAwait(false);
+                        await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"TextBox is: {textBox.Name}");
+                        await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"TextBox.Text is: {textBox.Text}");
 
                         // Check if text is Hex
                         string textBoxText = string.Empty;
                         if (Checks.CheckHexString(textBox.Text))
                         {
                             textBoxText = textBox.Text;
-                            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, $"TextBox.Text is Hex").ConfigureAwait(false);
-                            await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Hex Text is: {textBoxText}").ConfigureAwait(false);
+                            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, $"TextBox.Text is Hex");
+                            await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Hex Text is: {textBoxText}");
                         }
 
                         // Get the Text from it, if it is not Empty
@@ -51,35 +50,35 @@ namespace ChatManager
                         {
                             Color color = await Converter.HexToRGBAsync(textBoxText);
                             textBox.Text = await OpenWindows.OpenColorPicker(button.Text, color);
-                            await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"New hexColor is: {textBox.Text}").ConfigureAwait(false);
+                            await Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"New hexColor is: {textBox.Text}");
                         }
                         else
                         {
-                            await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "String is empty! Not starting conversion process").ConfigureAwait(false);
+                            await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "String is empty! Not starting conversion process");
                             ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_TextBoxEmpty);
                         }
 
                     }
                     else
                     {
-                        await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, $"TextBox: {targetTextBox} not found!").ConfigureAwait(false);
+                        await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, $"TextBox: {targetTextBox} not found!");
                     }
                 }
                 else
                 {
-                    await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, $"Button: {button.Name} has no Tag!").ConfigureAwait(false);
+                    await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, $"Button: {button.Name} has no Tag!");
                 }
             }
             else
             {
-                await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, $"Sender: {sender} is not a Button!").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, $"Sender: {sender} is not a Button!");
             }
         }
 
         // ToolStripMenu Program Handler
-        private void ToolStripMenuHandler(object sender, EventArgs e)
+        private async void ToolStripMenuHandler(object sender, EventArgs e)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ToolStripMainMenuHandler entered").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ToolStripMainMenuHandler entered");
 
             // Check if sender is a ToolStripMenuItem
             if (sender is ToolStripMenuItem menuItem)
@@ -91,27 +90,35 @@ namespace ChatManager
                     "logFolderToolStripMenuItem" => GetSetSettings.GetLogPath,
                     "backupToolStripMenuItem" => GetSetSettings.GetBackupPath,
                     "supportToolStripMenuItem" => GetSetSettings.GetSupportPath,
+                    "bugToolStripMenuItem" => GetSetSettings.GetBugPath,
                     _ => "%SYSTEMDRIVE%",
                 };
 
                 // Check if item is support Link then open browser and finish
                 if (menuItem.Name == "supportToolStripMenuItem")
                 {
-                    Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Support Site requested").ConfigureAwait(false);
+                    await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Support Site requested");
                     OpenWindows.OpenLinksInBrowser(path);
                     return;
                 }
 
-                Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if local Path exists").ConfigureAwait(false);
+                if (menuItem.Name == "bugToolStripMenuItem")
+                {
+                    await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Bug report Site requested");
+                    OpenWindows.OpenLinksInBrowser(path);
+                    return;
+                }
+
+                await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if local Path exists");
                 if (Checks.CheckIfPathExists(path))
                 {
                     // Open Explorer in given path
-                    Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Local Path exists!").ConfigureAwait(false);
+                    await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Local Path exists!");
                     OpenWindows.OpenExplorer(path);
                 }
                 else
                 {
-                    Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "Local Path does not exist!").ConfigureAwait(false);
+                    await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "Local Path does not exist!");
                     ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_SWTORpathNotFound);
                 }
 
@@ -121,13 +128,13 @@ namespace ChatManager
         // Import the colorIndexes from the given File into all textBoxes
         private async void ImportFile(object sender, EventArgs e)
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ImportFile entered").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ImportFile entered");
             FileImport fileImport = new();
 
             // Get the selectedFile and the selectedListBox from the tuple
             (string selectedFile, string selectedListBox) = OpenWindows.OpenFileImportSelector();
-            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, $"selectedFile: {selectedFile}").ConfigureAwait(false);
-            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, $"selectedListBox: {selectedListBox}").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, $"selectedFile: {selectedFile}");
+            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, $"selectedListBox: {selectedListBox}");
 
             if (!string.IsNullOrEmpty(selectedFile))
             {
@@ -174,9 +181,9 @@ namespace ChatManager
 
         private async void ExportFiles(object sender, EventArgs e)
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ExportFiles entered").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ExportFiles entered");
 
-            string[] colorIndexes = new string[51];
+            string[] colorIndexes = new string[100];
             colorIndexes[0] = tbSay.Text;
             colorIndexes[1] = tbYell.Text;
             colorIndexes[2] = tbEmote.Text;
@@ -228,58 +235,107 @@ namespace ChatManager
             colorIndexes[48] = "";
             colorIndexes[49] = "";
             colorIndexes[50] = "";
+            colorIndexes[51] = "";
+            colorIndexes[52] = "";
+            colorIndexes[53] = "";
+            colorIndexes[54] = "";
+            colorIndexes[55] = "";
+            colorIndexes[56] = "";
+            colorIndexes[57] = "";
+            colorIndexes[58] = "";
+            colorIndexes[59] = "";
+            colorIndexes[60] = "";
+            colorIndexes[61] = "";
+            colorIndexes[62] = "";
+            colorIndexes[63] = "";
+            colorIndexes[64] = "";
+            colorIndexes[65] = "";
+            colorIndexes[66] = "";
+            colorIndexes[67] = "";
+            colorIndexes[68] = "";
+            colorIndexes[69] = "";
+            colorIndexes[70] = "";
+            colorIndexes[71] = "";
+            colorIndexes[72] = "";
+            colorIndexes[73] = "";
+            colorIndexes[74] = "";
+            colorIndexes[75] = "";
+            colorIndexes[76] = "";
+            colorIndexes[77] = "";
+            colorIndexes[78] = "";
+            colorIndexes[79] = "";
+            colorIndexes[80] = "";
+            colorIndexes[81] = "";
+            colorIndexes[82] = "";
+            colorIndexes[83] = "";
+            colorIndexes[84] = "";
+            colorIndexes[85] = "";
+            colorIndexes[86] = "";
+            colorIndexes[87] = "";
+            colorIndexes[88] = "";
+            colorIndexes[89] = "";
+            colorIndexes[90] = "";
+            colorIndexes[91] = "";
+            colorIndexes[92] = "";
+            colorIndexes[93] = "";
+            colorIndexes[94] = "";
+            colorIndexes[95] = "";
+            colorIndexes[96] = "";
+            colorIndexes[97] = "";
+            colorIndexes[98] = "";
+            colorIndexes[99] = "";
 
-            string newIndexes = string.Join(";", colorIndexes);
-
-            OpenWindows.OpenFileExportSelector(newIndexes);
+            OpenWindows.OpenFileExportSelector(colorIndexes);
         }
 
         private async void CloseApplication(object sender, EventArgs e)
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Application exit requested").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Application exit requested");
             Application.Exit();
         }
 
         // When the Form is loading, initialize the logger and log it
         private async void MainForm_Load(object sender, EventArgs e)
         {
-            await Logging.Initialize().ConfigureAwait(false);
-            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if SWTOR is running").ConfigureAwait(false);
+            await Logging.Initialize();
+            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if SWTOR is running");
             if (Checks.CheckSWTORprocessFound())
             {
-                await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "SWTOR is running!").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "SWTOR is running!");
                 ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_SWTORrunning);
             }
             else
             {
-                await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "SWTOR is not running!").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "SWTOR is not running!");
             }
 
-            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Set BackupOption in Menu").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Set BackupOption in Menu");
             if (!Checks.BackupDirectory())
             {
                 backupToolStripMenuItem.Enabled = false;
-                await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "BackupOption is not available!").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "BackupOption is not available!");
             }
             else
             {
-                await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "BackupOption is available!").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "BackupOption is available!");
             }
 
-            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm is loading").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm is loading");
+
+            await Updater.CheckForUpdates();
         }
 
         // When the Form is closing, log it
         private async void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm is closing").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm is closing");
         }
 
         // When the Form is closed, log it and stop the logger
         private async void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm closed").ConfigureAwait(false);
-            await Logging.Finalize().ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm closed");
+            await Logging.Finalize();
         }
 
         // Draw the Tabs on the left side

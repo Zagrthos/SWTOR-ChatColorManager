@@ -19,7 +19,7 @@ namespace ChatManager.Services
         // Is used for positioning the characters in the array
         private static int arrayCounter = 0;
 
-        public void BackupFilesAndWrite(string content)
+        public void BackupFilesAndWrite(string[] content)
         {
             Logging.Write(LogEvent.Method, ProgramClass.FileExport, "BackupFilesAndWrite entered").ConfigureAwait(false);
 
@@ -92,12 +92,11 @@ namespace ChatManager.Services
 
                             string[] lines = File.ReadAllLines(path);
 
-                            Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current ChatColors: {lines[1]}").ConfigureAwait(false);
-
                             string searchLine = "ChatColors = ";
                             int lineNumber = 0;
-                            
-                            for (int line  = 0; line < lines.Length; line++)
+
+                            // Search the correct line in the file
+                            for (int line = 0; line < lines.Length; line++)
                             {
                                 if (lines[line].StartsWith(searchLine))
                                 {
@@ -106,10 +105,44 @@ namespace ChatManager.Services
                                 }
                             }
 
-                            lines[lineNumber] = $"ChatColors = {content}";
+                            // Split the string to only get the wanted numbers
+                            // It assumes it starts with a "ChatColors = "
+                            string colorLine = lines[lineNumber].Split("=")[1].TrimStart();
 
-                            Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"New ChatColors: {lines[1]}").ConfigureAwait(false);
+                            Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current ChatColors: {colorLine}").ConfigureAwait(false);
 
+                            // Split it again to the get colors in an array
+                            string[] colorLines = colorLine.Split(";");
+
+                            // Loop through the changed array and check if there's empty colors
+                            // Check if the array is big enough else break
+                            // If yes check if the old array has any value that can fill it
+                            // If yes fill it with the old value
+                            for (int color = 0; color < content.Length; color++)
+                            {
+                                if (content[color] == "")
+                                {
+                                    if (color >= colorLines.Length)
+                                    {
+                                        break;
+                                    }
+
+                                    if (colorLines[color] != "")
+                                    {
+                                        content[color] = colorLines[color];
+                                    }
+                                }
+                            }
+
+                            // Put the array into a string
+                            string colorIndexes = string.Join(";", content);
+
+                            // Change the line to the new Array of colors
+                            lines[lineNumber] = $"ChatColors = {colorIndexes}";
+
+                            Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"New ChatColors: {lines[lineNumber]}").ConfigureAwait(false);
+
+                            // Write it all back
                             File.WriteAllLines(path, lines);
 
                             Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"File {name[i, 0]} written back").ConfigureAwait(false);

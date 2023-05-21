@@ -43,7 +43,7 @@ namespace ChatManager.Services
 
             string logfilePath = Path.Combine(LogPath, $"ChatManager_{LogSession}.log");
             logWriter = new(logfilePath, true);
-            await Write(LogEvent.Info, ProgramClass.Logging, "Logging started").ConfigureAwait(false);
+            await Write(LogEvent.Info, ProgramClass.Logging, "Logging started");
 
             // Add Timer to write any second all open entries in the log
             timer = new(5000);
@@ -82,10 +82,10 @@ namespace ChatManager.Services
 
             if (logWriter != null)
             {
-                await logWriter.WriteLineAsync($"[{DateTime.Now:HH:mm:ss}] => {Event} on {programClass}: {Message}").ConfigureAwait(false);
+                await logWriter.WriteLineAsync($"[{DateTime.Now:HH:mm:ss}] => {Event} on {programClass}: {Message}");
             } else
             {
-                await Initialize().ConfigureAwait(false);
+                await Initialize();
             }
         }
 
@@ -93,8 +93,8 @@ namespace ChatManager.Services
         {
             if (logWriter != null)
             {
-                await Write(LogEvent.Info, ProgramClass.Logging, "Logging stopped").ConfigureAwait(false);
-                await logWriter.FlushAsync().ConfigureAwait(false);
+                await Write(LogEvent.Info, ProgramClass.Logging, "Logging stopped");
+                await logWriter.FlushAsync();
                 logWriter.Close();
             }
 

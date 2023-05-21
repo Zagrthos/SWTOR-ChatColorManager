@@ -8,9 +8,9 @@ namespace ChatManager.Services
         // Debug Test Method
         private async void StartColorPicker(object sender, EventArgs e)
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "StartColorPicker Entered").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "StartColorPicker Entered");
             ColorPickerForm colorPicker = new("Test", Color.Black);
-            await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Form {colorPicker.Text} created").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Form {colorPicker.Text} created");
             colorPicker.ShowDialog();
             colorPicker.Dispose();
         }
@@ -19,11 +19,11 @@ namespace ChatManager.Services
         // ??? Color Picker must be opened from an non-async method, due to the ShowDialog Method which is synchronous
         public static async Task<string> OpenColorPicker(string text, Color color)
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenColorPicker Entered").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenColorPicker Entered");
 
             // Create new Form with the Text of the sender Button
             ColorPickerForm colorPicker = new(text, color);
-            await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Form {colorPicker.Text} created").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Form {colorPicker.Text} created");
             colorPicker.ShowDialog();
             string hexColor = colorPicker.GetHexColor;
 
@@ -50,7 +50,7 @@ namespace ChatManager.Services
         }
 
         // Open the FileSelector but with the export Settings
-        public static void OpenFileExportSelector(string values)
+        public static void OpenFileExportSelector(string[] values)
         {
             Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenFileExportSelector Entered").ConfigureAwait(false);
 

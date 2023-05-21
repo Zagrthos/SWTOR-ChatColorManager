@@ -16,6 +16,7 @@ namespace ChatManager.Services
         public static bool GetBackupAvailability => Settings.Default.backupAvailability;
         public static string GetLogPath => Settings.Default.logPath;
         public static string GetSupportPath => Settings.Default.supportPath;
+        public static string GetBugPath => Settings.Default.bugPath;
 
         public static void InitSettings()
         {

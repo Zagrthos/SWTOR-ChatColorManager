@@ -57,6 +57,7 @@
             optionsToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             supportToolStripMenuItem = new ToolStripMenuItem();
+            bugToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             tabsMainForm = new TabControl();
@@ -321,7 +322,7 @@
             // helpToolStripMenuItem
             // 
             helpToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supportToolStripMenuItem, toolStripSeparator5, aboutToolStripMenuItem });
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supportToolStripMenuItem, bugToolStripMenuItem, toolStripSeparator5, aboutToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             helpToolStripMenuItem.Size = new Size(44, 20);
             helpToolStripMenuItem.Text = "Hilfe";
@@ -332,6 +333,13 @@
             supportToolStripMenuItem.Size = new Size(180, 22);
             supportToolStripMenuItem.Text = "Support";
             supportToolStripMenuItem.Click += ToolStripMenuHandler;
+            // 
+            // bugToolStripMenuItem
+            // 
+            bugToolStripMenuItem.Name = "bugToolStripMenuItem";
+            bugToolStripMenuItem.Size = new Size(180, 22);
+            bugToolStripMenuItem.Text = "Bug melden";
+            bugToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // toolStripSeparator5
             // 
@@ -1049,5 +1057,6 @@
         private ToolStripMenuItem logFolderToolStripMenuItem;
         private ToolStripMenuItem supportToolStripMenuItem;
         private ToolStripMenuItem backupToolStripMenuItem;
+        private ToolStripMenuItem bugToolStripMenuItem;
     }
 }

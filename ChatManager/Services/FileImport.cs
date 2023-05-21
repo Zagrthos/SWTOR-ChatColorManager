@@ -149,7 +149,7 @@
         // Get the colors from the given File
         public async Task<string[]> GetContentFromFile(string fileName)
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetContentFromFile entered").ConfigureAwait(false);
+            await Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetContentFromFile entered");
 
             // Initialize Array for saving of colorIndexes
             string[] colorIndex = new string[22];
@@ -203,7 +203,7 @@
             byte b = 0;
             foreach (string index in colorIndex)
             {
-                await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"colorIndex {b} = {colorIndex[b]}").ConfigureAwait(false);
+                await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"colorIndex {b} = {colorIndex[b]}");
                 b++;
             }
 
