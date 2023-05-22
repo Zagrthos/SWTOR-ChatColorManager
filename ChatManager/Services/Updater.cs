@@ -1,14 +1,10 @@
-﻿using System.Diagnostics;
-
-namespace ChatManager.Services
+﻿namespace ChatManager.Services
 {
     internal class Updater
     {
         private static readonly string currentVersion = Application.ProductVersion;
         private static readonly string updateCheckURL = "https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/version.txt";
-        private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/download/";
-        private static readonly string tempPath = Path.GetTempPath();
-        private static bool updateAvailable = false;
+        private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/tag/";
 
         public static async Task CheckForUpdates()
         {
@@ -27,87 +23,24 @@ namespace ChatManager.Services
                 if (onlineVersion != currentVersion)
                 {
                     await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Update is available!");
-                    updateAvailable = true;
 
-                    updateURL += $"v{onlineVersion}/SWTOR-ChatManager-v{onlineVersion}";
+                    updateURL += $"v{onlineVersion}";
                     await Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"updateURL set to: {updateURL}");
 
                     if (await ShowMessageBox.ShowUpdate(onlineVersion))
                     {
-                        await DownloadUpdate();
+                        await OpenWindows.OpenLinksInBrowser(updateURL);
                     }
                 }
                 else
                 {
                     await Logging.Write(LogEvent.Info, ProgramClass.Updater, "No Update available!");
-                    updateAvailable = false;
                 }
             }
             catch (HttpRequestException ex)
             {
                 await Logging.Write(LogEvent.Error, ProgramClass.Updater, "Check for Updates failed!");
                 await Logging.Write(LogEvent.ExMessage, ProgramClass.Updater, $"{ex.Message}");
-            }
-        }
-
-        private static async Task DownloadUpdate()
-        {
-            await Logging.Write(LogEvent.Info, ProgramClass.Updater, "DownloadUpdate entered");
-
-            if (updateAvailable)
-            {
-                await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Update is available");
-
-                HttpClient client = new();
-                await Logging.Write(LogEvent.Info, ProgramClass.Updater, "HttpClient created");
-
-                try
-                {
-                    await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Update download initiated");
-                    var bytes = await client.GetByteArrayAsync(updateCheckURL);
-
-                    try
-                    {
-                        await File.WriteAllBytesAsync(tempPath, bytes);
-                        await Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"File downloaded to: {tempPath}");
-                    }
-                    catch (Exception ex)
-                    {
-                        await Logging.Write(LogEvent.Error, ProgramClass.Updater, "Update writing failed!");
-                        await Logging.Write(LogEvent.ExMessage, ProgramClass.Updater, $"{ex.Message}");
-                        await ShowMessageBox.ShowBug();
-                    }
-
-                    await InstallUpdate();
-                }
-                catch (HttpRequestException ex)
-                {
-                    await Logging.Write(LogEvent.Error, ProgramClass.Updater, "Update download failed!");
-                    await Logging.Write(LogEvent.ExMessage, ProgramClass.Updater, $"{ex.Message}");
-                    await ShowMessageBox.ShowBug();
-                }
-            }
-        }
-
-        private static async Task InstallUpdate()
-        {
-            await Logging.Write(LogEvent.Info, ProgramClass.Updater, "InstallUpdate entered");
-            
-            try
-            {
-                await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Trying to start Update Installer");
-                Process.Start($"{tempPath}\\SWTOR-ChatManager-v1.0.0");
-
-                await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Update installer started");
-                await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Main Process will be killed");
-
-                Application.Exit();
-            }
-            catch (Exception ex)
-            {
-                await Logging.Write(LogEvent.Error, ProgramClass.Updater, "Update installation failed!");
-                await Logging.Write(LogEvent.ExMessage, ProgramClass.Updater, $"{ex.Message}");
-                await ShowMessageBox.ShowBug();
             }
         }
     }
