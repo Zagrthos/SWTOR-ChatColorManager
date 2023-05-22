@@ -37,18 +37,6 @@ namespace ChatManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool filesChecked {
-            get {
-                return ((bool)(this["filesChecked"]));
-            }
-            set {
-                this["filesChecked"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string backupPath {
             get {
@@ -95,27 +83,30 @@ namespace ChatManager.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatManager/issues")]
         public string supportPath {
             get {
                 return ((string)(this["supportPath"]));
             }
-            set {
-                this["supportPath"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatManager/issues/new/choose")]
         public string bugPath {
             get {
                 return ((string)(this["bugPath"]));
             }
-            set {
-                this["bugPath"] = value;
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://unsplash.com/de/fotos/PEJtZfT6C1Q")]
+        public string copyrightPicture {
+            get {
+                return ((string)(this["copyrightPicture"]));
             }
         }
     }

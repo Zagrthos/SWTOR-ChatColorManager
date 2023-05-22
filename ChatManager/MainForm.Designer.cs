@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             tlpMainForm = new TableLayoutPanel();
             menuMainForm = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -351,6 +352,7 @@
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             aboutToolStripMenuItem.Size = new Size(138, 22);
             aboutToolStripMenuItem.Text = "Über...";
+            aboutToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // tabsMainForm
             // 
@@ -945,11 +947,12 @@
             ClientSize = new Size(584, 261);
             Controls.Add(tlpMainForm);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuMainForm;
             MaximizeBox = false;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "SWTOR Chat Manager";
+            Text = "SWTOR Chat Color Manager";
             FormClosing += MainForm_FormClosing;
             FormClosed += MainForm_FormClosed;
             Load += MainForm_Load;

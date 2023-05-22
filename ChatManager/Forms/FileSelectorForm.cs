@@ -32,7 +32,7 @@ namespace ChatManager.Forms
         private async Task SetTabs(List<string> servers)
         {
             await Logging.Write(LogEvent.Method, ProgramClass.FileSelectorForm, "SetTabs entered");
-            
+
             // Create a list of all current TabPages from the tabsFileSelector
             foreach (TabPage tabPage in tabsFileSelector.TabPages.Cast<TabPage>().ToList())
             {
@@ -70,7 +70,7 @@ namespace ChatManager.Forms
                 if (tlp != null)
                 {
                     await Logging.Write(LogEvent.Control, ProgramClass.FileSelectorForm, $"Selected tlp is: {tlp.Name}");
-                                        
+
                     // If the user wants to save it's config, use a different ListBox
                     // ListBox
                     if (!isSave)

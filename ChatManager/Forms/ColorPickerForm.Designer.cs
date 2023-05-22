@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColorPickerForm));
             colorEditor = new Cyotek.Windows.Forms.ColorEditor();
             tlpColorPickerForm = new TableLayoutPanel();
             lblExample = new Label();
@@ -80,6 +81,7 @@
             ClientSize = new Size(384, 176);
             Controls.Add(tlpColorPickerForm);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             MinimumSize = new Size(400, 215);

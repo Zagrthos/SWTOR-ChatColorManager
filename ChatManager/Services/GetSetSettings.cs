@@ -17,6 +17,7 @@ namespace ChatManager.Services
         public static string GetLogPath => Settings.Default.logPath;
         public static string GetSupportPath => Settings.Default.supportPath;
         public static string GetBugPath => Settings.Default.bugPath;
+        public static string GetAboutPictureLink => Settings.Default.copyrightPicture;
 
         public static void InitSettings()
         {

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileSelectorForm));
             tabsFileSelector = new TabControl();
             tpStarForge = new TabPage();
             tlpStarForge = new TableLayoutPanel();
@@ -389,6 +390,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(484, 261);
             Controls.Add(tabsFileSelector);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FileSelectorForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Charakter wählen";

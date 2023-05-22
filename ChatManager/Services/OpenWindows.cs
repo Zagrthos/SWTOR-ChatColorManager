@@ -6,6 +6,7 @@ namespace ChatManager.Services
     internal class OpenWindows
     {
         // Debug Test Method
+        /*
         private async void StartColorPicker(object sender, EventArgs e)
         {
             await Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "StartColorPicker Entered");
@@ -13,7 +14,7 @@ namespace ChatManager.Services
             await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Form {colorPicker.Text} created");
             colorPicker.ShowDialog();
             colorPicker.Dispose();
-        }
+        }*/
 
         // Production Method
         // ??? Color Picker must be opened from an non-async method, due to the ShowDialog Method which is synchronous
@@ -30,6 +31,16 @@ namespace ChatManager.Services
             colorPicker.Dispose();
 
             return hexColor;
+        }
+
+        public static async Task OpenAbout()
+        {
+            await Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenAbout Entered");
+
+            AboutForm aboutForm = new();
+            aboutForm.ShowDialog();
+
+            aboutForm.Dispose();
         }
 
         // Open the FileSelector but with the import Settings

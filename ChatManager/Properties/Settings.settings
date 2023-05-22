@@ -5,9 +5,6 @@
     <Setting Name="localPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="filesChecked" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="backupPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -20,11 +17,14 @@
     <Setting Name="logPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="supportPath" Type="System.String" Scope="User">
+    <Setting Name="supportPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://github.com/Zagrthos/SWTOR-ChatManager/issues</Value>
     </Setting>
-    <Setting Name="bugPath" Type="System.String" Scope="User">
+    <Setting Name="bugPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://github.com/Zagrthos/SWTOR-ChatManager/issues/new/choose</Value>
+    </Setting>
+    <Setting Name="copyrightPicture" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://unsplash.com/de/fotos/PEJtZfT6C1Q</Value>
     </Setting>
   </Settings>
 </SettingsFile>

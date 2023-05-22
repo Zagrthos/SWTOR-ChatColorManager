@@ -3,8 +3,8 @@
     internal class Updater
     {
         private static readonly string currentVersion = Application.ProductVersion;
-        private static readonly string updateCheckURL = "https://github.com/Zagrthos/SWTOR-ChatManager/blob/master/ChatManager/Update/version.txt";
-        private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatManager/releases/download/";
+        private static readonly string updateCheckURL = "https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/version.txt";
+        private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/download/";
         private static readonly string tempPath = Path.GetTempPath();
         private static bool updateAvailable = false;
 
@@ -27,7 +27,7 @@
                     await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Update is available!");
                     updateAvailable = true;
 
-                    updateURL += $"{onlineVersion}/SWTOR-ChatManager-{onlineVersion}";
+                    updateURL += $"v{onlineVersion}/SWTOR-ChatManager-v{onlineVersion}";
                     await Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"updateURL set to: {updateURL}");
 
                     //await DownloadUpdate();

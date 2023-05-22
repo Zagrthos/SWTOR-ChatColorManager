@@ -61,6 +61,15 @@ namespace ChatManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Link zum Logo Ersteller.
+        /// </summary>
+        internal static string About_Picture {
+            get {
+                return ResourceManager.GetString("About_Picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Die angegebene Farbe in der Textbox entspricht nicht dem HEX-Standard..
         /// </summary>
         internal static string Err_ColorNotHex {
@@ -76,6 +85,46 @@ namespace ChatManager.Properties {
         internal static string Error_IsDetected {
             get {
                 return ResourceManager.GetString("Error_IsDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Logo {
+            get {
+                object obj = ResourceManager.GetObject("Logo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo_big {
+            get {
+                object obj = ResourceManager.GetObject("Logo_big", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo_medium {
+            get {
+                object obj = ResourceManager.GetObject("Logo_medium", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo_small {
+            get {
+                object obj = ResourceManager.GetObject("Logo_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

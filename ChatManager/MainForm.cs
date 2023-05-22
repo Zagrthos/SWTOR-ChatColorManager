@@ -95,19 +95,22 @@ namespace ChatManager
                     _ => "%SYSTEMDRIVE%",
                 };
 
-                // Check if item is support Link then open browser and finish
-                if (menuItem.Name == "supportToolStripMenuItem")
+                switch (menuItem.Name)
                 {
-                    await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Support Site requested");
-                    await OpenWindows.OpenLinksInBrowser(path);
-                    return;
-                }
+                    case "supportToolStripMenuItem":
+                        await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Support Site requested");
+                        await OpenWindows.OpenLinksInBrowser(path);
+                        return;
 
-                if (menuItem.Name == "bugToolStripMenuItem")
-                {
-                    await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Bug report Site requested");
-                    await OpenWindows.OpenLinksInBrowser(path);
-                    return;
+                    case "bugToolStripMenuItem":
+                        await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Bug report Site requested");
+                        await OpenWindows.OpenLinksInBrowser(path);
+                        return;
+
+                    case "aboutToolStripMenuItem":
+                        await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "About Form requested");
+                        await OpenWindows.OpenAbout();
+                        return;
                 }
 
                 await Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if local Path exists");
