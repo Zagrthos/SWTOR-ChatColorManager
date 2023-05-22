@@ -44,6 +44,7 @@ namespace ChatManager.Services
             string logfilePath = Path.Combine(LogPath, $"ChatManager_{LogSession}.log");
             logWriter = new(logfilePath, true);
             await Write(LogEvent.Info, ProgramClass.Logging, "Logging started");
+            await Write(LogEvent.Info, ProgramClass.Logging, $"Application version is: {Application.ProductVersion}");
 
             // Add Timer to write any second all open entries in the log
             timer = new(5000);
