@@ -33,9 +33,9 @@ namespace ChatManager.Services
             await Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, "MessageBox accepted.");
         }
 
-        public static async Task<bool> ShowUpdate()
+        public static async Task<bool> ShowUpdate(string version)
         {
-            DialogResult result = MessageBox.Show(Resources.Update_IsAvailable, Resources.MessageBoxUpdate, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            DialogResult result = MessageBox.Show(Resources.Update_IsAvailable + $" {version}", Resources.MessageBoxUpdate, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             await Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, "MessageBox shown.");
             await Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Caption: {Resources.MessageBoxUpdate}");

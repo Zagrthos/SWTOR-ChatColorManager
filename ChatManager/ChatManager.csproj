@@ -18,6 +18,7 @@
 	<Product>SWTOR Chat Manager</Product>
 	<Copyright>© Zagrthos 2023</Copyright>
 	<Description>A GUI Manager for customizing the SWTOR Chat.</Description>
+	<ApplicationIcon>Resources\Logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -30,6 +31,10 @@
 
   <ItemGroup>
     <AdditionalFiles Remove="Properties\app.manifest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Logo.ico" />
   </ItemGroup>
 
   <ItemGroup>

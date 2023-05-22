@@ -32,7 +32,10 @@ namespace ChatManager.Services
                     updateURL += $"v{onlineVersion}/SWTOR-ChatManager-v{onlineVersion}";
                     await Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"updateURL set to: {updateURL}");
 
-                    await DownloadUpdate();
+                    if (await ShowMessageBox.ShowUpdate(onlineVersion))
+                    {
+                        await DownloadUpdate();
+                    }
                 }
                 else
                 {
@@ -61,11 +64,19 @@ namespace ChatManager.Services
                 try
                 {
                     await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Update download initiated");
-
                     var bytes = await client.GetByteArrayAsync(updateCheckURL);
-                    await File.WriteAllBytesAsync(tempPath, bytes);
 
-                    await Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"File downloaded to: {tempPath}");
+                    try
+                    {
+                        await File.WriteAllBytesAsync(tempPath, bytes);
+                        await Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"File downloaded to: {tempPath}");
+                    }
+                    catch (Exception ex)
+                    {
+                        await Logging.Write(LogEvent.Error, ProgramClass.Updater, "Update writing failed!");
+                        await Logging.Write(LogEvent.ExMessage, ProgramClass.Updater, $"{ex.Message}");
+                        await ShowMessageBox.ShowBug();
+                    }
 
                     await InstallUpdate();
                 }
