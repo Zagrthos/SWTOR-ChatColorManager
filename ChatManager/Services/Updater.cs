@@ -1,4 +1,6 @@
-﻿namespace ChatManager.Services
+﻿using System.Diagnostics;
+
+namespace ChatManager.Services
 {
     internal class Updater
     {
@@ -30,7 +32,12 @@
                     updateURL += $"v{onlineVersion}/SWTOR-ChatManager-v{onlineVersion}";
                     await Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"updateURL set to: {updateURL}");
 
-                    //await DownloadUpdate();
+                    await DownloadUpdate();
+                }
+                else
+                {
+                    await Logging.Write(LogEvent.Info, ProgramClass.Updater, "No Update available!");
+                    updateAvailable = false;
                 }
             }
             catch (HttpRequestException ex)
@@ -59,6 +66,8 @@
                     await File.WriteAllBytesAsync(tempPath, bytes);
 
                     await Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"File downloaded to: {tempPath}");
+
+                    await InstallUpdate();
                 }
                 catch (HttpRequestException ex)
                 {
@@ -69,9 +78,26 @@
             }
         }
 
-        //private static async Task InstallUpdate()
-        //{
+        private static async Task InstallUpdate()
+        {
+            await Logging.Write(LogEvent.Info, ProgramClass.Updater, "InstallUpdate entered");
+            
+            try
+            {
+                await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Trying to start Update Installer");
+                Process.Start($"{tempPath}\\SWTOR-ChatManager-v1.0.0");
 
-        //}
+                await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Update installer started");
+                await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Main Process will be killed");
+
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                await Logging.Write(LogEvent.Error, ProgramClass.Updater, "Update installation failed!");
+                await Logging.Write(LogEvent.ExMessage, ProgramClass.Updater, $"{ex.Message}");
+                await ShowMessageBox.ShowBug();
+            }
+        }
     }
 }
