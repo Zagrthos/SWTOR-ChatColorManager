@@ -1,27 +1,33 @@
-name: Remove Signature and Delete Revision History
+name: Remove Signature and Delete Latest Edit
 on:
   issues:
     types:
       - opened
-
 jobs:
-  remove_signature_and_delete_revision:
+  remove_signature_and_delete_edit:
     runs-on: ubuntu-latest
     steps:
-      - name: Remove Signature
+      - name: Remove Signature and Delete Latest Edit
         uses: actions/github-script@v5
         with:
           script: |
             const issue = context.issue();
-            const description = issue.body.replace(/Sent by \[.*\]./, '');
+            const description = issue.body.replace(/Sent by \[.*@.*\]/g, '');
             const updatedIssue = await github.issues.update({
               ...context.repo,
               issue_number: issue.number,
               body: description.trim()
             });
-            await github.repos.deleteCommitComment({
+            const editHistory = await github.issues.listEvents({
               ...context.repo,
-              comment_id: updatedIssue.data.comments[0].id
+              issue_number: issue.number
             });
+            if (editHistory.data.length > 1) {
+              const latestEdit = editHistory.data[0];
+              await github.issues.deleteComment({
+                ...context.repo,
+                comment_id: latestEdit.id
+              });
+            }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
