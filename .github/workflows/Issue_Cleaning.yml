@@ -11,7 +11,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            const issue = context.issue();
+            const issue = context.payload.issue;
             const description = issue.body.replace(/Sent by \[.*@.*\]/g, '');
             const updatedIssue = await github.issues.update({
               ...context.repo,
