@@ -11,29 +11,23 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            async function run() {
-              const issue = context.payload.issue;
-              const description = issue.body.replace(/Sent by \[.*@.*\]/g, '');
-              const update = github.issues.update.bind(github.issues);
-              const updatedIssue = await update({
+            const issue = context.payload.issue;
+            const description = issue.body.replace(/Sent by \[.*@.*\]/g, '');
+            const updatedIssue = await github.rest.issues.update({
+              ...context.repo,
+              issue_number: issue.number,
+              body: description.trim()
+            });
+            const editHistory = await github.rest.issues.listEvents({
+              ...context.repo,
+              issue_number: issue.number
+            });
+            if (editHistory.data.length > 1) {
+              const latestEdit = editHistory.data[0];
+              await github.rest.issues.deleteComment({
                 ...context.repo,
-                issue_number: issue.number,
-                body: description.trim()
+                comment_id: latestEdit.id
               });
-              const listEvents = github.issues.listEvents.bind(github.issues);
-              const editHistory = await listEvents({
-                ...context.repo,
-                issue_number: issue.number
-              });
-              if (editHistory.data.length > 1) {
-                const latestEdit = editHistory.data[0];
-                const deleteComment = github.issues.deleteComment.bind(github.issues);
-                await deleteComment({
-                  ...context.repo,
-                  comment_id: latestEdit.id
-                });
-              }
             }
-            run();
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
