@@ -16,11 +16,11 @@
         private static readonly string filePath = GetSetSettings.GetLocalPath;
         private static readonly List<string> serverList = new();
 
-        private static readonly string[,] starForgeArray = new string[100, 2];
-        private static readonly string[,] sateleShanArray = new string[100, 2];
-        private static readonly string[,] darthMalgusArray = new string[100, 2];
-        private static readonly string[,] tulakHordArray = new string[100, 2];
-        private static readonly string[,] theLeviathanArray = new string[100, 2];
+        private static readonly string[,] starForgeArray = new string[1000, 2];
+        private static readonly string[,] sateleShanArray = new string[1000, 2];
+        private static readonly string[,] darthMalgusArray = new string[1000, 2];
+        private static readonly string[,] tulakHordArray = new string[1000, 2];
+        private static readonly string[,] theLeviathanArray = new string[1000, 2];
 
         // Get Methods to exchange data to other parts of the program
         public string[,] GetArray(string name)
@@ -64,6 +64,8 @@
             // Categorize the files by servers
             if (charFileNames.Length > 0)
             {
+                Logging.Write(LogEvent.Info, ProgramClass.FileImport, "Starting to count files");
+
                 // TODO: Decide if logging to be removed or not
                 for (int i = 0; i < charFileNames.Length; i++)
                 {
