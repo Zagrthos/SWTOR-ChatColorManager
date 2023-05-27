@@ -120,6 +120,7 @@
             btnStarForgeSelectAll.TabIndex = 0;
             btnStarForgeSelectAll.Text = "Alle auswählen";
             btnStarForgeSelectAll.UseVisualStyleBackColor = true;
+            btnStarForgeSelectAll.Click += SelectClick;
             // 
             // btnStarForgeDeselectAll
             // 
@@ -130,6 +131,7 @@
             btnStarForgeDeselectAll.TabIndex = 1;
             btnStarForgeDeselectAll.Text = "Alle abwählen";
             btnStarForgeDeselectAll.UseVisualStyleBackColor = true;
+            btnStarForgeDeselectAll.Click += SelectClick;
             // 
             // btnStarForgeSelect
             // 
@@ -193,6 +195,7 @@
             btnSateleShanSelectAll.TabIndex = 0;
             btnSateleShanSelectAll.Text = "Alle auswählen";
             btnSateleShanSelectAll.UseVisualStyleBackColor = true;
+            btnSateleShanSelectAll.Click += SelectClick;
             // 
             // btnSateleShanDeselectAll
             // 
@@ -203,6 +206,7 @@
             btnSateleShanDeselectAll.TabIndex = 1;
             btnSateleShanDeselectAll.Text = "Alle abwählen";
             btnSateleShanDeselectAll.UseVisualStyleBackColor = true;
+            btnSateleShanDeselectAll.Click += SelectClick;
             // 
             // tpDarthMalgus
             // 
@@ -253,6 +257,7 @@
             btnDarthMalgusSelectAll.TabIndex = 0;
             btnDarthMalgusSelectAll.Text = "Alle auswählen";
             btnDarthMalgusSelectAll.UseVisualStyleBackColor = true;
+            btnDarthMalgusSelectAll.Click += SelectClick;
             // 
             // btnDarthMalgusDeselectAll
             // 
@@ -263,6 +268,7 @@
             btnDarthMalgusDeselectAll.TabIndex = 1;
             btnDarthMalgusDeselectAll.Text = "Alle abwählen";
             btnDarthMalgusDeselectAll.UseVisualStyleBackColor = true;
+            btnDarthMalgusDeselectAll.Click += SelectClick;
             // 
             // tpTulakHord
             // 
@@ -313,6 +319,7 @@
             btnTulakHordSelectAll.TabIndex = 0;
             btnTulakHordSelectAll.Text = "Alle auswählen";
             btnTulakHordSelectAll.UseVisualStyleBackColor = true;
+            btnTulakHordSelectAll.Click += SelectClick;
             // 
             // btnTulakHordDeselectAll
             // 
@@ -323,6 +330,7 @@
             btnTulakHordDeselectAll.TabIndex = 1;
             btnTulakHordDeselectAll.Text = "Alle abwählen";
             btnTulakHordDeselectAll.UseVisualStyleBackColor = true;
+            btnTulakHordDeselectAll.Click += SelectClick;
             // 
             // tpTheLeviathan
             // 
@@ -373,6 +381,7 @@
             btnTheLeviathanSelectAll.TabIndex = 0;
             btnTheLeviathanSelectAll.Text = "Alle auswählen";
             btnTheLeviathanSelectAll.UseVisualStyleBackColor = true;
+            btnTheLeviathanSelectAll.Click += SelectClick;
             // 
             // btnTheLeviathanDeselectAll
             // 
@@ -383,6 +392,7 @@
             btnTheLeviathanDeselectAll.TabIndex = 1;
             btnTheLeviathanDeselectAll.Text = "Alle abwählen";
             btnTheLeviathanDeselectAll.UseVisualStyleBackColor = true;
+            btnTheLeviathanDeselectAll.Click += SelectClick;
             // 
             // FileSelectorForm
             // 

@@ -280,6 +280,53 @@ namespace ChatManager.Forms
             Close();
         }
 
+        private void SelectClick(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                string tabName = button.Name.Substring(2);
+
+                Control[] controls = Array.Empty<Control>();
+
+                CheckedListBox? checkedListBox;
+
+                if (tabName.Contains("StarForge"))
+                {
+                    controls = Controls.Find("clbxStarForge", true);
+                }
+                else if (tabName.Contains("SateleShan"))
+                {
+                    controls = Controls.Find("clbxSateleShan", true);
+                }
+                else if (tabName.Contains("DarthMalgus"))
+                {
+                    controls = Controls.Find("clbxDarthMalgus", true);
+                }
+                else if (tabName.Contains("TulakHord"))
+                {
+                    controls = Controls.Find("clbxTulakHord", true);
+                }
+                else if (tabName.Contains("TheLeviathan"))
+                {
+                    controls = Controls.Find("clbxTheLeviathan", true);
+                }
+
+                if (controls.Length > 0)
+                {
+                    checkedListBox = controls[0] as CheckedListBox;
+
+                    if (checkedListBox != null)
+                    {
+                        bool isChecked = !button.Name.Contains("Deselect");
+                        for (int i = 0; i < checkedListBox.Items.Count; i++)
+                        {
+                            checkedListBox.SetItemChecked(i, isChecked);
+                        }
+                    }
+                }
+            }
+        }
+
         // Find all Controls of the desired Type and pack them in a Control List
         private IEnumerable<Control> GetControls(Control parent, Type type)
         {
