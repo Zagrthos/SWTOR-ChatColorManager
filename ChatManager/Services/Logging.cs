@@ -36,15 +36,15 @@ namespace ChatManager.Services
         private static StreamWriter? logWriter;
         private static System.Timers.Timer? timer;
 
-        internal static async Task Initialize()
+        internal static void Initialize()
         {
             if (!Directory.Exists(LogPath))
                 Directory.CreateDirectory(LogPath);
 
             string logfilePath = Path.Combine(LogPath, $"ChatManager_{LogSession}.log");
             logWriter = new(logfilePath, true);
-            await Write(LogEvent.Info, ProgramClass.Logging, "Logging started");
-            await Write(LogEvent.Info, ProgramClass.Logging, $"Application version is: {Application.ProductVersion}");
+            Write(LogEvent.Info, ProgramClass.Logging, "Logging started");
+            Write(LogEvent.Info, ProgramClass.Logging, $"Application version is: {Application.ProductVersion}");
 
             // Add Timer to write any second all open entries in the log
             timer = new(5000);
@@ -59,14 +59,14 @@ namespace ChatManager.Services
             {
                 lock (logWriter)
                 {
-                    logWriter.FlushAsync().Wait();
+                    logWriter.Flush();
                     logWriter.Close();
                     logWriter = new(Path.Combine(LogPath, $"ChatManager_{LogSession}.log"), true);
                 }
             }
         }
 
-        internal static async Task Write(LogEvent Level, ProgramClass programClass, string Message)
+        internal static void Write(LogEvent Level, ProgramClass programClass, string Message)
         {
             string Event = Level switch
             {
@@ -83,19 +83,19 @@ namespace ChatManager.Services
 
             if (logWriter != null)
             {
-                await logWriter.WriteLineAsync($"[{DateTime.Now:HH:mm:ss}] => {Event} on {programClass}: {Message}");
+                logWriter.WriteLine($"[{DateTime.Now:HH:mm:ss}] => {Event} on {programClass}: {Message}");
             } else
             {
-                await Initialize();
+                Initialize();
             }
         }
 
-        internal static async Task Finalize()
+        internal static void Finalize()
         {
             if (logWriter != null)
             {
-                await Write(LogEvent.Info, ProgramClass.Logging, "Logging stopped");
-                await logWriter.FlushAsync();
+                Write(LogEvent.Info, ProgramClass.Logging, "Logging stopped");
+                logWriter.Flush();
                 logWriter.Close();
             }
 

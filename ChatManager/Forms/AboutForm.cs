@@ -78,9 +78,9 @@ namespace ChatManager.Forms
         }
         #endregion
 
-        private async void CopyrightButton_Click(object sender, EventArgs e)
+        private void CopyrightButton_Click(object sender, EventArgs e)
         {
-            await OpenWindows.OpenLinksInBrowser(GetSetSettings.GetAboutPictureLink);
+            OpenWindows.OpenLinksInBrowser(GetSetSettings.GetAboutPictureLink);
         }
     }
 }

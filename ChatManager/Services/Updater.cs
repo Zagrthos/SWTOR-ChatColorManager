@@ -8,39 +8,39 @@
 
         public static async Task CheckForUpdates()
         {
-            await Logging.Write(LogEvent.Info, ProgramClass.Updater, "CheckForUpdates entered");
+            Logging.Write(LogEvent.Info, ProgramClass.Updater, "CheckForUpdates entered");
             
             HttpClient client = new();
-            await Logging.Write(LogEvent.Info, ProgramClass.Updater, "HttpClient created");
+            Logging.Write(LogEvent.Info, ProgramClass.Updater, "HttpClient created");
 
             try
             {
-                await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Check for Updates initiated");
+                Logging.Write(LogEvent.Info, ProgramClass.Updater, "Check for Updates initiated");
 
                 string onlineVersion = await client.GetStringAsync(updateCheckURL);
-                await Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"onlineVersion is: {onlineVersion}");
+                Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"onlineVersion is: {onlineVersion}");
 
                 if (onlineVersion != currentVersion)
                 {
-                    await Logging.Write(LogEvent.Info, ProgramClass.Updater, "Update is available!");
+                    Logging.Write(LogEvent.Info, ProgramClass.Updater, "Update is available!");
 
                     updateURL += $"v{onlineVersion}";
-                    await Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"updateURL set to: {updateURL}");
+                    Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"updateURL set to: {updateURL}");
 
-                    if (await ShowMessageBox.ShowUpdate(onlineVersion))
+                    if (ShowMessageBox.ShowUpdate(onlineVersion))
                     {
-                        await OpenWindows.OpenLinksInBrowser(updateURL);
+                        OpenWindows.OpenLinksInBrowser(updateURL);
                     }
                 }
                 else
                 {
-                    await Logging.Write(LogEvent.Info, ProgramClass.Updater, "No Update available!");
+                    Logging.Write(LogEvent.Info, ProgramClass.Updater, "No Update available!");
                 }
             }
             catch (HttpRequestException ex)
             {
-                await Logging.Write(LogEvent.Error, ProgramClass.Updater, "Check for Updates failed!");
-                await Logging.Write(LogEvent.ExMessage, ProgramClass.Updater, $"{ex.Message}");
+                Logging.Write(LogEvent.Error, ProgramClass.Updater, "Check for Updates failed!");
+                Logging.Write(LogEvent.ExMessage, ProgramClass.Updater, $"{ex.Message}");
             }
         }
     }

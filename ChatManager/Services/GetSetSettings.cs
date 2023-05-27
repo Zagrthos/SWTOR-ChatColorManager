@@ -11,7 +11,7 @@ namespace ChatManager.Services
 
         private static readonly string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Logs");
 
-        public static string GetLocalPath => Settings.Default.localPath;        
+        public static string GetLocalPath => Settings.Default.localPath;
         public static string GetBackupPath => Settings.Default.backupPath;
         public static bool GetBackupAvailability => Settings.Default.backupAvailability;
         public static string GetLogPath => Settings.Default.logPath;

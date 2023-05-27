@@ -4,11 +4,11 @@
     {
         public FileImport()
         {
-            Logging.Write(LogEvent.Info, ProgramClass.FileImport, "FileImport Constructor created").ConfigureAwait(false);
+            Logging.Write(LogEvent.Info, ProgramClass.FileImport, "FileImport Constructor created");
             if (filesChecked != true)
             {
-                Logging.Write(LogEvent.Info, ProgramClass.FileImport, $"filesChecked = {filesChecked}").ConfigureAwait(false);
-                GetLocalFiles().ConfigureAwait(false);
+                Logging.Write(LogEvent.Info, ProgramClass.FileImport, $"filesChecked = {filesChecked}");
+                GetLocalFiles();
             }
         }
 
@@ -42,18 +42,18 @@
         }
 
         // Get the local files
-        private static async Task GetLocalFiles()
+        private static void GetLocalFiles()
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetLocalFiles entered");
-            await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePath: {filePath}");
+            Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetLocalFiles entered");
+            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePath: {filePath}");
 
             // Search the given Path for files
             string[] charFilePaths = Directory.GetFiles(filePath);
-            await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePaths: {charFilePaths.Length}");
+            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePaths: {charFilePaths.Length}");
 
             // Convert all filePaths to fileNames
             string?[] charFileNames = charFilePaths.Select(Path.GetFileName).ToArray();
-            await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"files: {charFileNames.Length}");
+            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"files: {charFileNames.Length}");
 
             byte starForgeCounter = 0;
             byte sateleShanCounter = 0;
@@ -67,7 +67,7 @@
                 // TODO: Decide if logging to be removed or not
                 for (int i = 0; i < charFileNames.Length; i++)
                 {
-                    //await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"currentFile: {charFileNames[i]}").ConfigureAwait(false);
+                    Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"currentFile: {i}");
                     string[] fileParts = charFileNames[i]!.Split("_");
 
                     if (fileParts.Length == 3)
@@ -89,20 +89,20 @@
                             else if (fileParts[0] == "he4000")
                             {
                                 darthMalgusArray[darthMalgusCounter, 0] = fileParts[1];
-                                //await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"darthMalgusArray: {darthMalgusArray[darthMalgusCounter, 0]}").ConfigureAwait(false);
+                                //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"darthMalgusArray: {darthMalgusArray[darthMalgusCounter, 0]}");
                                 darthMalgusArray[darthMalgusCounter, 1] = charFilePaths[i];
-                                //await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"darthMalgusArray: {darthMalgusArray[darthMalgusCounter, 1]}").ConfigureAwait(false);
+                                //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"darthMalgusArray: {darthMalgusArray[darthMalgusCounter, 1]}");
                                 darthMalgusCounter++;
-                                //await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"darthMalgusCounter: {darthMalgusCounter}").ConfigureAwait(false);
+                                //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"darthMalgusCounter: {darthMalgusCounter}");
                             }
                             else if (fileParts[0] == "he4001")
                             {
                                 tulakHordArray[tulakHordCounter, 0] = fileParts[1];
-                                //await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"tulakHordArray: {tulakHordArray[tulakHordCounter, 0]}").ConfigureAwait(false);
+                                //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"tulakHordArray: {tulakHordArray[tulakHordCounter, 0]}");
                                 tulakHordArray[tulakHordCounter, 1] = charFilePaths[i];
-                                //await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"tulakHordArray: {tulakHordArray[tulakHordCounter, 1]}").ConfigureAwait(false);
+                                //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"tulakHordArray: {tulakHordArray[tulakHordCounter, 1]}");
                                 tulakHordCounter++;
-                                //await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"tulakHordCounter: {tulakHordCounter}").ConfigureAwait(false);
+                                //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"tulakHordCounter: {tulakHordCounter}");
                             }
                             else if (fileParts[0] == "he4002")
                             {
@@ -115,7 +115,7 @@
                 }
             }
 
-            await Logging.Write(LogEvent.Info, ProgramClass.FileImport, "Select the servers by files");
+            Logging.Write(LogEvent.Info, ProgramClass.FileImport, "Select the servers by files");
 
             // Select the servers by files
             if (starForgeArray[0, 0] != null && starForgeArray[0, 0] != string.Empty)
@@ -139,17 +139,17 @@
                 serverList.Add("TheLeviathan");
             }
 
-            await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"serverList.Count = {serverList.Count}");
+            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"serverList.Count = {serverList.Count}");
 
             // Set the once runner true
             filesChecked = true;
-            await Logging.Write(LogEvent.Info, ProgramClass.FileImport, $"Set filesChecked = {filesChecked}");
+            Logging.Write(LogEvent.Info, ProgramClass.FileImport, $"Set filesChecked = {filesChecked}");
         }
 
         // Get the colors from the given File
-        public async Task<string[]> GetContentFromFile(string fileName)
+        public string[] GetContentFromFile(string fileName)
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetContentFromFile entered");
+            Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetContentFromFile entered");
 
             // Initialize Array for saving of colorIndexes
             string[] colorIndex = new string[22];
@@ -158,7 +158,7 @@
             colorIndex[0] = fileName;
 
             // Read every Line in the File and save it to the variable
-            string[] fileLines = await File.ReadAllLinesAsync(colorIndex[0]);
+            string[] fileLines = File.ReadAllLines(colorIndex[0]);
 
             // Initialize new Array and search for the correct line in the File
             string colorLine = string.Empty;
@@ -203,7 +203,7 @@
             byte b = 0;
             foreach (string index in colorIndex)
             {
-                await Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"colorIndex {b} = {colorIndex[b]}");
+                Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"colorIndex {b} = {colorIndex[b]}");
                 b++;
             }
 

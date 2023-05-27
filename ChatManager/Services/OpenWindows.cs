@@ -18,13 +18,13 @@ namespace ChatManager.Services
 
         // Production Method
         // ??? Color Picker must be opened from an non-async method, due to the ShowDialog Method which is synchronous
-        public static async Task<string> OpenColorPicker(string text, Color color)
+        public static string OpenColorPicker(string text, Color color)
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenColorPicker Entered");
+            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenColorPicker Entered");
 
             // Create new Form with the Text of the sender Button
             ColorPickerForm colorPicker = new(text, color);
-            await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Form {colorPicker.Text} created");
+            Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Form {colorPicker.Text} created");
             colorPicker.ShowDialog();
             string hexColor = colorPicker.GetHexColor;
 
@@ -33,9 +33,9 @@ namespace ChatManager.Services
             return hexColor;
         }
 
-        public static async Task OpenAbout()
+        public static void OpenAbout()
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenAbout Entered");
+            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenAbout Entered");
 
             AboutForm aboutForm = new();
             aboutForm.ShowDialog();
@@ -46,7 +46,7 @@ namespace ChatManager.Services
         // Open the FileSelector but with the import Settings
         public static (string, string) OpenFileImportSelector()
         {
-            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenFileImportSelector Entered").ConfigureAwait(false);
+            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenFileImportSelector Entered");
 
             FileImport fileImport = new();
             FileSelectorForm fileSelector = new(fileImport.GetServerList(), false);
@@ -61,13 +61,13 @@ namespace ChatManager.Services
         }
 
         // Open the FileSelector but with the export Settings
-        public static async Task OpenFileExportSelector(string[] values)
+        public static void OpenFileExportSelector(string[] values)
         {
-            await Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenFileExportSelector Entered");
+            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenFileExportSelector Entered");
 
             FileImport fileImport = new();
             FileSelectorForm fileSelector = new(fileImport.GetServerList(), true);
-            fileSelector.ShowDialog();
+            DialogResult dialogResult = fileSelector.ShowDialog();
 
             FileExport fileExport = new();
             await fileExport.BackupFilesAndWrite(values);
@@ -76,20 +76,20 @@ namespace ChatManager.Services
         }
 
         // Open Explorer Window with a specified path
-        public static async Task OpenExplorer(string path)
+        public static void OpenExplorer(string path)
         {
-            await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start explorer.exe with path: {path}");
+            Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start explorer.exe with path: {path}");
 
             try
             {
                 Process.Start("explorer.exe", path);
-                await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"explorer.exe started with path: {path}");
+                Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"explorer.exe started with path: {path}");
             }
             catch (Exception ex)
             {
-                await Logging.Write(LogEvent.Error, ProgramClass.OpenWindows, "explorer.exe failed to start!");
-                await Logging.Write(LogEvent.ExMessage, ProgramClass.OpenWindows, ex.Message);
-                await ShowMessageBox.ShowBug();
+                Logging.Write(LogEvent.Error, ProgramClass.OpenWindows, "explorer.exe failed to start!");
+                Logging.Write(LogEvent.ExMessage, ProgramClass.OpenWindows, ex.Message);
+                ShowMessageBox.ShowBug();
             }
         }
 
