@@ -17,12 +17,14 @@ namespace ChatManager.Services
         public static string GetLogPath => Settings.Default.logPath;
         public static string GetSupportPath => Settings.Default.supportPath;
         public static string GetBugPath => Settings.Default.bugPath;
+        public static string GetBugMailpath => Settings.Default.bugMailPath;
         public static string GetAboutPictureLink => Settings.Default.copyrightPicture;
 
         public static void InitSettings()
         {
             if (!Settings.Default._Initialized)
             {
+                Settings.Default.Upgrade();
                 Settings.Default.localPath = localPath;
                 Settings.Default.backupPath = backupPath;
                 Settings.Default.backupAvailability = backupDir;

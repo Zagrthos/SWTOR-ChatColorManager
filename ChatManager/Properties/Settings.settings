@@ -26,5 +26,8 @@
     <Setting Name="copyrightPicture" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://unsplash.com/de/fotos/PEJtZfT6C1Q</Value>
     </Setting>
+    <Setting Name="bugMailPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mailto:swtor-chatmanager@fire.fundersclub.com?subject=[BUG]</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -109,5 +109,14 @@ namespace ChatManager.Properties {
                 return ((string)(this["copyrightPicture"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("mailto:swtor-chatmanager@fire.fundersclub.com?subject=[BUG]")]
+        public string bugMailPath {
+            get {
+                return ((string)(this["bugMailPath"]));
+            }
+        }
     }
 }

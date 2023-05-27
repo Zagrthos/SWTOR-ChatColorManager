@@ -93,9 +93,9 @@ namespace ChatManager.Services
             }
         }
 
-        public static async Task OpenLinksInBrowser(string url)
+        public static void OpenLinksInBrowser(string url)
         {
-            await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start default Browser with url: {url}");
+            Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start default Browser with url: {url}");
 
             try
             {
@@ -103,13 +103,33 @@ namespace ChatManager.Services
                 {
                     UseShellExecute = true
                 });
-                await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Browser started with url: {url}");
+                Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Browser started with url: {url}");
             }
             catch (Exception ex)
             {
-                await Logging.Write(LogEvent.Error, ProgramClass.OpenWindows, "Browser failed to start!");
-                await Logging.Write(LogEvent.ExMessage, ProgramClass.OpenWindows, ex.Message);
-                await ShowMessageBox.ShowBug();
+                Logging.Write(LogEvent.Error, ProgramClass.OpenWindows, "Browser failed to start!");
+                Logging.Write(LogEvent.ExMessage, ProgramClass.OpenWindows, ex.Message);
+                ShowMessageBox.ShowBug();
+            }
+        }
+
+        public static void OpenProcess(string path)
+        {
+            Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start process with path: {path}");
+
+            try
+            {
+                Process.Start(new ProcessStartInfo(path)
+                {
+                    UseShellExecute = true
+                });
+                Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Process started with path: {path}");
+            }
+            catch (Exception ex)
+            {
+                Logging.Write(LogEvent.Error, ProgramClass.OpenWindows, "Process failed to start!");
+                Logging.Write(LogEvent.ExMessage, ProgramClass.OpenWindows, ex.Message);
+                ShowMessageBox.ShowBug();
             }
         }
     }

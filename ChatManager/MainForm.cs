@@ -92,6 +92,7 @@ namespace ChatManager
                     "backupToolStripMenuItem" => GetSetSettings.GetBackupPath,
                     "supportToolStripMenuItem" => GetSetSettings.GetSupportPath,
                     "bugToolStripMenuItem" => GetSetSettings.GetBugPath,
+                    "bugMailToolStripMenuItem" => GetSetSettings.GetBugMailpath,
                     _ => "%SYSTEMDRIVE%",
                 };
 
@@ -105,6 +106,11 @@ namespace ChatManager
                     case "bugToolStripMenuItem":
                         await Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Bug report Site requested");
                         await OpenWindows.OpenLinksInBrowser(path);
+                        return;
+
+                    case "bugMailToolStripMenuItem":
+                        Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Bug report Site requested");
+                        OpenWindows.OpenProcess(path);
                         return;
 
                     case "aboutToolStripMenuItem":
