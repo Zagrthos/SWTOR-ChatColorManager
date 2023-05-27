@@ -69,8 +69,16 @@ namespace ChatManager.Services
             FileSelectorForm fileSelector = new(fileImport.GetServerList(), true);
             DialogResult dialogResult = fileSelector.ShowDialog();
 
-            FileExport fileExport = new();
-            await fileExport.BackupFilesAndWrite(values);
+            if (dialogResult != DialogResult.Cancel)
+            {
+                Logging.Write(LogEvent.Variable, ProgramClass.OpenWindows, $"dialogResult = {dialogResult}");
+                FileExport fileExport = new();
+                fileExport.BackupFilesAndWrite(values);
+            }
+            else
+            {
+                Logging.Write(LogEvent.Warning, ProgramClass.OpenWindows, $"dialogResult = {dialogResult}");
+            }
 
             fileSelector.Dispose();
         }
