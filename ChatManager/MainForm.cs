@@ -99,27 +99,27 @@ namespace ChatManager
                 switch (menuItem.Name)
                 {
                     case "supportToolStripMenuItem":
-                        Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Support Site requested");
+                        Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Support Site requested");
                         OpenWindows.OpenLinksInBrowser(path);
                         return;
 
                     case "bugToolStripMenuItem":
-                        Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Bug report Site requested");
+                        Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Bug report Site requested");
                         OpenWindows.OpenLinksInBrowser(path);
                         return;
 
                     case "bugMailToolStripMenuItem":
-                        Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Bug report Site requested");
+                        Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Bug report Site requested");
                         OpenWindows.OpenProcess(path);
                         return;
 
                     case "aboutToolStripMenuItem":
-                        Logging.Write(LogEvent.Method, ProgramClass.MainForm, "About Form requested");
+                        Logging.Write(LogEvent.Info, ProgramClass.MainForm, "About Form requested");
                         OpenWindows.OpenAbout();
                         return;
 
                     case "updateToolStripMenuItem":
-                        Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Update Check requested");
+                        Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Update Check requested");
                         await Updater.CheckForUpdates(true);
                         return;
 
@@ -357,8 +357,6 @@ namespace ChatManager
         // Draw the Tabs on the left side
         private void TabsMainForm_DrawItem(object sender, DrawItemEventArgs e)
         {
-            // TODO: Review Logging
-            //Logging.Write(LogEvent.Method, ProgramClass.MainForm, "TabsMainForm_DrawItem entered");
             Graphics g = e.Graphics;
             Brush _textBrush;
 
