@@ -119,7 +119,7 @@ namespace ChatManager
                         return;
 
                     case "updateToolStripMenuItem":
-                        Logging.Write(LogEvent.Method, ProgramClass.MainForm, "About Form requested");
+                        Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Update Check requested");
                         await Updater.CheckForUpdates(true);
                         return;
                 }
