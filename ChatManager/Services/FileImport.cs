@@ -66,7 +66,6 @@
             {
                 Logging.Write(LogEvent.Info, ProgramClass.FileImport, "Starting to count files");
 
-                // TODO: Decide if logging to be removed or not
                 for (int i = 0; i < charFileNames.Length; i++)
                 {
                     Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"currentFile: {i}");
@@ -91,20 +90,14 @@
                             else if (fileParts[0] == "he4000")
                             {
                                 darthMalgusArray[darthMalgusCounter, 0] = fileParts[1];
-                                //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"darthMalgusArray: {darthMalgusArray[darthMalgusCounter, 0]}");
                                 darthMalgusArray[darthMalgusCounter, 1] = charFilePaths[i];
-                                //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"darthMalgusArray: {darthMalgusArray[darthMalgusCounter, 1]}");
                                 darthMalgusCounter++;
-                                //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"darthMalgusCounter: {darthMalgusCounter}");
                             }
                             else if (fileParts[0] == "he4001")
                             {
                                 tulakHordArray[tulakHordCounter, 0] = fileParts[1];
-                                //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"tulakHordArray: {tulakHordArray[tulakHordCounter, 0]}");
                                 tulakHordArray[tulakHordCounter, 1] = charFilePaths[i];
-                                //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"tulakHordArray: {tulakHordArray[tulakHordCounter, 1]}");
                                 tulakHordCounter++;
-                                //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"tulakHordCounter: {tulakHordCounter}");
                             }
                             else if (fileParts[0] == "he4002")
                             {
