@@ -18,13 +18,13 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="supportPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://github.com/Zagrthos/SWTOR-ChatManager/issues</Value>
+      <Value Profile="(Default)">https://github.com/Zagrthos/SWTOR-ChatColorManager/issues/</Value>
     </Setting>
     <Setting Name="bugPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://github.com/Zagrthos/SWTOR-ChatManager/issues/new/choose</Value>
+      <Value Profile="(Default)">https://github.com/Zagrthos/SWTOR-ChatColorManager/issues/new/choose</Value>
     </Setting>
     <Setting Name="copyrightPicture" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://unsplash.com/de/fotos/PEJtZfT6C1Q</Value>
+      <Value Profile="(Default)">https://unsplash.com/photos/PEJtZfT6C1Q</Value>
     </Setting>
     <Setting Name="bugMailPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">mailto:swtor-chatmanager@fire.fundersclub.com?subject=[BUG]</Value>

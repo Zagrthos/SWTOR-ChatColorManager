@@ -85,7 +85,7 @@ namespace ChatManager.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatManager/issues")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatColorManager/issues/")]
         public string supportPath {
             get {
                 return ((string)(this["supportPath"]));
@@ -94,7 +94,7 @@ namespace ChatManager.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatManager/issues/new/choose")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatColorManager/issues/new/choose")]
         public string bugPath {
             get {
                 return ((string)(this["bugPath"]));
@@ -103,7 +103,7 @@ namespace ChatManager.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://unsplash.com/de/fotos/PEJtZfT6C1Q")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://unsplash.com/photos/PEJtZfT6C1Q")]
         public string copyrightPicture {
             get {
                 return ((string)(this["copyrightPicture"]));
