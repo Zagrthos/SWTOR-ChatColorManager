@@ -9,10 +9,11 @@ namespace ChatManager.Services
         private static readonly string updateCheckURL = "https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/version.txt";
         private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/download/";
         private static string updateName = "SWTOR-ChatManager-";
+        private static string updatePath = string.Empty;
 
         public static async Task CheckForUpdates(bool fromUser = false)
         {
-            Logging.Write(LogEvent.Info, ProgramClass.Updater, "CheckForUpdates entered");
+            Logging.Write(LogEvent.Method, ProgramClass.Updater, "CheckForUpdates entered");
             
             HttpClient client = new();
             Logging.Write(LogEvent.Info, ProgramClass.Updater, "HttpClient created");
@@ -62,7 +63,7 @@ namespace ChatManager.Services
 
         private static async Task DownloadUpdate()
         {
-            Logging.Write(LogEvent.Info, ProgramClass.Updater, "DownloadUpdate entered");
+            Logging.Write(LogEvent.Method, ProgramClass.Updater, "DownloadUpdate entered");
 
             updateName += $"v{onlineVersion}.exe";
             Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"updateName set to: {updateName}");
@@ -86,22 +87,38 @@ namespace ChatManager.Services
                     return;
                 }
 
-                string tempPath = Path.Combine(Path.GetTempPath(), updateName);
-                Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"Download Path: {tempPath}");
+                updatePath = Path.Combine(Path.GetTempPath(), updateName);
+                Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"Download Path: {updatePath}");
 
-                FileStream fileStream = new(tempPath, FileMode.Create, FileAccess.Write, FileShare.None);
+                FileStream fileStream = new(updatePath, FileMode.Create, FileAccess.Write, FileShare.None);
                 Stream stream = await responseMessage.Content.ReadAsStreamAsync();
                 await stream.CopyToAsync(fileStream);
 
-                Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"Update downloaded to: {tempPath}");
+                client.Dispose();
+                responseMessage.Dispose();
+                fileStream.Dispose();
+                stream.Dispose();
+
+                Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"Update downloaded to: {updatePath}");
 
                 ShowMessageBox.Show(Resources.MessageBoxUpdate, Resources.Update_IsInstallReady);
+
+                InstallUpdate();
             }
             catch (HttpRequestException ex)
             {
                 Logging.Write(LogEvent.Error, ProgramClass.Updater, "Update download failed!");
                 Logging.Write(LogEvent.ExMessage, ProgramClass.Updater, $"{ex.Message}");
             }
+        }
+
+        private static void InstallUpdate()
+        {
+            Logging.Write(LogEvent.Method, ProgramClass.Updater, "InstallUpdate entered");
+
+            OpenWindows.OpenProcess(updatePath);
+
+            Environment.Exit(0);
         }
     }
 }
