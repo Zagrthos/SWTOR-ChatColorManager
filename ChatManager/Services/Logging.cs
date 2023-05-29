@@ -95,12 +95,11 @@ namespace ChatManager.Services
         {
             if (logWriter != null)
             {
+                timer?.Stop();
                 Write(LogEvent.Info, ProgramClass.Logging, "Logging stopped");
                 logWriter.Flush();
                 logWriter.Close();
             }
-
-            timer?.Stop();
         }
     }
 }
