@@ -1,0 +1,19 @@
+﻿{
+  "runtimeOptions": {
+    "tfm": "net7.0",
+    "frameworks": [
+      {
+        "name": "Microsoft.NETCore.App",
+        "version": "7.0.0"
+      },
+      {
+        "name": "Microsoft.WindowsDesktop.App",
+        "version": "7.0.0"
+      }
+    ],
+    "configProperties": {
+      "System.Net.Http.SocketsHttpHandler.Http2Support": true,
+      "System.Windows.Forms.ScaleTopLevelFormMinMaxSizeForDpi": true
+    }
+  }
+}
