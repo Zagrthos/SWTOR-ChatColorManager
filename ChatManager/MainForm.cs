@@ -311,7 +311,6 @@ namespace ChatManager
         // When the Form is loading, initialize the logger and log it
         private async void MainForm_Load(object sender, EventArgs e)
         {
-            Logging.Initialize();
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if SWTOR is running");
             if (Checks.CheckSWTORprocessFound())
             {

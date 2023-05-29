@@ -17,6 +17,7 @@ namespace ChatManager.Services
     internal enum ProgramClass
     {
         MainForm,
+        ProgramConfig,
         ColorPickerForm,
         FileSelectorForm,
         Checks,
