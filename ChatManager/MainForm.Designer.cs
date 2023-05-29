@@ -62,6 +62,7 @@
             bugMailToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
             aboutToolStripMenuItem = new ToolStripMenuItem();
+            updateToolStripMenuItem = new ToolStripMenuItem();
             tabsMainForm = new TabControl();
             tpGlobal = new TabPage();
             tlpGlobal = new TableLayoutPanel();
@@ -324,7 +325,7 @@
             // helpToolStripMenuItem
             // 
             helpToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supportToolStripMenuItem, bugToolStripMenuItem, bugMailToolStripMenuItem, toolStripSeparator5, aboutToolStripMenuItem });
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supportToolStripMenuItem, bugToolStripMenuItem, bugMailToolStripMenuItem, toolStripSeparator5, aboutToolStripMenuItem, updateToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             helpToolStripMenuItem.Size = new Size(44, 20);
             helpToolStripMenuItem.Text = "Hilfe";
@@ -361,6 +362,13 @@
             aboutToolStripMenuItem.Size = new Size(187, 22);
             aboutToolStripMenuItem.Text = "Über...";
             aboutToolStripMenuItem.Click += ToolStripMenuHandler;
+            // 
+            // updateToolStripMenuItem
+            // 
+            updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            updateToolStripMenuItem.Size = new Size(187, 22);
+            updateToolStripMenuItem.Text = "Auf Updates prüfen";
+            updateToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // tabsMainForm
             // 
@@ -1070,5 +1078,6 @@
         private ToolStripMenuItem backupToolStripMenuItem;
         private ToolStripMenuItem bugToolStripMenuItem;
         private ToolStripMenuItem bugMailToolStripMenuItem;
+        private ToolStripMenuItem updateToolStripMenuItem;
     }
 }

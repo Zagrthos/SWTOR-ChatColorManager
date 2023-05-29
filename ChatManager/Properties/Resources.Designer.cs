@@ -147,6 +147,15 @@ namespace ChatManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kein Update verfügbar!.
+        /// </summary>
+        internal static string MessageBoxNoUpdate {
+            get {
+                return ResourceManager.GetString("MessageBoxNoUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update verfügbar!.
         /// </summary>
         internal static string MessageBoxUpdate {
@@ -171,6 +180,26 @@ namespace ChatManager.Properties {
         internal static string Update_IsAvailable {
             get {
                 return ResourceManager.GetString("Update_IsAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Das Update ist bereit zur Installation!
+        ///
+        ///Mit einem Klick auf &quot;Ok&quot; wird die Installation gestartet..
+        /// </summary>
+        internal static string Update_IsInstallReady {
+            get {
+                return ResourceManager.GetString("Update_IsInstallReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es ist kein Update verfügbar!.
+        /// </summary>
+        internal static string Update_IsNotAvailable {
+            get {
+                return ResourceManager.GetString("Update_IsNotAvailable", resourceCulture);
             }
         }
         

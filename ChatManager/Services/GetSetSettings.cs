@@ -41,6 +41,7 @@ namespace ChatManager.Services
                 case "backupAvailability":
                     Settings.Default.backupAvailability = value;
                     break;
+
                 default:
                     throw new NotImplementedException();
             }

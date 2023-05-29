@@ -77,7 +77,7 @@ namespace ChatManager
         }
 
         // ToolStripMenu Program Handler
-        private void ToolStripMenuHandler(object sender, EventArgs e)
+        private async void ToolStripMenuHandler(object sender, EventArgs e)
         {
             Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ToolStripMainMenuHandler entered");
 
@@ -117,6 +117,11 @@ namespace ChatManager
                         Logging.Write(LogEvent.Method, ProgramClass.MainForm, "About Form requested");
                         OpenWindows.OpenAbout();
                         return;
+
+                    case "updateToolStripMenuItem":
+                        Logging.Write(LogEvent.Method, ProgramClass.MainForm, "About Form requested");
+                        await Updater.CheckForUpdates(true);
+                        return;
                 }
 
                 Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if local Path exists");
@@ -131,7 +136,6 @@ namespace ChatManager
                     Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "Local Path does not exist!");
                     ShowMessageBox.ShowBug();
                 }
-
             }
             else
             {
@@ -308,7 +312,7 @@ namespace ChatManager
             Application.Exit();
         }
 
-        // When the Form is loading, initialize the logger and log it
+        // Perform basic Checks when the Form is loading
         private async void MainForm_Load(object sender, EventArgs e)
         {
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if SWTOR is running");

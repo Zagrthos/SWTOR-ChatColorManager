@@ -146,6 +146,9 @@ Möchtest du den Bug melden?</value>
   <data name="MessageBoxInfo" xml:space="preserve">
     <value>Information</value>
   </data>
+  <data name="MessageBoxNoUpdate" xml:space="preserve">
+    <value>Kein Update verfügbar!</value>
+  </data>
   <data name="MessageBoxUpdate" xml:space="preserve">
     <value>Update verfügbar!</value>
   </data>
@@ -155,6 +158,14 @@ Möchtest du den Bug melden?</value>
   <data name="Update_IsAvailable" xml:space="preserve">
     <value>Möchtest du jetzt aktualisieren?
 Es ist ein Update auf folgende Version verfügbar:</value>
+  </data>
+  <data name="Update_IsInstallReady" xml:space="preserve">
+    <value>Das Update ist bereit zur Installation!
+
+Mit einem Klick auf "Ok" wird die Installation gestartet.</value>
+  </data>
+  <data name="Update_IsNotAvailable" xml:space="preserve">
+    <value>Es ist kein Update verfügbar!</value>
   </data>
   <data name="Warn_BackupDirMissing" xml:space="preserve">
     <value>Es konnte kein Backup Verzeichnis erstellt werden!
