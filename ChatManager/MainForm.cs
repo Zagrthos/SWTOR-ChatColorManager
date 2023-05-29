@@ -122,6 +122,11 @@ namespace ChatManager
                         Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Update Check requested");
                         await Updater.CheckForUpdates(true);
                         return;
+
+                    case "exitToolStripMenuItem":
+                        Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Application Exit requested");
+                        Application.Exit();
+                        return;
                 }
 
                 Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if local Path exists");
@@ -304,12 +309,6 @@ namespace ChatManager
             colorIndexes[99] = "";
 
             OpenWindows.OpenFileExportSelector(colorIndexes);
-        }
-
-        private void CloseApplication(object sender, EventArgs e)
-        {
-            Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Application exit requested");
-            Application.Exit();
         }
 
         // Perform basic Checks when the Form is loading
