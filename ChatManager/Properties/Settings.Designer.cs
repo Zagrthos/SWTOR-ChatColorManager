@@ -122,12 +122,12 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string _selectedLocale {
+        public string _locale {
             get {
-                return ((string)(this["_selectedLocale"]));
+                return ((string)(this["_locale"]));
             }
             set {
-                this["_selectedLocale"] = value;
+                this["_locale"] = value;
             }
         }
     }

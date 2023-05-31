@@ -11,7 +11,7 @@ namespace ChatManager.Services
 
         private static readonly string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Logs");
 
-        public static string GetCurrentLocale => Settings.Default._selectedLocale;
+        public static string GetCurrentLocale => Settings.Default._locale;
         public static string GetLocalPath => Settings.Default.localPath;
         public static string GetBackupPath => Settings.Default.backupPath;
         public static bool GetBackupAvailability => Settings.Default.backupAvailability;
@@ -41,7 +41,7 @@ namespace ChatManager.Services
             switch (settingName)
             {
                 case "_selectedLocale":
-                    Settings.Default._selectedLocale = settingValue;
+                    Settings.Default._locale = settingValue;
                     break;
 
                 default:
