@@ -12,9 +12,6 @@ namespace ChatManager.Forms
             }
             InitializeComponent();
             SetTabs(servers);
-
-            // Attach an event handler to handle the Load Event
-            //Load += (sender, e) => SetListBox(isSave);
         }
 
         private readonly bool isSave = false;
@@ -344,16 +341,16 @@ namespace ChatManager.Forms
 
             if (isSave)
             {
-                foreach (TabControl tabControl in Controls)
+                var buttons = GetControls(this, typeof(Button));
+
+                foreach (Control control in buttons)
                 {
-                    foreach (TabPage tab in tabControl.Controls)
-                    {
-                        foreach (TableLayoutPanel tlp in tab.Controls)
-                        {
-                            foreach (Control control in tlp.Controls)
-                            {
                                 if (control is Button button)
                                 {
+                        string parent = button.Parent!.Name.Substring(3);
+
+                        if (button.Name == $"btn{parent}Select")
+                        {
                                     button.Tag = $"c{button.Tag}";
                                     Logging.Write(LogEvent.Method, ProgramClass.FileSelectorForm, $"New Tag of {button.Name}: {button.Tag}");
                                 }
@@ -361,8 +358,6 @@ namespace ChatManager.Forms
                         }
                     }
                 }
-            }
-        }
 
         // Delete all Controls which are NOT part of the Initialization
         private void FileSelectorForm_FormClosing(object sender, FormClosingEventArgs e)
