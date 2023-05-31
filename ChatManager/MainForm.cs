@@ -1,5 +1,6 @@
 using ChatManager.Properties;
 using ChatManager.Services;
+using System.Globalization;
 
 namespace ChatManager
 {
@@ -310,9 +311,19 @@ namespace ChatManager
             OpenWindows.OpenFileExportSelector(colorIndexes);
         }
 
+        private void ChangeLanguage()
+        {
+            Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ChangeLanguage entered");
+
+            Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"CurrentCulture set to: {CultureInfo.CurrentCulture.TwoLetterISOLanguageName}");
+            GetSetSettings.SaveSettings("_selectedLocale", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+        }
+
         // Perform basic Checks when the Form is loading
         private async void MainForm_Load(object sender, EventArgs e)
         {
+            ChangeLanguage();
+
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if SWTOR is running");
             if (Checks.CheckSWTORprocessFound())
             {

@@ -29,5 +29,8 @@
     <Setting Name="bugMailPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">mailto:swtor-chatmanager@fire.fundersclub.com?subject=[BUG]</Value>
     </Setting>
+    <Setting Name="_selectedLocale" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

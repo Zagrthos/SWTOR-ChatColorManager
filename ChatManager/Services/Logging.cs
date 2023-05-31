@@ -24,6 +24,7 @@ namespace ChatManager.Services
         Converter,
         FileExport,
         FileImport,
+        Localization,
         Logging,
         OpenWindows,
         ShowMessageBox,

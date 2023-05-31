@@ -33,7 +33,23 @@ namespace ChatManager.Services
                 Settings.Default.Save();
             }
         }
+
+        // This is for setting strings
+        public static void SaveSettings(string settingName, string settingValue)
+        {
+            switch (settingName)
+            {
+                case "_selectedLocale":
+                    Settings.Default._selectedLocale = settingValue;
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+            Settings.Default.Save();
+        }
         
+        // This is for setting booleans
         public static void SaveSettings(string settingName, bool value)
         {
             switch (settingName)
