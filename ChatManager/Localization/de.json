@@ -1,5 +1,5 @@
 {
-  // MainForm Menu
+  "_comment1": "MainForm Menu",
   "fileToolStripMenuItem": "Datei",
   "openToolStripMenuItem": "Öffnen",
   "saveToolStripMenuItem": "Speichern",
@@ -16,7 +16,7 @@
   "aboutToolStripMenuItem": "Über...",
   "updateToolStripMenuItem": "Auf Updates prüfen",
 
-  // MainForm
+  "_comment2": "MainForm",
   "tpGlobal": "Globale Kanäle",
   "tpPlayer": "Spielerkanäle",
   "tpGroup": "Gruppenkanäle",
@@ -43,19 +43,15 @@
   "btnGuildInfo": "Gildeninfos",
   "btnGroupInfo": "Gruppeninfos",
 
-  // AboutForm
+  "_comment3": "AboutForm",
   "AboutForm": "Über diese App",
-  "labelProductName": "Produktname",
-  "labelVersion": "Version",
-  "labelCopyright": "Copyright",
-  "labelCompanyName": "Entwicklername",
   "copyrightButton": "Link zum Logo Ersteller",
   "okButton": "Ok",
 
-  // ColorPickerForm
+  "_comment4": "ColorPickerForm",
   "lblExample": "Das ist ein Beispieltext in der ausgewählten Farbe.",
 
-  // FileSelectorForm
+  "_comment5": "FileSelectorForm",
   "FileSelectorForm": "Charakter wählen",
   "tabStarForge": "Star Forge",
   "tabSateleShan": "Satele Shan",
@@ -78,7 +74,7 @@
   "btnTheLeviathanSelect": "Auswählen",
   "btnTheLeviathanDeselectAll": "Alle abwählen",
 
-  // MessageBox Strings
+  "_comment6": "MessageBox Strings",
   "Err_ColorNotHex": "Die angegebene Farbe in der Textbox entspricht nicht dem HEX-Standard.",
   "Error_IsDetected": "Da ist was schief gelaufen!\nMöchtest du den Bug melden?",
   "MessageBoxError": "Fehler",

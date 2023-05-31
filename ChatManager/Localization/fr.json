@@ -1,5 +1,5 @@
 {
-  // MainForm Menu
+  "_comment1": "MainForm Menu",
   "fileToolStripMenuItem": "Fichier",
   "openToolStripMenuItem": "Ouvrir",
   "saveToolStripMenuItem": "Sauvegarde",
@@ -16,7 +16,7 @@
   "aboutToolStripMenuItem": "À propos de...",
   "updateToolStripMenuItem": "Vérifier les mises à jour",
 
-  // MainForm
+  "_comment2": "MainForm",
   "tpGlobal": "Canaux mondiaux",
   "tpPlayer": "Canaux de lecture",
   "tpGroup": "Canaux de groupe",
@@ -43,19 +43,15 @@
   "btnGuildInfo": "Guilde Info",
   "btnGroupInfo": "Groupe Info",
 
-  // AboutForm
+  "_comment3": "AboutForm",
   "AboutForm": "A propos de cette application",
-  "labelProductName": "Nom du produit",
-  "labelVersion": "Version",
-  "labelCopyright": "Droits d'auteur",
-  "labelCompanyName": "Nom du créateur",
   "copyrightButton": "Lien vers le créateur de logo",
   "okButton": "Ok",
 
-  // ColorPickerForm
+  "_comment4": "ColorPickerForm",
   "lblExample": "Voici un exemple de texte dans la couleur sélectionnée.",
 
-  // FileSelectorForm
+  "_comment5": "FileSelectorForm",
   "FileSelectorForm": "Choisis un personnage",
   "tabStarForge": "Star Forge",
   "tabSateleShan": "Satele Shan",
@@ -78,7 +74,7 @@
   "btnTheLeviathanSelect": "Sélectionne",
   "btnTheLeviathanDeselectAll": "Désélectionne tout",
 
-  // MessageBox Strings
+  "_comment6": "MessageBox Strings",
   "Err_ColorNotHex": "La couleur spécifiée dans la zone de texte ne correspond pas à la norme HEX..",
   "Error_IsDetected": "Quelque chose a mal tourné!\nVeux-tu signaler le bogue?",
   "MessageBoxError": "Erreur",

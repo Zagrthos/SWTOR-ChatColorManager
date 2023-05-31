@@ -1,5 +1,5 @@
 {
-  // MainForm Menu
+  "_comment1": "MainForm Menu",
   "fileToolStripMenuItem": "File",
   "openToolStripMenuItem": "Open",
   "saveToolStripMenuItem": "Save",
@@ -16,7 +16,7 @@
   "aboutToolStripMenuItem": "About...",
   "updateToolStripMenuItem": "Check for updates",
 
-  // MainForm
+  "_comment2": "MainForm",
   "tpGlobal": "Global Channels",
   "tpPlayer": "Player Channels",
   "tpGroup": "Group Channels",
@@ -43,19 +43,15 @@
   "btnGuildInfo": "Guild Info",
   "btnGroupInfo": "Group Info",
 
-  // AboutForm
+  "_comment3": "AboutForm",
   "AboutForm": "About this app",
-  "labelProductName": "Product Name",
-  "labelVersion": "Version",
-  "labelCopyright": "Copyright",
-  "labelCompanyName": "Company name",
   "copyrightButton": "Link to logo creator",
   "okButton": "Ok",
 
-  // ColorPickerForm
+  "_comment4": "ColorPickerForm",
   "lblExample": "This is a sample text in the selected color.",
 
-  // FileSelectorForm
+  "_comment5": "FileSelectorForm",
   "FileSelectorForm": "Choose character",
   "tabStarForge": "Star Forge",
   "tabSateleShan": "Satele Shan",
@@ -78,7 +74,7 @@
   "btnTheLeviathanSelect": "Select",
   "btnTheLeviathanDeselectAll": "Deselect all",
 
-  // MessageBox Strings
+  "_comment6": "MessageBox Strings",
   "Err_ColorNotHex": "The specified color in the text box does not correspond to the HEX standard.",
   "Error_IsDetected": "Something went wrong!\nDo you want to report the bug?",
   "MessageBoxError": "Error",
