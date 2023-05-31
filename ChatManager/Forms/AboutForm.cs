@@ -1,5 +1,4 @@
-﻿using ChatManager.Properties;
-using ChatManager.Services;
+﻿using ChatManager.Services;
 using System.Reflection;
 
 namespace ChatManager.Forms
@@ -11,10 +10,10 @@ namespace ChatManager.Forms
             InitializeComponent();
             Text = string.Format("About {0}", AssemblyTitle);
             labelProductName.Text = AssemblyProduct;
-            labelVersion.Text = string.Format("Version {0}", AssemblyVersion);
+            labelVersion.Text = string.Format("Version {0}", ProductVersion);
             labelCopyright.Text = AssemblyCopyright;
             labelCompanyName.Text = AssemblyCompany;
-            copyrightButton.Text = Resources.About_Picture;
+            Localize(GetSetSettings.GetCurrentLocale);
         }
 
         #region Assembly Attribute Accessors
@@ -80,7 +79,21 @@ namespace ChatManager.Forms
 
         private void CopyrightButton_Click(object sender, EventArgs e)
         {
+            Logging.Write(LogEvent.Method, ProgramClass.AboutForm, "CopyrightButtonClick entered");
             OpenWindows.OpenLinksInBrowser(GetSetSettings.GetAboutPictureLink);
+        }
+
+        private void Localize(string locale)
+        {
+            Logging.Write(LogEvent.Method, ProgramClass.AboutForm, "Localize entered");
+
+            Localization localization = new(locale);
+
+            Text = localization.GetString(Name);
+            Logging.Write(LogEvent.Variable, ProgramClass.AboutForm, $"FormText set to {Text}");
+
+            copyrightButton.Text = localization.GetString(copyrightButton.Name);
+            Logging.Write(LogEvent.Variable, ProgramClass.AboutForm, $"copyrightButton set to {copyrightButton.Text}");
         }
     }
 }

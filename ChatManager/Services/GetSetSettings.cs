@@ -11,6 +11,7 @@ namespace ChatManager.Services
 
         private static readonly string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Logs");
 
+        public static string GetCurrentLocale => Settings.Default._selectedLocale;
         public static string GetLocalPath => Settings.Default.localPath;
         public static string GetBackupPath => Settings.Default.backupPath;
         public static bool GetBackupAvailability => Settings.Default.backupAvailability;
@@ -33,7 +34,23 @@ namespace ChatManager.Services
                 Settings.Default.Save();
             }
         }
+
+        // This is for setting strings
+        public static void SaveSettings(string settingName, string settingValue)
+        {
+            switch (settingName)
+            {
+                case "_selectedLocale":
+                    Settings.Default._selectedLocale = settingValue;
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+            Settings.Default.Save();
+        }
         
+        // This is for setting booleans
         public static void SaveSettings(string settingName, bool value)
         {
             switch (settingName)

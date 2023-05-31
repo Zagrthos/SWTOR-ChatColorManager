@@ -118,5 +118,17 @@ namespace ChatManager.Properties {
                 return ((string)(this["bugMailPath"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string _selectedLocale {
+            get {
+                return ((string)(this["_selectedLocale"]));
+            }
+            set {
+                this["_selectedLocale"] = value;
+            }
+        }
     }
 }

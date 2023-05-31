@@ -140,7 +140,7 @@
             tlpMainForm.RowCount = 2;
             tlpMainForm.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
             tlpMainForm.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlpMainForm.Size = new Size(584, 261);
+            tlpMainForm.Size = new Size(484, 261);
             tlpMainForm.TabIndex = 0;
             // 
             // menuMainForm
@@ -149,7 +149,7 @@
             menuMainForm.Location = new Point(0, 0);
             menuMainForm.Name = "menuMainForm";
             menuMainForm.RenderMode = ToolStripRenderMode.Professional;
-            menuMainForm.Size = new Size(584, 24);
+            menuMainForm.Size = new Size(484, 24);
             menuMainForm.TabIndex = 44;
             // 
             // fileToolStripMenuItem
@@ -164,26 +164,26 @@
             // 
             newToolStripMenuItem.Enabled = false;
             newToolStripMenuItem.Name = "newToolStripMenuItem";
-            newToolStripMenuItem.Size = new Size(180, 22);
+            newToolStripMenuItem.Size = new Size(153, 22);
             newToolStripMenuItem.Text = "Neu";
             newToolStripMenuItem.Visible = false;
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(180, 22);
+            openToolStripMenuItem.Size = new Size(153, 22);
             openToolStripMenuItem.Text = "Öffnen";
             openToolStripMenuItem.Click += ImportFile;
             // 
             // toolStripSeparator
             // 
             toolStripSeparator.Name = "toolStripSeparator";
-            toolStripSeparator.Size = new Size(177, 6);
+            toolStripSeparator.Size = new Size(150, 6);
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(180, 22);
+            saveToolStripMenuItem.Size = new Size(153, 22);
             saveToolStripMenuItem.Text = "Speichern";
             saveToolStripMenuItem.Click += ExportFiles;
             // 
@@ -191,20 +191,20 @@
             // 
             saveAsToolStripMenuItem.Enabled = false;
             saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new Size(180, 22);
+            saveAsToolStripMenuItem.Size = new Size(153, 22);
             saveAsToolStripMenuItem.Text = "Speichern als...";
             saveAsToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(177, 6);
+            toolStripSeparator1.Size = new Size(150, 6);
             // 
             // printToolStripMenuItem
             // 
             printToolStripMenuItem.Enabled = false;
             printToolStripMenuItem.Name = "printToolStripMenuItem";
-            printToolStripMenuItem.Size = new Size(180, 22);
+            printToolStripMenuItem.Size = new Size(153, 22);
             printToolStripMenuItem.Text = "Drucken";
             printToolStripMenuItem.Visible = false;
             // 
@@ -212,20 +212,20 @@
             // 
             printPreviewToolStripMenuItem.Enabled = false;
             printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            printPreviewToolStripMenuItem.Size = new Size(180, 22);
+            printPreviewToolStripMenuItem.Size = new Size(153, 22);
             printPreviewToolStripMenuItem.Text = "Druckvorschau";
             printPreviewToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(177, 6);
+            toolStripSeparator2.Size = new Size(150, 6);
             toolStripSeparator2.Visible = false;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Size = new Size(153, 22);
             exitToolStripMenuItem.Text = "Beenden";
             exitToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
@@ -384,7 +384,7 @@
             tabsMainForm.Multiline = true;
             tabsMainForm.Name = "tabsMainForm";
             tabsMainForm.SelectedIndex = 0;
-            tabsMainForm.Size = new Size(578, 230);
+            tabsMainForm.Size = new Size(478, 230);
             tabsMainForm.SizeMode = TabSizeMode.Fixed;
             tabsMainForm.TabIndex = 43;
             tabsMainForm.DrawItem += TabsMainForm_DrawItem;
@@ -394,37 +394,39 @@
             tpGlobal.Controls.Add(tlpGlobal);
             tpGlobal.Location = new Point(104, 4);
             tpGlobal.Name = "tpGlobal";
-            tpGlobal.Size = new Size(470, 222);
+            tpGlobal.Size = new Size(370, 222);
             tpGlobal.TabIndex = 0;
             tpGlobal.Text = "Standardkanäle";
             tpGlobal.UseVisualStyleBackColor = true;
             // 
             // tlpGlobal
             // 
-            tlpGlobal.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tlpGlobal.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33334F));
-            tlpGlobal.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33334F));
-            tlpGlobal.Controls.Add(btnGeneral, 2, 2);
-            tlpGlobal.Controls.Add(btnPvP, 2, 1);
-            tlpGlobal.Controls.Add(btnTrade, 2, 0);
-            tlpGlobal.Controls.Add(tbTrade, 1, 0);
-            tlpGlobal.Controls.Add(tbPvP, 1, 1);
-            tlpGlobal.Controls.Add(tbGeneral, 1, 2);
+            tlpGlobal.ColumnCount = 2;
+            tlpGlobal.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpGlobal.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpGlobal.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tlpGlobal.Controls.Add(btnGeneral, 1, 2);
+            tlpGlobal.Controls.Add(btnPvP, 1, 1);
+            tlpGlobal.Controls.Add(btnTrade, 1, 0);
+            tlpGlobal.Controls.Add(tbTrade, 0, 0);
+            tlpGlobal.Controls.Add(tbPvP, 0, 1);
+            tlpGlobal.Controls.Add(tbGeneral, 0, 2);
             tlpGlobal.Dock = DockStyle.Fill;
             tlpGlobal.Location = new Point(0, 0);
             tlpGlobal.Name = "tlpGlobal";
-            tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33334F));
-            tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33332F));
-            tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33333F));
-            tlpGlobal.Size = new Size(470, 222);
+            tlpGlobal.RowCount = 3;
+            tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333435F));
+            tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333244F));
+            tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tlpGlobal.Size = new Size(370, 222);
             tlpGlobal.TabIndex = 0;
             // 
             // btnGeneral
             // 
             btnGeneral.Dock = DockStyle.Fill;
-            btnGeneral.Location = new Point(315, 150);
+            btnGeneral.Location = new Point(188, 150);
             btnGeneral.Name = "btnGeneral";
-            btnGeneral.Size = new Size(152, 69);
+            btnGeneral.Size = new Size(179, 69);
             btnGeneral.TabIndex = 2;
             btnGeneral.Tag = "tbGeneral";
             btnGeneral.Text = "Allgemein";
@@ -434,9 +436,9 @@
             // btnPvP
             // 
             btnPvP.Dock = DockStyle.Fill;
-            btnPvP.Location = new Point(315, 77);
+            btnPvP.Location = new Point(188, 77);
             btnPvP.Name = "btnPvP";
-            btnPvP.Size = new Size(152, 67);
+            btnPvP.Size = new Size(179, 67);
             btnPvP.TabIndex = 1;
             btnPvP.Tag = "tbPvP";
             btnPvP.Text = "PvP";
@@ -446,9 +448,9 @@
             // btnTrade
             // 
             btnTrade.Dock = DockStyle.Fill;
-            btnTrade.Location = new Point(315, 3);
+            btnTrade.Location = new Point(188, 3);
             btnTrade.Name = "btnTrade";
-            btnTrade.Size = new Size(152, 68);
+            btnTrade.Size = new Size(179, 68);
             btnTrade.TabIndex = 0;
             btnTrade.Tag = "tbTrade";
             btnTrade.Text = "Handel";
@@ -458,25 +460,25 @@
             // tbTrade
             // 
             tbTrade.Dock = DockStyle.Fill;
-            tbTrade.Location = new Point(159, 3);
+            tbTrade.Location = new Point(3, 3);
             tbTrade.Name = "tbTrade";
-            tbTrade.Size = new Size(150, 23);
+            tbTrade.Size = new Size(179, 23);
             tbTrade.TabIndex = 21;
             // 
             // tbPvP
             // 
             tbPvP.Dock = DockStyle.Fill;
-            tbPvP.Location = new Point(159, 77);
+            tbPvP.Location = new Point(3, 77);
             tbPvP.Name = "tbPvP";
-            tbPvP.Size = new Size(150, 23);
+            tbPvP.Size = new Size(179, 23);
             tbPvP.TabIndex = 22;
             // 
             // tbGeneral
             // 
             tbGeneral.Dock = DockStyle.Fill;
-            tbGeneral.Location = new Point(159, 150);
+            tbGeneral.Location = new Point(3, 150);
             tbGeneral.Name = "tbGeneral";
-            tbGeneral.Size = new Size(150, 23);
+            tbGeneral.Size = new Size(179, 23);
             tbGeneral.TabIndex = 23;
             // 
             // tpPlayer
@@ -484,46 +486,48 @@
             tpPlayer.Controls.Add(tlpPlayer);
             tpPlayer.Location = new Point(104, 4);
             tpPlayer.Name = "tpPlayer";
-            tpPlayer.Size = new Size(470, 222);
+            tpPlayer.Size = new Size(370, 222);
             tpPlayer.TabIndex = 1;
             tpPlayer.Text = "Spielerkanäle";
             tpPlayer.UseVisualStyleBackColor = true;
             // 
             // tlpPlayer
             // 
-            tlpPlayer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tlpPlayer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tlpPlayer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tlpPlayer.Controls.Add(btnWhisper, 2, 5);
-            tlpPlayer.Controls.Add(btnSay, 2, 4);
-            tlpPlayer.Controls.Add(btnGuild, 2, 3);
-            tlpPlayer.Controls.Add(btnOfficer, 2, 2);
-            tlpPlayer.Controls.Add(btnYell, 2, 1);
-            tlpPlayer.Controls.Add(btnEmote, 2, 0);
-            tlpPlayer.Controls.Add(tbEmote, 1, 0);
-            tlpPlayer.Controls.Add(tbYell, 1, 1);
-            tlpPlayer.Controls.Add(tbOfficer, 1, 2);
-            tlpPlayer.Controls.Add(tbGuild, 1, 3);
-            tlpPlayer.Controls.Add(tbSay, 1, 4);
-            tlpPlayer.Controls.Add(tbWhisper, 1, 5);
+            tlpPlayer.ColumnCount = 2;
+            tlpPlayer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpPlayer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpPlayer.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tlpPlayer.Controls.Add(btnWhisper, 1, 5);
+            tlpPlayer.Controls.Add(btnSay, 1, 4);
+            tlpPlayer.Controls.Add(btnGuild, 1, 3);
+            tlpPlayer.Controls.Add(btnOfficer, 1, 2);
+            tlpPlayer.Controls.Add(btnYell, 1, 1);
+            tlpPlayer.Controls.Add(btnEmote, 1, 0);
+            tlpPlayer.Controls.Add(tbEmote, 0, 0);
+            tlpPlayer.Controls.Add(tbYell, 0, 1);
+            tlpPlayer.Controls.Add(tbOfficer, 0, 2);
+            tlpPlayer.Controls.Add(tbGuild, 0, 3);
+            tlpPlayer.Controls.Add(tbSay, 0, 4);
+            tlpPlayer.Controls.Add(tbWhisper, 0, 5);
             tlpPlayer.Dock = DockStyle.Fill;
             tlpPlayer.Location = new Point(0, 0);
             tlpPlayer.Name = "tlpPlayer";
-            tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.66667F));
-            tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.66667F));
-            tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.66667F));
-            tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.66667F));
-            tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.66667F));
-            tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.66667F));
-            tlpPlayer.Size = new Size(470, 222);
+            tlpPlayer.RowCount = 6;
+            tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
+            tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
+            tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
+            tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
+            tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
+            tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
+            tlpPlayer.Size = new Size(370, 222);
             tlpPlayer.TabIndex = 0;
             // 
             // btnWhisper
             // 
             btnWhisper.Dock = DockStyle.Fill;
-            btnWhisper.Location = new Point(315, 188);
+            btnWhisper.Location = new Point(188, 188);
             btnWhisper.Name = "btnWhisper";
-            btnWhisper.Size = new Size(152, 31);
+            btnWhisper.Size = new Size(179, 31);
             btnWhisper.TabIndex = 8;
             btnWhisper.Tag = "tbWhisper";
             btnWhisper.Text = "Flüstern";
@@ -533,9 +537,9 @@
             // btnSay
             // 
             btnSay.Dock = DockStyle.Fill;
-            btnSay.Location = new Point(315, 151);
+            btnSay.Location = new Point(188, 151);
             btnSay.Name = "btnSay";
-            btnSay.Size = new Size(152, 31);
+            btnSay.Size = new Size(179, 31);
             btnSay.TabIndex = 7;
             btnSay.Tag = "tbSay";
             btnSay.Text = "Sagen";
@@ -545,9 +549,9 @@
             // btnGuild
             // 
             btnGuild.Dock = DockStyle.Fill;
-            btnGuild.Location = new Point(315, 114);
+            btnGuild.Location = new Point(188, 114);
             btnGuild.Name = "btnGuild";
-            btnGuild.Size = new Size(152, 31);
+            btnGuild.Size = new Size(179, 31);
             btnGuild.TabIndex = 6;
             btnGuild.Tag = "tbGuild";
             btnGuild.Text = "Gilde";
@@ -557,9 +561,9 @@
             // btnOfficer
             // 
             btnOfficer.Dock = DockStyle.Fill;
-            btnOfficer.Location = new Point(315, 77);
+            btnOfficer.Location = new Point(188, 77);
             btnOfficer.Name = "btnOfficer";
-            btnOfficer.Size = new Size(152, 31);
+            btnOfficer.Size = new Size(179, 31);
             btnOfficer.TabIndex = 5;
             btnOfficer.Tag = "tbOfficer";
             btnOfficer.Text = "Offizier";
@@ -569,9 +573,9 @@
             // btnYell
             // 
             btnYell.Dock = DockStyle.Fill;
-            btnYell.Location = new Point(315, 40);
+            btnYell.Location = new Point(188, 40);
             btnYell.Name = "btnYell";
-            btnYell.Size = new Size(152, 31);
+            btnYell.Size = new Size(179, 31);
             btnYell.TabIndex = 4;
             btnYell.Tag = "tbYell";
             btnYell.Text = "Brüllen";
@@ -581,9 +585,9 @@
             // btnEmote
             // 
             btnEmote.Dock = DockStyle.Fill;
-            btnEmote.Location = new Point(315, 3);
+            btnEmote.Location = new Point(188, 3);
             btnEmote.Name = "btnEmote";
-            btnEmote.Size = new Size(152, 31);
+            btnEmote.Size = new Size(179, 31);
             btnEmote.TabIndex = 3;
             btnEmote.Tag = "tbEmote";
             btnEmote.Text = "Emote";
@@ -593,49 +597,49 @@
             // tbEmote
             // 
             tbEmote.Dock = DockStyle.Fill;
-            tbEmote.Location = new Point(159, 3);
+            tbEmote.Location = new Point(3, 3);
             tbEmote.Name = "tbEmote";
-            tbEmote.Size = new Size(150, 23);
+            tbEmote.Size = new Size(179, 23);
             tbEmote.TabIndex = 24;
             // 
             // tbYell
             // 
             tbYell.Dock = DockStyle.Fill;
-            tbYell.Location = new Point(159, 40);
+            tbYell.Location = new Point(3, 40);
             tbYell.Name = "tbYell";
-            tbYell.Size = new Size(150, 23);
+            tbYell.Size = new Size(179, 23);
             tbYell.TabIndex = 25;
             // 
             // tbOfficer
             // 
             tbOfficer.Dock = DockStyle.Fill;
-            tbOfficer.Location = new Point(159, 77);
+            tbOfficer.Location = new Point(3, 77);
             tbOfficer.Name = "tbOfficer";
-            tbOfficer.Size = new Size(150, 23);
+            tbOfficer.Size = new Size(179, 23);
             tbOfficer.TabIndex = 26;
             // 
             // tbGuild
             // 
             tbGuild.Dock = DockStyle.Fill;
-            tbGuild.Location = new Point(159, 114);
+            tbGuild.Location = new Point(3, 114);
             tbGuild.Name = "tbGuild";
-            tbGuild.Size = new Size(150, 23);
+            tbGuild.Size = new Size(179, 23);
             tbGuild.TabIndex = 27;
             // 
             // tbSay
             // 
             tbSay.Dock = DockStyle.Fill;
-            tbSay.Location = new Point(159, 151);
+            tbSay.Location = new Point(3, 151);
             tbSay.Name = "tbSay";
-            tbSay.Size = new Size(150, 23);
+            tbSay.Size = new Size(179, 23);
             tbSay.TabIndex = 28;
             // 
             // tbWhisper
             // 
             tbWhisper.Dock = DockStyle.Fill;
-            tbWhisper.Location = new Point(159, 188);
+            tbWhisper.Location = new Point(3, 188);
             tbWhisper.Name = "tbWhisper";
-            tbWhisper.Size = new Size(150, 23);
+            tbWhisper.Size = new Size(179, 23);
             tbWhisper.TabIndex = 29;
             // 
             // tpGroup
@@ -643,43 +647,45 @@
             tpGroup.Controls.Add(tlpGroup);
             tpGroup.Location = new Point(104, 4);
             tpGroup.Name = "tpGroup";
-            tpGroup.Size = new Size(470, 222);
+            tpGroup.Size = new Size(370, 222);
             tpGroup.TabIndex = 2;
             tpGroup.Text = "Gruppenkanäle";
             tpGroup.UseVisualStyleBackColor = true;
             // 
             // tlpGroup
             // 
-            tlpGroup.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tlpGroup.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tlpGroup.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tlpGroup.Controls.Add(btnOpsOfficer, 2, 4);
-            tlpGroup.Controls.Add(btnOpsAnnou, 2, 3);
-            tlpGroup.Controls.Add(btnGroup, 2, 2);
-            tlpGroup.Controls.Add(btnOpsLead, 2, 1);
-            tlpGroup.Controls.Add(btnOps, 2, 0);
-            tlpGroup.Controls.Add(tbOps, 1, 0);
-            tlpGroup.Controls.Add(tbOpsLead, 1, 1);
-            tlpGroup.Controls.Add(tbGroup, 1, 2);
-            tlpGroup.Controls.Add(tbOpsAnnou, 1, 3);
-            tlpGroup.Controls.Add(tbOpsOfficer, 1, 4);
+            tlpGroup.ColumnCount = 2;
+            tlpGroup.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpGroup.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpGroup.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tlpGroup.Controls.Add(btnOpsOfficer, 1, 4);
+            tlpGroup.Controls.Add(btnOpsAnnou, 1, 3);
+            tlpGroup.Controls.Add(btnGroup, 1, 2);
+            tlpGroup.Controls.Add(btnOpsLead, 1, 1);
+            tlpGroup.Controls.Add(btnOps, 1, 0);
+            tlpGroup.Controls.Add(tbOps, 0, 0);
+            tlpGroup.Controls.Add(tbOpsLead, 0, 1);
+            tlpGroup.Controls.Add(tbGroup, 0, 2);
+            tlpGroup.Controls.Add(tbOpsAnnou, 0, 3);
+            tlpGroup.Controls.Add(tbOpsOfficer, 0, 4);
             tlpGroup.Dock = DockStyle.Fill;
             tlpGroup.Location = new Point(0, 0);
             tlpGroup.Name = "tlpGroup";
+            tlpGroup.RowCount = 5;
             tlpGroup.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tlpGroup.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tlpGroup.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tlpGroup.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tlpGroup.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tlpGroup.Size = new Size(470, 222);
+            tlpGroup.Size = new Size(370, 222);
             tlpGroup.TabIndex = 0;
             // 
             // btnOpsOfficer
             // 
             btnOpsOfficer.Dock = DockStyle.Fill;
-            btnOpsOfficer.Location = new Point(315, 179);
+            btnOpsOfficer.Location = new Point(188, 179);
             btnOpsOfficer.Name = "btnOpsOfficer";
-            btnOpsOfficer.Size = new Size(152, 40);
+            btnOpsOfficer.Size = new Size(179, 40);
             btnOpsOfficer.TabIndex = 13;
             btnOpsOfficer.Tag = "tbOpsOfficer";
             btnOpsOfficer.Text = "Ops Offizier";
@@ -689,9 +695,9 @@
             // btnOpsAnnou
             // 
             btnOpsAnnou.Dock = DockStyle.Fill;
-            btnOpsAnnou.Location = new Point(315, 135);
+            btnOpsAnnou.Location = new Point(188, 135);
             btnOpsAnnou.Name = "btnOpsAnnou";
-            btnOpsAnnou.Size = new Size(152, 38);
+            btnOpsAnnou.Size = new Size(179, 38);
             btnOpsAnnou.TabIndex = 12;
             btnOpsAnnou.Tag = "tbOpsAnnou";
             btnOpsAnnou.Text = "Ops Ankündigung";
@@ -701,9 +707,9 @@
             // btnGroup
             // 
             btnGroup.Dock = DockStyle.Fill;
-            btnGroup.Location = new Point(315, 91);
+            btnGroup.Location = new Point(188, 91);
             btnGroup.Name = "btnGroup";
-            btnGroup.Size = new Size(152, 38);
+            btnGroup.Size = new Size(179, 38);
             btnGroup.TabIndex = 11;
             btnGroup.Tag = "tbGroup";
             btnGroup.Text = "Gruppe";
@@ -713,9 +719,9 @@
             // btnOpsLead
             // 
             btnOpsLead.Dock = DockStyle.Fill;
-            btnOpsLead.Location = new Point(315, 47);
+            btnOpsLead.Location = new Point(188, 47);
             btnOpsLead.Name = "btnOpsLead";
-            btnOpsLead.Size = new Size(152, 38);
+            btnOpsLead.Size = new Size(179, 38);
             btnOpsLead.TabIndex = 10;
             btnOpsLead.Tag = "tbOpsLead";
             btnOpsLead.Text = "Ops Anführer";
@@ -725,9 +731,9 @@
             // btnOps
             // 
             btnOps.Dock = DockStyle.Fill;
-            btnOps.Location = new Point(315, 3);
+            btnOps.Location = new Point(188, 3);
             btnOps.Name = "btnOps";
-            btnOps.Size = new Size(152, 38);
+            btnOps.Size = new Size(179, 38);
             btnOps.TabIndex = 9;
             btnOps.Tag = "tbOps";
             btnOps.Text = "Ops";
@@ -737,41 +743,41 @@
             // tbOps
             // 
             tbOps.Dock = DockStyle.Fill;
-            tbOps.Location = new Point(159, 3);
+            tbOps.Location = new Point(3, 3);
             tbOps.Name = "tbOps";
-            tbOps.Size = new Size(150, 23);
+            tbOps.Size = new Size(179, 23);
             tbOps.TabIndex = 30;
             // 
             // tbOpsLead
             // 
             tbOpsLead.Dock = DockStyle.Fill;
-            tbOpsLead.Location = new Point(159, 47);
+            tbOpsLead.Location = new Point(3, 47);
             tbOpsLead.Name = "tbOpsLead";
-            tbOpsLead.Size = new Size(150, 23);
+            tbOpsLead.Size = new Size(179, 23);
             tbOpsLead.TabIndex = 31;
             // 
             // tbGroup
             // 
             tbGroup.Dock = DockStyle.Fill;
-            tbGroup.Location = new Point(159, 91);
+            tbGroup.Location = new Point(3, 91);
             tbGroup.Name = "tbGroup";
-            tbGroup.Size = new Size(150, 23);
+            tbGroup.Size = new Size(179, 23);
             tbGroup.TabIndex = 32;
             // 
             // tbOpsAnnou
             // 
             tbOpsAnnou.Dock = DockStyle.Fill;
-            tbOpsAnnou.Location = new Point(159, 135);
+            tbOpsAnnou.Location = new Point(3, 135);
             tbOpsAnnou.Name = "tbOpsAnnou";
-            tbOpsAnnou.Size = new Size(150, 23);
+            tbOpsAnnou.Size = new Size(179, 23);
             tbOpsAnnou.TabIndex = 33;
             // 
             // tbOpsOfficer
             // 
             tbOpsOfficer.Dock = DockStyle.Fill;
-            tbOpsOfficer.Location = new Point(159, 179);
+            tbOpsOfficer.Location = new Point(3, 179);
             tbOpsOfficer.Name = "tbOpsOfficer";
-            tbOpsOfficer.Size = new Size(150, 23);
+            tbOpsOfficer.Size = new Size(179, 23);
             tbOpsOfficer.TabIndex = 34;
             // 
             // tpSystem
@@ -779,49 +785,51 @@
             tpSystem.Controls.Add(tlpSystem);
             tpSystem.Location = new Point(104, 4);
             tpSystem.Name = "tpSystem";
-            tpSystem.Size = new Size(470, 222);
+            tpSystem.Size = new Size(370, 222);
             tpSystem.TabIndex = 3;
             tpSystem.Text = "Systemkanäle";
             tpSystem.UseVisualStyleBackColor = true;
             // 
             // tlpSystem
             // 
-            tlpSystem.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tlpSystem.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            tlpSystem.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            tlpSystem.Controls.Add(btnGroupInfo, 2, 6);
-            tlpSystem.Controls.Add(btnGuildInfo, 2, 5);
-            tlpSystem.Controls.Add(tbGroupInfo, 1, 6);
-            tlpSystem.Controls.Add(btnSystem, 2, 4);
-            tlpSystem.Controls.Add(btnOpsInfo, 2, 3);
-            tlpSystem.Controls.Add(tbGuildInfo, 1, 5);
-            tlpSystem.Controls.Add(btnLogin, 2, 2);
-            tlpSystem.Controls.Add(btnConv, 2, 1);
-            tlpSystem.Controls.Add(tbSystem, 1, 4);
-            tlpSystem.Controls.Add(btnCombat, 2, 0);
-            tlpSystem.Controls.Add(tbCombat, 1, 0);
-            tlpSystem.Controls.Add(tbOpsInfo, 1, 3);
-            tlpSystem.Controls.Add(tbConv, 1, 1);
-            tlpSystem.Controls.Add(tbLogin, 1, 2);
+            tlpSystem.ColumnCount = 2;
+            tlpSystem.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50.0000076F));
+            tlpSystem.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpSystem.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tlpSystem.Controls.Add(btnGroupInfo, 1, 6);
+            tlpSystem.Controls.Add(btnGuildInfo, 1, 5);
+            tlpSystem.Controls.Add(tbGroupInfo, 0, 6);
+            tlpSystem.Controls.Add(btnSystem, 1, 4);
+            tlpSystem.Controls.Add(btnOpsInfo, 1, 3);
+            tlpSystem.Controls.Add(tbGuildInfo, 0, 5);
+            tlpSystem.Controls.Add(btnLogin, 1, 2);
+            tlpSystem.Controls.Add(btnConv, 1, 1);
+            tlpSystem.Controls.Add(tbSystem, 0, 4);
+            tlpSystem.Controls.Add(btnCombat, 1, 0);
+            tlpSystem.Controls.Add(tbCombat, 0, 0);
+            tlpSystem.Controls.Add(tbOpsInfo, 0, 3);
+            tlpSystem.Controls.Add(tbConv, 0, 1);
+            tlpSystem.Controls.Add(tbLogin, 0, 2);
             tlpSystem.Dock = DockStyle.Fill;
             tlpSystem.Location = new Point(0, 0);
             tlpSystem.Name = "tlpSystem";
-            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.4302216F));
-            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.4302187F));
-            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.4302187F));
-            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.4302187F));
-            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.4302187F));
-            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.4302216F));
-            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 13.4186754F));
-            tlpSystem.Size = new Size(470, 222);
+            tlpSystem.RowCount = 7;
+            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.4302235F));
+            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.43022F));
+            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.43022F));
+            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.43022F));
+            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.43022F));
+            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.4302235F));
+            tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 13.4186764F));
+            tlpSystem.Size = new Size(370, 222);
             tlpSystem.TabIndex = 0;
             // 
             // btnGroupInfo
             // 
             btnGroupInfo.Dock = DockStyle.Fill;
-            btnGroupInfo.Location = new Point(315, 195);
+            btnGroupInfo.Location = new Point(188, 195);
             btnGroupInfo.Name = "btnGroupInfo";
-            btnGroupInfo.Size = new Size(152, 24);
+            btnGroupInfo.Size = new Size(179, 24);
             btnGroupInfo.TabIndex = 20;
             btnGroupInfo.Tag = "tbGroupInfo";
             btnGroupInfo.Text = "Gruppeninfos";
@@ -831,9 +839,9 @@
             // btnGuildInfo
             // 
             btnGuildInfo.Dock = DockStyle.Fill;
-            btnGuildInfo.Location = new Point(315, 163);
+            btnGuildInfo.Location = new Point(188, 163);
             btnGuildInfo.Name = "btnGuildInfo";
-            btnGuildInfo.Size = new Size(152, 26);
+            btnGuildInfo.Size = new Size(179, 26);
             btnGuildInfo.TabIndex = 19;
             btnGuildInfo.Tag = "tbGuildInfo";
             btnGuildInfo.Text = "Gildeninfos";
@@ -843,17 +851,17 @@
             // tbGroupInfo
             // 
             tbGroupInfo.Dock = DockStyle.Fill;
-            tbGroupInfo.Location = new Point(159, 195);
+            tbGroupInfo.Location = new Point(3, 195);
             tbGroupInfo.Name = "tbGroupInfo";
-            tbGroupInfo.Size = new Size(150, 23);
+            tbGroupInfo.Size = new Size(179, 23);
             tbGroupInfo.TabIndex = 41;
             // 
             // btnSystem
             // 
             btnSystem.Dock = DockStyle.Fill;
-            btnSystem.Location = new Point(315, 131);
+            btnSystem.Location = new Point(188, 131);
             btnSystem.Name = "btnSystem";
-            btnSystem.Size = new Size(152, 26);
+            btnSystem.Size = new Size(179, 26);
             btnSystem.TabIndex = 18;
             btnSystem.Tag = "tbSystem";
             btnSystem.Text = "System-Rückmeldung";
@@ -863,9 +871,9 @@
             // btnOpsInfo
             // 
             btnOpsInfo.Dock = DockStyle.Fill;
-            btnOpsInfo.Location = new Point(315, 99);
+            btnOpsInfo.Location = new Point(188, 99);
             btnOpsInfo.Name = "btnOpsInfo";
-            btnOpsInfo.Size = new Size(152, 26);
+            btnOpsInfo.Size = new Size(179, 26);
             btnOpsInfo.TabIndex = 17;
             btnOpsInfo.Tag = "tbOpsInfo";
             btnOpsInfo.Text = "Ops Infos";
@@ -875,17 +883,17 @@
             // tbGuildInfo
             // 
             tbGuildInfo.Dock = DockStyle.Fill;
-            tbGuildInfo.Location = new Point(159, 163);
+            tbGuildInfo.Location = new Point(3, 163);
             tbGuildInfo.Name = "tbGuildInfo";
-            tbGuildInfo.Size = new Size(150, 23);
+            tbGuildInfo.Size = new Size(179, 23);
             tbGuildInfo.TabIndex = 40;
             // 
             // btnLogin
             // 
             btnLogin.Dock = DockStyle.Fill;
-            btnLogin.Location = new Point(315, 67);
+            btnLogin.Location = new Point(188, 67);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(152, 26);
+            btnLogin.Size = new Size(179, 26);
             btnLogin.TabIndex = 16;
             btnLogin.Tag = "tbLogin";
             btnLogin.Text = "Charakter Login";
@@ -895,9 +903,9 @@
             // btnConv
             // 
             btnConv.Dock = DockStyle.Fill;
-            btnConv.Location = new Point(315, 35);
+            btnConv.Location = new Point(188, 35);
             btnConv.Name = "btnConv";
-            btnConv.Size = new Size(152, 26);
+            btnConv.Size = new Size(179, 26);
             btnConv.TabIndex = 15;
             btnConv.Tag = "tbConv";
             btnConv.Text = "Gespräch";
@@ -907,17 +915,17 @@
             // tbSystem
             // 
             tbSystem.Dock = DockStyle.Fill;
-            tbSystem.Location = new Point(159, 131);
+            tbSystem.Location = new Point(3, 131);
             tbSystem.Name = "tbSystem";
-            tbSystem.Size = new Size(150, 23);
+            tbSystem.Size = new Size(179, 23);
             tbSystem.TabIndex = 39;
             // 
             // btnCombat
             // 
             btnCombat.Dock = DockStyle.Fill;
-            btnCombat.Location = new Point(315, 3);
+            btnCombat.Location = new Point(188, 3);
             btnCombat.Name = "btnCombat";
-            btnCombat.Size = new Size(152, 26);
+            btnCombat.Size = new Size(179, 26);
             btnCombat.TabIndex = 14;
             btnCombat.Tag = "tbCombat";
             btnCombat.Text = "Kampfinfos";
@@ -927,40 +935,40 @@
             // tbCombat
             // 
             tbCombat.Dock = DockStyle.Fill;
-            tbCombat.Location = new Point(159, 3);
+            tbCombat.Location = new Point(3, 3);
             tbCombat.Name = "tbCombat";
-            tbCombat.Size = new Size(150, 23);
+            tbCombat.Size = new Size(179, 23);
             tbCombat.TabIndex = 35;
             // 
             // tbOpsInfo
             // 
             tbOpsInfo.Dock = DockStyle.Fill;
-            tbOpsInfo.Location = new Point(159, 99);
+            tbOpsInfo.Location = new Point(3, 99);
             tbOpsInfo.Name = "tbOpsInfo";
-            tbOpsInfo.Size = new Size(150, 23);
+            tbOpsInfo.Size = new Size(179, 23);
             tbOpsInfo.TabIndex = 38;
             // 
             // tbConv
             // 
             tbConv.Dock = DockStyle.Fill;
-            tbConv.Location = new Point(159, 35);
+            tbConv.Location = new Point(3, 35);
             tbConv.Name = "tbConv";
-            tbConv.Size = new Size(150, 23);
+            tbConv.Size = new Size(179, 23);
             tbConv.TabIndex = 36;
             // 
             // tbLogin
             // 
             tbLogin.Dock = DockStyle.Fill;
-            tbLogin.Location = new Point(159, 67);
+            tbLogin.Location = new Point(3, 67);
             tbLogin.Name = "tbLogin";
-            tbLogin.Size = new Size(150, 23);
+            tbLogin.Size = new Size(179, 23);
             tbLogin.TabIndex = 37;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(584, 261);
+            ClientSize = new Size(484, 261);
             Controls.Add(tlpMainForm);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");

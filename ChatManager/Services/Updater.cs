@@ -1,6 +1,4 @@
-﻿using ChatManager.Properties;
-
-namespace ChatManager.Services
+﻿namespace ChatManager.Services
 {
     internal class Updater
     {
@@ -44,7 +42,8 @@ namespace ChatManager.Services
 
                     if (fromUser)
                     {
-                        ShowMessageBox.Show(Resources.MessageBoxNoUpdate, Resources.Update_IsNotAvailable);
+                        Localization localization = new(GetSetSettings.GetCurrentLocale);
+                        ShowMessageBox.Show(localization.GetString("MessageBoxNoUpdate"), localization.GetString("Update_IsNotAvailable"));
                     }
 
                     Logging.Write(LogEvent.Info, ProgramClass.Updater, "HttpClient disposed!");
@@ -101,7 +100,8 @@ namespace ChatManager.Services
 
                 Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"Update downloaded to: {updatePath}");
 
-                ShowMessageBox.Show(Resources.MessageBoxUpdate, Resources.Update_IsInstallReady);
+                Localization localization = new(GetSetSettings.GetCurrentLocale);
+                ShowMessageBox.Show(localization.GetString("MessageBoxUpdate"), localization.GetString("Update_IsInstallReady"));
 
                 InstallUpdate();
             }
