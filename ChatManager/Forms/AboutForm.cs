@@ -11,7 +11,7 @@ namespace ChatManager.Forms
             InitializeComponent();
             Text = string.Format("About {0}", AssemblyTitle);
             labelProductName.Text = AssemblyProduct;
-            labelVersion.Text = string.Format("Version {0}", AssemblyVersion);
+            labelVersion.Text = string.Format("Version {0}", ProductVersion);
             labelCopyright.Text = AssemblyCopyright;
             labelCompanyName.Text = AssemblyCompany;
             copyrightButton.Text = Resources.About_Picture;
