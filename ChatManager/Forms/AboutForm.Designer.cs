@@ -135,7 +135,7 @@
             okButton.Name = "okButton";
             okButton.Size = new Size(88, 27);
             okButton.TabIndex = 24;
-            okButton.Text = "&OK";
+            okButton.Text = "OK";
             // 
             // copyrightButton
             // 

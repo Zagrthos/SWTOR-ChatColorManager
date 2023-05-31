@@ -7,7 +7,6 @@ namespace ChatManager
     {
         public MainForm()
         {
-            GetSetSettings.InitSettings();
             InitializeComponent();
         }
 

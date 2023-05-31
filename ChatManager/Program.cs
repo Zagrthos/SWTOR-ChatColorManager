@@ -14,6 +14,7 @@ namespace ChatManager
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
+            GetSetSettings.InitSettings();
             Logging.Initialize();
 
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
