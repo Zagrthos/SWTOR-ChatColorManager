@@ -40,7 +40,7 @@ namespace ChatManager.Services
         {
             switch (settingName)
             {
-                case "_selectedLocale":
+                case "_locale":
                     Settings.Default._locale = settingValue;
                     break;
 

@@ -4,24 +4,13 @@ namespace ChatManager.Services
 {
     internal class Localization
     {
-        private bool languageInit = false;
-        private string language = string.Empty;
         private Dictionary<string, string> strings = new();
         private readonly string installPath = Application.StartupPath;
 
         public Localization(string locale)
         {
             Logging.Write(LogEvent.Info, ProgramClass.Localization, $"Localization Constructor created with locale: {locale}");
-
-            if (!languageInit && locale != language)
-            {
-                Logging.Write(LogEvent.Info, ProgramClass.Localization, "Locale will now be set!");
-                CheckLocale(locale);
-            }
-            else
-            {
-                Logging.Write(LogEvent.Warning, ProgramClass.Localization, "Locale already set!");
-            }
+            CheckLocale(locale);
         }
 
         private void CheckLocale(string locale)
@@ -41,10 +30,7 @@ namespace ChatManager.Services
                 if (tempStrings != null)
                 {
                     strings = tempStrings;
-                    GetSetSettings.SaveSettings("_selectedLocale", locale);
-
-                    languageInit = true;
-                    language = locale;
+                    GetSetSettings.SaveSettings("_locale", locale);
                 }
 
                 // If not log Warning

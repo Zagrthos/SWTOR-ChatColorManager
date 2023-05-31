@@ -75,7 +75,7 @@
   "btnTheLeviathanDeselectAll": "Désélectionne tout",
 
   "_comment6": "MessageBox Strings",
-  "Err_ColorNotHex": "La couleur spécifiée dans la zone de texte ne correspond pas à la norme HEX..",
+  "Err_ColorNotHex": "La couleur spécifiée dans la zone de texte ne correspond pas à la norme HEX.",
   "Error_IsDetected": "Quelque chose a mal tourné!\nVeux-tu signaler le bogue?",
   "MessageBoxError": "Erreur",
   "MessageBoxInfo": "Informations",
