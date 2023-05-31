@@ -4,21 +4,60 @@ namespace ChatManager.Services
 {
     internal class Localization
     {
-        private readonly Dictionary<string, string> strings = new();
+        private bool languageInit = false;
+        private string language = string.Empty;
+        private Dictionary<string, string> strings = new();
         private readonly string installPath = Application.StartupPath;
 
         public Localization(string locale)
         {
             Logging.Write(LogEvent.Info, ProgramClass.Localization, $"Localization Constructor created with locale: {locale}");
 
+            if (!languageInit && locale != language)
+            {
+                Logging.Write(LogEvent.Info, ProgramClass.Localization, "Locale will now be set!");
+                CheckLocale(locale);
+            }
+            else
+            {
+                Logging.Write(LogEvent.Warning, ProgramClass.Localization, "Locale already set!");
+            }
+        }
+
+        private void CheckLocale(string locale)
+        {
+            Logging.Write(LogEvent.Method, ProgramClass.Localization, "CheckLocale Entered");
+
+            Logging.Write(LogEvent.Variable, ProgramClass.Localization, $"Localization path is: {Path.Combine(installPath, "Localization", $"{locale}.json")}");
             var jsonString = File.ReadAllText(Path.Combine(installPath, "Localization", $"{locale}.json"));
+
+            // Check if file has content
             if (jsonString != null)
             {
+                // If yes decode the JSON
                 var tempStrings = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonString);
+
+                // Check if JSON has content
                 if (tempStrings != null)
                 {
                     strings = tempStrings;
+                    GetSetSettings.SaveSettings("_selectedLocale", locale);
+
+                    languageInit = true;
+                    language = locale;
                 }
+
+                // If not log Warning
+                else
+                {
+                    Logging.Write(LogEvent.Warning, ProgramClass.Localization, "JSON file without content detected!");
+                }
+            }
+
+            // If not log Warning
+            else
+            {
+                Logging.Write(LogEvent.Warning, ProgramClass.Localization, "Localization file without content detected!");
             }
         }
 

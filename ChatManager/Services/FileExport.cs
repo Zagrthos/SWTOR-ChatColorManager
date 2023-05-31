@@ -1,5 +1,4 @@
 ﻿using ChatManager.Forms;
-using ChatManager.Properties;
 
 namespace ChatManager.Services
 {
@@ -26,7 +25,8 @@ namespace ChatManager.Services
             // Check if backupDir exists and if not show a warning Box
             if (!backupAvailability)
             {
-                ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_BackupDirMissing);
+                Localization localization = new(GetSetSettings.GetCurrentLocale);
+                ShowMessageBox.Show(localization.GetString("MessageBoxWarn"), localization.GetString("Warn_BackupDirMissing"));
             }
 
             // Check if the user selected any characters

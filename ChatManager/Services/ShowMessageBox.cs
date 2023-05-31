@@ -1,32 +1,32 @@
-﻿using ChatManager.Properties;
-
-namespace ChatManager.Services
+﻿namespace ChatManager.Services
 {
     internal class ShowMessageBox
     {
         public static void Show(string caption, string message)
         {
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
+
             MessageBoxIcon icon = MessageBoxIcon.None;
 
             switch (caption)
             {
-                case var value when value == Resources.MessageBoxError:
+                case var value when value == localization.GetString("MessageBoxError"):
                     icon = MessageBoxIcon.Error;
                     break;
 
-                case var value when value == Resources.MessageBoxInfo:
+                case var value when value == localization.GetString("MessageBoxInfo"):
                     icon = MessageBoxIcon.Information;
                     break;
 
-                case var value when value == Resources.MessageBoxWarn:
+                case var value when value == localization.GetString("MessageBoxWarn"):
                     icon = MessageBoxIcon.Warning;
                     break;
 
-                case var value when value == Resources.MessageBoxUpdate:
+                case var value when value == localization.GetString("MessageBoxUpdate"):
                     icon = MessageBoxIcon.Information;
                     break;
 
-                case var value when value == Resources.MessageBoxNoUpdate:
+                case var value when value == localization.GetString("MessageBoxNoUpdate"):
                     icon = MessageBoxIcon.Information;
                     break;
             }
@@ -43,11 +43,12 @@ namespace ChatManager.Services
 
         public static bool ShowUpdate(string version)
         {
-            DialogResult result = MessageBox.Show(Resources.Update_IsAvailable + $" {version}", Resources.MessageBoxUpdate, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
+            DialogResult result = MessageBox.Show(localization.GetString("Update_IsAvailable") + $" {version}", localization.GetString("MessageBoxUpdate"), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, "MessageBox shown");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Caption: {Resources.MessageBoxUpdate}");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Message: {Resources.Update_IsAvailable}");
+            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Caption: {localization.GetString("MessageBoxUpdate")}");
+            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Message: {localization.GetString("Update_IsAvailable")}");
             Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Icon: {MessageBoxIcon.Information}");
 
             if (result == DialogResult.Yes)
@@ -63,11 +64,12 @@ namespace ChatManager.Services
 
         public static void ShowBug()
         {
-            DialogResult result = MessageBox.Show(Resources.Error_IsDetected, Resources.MessageBoxError, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
+            DialogResult result = MessageBox.Show(localization.GetString("Error_IsDetected"), localization.GetString("MessageBoxError"), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
 
             Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, "MessageBox shown");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Caption: {Resources.MessageBoxError}");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Message: {Resources.Error_IsDetected}");
+            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Caption: {localization.GetString("MessageBoxError")}");
+            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Message: {localization.GetString("Error_IsDetected")}");
             Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Icon: {MessageBoxIcon.Information}");
 
             if (result == DialogResult.Yes)

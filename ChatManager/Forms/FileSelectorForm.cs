@@ -345,60 +345,41 @@ namespace ChatManager.Forms
 
                 foreach (Control control in buttons)
                 {
-                                if (control is Button button)
-                                {
+                    if (control is Button button)
+                    {
                         string parent = button.Parent!.Name.Substring(3);
 
                         if (button.Name == $"btn{parent}Select")
                         {
-                                    button.Tag = $"c{button.Tag}";
-                                    Logging.Write(LogEvent.Method, ProgramClass.FileSelectorForm, $"New Tag of {button.Name}: {button.Tag}");
-                                }
-                            }
+                            button.Tag = $"c{button.Tag}";
+                            Logging.Write(LogEvent.Method, ProgramClass.FileSelectorForm, $"New Tag of {button.Name}: {button.Tag}");
                         }
                     }
                 }
+            }
 
-        // Delete all Controls which are NOT part of the Initialization
-        private void FileSelectorForm_FormClosing(object sender, FormClosingEventArgs e)
+            Localize(GetSetSettings.GetCurrentLocale);
+        }
+
+        private void Localize(string locale)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.FileSelectorForm, "Form Closed");
-            Logging.Write(LogEvent.Info, ProgramClass.FileSelectorForm, "Start to remove Controls");
+            Logging.Write(LogEvent.Method, ProgramClass.FileSelectorForm, "Localize entered");
 
-            foreach (TabControl tabControl in Controls)
+            Localization localization = new(locale);
+
+            // Change the Text of the Form
+            Text = localization.GetString(Name);
+            Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"FormText set to {Text}");
+
+            var buttons = GetControls(this, typeof(Button));
+
+            foreach (Control control in buttons)
             {
-                foreach (TabPage tab in tabControl.Controls)
+                if (control is Button button)
                 {
-                    Logging.Write(LogEvent.Info, ProgramClass.FileSelectorForm, $"tabPage is: {tab.Name}");
-
-                    foreach (TableLayoutPanel tlp in tab.Controls)
-                    {
-                        Logging.Write(LogEvent.Info, ProgramClass.FileSelectorForm, $"tlp is: {tlp.Name}");
-
-                        foreach (Control control in tlp.Controls)
-                        {
-                            if (control is ListBox)
-                            {
-                                Logging.Write(LogEvent.Info, ProgramClass.FileSelectorForm, $"control name: {control.Name}");
-                                Logging.Write(LogEvent.Info, ProgramClass.FileSelectorForm, $"control is: {control.GetType()}");
-
-                                control.Dispose();
-                                tlp.Controls.Remove(control);
-
-                                Logging.Write(LogEvent.Info, ProgramClass.FileSelectorForm, $"control removed");
-                            }
-                            else if (control is CheckedListBox)
-                            {
-                                Logging.Write(LogEvent.Info, ProgramClass.FileSelectorForm, $"control name: {control.Name}");
-                                Logging.Write(LogEvent.Info, ProgramClass.FileSelectorForm, $"control is: {control.GetType()}");
-
-                                control.Dispose();
-                                tlp.Controls.Remove(control);
-
-                                Logging.Write(LogEvent.Info, ProgramClass.FileSelectorForm, $"control removed");
-                            }
-                        }
-                    }
+                    Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Control is {button.Name}");
+                    button.Text = localization.GetString(button.Name);
+                    Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Control.Text set to {button.Text}");
                 }
             }
         }

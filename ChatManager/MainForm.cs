@@ -1,4 +1,3 @@
-using ChatManager.Properties;
 using ChatManager.Services;
 using System.Globalization;
 
@@ -54,8 +53,9 @@ namespace ChatManager
                         }
                         else
                         {
+                            Localization localization = new(GetSetSettings.GetCurrentLocale);
                             Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "String is empty! Not starting conversion process");
-                            ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_TextBoxEmpty);
+                            ShowMessageBox.Show(localization.GetString("MessageBoxWarn"), localization.GetString("Warn_TextBoxEmpty"));
                         }
                     }
                     else
@@ -311,24 +311,91 @@ namespace ChatManager
             OpenWindows.OpenFileExportSelector(colorIndexes);
         }
 
-        private void ChangeLanguage()
+        private void Localize(string locale)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ChangeLanguage entered");
+            Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Localize entered");
 
-            Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"CurrentCulture set to: {CultureInfo.CurrentCulture.TwoLetterISOLanguageName}");
-            GetSetSettings.SaveSettings("_selectedLocale", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            Localization localization = new(locale);
+
+            if (locale == "fr")
+            {
+                tabsMainForm.ItemSize = new Size(50, 100);
+            }
+
+            // Find all Controls of the desired Type and pack them in a Control List
+            IEnumerable<Control> GetControls(Control parent, Type type)
+            {
+                var controls = parent.Controls.Cast<Control>();
+
+                return controls
+                    .Where(c => c.GetType() == type)
+                    .Concat(controls.SelectMany(c => GetControls(c, type)));
+            }
+
+            var tabs = GetControls(this, typeof(TabControl));
+            var buttons = GetControls(this, typeof(Button));
+
+            foreach (var item in menuMainForm.Items)
+            {
+                if (item is ToolStripMenuItem menuItem)
+                {
+                    Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control is {menuItem.Name}");
+                    menuItem.Text = localization.GetString(menuItem.Name);
+                    Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control.Text set to {menuItem.Text}");
+
+                    foreach (var moreItems in menuItem.DropDownItems)
+                    {
+                        if (moreItems is ToolStripMenuItem moreItem)
+                        {
+                            Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control is {moreItem.Name}");
+                            moreItem.Text = localization.GetString(moreItem.Name);
+                            Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control.Text set to {moreItem.Text}");
+                        }
+                    }
+                }
+            }
+
+            foreach (TabControl tabControl in tabs.Cast<TabControl>())
+            {
+                foreach (TabPage tab in tabControl.Controls)
+                {
+                    if (tab != null)
+                    {
+                        Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control is {tab.Name}");
+                        tab.Text = localization.GetString(tab.Name);
+                        Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control.Text set to {tab.Text}");
+                    }
+                }
+            }
+
+            foreach (Control control in buttons)
+            {
+                if (control is Button button)
+                {
+                    Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control is {button.Name}");
+                    button.Text = localization.GetString(button.Name);
+                    Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control.Text set to {button.Text}");
+                }
+            }
         }
 
         // Perform basic Checks when the Form is loading
         private async void MainForm_Load(object sender, EventArgs e)
         {
-            ChangeLanguage();
+            if (string.IsNullOrEmpty(GetSetSettings.GetCurrentLocale))
+            {
+                Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"CurrentCulture set to: {CultureInfo.CurrentCulture.TwoLetterISOLanguageName}");
+                GetSetSettings.SaveSettings("_selectedLocale", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            }
+
+            Localize(GetSetSettings.GetCurrentLocale);
 
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if SWTOR is running");
             if (Checks.CheckSWTORprocessFound())
             {
+                Localization localization = new(GetSetSettings.GetCurrentLocale);
                 Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "SWTOR is running!");
-                ShowMessageBox.Show(Resources.MessageBoxWarn, Resources.Warn_SWTORrunning);
+                ShowMessageBox.Show(localization.GetString("MessageBoxWarn"), localization.GetString("Warn_SWTORrunning"));
             }
             else
             {
