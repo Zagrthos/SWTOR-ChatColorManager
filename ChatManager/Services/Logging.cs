@@ -18,6 +18,7 @@ namespace ChatManager.Services
     {
         MainForm,
         ProgramConfig,
+        AboutForm,
         ColorPickerForm,
         FileSelectorForm,
         Checks,
