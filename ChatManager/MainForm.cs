@@ -93,7 +93,7 @@ namespace ChatManager
                     "supportToolStripMenuItem" => GetSetSettings.GetSupportPath,
                     "bugToolStripMenuItem" => GetSetSettings.GetBugPath,
                     "bugMailToolStripMenuItem" => GetSetSettings.GetBugMailpath,
-                    _ => "%SYSTEMDRIVE%",
+                    _ => throw new NotImplementedException(),
                 };
 
                 switch (menuItem.Name)
