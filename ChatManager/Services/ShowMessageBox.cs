@@ -32,9 +32,6 @@
             }
 
             Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, "MessageBox shown");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Caption: {caption}");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Message: {message}");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Icon: {icon}");
 
             MessageBox.Show(message, caption, MessageBoxButtons.OK, icon);
 
@@ -47,9 +44,6 @@
             DialogResult result = MessageBox.Show(localization.GetString("Update_IsAvailable") + $" {version}", localization.GetString("MessageBoxUpdate"), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, "MessageBox shown");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Caption: {localization.GetString("MessageBoxUpdate")}");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Message: {localization.GetString("Update_IsAvailable")}");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Icon: {MessageBoxIcon.Information}");
 
             if (result == DialogResult.Yes)
             {
@@ -68,9 +62,6 @@
             DialogResult result = MessageBox.Show(localization.GetString("Error_IsDetected"), localization.GetString("MessageBoxError"), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
 
             Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, "MessageBox shown");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Caption: {localization.GetString("MessageBoxError")}");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Message: {localization.GetString("Error_IsDetected")}");
-            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, $"Icon: {MessageBoxIcon.Information}");
 
             if (result == DialogResult.Yes)
             {
