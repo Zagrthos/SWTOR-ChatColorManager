@@ -45,7 +45,6 @@ namespace ChatManager.Forms
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
             lblExample.Text = localization.GetString(lblExample.Name);
-            Logging.Write(LogEvent.Variable, ProgramClass.ColorPickerForm, $"lblExample.Text set to {lblExample.Text}");
         }
     }
 }

@@ -339,17 +339,13 @@ namespace ChatManager
             {
                 if (item is ToolStripMenuItem menuItem && menuItem.Enabled)
                 {
-                    Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control is {menuItem.Name}");
                     menuItem.Text = localization.GetString(menuItem.Name);
-                    Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control.Text set to {menuItem.Text}");
 
                     foreach (var moreItems in menuItem.DropDownItems)
                     {
                         if (moreItems is ToolStripMenuItem moreItem && moreItem.Enabled)
                         {
-                            Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control is {moreItem.Name}");
                             moreItem.Text = localization.GetString(moreItem.Name);
-                            Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control.Text set to {moreItem.Text}");
                         }
                     }
                 }
@@ -361,9 +357,7 @@ namespace ChatManager
                 {
                     if (tab != null)
                     {
-                        Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control is {tab.Name}");
                         tab.Text = localization.GetString(tab.Name);
-                        Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control.Text set to {tab.Text}");
                     }
                 }
             }
@@ -372,9 +366,7 @@ namespace ChatManager
             {
                 if (control is Button button)
                 {
-                    Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control is {button.Name}");
                     button.Text = localization.GetString(button.Name);
-                    Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control.Text set to {button.Text}");
                 }
             }
         }

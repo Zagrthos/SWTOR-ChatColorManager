@@ -369,7 +369,6 @@ namespace ChatManager.Forms
 
             // Change the Text of the Form
             Text = localization.GetString(Name);
-            Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"FormText set to {Text}");
 
             var buttons = GetControls(this, typeof(Button));
 
@@ -377,9 +376,7 @@ namespace ChatManager.Forms
             {
                 if (control is Button button)
                 {
-                    Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Control is {button.Name}");
                     button.Text = localization.GetString(button.Name);
-                    Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Control.Text set to {button.Text}");
                 }
             }
         }

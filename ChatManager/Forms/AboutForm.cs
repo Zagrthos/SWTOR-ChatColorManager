@@ -90,10 +90,7 @@ namespace ChatManager.Forms
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
             Text = localization.GetString(Name);
-            Logging.Write(LogEvent.Variable, ProgramClass.AboutForm, $"FormText set to {Text}");
-
             copyrightButton.Text = localization.GetString(copyrightButton.Name);
-            Logging.Write(LogEvent.Variable, ProgramClass.AboutForm, $"copyrightButton set to {copyrightButton.Text}");
         }
     }
 }
