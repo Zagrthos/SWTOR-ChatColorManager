@@ -130,5 +130,41 @@ namespace ChatManager.Properties {
                 this["_locale"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool _autosave {
+            get {
+                return ((bool)(this["_autosave"]));
+            }
+            set {
+                this["_autosave"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal _autosaveInterval {
+            get {
+                return ((decimal)(this["_autosaveInterval"]));
+            }
+            set {
+                this["_autosaveInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool _saveOnClose {
+            get {
+                return ((bool)(this["_saveOnClose"]));
+            }
+            set {
+                this["_saveOnClose"] = value;
+            }
+        }
     }
 }

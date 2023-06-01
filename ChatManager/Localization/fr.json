@@ -8,7 +8,7 @@
   "charFolderToolStripMenuItem": "Ouvre le dossier des personnages",
   "backupToolStripMenuItem": "Ouvre le dossier de sauvegarde",
   "logFolderToolStripMenuItem": "Ouvrir les fichiers journaux",
-  "optionsToolStripMenuItem": "Paramètres",
+  "settingsToolStripMenuItem": "Paramètres",
   "helpToolStripMenuItem": "Aide",
   "supportToolStripMenuItem": "Soutien",
   "bugToolStripMenuItem": "Signaler un bug (GitHub)",
@@ -88,5 +88,13 @@
   "Warn_BackupDirMissing": "Aucun répertoire de sauvegarde n'a pu être créé!\nProcède à tes propres risques!",
   "Warn_SWTORpathNotFound": "Le chemin d'accès aux fichiers locaux de SWTOR n'a pas été trouvé!\n\nLe jeu est-il installé?",
   "Warn_SWTORrunning": "Une instance active de SWTOR a été trouvée, veuillez d'abord fermer le jeu!\n\nDans le cas contraire, le bon fonctionnement des modifications ne peut être garanti.",
-  "Warn_TextBoxEmpty": "Un fichier doit d'abord être importé!"
+  "Warn_TextBoxEmpty": "Un fichier doit d'abord être importé!",
+
+  "_comment7": "SettingsForm Strings",
+  "SettingsForm": "Paramètres",
+  "gbLanguage": "Choix de la langue",
+  "gbGeneral": "Paramètres généraux",
+  "chbSaveOnClose": "Enregistrer les dernières couleurs en fermant l'application",
+  "chbAutosave": "Activer la sauvegarde automatique",
+  "lblAutosaveInterval": "Intervalle Autosave (minutes)"
 }

@@ -11,7 +11,8 @@ namespace ChatManager.Services
         Method,
         Control,
         ExMessage,
-        BoxMessage
+        BoxMessage,
+        Setting
     }
 
     internal enum ProgramClass
@@ -21,6 +22,7 @@ namespace ChatManager.Services
         AboutForm,
         ColorPickerForm,
         FileSelectorForm,
+        SettingsForm,
         Checks,
         Converter,
         FileExport,
@@ -81,6 +83,7 @@ namespace ChatManager.Services
                 LogEvent.Control => "CONTROL",
                 LogEvent.ExMessage => "EXECPTION",
                 LogEvent.BoxMessage => "MESSAGE-BOX",
+                LogEvent.Setting => "SETTING",
                 _ => "UNCATEGORIZED"
             };
 

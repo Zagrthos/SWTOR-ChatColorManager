@@ -96,6 +96,8 @@ namespace ChatManager
                     _ => string.Empty,
                 };
 
+                bool languageChanged = false;
+
                 switch (menuItem.Name)
                 {
                     case "supportToolStripMenuItem":
@@ -126,6 +128,11 @@ namespace ChatManager
                     case "exitToolStripMenuItem":
                         Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Application Exit requested");
                         Application.Exit();
+                        return;
+
+                    case "settingsToolStripMenuItem":
+                        Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Settings Form requested");
+                        languageChanged = OpenWindows.OpenSettings();
                         return;
                 }
 
@@ -407,7 +414,9 @@ namespace ChatManager
 
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm is loading");
 
+#if !DEBUG
             await Updater.CheckForUpdates();
+#endif
         }
 
         // When the Form is closing, log it

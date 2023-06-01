@@ -55,7 +55,7 @@
             charFolderToolStripMenuItem = new ToolStripMenuItem();
             backupToolStripMenuItem = new ToolStripMenuItem();
             logFolderToolStripMenuItem = new ToolStripMenuItem();
-            optionsToolStripMenuItem = new ToolStripMenuItem();
+            settingsToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             supportToolStripMenuItem = new ToolStripMenuItem();
             bugToolStripMenuItem = new ToolStripMenuItem();
@@ -288,7 +288,7 @@
             // toolsToolStripMenuItem
             // 
             toolsToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { charFolderToolStripMenuItem, backupToolStripMenuItem, logFolderToolStripMenuItem, optionsToolStripMenuItem });
+            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { charFolderToolStripMenuItem, backupToolStripMenuItem, logFolderToolStripMenuItem, settingsToolStripMenuItem });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new Size(46, 20);
             toolsToolStripMenuItem.Text = "Tools";
@@ -314,13 +314,12 @@
             logFolderToolStripMenuItem.Text = "Log Dateien öffnen";
             logFolderToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
-            // optionsToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            optionsToolStripMenuItem.Enabled = false;
-            optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            optionsToolStripMenuItem.Size = new Size(209, 22);
-            optionsToolStripMenuItem.Text = "Einstellungen";
-            optionsToolStripMenuItem.Visible = false;
+            settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            settingsToolStripMenuItem.Size = new Size(209, 22);
+            settingsToolStripMenuItem.Text = "Einstellungen";
+            settingsToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // helpToolStripMenuItem
             // 
@@ -1076,7 +1075,7 @@
         private ToolStripMenuItem selectAllToolStripMenuItem;
         private ToolStripMenuItem toolsToolStripMenuItem;
         private ToolStripMenuItem charFolderToolStripMenuItem;
-        private ToolStripMenuItem optionsToolStripMenuItem;
+        private ToolStripMenuItem settingsToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem aboutToolStripMenuItem;

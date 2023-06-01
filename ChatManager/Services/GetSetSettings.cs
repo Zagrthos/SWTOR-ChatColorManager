@@ -20,6 +20,9 @@ namespace ChatManager.Services
         public static string GetBugPath => Settings.Default.bugPath;
         public static string GetBugMailpath => Settings.Default.bugMailPath;
         public static string GetAboutPictureLink => Settings.Default.copyrightPicture;
+        public static bool GetSaveOnClose => Settings.Default._saveOnClose;
+        public static bool GetAutosave => Settings.Default._autosave;
+        public static decimal GetAutosaveInterval => Settings.Default._autosaveInterval;
 
         public static void InitSettings()
         {
@@ -57,6 +60,28 @@ namespace ChatManager.Services
             {
                 case "backupAvailability":
                     Settings.Default.backupAvailability = value;
+                    break;
+
+                case "_autosave":
+                    Settings.Default._autosave = value;
+                    break;
+
+                case "_saveOnClose":
+                    Settings.Default._saveOnClose = value;
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+            Settings.Default.Save();
+        }
+
+        public static void SaveSettings(string settingName, decimal value)
+        {
+            switch (settingName)
+            {
+                case "_autosaveInterval":
+                    Settings.Default._autosaveInterval = value;
                     break;
 
                 default:

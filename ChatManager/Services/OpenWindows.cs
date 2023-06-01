@@ -43,6 +43,25 @@ namespace ChatManager.Services
             aboutForm.Dispose();
         }
 
+        public static bool OpenSettings()
+        {
+            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenSettings Entered");
+
+            SettingsForm settingsForm = new();
+            settingsForm.ShowDialog();
+
+            if (SettingsForm.GetLanguageChanged)
+            {
+                settingsForm.Dispose();
+                return true;
+            }
+            else
+            {
+                settingsForm.Dispose();
+                return false;
+            }
+        }
+
         // Open the FileSelector but with the import Settings
         public static (string, string) OpenFileImportSelector()
         {
