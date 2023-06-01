@@ -13,7 +13,7 @@ namespace ChatManager.Forms
             labelVersion.Text = string.Format("Version {0}", ProductVersion);
             labelCopyright.Text = AssemblyCopyright;
             labelCompanyName.Text = AssemblyCompany;
-            Localize(GetSetSettings.GetCurrentLocale);
+            Localize();
         }
 
         #region Assembly Attribute Accessors
@@ -83,11 +83,11 @@ namespace ChatManager.Forms
             OpenWindows.OpenLinksInBrowser(GetSetSettings.GetAboutPictureLink);
         }
 
-        private void Localize(string locale)
+        private void Localize()
         {
             Logging.Write(LogEvent.Method, ProgramClass.AboutForm, "Localize entered");
 
-            Localization localization = new(locale);
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
 
             Text = localization.GetString(Name);
             Logging.Write(LogEvent.Variable, ProgramClass.AboutForm, $"FormText set to {Text}");

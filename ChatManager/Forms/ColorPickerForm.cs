@@ -9,7 +9,7 @@ namespace ChatManager.Forms
             InitializeComponent();
             Text = text;
             colorEditor.Color = color;
-            Localize(GetSetSettings.GetCurrentLocale);
+            Localize();
         }
 
         private string hexColor = string.Empty;
@@ -38,11 +38,11 @@ namespace ChatManager.Forms
             Logging.Write(LogEvent.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm: {Text} closed");
         }
 
-        private void Localize(string locale)
+        private void Localize()
         {
             Logging.Write(LogEvent.Method, ProgramClass.ColorPickerForm, "Localize entered");
 
-            Localization localization = new(locale);
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
 
             lblExample.Text = localization.GetString(lblExample.Name);
             Logging.Write(LogEvent.Variable, ProgramClass.ColorPickerForm, $"lblExample.Text set to {lblExample.Text}");

@@ -358,14 +358,14 @@ namespace ChatManager.Forms
                 }
             }
 
-            Localize(GetSetSettings.GetCurrentLocale);
+            Localize();
         }
 
-        private void Localize(string locale)
+        private void Localize()
         {
             Logging.Write(LogEvent.Method, ProgramClass.FileSelectorForm, "Localize entered");
 
-            Localization localization = new(locale);
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
 
             // Change the Text of the Form
             Text = localization.GetString(Name);

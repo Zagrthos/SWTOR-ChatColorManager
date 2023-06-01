@@ -311,13 +311,13 @@ namespace ChatManager
             OpenWindows.OpenFileExportSelector(colorIndexes);
         }
 
-        private void Localize(string locale)
+        private void Localize()
         {
             Logging.Write(LogEvent.Method, ProgramClass.MainForm, "Localize entered");
 
-            Localization localization = new(locale);
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-            if (locale == "fr")
+            if (GetSetSettings.GetCurrentLocale == "fr")
             {
                 tabsMainForm.ItemSize = new Size(50, 100);
             }
@@ -388,7 +388,7 @@ namespace ChatManager
                 GetSetSettings.SaveSettings("_selectedLocale", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             }
 
-            Localize(GetSetSettings.GetCurrentLocale);
+            Localize();
 
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if SWTOR is running");
             if (Checks.CheckSWTORprocessFound())
