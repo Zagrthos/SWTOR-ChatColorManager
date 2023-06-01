@@ -337,7 +337,7 @@ namespace ChatManager
 
             foreach (var item in menuMainForm.Items)
             {
-                if (item is ToolStripMenuItem menuItem)
+                if (item is ToolStripMenuItem menuItem && menuItem.Enabled)
                 {
                     Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control is {menuItem.Name}");
                     menuItem.Text = localization.GetString(menuItem.Name);
@@ -345,7 +345,7 @@ namespace ChatManager
 
                     foreach (var moreItems in menuItem.DropDownItems)
                     {
-                        if (moreItems is ToolStripMenuItem moreItem)
+                        if (moreItems is ToolStripMenuItem moreItem && moreItem.Enabled)
                         {
                             Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"Control is {moreItem.Name}");
                             moreItem.Text = localization.GetString(moreItem.Name);
