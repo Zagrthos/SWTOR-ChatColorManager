@@ -21,12 +21,12 @@ jobs:
   SCS:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@latest
-      - uses: nuget/setup-nuget@latest
-      - uses: microsoft/setup-msbuild@latest
+      - uses: actions/checkout@v3
+      - uses: nuget/setup-nuget@v1
+      - uses: microsoft/setup-msbuild@v1
 
       - name: Set up projects for analysis
-        uses: security-code-scan/security-code-scan-add-action@latest
+        uses: security-code-scan/security-code-scan-add-action@v1
 
       - name: Restore dependencies
         run: dotnet restore
@@ -35,7 +35,7 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Convert sarif for uploading to GitHub
-        uses: security-code-scan/security-code-scan-results-action@latest
+        uses: security-code-scan/security-code-scan-results-action@v1
 
       - name: Upload sarif
-        uses: github/codeql-action/upload-sarif@latest
+        uses: github/codeql-action/upload-sarif@v2
