@@ -112,7 +112,7 @@
             numberAutosaveInterval.Name = "numberAutosaveInterval";
             numberAutosaveInterval.Size = new Size(41, 23);
             numberAutosaveInterval.TabIndex = 2;
-            numberAutosaveInterval.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numberAutosaveInterval.Value = new decimal(new int[] { 10, 0, 0, 0 });
             numberAutosaveInterval.ValueChanged += SetAutosaveInterval;
             // 
             // chbAutosave

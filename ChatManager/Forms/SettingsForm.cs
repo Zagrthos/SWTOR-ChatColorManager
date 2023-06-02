@@ -98,10 +98,18 @@ namespace ChatManager.Forms
             if (GetSetSettings.GetAutosave)
             {
                 chbAutosave.Checked = true;
+                numberAutosaveInterval.Enabled = true;
+                numberAutosaveInterval.Visible = true;
+                lblAutosaveInterval.Enabled = true;
+                lblAutosaveInterval.Visible = true;
             }
             else
             {
                 chbAutosave.Checked = false;
+                numberAutosaveInterval.Enabled = false;
+                numberAutosaveInterval.Visible = false;
+                lblAutosaveInterval.Enabled = false;
+                lblAutosaveInterval.Visible = false;
             }
 
             numberAutosaveInterval.Value = GetSetSettings.GetAutosaveInterval;
@@ -164,12 +172,20 @@ namespace ChatManager.Forms
                     {
                         GetSetSettings.SaveSettings("_autosave", true);
                         Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "Autosave = true");
+                        numberAutosaveInterval.Enabled = true;
+                        numberAutosaveInterval.Visible = true;
+                        lblAutosaveInterval.Enabled = true;
+                        lblAutosaveInterval.Visible = true;
                         return;
                     }
                     else
                     {
                         GetSetSettings.SaveSettings("_autosave", false);
                         Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "Autosave = false");
+                        numberAutosaveInterval.Enabled = false;
+                        numberAutosaveInterval.Visible = false;
+                        lblAutosaveInterval.Enabled = false;
+                        lblAutosaveInterval.Visible = false;
                         return;
                     }
                 }
