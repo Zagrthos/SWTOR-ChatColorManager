@@ -10,11 +10,11 @@ updates:
     schedule:
       interval: "weekly"
     assignees:
-      "zagrthos"
+    - "zagrthos"
       
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/ChatManager" # Location of package manifests
     schedule:
       interval: "weekly"
     assignees:
-      "zagrthos"
+    - "zagrthos"
