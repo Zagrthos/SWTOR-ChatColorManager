@@ -36,7 +36,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="_autosaveInterval" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="_saveOnClose" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

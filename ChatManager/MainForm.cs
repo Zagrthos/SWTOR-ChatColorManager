@@ -132,7 +132,15 @@ namespace ChatManager
 
                     case "settingsToolStripMenuItem":
                         Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Settings Form requested");
+                        Hide();
                         languageChanged = OpenWindows.OpenSettings();
+
+                        if (languageChanged)
+                        {
+                            Localize();
+                        }
+
+                        Show();
                         return;
                 }
 

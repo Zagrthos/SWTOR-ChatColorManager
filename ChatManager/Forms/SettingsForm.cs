@@ -142,6 +142,7 @@ namespace ChatManager.Forms
                 Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, $"Saving new locale: {newLanguage}");
                 GetSetSettings.SaveSettings("_locale", newLanguage);
                 Localize();
+                languageChanged = true;
             }
         }
 

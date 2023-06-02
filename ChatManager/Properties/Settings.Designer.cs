@@ -145,7 +145,7 @@ namespace ChatManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public decimal _autosaveInterval {
             get {
                 return ((decimal)(this["_autosaveInterval"]));
