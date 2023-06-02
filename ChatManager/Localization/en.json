@@ -96,5 +96,6 @@
   "gbGeneral": "General settings",
   "chbSaveOnClose": "Save last colors when closing the app",
   "chbAutosave": "Enable autosave",
-  "lblAutosaveInterval": "Autosave interval (minutes)"
+  "lblAutosaveInterval": "Autosave interval (minutes)",
+  "btnResetSettings": "Reset Settings"
 }

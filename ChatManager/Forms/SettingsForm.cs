@@ -203,6 +203,8 @@ namespace ChatManager.Forms
 
         private void SetAutosaveInterval(object sender, EventArgs e)
         {
+            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "SetAutosaveInterval entered");
+
             if (sender is NumericUpDown)
             {
                 GetSetSettings.SaveSettings("_autosaveInterval", numberAutosaveInterval.Value);
@@ -211,6 +213,20 @@ namespace ChatManager.Forms
             else
             {
                 Logging.Write(LogEvent.Warning, ProgramClass.SettingsForm, $"Sender: {sender} is not a NumericUpDown!");
+            }
+        }
+
+        private void ResetSettings(object sender, EventArgs e)
+        {
+            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "ResetSettings entered");
+
+            if (sender is Button button)
+            {
+                GetSetSettings.RestoreSettings();
+            }
+            else
+            {
+                Logging.Write(LogEvent.Warning, ProgramClass.SettingsForm, $"Sender: {sender} is not a Button!");
             }
         }
     }
