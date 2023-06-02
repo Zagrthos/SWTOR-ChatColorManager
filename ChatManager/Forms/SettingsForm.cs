@@ -220,7 +220,7 @@ namespace ChatManager.Forms
         {
             Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "ResetSettings entered");
 
-            if (sender is Button button)
+            if (sender is Button)
             {
                 GetSetSettings.RestoreSettings();
             }

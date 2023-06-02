@@ -96,8 +96,6 @@ namespace ChatManager
                     _ => string.Empty,
                 };
 
-                bool languageChanged = false;
-
                 switch (menuItem.Name)
                 {
                     case "supportToolStripMenuItem":
@@ -133,7 +131,7 @@ namespace ChatManager
                     case "settingsToolStripMenuItem":
                         Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Settings Form requested");
                         Hide();
-                        languageChanged = OpenWindows.OpenSettings();
+                        bool languageChanged = OpenWindows.OpenSettings();
 
                         if (languageChanged)
                         {
