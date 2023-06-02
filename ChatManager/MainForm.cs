@@ -397,6 +397,7 @@ namespace ChatManager
 
             Localize();
 
+#if !DEBUG
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if SWTOR is running");
             if (Checks.CheckSWTORprocessFound())
             {
@@ -408,6 +409,7 @@ namespace ChatManager
             {
                 Logging.Write(LogEvent.Info, ProgramClass.MainForm, "SWTOR is not running!");
             }
+#endif
 
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Set BackupOption in Menu");
             if (!Checks.BackupDirectory())
@@ -446,15 +448,15 @@ namespace ChatManager
             Graphics g = e.Graphics;
             Brush _textBrush;
 
-            // Get the item from the collection.
+            // Get the item from the collection
             TabPage _tabPage = tabsMainForm.TabPages[e.Index];
 
-            // Get the real bounds for the tab rectangle.
+            // Get the real bounds for the tab rectangle
             Rectangle _tabBounds = tabsMainForm.GetTabRect(e.Index);
 
             if (e.State == DrawItemState.Selected)
             {
-                // Draw a different background color, and don't paint a focus rectangle.
+                // Draw a different background color, and don't paint a focus rectangle
                 _textBrush = new SolidBrush(Color.Black);
                 g.FillRectangle(Brushes.LightGray, e.Bounds);
             }
@@ -464,10 +466,10 @@ namespace ChatManager
                 e.DrawBackground();
             }
 
-            // Use our own font.
+            // Use our own font
             Font _tabFont = new("Segoe UI", 9f);
 
-            // Draw string. Center the text.
+            // Draw string. Center the text
             StringFormat _stringFlags = new()
             {
                 Alignment = StringAlignment.Center,

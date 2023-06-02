@@ -35,8 +35,6 @@ namespace ChatManager.Forms
             }
         }
 
-        public static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version!.ToString();
-
         public static string AssemblyProduct
         {
             get

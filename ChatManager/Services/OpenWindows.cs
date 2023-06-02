@@ -5,19 +5,6 @@ namespace ChatManager.Services
 {
     internal class OpenWindows
     {
-        // Debug Test Method
-        /*
-        private async void StartColorPicker(object sender, EventArgs e)
-        {
-            await Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "StartColorPicker Entered");
-            ColorPickerForm colorPicker = new("Test", Color.Black);
-            await Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Form {colorPicker.Text} created");
-            colorPicker.ShowDialog();
-            colorPicker.Dispose();
-        }*/
-
-        // Production Method
-        // ??? Color Picker must be opened from an non-async method, due to the ShowDialog Method which is synchronous
         public static string OpenColorPicker(string text, Color color)
         {
             Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenColorPicker Entered");
