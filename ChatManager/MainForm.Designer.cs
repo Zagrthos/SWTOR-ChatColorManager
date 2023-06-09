@@ -976,7 +976,6 @@
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SWTOR Chat Color Manager";
-            FormClosing += MainForm_FormClosing;
             FormClosed += MainForm_FormClosed;
             Load += MainForm_Load;
             tlpMainForm.ResumeLayout(false);

@@ -385,7 +385,9 @@ namespace ChatManager
         }
 
         // Perform basic Checks when the Form is loading
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         private async void MainForm_Load(object sender, EventArgs e)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (string.IsNullOrEmpty(GetSetSettings.GetCurrentLocale))
             {
@@ -425,12 +427,6 @@ namespace ChatManager
 #if !DEBUG
             await Updater.CheckForUpdates();
 #endif
-        }
-
-        // When the Form is closing, log it
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm is closing");
         }
 
         // When the Form is closed, log it and stop the logger
