@@ -149,7 +149,7 @@
             // Initialize Array for saving of colorIndexes
             string[] colorIndex = new string[22];
 
-            // Set position 21 to the original filepath
+            // Set position 0 to the original filepath
             colorIndex[0] = fileName;
 
             // Read every Line in the File and save it to the variable
@@ -164,6 +164,12 @@
                     colorLine = line.Substring(line.IndexOf('=') + 1).Trim();
                     break;
                 }
+            }
+
+            if (colorLine == string.Empty)
+            {
+                Logging.Write(LogEvent.Error, ProgramClass.FileImport, "Line ChatColors could not be found!");
+                ShowMessageBox.ShowBug();
             }
 
             // Create new Array out of the line
