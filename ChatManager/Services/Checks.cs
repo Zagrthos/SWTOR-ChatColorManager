@@ -34,22 +34,10 @@ namespace ChatManager.Services
             return found;
         }
 
-        // Check if Path exists
-        public static bool CheckIfPathExists(string path)
-        {
-            if (Directory.Exists(path))
-            {
-                return true;
-            } else
-            {
-                return false;
-            }
-        }
-
         // Associate server name to identifier
-        public static string ServerNameIdentifier(string name)
+        public static string ServerNameIdentifier(string name, bool isServerName)
         {
-            if (!string.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(name) && isServerName)
             {
                 return name switch
                 {
@@ -58,6 +46,18 @@ namespace ChatManager.Services
                     "DarthMalgus" => "he4000",
                     "TulakHord" => "he4001",
                     "TheLeviathan" => "he4002",
+                    _ => string.Empty,
+                };
+            }
+            else if (!string.IsNullOrEmpty(name) && !isServerName)
+            {
+                return name switch
+                {
+                    "he3000" => "StarForge",
+                    "he3001" => "SateleShan",
+                    "he4000" => "DarthMalgus",
+                    "he4001" => "TulakHord",
+                    "he4002" => "TheLeviathan",
                     _ => string.Empty,
                 };
             }

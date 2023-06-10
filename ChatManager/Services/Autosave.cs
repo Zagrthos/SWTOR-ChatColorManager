@@ -40,7 +40,7 @@ namespace ChatManager.Services
 
         private static void CheckAutosavePath()
         {
-            if (!Checks.CheckIfPathExists(GetSetSettings.GetAutosavePath))
+            if (!Directory.Exists(GetSetSettings.GetAutosavePath))
             {
                 Logging.Write(LogEvent.Warning, ProgramClass.Autosave, "autosavePath does not exist, creating it!");
                 Directory.CreateDirectory(GetSetSettings.GetAutosavePath);

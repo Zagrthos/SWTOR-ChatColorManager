@@ -151,7 +151,7 @@ namespace ChatManager
                 }
 
                 Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if local Path exists");
-                if (Checks.CheckIfPathExists(path))
+                if (Directory.Exists(path))
                 {
                     // Open Explorer in given path
                     Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Local Path exists!");
@@ -451,9 +451,13 @@ namespace ChatManager
 
                 Logging.Write(LogEvent.Info, ProgramClass.MainForm, "SaveOnClose set");
 
-                if (Checks.CheckIfPathExists(GetSetSettings.GetAutosavePath))
+                if (Directory.Exists(GetSetSettings.GetAutosavePath))
                 {
                     // TODO: Check if file exists and then import file
+                    if (File.Exists(Path.Combine(GetSetSettings.GetAutosavePath, "autosave.json")))
+                    {
+
+                    }
                 }
             }
         }

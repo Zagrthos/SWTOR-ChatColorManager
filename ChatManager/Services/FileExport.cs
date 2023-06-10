@@ -239,7 +239,7 @@
                         }
                         // Check if the name of the character is the same as the one that was selected
                         // and check if the fileName starts with the server prefix
-                        if (name[j, 0] == file && fileName.StartsWith(Checks.ServerNameIdentifier(server)))
+                        if (name[j, 0] == file && fileName.StartsWith(Checks.ServerNameIdentifier(server, true)))
                         {
                             Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"arrayCounter is: {arrayCounter}");
 
