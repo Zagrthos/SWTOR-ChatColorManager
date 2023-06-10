@@ -93,13 +93,12 @@ namespace ChatManager.Services
 
                             string[] lines = File.ReadAllLines(path);
 
-                            string searchLine = "ChatColors = ";
                             int lineNumber = 0;
 
                             // Search the correct line in the file
                             for (int line = 0; line < lines.Length; line++)
                             {
-                                if (lines[line].StartsWith(searchLine))
+                                if (lines[line].StartsWith("ChatColors"))
                                 {
                                     lineNumber = line;
                                     break;

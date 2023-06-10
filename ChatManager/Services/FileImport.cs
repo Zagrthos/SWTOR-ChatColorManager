@@ -149,11 +149,8 @@
             // Initialize Array for saving of colorIndexes
             string[] colorIndex = new string[22];
 
-            // Set position 0 to the original filepath
-            colorIndex[0] = fileName;
-
             // Read every Line in the File and save it to the variable
-            string[] fileLines = File.ReadAllLines(colorIndex[0]);
+            string[] fileLines = File.ReadAllLines(fileName);
 
             // Initialize new Array and search for the correct line in the File
             string colorLine = string.Empty;
