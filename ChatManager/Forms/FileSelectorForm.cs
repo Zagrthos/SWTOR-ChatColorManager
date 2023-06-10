@@ -275,6 +275,9 @@ namespace ChatManager.Forms
             }
 
             Close();
+
+            // Dummy DialogResult to get it work properly, it thinks after Close() it's DialogResult.Cancel
+            DialogResult = DialogResult.OK;
         }
 
         private void SelectClick(object sender, EventArgs e)

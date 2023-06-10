@@ -114,6 +114,8 @@ namespace ChatManager.Services
                             // Split it again to the get colors in an array
                             string[] colorLines = colorLine.Split(";");
 
+                            Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"colorLines: {colorLines.Length}");
+
                             // Loop through the changed array and check if there's empty colors
                             // Check if the array is big enough else break
                             // If yes check if the old array has any value that can fill it
@@ -124,6 +126,7 @@ namespace ChatManager.Services
                                 {
                                     if (color >= colorLines.Length)
                                     {
+                                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, "colorLines end reached");
                                         break;
                                     }
 
