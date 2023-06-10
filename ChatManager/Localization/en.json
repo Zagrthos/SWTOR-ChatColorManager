@@ -42,6 +42,8 @@
   "btnSystem": "System Feedback",
   "btnGuildInfo": "Guild Info",
   "btnGroupInfo": "Group Info",
+  "lblServerName": "Current Server:",
+  "lblCharName": "Current Charakter:",
 
   "_comment3": "AboutForm",
   "AboutForm": "About this app",
@@ -77,6 +79,7 @@
   "_comment6": "MessageBox Strings",
   "Err_ColorNotHex": "The specified color in the text box does not correspond to the HEX standard.",
   "Error_IsDetected": "Something went wrong!\nDo you want to report the bug?",
+  "Inf_RestartRequired": "The application must be restarted after this change!",
   "MessageBoxError": "Error",
   "MessageBoxInfo": "Information",
   "MessageBoxNoUpdate": "No update available!",

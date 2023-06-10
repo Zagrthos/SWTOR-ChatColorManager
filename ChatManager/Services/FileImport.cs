@@ -147,10 +147,18 @@
             Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetContentFromFile entered");
 
             // Initialize Array for saving of colorIndexes
-            string[] colorIndex = new string[22];
+            string[] colorIndex = new string[23];
 
             // Read every Line in the File and save it to the variable
             string[] fileLines = File.ReadAllLines(fileName);
+
+            // Create a new array by the split and then override the array with another split
+            string[] fileNameParts = fileName.Split("\\");
+            fileNameParts = fileNameParts[8].Split("_");
+
+            // Set position 0 to the server name and position 1 to the char name
+            colorIndex[0] = fileNameParts[0];
+            colorIndex[1] = fileNameParts[1];
 
             // Initialize new Array and search for the correct line in the File
             string colorLine = string.Empty;
@@ -173,27 +181,27 @@
             string[] colorLineIndex = colorLine.Split(";");
 
             // Set each colorIndex position to the correct colorLineIndex position
-            colorIndex[1] = colorLineIndex[7]; // Trade
-            colorIndex[2] = colorLineIndex[8]; // PvP
-            colorIndex[3] = colorLineIndex[6]; // General
-            colorIndex[4] = colorLineIndex[2]; // Emote
-            colorIndex[5] = colorLineIndex[1]; // Yell
-            colorIndex[6] = colorLineIndex[11]; // Officer
-            colorIndex[7] = colorLineIndex[10]; // Guild
-            colorIndex[8] = colorLineIndex[0]; // Say
-            colorIndex[9] = colorLineIndex[3]; // Whisper
-            colorIndex[10] = colorLineIndex[12]; // Ops
-            colorIndex[11] = colorLineIndex[29]; // Ops Leader
-            colorIndex[12] = colorLineIndex[9]; // Group
-            colorIndex[13] = colorLineIndex[32]; // Ops Announcement
-            colorIndex[14] = colorLineIndex[13]; // Ops Officer
-            colorIndex[15] = colorLineIndex[36]; // Combat Information
-            colorIndex[16] = colorLineIndex[19]; // Conversation
-            colorIndex[17] = colorLineIndex[20]; // Character Login
-            colorIndex[18] = colorLineIndex[33]; // Ops Information
-            colorIndex[19] = colorLineIndex[18]; // System Feedback
-            colorIndex[20] = colorLineIndex[35]; // Guild Information
-            colorIndex[21] = colorLineIndex[34]; // Group Information
+            colorIndex[2] = colorLineIndex[7]; // Trade
+            colorIndex[3] = colorLineIndex[8]; // PvP
+            colorIndex[4] = colorLineIndex[6]; // General
+            colorIndex[5] = colorLineIndex[2]; // Emote
+            colorIndex[6] = colorLineIndex[1]; // Yell
+            colorIndex[7] = colorLineIndex[11]; // Officer
+            colorIndex[8] = colorLineIndex[10]; // Guild
+            colorIndex[9] = colorLineIndex[0]; // Say
+            colorIndex[10] = colorLineIndex[3]; // Whisper
+            colorIndex[11] = colorLineIndex[12]; // Ops
+            colorIndex[12] = colorLineIndex[29]; // Ops Leader
+            colorIndex[13] = colorLineIndex[9]; // Group
+            colorIndex[14] = colorLineIndex[32]; // Ops Announcement
+            colorIndex[15] = colorLineIndex[13]; // Ops Officer
+            colorIndex[16] = colorLineIndex[36]; // Combat Information
+            colorIndex[17] = colorLineIndex[19]; // Conversation
+            colorIndex[18] = colorLineIndex[20]; // Character Login
+            colorIndex[19] = colorLineIndex[33]; // Ops Information
+            colorIndex[20] = colorLineIndex[18]; // System Feedback
+            colorIndex[21] = colorLineIndex[35]; // Guild Information
+            colorIndex[22] = colorLineIndex[34]; // Group Information
 
             // TODO: Decide if logging to be removed or not
             // Debug Purposes

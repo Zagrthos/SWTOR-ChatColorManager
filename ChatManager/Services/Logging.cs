@@ -23,6 +23,7 @@ namespace ChatManager.Services
         ColorPickerForm,
         FileSelectorForm,
         SettingsForm,
+        Autosave,
         Checks,
         Converter,
         FileExport,

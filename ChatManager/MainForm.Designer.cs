@@ -114,6 +114,8 @@
             tbOpsInfo = new TextBox();
             tbConv = new TextBox();
             tbLogin = new TextBox();
+            lblCharName = new Label();
+            lblServerName = new Label();
             tlpMainForm.SuspendLayout();
             menuMainForm.SuspendLayout();
             tabsMainForm.SuspendLayout();
@@ -129,22 +131,27 @@
             // 
             // tlpMainForm
             // 
-            tlpMainForm.ColumnCount = 1;
-            tlpMainForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tlpMainForm.ColumnCount = 2;
+            tlpMainForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpMainForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpMainForm.Controls.Add(menuMainForm, 0, 0);
             tlpMainForm.Controls.Add(tabsMainForm, 0, 1);
+            tlpMainForm.Controls.Add(lblCharName, 0, 2);
+            tlpMainForm.Controls.Add(lblServerName, 1, 2);
             tlpMainForm.Dock = DockStyle.Fill;
             tlpMainForm.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tlpMainForm.Location = new Point(0, 0);
             tlpMainForm.Name = "tlpMainForm";
-            tlpMainForm.RowCount = 2;
+            tlpMainForm.RowCount = 3;
             tlpMainForm.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
             tlpMainForm.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlpMainForm.Size = new Size(484, 261);
+            tlpMainForm.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+            tlpMainForm.Size = new Size(484, 286);
             tlpMainForm.TabIndex = 0;
             // 
             // menuMainForm
             // 
+            tlpMainForm.SetColumnSpan(menuMainForm, 2);
             menuMainForm.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem });
             menuMainForm.Location = new Point(0, 0);
             menuMainForm.Name = "menuMainForm";
@@ -372,6 +379,7 @@
             // tabsMainForm
             // 
             tabsMainForm.Alignment = TabAlignment.Left;
+            tlpMainForm.SetColumnSpan(tabsMainForm, 2);
             tabsMainForm.Controls.Add(tpGlobal);
             tabsMainForm.Controls.Add(tpPlayer);
             tabsMainForm.Controls.Add(tpGroup);
@@ -403,7 +411,6 @@
             tlpGlobal.ColumnCount = 2;
             tlpGlobal.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpGlobal.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tlpGlobal.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tlpGlobal.Controls.Add(btnGeneral, 1, 2);
             tlpGlobal.Controls.Add(btnPvP, 1, 1);
             tlpGlobal.Controls.Add(btnTrade, 1, 0);
@@ -414,7 +421,7 @@
             tlpGlobal.Location = new Point(0, 0);
             tlpGlobal.Name = "tlpGlobal";
             tlpGlobal.RowCount = 3;
-            tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333435F));
+            tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33334F));
             tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333244F));
             tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tlpGlobal.Size = new Size(370, 222);
@@ -963,11 +970,33 @@
             tbLogin.Size = new Size(179, 23);
             tbLogin.TabIndex = 37;
             // 
+            // lblCharName
+            // 
+            lblCharName.AutoSize = true;
+            lblCharName.Dock = DockStyle.Fill;
+            lblCharName.Location = new Point(3, 261);
+            lblCharName.Name = "lblCharName";
+            lblCharName.Size = new Size(236, 25);
+            lblCharName.TabIndex = 45;
+            lblCharName.Text = "Aktueller Char:";
+            lblCharName.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblServerName
+            // 
+            lblServerName.AutoSize = true;
+            lblServerName.Dock = DockStyle.Fill;
+            lblServerName.Location = new Point(245, 261);
+            lblServerName.Name = "lblServerName";
+            lblServerName.Size = new Size(236, 25);
+            lblServerName.TabIndex = 46;
+            lblServerName.Text = "Aktueller Server:";
+            lblServerName.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(484, 261);
+            ClientSize = new Size(484, 286);
             Controls.Add(tlpMainForm);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -1085,5 +1114,7 @@
         private ToolStripMenuItem bugMailToolStripMenuItem;
         private ToolStripMenuItem updateToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
+        private Label lblCharName;
+        private Label lblServerName;
     }
 }

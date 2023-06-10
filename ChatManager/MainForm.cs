@@ -1,3 +1,4 @@
+using ChatManager.Forms;
 using ChatManager.Services;
 using System.Globalization;
 
@@ -9,6 +10,8 @@ namespace ChatManager
         {
             InitializeComponent();
         }
+
+        private static System.Timers.Timer? autosaveTimer;
 
         // Button Click Handler for every button next to the TextBox
         private void ClickChangeColorButton(object sender, EventArgs e)
@@ -133,6 +136,11 @@ namespace ChatManager
                         Hide();
                         bool languageChanged = OpenWindows.OpenSettings();
 
+                        if (SettingsForm.GetAutosaveTimerChanged)
+                        {
+                            ShowMessageBox.ShowRestart();
+                        }
+
                         if (languageChanged)
                         {
                             Localize();
@@ -187,27 +195,46 @@ namespace ChatManager
                         string filePath = filePaths[i, 1];
                         colorIndexes = fileImport.GetContentFromFile(filePath);
 
-                        tbTrade.Text = colorIndexes[1];
-                        tbPvP.Text = colorIndexes[2];
-                        tbGeneral.Text = colorIndexes[3];
-                        tbEmote.Text = colorIndexes[4];
-                        tbYell.Text = colorIndexes[5];
-                        tbOfficer.Text = colorIndexes[6];
-                        tbGuild.Text = colorIndexes[7];
-                        tbSay.Text = colorIndexes[8];
-                        tbWhisper.Text = colorIndexes[9];
-                        tbOps.Text = colorIndexes[10];
-                        tbOpsLead.Text = colorIndexes[11];
-                        tbGroup.Text = colorIndexes[12];
-                        tbOpsAnnou.Text = colorIndexes[13];
-                        tbOpsOfficer.Text = colorIndexes[14];
-                        tbCombat.Text = colorIndexes[15];
-                        tbConv.Text = colorIndexes[16];
-                        tbLogin.Text = colorIndexes[17];
-                        tbOpsInfo.Text = colorIndexes[18];
-                        tbSystem.Text = colorIndexes[19];
-                        tbGuildInfo.Text = colorIndexes[20];
-                        tbGroupInfo.Text = colorIndexes[21];
+                        lblServerName.Text = colorIndexes[0];
+                        lblCharName.Text = colorIndexes[1];
+                        tbTrade.Text = colorIndexes[2];
+                        tbPvP.Text = colorIndexes[3];
+                        tbGeneral.Text = colorIndexes[4];
+                        tbEmote.Text = colorIndexes[5];
+                        tbYell.Text = colorIndexes[6];
+                        tbOfficer.Text = colorIndexes[7];
+                        tbGuild.Text = colorIndexes[8];
+                        tbSay.Text = colorIndexes[9];
+                        tbWhisper.Text = colorIndexes[10];
+                        tbOps.Text = colorIndexes[11];
+                        tbOpsLead.Text = colorIndexes[12];
+                        tbGroup.Text = colorIndexes[13];
+                        tbOpsAnnou.Text = colorIndexes[14];
+                        tbOpsOfficer.Text = colorIndexes[15];
+                        tbCombat.Text = colorIndexes[16];
+                        tbConv.Text = colorIndexes[17];
+                        tbLogin.Text = colorIndexes[18];
+                        tbOpsInfo.Text = colorIndexes[19];
+                        tbSystem.Text = colorIndexes[20];
+                        tbGuildInfo.Text = colorIndexes[21];
+                        tbGroupInfo.Text = colorIndexes[22];
+
+                        if (GetSetSettings.GetAutosave)
+                        {
+                            // Stop previously intialized Timer
+                            if (autosaveTimer != null)
+                            {
+                                autosaveTimer.Stop();
+                                autosaveTimer.Elapsed -= AutosaveTimer_Elapsed;
+                            }
+
+                            // Initialize Autosave Timer
+                            autosaveTimer = new(Convert.ToDouble(GetSetSettings.GetAutosaveInterval));
+                            autosaveTimer.Elapsed += AutosaveTimer_Elapsed;
+                            autosaveTimer.Start();
+
+                            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Autosave set");
+                        }
 
                         break;
                     }
@@ -215,111 +242,119 @@ namespace ChatManager
             }
         }
 
+        private string[] GetAllColorData()
+        {
+            string[] colorData = new string[100];
+
+            colorData[0] = tbSay.Text;
+            colorData[1] = tbYell.Text;
+            colorData[2] = tbEmote.Text;
+            colorData[3] = tbWhisper.Text;
+            colorData[4] = "";
+            colorData[5] = "";
+            colorData[6] = tbGeneral.Text;
+            colorData[7] = tbTrade.Text;
+            colorData[8] = tbPvP.Text;
+            colorData[9] = tbGroup.Text;
+            colorData[10] = tbGuild.Text;
+            colorData[11] = tbOfficer.Text;
+            colorData[12] = tbOps.Text;
+            colorData[13] = tbOpsOfficer.Text;
+            colorData[14] = "";
+            colorData[15] = "";
+            colorData[16] = "";
+            colorData[17] = "";
+            colorData[18] = tbSystem.Text;
+            colorData[19] = tbConv.Text;
+            colorData[20] = tbLogin.Text;
+            colorData[21] = "";
+            colorData[22] = "";
+            colorData[23] = "";
+            colorData[24] = "";
+            colorData[25] = "";
+            colorData[26] = "";
+            colorData[27] = "";
+            colorData[28] = "";
+            colorData[29] = tbOpsLead.Text;
+            colorData[30] = "";
+            colorData[31] = "";
+            colorData[32] = tbOpsAnnou.Text;
+            colorData[33] = tbOpsInfo.Text;
+            colorData[34] = tbGroupInfo.Text;
+            colorData[35] = tbGuildInfo.Text;
+            colorData[36] = tbCombat.Text;
+            colorData[37] = "";
+            colorData[38] = "";
+            colorData[39] = "";
+            colorData[40] = "";
+            colorData[41] = "";
+            colorData[42] = "";
+            colorData[43] = "";
+            colorData[44] = "";
+            colorData[45] = "";
+            colorData[46] = "";
+            colorData[47] = "";
+            colorData[48] = "";
+            colorData[49] = "";
+            colorData[50] = "";
+            colorData[51] = "";
+            colorData[52] = "";
+            colorData[53] = "";
+            colorData[54] = "";
+            colorData[55] = "";
+            colorData[56] = "";
+            colorData[57] = "";
+            colorData[58] = "";
+            colorData[59] = "";
+            colorData[60] = "";
+            colorData[61] = "";
+            colorData[62] = "";
+            colorData[63] = "";
+            colorData[64] = "";
+            colorData[65] = "";
+            colorData[66] = "";
+            colorData[67] = "";
+            colorData[68] = "";
+            colorData[69] = "";
+            colorData[70] = "";
+            colorData[71] = "";
+            colorData[72] = "";
+            colorData[73] = "";
+            colorData[74] = "";
+            colorData[75] = "";
+            colorData[76] = "";
+            colorData[77] = "";
+            colorData[78] = "";
+            colorData[79] = "";
+            colorData[80] = "";
+            colorData[81] = "";
+            colorData[82] = "";
+            colorData[83] = "";
+            colorData[84] = "";
+            colorData[85] = "";
+            colorData[86] = "";
+            colorData[87] = "";
+            colorData[88] = "";
+            colorData[89] = "";
+            colorData[90] = "";
+            colorData[91] = "";
+            colorData[92] = "";
+            colorData[93] = "";
+            colorData[94] = "";
+            colorData[95] = "";
+            colorData[96] = "";
+            colorData[97] = "";
+            colorData[98] = "";
+            colorData[99] = "";
+
+            return colorData;
+        }
+
         private void ExportFiles(object sender, EventArgs e)
         {
             Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ExportFiles entered");
 
-            string[] colorIndexes = new string[100];
-            colorIndexes[0] = tbSay.Text;
-            colorIndexes[1] = tbYell.Text;
-            colorIndexes[2] = tbEmote.Text;
-            colorIndexes[3] = tbWhisper.Text;
-            colorIndexes[4] = "";
-            colorIndexes[5] = "";
-            colorIndexes[6] = tbGeneral.Text;
-            colorIndexes[7] = tbTrade.Text;
-            colorIndexes[8] = tbPvP.Text;
-            colorIndexes[9] = tbGroup.Text;
-            colorIndexes[10] = tbGuild.Text;
-            colorIndexes[11] = tbOfficer.Text;
-            colorIndexes[12] = tbOps.Text;
-            colorIndexes[13] = tbOpsOfficer.Text;
-            colorIndexes[14] = "";
-            colorIndexes[15] = "";
-            colorIndexes[16] = "";
-            colorIndexes[17] = "";
-            colorIndexes[18] = tbSystem.Text;
-            colorIndexes[19] = tbConv.Text;
-            colorIndexes[20] = tbLogin.Text;
-            colorIndexes[21] = "";
-            colorIndexes[22] = "";
-            colorIndexes[23] = "";
-            colorIndexes[24] = "";
-            colorIndexes[25] = "";
-            colorIndexes[26] = "";
-            colorIndexes[27] = "";
-            colorIndexes[28] = "";
-            colorIndexes[29] = tbOpsLead.Text;
-            colorIndexes[30] = "";
-            colorIndexes[31] = "";
-            colorIndexes[32] = tbOpsAnnou.Text;
-            colorIndexes[33] = tbOpsInfo.Text;
-            colorIndexes[34] = tbGroupInfo.Text;
-            colorIndexes[35] = tbGuildInfo.Text;
-            colorIndexes[36] = tbCombat.Text;
-            colorIndexes[37] = "";
-            colorIndexes[38] = "";
-            colorIndexes[39] = "";
-            colorIndexes[40] = "";
-            colorIndexes[41] = "";
-            colorIndexes[42] = "";
-            colorIndexes[43] = "";
-            colorIndexes[44] = "";
-            colorIndexes[45] = "";
-            colorIndexes[46] = "";
-            colorIndexes[47] = "";
-            colorIndexes[48] = "";
-            colorIndexes[49] = "";
-            colorIndexes[50] = "";
-            colorIndexes[51] = "";
-            colorIndexes[52] = "";
-            colorIndexes[53] = "";
-            colorIndexes[54] = "";
-            colorIndexes[55] = "";
-            colorIndexes[56] = "";
-            colorIndexes[57] = "";
-            colorIndexes[58] = "";
-            colorIndexes[59] = "";
-            colorIndexes[60] = "";
-            colorIndexes[61] = "";
-            colorIndexes[62] = "";
-            colorIndexes[63] = "";
-            colorIndexes[64] = "";
-            colorIndexes[65] = "";
-            colorIndexes[66] = "";
-            colorIndexes[67] = "";
-            colorIndexes[68] = "";
-            colorIndexes[69] = "";
-            colorIndexes[70] = "";
-            colorIndexes[71] = "";
-            colorIndexes[72] = "";
-            colorIndexes[73] = "";
-            colorIndexes[74] = "";
-            colorIndexes[75] = "";
-            colorIndexes[76] = "";
-            colorIndexes[77] = "";
-            colorIndexes[78] = "";
-            colorIndexes[79] = "";
-            colorIndexes[80] = "";
-            colorIndexes[81] = "";
-            colorIndexes[82] = "";
-            colorIndexes[83] = "";
-            colorIndexes[84] = "";
-            colorIndexes[85] = "";
-            colorIndexes[86] = "";
-            colorIndexes[87] = "";
-            colorIndexes[88] = "";
-            colorIndexes[89] = "";
-            colorIndexes[90] = "";
-            colorIndexes[91] = "";
-            colorIndexes[92] = "";
-            colorIndexes[93] = "";
-            colorIndexes[94] = "";
-            colorIndexes[95] = "";
-            colorIndexes[96] = "";
-            colorIndexes[97] = "";
-            colorIndexes[98] = "";
-            colorIndexes[99] = "";
+            string[] colorIndexes = GetAllColorData();
 
             OpenWindows.OpenFileExportSelector(colorIndexes);
         }
@@ -384,6 +419,43 @@ namespace ChatManager
             }
         }
 
+        private void InitializeCustomSettings()
+        {
+            Logging.Write(LogEvent.Method, ProgramClass.MainForm, "InitializeCustomSettings entered");
+
+            if (GetSetSettings.GetSaveOnClose)
+            {
+                FormClosing += MainForm_FormClosing!;
+
+                Logging.Write(LogEvent.Info, ProgramClass.MainForm, "SaveOnClose set");
+
+                if (Checks.CheckIfPathExists(GetSetSettings.GetAutosavePath))
+                {
+                    // TODO: Check if file exists and then import file
+                }
+            }
+        }
+
+        private void DoSave()
+        {
+            Logging.Write(LogEvent.Method, ProgramClass.MainForm, "DoSave entered");
+
+            string[] colorIndexes = GetAllColorData();
+
+            Autosave autosave = new();
+            if (!string.IsNullOrEmpty(lblCharName.Text) && !string.IsNullOrEmpty(lblServerName.Text))
+            {
+                autosave.DoAutosave(lblCharName.Text, lblServerName.Text, colorIndexes);
+            }
+        }
+
+        private void AutosaveTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        {
+            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "AutosaveTimer elapsed");
+
+            DoSave();
+        }
+
         // Perform basic Checks when the Form is loading
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         private async void MainForm_Load(object sender, EventArgs e)
@@ -422,11 +494,21 @@ namespace ChatManager
                 Logging.Write(LogEvent.Info, ProgramClass.MainForm, "BackupOption is available!");
             }
 
+            InitializeCustomSettings();
+
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm is loading");
 
 #if !DEBUG
             await Updater.CheckForUpdates();
 #endif
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm closing");
+
+            autosaveTimer?.Stop();
+            DoSave();
         }
 
         // When the Form is closed, log it and stop the logger

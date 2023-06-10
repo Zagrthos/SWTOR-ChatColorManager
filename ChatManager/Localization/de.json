@@ -42,6 +42,8 @@
   "btnSystem": "System-Rückmeldung",
   "btnGuildInfo": "Gildeninfos",
   "btnGroupInfo": "Gruppeninfos",
+  "lblServerName": "Aktueller Server:",
+  "lblCharName": "Aktueller Charakter:",
 
   "_comment3": "AboutForm",
   "AboutForm": "Über diese App",
@@ -77,6 +79,7 @@
   "_comment6": "MessageBox Strings",
   "Err_ColorNotHex": "Die angegebene Farbe in der Textbox entspricht nicht dem HEX-Standard.",
   "Error_IsDetected": "Da ist was schief gelaufen!\nMöchtest du den Bug melden?",
+  "Inf_RestartRequired": "Die Applikation muss nach dieser Änderung neu gestartet werden!",
   "MessageBoxError": "Fehler",
   "MessageBoxInfo": "Information",
   "MessageBoxNoUpdate": "Kein Update verfügbar!",

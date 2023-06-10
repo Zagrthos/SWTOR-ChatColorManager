@@ -73,5 +73,19 @@
                 Logging.Write(LogEvent.Info, ProgramClass.ShowMessageBox, "DialogResult is no");
             }
         }
+
+        public static void ShowRestart()
+        {
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, "MessageBox shown");
+
+            MessageBox.Show(localization.GetString("Inf_RestartRequired"), localization.GetString("MessageBoxInfo"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, "MessageBox accepted");
+            Logging.Write(LogEvent.Info, ProgramClass.ShowMessageBox, "Restart initated");
+
+            Application.Restart();
+        }
     }
 }

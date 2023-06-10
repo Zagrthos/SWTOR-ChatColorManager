@@ -10,12 +10,14 @@ namespace ChatManager.Services
         private static readonly bool backupDir = false;
 
         private static readonly string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Logs");
+        private static readonly string autosavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Autosave");
 
         public static string GetCurrentLocale => Settings.Default._locale;
         public static string GetLocalPath => Settings.Default.localPath;
         public static string GetBackupPath => Settings.Default.backupPath;
         public static bool GetBackupAvailability => Settings.Default.backupAvailability;
         public static string GetLogPath => Settings.Default.logPath;
+        public static string GetAutosavePath => Settings.Default.autosavePath;
         public static string GetSupportPath => Settings.Default.supportPath;
         public static string GetBugPath => Settings.Default.bugPath;
         public static string GetBugMailpath => Settings.Default.bugMailPath;
@@ -33,6 +35,8 @@ namespace ChatManager.Services
                 Settings.Default.backupPath = backupPath;
                 Settings.Default.backupAvailability = backupDir;
                 Settings.Default.logPath = logPath;
+                Settings.Default.autosavePath = autosavePath;
+                Settings.Default._autosaveInterval = 0;
                 Settings.Default._Initialized = true;
                 Settings.Default.Save();
             }

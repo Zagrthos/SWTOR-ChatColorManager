@@ -166,5 +166,17 @@ namespace ChatManager.Properties {
                 this["_saveOnClose"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string autosavePath {
+            get {
+                return ((string)(this["autosavePath"]));
+            }
+            set {
+                this["autosavePath"] = value;
+            }
+        }
     }
 }

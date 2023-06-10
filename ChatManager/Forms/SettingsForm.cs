@@ -9,8 +9,11 @@ namespace ChatManager.Forms
             InitializeComponent();
         }
 
+        private static bool autosaveTimerChanged = false;
         private static bool languageChanged = false;
+        private decimal currentAutosaveInterval = 0;
 
+        public static bool GetAutosaveTimerChanged => autosaveTimerChanged;
         public static bool GetLanguageChanged => languageChanged;
 
         private void Localize()
@@ -112,7 +115,18 @@ namespace ChatManager.Forms
                 lblAutosaveInterval.Visible = false;
             }
 
-            numberAutosaveInterval.Value = GetSetSettings.GetAutosaveInterval;
+            currentAutosaveInterval = GetSetSettings.GetAutosaveInterval / 60000;
+            Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"currentAutosaveInterval: {currentAutosaveInterval}");
+
+            if (currentAutosaveInterval == 0)
+            {
+                numberAutosaveInterval.Value = 10;
+                SetAutosaveInterval();
+            }
+            else
+            {
+                numberAutosaveInterval.Value = currentAutosaveInterval;
+            }
         }
 
         private void SwitchCurrentLocale(object sender, EventArgs e)
@@ -201,14 +215,27 @@ namespace ChatManager.Forms
             }
         }
 
+        // Triggered programmatically
+        private void SetAutosaveInterval()
+        {
+            GetSetSettings.SaveSettings("_autosaveInterval", numberAutosaveInterval.Value * 60000);
+            Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, $"AutosaveInterval = {numberAutosaveInterval.Value}");
+
+            if (numberAutosaveInterval.Value != currentAutosaveInterval)
+            {
+                autosaveTimerChanged = true;
+                Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"autosaveTimerChanged = {autosaveTimerChanged}");
+            }
+        }
+
+        // Triggered by the NumericUpDown
         private void SetAutosaveInterval(object sender, EventArgs e)
         {
             Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "SetAutosaveInterval entered");
 
             if (sender is NumericUpDown)
             {
-                GetSetSettings.SaveSettings("_autosaveInterval", numberAutosaveInterval.Value);
-                Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, $"AutosaveInterval = {numberAutosaveInterval.Value}");
+                SetAutosaveInterval();
             }
             else
             {
