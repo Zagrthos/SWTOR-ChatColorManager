@@ -500,7 +500,7 @@ namespace ChatManager
             if (string.IsNullOrEmpty(GetSetSettings.GetCurrentLocale))
             {
                 Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"CurrentCulture set to: {CultureInfo.CurrentCulture.TwoLetterISOLanguageName}");
-                GetSetSettings.SaveSettings("_locale", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+                GetSetSettings.SaveSettings(Setting.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             }
 
             Localize();

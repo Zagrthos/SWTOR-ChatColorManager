@@ -156,7 +156,7 @@ namespace ChatManager.Forms
             if (currLocale != newLanguage)
             {
                 Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, $"Saving new locale: {newLanguage}");
-                GetSetSettings.SaveSettings("_locale", newLanguage);
+                GetSetSettings.SaveSettings(Setting.locale, newLanguage);
                 Localize();
                 languageChanged = true;
             }
@@ -172,13 +172,13 @@ namespace ChatManager.Forms
                 {
                     if (checkBox.Checked)
                     {
-                        GetSetSettings.SaveSettings("_saveOnClose", true);
+                        GetSetSettings.SaveSettings(Setting.saveOnClose, true);
                         Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "chbSaveOnClose = true");
                         return;
                     }
                     else
                     {
-                        GetSetSettings.SaveSettings("_saveOnClose", false);
+                        GetSetSettings.SaveSettings(Setting.saveOnClose, false);
                         Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "chbSaveOnClose = false");
                         return;
                     }
@@ -187,7 +187,7 @@ namespace ChatManager.Forms
                 {
                     if (checkBox.Checked)
                     {
-                        GetSetSettings.SaveSettings("_autosave", true);
+                        GetSetSettings.SaveSettings(Setting.autosave, true);
                         Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "Autosave = true");
                         numberAutosaveInterval.Enabled = true;
                         numberAutosaveInterval.Visible = true;
@@ -197,7 +197,7 @@ namespace ChatManager.Forms
                     }
                     else
                     {
-                        GetSetSettings.SaveSettings("_autosave", false);
+                        GetSetSettings.SaveSettings(Setting.autosave, false);
                         Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "Autosave = false");
                         numberAutosaveInterval.Enabled = false;
                         numberAutosaveInterval.Visible = false;
@@ -220,7 +220,7 @@ namespace ChatManager.Forms
         // Triggered programmatically
         private void SetAutosaveInterval()
         {
-            GetSetSettings.SaveSettings("_autosaveInterval", numberAutosaveInterval.Value * 60000);
+            GetSetSettings.SaveSettings(Setting.autosaveInterval, numberAutosaveInterval.Value * 60000);
             Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, $"AutosaveInterval = {numberAutosaveInterval.Value}");
 
             if (numberAutosaveInterval.Value != currentAutosaveInterval)

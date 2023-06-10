@@ -2,6 +2,15 @@
 
 namespace ChatManager.Services
 {
+    internal enum Setting
+    {
+        autosave,
+        autosaveInterval,
+        backupAvailability,
+        locale,
+        saveOnClose
+    }
+
     internal class GetSetSettings
     {
         private static readonly string localPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SWTOR\\swtor\\settings");
@@ -43,11 +52,11 @@ namespace ChatManager.Services
         }
 
         // This is for setting strings
-        public static void SaveSettings(string settingName, string settingValue)
+        public static void SaveSettings(Setting settingName, string settingValue)
         {
             switch (settingName)
             {
-                case "_locale":
+                case Setting.locale:
                     Settings.Default._locale = settingValue;
                     break;
 
@@ -58,19 +67,19 @@ namespace ChatManager.Services
         }
         
         // This is for setting booleans
-        public static void SaveSettings(string settingName, bool value)
+        public static void SaveSettings(Setting settingName, bool value)
         {
             switch (settingName)
             {
-                case "backupAvailability":
+                case Setting.backupAvailability:
                     Settings.Default.backupAvailability = value;
                     break;
 
-                case "_autosave":
+                case Setting.autosave:
                     Settings.Default._autosave = value;
                     break;
 
-                case "_saveOnClose":
+                case Setting.saveOnClose:
                     Settings.Default._saveOnClose = value;
                     break;
 
@@ -80,11 +89,11 @@ namespace ChatManager.Services
             Settings.Default.Save();
         }
 
-        public static void SaveSettings(string settingName, decimal value)
+        public static void SaveSettings(Setting settingName, decimal value)
         {
             switch (settingName)
             {
-                case "_autosaveInterval":
+                case Setting.autosaveInterval:
                     Settings.Default._autosaveInterval = value;
                     break;
 

@@ -83,7 +83,7 @@ namespace ChatManager.Services
                 if (Directory.Exists(backupPath))
                 {
                     Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Backup Dir created at: {backupPath}");
-                    GetSetSettings.SaveSettings("backupAvailability", true);
+                    GetSetSettings.SaveSettings(Setting.backupAvailability, true);
                     Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set backupDir to: {true}");
                 }
                 else
@@ -95,7 +95,7 @@ namespace ChatManager.Services
             else
             {
                 Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Backup Dir exists at: {backupPath}");
-                GetSetSettings.SaveSettings("backupAvailability", true);
+                GetSetSettings.SaveSettings(Setting.backupAvailability, true);
                 Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set backupDir to: {true}");
             }
 
