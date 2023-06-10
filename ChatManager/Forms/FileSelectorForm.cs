@@ -15,15 +15,15 @@ namespace ChatManager.Forms
         }
 
         private readonly bool isSave = false;
-        private static string listBoxString = string.Empty;
-        private static string listBoxName = string.Empty;
-        private static readonly string[] selectedServers = new string[5];
-        private static readonly List<string> listBoxMulti = new();
+        private string listBoxString = string.Empty;
+        private string listBoxName = string.Empty;
+        private readonly string[] selectedServers = new string[5];
+        private readonly List<string> listBoxMulti = new();
 
-        public static string GetListBoxString => listBoxString;
-        public static string GetListBoxName => listBoxName;
-        public static string[] GetSelectedServers => selectedServers;
-        public static List<string> GetListBoxMulti => listBoxMulti;
+        public string GetListBoxString => listBoxString;
+        public string GetListBoxName => listBoxName;
+        public string[] GetSelectedServers => selectedServers;
+        public List<string> GetListBoxMulti => listBoxMulti;
 
         // Remove the not needed servers from the List
         private void SetTabs(List<string> servers)

@@ -58,7 +58,7 @@ namespace ChatManager
                         {
                             Localization localization = new(GetSetSettings.GetCurrentLocale);
                             Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "String is empty! Not starting conversion process");
-                            ShowMessageBox.Show(localization.GetString("MessageBoxWarn"), localization.GetString("Warn_TextBoxEmpty"));
+                            ShowMessageBox.Show(localization.GetString("MessageBoxWarn"), localization.GetString("Warn_NoImportFound"));
                         }
                     }
                     else
@@ -354,6 +354,38 @@ namespace ChatManager
         {
             Logging.Write(LogEvent.Method, ProgramClass.MainForm, "ExportFiles entered");
 
+            var textBoxes = GetControls(this, typeof(TextBox));
+            byte counter = 0;
+
+            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Checking for empty textBoxes...");
+            foreach (Control control in textBoxes)
+            {
+                if (control is TextBox textBox)
+                {
+                    if (string.IsNullOrEmpty(textBox.Text))
+                    {
+                        counter++;
+                        Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"counter: {counter}");
+                    }
+                }
+            }
+
+            if (counter != 0)
+            {
+                Logging.Write(LogEvent.Warning, ProgramClass.MainForm, $"{counter} empty textBoxes found!");
+                Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+                string exportedFilesInfo = localization.GetString("Warn_TextBoxEmpty");
+                exportedFilesInfo = exportedFilesInfo.Replace("TEXTBOXCOUNTER", counter.ToString());
+
+                ShowMessageBox.Show(localization.GetString("MessageBoxError"), exportedFilesInfo);
+                return;
+            }
+            else
+            {
+                Logging.Write(LogEvent.Info, ProgramClass.MainForm, "0 empty textboxes found!");
+            }
+
             string[] colorIndexes = GetAllColorData();
 
             OpenWindows.OpenFileExportSelector(colorIndexes);
@@ -368,16 +400,6 @@ namespace ChatManager
             if (GetSetSettings.GetCurrentLocale == "fr")
             {
                 tabsMainForm.ItemSize = new Size(50, 100);
-            }
-
-            // Find all Controls of the desired Type and pack them in a Control List
-            IEnumerable<Control> GetControls(Control parent, Type type)
-            {
-                var controls = parent.Controls.Cast<Control>();
-
-                return controls
-                    .Where(c => c.GetType() == type)
-                    .Concat(controls.SelectMany(c => GetControls(c, type)));
             }
 
             var tabs = GetControls(this, typeof(TabControl));
@@ -447,6 +469,16 @@ namespace ChatManager
             {
                 autosave.DoAutosave(lblCharName.Text, lblServerName.Text, colorIndexes);
             }
+        }
+
+        // Find all Controls of the desired Type and pack them in a Control List
+        private IEnumerable<Control> GetControls(Control parent, Type type)
+        {
+            var controls = parent.Controls.Cast<Control>();
+
+            return controls
+                .Where(c => c.GetType() == type)
+                .Concat(controls.SelectMany(c => GetControls(c, type)));
         }
 
         private void AutosaveTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)

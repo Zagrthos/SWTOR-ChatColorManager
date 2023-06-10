@@ -1,22 +1,25 @@
-﻿using ChatManager.Forms;
-
-namespace ChatManager.Services
+﻿namespace ChatManager.Services
 {
     internal class FileExport
     {
-        public FileExport()
+        public FileExport(string[] servers, string[] files)
         {
             Logging.Write(LogEvent.Info, ProgramClass.FileExport, "FileExport Constructor created");
+            arrayCounter = 0;
+            selectedServers = servers;
+            fileNames = files;
         }
 
         private static readonly bool backupAvailability = GetSetSettings.GetBackupAvailability;
         private static readonly string backupPath = GetSetSettings.GetBackupPath;
 
-        private static readonly string[] selectedServers = FileSelectorForm.GetSelectedServers;
-        private static readonly string[] fileNames = FileSelectorForm.GetListBoxMulti.ToArray();
+        private readonly string[] selectedServers;
+        private readonly string[] fileNames;
         
         // Is used for positioning the characters in the array
-        private static int arrayCounter = 0;
+        private int arrayCounter;
+
+        public int GetNumberOfChangedFiles => arrayCounter;
 
         public void BackupFilesAndWrite(string[] content)
         {
@@ -137,6 +140,10 @@ namespace ChatManager.Services
                                 }
                             }
 
+                            // TODO: Calculate the difference how many ; are between the new and the old string array.
+                            // Then start to remove the useless ; and only replace the numbers
+                            // Maybe implement it in the code above?
+
                             // Put the array into a string
                             string colorIndexes = string.Join(";", content);
 
@@ -170,7 +177,7 @@ namespace ChatManager.Services
         }
 
         // Create a multidimensional Array that has all files associated with the servers
-        private static string[,] AssociateFileWithServer()
+        private string[,] AssociateFileWithServer()
         {
             Logging.Write(LogEvent.Method, ProgramClass.FileExport, "AssociateFileWithServer entered");
 

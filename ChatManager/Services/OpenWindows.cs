@@ -58,8 +58,8 @@ namespace ChatManager.Services
             FileSelectorForm fileSelector = new(fileImport.GetServerList(), false);
             fileSelector.ShowDialog();
 
-            string listBoxString = FileSelectorForm.GetListBoxString;
-            string listBoxName = FileSelectorForm.GetListBoxName;
+            string listBoxString = fileSelector.GetListBoxString;
+            string listBoxName = fileSelector.GetListBoxName;
 
             fileSelector.Dispose();
 
@@ -75,11 +75,15 @@ namespace ChatManager.Services
             FileSelectorForm fileSelector = new(fileImport.GetServerList(), true);
             DialogResult dialogResult = fileSelector.ShowDialog();
 
+            int fileCount = 0;
+
             if (dialogResult != DialogResult.Cancel)
             {
                 Logging.Write(LogEvent.Variable, ProgramClass.OpenWindows, $"dialogResult = {dialogResult}");
-                FileExport fileExport = new();
+                FileExport fileExport = new(fileSelector.GetSelectedServers, fileSelector.GetListBoxMulti.ToArray());
                 fileExport.BackupFilesAndWrite(values);
+                fileCount = fileExport.GetNumberOfChangedFiles;
+                Logging.Write(LogEvent.Variable, ProgramClass.OpenWindows, $"fileCount = {fileCount}");
             }
             else
             {
@@ -87,6 +91,13 @@ namespace ChatManager.Services
             }
 
             fileSelector.Dispose();
+
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+            string exportedFilesInfo = localization.GetString("Inf_ExportedFiles");
+            exportedFilesInfo = exportedFilesInfo.Replace("FILECOUNT", fileCount.ToString());
+
+            ShowMessageBox.Show(localization.GetString("MessageBoxInfo"), exportedFilesInfo);
         }
 
         // Open Explorer Window with a specified path
