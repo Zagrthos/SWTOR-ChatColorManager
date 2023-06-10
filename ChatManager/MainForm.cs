@@ -187,7 +187,7 @@ namespace ChatManager
                 string[] colorIndexes;
 
                 // Loop through and set the colors to the corresponding textBox
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < 1000; i++)
                 {
                     if (selectedFile == filePaths[i, 0])
                     {
@@ -195,8 +195,8 @@ namespace ChatManager
                         string filePath = filePaths[i, 1];
                         colorIndexes = fileImport.GetContentFromFile(filePath);
 
-                        lblServerName.Text = colorIndexes[0];
-                        lblCharName.Text = colorIndexes[1];
+                        lblServerName.Text += $" {Converter.AddWhitespace(Converter.ServerNameIdentifier(colorIndexes[0], false))}";
+                        lblCharName.Text += $" {colorIndexes[1]}";
                         tbTrade.Text = colorIndexes[2];
                         tbPvP.Text = colorIndexes[3];
                         tbGeneral.Text = colorIndexes[4];
@@ -233,7 +233,7 @@ namespace ChatManager
                             autosaveTimer.Elapsed += AutosaveTimer_Elapsed;
                             autosaveTimer.Start();
 
-                            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Autosave set");
+                            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "autosaveTimer set");
                         }
 
                         break;
@@ -404,6 +404,7 @@ namespace ChatManager
 
             var tabs = GetControls(this, typeof(TabControl));
             var buttons = GetControls(this, typeof(Button));
+            var labels = GetControls(this, typeof(Label));
 
             foreach (var item in menuMainForm.Items)
             {
@@ -437,6 +438,14 @@ namespace ChatManager
                 if (control is Button button)
                 {
                     button.Text = localization.GetString(button.Name);
+                }
+            }
+
+            foreach (Control control in labels)
+            {
+                if (control is Label label)
+                {
+                    label.Text = localization.GetString(label.Name);
                 }
             }
         }
