@@ -13,6 +13,7 @@ namespace ChatManager.Forms
 
         private bool autosaveTimerChanged = false;
         private bool languageChanged = false;
+        private bool comboBoxFalseAlarm = false;
         private decimal currentAutosaveInterval = 0;
 
         public bool GetAutosaveTimerChanged => autosaveTimerChanged;
@@ -72,16 +73,22 @@ namespace ChatManager.Forms
             switch (GetSetSettings.GetCurrentLocale)
             {
                 case "de":
+                    comboBoxFalseAlarm = true;
                     cbLanguage.SelectedIndex = 2;
                     break;
 
                 case "en":
+                    comboBoxFalseAlarm = true;
                     cbLanguage.SelectedIndex = 0;
                     break;
 
                 case "fr":
+                    comboBoxFalseAlarm = true;
                     cbLanguage.SelectedIndex = 1;
                     break;
+
+                default:
+                    throw new NotImplementedException();
             }
 
             if (GetSetSettings.GetSaveOnClose)
@@ -110,22 +117,31 @@ namespace ChatManager.Forms
                 lblAutosaveInterval.Visible = false;
             }
 
-            currentAutosaveInterval = GetSetSettings.GetAutosaveInterval / 60000;
-            Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"currentAutosaveInterval: {currentAutosaveInterval}");
+            if (numberAutosaveInterval.Enabled)
+            {
+                currentAutosaveInterval = GetSetSettings.GetAutosaveInterval / 60000;
+                Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"currentAutosaveInterval: {currentAutosaveInterval}");
 
-            if (currentAutosaveInterval == 0)
-            {
-                numberAutosaveInterval.Value = 10;
-                SetAutosaveInterval();
-            }
-            else
-            {
-                numberAutosaveInterval.Value = currentAutosaveInterval;
+                if (currentAutosaveInterval == 0)
+                {
+                    numberAutosaveInterval.Value = 10;
+                    SetAutosaveInterval();
+                }
+                else
+                {
+                    numberAutosaveInterval.Value = currentAutosaveInterval;
+                }
             }
         }
 
-        private void SwitchCurrentLocale(object sender, EventArgs e)
+        private void SwitchCurrentLocale()
         {
+            if (comboBoxFalseAlarm)
+            {
+                comboBoxFalseAlarm = false;
+                return;
+            }
+
             Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "SwitchCurrentLocale entered");
 
             string currLocale = GetSetSettings.GetCurrentLocale;
@@ -144,6 +160,9 @@ namespace ChatManager.Forms
                 case "German":
                     newLanguage = "de";
                     break;
+
+                default:
+                    throw new NotImplementedException();
             }
 
             if (currLocale != newLanguage)
@@ -152,6 +171,19 @@ namespace ChatManager.Forms
                 GetSetSettings.SaveSettings(Setting.locale, newLanguage);
                 Localize();
                 languageChanged = true;
+            }
+        }
+
+        private void SwitchCurrentLocale(object sender, EventArgs e)
+        {
+            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "ComboBoxMethod triggered");
+
+            if (sender is ComboBox)
+            {
+                SwitchCurrentLocale();
+            } else
+            {
+                Logging.Write(LogEvent.Warning, ProgramClass.SettingsForm, $"Sender: {sender} is not a ComboBox!");
             }
         }
 
