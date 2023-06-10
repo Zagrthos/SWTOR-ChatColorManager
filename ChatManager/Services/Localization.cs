@@ -30,7 +30,7 @@ namespace ChatManager.Services
                 if (tempStrings != null)
                 {
                     strings = tempStrings;
-                    GetSetSettings.SaveSettings("_locale", locale);
+                    GetSetSettings.SaveSettings(Setting.locale, locale);
                 }
 
                 // If not log Warning

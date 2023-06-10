@@ -45,7 +45,17 @@ namespace ChatManager.Services
         internal static void Initialize()
         {
             if (!Directory.Exists(LogPath))
-                Directory.CreateDirectory(LogPath);
+            {
+                try
+                {
+                    Directory.CreateDirectory(LogPath);
+                }
+                catch (Exception ex)
+                {
+                    ShowMessageBox.ShowLoggingBug(ex.Message);
+                    Environment.Exit(0);
+                }
+            }
 
             string logfilePath = Path.Combine(LogPath, $"ChatManager_{LogSession}.log");
             logWriter = new(logfilePath, true);

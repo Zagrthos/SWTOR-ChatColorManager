@@ -10,11 +10,12 @@ namespace ChatManager.Services
             if (pathChecked != true)
             {
                 Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"pathChecked = {pathChecked}");
-                CheckAutosavePath();
+                pathChecked = Checks.DirectoryCheck(CheckFolder.AutosaveFolder);
+                Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"pathChecked = {pathChecked}");
             }
         }
 
-        private static bool pathChecked = false;
+        private static bool pathChecked = GetSetSettings.GetAutosaveAvailability;
         private static readonly string autosavePath = Path.Combine(GetSetSettings.GetAutosavePath, "autosave.json");
 
         public void DoAutosave(string charName, string serverName, string[] colorData)
@@ -36,33 +37,6 @@ namespace ChatManager.Services
             var json = JsonSerializer.Serialize(jsonData, jsonOptions);
 
             File.WriteAllText(autosavePath, json);
-        }
-
-        private static void CheckAutosavePath()
-        {
-            if (!Directory.Exists(GetSetSettings.GetAutosavePath))
-            {
-                Logging.Write(LogEvent.Warning, ProgramClass.Autosave, "autosavePath does not exist, creating it!");
-                Directory.CreateDirectory(GetSetSettings.GetAutosavePath);
-
-                Logging.Write(LogEvent.Info, ProgramClass.Checks, "Checking again if autosavePath exists");
-                if (Directory.Exists(GetSetSettings.GetAutosavePath))
-                {
-                    Logging.Write(LogEvent.Variable, ProgramClass.Autosave, $"autosavePath created at: {GetSetSettings.GetAutosavePath}");
-                }
-                else
-                {
-                    Logging.Write(LogEvent.Warning, ProgramClass.Autosave, $"Could not create autosavePath!");
-                    ShowMessageBox.ShowBug();
-                }
-            }
-            else
-            {
-                Logging.Write(LogEvent.Variable, ProgramClass.Autosave, $"autosavePath exists at: {GetSetSettings.GetAutosavePath}");
-            }
-
-            pathChecked = true;
-            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"pathChecked = {pathChecked}");
         }
     }
 }

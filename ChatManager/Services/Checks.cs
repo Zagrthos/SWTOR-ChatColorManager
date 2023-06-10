@@ -3,6 +3,13 @@ using System.Text.RegularExpressions;
 
 namespace ChatManager.Services
 {
+    internal enum CheckFolder
+    {
+        AutosaveFolder,
+        BackupFolder,
+        LogFolder
+    }
+
     internal class Checks
     {
         // Check if the String is a Hex Text
@@ -67,39 +74,58 @@ namespace ChatManager.Services
             }
         }
 
-        public static bool BackupDirectory()
+        public static bool DirectoryCheck(CheckFolder folder)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.Checks, "BackupDirectory entered");
-
-            string backupPath = GetSetSettings.GetBackupPath;
-
-            Logging.Write(LogEvent.Info, ProgramClass.Checks, "Checking if Backup Dir exists");
-            if (!Directory.Exists(backupPath))
+            string path = folder switch
             {
-                Logging.Write(LogEvent.Info, ProgramClass.Checks, "Backup does not exist, creating it");
-                Directory.CreateDirectory(backupPath);
+                CheckFolder.AutosaveFolder => GetSetSettings.GetAutosavePath,
+                CheckFolder.BackupFolder => GetSetSettings.GetBackupPath,
+                _ => throw new NotImplementedException(),
+            };
 
-                Logging.Write(LogEvent.Info, ProgramClass.Checks, "Checking again if Backup Dir exists");
-                if (Directory.Exists(backupPath))
+            Setting setting = folder switch
+            {
+                CheckFolder.AutosaveFolder => Setting.autosaveAvailability,
+                CheckFolder.BackupFolder => Setting.backupAvailability,
+                _ => throw new NotImplementedException(),
+            };
+
+            bool getSettings = folder switch
+            {
+                CheckFolder.AutosaveFolder => GetSetSettings.GetAutosaveAvailability,
+                CheckFolder.BackupFolder => GetSetSettings.GetBackupAvailability,
+                _ => throw new NotImplementedException(),
+            };
+
+            Logging.Write(LogEvent.Method, ProgramClass.Checks, "DirectoryCheck entered");
+            Logging.Write(LogEvent.Info, ProgramClass.Checks, $"Checking if {folder} exists");
+
+            if (!Directory.Exists(path))
+            {
+                Logging.Write(LogEvent.Info, ProgramClass.Checks, $"{folder} does not exist, creating it");
+                Directory.CreateDirectory(path);
+                Logging.Write(LogEvent.Info, ProgramClass.Checks, $"Checking again if {folder} exists");
+
+                if (Directory.Exists(path))
                 {
-                    Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Backup Dir created at: {backupPath}");
-                    GetSetSettings.SaveSettings(Setting.backupAvailability, true);
-                    Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set backupDir to: {true}");
+                    Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"{folder} created at: {path}");
+                    GetSetSettings.SaveSettings(setting, true);
+                    Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set {setting} to: {true}");
                 }
                 else
                 {
-                    Logging.Write(LogEvent.Warning, ProgramClass.Checks, $"Could not create backup dir!");
+                    Logging.Write(LogEvent.Warning, ProgramClass.Checks, $"Could not create {folder}!");
                     ShowMessageBox.ShowBug();
                 }
             }
             else
             {
-                Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Backup Dir exists at: {backupPath}");
-                GetSetSettings.SaveSettings(Setting.backupAvailability, true);
-                Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set backupDir to: {true}");
+                Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"{folder} exists at: {path}");
+                GetSetSettings.SaveSettings(setting, true);
+                Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set {setting} to: {true}");
             }
 
-            return GetSetSettings.GetBackupAvailability;
+            return getSettings;
         }
     }
 }

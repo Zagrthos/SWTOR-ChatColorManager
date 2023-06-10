@@ -74,6 +74,12 @@
             }
         }
 
+        public static void ShowLoggingBug(string message)
+        {
+            MessageBox.Show($"REPORT BUG WITH SCREENSHOT OF THIS!\n{message}", "CRITICAL ERROR");
+            OpenWindows.OpenLinksInBrowser(GetSetSettings.GetBugPath);
+        }
+
         public static void ShowRestart()
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);

@@ -36,13 +36,16 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="_autosaveInterval" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="_saveOnClose" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="autosavePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="autosaveAvailability" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

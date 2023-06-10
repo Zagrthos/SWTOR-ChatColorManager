@@ -5,6 +5,7 @@ namespace ChatManager.Services
     internal enum Setting
     {
         autosave,
+        autosaveAvailability,
         autosaveInterval,
         backupAvailability,
         locale,
@@ -19,7 +20,9 @@ namespace ChatManager.Services
         private static readonly bool backupDir = false;
 
         private static readonly string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Logs");
+
         private static readonly string autosavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Autosave");
+        private static readonly bool autosaveDir = false;
 
         public static string GetCurrentLocale => Settings.Default._locale;
         public static string GetLocalPath => Settings.Default.localPath;
@@ -27,6 +30,7 @@ namespace ChatManager.Services
         public static bool GetBackupAvailability => Settings.Default.backupAvailability;
         public static string GetLogPath => Settings.Default.logPath;
         public static string GetAutosavePath => Settings.Default.autosavePath;
+        public static bool GetAutosaveAvailability => Settings.Default.autosaveAvailability;
         public static string GetSupportPath => Settings.Default.supportPath;
         public static string GetBugPath => Settings.Default.bugPath;
         public static string GetBugMailpath => Settings.Default.bugMailPath;
@@ -45,6 +49,7 @@ namespace ChatManager.Services
                 Settings.Default.backupAvailability = backupDir;
                 Settings.Default.logPath = logPath;
                 Settings.Default.autosavePath = autosavePath;
+                Settings.Default.autosaveAvailability = autosaveDir;
                 Settings.Default._autosaveInterval = 0;
                 Settings.Default._Initialized = true;
                 Settings.Default.Save();
@@ -73,6 +78,10 @@ namespace ChatManager.Services
             {
                 case Setting.backupAvailability:
                     Settings.Default.backupAvailability = value;
+                    break;
+
+                case Setting.autosaveAvailability:
+                    Settings.Default.autosaveAvailability = value;
                     break;
 
                 case Setting.autosave:

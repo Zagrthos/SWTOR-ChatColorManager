@@ -145,7 +145,7 @@ namespace ChatManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public decimal _autosaveInterval {
             get {
                 return ((decimal)(this["_autosaveInterval"]));
@@ -176,6 +176,18 @@ namespace ChatManager.Properties {
             }
             set {
                 this["autosavePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool autosaveAvailability {
+            get {
+                return ((bool)(this["autosaveAvailability"]));
+            }
+            set {
+                this["autosaveAvailability"] = value;
             }
         }
     }
