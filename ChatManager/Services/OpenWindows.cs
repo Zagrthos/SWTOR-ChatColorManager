@@ -30,22 +30,45 @@ namespace ChatManager.Services
             aboutForm.Dispose();
         }
 
-        public static bool OpenSettings()
+        public static (bool, bool) OpenSettings()
         {
             Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenSettings Entered");
 
             SettingsForm settingsForm = new();
             settingsForm.ShowDialog();
 
-            if (SettingsForm.GetLanguageChanged)
+            // Check if Language and AutosaveTimer was changed
+            if (settingsForm.GetLanguageChanged)
             {
-                settingsForm.Dispose();
-                return true;
+                // Language was changed
+                if (settingsForm.GetAutosaveTimerChanged)
+                {
+                    // AND if AutosaveTimer was changed
+                    settingsForm.Dispose();
+                    return (true, true);
+                }
+                else
+                {
+                    // AND if AutosaveTimer was NOT changed
+                    settingsForm.Dispose();
+                    return (true, false);
+                }
             }
             else
             {
-                settingsForm.Dispose();
-                return false;
+                // If Language was NOT changed
+                if (settingsForm.GetAutosaveTimerChanged)
+                {
+                    // AND if AutosaveTimer was changed
+                    settingsForm.Dispose();
+                    return (false, true);
+                }
+                else
+                {
+                    // AND if AutosaveTimer was NOT changed
+                    settingsForm.Dispose();
+                    return (false, false);
+                }
             }
         }
 

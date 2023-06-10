@@ -134,9 +134,9 @@ namespace ChatManager
                     case "settingsToolStripMenuItem":
                         Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Settings Form requested");
                         Hide();
-                        bool languageChanged = OpenWindows.OpenSettings();
+                        (bool languageChanged, bool autosaveTimerChanged) = OpenWindows.OpenSettings();
 
-                        if (SettingsForm.GetAutosaveTimerChanged)
+                        if (autosaveTimerChanged)
                         {
                             ShowMessageBox.ShowRestart();
                         }

@@ -7,14 +7,16 @@ namespace ChatManager.Forms
         public SettingsForm()
         {
             InitializeComponent();
+            autosaveTimerChanged = false;
+            languageChanged = false;
         }
 
-        private static bool autosaveTimerChanged = false;
-        private static bool languageChanged = false;
+        private bool autosaveTimerChanged = false;
+        private bool languageChanged = false;
         private decimal currentAutosaveInterval = 0;
 
-        public static bool GetAutosaveTimerChanged => autosaveTimerChanged;
-        public static bool GetLanguageChanged => languageChanged;
+        public bool GetAutosaveTimerChanged => autosaveTimerChanged;
+        public bool GetLanguageChanged => languageChanged;
 
         private void Localize()
         {
