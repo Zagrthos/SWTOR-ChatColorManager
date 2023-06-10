@@ -26,7 +26,6 @@ namespace ChatManager.Forms
 
             // Change the Text of the Form
             Text = localization.GetString(Name);
-            Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"FormText set to {Text}");
 
             // Find all Controls of the desired Type and pack them in a Control List
             IEnumerable<Control> GetControls(Control parent, Type type)
@@ -45,9 +44,7 @@ namespace ChatManager.Forms
             {
                 if (control is GroupBox group)
                 {
-                    Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"Control is {group.Name}");
                     group.Text = localization.GetString(group.Name);
-                    Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"Control.Text set to {group.Text}");
                 }
             }
 
@@ -55,15 +52,11 @@ namespace ChatManager.Forms
             {
                 if (control is CheckBox checkBox)
                 {
-                    Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"Control is {checkBox.Name}");
                     checkBox.Text = localization.GetString(checkBox.Name);
-                    Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"Control.Text set to {checkBox.Text}");
                 }
             }
 
-            Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"Control is {lblAutosaveInterval.Name}");
             lblAutosaveInterval.Text = localization.GetString(lblAutosaveInterval.Name);
-            Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"Control.Text set to {lblAutosaveInterval.Text}");
         }
 
         private void SettingsForm_Load(object sender, EventArgs e)
