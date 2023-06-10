@@ -41,39 +41,6 @@ namespace ChatManager.Services
             return found;
         }
 
-        // Associate server name to identifier
-        public static string ServerNameIdentifier(string name, bool isServerName)
-        {
-            if (!string.IsNullOrEmpty(name) && isServerName)
-            {
-                return name switch
-                {
-                    "StarForge" => "he3000",
-                    "SateleShan" => "he3001",
-                    "DarthMalgus" => "he4000",
-                    "TulakHord" => "he4001",
-                    "TheLeviathan" => "he4002",
-                    _ => string.Empty,
-                };
-            }
-            else if (!string.IsNullOrEmpty(name) && !isServerName)
-            {
-                return name switch
-                {
-                    "he3000" => "StarForge",
-                    "he3001" => "SateleShan",
-                    "he4000" => "DarthMalgus",
-                    "he4001" => "TulakHord",
-                    "he4002" => "TheLeviathan",
-                    _ => string.Empty,
-                };
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
-
         public static bool DirectoryCheck(CheckFolder folder)
         {
             string path = folder switch
