@@ -90,13 +90,6 @@ namespace ChatManager.Services
                 _ => throw new NotImplementedException(),
             };
 
-            bool getSettings = folder switch
-            {
-                CheckFolder.AutosaveFolder => GetSetSettings.GetAutosaveAvailability,
-                CheckFolder.BackupFolder => GetSetSettings.GetBackupAvailability,
-                _ => throw new NotImplementedException(),
-            };
-
             Logging.Write(LogEvent.Method, ProgramClass.Checks, "DirectoryCheck entered");
             Logging.Write(LogEvent.Info, ProgramClass.Checks, $"Checking if {folder} exists");
 
@@ -124,6 +117,13 @@ namespace ChatManager.Services
                 GetSetSettings.SaveSettings(setting, true);
                 Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set {setting} to: {true}");
             }
+
+            bool getSettings = folder switch
+            {
+                CheckFolder.AutosaveFolder => GetSetSettings.GetAutosaveAvailability,
+                CheckFolder.BackupFolder => GetSetSettings.GetBackupAvailability,
+                _ => throw new NotImplementedException(),
+            };
 
             return getSettings;
         }
