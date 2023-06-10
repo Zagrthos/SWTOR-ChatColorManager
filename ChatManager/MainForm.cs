@@ -480,7 +480,7 @@ namespace ChatManager
             Autosave autosave = new();
             if (!string.IsNullOrEmpty(lblCharName.Text) && !string.IsNullOrEmpty(lblServerName.Text))
             {
-                autosave.DoAutosave(lblCharName.Text, lblServerName.Text, colorIndexes);
+                autosave.DoAutosave(Converter.LabelToString(lblCharName.Text), Converter.LabelToString(lblServerName.Text), colorIndexes);
             }
         }
 

@@ -16,27 +16,18 @@ namespace ChatManager.Services
         }
 
         private static bool pathChecked = GetSetSettings.GetAutosaveAvailability;
-        private static readonly string autosavePath = Path.Combine(GetSetSettings.GetAutosavePath, "autosave.json");
+        private static readonly string autosavePath = Path.Combine(GetSetSettings.GetAutosavePath, "autosave.txt");
 
         public void DoAutosave(string charName, string serverName, string[] colorData)
         {
             Logging.Write(LogEvent.Method, ProgramClass.Autosave, "DoAutosave entered");
 
-            var jsonData = new
-            {
-                CharName = charName,
-                ServerName = serverName,
-                ColorData = colorData
-            };
+            string colorDataString = string.Join(";", colorData);
+            string data = string.Join(";", charName, serverName, colorDataString);
 
-            var jsonOptions = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-            };
+            File.WriteAllText(autosavePath, data);
 
-            var json = JsonSerializer.Serialize(jsonData, jsonOptions);
-
-            File.WriteAllText(autosavePath, json);
+            Logging.Write(LogEvent.Info, ProgramClass.Autosave, "Autosave created");
         }
     }
 }

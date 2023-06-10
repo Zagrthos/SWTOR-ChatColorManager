@@ -76,5 +76,11 @@ namespace ChatManager.Services
         {
             return Regex.Replace(text, "(\\B[A-Z])", " $1");
         }
+
+        public static string LabelToString(string text)
+        {
+            string[] splitted = text.Split(":");
+            return splitted[1].Trim();
+        }
     }
 }
