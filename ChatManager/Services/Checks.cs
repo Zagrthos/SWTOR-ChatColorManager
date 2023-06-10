@@ -70,7 +70,7 @@ namespace ChatManager.Services
                 {
                     Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"{folder} created at: {path}");
                     GetSetSettings.SaveSettings(setting, true);
-                    Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set {setting} to: {true}");
+                    Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Set {setting} to: {true}");
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace ChatManager.Services
             {
                 Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"{folder} exists at: {path}");
                 GetSetSettings.SaveSettings(setting, true);
-                Logging.Write(LogEvent.Method, ProgramClass.Checks, $"Set {setting} to: {true}");
+                Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Set {setting} to: {true}");
             }
 
             bool getSettings = folder switch

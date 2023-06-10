@@ -129,7 +129,7 @@
                                 {
                                     if (color >= colorLines.Length)
                                     {
-                                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, "colorLines end reached");
+                                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, "End of content reached");
                                         break;
                                     }
 
