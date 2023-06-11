@@ -101,7 +101,7 @@
             // lblAutosaveInterval
             // 
             lblAutosaveInterval.AutoSize = true;
-            lblAutosaveInterval.Location = new Point(53, 71);
+            lblAutosaveInterval.Location = new Point(53, 48);
             lblAutosaveInterval.Name = "lblAutosaveInterval";
             lblAutosaveInterval.Size = new Size(157, 15);
             lblAutosaveInterval.TabIndex = 3;
@@ -110,18 +110,18 @@
             // numberAutosaveInterval
             // 
             numberAutosaveInterval.InterceptArrowKeys = false;
-            numberAutosaveInterval.Location = new Point(6, 69);
+            numberAutosaveInterval.Location = new Point(6, 46);
             numberAutosaveInterval.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numberAutosaveInterval.Name = "numberAutosaveInterval";
             numberAutosaveInterval.Size = new Size(41, 23);
             numberAutosaveInterval.TabIndex = 2;
-            numberAutosaveInterval.Value = new decimal(new int[] { 10, 0, 0, 0 });
+            numberAutosaveInterval.Value = new decimal(new int[] { 1, 0, 0, 0 });
             numberAutosaveInterval.ValueChanged += SetAutosaveInterval;
             // 
             // chbAutosave
             // 
             chbAutosave.AutoSize = true;
-            chbAutosave.Location = new Point(6, 44);
+            chbAutosave.Location = new Point(6, 21);
             chbAutosave.Name = "chbAutosave";
             chbAutosave.Size = new Size(129, 19);
             chbAutosave.TabIndex = 1;
@@ -132,7 +132,7 @@
             // chbSaveOnClose
             // 
             chbSaveOnClose.AutoSize = true;
-            chbSaveOnClose.Location = new Point(6, 19);
+            chbSaveOnClose.Location = new Point(6, 75);
             chbSaveOnClose.Name = "chbSaveOnClose";
             chbSaveOnClose.Size = new Size(303, 19);
             chbSaveOnClose.TabIndex = 0;

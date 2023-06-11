@@ -91,15 +91,6 @@ namespace ChatManager.Forms
                     throw new NotImplementedException();
             }
 
-            if (GetSetSettings.GetSaveOnClose)
-            {
-                chbSaveOnClose.Checked = true;
-            }
-            else
-            {
-                chbSaveOnClose.Checked = false;
-            }
-
             if (GetSetSettings.GetAutosave)
             {
                 chbAutosave.Checked = true;
@@ -131,6 +122,17 @@ namespace ChatManager.Forms
                 {
                     numberAutosaveInterval.Value = currentAutosaveInterval;
                 }
+            }
+
+            if (GetSetSettings.GetSaveOnClose)
+            {
+                chbSaveOnClose.Checked = true;
+                chbAutosave.Enabled = false;
+            }
+            else
+            {
+                chbSaveOnClose.Checked = false;
+                chbAutosave.Enabled = true;
             }
         }
 
@@ -181,7 +183,8 @@ namespace ChatManager.Forms
             if (sender is ComboBox)
             {
                 SwitchCurrentLocale();
-            } else
+            }
+            else
             {
                 Logging.Write(LogEvent.Warning, ProgramClass.SettingsForm, $"Sender: {sender} is not a ComboBox!");
             }
@@ -199,12 +202,14 @@ namespace ChatManager.Forms
                     {
                         GetSetSettings.SaveSettings(Setting.saveOnClose, true);
                         Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "chbSaveOnClose = true");
+                        chbAutosave.Enabled = false;
                         return;
                     }
                     else
                     {
                         GetSetSettings.SaveSettings(Setting.saveOnClose, false);
                         Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "chbSaveOnClose = false");
+                        chbAutosave.Enabled = true;
                         return;
                     }
                 }
