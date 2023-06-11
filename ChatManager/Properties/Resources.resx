@@ -117,16 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About_Picture" xml:space="preserve">
-    <value>Link zum Logo Ersteller</value>
-  </data>
-  <data name="Error_IsDetected" xml:space="preserve">
-    <value>Da ist was schief gelaufen!
-Möchtest du den Bug melden?</value>
-  </data>
-  <data name="Err_ColorNotHex" xml:space="preserve">
-    <value>Die angegebene Farbe in der Textbox entspricht nicht dem HEX-Standard.</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Logo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -139,50 +129,5 @@ Möchtest du den Bug melden?</value>
   </data>
   <data name="Logo_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Logo_small.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MessageBoxError" xml:space="preserve">
-    <value>Fehler</value>
-  </data>
-  <data name="MessageBoxInfo" xml:space="preserve">
-    <value>Information</value>
-  </data>
-  <data name="MessageBoxNoUpdate" xml:space="preserve">
-    <value>Kein Update verfügbar!</value>
-  </data>
-  <data name="MessageBoxUpdate" xml:space="preserve">
-    <value>Update verfügbar!</value>
-  </data>
-  <data name="MessageBoxWarn" xml:space="preserve">
-    <value>Warnung</value>
-  </data>
-  <data name="Update_IsAvailable" xml:space="preserve">
-    <value>Möchtest du jetzt aktualisieren?
-Es ist ein Update auf folgende Version verfügbar:</value>
-  </data>
-  <data name="Update_IsInstallReady" xml:space="preserve">
-    <value>Das Update ist bereit zur Installation!
-
-Mit einem Klick auf "Ok" wird die Installation gestartet.</value>
-  </data>
-  <data name="Update_IsNotAvailable" xml:space="preserve">
-    <value>Es ist kein Update verfügbar!</value>
-  </data>
-  <data name="Warn_BackupDirMissing" xml:space="preserve">
-    <value>Es konnte kein Backup Verzeichnis erstellt werden!
-
-Fortfahren auf eigene Gefahr!</value>
-  </data>
-  <data name="Warn_SWTORpathNotFound" xml:space="preserve">
-    <value>Der Pfad für die lokalen Dateien von SWTOR wurde nicht gefunden!
-
-Ist das Spiel installiert?</value>
-  </data>
-  <data name="Warn_SWTORrunning" xml:space="preserve">
-    <value>Es wurde eine aktive SWTOR Instanz gefunden, bitte schließe das Spiel zuerst!
-
-Andernfalls kann die korrekte Funktion der Änderungen nicht garantiert werden.</value>
-  </data>
-  <data name="Warn_TextBoxEmpty" xml:space="preserve">
-    <value>Es muss zuerst eine Datei importiert werden!</value>
   </data>
 </root>
