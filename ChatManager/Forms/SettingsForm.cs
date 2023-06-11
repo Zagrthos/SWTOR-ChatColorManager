@@ -115,7 +115,7 @@ namespace ChatManager.Forms
 
                 if (currentAutosaveInterval == 0)
                 {
-                    numberAutosaveInterval.Value = 10;
+                    numberAutosaveInterval.Value = 1;
                     SetAutosaveInterval();
                 }
                 else
@@ -202,6 +202,11 @@ namespace ChatManager.Forms
                     {
                         GetSetSettings.SaveSettings(Setting.saveOnClose, true);
                         Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "chbSaveOnClose = true");
+                        if (!chbAutosave.Checked)
+                        {
+                            chbAutosave.Checked = true;
+                            SetAutosaveInterval();
+                        }
                         chbAutosave.Enabled = false;
                         return;
                     }
