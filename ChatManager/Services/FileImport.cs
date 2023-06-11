@@ -142,7 +142,7 @@
         }
 
         // Get the colors from the given File
-        public string[] GetContentFromFile(string fileName)
+        public string[] GetContentFromFile(string fileName, bool autosaveImport)
         {
             Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetContentFromFile entered");
 
@@ -152,29 +152,44 @@
             // Read every Line in the File and save it to the variable
             string[] fileLines = File.ReadAllLines(fileName);
 
-            // Create a new array by the split and then override the array with another split
-            string[] fileNameParts = fileName.Split("\\");
-            fileNameParts = fileNameParts[8].Split("_");
-
-            // Set position 0 to the server name and position 1 to the char name
-            colorIndex[0] = fileNameParts[0];
-            colorIndex[1] = fileNameParts[1];
-
-            // Initialize new Array and search for the correct line in the File
             string colorLine = string.Empty;
-            foreach (string line in fileLines)
+
+            // If file is NOT imported from Autosave
+            if (!autosaveImport)
             {
-                if (line.StartsWith("ChatColors"))
+                // Create a new array by the split and then override the array with another split
+                string[] fileNameParts = fileName.Split("\\");
+                fileNameParts = fileNameParts[8].Split("_");
+
+                // Set position 0 to the server name and position 1 to the char name
+                colorIndex[0] = fileNameParts[0];
+                colorIndex[1] = fileNameParts[1];
+
+                // Search for the correct line in the File
+                foreach (string line in fileLines)
                 {
-                    colorLine = line.Substring(line.IndexOf('=') + 1).Trim();
-                    break;
+                    if (line.StartsWith("ChatColors"))
+                    {
+                        colorLine = line.Substring(line.IndexOf('=') + 1).Trim();
+                        break;
+                    }
+                }
+
+                if (colorLine == string.Empty)
+                {
+                    Logging.Write(LogEvent.Error, ProgramClass.FileImport, "Line ChatColors could not be found!");
+                    ShowMessageBox.ShowBug();
                 }
             }
-
-            if (colorLine == string.Empty)
+            else
             {
-                Logging.Write(LogEvent.Error, ProgramClass.FileImport, "Line ChatColors could not be found!");
-                ShowMessageBox.ShowBug();
+                // Split the string to get the server name and char name
+                string[] colorLines = fileLines[0].Split(";");
+                colorIndex[0] = colorLines[0];
+                colorIndex[1] = colorLines[1];
+
+                // Rejoin the array to a string without the first two
+                colorLine = string.Join(";", colorLines.Skip(2));
             }
 
             // Create new Array out of the line

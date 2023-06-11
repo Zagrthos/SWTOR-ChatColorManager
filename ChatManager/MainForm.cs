@@ -184,7 +184,6 @@ namespace ChatManager
             {
                 // Get the whole Character List for the requested name
                 string[,] filePaths = fileImport.GetArray($"{selectedListBox.Substring(3)}");
-                string[] colorIndexes;
 
                 // Loop through and set the colors to the corresponding textBox
                 for (int i = 0; i < 1000; i++)
@@ -193,52 +192,71 @@ namespace ChatManager
                     {
                         // But get the correct Colors from the right character file
                         string filePath = filePaths[i, 1];
-                        colorIndexes = fileImport.GetContentFromFile(filePath);
 
-                        lblServerName.Text += $" {Converter.AddWhitespace(Converter.ServerNameIdentifier(colorIndexes[0], false))}";
-                        lblCharName.Text += $" {colorIndexes[1]}";
-                        tbTrade.Text = colorIndexes[2];
-                        tbPvP.Text = colorIndexes[3];
-                        tbGeneral.Text = colorIndexes[4];
-                        tbEmote.Text = colorIndexes[5];
-                        tbYell.Text = colorIndexes[6];
-                        tbOfficer.Text = colorIndexes[7];
-                        tbGuild.Text = colorIndexes[8];
-                        tbSay.Text = colorIndexes[9];
-                        tbWhisper.Text = colorIndexes[10];
-                        tbOps.Text = colorIndexes[11];
-                        tbOpsLead.Text = colorIndexes[12];
-                        tbGroup.Text = colorIndexes[13];
-                        tbOpsAnnou.Text = colorIndexes[14];
-                        tbOpsOfficer.Text = colorIndexes[15];
-                        tbCombat.Text = colorIndexes[16];
-                        tbConv.Text = colorIndexes[17];
-                        tbLogin.Text = colorIndexes[18];
-                        tbOpsInfo.Text = colorIndexes[19];
-                        tbSystem.Text = colorIndexes[20];
-                        tbGuildInfo.Text = colorIndexes[21];
-                        tbGroupInfo.Text = colorIndexes[22];
-
-                        if (GetSetSettings.GetAutosave)
-                        {
-                            // Stop previously intialized Timer
-                            if (autosaveTimer != null)
-                            {
-                                autosaveTimer.Stop();
-                                autosaveTimer.Elapsed -= AutosaveTimer_Elapsed;
-                            }
-
-                            // Initialize Autosave Timer
-                            autosaveTimer = new(Convert.ToDouble(GetSetSettings.GetAutosaveInterval));
-                            autosaveTimer.Elapsed += AutosaveTimer_Elapsed;
-                            autosaveTimer.Start();
-
-                            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "autosaveTimer set");
-                        }
+                        SetAllColorData(filePath, false);
 
                         break;
                     }
                 }
+            }
+        }
+
+        private void SetAllColorData(string filePath, bool autosaveIntitiated)
+        {
+            Logging.Write(LogEvent.Method, ProgramClass.MainForm, "SetAllColorData entered");
+
+            FileImport fileImport = new();
+            string[] colorIndexes = fileImport.GetContentFromFile(filePath, autosaveIntitiated);
+
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+            if (autosaveIntitiated)
+            {
+                lblServerName.Text = $"{localization.GetString(lblServerName.Name)} {colorIndexes[0]}";
+            }
+            else
+            {
+                lblServerName.Text = $"{localization.GetString(lblServerName.Name)} {Converter.AddWhitespace(Converter.ServerNameIdentifier(colorIndexes[0], false))}";
+            }
+
+            lblCharName.Text = $"{localization.GetString(lblServerName.Name)} {colorIndexes[1]}";
+            tbTrade.Text = colorIndexes[2];
+            tbPvP.Text = colorIndexes[3];
+            tbGeneral.Text = colorIndexes[4];
+            tbEmote.Text = colorIndexes[5];
+            tbYell.Text = colorIndexes[6];
+            tbOfficer.Text = colorIndexes[7];
+            tbGuild.Text = colorIndexes[8];
+            tbSay.Text = colorIndexes[9];
+            tbWhisper.Text = colorIndexes[10];
+            tbOps.Text = colorIndexes[11];
+            tbOpsLead.Text = colorIndexes[12];
+            tbGroup.Text = colorIndexes[13];
+            tbOpsAnnou.Text = colorIndexes[14];
+            tbOpsOfficer.Text = colorIndexes[15];
+            tbCombat.Text = colorIndexes[16];
+            tbConv.Text = colorIndexes[17];
+            tbLogin.Text = colorIndexes[18];
+            tbOpsInfo.Text = colorIndexes[19];
+            tbSystem.Text = colorIndexes[20];
+            tbGuildInfo.Text = colorIndexes[21];
+            tbGroupInfo.Text = colorIndexes[22];
+
+            if (GetSetSettings.GetAutosave)
+            {
+                // Stop previously intialized Timer
+                if (autosaveTimer != null)
+                {
+                    autosaveTimer.Stop();
+                    autosaveTimer.Elapsed -= AutosaveTimer_Elapsed;
+                }
+
+                // Initialize Autosave Timer
+                autosaveTimer = new(Convert.ToDouble(GetSetSettings.GetAutosaveInterval));
+                autosaveTimer.Elapsed += AutosaveTimer_Elapsed;
+                autosaveTimer.Start();
+
+                Logging.Write(LogEvent.Info, ProgramClass.MainForm, "autosaveTimer set");
             }
         }
 
@@ -462,11 +480,23 @@ namespace ChatManager
 
                 if (Directory.Exists(GetSetSettings.GetAutosavePath))
                 {
-                    // TODO: Check if file exists and then import file
-                    if (File.Exists(Path.Combine(GetSetSettings.GetAutosavePath, "autosave.json")))
-                    {
+                    string filePath = Path.Combine(GetSetSettings.GetAutosavePath, "autosave.txt");
 
+                    if (File.Exists(filePath))
+                    {
+                        SetAllColorData(filePath, true);
+
+                        Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Autosave data imported");
                     }
+                    else
+                    {
+                        Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "No Autosave data found!");
+                    }
+                }
+                else
+                {
+                    Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "No Autosave Directory found!");
+                    ShowMessageBox.ShowBug();
                 }
             }
         }

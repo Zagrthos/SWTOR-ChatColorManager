@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace ChatManager.Services
+﻿namespace ChatManager.Services
 {
     internal class Autosave
     {
@@ -23,7 +21,7 @@ namespace ChatManager.Services
             Logging.Write(LogEvent.Method, ProgramClass.Autosave, "DoAutosave entered");
 
             string colorDataString = string.Join(";", colorData);
-            string data = string.Join(";", charName, serverName, colorDataString);
+            string data = string.Join(";", serverName, charName, colorDataString);
 
             File.WriteAllText(autosavePath, data);
 
