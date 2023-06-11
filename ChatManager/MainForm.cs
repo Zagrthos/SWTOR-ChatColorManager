@@ -506,10 +506,7 @@ namespace ChatManager
             string[] colorIndexes = GetAllColorData();
 
             Autosave autosave = new();
-            if (!string.IsNullOrEmpty(lblCharName.Text) && !string.IsNullOrEmpty(lblServerName.Text))
-            {
-                autosave.DoAutosave(Converter.LabelToString(lblCharName.Text), Converter.LabelToString(lblServerName.Text), colorIndexes);
-            }
+            autosave.DoAutosave(Converter.LabelToString(lblCharName.Text), Converter.LabelToString(lblServerName.Text), colorIndexes);
         }
 
         // Find all Controls of the desired Type and pack them in a Control List
