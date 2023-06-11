@@ -495,7 +495,6 @@ namespace ChatManager
                 else
                 {
                     Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "No Autosave Directory found!");
-                    ShowMessageBox.ShowBug();
                 }
             }
         }
