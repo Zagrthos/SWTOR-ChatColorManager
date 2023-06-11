@@ -589,7 +589,7 @@ namespace ChatManager
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm closed");
-            Logging.Finalize();
+            Logging.Dispose();
         }
 
         // Draw the Tabs on the left side

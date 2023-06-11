@@ -107,7 +107,7 @@ namespace ChatManager.Services
             }
         }
 
-        internal static void Finalize()
+        internal static void Dispose()
         {
             if (logWriter != null)
             {
