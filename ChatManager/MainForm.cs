@@ -477,24 +477,28 @@ namespace ChatManager
 
                 Logging.Write(LogEvent.Info, ProgramClass.MainForm, "SaveOnClose set");
 
-                if (Directory.Exists(GetSetSettings.GetAutosavePath))
+                if (GetSetSettings.GetReloadOnStartup)
                 {
-                    string filePath = Path.Combine(GetSetSettings.GetAutosavePath, "autosave.txt");
-
-                    if (File.Exists(filePath))
+                    if (Directory.Exists(GetSetSettings.GetAutosavePath))
                     {
-                        SetAllColorData(filePath, true);
+                        string filePath = Path.Combine(GetSetSettings.GetAutosavePath, "autosave.txt");
 
-                        Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Autosave data imported");
+                        if (File.Exists(filePath))
+                        {
+                            SetAllColorData(filePath, true);
+
+                            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Autosave data imported");
+                            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "ReloadOnStartup set");
+                        }
+                        else
+                        {
+                            Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "No Autosave data found!");
+                        }
                     }
                     else
                     {
-                        Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "No Autosave data found!");
+                        Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "No Autosave Directory found!");
                     }
-                }
-                else
-                {
-                    Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "No Autosave Directory found!");
                 }
             }
         }

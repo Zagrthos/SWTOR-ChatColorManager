@@ -99,6 +99,7 @@
   "SettingsForm": "Settings",
   "gbLanguage": "Language selection",
   "gbGeneral": "General settings",
+  "chbReloadOnStartup": "Reload last colors when starting the app",
   "chbSaveOnClose": "Save last colors when closing the app",
   "chbAutosave": "Enable autosave",
   "lblAutosaveInterval": "Autosave interval (minutes)",

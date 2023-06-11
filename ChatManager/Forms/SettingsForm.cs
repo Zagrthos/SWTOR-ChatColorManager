@@ -14,6 +14,7 @@ namespace ChatManager.Forms
         private bool autosaveTimerChanged = false;
         private bool languageChanged = false;
         private bool comboBoxFalseAlarm = false;
+        private bool checkBoxFalseAlarm = false;
         private decimal currentAutosaveInterval = 0;
 
         public bool GetAutosaveTimerChanged => autosaveTimerChanged;
@@ -93,6 +94,7 @@ namespace ChatManager.Forms
 
             if (GetSetSettings.GetAutosave)
             {
+                checkBoxFalseAlarm = true;
                 chbAutosave.Checked = true;
                 numberAutosaveInterval.Enabled = true;
                 numberAutosaveInterval.Visible = true;
@@ -133,6 +135,17 @@ namespace ChatManager.Forms
             {
                 chbSaveOnClose.Checked = false;
                 chbAutosave.Enabled = true;
+            }
+
+            if (GetSetSettings.GetReloadOnStartup)
+            {
+                chbReloadOnStartup.Checked = true;
+                chbSaveOnClose.Enabled = false;
+            }
+            else
+            {
+                chbReloadOnStartup.Checked = false;
+                chbSaveOnClose.Enabled = true;
             }
         }
 
@@ -218,6 +231,34 @@ namespace ChatManager.Forms
                         return;
                     }
                 }
+                else if (checkBox.Name == "chbReloadOnStartup")
+                {
+                    if (checkBox.Checked)
+                    {
+                        GetSetSettings.SaveSettings(Setting.reloadOnStartup, true);
+                        Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "chbReloadOnStartup = true");
+                        if (!chbAutosave.Checked)
+                        {
+                            chbAutosave.Checked = true;
+                            SetAutosaveInterval();
+                        }
+                        chbAutosave.Enabled = false;
+                        
+                        if (!chbSaveOnClose.Checked)
+                        {
+                            chbSaveOnClose.Checked = true;
+                        }
+                        chbSaveOnClose.Enabled = false;
+                        return;
+                    }
+                    else
+                    {
+                        GetSetSettings.SaveSettings(Setting.reloadOnStartup, false);
+                        Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "chbReloadOnStartup = false");
+                        chbSaveOnClose.Enabled = true;
+                        return;
+                    }
+                }
                 else if (checkBox.Name == "chbAutosave")
                 {
                     if (checkBox.Checked)
@@ -228,6 +269,10 @@ namespace ChatManager.Forms
                         numberAutosaveInterval.Visible = true;
                         lblAutosaveInterval.Enabled = true;
                         lblAutosaveInterval.Visible = true;
+                        if (!checkBoxFalseAlarm)
+                        {
+                            SetAutosaveInterval();
+                        }
                         return;
                     }
                     else

@@ -190,5 +190,17 @@ namespace ChatManager.Properties {
                 this["autosaveAvailability"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool _reloadOnStartup {
+            get {
+                return ((bool)(this["_reloadOnStartup"]));
+            }
+            set {
+                this["_reloadOnStartup"] = value;
+            }
+        }
     }
 }

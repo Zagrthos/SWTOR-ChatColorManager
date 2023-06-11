@@ -99,6 +99,7 @@
   "SettingsForm": "Paramètres",
   "gbLanguage": "Choix de la langue",
   "gbGeneral": "Paramètres généraux",
+  "chbReloadOnStartup": "Recharger les dernières couleurs au démarrage de l'application",
   "chbSaveOnClose": "Enregistrer les dernières couleurs en fermant l'application",
   "chbAutosave": "Activer la sauvegarde automatique",
   "lblAutosaveInterval": "Intervalle Autosave (minutes)",

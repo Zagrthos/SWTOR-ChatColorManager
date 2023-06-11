@@ -9,6 +9,7 @@ namespace ChatManager.Services
         autosaveInterval,
         backupAvailability,
         locale,
+        reloadOnStartup,
         saveOnClose
     }
 
@@ -36,6 +37,7 @@ namespace ChatManager.Services
         public static string GetBugMailpath => Settings.Default.bugMailPath;
         public static string GetAboutPictureLink => Settings.Default.copyrightPicture;
         public static bool GetSaveOnClose => Settings.Default._saveOnClose;
+        public static bool GetReloadOnStartup => Settings.Default._reloadOnStartup;
         public static bool GetAutosave => Settings.Default._autosave;
         public static decimal GetAutosaveInterval => Settings.Default._autosaveInterval;
 
@@ -90,6 +92,10 @@ namespace ChatManager.Services
 
                 case Setting.saveOnClose:
                     Settings.Default._saveOnClose = value;
+                    break;
+
+                case Setting.reloadOnStartup:
+                    Settings.Default._reloadOnStartup = value;
                     break;
 
                 default:

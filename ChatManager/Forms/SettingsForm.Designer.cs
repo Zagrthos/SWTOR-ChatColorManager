@@ -38,6 +38,7 @@
             chbAutosave = new CheckBox();
             chbSaveOnClose = new CheckBox();
             btnResetSettings = new Button();
+            chbReloadOnStartup = new CheckBox();
             tlpSettings.SuspendLayout();
             gbLanguage.SuspendLayout();
             gbGeneral.SuspendLayout();
@@ -86,6 +87,7 @@
             // 
             // gbGeneral
             // 
+            gbGeneral.Controls.Add(chbReloadOnStartup);
             gbGeneral.Controls.Add(lblAutosaveInterval);
             gbGeneral.Controls.Add(numberAutosaveInterval);
             gbGeneral.Controls.Add(chbAutosave);
@@ -152,6 +154,17 @@
             btnResetSettings.UseVisualStyleBackColor = true;
             btnResetSettings.Click += ResetSettings;
             // 
+            // chbReloadOnStartup
+            // 
+            chbReloadOnStartup.AutoSize = true;
+            chbReloadOnStartup.Location = new Point(6, 100);
+            chbReloadOnStartup.Name = "chbReloadOnStartup";
+            chbReloadOnStartup.Size = new Size(274, 19);
+            chbReloadOnStartup.TabIndex = 4;
+            chbReloadOnStartup.Text = "Öffnen der letzten Farben beim starten der App";
+            chbReloadOnStartup.UseVisualStyleBackColor = true;
+            chbReloadOnStartup.CheckedChanged += ChangingCheckBoxes;
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -183,5 +196,6 @@
         private NumericUpDown numberAutosaveInterval;
         private CheckBox chbAutosave;
         private Button btnResetSettings;
+        private CheckBox chbReloadOnStartup;
     }
 }
