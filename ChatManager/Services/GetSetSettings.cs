@@ -48,7 +48,6 @@ namespace ChatManager.Services
         {
             if (!Settings.Default._Initialized)
             {
-                Settings.Default.Upgrade();
                 Settings.Default.localPath = localPath;
                 Settings.Default.backupPath = backupPath;
                 Settings.Default.backupAvailability = backupDir;
@@ -57,6 +56,13 @@ namespace ChatManager.Services
                 Settings.Default.autosaveAvailability = autosaveDir;
                 Settings.Default._autosaveInterval = 0;
                 Settings.Default._Initialized = true;
+                Settings.Default.Save();
+            }
+
+            if (Settings.Default._upgradeRequired)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default._upgradeRequired = false;
                 Settings.Default.Save();
             }
         }

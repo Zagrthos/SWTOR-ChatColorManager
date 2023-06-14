@@ -214,5 +214,17 @@ namespace ChatManager.Properties {
                 this["_reset"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool _upgradeRequired {
+            get {
+                return ((bool)(this["_upgradeRequired"]));
+            }
+            set {
+                this["_upgradeRequired"] = value;
+            }
+        }
     }
 }
