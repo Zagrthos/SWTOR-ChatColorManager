@@ -582,7 +582,15 @@ namespace ChatManager
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm closing");
 
             autosaveTimer?.Stop();
-            DoSave();
+
+            if (GetSetSettings.GetReset)
+            {
+                GetSetSettings.SaveSettings(Setting.reset, false);
+            }
+            else
+            {
+                DoSave();
+            }
         }
 
         // When the Form is closed, log it and stop the logger

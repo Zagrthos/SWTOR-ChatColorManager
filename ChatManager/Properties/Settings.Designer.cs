@@ -202,5 +202,17 @@ namespace ChatManager.Properties {
                 this["_reloadOnStartup"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool _reset {
+            get {
+                return ((bool)(this["_reset"]));
+            }
+            set {
+                this["_reset"] = value;
+            }
+        }
     }
 }

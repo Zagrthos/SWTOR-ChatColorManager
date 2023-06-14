@@ -1,4 +1,5 @@
 ﻿using ChatManager.Properties;
+using System.Globalization;
 
 namespace ChatManager.Services
 {
@@ -10,6 +11,7 @@ namespace ChatManager.Services
         backupAvailability,
         locale,
         reloadOnStartup,
+        reset,
         saveOnClose
     }
 
@@ -40,6 +42,7 @@ namespace ChatManager.Services
         public static bool GetReloadOnStartup => Settings.Default._reloadOnStartup;
         public static bool GetAutosave => Settings.Default._autosave;
         public static decimal GetAutosaveInterval => Settings.Default._autosaveInterval;
+        public static bool GetReset => Settings.Default._reset;
 
         public static void InitSettings()
         {
@@ -98,6 +101,10 @@ namespace ChatManager.Services
                     Settings.Default._reloadOnStartup = value;
                     break;
 
+                case Setting.reset:
+                    Settings.Default._reset = value;
+                    break;
+
                 default:
                     throw new NotImplementedException();
             }
@@ -121,6 +128,14 @@ namespace ChatManager.Services
         public static void RestoreSettings()
         {
             Settings.Default.Reset();
+
+            SaveSettings(Setting.reset, true);
+
+            if (string.IsNullOrEmpty(GetCurrentLocale))
+            {
+                SaveSettings(Setting.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            }
+
             Settings.Default.Save();
         }
     }

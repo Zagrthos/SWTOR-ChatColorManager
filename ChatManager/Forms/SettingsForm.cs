@@ -332,6 +332,8 @@ namespace ChatManager.Forms
             if (sender is Button)
             {
                 GetSetSettings.RestoreSettings();
+                Localize();
+                AdjustContentOnForm();
             }
             else
             {
