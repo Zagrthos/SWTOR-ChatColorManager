@@ -142,6 +142,8 @@ namespace ChatManager.Services
                 SaveSettings(Setting.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             }
 
+            Settings.Default._upgradeRequired = false;
+
             Settings.Default.Save();
         }
     }
