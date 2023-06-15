@@ -283,6 +283,7 @@ namespace ChatManager.Forms
                         numberAutosaveInterval.Visible = false;
                         lblAutosaveInterval.Enabled = false;
                         lblAutosaveInterval.Visible = false;
+                        autosaveTimerChanged = false;
                         return;
                     }
                 }
