@@ -583,11 +583,7 @@ namespace ChatManager
 
             autosaveTimer?.Stop();
 
-            if (GetSetSettings.GetReset)
-            {
-                GetSetSettings.SaveSettings(Setting.reset, false);
-            }
-            else
+            if (GetSetSettings.GetAutosave)
             {
                 DoSave();
             }

@@ -12,7 +12,6 @@ namespace ChatManager.Services
         lastUpdateCheck,
         locale,
         reloadOnStartup,
-        reset,
         saveOnClose,
         settingsUpgradeRequired,
         updateIntervall
@@ -45,7 +44,6 @@ namespace ChatManager.Services
         public static bool GetReloadOnStartup => Settings.Default._reloadOnStartup;
         public static bool GetAutosave => Settings.Default._autosave;
         public static decimal GetAutosaveInterval => Settings.Default._autosaveInterval;
-        public static bool GetReset => Settings.Default._reset;
         public static string GetUpdateIntervall => Settings.Default.updateIntervall;
         public static DateTime GetLastUpdateCheck => Settings.Default.lastUpdateCheck;
 
@@ -115,10 +113,6 @@ namespace ChatManager.Services
 
                 case Setting.reloadOnStartup:
                     Settings.Default._reloadOnStartup = value;
-                    break;
-
-                case Setting.reset:
-                    Settings.Default._reset = value;
                     break;
 
                 case Setting.settingsUpgradeRequired:
