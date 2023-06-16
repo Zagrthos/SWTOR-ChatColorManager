@@ -117,6 +117,7 @@ namespace ChatManager.Services
             Settings.Default.Save();
         }
 
+        // This is for setting decimals
         public static void SaveSettings(Setting settingName, decimal value)
         {
             switch (settingName)

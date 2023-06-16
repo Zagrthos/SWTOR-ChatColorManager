@@ -1,6 +1,7 @@
 ﻿namespace ChatManager.Services
 {
     internal class Updater
+    internal static class Updater
     {
         private static readonly Version currentVersion = new(Application.ProductVersion);
         private static Version? onlineVersion;

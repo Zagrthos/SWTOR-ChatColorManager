@@ -49,7 +49,7 @@ namespace ChatManager.Services
 
         public string GetString(string name)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.Localization, $"GetString Entered");
+            Logging.Write(LogEvent.Method, ProgramClass.Localization, "GetString Entered");
 
             if (strings.TryGetValue(name, out var result))
             {
