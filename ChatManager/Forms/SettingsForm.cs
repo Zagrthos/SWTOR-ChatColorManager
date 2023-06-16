@@ -218,7 +218,9 @@ namespace ChatManager.Forms
             {
                 Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, $"Saving new locale: {newLanguage}");
                 GetSetSettings.SaveSettings(Setting.locale, newLanguage);
+                int updateIntervall = cbUpdateIntervall.SelectedIndex;
                 Localize();
+                cbUpdateIntervall.SelectedIndex = updateIntervall;
                 languageChanged = true;
             }
         }
