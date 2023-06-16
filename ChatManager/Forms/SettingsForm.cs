@@ -227,7 +227,7 @@ namespace ChatManager.Forms
             }
         }
 
-        private void SwitchUpdateInterval()
+        private async void SwitchUpdateInterval()
         {
             if (cbUpdaterIntervallFalseAlarm)
             {
@@ -253,6 +253,8 @@ namespace ChatManager.Forms
                 }
 
                 Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"updateInterval set to: {GetSetSettings.GetUpdateInterval}");
+
+                await Updater.CheckForUpdateInterval();
             }
             else
             {

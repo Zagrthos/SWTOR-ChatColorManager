@@ -11,7 +11,6 @@ namespace ChatManager
         }
 
         private System.Timers.Timer? autosaveTimer;
-        private bool updateSearch = false;
 
         // Button Click Handler for every button next to the TextBox
         private void ClickChangeColorButton(object sender, EventArgs e)
@@ -506,35 +505,6 @@ namespace ChatManager
                     }
                 }
             }
-
-            string updateIntervall = GetSetSettings.GetUpdateInterval;
-            DateTime lastCheck = GetSetSettings.GetLastUpdateCheck;
-            DateTime today = DateTime.Today;
-            TimeSpan difference = today - lastCheck;
-
-            if (updateIntervall == UpdateInterval.OnStartup.ToString())
-            {
-                updateSearch = true;
-            }
-            else if (updateIntervall == UpdateInterval.Daily.ToString())
-            {
-                if (difference.Days >= 1)
-                {
-                    updateSearch = true;
-                }
-            }
-            else if (updateIntervall == UpdateInterval.Weekly.ToString())
-            {
-                if (difference.Days >= 7)
-                {
-                    updateSearch = true;
-                }
-            }
-            else
-            {
-                Logging.Write(LogEvent.Error, ProgramClass.MainForm, "updateIntervall Setting not set!");
-                ShowMessageBox.ShowBug();
-            }
         }
 
         private void DoSave()
@@ -607,10 +577,7 @@ namespace ChatManager
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm is loading");
 
 #if !DEBUG
-            if (updateSearch)
-            {
-                await Updater.CheckForUpdates();
-            }
+            await Updater.CheckForUpdateInterval();
 #endif
         }
 

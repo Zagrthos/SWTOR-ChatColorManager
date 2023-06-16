@@ -16,6 +16,50 @@
         private static string updateName = "SWTOR-ChatManager-";
         private static string updatePath = string.Empty;
 
+        public static async Task CheckForUpdateInterval()
+        {
+            string updateInterval = GetSetSettings.GetUpdateInterval;
+            bool updateSearch = false;
+            DateTime lastCheck = GetSetSettings.GetLastUpdateCheck;
+            DateTime today = DateTime.Today;
+            TimeSpan difference = today - lastCheck;
+
+            if (updateInterval == UpdateInterval.OnStartup.ToString())
+            {
+                updateSearch = true;
+            }
+            else if (updateInterval == UpdateInterval.Daily.ToString())
+            {
+                if (difference.Days >= 1)
+                {
+                    updateSearch = true;
+                }
+            }
+            else if (updateInterval == UpdateInterval.Weekly.ToString())
+            {
+                if (difference.Days >= 7)
+                {
+                    updateSearch = true;
+                }
+            }
+            else
+            {
+                Logging.Write(LogEvent.Error, ProgramClass.Updater, "updateInterval Setting not set!");
+                ShowMessageBox.ShowBug();
+            }
+
+            Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"updateInterval set to: {updateInterval}");
+            Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"lastCheck set to: {lastCheck}");
+            Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"today set to: {today}");
+            Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"difference set to: {difference}");
+            Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"updateSearch set to: {updateSearch}");
+
+            if (updateSearch)
+            {
+                await CheckForUpdates();
+            }
+        }
+
         public static async Task CheckForUpdates(bool fromUser = false)
         {
             Logging.Write(LogEvent.Method, ProgramClass.Updater, "CheckForUpdates entered");
