@@ -276,6 +276,9 @@ namespace ChatManager.Forms
                     case "cbUpdateInterval":
                         SwitchUpdateInterval();
                         break;
+
+                    default:
+                        throw new NotImplementedException();
                 }
             }
             else
