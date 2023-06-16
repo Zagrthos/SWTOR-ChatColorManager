@@ -418,6 +418,10 @@ namespace ChatManager
             {
                 tabsMainForm.ItemSize = new Size(50, 100);
             }
+            else
+            {
+                tabsMainForm.ItemSize = new Size(25, 100);
+            }
 
             var tabs = GetControls(this, typeof(TabControl));
             var buttons = GetControls(this, typeof(Button));
