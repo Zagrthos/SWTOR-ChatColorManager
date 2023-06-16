@@ -33,6 +33,7 @@
             gbLanguage = new GroupBox();
             cbLanguage = new ComboBox();
             gbGeneral = new GroupBox();
+            chbReloadOnStartup = new CheckBox();
             lblAutosaveInterval = new Label();
             numberAutosaveInterval = new NumericUpDown();
             chbAutosave = new CheckBox();
@@ -48,18 +49,24 @@
             // tlpSettings
             // 
             tlpSettings.ColumnCount = 2;
-            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33F));
-            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 67F));
+            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
+            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
             tlpSettings.Controls.Add(gbLanguage, 0, 0);
             tlpSettings.Controls.Add(gbGeneral, 1, 0);
-            tlpSettings.Controls.Add(btnResetSettings, 0, 1);
+            tlpSettings.Controls.Add(btnResetSettings, 0, 7);
             tlpSettings.Dock = DockStyle.Fill;
             tlpSettings.Location = new Point(0, 0);
             tlpSettings.Name = "tlpSettings";
-            tlpSettings.RowCount = 2;
-            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
-            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tlpSettings.Size = new Size(509, 161);
+            tlpSettings.RowCount = 8;
+            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
+            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
+            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
+            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
+            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
+            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
+            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
+            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
+            tlpSettings.Size = new Size(584, 211);
             tlpSettings.TabIndex = 0;
             // 
             // gbLanguage
@@ -68,7 +75,8 @@
             gbLanguage.Dock = DockStyle.Fill;
             gbLanguage.Location = new Point(3, 3);
             gbLanguage.Name = "gbLanguage";
-            gbLanguage.Size = new Size(161, 122);
+            tlpSettings.SetRowSpan(gbLanguage, 2);
+            gbLanguage.Size = new Size(198, 46);
             gbLanguage.TabIndex = 0;
             gbLanguage.TabStop = false;
             gbLanguage.Text = "Sprachauswahl";
@@ -81,7 +89,7 @@
             cbLanguage.Items.AddRange(new object[] { "English", "France", "German" });
             cbLanguage.Location = new Point(3, 19);
             cbLanguage.Name = "cbLanguage";
-            cbLanguage.Size = new Size(155, 23);
+            cbLanguage.Size = new Size(192, 23);
             cbLanguage.TabIndex = 0;
             cbLanguage.SelectedIndexChanged += SwitchCurrentLocale;
             // 
@@ -93,12 +101,24 @@
             gbGeneral.Controls.Add(chbAutosave);
             gbGeneral.Controls.Add(chbSaveOnClose);
             gbGeneral.Dock = DockStyle.Fill;
-            gbGeneral.Location = new Point(170, 3);
+            gbGeneral.Location = new Point(207, 3);
             gbGeneral.Name = "gbGeneral";
-            gbGeneral.Size = new Size(336, 122);
+            tlpSettings.SetRowSpan(gbGeneral, 5);
+            gbGeneral.Size = new Size(374, 124);
             gbGeneral.TabIndex = 1;
             gbGeneral.TabStop = false;
             gbGeneral.Text = "Allgemeine Einstellungen";
+            // 
+            // chbReloadOnStartup
+            // 
+            chbReloadOnStartup.AutoSize = true;
+            chbReloadOnStartup.Location = new Point(6, 100);
+            chbReloadOnStartup.Name = "chbReloadOnStartup";
+            chbReloadOnStartup.Size = new Size(274, 19);
+            chbReloadOnStartup.TabIndex = 4;
+            chbReloadOnStartup.Text = "Öffnen der letzten Farben beim starten der App";
+            chbReloadOnStartup.UseVisualStyleBackColor = true;
+            chbReloadOnStartup.CheckedChanged += ChangingCheckBoxes;
             // 
             // lblAutosaveInterval
             // 
@@ -145,10 +165,10 @@
             // btnResetSettings
             // 
             btnResetSettings.Dock = DockStyle.Fill;
-            btnResetSettings.Location = new Point(3, 131);
+            btnResetSettings.Location = new Point(3, 185);
             btnResetSettings.MinimumSize = new Size(161, 25);
             btnResetSettings.Name = "btnResetSettings";
-            btnResetSettings.Size = new Size(161, 27);
+            btnResetSettings.Size = new Size(198, 25);
             btnResetSettings.TabIndex = 2;
             btnResetSettings.Text = "Einstellungen zurücksetzen";
             btnResetSettings.UseVisualStyleBackColor = true;
@@ -169,7 +189,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(509, 161);
+            ClientSize = new Size(584, 211);
             Controls.Add(tlpSettings);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
