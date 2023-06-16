@@ -14,6 +14,7 @@ namespace ChatManager.Forms
         private bool autosaveTimerChanged = false;
         private bool languageChanged = false;
         private bool cbLanguageFalseAlarm = false;
+        private bool cbUpdaterIntervallFalseAlarm = false;
         private bool checkBoxFalseAlarm = false;
         private decimal currentAutosaveInterval = 0;
 
@@ -59,6 +60,11 @@ namespace ChatManager.Forms
             }
 
             lblAutosaveInterval.Text = localization.GetString(lblAutosaveInterval.Name);
+
+            cbUpdateIntervall.Items.Clear();
+            cbUpdateIntervall.Items.Add(localization.GetString("UpdateIntervallOnStart"));
+            cbUpdateIntervall.Items.Add(localization.GetString("UpdateIntervallDaily"));
+            cbUpdateIntervall.Items.Add(localization.GetString("UpdateIntervallWeekly"));
         }
 
         private void SettingsForm_Load(object sender, EventArgs e)
@@ -147,6 +153,27 @@ namespace ChatManager.Forms
                 chbReloadOnStartup.Checked = false;
                 chbSaveOnClose.Enabled = true;
             }
+
+            switch (GetSetSettings.GetUpdateIntervall)
+            {
+                case "OnStart":
+                    cbUpdaterIntervallFalseAlarm = true;
+                    cbUpdateIntervall.SelectedIndex = 0;
+                    break;
+
+                case "Daily":
+                    cbUpdaterIntervallFalseAlarm = true;
+                    cbUpdateIntervall.SelectedIndex = 1;
+                    break;
+
+                case "Weekly":
+                    cbUpdaterIntervallFalseAlarm = true;
+                    cbUpdateIntervall.SelectedIndex = 2;
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         private void SwitchCurrentLocale()
@@ -189,14 +216,56 @@ namespace ChatManager.Forms
             }
         }
 
-        private void SwitchCurrentLocale(object sender, EventArgs e)
+        private void SwitchUpdaterIntervall()
+        {
+            if (cbUpdaterIntervallFalseAlarm)
+            {
+                cbUpdaterIntervallFalseAlarm = false;
+                return;
+            }
+
+            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "SwitchUpdaterIntervall entered");
+
+            if (cbUpdateIntervall.SelectedIndex != -1)
+            {
+                if (cbUpdateIntervall.SelectedIndex == 0)
+                {
+                    GetSetSettings.SaveSettings(Setting.updateIntervall, UpdateIntervall.OnStart.ToString());
+                }
+                else if (cbUpdateIntervall.SelectedIndex == 1)
+                {
+                    GetSetSettings.SaveSettings(Setting.updateIntervall, UpdateIntervall.Daily.ToString());
+                }
+                else if (cbUpdateIntervall.SelectedIndex == 2)
+                {
+                    GetSetSettings.SaveSettings(Setting.updateIntervall, UpdateIntervall.Weekly.ToString());
+                }
+
+                Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"updateIntervall set to: {GetSetSettings.GetUpdateIntervall}");
+            }
+            else
+            {
+                Logging.Write(LogEvent.Error, ProgramClass.SettingsForm, "cbUpdateIntervall has no value!");
+                ShowMessageBox.ShowBug();
+            }
+        }
+
         private void ComboBoxHandler(object sender, EventArgs e)
         {
             Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "ComboBoxHandler triggered");
 
-            if (sender is ComboBox)
+            if (sender is ComboBox comboBox)
             {
-                SwitchCurrentLocale();
+                switch (comboBox.Name)
+                {
+                    case "cbLanguage":
+                        SwitchCurrentLocale();
+                        break;
+
+                    case "cbUpdaterIntervall":
+                        SwitchUpdaterIntervall();
+                        break;
+                }
             }
             else
             {
@@ -244,7 +313,7 @@ namespace ChatManager.Forms
                             SetAutosaveInterval();
                         }
                         chbAutosave.Enabled = false;
-                        
+
                         if (!chbSaveOnClose.Checked)
                         {
                             chbSaveOnClose.Checked = true;

@@ -12,7 +12,9 @@ namespace ChatManager.Services
         locale,
         reloadOnStartup,
         reset,
-        saveOnClose
+        saveOnClose,
+        lastUpdateCheck,
+        updateIntervall
     }
 
     internal class GetSetSettings
@@ -43,6 +45,8 @@ namespace ChatManager.Services
         public static bool GetAutosave => Settings.Default._autosave;
         public static decimal GetAutosaveInterval => Settings.Default._autosaveInterval;
         public static bool GetReset => Settings.Default._reset;
+        public static string GetUpdateIntervall => Settings.Default.updateIntervall;
+        public static DateTime GetLastUpdateCheck => Settings.Default.lastUpdateCheck;
 
         public static void InitSettings()
         {
@@ -55,6 +59,7 @@ namespace ChatManager.Services
                 Settings.Default.autosavePath = autosavePath;
                 Settings.Default.autosaveAvailability = autosaveDir;
                 Settings.Default._autosaveInterval = 0;
+                Settings.Default.updateIntervall = UpdateIntervall.OnStart.ToString();
                 Settings.Default._Initialized = true;
                 Settings.Default.Save();
             }
@@ -74,6 +79,10 @@ namespace ChatManager.Services
             {
                 case Setting.locale:
                     Settings.Default._locale = settingValue;
+                    break;
+
+                case Setting.updateIntervall:
+                    Settings.Default.updateIntervall = settingValue;
                     break;
 
                 default:
@@ -124,6 +133,21 @@ namespace ChatManager.Services
             {
                 case Setting.autosaveInterval:
                     Settings.Default._autosaveInterval = value;
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+            Settings.Default.Save();
+        }
+
+        // This is for setting DateTimes
+        public static void SaveSettings(Setting settingName, DateTime value)
+        {
+            switch (settingName)
+            {
+                case Setting.lastUpdateCheck:
+                    Settings.Default.lastUpdateCheck = value;
                     break;
 
                 default:

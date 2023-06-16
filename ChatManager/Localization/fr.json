@@ -103,5 +103,10 @@
   "chbSaveOnClose": "Enregistrer les dernières couleurs en fermant l'application",
   "chbAutosave": "Activer la sauvegarde automatique",
   "lblAutosaveInterval": "Intervalle Autosave (minutes)",
-  "btnResetSettings": "Réinitialiser les paramètres"
+  "btnResetSettings": "Réinitialiser les paramètres",
+  "gbUpdater": "Mettre à jour les réglages",
+  "lblUpdateIntervall": "Recherche Intervalle",
+  "UpdateIntervallOnStart": "Au démarrage",
+  "UpdateIntervallDaily": "Quotidiennement",
+  "UpdateIntervallWeekly": "Hebdomadaire"
 }

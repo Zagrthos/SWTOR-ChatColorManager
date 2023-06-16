@@ -1,6 +1,12 @@
 ﻿namespace ChatManager.Services
 {
-    internal class Updater
+    internal enum UpdateIntervall
+    {
+        OnStart,
+        Daily,
+        Weekly
+    }
+
     internal static class Updater
     {
         private static readonly Version currentVersion = new(Application.ProductVersion);
@@ -49,6 +55,12 @@
 
                     Logging.Write(LogEvent.Info, ProgramClass.Updater, "HttpClient disposed!");
                     client.Dispose();
+                }
+
+                // Save the date of the last update Check but only if the user has NOT initiated it
+                if (GetSetSettings.GetUpdateIntervall != UpdateIntervall.OnStart.ToString() && !fromUser)
+                {
+                    GetSetSettings.SaveSettings(Setting.lastUpdateCheck, DateTime.Today.ToLocalTime());
                 }
             }
             catch (HttpRequestException ex)

@@ -226,5 +226,28 @@ namespace ChatManager.Properties {
                 this["_upgradeRequired"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string updateIntervall {
+            get {
+                return ((string)(this["updateIntervall"]));
+            }
+            set {
+                this["updateIntervall"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime lastUpdateCheck {
+            get {
+                return ((global::System.DateTime)(this["lastUpdateCheck"]));
+            }
+            set {
+                this["lastUpdateCheck"] = value;
+            }
+        }
     }
 }
