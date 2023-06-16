@@ -32,25 +32,14 @@
             tlpMainForm = new TableLayoutPanel();
             menuMainForm = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
-            newToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator = new ToolStripSeparator();
             saveToolStripMenuItem = new ToolStripMenuItem();
-            saveAsToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
-            printToolStripMenuItem = new ToolStripMenuItem();
-            printPreviewToolStripMenuItem = new ToolStripMenuItem();
+            loadAutosaveToolStripMenuItem = new ToolStripMenuItem();
+            restoreBackupToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             exitToolStripMenuItem = new ToolStripMenuItem();
-            editToolStripMenuItem = new ToolStripMenuItem();
-            undoToolStripMenuItem = new ToolStripMenuItem();
-            redoToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator3 = new ToolStripSeparator();
-            cutToolStripMenuItem = new ToolStripMenuItem();
-            copyToolStripMenuItem = new ToolStripMenuItem();
-            pasteToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator4 = new ToolStripSeparator();
-            selectAllToolStripMenuItem = new ToolStripMenuItem();
             toolsToolStripMenuItem = new ToolStripMenuItem();
             charFolderToolStripMenuItem = new ToolStripMenuItem();
             backupToolStripMenuItem = new ToolStripMenuItem();
@@ -152,7 +141,7 @@
             // menuMainForm
             // 
             tlpMainForm.SetColumnSpan(menuMainForm, 2);
-            menuMainForm.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem });
+            menuMainForm.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem });
             menuMainForm.Location = new Point(0, 0);
             menuMainForm.Name = "menuMainForm";
             menuMainForm.RenderMode = ToolStripRenderMode.Professional;
@@ -162,135 +151,60 @@
             // fileToolStripMenuItem
             // 
             fileToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator1, printToolStripMenuItem, printPreviewToolStripMenuItem, toolStripSeparator2, exitToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, toolStripSeparator1, loadAutosaveToolStripMenuItem, restoreBackupToolStripMenuItem, toolStripSeparator2, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(46, 20);
             fileToolStripMenuItem.Text = "Datei";
             // 
-            // newToolStripMenuItem
-            // 
-            newToolStripMenuItem.Enabled = false;
-            newToolStripMenuItem.Name = "newToolStripMenuItem";
-            newToolStripMenuItem.Size = new Size(153, 22);
-            newToolStripMenuItem.Text = "Neu";
-            newToolStripMenuItem.Visible = false;
-            // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(153, 22);
+            openToolStripMenuItem.Size = new Size(202, 22);
             openToolStripMenuItem.Text = "Öffnen";
             openToolStripMenuItem.Click += ImportFile;
             // 
             // toolStripSeparator
             // 
             toolStripSeparator.Name = "toolStripSeparator";
-            toolStripSeparator.Size = new Size(150, 6);
+            toolStripSeparator.Size = new Size(199, 6);
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(153, 22);
+            saveToolStripMenuItem.Size = new Size(202, 22);
             saveToolStripMenuItem.Text = "Speichern";
             saveToolStripMenuItem.Click += ExportFiles;
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            saveAsToolStripMenuItem.Enabled = false;
-            saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new Size(153, 22);
-            saveAsToolStripMenuItem.Text = "Speichern als...";
-            saveAsToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(150, 6);
+            toolStripSeparator1.Size = new Size(199, 6);
             // 
-            // printToolStripMenuItem
+            // loadAutosaveToolStripMenuItem
             // 
-            printToolStripMenuItem.Enabled = false;
-            printToolStripMenuItem.Name = "printToolStripMenuItem";
-            printToolStripMenuItem.Size = new Size(153, 22);
-            printToolStripMenuItem.Text = "Drucken";
-            printToolStripMenuItem.Visible = false;
+            loadAutosaveToolStripMenuItem.Name = "loadAutosaveToolStripMenuItem";
+            loadAutosaveToolStripMenuItem.Size = new Size(202, 22);
+            loadAutosaveToolStripMenuItem.Text = "Autosave laden";
+            loadAutosaveToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
-            // printPreviewToolStripMenuItem
+            // restoreBackupToolStripMenuItem
             // 
-            printPreviewToolStripMenuItem.Enabled = false;
-            printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            printPreviewToolStripMenuItem.Size = new Size(153, 22);
-            printPreviewToolStripMenuItem.Text = "Druckvorschau";
-            printPreviewToolStripMenuItem.Visible = false;
+            restoreBackupToolStripMenuItem.Name = "restoreBackupToolStripMenuItem";
+            restoreBackupToolStripMenuItem.Size = new Size(202, 22);
+            restoreBackupToolStripMenuItem.Text = "Backup wiederherstellen";
+            restoreBackupToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(150, 6);
-            toolStripSeparator2.Visible = false;
+            toolStripSeparator2.Size = new Size(199, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(153, 22);
+            exitToolStripMenuItem.Size = new Size(202, 22);
             exitToolStripMenuItem.Text = "Beenden";
             exitToolStripMenuItem.Click += ToolStripMenuHandler;
-            // 
-            // editToolStripMenuItem
-            // 
-            editToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, toolStripSeparator3, cutToolStripMenuItem, copyToolStripMenuItem, pasteToolStripMenuItem, toolStripSeparator4, selectAllToolStripMenuItem });
-            editToolStripMenuItem.Enabled = false;
-            editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new Size(58, 20);
-            editToolStripMenuItem.Text = "Ändern";
-            editToolStripMenuItem.Visible = false;
-            // 
-            // undoToolStripMenuItem
-            // 
-            undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            undoToolStripMenuItem.Size = new Size(155, 22);
-            undoToolStripMenuItem.Text = "Rückgängig";
-            // 
-            // redoToolStripMenuItem
-            // 
-            redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            redoToolStripMenuItem.Size = new Size(155, 22);
-            redoToolStripMenuItem.Text = "Wiederholen";
-            // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(152, 6);
-            // 
-            // cutToolStripMenuItem
-            // 
-            cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            cutToolStripMenuItem.Size = new Size(155, 22);
-            cutToolStripMenuItem.Text = "Ausschneiden";
-            // 
-            // copyToolStripMenuItem
-            // 
-            copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            copyToolStripMenuItem.Size = new Size(155, 22);
-            copyToolStripMenuItem.Text = "Kopieren";
-            // 
-            // pasteToolStripMenuItem
-            // 
-            pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            pasteToolStripMenuItem.Size = new Size(155, 22);
-            pasteToolStripMenuItem.Text = "Einfügen";
-            // 
-            // toolStripSeparator4
-            // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(152, 6);
-            // 
-            // selectAllToolStripMenuItem
-            // 
-            selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            selectAllToolStripMenuItem.Size = new Size(155, 22);
-            selectAllToolStripMenuItem.Text = "Alles markieren";
             // 
             // toolsToolStripMenuItem
             // 
@@ -1083,24 +997,13 @@
         private TableLayoutPanel tlpSystem;
         private MenuStrip menuMainForm;
         private ToolStripMenuItem fileToolStripMenuItem;
-        private ToolStripMenuItem newToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator;
         private ToolStripMenuItem saveToolStripMenuItem;
-        private ToolStripMenuItem saveAsToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripMenuItem printToolStripMenuItem;
-        private ToolStripMenuItem printPreviewToolStripMenuItem;
+        private ToolStripMenuItem loadAutosaveToolStripMenuItem;
+        private ToolStripMenuItem restoreBackupToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator2;
-        private ToolStripMenuItem editToolStripMenuItem;
-        private ToolStripMenuItem undoToolStripMenuItem;
-        private ToolStripMenuItem redoToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator3;
-        private ToolStripMenuItem cutToolStripMenuItem;
-        private ToolStripMenuItem copyToolStripMenuItem;
-        private ToolStripMenuItem pasteToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator4;
-        private ToolStripMenuItem selectAllToolStripMenuItem;
         private ToolStripMenuItem toolsToolStripMenuItem;
         private ToolStripMenuItem charFolderToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;

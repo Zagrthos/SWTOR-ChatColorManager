@@ -147,6 +147,15 @@ namespace ChatManager
 
                         Show();
                         return;
+
+                    case "loadAutosaveToolStripMenuItem":
+                        Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Load Autosave requested");
+                        ImportAutosave();
+                        return;
+
+                    case "restoreBackupToolStripMenuItem":
+                        Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Restore Backup requested");
+                        return;
                 }
 
                 Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Check if local Path exists");
@@ -194,9 +203,44 @@ namespace ChatManager
 
                         SetAllColorData(filePath, false);
 
+                        Localization localization = new(GetSetSettings.GetCurrentLocale);
+                        string message = localization.GetString("Inf_AutosaveImport").Replace("CHARNAME", Converter.LabelToString(lblCharName.Text)).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text)).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString());
+                        ShowMessageBox.Show(localization.GetString("MessageBoxInfo"), message);
+
                         break;
                     }
                 }
+            }
+        }
+
+        private void ImportAutosave()
+        {
+            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "ImportAutosave entered");
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
+            if (Directory.Exists(GetSetSettings.GetAutosavePath))
+            {
+                string filePath = Path.Combine(GetSetSettings.GetAutosavePath, "autosave.txt");
+
+                if (File.Exists(filePath))
+                {
+                    SetAllColorData(filePath, true);
+
+                    Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Autosave data imported");
+                    Logging.Write(LogEvent.Info, ProgramClass.MainForm, "ReloadOnStartup set");
+
+                    string message = localization.GetString("Inf_AutosaveImport").Replace("CHARNAME", Converter.LabelToString(lblCharName.Text)).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text)).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString());
+                    ShowMessageBox.Show(localization.GetString("MessageBoxInfo"), message);
+                }
+                else
+                {
+                    Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "No Autosave data found!");
+                    ShowMessageBox.Show(localization.GetString("MessageBoxError"), localization.GetString("Err_AutosaveImport"));
+                }
+            }
+            else
+            {
+                Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "No Autosave Directory found!");
+                ShowMessageBox.Show(localization.GetString("MessageBoxError"), localization.GetString("Err_AutosaveImport"));
             }
         }
 
@@ -475,6 +519,15 @@ namespace ChatManager
         {
             Logging.Write(LogEvent.Method, ProgramClass.MainForm, "InitializeCustomSettings entered");
 
+            if (GetSetSettings.GetAutosave)
+            {
+                loadAutosaveToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                loadAutosaveToolStripMenuItem.Enabled = false;
+            }
+
             if (GetSetSettings.GetSaveOnClose)
             {
                 FormClosing += MainForm_FormClosing!;
@@ -483,26 +536,7 @@ namespace ChatManager
 
                 if (GetSetSettings.GetReloadOnStartup)
                 {
-                    if (Directory.Exists(GetSetSettings.GetAutosavePath))
-                    {
-                        string filePath = Path.Combine(GetSetSettings.GetAutosavePath, "autosave.txt");
-
-                        if (File.Exists(filePath))
-                        {
-                            SetAllColorData(filePath, true);
-
-                            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Autosave data imported");
-                            Logging.Write(LogEvent.Info, ProgramClass.MainForm, "ReloadOnStartup set");
-                        }
-                        else
-                        {
-                            Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "No Autosave data found!");
-                        }
-                    }
-                    else
-                    {
-                        Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "No Autosave Directory found!");
-                    }
+                    ImportAutosave();
                 }
             }
         }
