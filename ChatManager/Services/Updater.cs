@@ -12,7 +12,7 @@
         private static readonly Version currentVersion = new(Application.ProductVersion);
         private static Version? onlineVersion;
         private static readonly string updateCheckURL = "https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/version.txt";
-        private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/download/";
+        private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/";
         private static string updateName = "SWTOR-ChatManager-";
         private static string updatePath = string.Empty;
 
@@ -81,7 +81,16 @@
 
                     if (ShowMessageBox.ShowUpdate(onlineVersion.ToString()))
                     {
-                        await DownloadUpdate();
+                        if (GetSetSettings.GetUpdateDownload)
+                        {
+                            Logging.Write(LogEvent.Info, ProgramClass.Updater, "Manual download initiated");
+                            OpenWindows.OpenLinksInBrowser($"{updateURL}/tag/v{onlineVersion}/");
+                        }
+                        else
+                        {
+                            Logging.Write(LogEvent.Info, ProgramClass.Updater, "Background download initiated");
+                            await DownloadUpdate();
+                        }
 
                         Logging.Write(LogEvent.Info, ProgramClass.Updater, "HttpClient disposed!");
                         client.Dispose();
@@ -125,7 +134,7 @@
             updateName += $"v{onlineVersion}.exe";
             Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"updateName set to: {updateName}");
 
-            updateURL += $"v{onlineVersion}/{updateName}";
+            updateURL += $"download/v{onlineVersion}/{updateName}";
             Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"updateURL set to: {updateURL}");
 
             HttpClient client = new();

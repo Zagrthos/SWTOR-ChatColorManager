@@ -183,6 +183,15 @@ namespace ChatManager.Forms
                 default:
                     throw new NotImplementedException();
             }
+
+            if (GetSetSettings.GetUpdateDownload)
+            {
+                chbUpdateDownload.Checked = true;
+            }
+            else
+            {
+                chbUpdateDownload.Checked = false;
+            }
         }
 
         private void SwitchCurrentLocale()
@@ -370,6 +379,21 @@ namespace ChatManager.Forms
                         lblAutosaveInterval.Enabled = false;
                         lblAutosaveInterval.Visible = false;
                         autosaveTimerChanged = false;
+                        return;
+                    }
+                }
+                else if (checkBox.Name == "chbUpdateDownload")
+                {
+                    if (checkBox.Checked)
+                    {
+                        GetSetSettings.SaveSettings(Setting.updateDownload, true);
+                        Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "updateDownload = true");
+                        return;
+                    }
+                    else
+                    {
+                        GetSetSettings.SaveSettings(Setting.updateDownload, false);
+                        Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "updateDownload = false");
                         return;
                     }
                 }

@@ -40,6 +40,7 @@
             chbSaveOnClose = new CheckBox();
             btnResetSettings = new Button();
             gbUpdater = new GroupBox();
+            chbUpdateDownload = new CheckBox();
             cbUpdateInterval = new ComboBox();
             lblUpdateIntervall = new Label();
             tlpSettings.SuspendLayout();
@@ -52,8 +53,8 @@
             // tlpSettings
             // 
             tlpSettings.ColumnCount = 2;
-            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
-            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
+            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+            tlpSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
             tlpSettings.Controls.Add(gbLanguage, 0, 0);
             tlpSettings.Controls.Add(gbGeneral, 1, 0);
             tlpSettings.Controls.Add(btnResetSettings, 0, 7);
@@ -70,7 +71,7 @@
             tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
             tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
             tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
-            tlpSettings.Size = new Size(584, 211);
+            tlpSettings.Size = new Size(684, 211);
             tlpSettings.TabIndex = 0;
             // 
             // gbLanguage
@@ -80,7 +81,7 @@
             gbLanguage.Location = new Point(3, 3);
             gbLanguage.Name = "gbLanguage";
             tlpSettings.SetRowSpan(gbLanguage, 2);
-            gbLanguage.Size = new Size(198, 46);
+            gbLanguage.Size = new Size(267, 46);
             gbLanguage.TabIndex = 0;
             gbLanguage.TabStop = false;
             gbLanguage.Text = "Sprachauswahl";
@@ -93,7 +94,7 @@
             cbLanguage.Items.AddRange(new object[] { "English", "France", "German" });
             cbLanguage.Location = new Point(3, 19);
             cbLanguage.Name = "cbLanguage";
-            cbLanguage.Size = new Size(192, 23);
+            cbLanguage.Size = new Size(261, 23);
             cbLanguage.TabIndex = 0;
             cbLanguage.SelectedIndexChanged += ComboBoxHandler;
             // 
@@ -105,10 +106,10 @@
             gbGeneral.Controls.Add(chbAutosave);
             gbGeneral.Controls.Add(chbSaveOnClose);
             gbGeneral.Dock = DockStyle.Fill;
-            gbGeneral.Location = new Point(207, 3);
+            gbGeneral.Location = new Point(276, 3);
             gbGeneral.Name = "gbGeneral";
             tlpSettings.SetRowSpan(gbGeneral, 5);
-            gbGeneral.Size = new Size(374, 124);
+            gbGeneral.Size = new Size(405, 124);
             gbGeneral.TabIndex = 1;
             gbGeneral.TabStop = false;
             gbGeneral.Text = "Allgemeine Einstellungen";
@@ -172,7 +173,7 @@
             btnResetSettings.Location = new Point(3, 185);
             btnResetSettings.MinimumSize = new Size(161, 25);
             btnResetSettings.Name = "btnResetSettings";
-            btnResetSettings.Size = new Size(198, 25);
+            btnResetSettings.Size = new Size(267, 25);
             btnResetSettings.TabIndex = 2;
             btnResetSettings.Text = "Einstellungen zurücksetzen";
             btnResetSettings.UseVisualStyleBackColor = true;
@@ -180,16 +181,28 @@
             // 
             // gbUpdater
             // 
+            gbUpdater.Controls.Add(chbUpdateDownload);
             gbUpdater.Controls.Add(cbUpdateInterval);
             gbUpdater.Controls.Add(lblUpdateIntervall);
             gbUpdater.Dock = DockStyle.Fill;
             gbUpdater.Location = new Point(3, 55);
             gbUpdater.Name = "gbUpdater";
             tlpSettings.SetRowSpan(gbUpdater, 4);
-            gbUpdater.Size = new Size(198, 98);
+            gbUpdater.Size = new Size(267, 98);
             gbUpdater.TabIndex = 3;
             gbUpdater.TabStop = false;
             gbUpdater.Text = "Update-Einstellungen";
+            // 
+            // chbUpdateDownload
+            // 
+            chbUpdateDownload.AutoSize = true;
+            chbUpdateDownload.Location = new Point(3, 63);
+            chbUpdateDownload.Name = "chbUpdateDownload";
+            chbUpdateDownload.Size = new Size(192, 19);
+            chbUpdateDownload.TabIndex = 2;
+            chbUpdateDownload.Text = "Updates manuell herunterladen";
+            chbUpdateDownload.UseVisualStyleBackColor = true;
+            chbUpdateDownload.CheckedChanged += ChangingCheckBoxes;
             // 
             // cbUpdateInterval
             // 
@@ -198,7 +211,7 @@
             cbUpdateInterval.FormattingEnabled = true;
             cbUpdateInterval.Location = new Point(3, 34);
             cbUpdateInterval.Name = "cbUpdateInterval";
-            cbUpdateInterval.Size = new Size(192, 23);
+            cbUpdateInterval.Size = new Size(261, 23);
             cbUpdateInterval.TabIndex = 1;
             cbUpdateInterval.SelectedIndexChanged += ComboBoxHandler;
             // 
@@ -216,7 +229,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(584, 211);
+            ClientSize = new Size(684, 211);
             Controls.Add(tlpSettings);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -249,5 +262,6 @@
         private GroupBox gbUpdater;
         private ComboBox cbUpdateInterval;
         private Label lblUpdateIntervall;
+        private CheckBox chbUpdateDownload;
     }
 }

@@ -108,5 +108,6 @@
   "lblUpdateIntervall": "Recherche Intervalle",
   "UpdateIntervalOnStart": "Au démarrage",
   "UpdateIntervalDaily": "Quotidiennement",
-  "UpdateIntervalWeekly": "Hebdomadaire"
+  "UpdateIntervalWeekly": "Hebdomadaire",
+  "chbUpdateDownload": "Télécharge les mises à jour manuellement"
 }

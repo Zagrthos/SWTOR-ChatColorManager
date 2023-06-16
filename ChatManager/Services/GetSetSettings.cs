@@ -14,6 +14,7 @@ namespace ChatManager.Services
         reloadOnStartup,
         saveOnClose,
         settingsUpgradeRequired,
+        updateDownload,
         updateInterval
     }
 
@@ -46,6 +47,7 @@ namespace ChatManager.Services
         public static decimal GetAutosaveInterval => Settings.Default._autosaveInterval;
         public static string GetUpdateInterval => Settings.Default.updateInterval;
         public static DateTime GetLastUpdateCheck => Settings.Default.lastUpdateCheck;
+        public static bool GetUpdateDownload => Settings.Default.updateDownload;
 
         public static void InitSettings()
         {
@@ -117,6 +119,10 @@ namespace ChatManager.Services
 
                 case Setting.settingsUpgradeRequired:
                     Settings.Default._upgradeRequired = value;
+                    break;
+
+                case Setting.updateDownload:
+                    Settings.Default.updateDownload = value;
                     break;
 
                 default:

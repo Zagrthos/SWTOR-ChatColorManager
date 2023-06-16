@@ -249,5 +249,17 @@ namespace ChatManager.Properties {
                 this["lastUpdateCheck"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool updateDownload {
+            get {
+                return ((bool)(this["updateDownload"]));
+            }
+            set {
+                this["updateDownload"] = value;
+            }
+        }
     }
 }

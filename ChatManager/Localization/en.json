@@ -108,5 +108,6 @@
   "lblUpdateIntervall": "Search intervall",
   "UpdateIntervalOnStart": "On startup",
   "UpdateIntervalDaily": "Daily",
-  "UpdateIntervalWeekly": "Weekly"
+  "UpdateIntervalWeekly": "Weekly",
+  "chbUpdateDownload": "Download updates manually"
 }
