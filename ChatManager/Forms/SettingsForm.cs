@@ -70,10 +70,10 @@ namespace ChatManager.Forms
 
             btnResetSettings.Text = localization.GetString(btnResetSettings.Name);
 
-            cbUpdateIntervall.Items.Clear();
-            cbUpdateIntervall.Items.Add(localization.GetString("UpdateIntervallOnStart"));
-            cbUpdateIntervall.Items.Add(localization.GetString("UpdateIntervallDaily"));
-            cbUpdateIntervall.Items.Add(localization.GetString("UpdateIntervallWeekly"));
+            cbUpdateInterval.Items.Clear();
+            cbUpdateInterval.Items.Add(localization.GetString("UpdateIntervallOnStart"));
+            cbUpdateInterval.Items.Add(localization.GetString("UpdateIntervallDaily"));
+            cbUpdateInterval.Items.Add(localization.GetString("UpdateIntervallWeekly"));
         }
 
         private void SettingsForm_Load(object sender, EventArgs e)
@@ -163,21 +163,21 @@ namespace ChatManager.Forms
                 chbSaveOnClose.Enabled = true;
             }
 
-            switch (GetSetSettings.GetUpdateIntervall)
+            switch (GetSetSettings.GetUpdateInterval)
             {
                 case "OnStartup":
                     cbUpdaterIntervallFalseAlarm = true;
-                    cbUpdateIntervall.SelectedIndex = 0;
+                    cbUpdateInterval.SelectedIndex = 0;
                     break;
 
                 case "Daily":
                     cbUpdaterIntervallFalseAlarm = true;
-                    cbUpdateIntervall.SelectedIndex = 1;
+                    cbUpdateInterval.SelectedIndex = 1;
                     break;
 
                 case "Weekly":
                     cbUpdaterIntervallFalseAlarm = true;
-                    cbUpdateIntervall.SelectedIndex = 2;
+                    cbUpdateInterval.SelectedIndex = 2;
                     break;
 
                 default:
@@ -220,14 +220,14 @@ namespace ChatManager.Forms
             {
                 Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, $"Saving new locale: {newLanguage}");
                 GetSetSettings.SaveSettings(Setting.locale, newLanguage);
-                int updateIntervall = cbUpdateIntervall.SelectedIndex;
+                int updateIntervall = cbUpdateInterval.SelectedIndex;
                 Localize();
-                cbUpdateIntervall.SelectedIndex = updateIntervall;
+                cbUpdateInterval.SelectedIndex = updateIntervall;
                 languageChanged = true;
             }
         }
 
-        private void SwitchUpdaterIntervall()
+        private void SwitchUpdateInterval()
         {
             if (cbUpdaterIntervallFalseAlarm)
             {
@@ -235,28 +235,28 @@ namespace ChatManager.Forms
                 return;
             }
 
-            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "SwitchUpdaterIntervall entered");
+            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "SwitchUpdateInterval entered");
 
-            if (cbUpdateIntervall.SelectedIndex != -1)
+            if (cbUpdateInterval.SelectedIndex != -1)
             {
-                if (cbUpdateIntervall.SelectedIndex == 0)
+                if (cbUpdateInterval.SelectedIndex == 0)
                 {
-                    GetSetSettings.SaveSettings(Setting.updateIntervall, UpdateIntervall.OnStartup.ToString());
+                    GetSetSettings.SaveSettings(Setting.updateInterval, UpdateInterval.OnStartup.ToString());
                 }
-                else if (cbUpdateIntervall.SelectedIndex == 1)
+                else if (cbUpdateInterval.SelectedIndex == 1)
                 {
-                    GetSetSettings.SaveSettings(Setting.updateIntervall, UpdateIntervall.Daily.ToString());
+                    GetSetSettings.SaveSettings(Setting.updateInterval, UpdateInterval.Daily.ToString());
                 }
-                else if (cbUpdateIntervall.SelectedIndex == 2)
+                else if (cbUpdateInterval.SelectedIndex == 2)
                 {
-                    GetSetSettings.SaveSettings(Setting.updateIntervall, UpdateIntervall.Weekly.ToString());
+                    GetSetSettings.SaveSettings(Setting.updateInterval, UpdateInterval.Weekly.ToString());
                 }
 
-                Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"updateIntervall set to: {GetSetSettings.GetUpdateIntervall}");
+                Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"updateInterval set to: {GetSetSettings.GetUpdateInterval}");
             }
             else
             {
-                Logging.Write(LogEvent.Error, ProgramClass.SettingsForm, "cbUpdateIntervall has no value!");
+                Logging.Write(LogEvent.Error, ProgramClass.SettingsForm, "cbUpdateInterval has no value!");
                 ShowMessageBox.ShowBug();
             }
         }
@@ -273,8 +273,8 @@ namespace ChatManager.Forms
                         SwitchCurrentLocale();
                         break;
 
-                    case "cbUpdaterIntervall":
-                        SwitchUpdaterIntervall();
+                    case "cbUpdateInterval":
+                        SwitchUpdateInterval();
                         break;
                 }
             }

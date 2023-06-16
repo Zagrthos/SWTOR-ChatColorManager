@@ -230,12 +230,12 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string updateIntervall {
+        public string updateInterval {
             get {
-                return ((string)(this["updateIntervall"]));
+                return ((string)(this["updateInterval"]));
             }
             set {
-                this["updateIntervall"] = value;
+                this["updateInterval"] = value;
             }
         }
         

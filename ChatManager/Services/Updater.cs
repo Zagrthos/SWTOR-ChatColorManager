@@ -1,6 +1,6 @@
 ﻿namespace ChatManager.Services
 {
-    internal enum UpdateIntervall
+    internal enum UpdateInterval
     {
         OnStartup,
         Daily,
@@ -58,9 +58,10 @@
                 }
 
                 // Save the date of the last update Check but only if the user has NOT initiated it
-                if (GetSetSettings.GetUpdateIntervall != UpdateIntervall.OnStartup.ToString() && !fromUser)
+                if (GetSetSettings.GetUpdateInterval != UpdateInterval.OnStartup.ToString() && !fromUser)
                 {
-                    GetSetSettings.SaveSettings(Setting.lastUpdateCheck, DateTime.Today.ToLocalTime());
+                    GetSetSettings.SaveSettings(Setting.lastUpdateCheck, DateTime.Today);
+                    Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"Last Update Check: {DateTime.Today}");
                 }
             }
             catch (HttpRequestException ex)

@@ -40,7 +40,7 @@
             chbSaveOnClose = new CheckBox();
             btnResetSettings = new Button();
             gbUpdater = new GroupBox();
-            cbUpdateIntervall = new ComboBox();
+            cbUpdateInterval = new ComboBox();
             lblUpdateIntervall = new Label();
             tlpSettings.SuspendLayout();
             gbLanguage.SuspendLayout();
@@ -180,7 +180,7 @@
             // 
             // gbUpdater
             // 
-            gbUpdater.Controls.Add(cbUpdateIntervall);
+            gbUpdater.Controls.Add(cbUpdateInterval);
             gbUpdater.Controls.Add(lblUpdateIntervall);
             gbUpdater.Dock = DockStyle.Fill;
             gbUpdater.Location = new Point(3, 55);
@@ -191,16 +191,16 @@
             gbUpdater.TabStop = false;
             gbUpdater.Text = "Update-Einstellungen";
             // 
-            // cbUpdateIntervall
+            // cbUpdateInterval
             // 
-            cbUpdateIntervall.Dock = DockStyle.Top;
-            cbUpdateIntervall.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbUpdateIntervall.FormattingEnabled = true;
-            cbUpdateIntervall.Location = new Point(3, 34);
-            cbUpdateIntervall.Name = "cbUpdateIntervall";
-            cbUpdateIntervall.Size = new Size(192, 23);
-            cbUpdateIntervall.TabIndex = 1;
-            cbUpdateIntervall.SelectedIndexChanged += ComboBoxHandler;
+            cbUpdateInterval.Dock = DockStyle.Top;
+            cbUpdateInterval.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbUpdateInterval.FormattingEnabled = true;
+            cbUpdateInterval.Location = new Point(3, 34);
+            cbUpdateInterval.Name = "cbUpdateInterval";
+            cbUpdateInterval.Size = new Size(192, 23);
+            cbUpdateInterval.TabIndex = 1;
+            cbUpdateInterval.SelectedIndexChanged += ComboBoxHandler;
             // 
             // lblUpdateIntervall
             // 
@@ -247,7 +247,7 @@
         private Button btnResetSettings;
         private CheckBox chbReloadOnStartup;
         private GroupBox gbUpdater;
-        private ComboBox cbUpdateIntervall;
+        private ComboBox cbUpdateInterval;
         private Label lblUpdateIntervall;
     }
 }

@@ -14,7 +14,7 @@ namespace ChatManager.Services
         reloadOnStartup,
         saveOnClose,
         settingsUpgradeRequired,
-        updateIntervall
+        updateInterval
     }
 
     internal class GetSetSettings
@@ -44,7 +44,7 @@ namespace ChatManager.Services
         public static bool GetReloadOnStartup => Settings.Default._reloadOnStartup;
         public static bool GetAutosave => Settings.Default._autosave;
         public static decimal GetAutosaveInterval => Settings.Default._autosaveInterval;
-        public static string GetUpdateIntervall => Settings.Default.updateIntervall;
+        public static string GetUpdateInterval => Settings.Default.updateInterval;
         public static DateTime GetLastUpdateCheck => Settings.Default.lastUpdateCheck;
 
         public static void InitSettings()
@@ -58,7 +58,7 @@ namespace ChatManager.Services
                 Settings.Default.autosavePath = autosavePath;
                 Settings.Default.autosaveAvailability = autosaveDir;
                 Settings.Default._autosaveInterval = 0;
-                Settings.Default.updateIntervall = UpdateIntervall.OnStartup.ToString();
+                Settings.Default.updateInterval = UpdateInterval.OnStartup.ToString();
                 Settings.Default._Initialized = true;
                 Settings.Default.Save();
             }
@@ -80,8 +80,8 @@ namespace ChatManager.Services
                     Settings.Default._locale = settingValue;
                     break;
 
-                case Setting.updateIntervall:
-                    Settings.Default.updateIntervall = settingValue;
+                case Setting.updateInterval:
+                    Settings.Default.updateInterval = settingValue;
                     break;
 
                 default:
