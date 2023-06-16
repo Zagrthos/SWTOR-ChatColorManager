@@ -9,6 +9,10 @@ Maybe I will expand it so you can transfer all settings from one character to an
 - Live editing of all chat colors in the program
   - ATM not with the Background of the game chat but maybe...
 - Ability to update itself when an update is available
+- Supports 3 languages
+  - German
+  - English
+  - France
 
 ## What do I need to run this?
 An Operating System with the following versions:
