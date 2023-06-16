@@ -39,11 +39,14 @@
             chbAutosave = new CheckBox();
             chbSaveOnClose = new CheckBox();
             btnResetSettings = new Button();
-            chbReloadOnStartup = new CheckBox();
+            gbUpdater = new GroupBox();
+            cbUpdateIntervall = new ComboBox();
+            lblUpdateIntervall = new Label();
             tlpSettings.SuspendLayout();
             gbLanguage.SuspendLayout();
             gbGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numberAutosaveInterval).BeginInit();
+            gbUpdater.SuspendLayout();
             SuspendLayout();
             // 
             // tlpSettings
@@ -54,6 +57,7 @@
             tlpSettings.Controls.Add(gbLanguage, 0, 0);
             tlpSettings.Controls.Add(gbGeneral, 1, 0);
             tlpSettings.Controls.Add(btnResetSettings, 0, 7);
+            tlpSettings.Controls.Add(gbUpdater, 0, 2);
             tlpSettings.Dock = DockStyle.Fill;
             tlpSettings.Location = new Point(0, 0);
             tlpSettings.Name = "tlpSettings";
@@ -174,16 +178,39 @@
             btnResetSettings.UseVisualStyleBackColor = true;
             btnResetSettings.Click += ResetSettings;
             // 
-            // chbReloadOnStartup
+            // gbUpdater
             // 
-            chbReloadOnStartup.AutoSize = true;
-            chbReloadOnStartup.Location = new Point(6, 100);
-            chbReloadOnStartup.Name = "chbReloadOnStartup";
-            chbReloadOnStartup.Size = new Size(274, 19);
-            chbReloadOnStartup.TabIndex = 4;
-            chbReloadOnStartup.Text = "Öffnen der letzten Farben beim starten der App";
-            chbReloadOnStartup.UseVisualStyleBackColor = true;
-            chbReloadOnStartup.CheckedChanged += ChangingCheckBoxes;
+            gbUpdater.Controls.Add(cbUpdateIntervall);
+            gbUpdater.Controls.Add(lblUpdateIntervall);
+            gbUpdater.Dock = DockStyle.Fill;
+            gbUpdater.Location = new Point(3, 55);
+            gbUpdater.Name = "gbUpdater";
+            tlpSettings.SetRowSpan(gbUpdater, 4);
+            gbUpdater.Size = new Size(198, 98);
+            gbUpdater.TabIndex = 3;
+            gbUpdater.TabStop = false;
+            gbUpdater.Text = "Update-Einstellungen";
+            // 
+            // cbUpdateIntervall
+            // 
+            cbUpdateIntervall.Dock = DockStyle.Top;
+            cbUpdateIntervall.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbUpdateIntervall.FormattingEnabled = true;
+            cbUpdateIntervall.Location = new Point(3, 34);
+            cbUpdateIntervall.Name = "cbUpdateIntervall";
+            cbUpdateIntervall.Size = new Size(192, 23);
+            cbUpdateIntervall.TabIndex = 1;
+            cbUpdateIntervall.SelectedIndexChanged += ComboBoxHandler;
+            // 
+            // lblUpdateIntervall
+            // 
+            lblUpdateIntervall.AutoSize = true;
+            lblUpdateIntervall.Dock = DockStyle.Top;
+            lblUpdateIntervall.Location = new Point(3, 19);
+            lblUpdateIntervall.Name = "lblUpdateIntervall";
+            lblUpdateIntervall.Size = new Size(75, 15);
+            lblUpdateIntervall.TabIndex = 0;
+            lblUpdateIntervall.Text = "Suchintervall";
             // 
             // SettingsForm
             // 
@@ -202,6 +229,8 @@
             gbGeneral.ResumeLayout(false);
             gbGeneral.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numberAutosaveInterval).EndInit();
+            gbUpdater.ResumeLayout(false);
+            gbUpdater.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -217,5 +246,8 @@
         private CheckBox chbAutosave;
         private Button btnResetSettings;
         private CheckBox chbReloadOnStartup;
+        private GroupBox gbUpdater;
+        private ComboBox cbUpdateIntervall;
+        private Label lblUpdateIntervall;
     }
 }
