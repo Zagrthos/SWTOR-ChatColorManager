@@ -68,6 +68,8 @@ namespace ChatManager.Forms
                 }
             }
 
+            btnResetSettings.Text = localization.GetString(btnResetSettings.Name);
+
             cbUpdateIntervall.Items.Clear();
             cbUpdateIntervall.Items.Add(localization.GetString("UpdateIntervallOnStart"));
             cbUpdateIntervall.Items.Add(localization.GetString("UpdateIntervallDaily"));
