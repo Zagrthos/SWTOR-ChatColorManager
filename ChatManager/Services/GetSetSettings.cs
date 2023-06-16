@@ -165,16 +165,14 @@ namespace ChatManager.Services
         {
             Settings.Default.Reset();
 
-            SaveSettings(Setting.reset, true);
+            SaveSettings(Setting.settingsUpgradeRequired, false);
 
             if (string.IsNullOrEmpty(GetCurrentLocale))
             {
                 SaveSettings(Setting.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             }
 
-            SaveSettings(Setting.settingsUpgradeRequired, false);
-
-            Settings.Default.Save();
+            InitSettings();
         }
     }
 }
