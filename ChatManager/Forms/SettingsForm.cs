@@ -13,7 +13,7 @@ namespace ChatManager.Forms
 
         private bool autosaveTimerChanged = false;
         private bool languageChanged = false;
-        private bool comboBoxFalseAlarm = false;
+        private bool cbLanguageFalseAlarm = false;
         private bool checkBoxFalseAlarm = false;
         private decimal currentAutosaveInterval = 0;
 
@@ -74,17 +74,17 @@ namespace ChatManager.Forms
             switch (GetSetSettings.GetCurrentLocale)
             {
                 case "de":
-                    comboBoxFalseAlarm = true;
+                    cbLanguageFalseAlarm = true;
                     cbLanguage.SelectedIndex = 2;
                     break;
 
                 case "en":
-                    comboBoxFalseAlarm = true;
+                    cbLanguageFalseAlarm = true;
                     cbLanguage.SelectedIndex = 0;
                     break;
 
                 case "fr":
-                    comboBoxFalseAlarm = true;
+                    cbLanguageFalseAlarm = true;
                     cbLanguage.SelectedIndex = 1;
                     break;
 
@@ -151,9 +151,9 @@ namespace ChatManager.Forms
 
         private void SwitchCurrentLocale()
         {
-            if (comboBoxFalseAlarm)
+            if (cbLanguageFalseAlarm)
             {
-                comboBoxFalseAlarm = false;
+                cbLanguageFalseAlarm = false;
                 return;
             }
 
@@ -190,8 +190,9 @@ namespace ChatManager.Forms
         }
 
         private void SwitchCurrentLocale(object sender, EventArgs e)
+        private void ComboBoxHandler(object sender, EventArgs e)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "ComboBoxMethod triggered");
+            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "ComboBoxHandler triggered");
 
             if (sender is ComboBox)
             {

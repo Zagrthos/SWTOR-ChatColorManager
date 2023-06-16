@@ -91,7 +91,7 @@
             cbLanguage.Name = "cbLanguage";
             cbLanguage.Size = new Size(192, 23);
             cbLanguage.TabIndex = 0;
-            cbLanguage.SelectedIndexChanged += SwitchCurrentLocale;
+            cbLanguage.SelectedIndexChanged += ComboBoxHandler;
             // 
             // gbGeneral
             // 
