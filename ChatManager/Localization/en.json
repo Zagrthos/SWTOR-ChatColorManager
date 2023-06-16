@@ -106,7 +106,7 @@
   "btnResetSettings": "Reset Settings",
   "gbUpdater": "Update settings",
   "lblUpdateIntervall": "Search intervall",
-  "UpdateIntervallOnStart": "On startup",
-  "UpdateIntervallDaily": "Daily",
-  "UpdateIntervallWeekly": "Weekly"
+  "UpdateIntervalOnStart": "On startup",
+  "UpdateIntervalDaily": "Daily",
+  "UpdateIntervalWeekly": "Weekly"
 }
