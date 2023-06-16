@@ -59,7 +59,7 @@ namespace ChatManager.Services
                 Settings.Default.autosavePath = autosavePath;
                 Settings.Default.autosaveAvailability = autosaveDir;
                 Settings.Default._autosaveInterval = 0;
-                Settings.Default.updateIntervall = UpdateIntervall.OnStart.ToString();
+                Settings.Default.updateIntervall = UpdateIntervall.OnStartup.ToString();
                 Settings.Default._Initialized = true;
                 Settings.Default.Save();
             }

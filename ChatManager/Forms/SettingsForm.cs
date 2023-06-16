@@ -163,7 +163,7 @@ namespace ChatManager.Forms
 
             switch (GetSetSettings.GetUpdateIntervall)
             {
-                case "OnStart":
+                case "OnStartup":
                     cbUpdaterIntervallFalseAlarm = true;
                     cbUpdateIntervall.SelectedIndex = 0;
                     break;
@@ -239,7 +239,7 @@ namespace ChatManager.Forms
             {
                 if (cbUpdateIntervall.SelectedIndex == 0)
                 {
-                    GetSetSettings.SaveSettings(Setting.updateIntervall, UpdateIntervall.OnStart.ToString());
+                    GetSetSettings.SaveSettings(Setting.updateIntervall, UpdateIntervall.OnStartup.ToString());
                 }
                 else if (cbUpdateIntervall.SelectedIndex == 1)
                 {

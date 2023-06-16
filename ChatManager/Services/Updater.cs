@@ -2,7 +2,7 @@
 {
     internal enum UpdateIntervall
     {
-        OnStart,
+        OnStartup,
         Daily,
         Weekly
     }
@@ -58,7 +58,7 @@
                 }
 
                 // Save the date of the last update Check but only if the user has NOT initiated it
-                if (GetSetSettings.GetUpdateIntervall != UpdateIntervall.OnStart.ToString() && !fromUser)
+                if (GetSetSettings.GetUpdateIntervall != UpdateIntervall.OnStartup.ToString() && !fromUser)
                 {
                     GetSetSettings.SaveSettings(Setting.lastUpdateCheck, DateTime.Today.ToLocalTime());
                 }
