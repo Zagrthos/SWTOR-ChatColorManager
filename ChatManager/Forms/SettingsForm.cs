@@ -413,9 +413,15 @@ namespace ChatManager.Forms
 
             if (sender is Button)
             {
+                string currentLocale = GetSetSettings.GetCurrentLocale;
                 GetSetSettings.RestoreSettings();
                 Localize();
                 AdjustContentOnForm();
+
+                if (currentLocale != GetSetSettings.GetCurrentLocale)
+                {
+                    languageChanged = true;
+                }
             }
             else
             {
