@@ -9,11 +9,12 @@ namespace ChatManager.Services
         autosaveAvailability,
         autosaveInterval,
         backupAvailability,
+        lastUpdateCheck,
         locale,
         reloadOnStartup,
         reset,
         saveOnClose,
-        lastUpdateCheck,
+        settingsUpgradeRequired,
         updateIntervall
     }
 
@@ -120,6 +121,10 @@ namespace ChatManager.Services
                     Settings.Default._reset = value;
                     break;
 
+                case Setting.settingsUpgradeRequired:
+                    Settings.Default._upgradeRequired = value;
+                    break;
+
                 default:
                     throw new NotImplementedException();
             }
@@ -167,7 +172,7 @@ namespace ChatManager.Services
                 SaveSettings(Setting.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             }
 
-            Settings.Default._upgradeRequired = false;
+            SaveSettings(Setting.settingsUpgradeRequired, false);
 
             Settings.Default.Save();
         }
