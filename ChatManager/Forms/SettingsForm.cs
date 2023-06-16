@@ -42,6 +42,7 @@ namespace ChatManager.Forms
 
             var groups = GetControls(this, typeof(GroupBox));
             var checkBoxes = GetControls(this, typeof(CheckBox));
+            var labels = GetControls(this, typeof(Label));
 
             foreach (Control control in groups)
             {
@@ -59,7 +60,13 @@ namespace ChatManager.Forms
                 }
             }
 
-            lblAutosaveInterval.Text = localization.GetString(lblAutosaveInterval.Name);
+            foreach (Control control in labels)
+            {
+                if (control is Label label)
+                {
+                    label.Text = localization.GetString(label.Name);
+                }
+            }
 
             cbUpdateIntervall.Items.Clear();
             cbUpdateIntervall.Items.Add(localization.GetString("UpdateIntervallOnStart"));
