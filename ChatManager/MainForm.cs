@@ -155,6 +155,7 @@ namespace ChatManager
 
                     case "restoreBackupToolStripMenuItem":
                         Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Restore Backup requested");
+                        OpenWindows.OpenBackupSelector();
                         return;
                 }
 

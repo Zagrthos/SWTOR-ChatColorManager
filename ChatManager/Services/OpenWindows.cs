@@ -123,6 +123,16 @@ namespace ChatManager.Services
             ShowMessageBox.Show(localization.GetString("MessageBoxInfo"), exportedFilesInfo);
         }
 
+        public static void OpenBackupSelector()
+        {
+            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenBackupSelector Entered");
+
+            BackupSelector backupSelector = new();
+            backupSelector.ShowDialog();
+
+            backupSelector.Dispose();
+        }
+
         // Open Explorer Window with a specified path
         public static void OpenExplorer(string path)
         {

@@ -20,6 +20,7 @@ namespace ChatManager.Services
         MainForm,
         ProgramConfig,
         AboutForm,
+        BackupSelector,
         ColorPickerForm,
         FileSelectorForm,
         SettingsForm,
