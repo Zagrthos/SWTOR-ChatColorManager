@@ -30,10 +30,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AdditionalFiles Remove="Properties\app.manifest" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="Resources\Logo.ico" />
   </ItemGroup>
 
