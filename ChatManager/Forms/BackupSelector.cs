@@ -11,6 +11,7 @@ namespace ChatManager.Forms
         }
 
         private static readonly string backupPath = GetSetSettings.GetBackupPath;
+        private string[,] filesInDir = new string[1000, 2];
 
         private void DisplayBackupDirs()
         {
@@ -38,22 +39,51 @@ namespace ChatManager.Forms
             string[] dirContent = Directory.GetFiles(dirName);
             Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, $"fileNames: {dirContent.Length}");
 
-            string[] fileNames = new string[dirContent.Length];
+            AssociateFilesWithPaths(dirContent);
 
-            for (int i = 0;i < dirContent.Length;i++)
+            string[] files = new string[dirContent.Length];
+
+            for (int i = 0; i < filesInDir.Length / 2; i++)
             {
-                string fileName = Path.GetFileName(dirContent[i]);
-                string[] parts = fileName.Split("_");
-                fileNames[i] = $"{Path.GetFileName(parts[1])} ()";
-                Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, fileNames[i]);
+                Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, $"{i}");
+
+                if (!string.IsNullOrEmpty(filesInDir[i, 0]) && !string.IsNullOrEmpty(filesInDir[i, 1]))
+                {
+                    Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, $"{filesInDir[i, 0]} & {filesInDir[i, 1]}");
+
+                    Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, $"file[{i}]");
+                    files[i] = $"{filesInDir[i, 0]} - {Converter.AddWhitespace(Converter.ServerNameIdentifier(filesInDir[i, 1], false))}";
+                    Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, files[i]);
+                }
+                else
+                {
+                    Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, "Already done or null");
+                    break;
+                }
+            }
+
+            clbxBackupFiles.DataSource = files;
             }
 
             clbxBackupFiles.DataSource = fileNames;
         }
 
-        private void RestoreBackupFiles()
+        private void AssociateFilesWithPaths(string[] paths)
         {
+            // Clear the Array
+            filesInDir = new string[1000, 3];
 
+            for (int i = 0; i < paths.Length; i++)
+            {
+                string fileName = Path.GetFileName(paths[i]);
+                string[] parts = fileName.Split("_");
+                filesInDir[i, 0] = parts[1];
+                filesInDir[i, 1] = parts[0];
+                filesInDir[i, 2] = paths[i];
+                Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, filesInDir[i, 0]);
+                Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, filesInDir[i, 1]);
+                Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, filesInDir[i, 2]);
+        }
         }
 
         private void lbxBackupDir_SelectedIndexChanged(object sender, EventArgs e)
