@@ -7,6 +7,7 @@ namespace ChatManager.Forms
         public BackupSelector()
         {
             InitializeComponent();
+            lblDateConvertion.Text = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss} = {DateTime.Now:d} - {DateTime.Now:T}";
             DisplayBackupDirs();
         }
 

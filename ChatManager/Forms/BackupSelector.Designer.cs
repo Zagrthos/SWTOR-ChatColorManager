@@ -37,6 +37,7 @@
             tlpBackupFiles = new TableLayoutPanel();
             btnSelectAll = new Button();
             btnDeselectAll = new Button();
+            lblDateConvertion = new Label();
             tlpMain.SuspendLayout();
             tlpBackupFiles.SuspendLayout();
             SuspendLayout();
@@ -51,6 +52,7 @@
             tlpMain.Controls.Add(lblBackupDir, 0, 0);
             tlpMain.Controls.Add(lblBackupFiles, 1, 0);
             tlpMain.Controls.Add(tlpBackupFiles, 1, 2);
+            tlpMain.Controls.Add(lblDateConvertion, 0, 2);
             tlpMain.Dock = DockStyle.Fill;
             tlpMain.Location = new Point(0, 0);
             tlpMain.Name = "tlpMain";
@@ -140,6 +142,17 @@
             btnDeselectAll.Text = "Alle abwählen";
             btnDeselectAll.UseVisualStyleBackColor = true;
             // 
+            // lblDateConvertion
+            // 
+            lblDateConvertion.AutoSize = true;
+            lblDateConvertion.Dock = DockStyle.Fill;
+            lblDateConvertion.Location = new Point(3, 224);
+            lblDateConvertion.Name = "lblDateConvertion";
+            lblDateConvertion.Size = new Size(286, 37);
+            lblDateConvertion.TabIndex = 5;
+            lblDateConvertion.Text = "Date Placeholder";
+            lblDateConvertion.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // BackupSelector
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -167,5 +180,6 @@
         private TableLayoutPanel tlpBackupFiles;
         private Button btnSelectAll;
         private Button btnDeselectAll;
+        private Label lblDateConvertion;
     }
 }
