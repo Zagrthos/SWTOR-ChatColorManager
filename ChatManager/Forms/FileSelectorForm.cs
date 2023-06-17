@@ -325,6 +325,10 @@ namespace ChatManager.Forms
                     }
                 }
             }
+            else
+            {
+                Logging.Write(LogEvent.Warning, ProgramClass.FileSelectorForm, $"Sender: {sender} is not a Button!");
+            }
         }
 
         // Find all Controls of the desired Type and pack them in a Control List
