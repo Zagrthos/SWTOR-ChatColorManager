@@ -1,6 +1,6 @@
 ﻿namespace ChatManager.Forms
 {
-    partial class BackupSelector
+    partial class BackupSelectorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackupSelector));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackupSelectorForm));
             tlpMain = new TableLayoutPanel();
             lbxBackupDir = new ListBox();
             clbxBackupFiles = new CheckedListBox();
             lblBackupDir = new Label();
             lblBackupFiles = new Label();
             tlpBackupFiles = new TableLayoutPanel();
-            btnSelectAll = new Button();
-            btnDeselectAll = new Button();
+            btnBackupSelectAll = new Button();
+            btnBackupDeselectAll = new Button();
             lblDateConvertion = new Label();
             tlpMain.SuspendLayout();
             tlpBackupFiles.SuspendLayout();
@@ -111,8 +111,8 @@
             tlpBackupFiles.ColumnCount = 2;
             tlpBackupFiles.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpBackupFiles.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tlpBackupFiles.Controls.Add(btnSelectAll, 0, 0);
-            tlpBackupFiles.Controls.Add(btnDeselectAll, 1, 0);
+            tlpBackupFiles.Controls.Add(btnBackupSelectAll, 0, 0);
+            tlpBackupFiles.Controls.Add(btnBackupDeselectAll, 1, 0);
             tlpBackupFiles.Dock = DockStyle.Fill;
             tlpBackupFiles.Location = new Point(295, 227);
             tlpBackupFiles.Name = "tlpBackupFiles";
@@ -122,25 +122,25 @@
             tlpBackupFiles.Size = new Size(286, 31);
             tlpBackupFiles.TabIndex = 4;
             // 
-            // btnSelectAll
+            // btnBackupSelectAll
             // 
-            btnSelectAll.Dock = DockStyle.Fill;
-            btnSelectAll.Location = new Point(3, 3);
-            btnSelectAll.Name = "btnSelectAll";
-            btnSelectAll.Size = new Size(137, 25);
-            btnSelectAll.TabIndex = 0;
-            btnSelectAll.Text = "Alle auswählen";
-            btnSelectAll.UseVisualStyleBackColor = true;
+            btnBackupSelectAll.Dock = DockStyle.Fill;
+            btnBackupSelectAll.Location = new Point(3, 3);
+            btnBackupSelectAll.Name = "btnBackupSelectAll";
+            btnBackupSelectAll.Size = new Size(137, 25);
+            btnBackupSelectAll.TabIndex = 0;
+            btnBackupSelectAll.Text = "Alle auswählen";
+            btnBackupSelectAll.UseVisualStyleBackColor = true;
             // 
-            // btnDeselectAll
+            // btnBackupDeselectAll
             // 
-            btnDeselectAll.Dock = DockStyle.Fill;
-            btnDeselectAll.Location = new Point(146, 3);
-            btnDeselectAll.Name = "btnDeselectAll";
-            btnDeselectAll.Size = new Size(137, 25);
-            btnDeselectAll.TabIndex = 1;
-            btnDeselectAll.Text = "Alle abwählen";
-            btnDeselectAll.UseVisualStyleBackColor = true;
+            btnBackupDeselectAll.Dock = DockStyle.Fill;
+            btnBackupDeselectAll.Location = new Point(146, 3);
+            btnBackupDeselectAll.Name = "btnBackupDeselectAll";
+            btnBackupDeselectAll.Size = new Size(137, 25);
+            btnBackupDeselectAll.TabIndex = 1;
+            btnBackupDeselectAll.Text = "Alle abwählen";
+            btnBackupDeselectAll.UseVisualStyleBackColor = true;
             // 
             // lblDateConvertion
             // 
@@ -153,7 +153,7 @@
             lblDateConvertion.Text = "Date Placeholder";
             lblDateConvertion.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // BackupSelector
+            // BackupSelectorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -161,7 +161,7 @@
             Controls.Add(tlpMain);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
-            Name = "BackupSelector";
+            Name = "BackupSelectorForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Backup wiederherstellen";
             tlpMain.ResumeLayout(false);
@@ -178,8 +178,8 @@
         private Label lblBackupDir;
         private Label lblBackupFiles;
         private TableLayoutPanel tlpBackupFiles;
-        private Button btnSelectAll;
-        private Button btnDeselectAll;
+        private Button btnBackupSelectAll;
+        private Button btnBackupDeselectAll;
         private Label lblDateConvertion;
     }
 }

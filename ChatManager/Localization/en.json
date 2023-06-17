@@ -109,5 +109,12 @@
   "UpdateIntervalOnStart": "On startup",
   "UpdateIntervalDaily": "Daily",
   "UpdateIntervalWeekly": "Weekly",
-  "chbUpdateDownload": "Download updates manually"
+  "chbUpdateDownload": "Download updates manually",
+
+  "_comment8": "BackupSelector Strings",
+  "BackupSelectorForm": "Restore backup",
+  "lblBackupDir": "Choose backup directory",
+  "lblBackupFiles": "Choose backup file(s)",
+  "btnBackupSelectAll": "Select all",
+  "btnBackupDeselectAll": "Deselect all"
 }

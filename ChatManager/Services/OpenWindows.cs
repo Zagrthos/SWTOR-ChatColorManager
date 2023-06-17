@@ -127,7 +127,7 @@ namespace ChatManager.Services
         {
             Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenBackupSelector Entered");
 
-            BackupSelector backupSelector = new();
+            BackupSelectorForm backupSelector = new();
             backupSelector.ShowDialog();
 
             backupSelector.Dispose();

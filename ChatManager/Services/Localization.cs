@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 
 namespace ChatManager.Services
 {
@@ -60,6 +61,30 @@ namespace ChatManager.Services
                 Logging.Write(LogEvent.Warning, ProgramClass.Localization, $"No localization found for string: {name}!");
                 return string.Empty;
             }
+        }
+
+        public (string, string) GetLocalDateTime()
+        {
+            string currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+           
+            CultureInfo? culture = GetSetSettings.GetCurrentLocale switch
+            {
+                "de" => new("de"),
+                "en" => new("en"),
+                "fr" => new("fr"),
+                _ => throw new NotImplementedException(),
+            };
+
+            Application.CurrentCulture = culture!;
+
+            string date = DateTime.Now.ToString("d");
+            string time = DateTime.Now.ToString("T");
+
+            culture = new(currentCulture);
+
+            Application.CurrentCulture = culture;
+
+            return (date, time);
         }
     }
 }

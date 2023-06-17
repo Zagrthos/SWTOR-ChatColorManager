@@ -109,5 +109,12 @@
   "UpdateIntervalOnStart": "Au démarrage",
   "UpdateIntervalDaily": "Quotidiennement",
   "UpdateIntervalWeekly": "Hebdomadaire",
-  "chbUpdateDownload": "Télécharge les mises à jour manuellement"
+  "chbUpdateDownload": "Télécharge les mises à jour manuellement",
+
+  "_comment8": "BackupSelector Strings",
+  "BackupSelectorForm": "Restaurer la sauvegarde",
+  "lblBackupDir": "Choisis le répertoire de sauvegarde",
+  "lblBackupFiles": "Choisis le(s) fichier(s) de sauvegarde",
+  "btnBackupSelectAll": "Sélectionner tout",
+  "btnBackupDeselectAll": "Désélectionne tout"
 }
