@@ -72,7 +72,7 @@
             lbxBackupDir.Name = "lbxBackupDir";
             lbxBackupDir.Size = new Size(286, 193);
             lbxBackupDir.TabIndex = 0;
-            lbxBackupDir.SelectedIndexChanged += lbxBackupDir_SelectedIndexChanged;
+            lbxBackupDir.SelectedIndexChanged += SelectBackupDir;
             // 
             // clbxBackupFiles
             // 
@@ -131,6 +131,7 @@
             btnBackupSelectAll.TabIndex = 0;
             btnBackupSelectAll.Text = "Alle auswählen";
             btnBackupSelectAll.UseVisualStyleBackColor = true;
+            btnBackupSelectAll.Click += SelectClick;
             // 
             // btnBackupDeselectAll
             // 
@@ -141,6 +142,7 @@
             btnBackupDeselectAll.TabIndex = 1;
             btnBackupDeselectAll.Text = "Alle abwählen";
             btnBackupDeselectAll.UseVisualStyleBackColor = true;
+            btnBackupDeselectAll.Click += SelectClick;
             // 
             // lblDateConvertion
             // 

@@ -44,6 +44,7 @@ namespace ChatManager.Forms
         {
             Logging.Write(LogEvent.Method, ProgramClass.BackupSelector, "DisplayBackupDirs entered");
             
+            // Clear the DataSource so the checked Items get unchecked
             // Search the given Path for Files
             string[] dirContent = Directory.GetFiles(dirName);
             Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, $"fileNames: {dirContent.Length}");
@@ -104,7 +105,7 @@ namespace ChatManager.Forms
         }
         }
 
-        private void lbxBackupDir_SelectedIndexChanged(object sender, EventArgs e)
+        private void SelectBackupDir(object sender, EventArgs e)
         {
             if (sender is ListBox listBox)
             {
@@ -122,6 +123,23 @@ namespace ChatManager.Forms
             else
             {
                 Logging.Write(LogEvent.Warning, ProgramClass.BackupSelector, $"Sender: {sender} is not a ListBox!");
+            }
+        }
+
+        private void SelectClick(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                bool isChecked = !button.Name.Contains("Deselect");
+                for (int i = 0; i < clbxBackupFiles.Items.Count; i++)
+                {
+                    clbxBackupFiles.SetItemChecked(i, isChecked);
+                }
+                Logging.Write(LogEvent.Info, ProgramClass.BackupSelector, $"All Checks set to: {isChecked}");
+            }
+            else
+            {
+                Logging.Write(LogEvent.Warning, ProgramClass.BackupSelector, $"Sender: {sender} is not a Button!");
             }
         }
 
