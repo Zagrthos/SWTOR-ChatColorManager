@@ -77,6 +77,11 @@ namespace ChatManager.Services
             return Regex.Replace(text, "(\\B[A-Z])", " $1");
         }
 
+        public static string RemoveWhitespace(string text)
+        {
+            return text.Replace(" ", "");
+        }
+
         public static string LabelToString(string text)
         {
             string[] splitted = text.Split(":");
