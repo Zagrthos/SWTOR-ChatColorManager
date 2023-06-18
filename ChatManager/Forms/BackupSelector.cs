@@ -45,6 +45,8 @@ namespace ChatManager.Forms
             Logging.Write(LogEvent.Method, ProgramClass.BackupSelector, "DisplayBackupDirs entered");
             
             // Clear the DataSource so the checked Items get unchecked
+            clbxBackupFiles.DataSource = null;
+
             // Search the given Path for Files
             string[] dirContent = Directory.GetFiles(dirName);
             Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, $"fileNames: {dirContent.Length}");
@@ -80,7 +82,9 @@ namespace ChatManager.Forms
             clbxBackupFiles.DataSource = files;
             }
 
-            clbxBackupFiles.DataSource = fileNames;
+        private void RestoreBackupFiles(string[] fileNames)
+        {
+
         }
 
         private void AssociateFilesWithPaths(string[] paths)
