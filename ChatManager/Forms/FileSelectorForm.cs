@@ -282,6 +282,8 @@ namespace ChatManager.Forms
 
         private void SelectClick(object sender, EventArgs e)
         {
+            Logging.Write(LogEvent.Method, ProgramClass.FileSelectorForm, "SelectClick entered");
+
             if (sender is Button button)
             {
                 string tabName = button.Name.Substring(2);
@@ -322,6 +324,7 @@ namespace ChatManager.Forms
                         {
                             checkedListBox.SetItemChecked(i, isChecked);
                         }
+                        Logging.Write(LogEvent.Info, ProgramClass.FileSelectorForm, $"All Checks set to: {isChecked}");
                     }
                 }
             }
