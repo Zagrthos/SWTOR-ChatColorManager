@@ -17,7 +17,7 @@ namespace ChatManager.Forms
         private void DisplayBackupDirs()
         {
             Logging.Write(LogEvent.Method, ProgramClass.BackupSelector, "DisplayBackupDirs entered");
-            
+
             // Search the given Path for Directories
             string[] backupDirs = Directory.GetDirectories(backupPath);
             Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, $"backupDirs: {backupDirs.Length}");
@@ -43,7 +43,7 @@ namespace ChatManager.Forms
         private void DisplayBackupFiles(string dirName)
         {
             Logging.Write(LogEvent.Method, ProgramClass.BackupSelector, "DisplayBackupDirs entered");
-            
+
             // Clear the DataSource so the checked Items get unchecked
             clbxBackupFiles.DataSource = null;
 
@@ -80,7 +80,7 @@ namespace ChatManager.Forms
 
             // Set the DataSource
             clbxBackupFiles.DataSource = files;
-            }
+        }
 
         private void RestoreBackupFiles(string[] fileNames)
         {
@@ -106,7 +106,7 @@ namespace ChatManager.Forms
                 Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, filesInDir[i, 0]);
                 Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, filesInDir[i, 1]);
                 Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, filesInDir[i, 2]);
-        }
+            }
         }
 
         private void SelectBackupDir(object sender, EventArgs e)
@@ -144,6 +144,38 @@ namespace ChatManager.Forms
             else
             {
                 Logging.Write(LogEvent.Warning, ProgramClass.BackupSelector, $"Sender: {sender} is not a Button!");
+            }
+        }
+
+        private void Restore(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.Name == btnRestore.Name)
+            {
+                // Get all the checked items in an array
+                string[] checkedItems = clbxBackupFiles.CheckedItems.Cast<string>().ToArray();
+                string localPath = GetSetSettings.GetLocalPath;
+
+                // Now loop the array
+                for (int i = 0; i < checkedItems.Length; i++)
+                {
+                    // Split the name in two parts
+                    string[] parts = checkedItems[i].Split(" - ");
+
+                    // Generate the fileName
+                    string fileName = Converter.ServerNameIdentifier(Converter.RemoveWhitespace(parts[1]), true) + $"_{parts[0]}_PlayerGUIState.ini";
+                    Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, $"fileName: {fileName}");
+
+                    // Generate the filePath
+                    string path = Path.Combine(backupPath, lbxBackupDir.SelectedItem!.ToString()!, fileName);
+                    Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, $"path: {path}");
+
+                    // Replace the file
+                    File.Copy(path, localPath, true);
+                }
+            }
+            else
+            {
+                Logging.Write(LogEvent.Warning, ProgramClass.BackupSelector, $"Sender: {sender} is not a Button or {btnRestore.Name}!");
             }
         }
 

@@ -155,6 +155,7 @@
             btnRestore.TabIndex = 2;
             btnRestore.Text = "Wiederherstellen";
             btnRestore.UseVisualStyleBackColor = true;
+            btnRestore.Click += Restore;
             // 
             // lblDateConvertion
             // 
