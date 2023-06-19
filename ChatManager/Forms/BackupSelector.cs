@@ -42,7 +42,7 @@ namespace ChatManager.Forms
 
         private void DisplayBackupFiles(string dirName)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.BackupSelector, "DisplayBackupDirs entered");
+            Logging.Write(LogEvent.Method, ProgramClass.BackupSelector, "DisplayBackupFiles entered");
 
             // Clear the DataSource so the checked Items get unchecked
             clbxBackupFiles.DataSource = null;
@@ -82,13 +82,10 @@ namespace ChatManager.Forms
             clbxBackupFiles.DataSource = files;
         }
 
-        private void RestoreBackupFiles(string[] fileNames)
-        {
-
-        }
-
         private void AssociateFilesWithPaths(string[] paths)
         {
+            Logging.Write(LogEvent.Method, ProgramClass.BackupSelector, "AssociateFilesWithPaths entered");
+
             // Clear the Array
             filesInDir = new string[1000, 3];
 
@@ -111,6 +108,8 @@ namespace ChatManager.Forms
 
         private void SelectBackupDir(object sender, EventArgs e)
         {
+            Logging.Write(LogEvent.Method, ProgramClass.BackupSelector, "SelectBackupDir entered");
+
             if (sender is ListBox listBox)
             {
                 string? dirName = listBox.SelectedItem?.ToString();
@@ -132,6 +131,8 @@ namespace ChatManager.Forms
 
         private void SelectClick(object sender, EventArgs e)
         {
+            Logging.Write(LogEvent.Method, ProgramClass.BackupSelector, "SelectClick entered");
+
             if (sender is Button button)
             {
                 bool isChecked = !button.Name.Contains("Deselect");
@@ -149,6 +150,8 @@ namespace ChatManager.Forms
 
         private void Restore(object sender, EventArgs e)
         {
+            Logging.Write(LogEvent.Method, ProgramClass.BackupSelector, "Restore entered");
+
             if (sender is Button button && button.Name == btnRestore.Name)
             {
                 // Get all the checked items in an array
@@ -163,11 +166,9 @@ namespace ChatManager.Forms
 
                     // Generate the fileName
                     string fileName = Converter.ServerNameIdentifier(Converter.RemoveWhitespace(parts[1]), true) + $"_{parts[0]}_PlayerGUIState.ini";
-                    Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, $"fileName: {fileName}");
 
                     // Generate the filePath
                     string path = Path.Combine(backupPath, lbxBackupDir.SelectedItem!.ToString()!, fileName);
-                    Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, $"path: {path}");
 
                     // Replace the file
                     File.Copy(path, localPath, true);
