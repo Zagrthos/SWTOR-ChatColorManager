@@ -120,5 +120,6 @@
   "lblBackupDir": "Backupverzeichnis auswählen",
   "lblBackupFiles": "Backup Datei(en) auswählen",
   "btnBackupSelectAll": "Alle auswählen",
-  "btnBackupDeselectAll": "Alle abwählen"
+  "btnBackupDeselectAll": "Alle abwählen",
+  "btnRestore": "Wiederherstellen"
 }

@@ -2,6 +2,8 @@
   "_comment1": "MainForm Menu",
   "fileToolStripMenuItem": "Fichier",
   "openToolStripMenuItem": "Importation",
+  "loadAutosaveToolStripMenuItem": "Charger la sauvegarde automatique",
+  "restoreBackupToolStripMenuItem": "Restaurer la sauvegarde",
   "saveToolStripMenuItem": "Exportation",
   "exitToolStripMenuItem": "Sortie",
   "toolsToolStripMenuItem": "Outils",
@@ -116,5 +118,6 @@
   "lblBackupDir": "Choisis le répertoire de sauvegarde",
   "lblBackupFiles": "Choisis le(s) fichier(s) de sauvegarde",
   "btnBackupSelectAll": "Sélectionner tout",
-  "btnBackupDeselectAll": "Désélectionne tout"
+  "btnBackupDeselectAll": "Désélectionne tout",
+  "btnRestore": "Restaurer"
 }

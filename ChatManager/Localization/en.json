@@ -2,6 +2,8 @@
   "_comment1": "MainForm Menu",
   "fileToolStripMenuItem": "File",
   "openToolStripMenuItem": "Import",
+  "loadAutosaveToolStripMenuItem": "Load autosave",
+  "restoreBackupToolStripMenuItem": "Restore backup",
   "saveToolStripMenuItem": "Export",
   "exitToolStripMenuItem": "Exit",
   "toolsToolStripMenuItem": "Tools",
@@ -116,5 +118,6 @@
   "lblBackupDir": "Choose backup directory",
   "lblBackupFiles": "Choose backup file(s)",
   "btnBackupSelectAll": "Select all",
-  "btnBackupDeselectAll": "Deselect all"
+  "btnBackupDeselectAll": "Deselect all",
+  "btnRestore": "Restore"
 }
