@@ -156,6 +156,8 @@ namespace ChatManager.Forms
             {
                 // Get all the checked items in an array
                 string[] checkedItems = clbxBackupFiles.CheckedItems.Cast<string>().ToArray();
+                Logging.Write(LogEvent.Variable, ProgramClass.BackupSelector, $"checkedItems: {checkedItems.Length}");
+
                 string localPath = GetSetSettings.GetLocalPath;
 
                 // Now loop the array
