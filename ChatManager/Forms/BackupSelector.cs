@@ -171,8 +171,15 @@ namespace ChatManager.Forms
                     string path = Path.Combine(backupPath, lbxBackupDir.SelectedItem!.ToString()!, fileName);
 
                     // Replace the file
-                    File.Copy(path, localPath, true);
+                    File.Copy(path, Path.Combine(localPath, fileName), true);
                 }
+
+                Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+                string changedFiles = localization.GetString("Inf_ExportedFiles");
+                changedFiles = changedFiles.Replace("FILECOUNT", checkedItems.Length.ToString());
+
+                ShowMessageBox.Show(localization.GetString("MessageBoxInfo"), changedFiles);
             }
             else
             {
