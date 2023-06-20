@@ -64,7 +64,7 @@ namespace ChatManager.Services
             Write(LogEvent.Info, ProgramClass.Logging, $"Application version is: {Application.ProductVersion}");
 
             // Add Timer to write any second all open entries in the log
-            timer = new(5000);
+            timer = new(10000);
             timer.Elapsed += TimerElapsed;
             timer.Start();
         }
