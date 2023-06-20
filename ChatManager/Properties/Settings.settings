@@ -57,7 +57,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="updateInterval" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">OnStartup</Value>
     </Setting>
     <Setting Name="lastUpdateCheck" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)" />
