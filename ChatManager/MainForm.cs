@@ -472,6 +472,15 @@ namespace ChatManager
             var buttons = GetControls(this, typeof(Button));
             var labels = GetControls(this, typeof(Label));
 
+            // Needed because it's disabled by default and does not change the localization
+            // It will be enabled, the state will be saved and downwards it will be disabled again
+            bool loadAutosaveEnabled = false;
+            if (!loadAutosaveToolStripMenuItem.Enabled)
+            {
+                loadAutosaveToolStripMenuItem.Enabled = true;
+                loadAutosaveEnabled = true;
+            }
+
             foreach (var item in menuMainForm.Items)
             {
                 if (item is ToolStripMenuItem menuItem && menuItem.Enabled)
@@ -486,6 +495,12 @@ namespace ChatManager
                         }
                     }
                 }
+            }
+
+            // Disable the control again if the state is true
+            if (loadAutosaveEnabled)
+            {
+                loadAutosaveToolStripMenuItem.Enabled = false;
             }
 
             foreach (TabControl tabControl in tabs.Cast<TabControl>())
