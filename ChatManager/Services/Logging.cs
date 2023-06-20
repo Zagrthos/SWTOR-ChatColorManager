@@ -102,7 +102,8 @@ namespace ChatManager.Services
             if (logWriter != null)
             {
                 logWriter.WriteLine($"[{DateTime.Now:HH:mm:ss}] => {Event} on {programClass}: {Message}");
-            } else
+            }
+            else
             {
                 Initialize();
             }

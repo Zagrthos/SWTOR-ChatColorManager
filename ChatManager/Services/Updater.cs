@@ -63,7 +63,7 @@
         public static async Task CheckForUpdates(bool fromUser = false)
         {
             Logging.Write(LogEvent.Method, ProgramClass.Updater, "CheckForUpdates entered");
-            
+
             HttpClient client = new();
             Logging.Write(LogEvent.Info, ProgramClass.Updater, "HttpClient created");
 

@@ -15,7 +15,7 @@
 
         private readonly string[] selectedServers;
         private readonly string[] fileNames;
-        
+
         // Is used for positioning the characters in the array
         private int arrayCounter;
 

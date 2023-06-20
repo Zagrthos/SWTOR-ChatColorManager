@@ -229,6 +229,6 @@
             }
 
             return colorIndex;
-        } 
+        }
     }
 }

@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace ChatManager.Forms
 {
-    partial class AboutForm : Form
+    internal partial class AboutForm : Form
     {
         public AboutForm()
         {
@@ -73,7 +73,8 @@ namespace ChatManager.Forms
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
-        #endregion
+
+        #endregion Assembly Attribute Accessors
 
         private void CopyrightButton_Click(object sender, EventArgs e)
         {

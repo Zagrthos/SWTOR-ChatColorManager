@@ -64,7 +64,7 @@ namespace ChatManager.Services
         public (string, string) GetLocalDateTime()
         {
             string currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
-           
+
             CultureInfo? culture = GetSetSettings.GetCurrentLocale switch
             {
                 "de" => new("de"),

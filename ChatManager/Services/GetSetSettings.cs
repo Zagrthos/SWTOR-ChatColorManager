@@ -91,7 +91,7 @@ namespace ChatManager.Services
             }
             Settings.Default.Save();
         }
-        
+
         // This is for setting booleans
         public static void SaveSettings(Setting settingName, bool value)
         {
