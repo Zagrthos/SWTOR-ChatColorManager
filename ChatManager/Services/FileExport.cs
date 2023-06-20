@@ -57,21 +57,6 @@
                 // Get the Array from the association
                 string[,] name = AssociateFileWithServer();
 
-                // Debug Purposes only
-                // Log every entry if it's not null or empty
-                for (int i = 0; i < 100; i++)
-                {
-                    if (!string.IsNullOrEmpty(name[i, 0]) && !string.IsNullOrEmpty(name[i, 1]))
-                    {
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current name[{i}, 0] is: {name[i, 0]}");
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current name[{i}, 1] is: {name[i, 1]}");
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-
                 // Loop through the arrayCounter and Copy all files in the array to the backup position
                 for (int i = 0; i < arrayCounter; i++)
                 {
@@ -80,13 +65,13 @@
                     if (!string.IsNullOrEmpty(name[i, 0]) && !string.IsNullOrEmpty(name[i, 1]))
                     {
                         string path = name[i, 1];
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current path is: {path}");
+                        //Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current path is: {path}");
 
                         string fileName = Path.GetFileName(name[i, 1]);
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current fileName is: {fileName}");
+                        //Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current fileName is: {fileName}");
 
                         string newPath = $"{deeperBackup}\\{fileName}";
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current newPath is: {newPath}");
+                        //Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current newPath is: {newPath}");
 
                         // Copy only if the dir is present
                         if (backupAvailability)
@@ -105,6 +90,10 @@
                                 {
                                     lineNumber = line;
                                     break;
+                                }
+                                else
+                                {
+                                    Logging.Write(LogEvent.Warning, ProgramClass.FileExport, "No ChatColors line found!");
                                 }
                             }
 
@@ -219,11 +208,11 @@
 
                         // Get the path
                         string file = fileNames[arrayCounter];
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current file is: {file}");
+                        //Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current file is: {file}");
 
                         // Get the filename
                         string fileName = Path.GetFileName(name[j, 1]);
-                        Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current fileName is: {fileName}");
+                        //Logging.Write(LogEvent.Variable, ProgramClass.FileExport, $"Current fileName is: {fileName}");
 
                         // If file or fileName is null or empty stop it
                         if (string.IsNullOrEmpty(name[j, 0]) && string.IsNullOrEmpty(fileName))

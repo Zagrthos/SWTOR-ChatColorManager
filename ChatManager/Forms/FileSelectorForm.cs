@@ -194,7 +194,6 @@ namespace ChatManager.Forms
         private void ListBoxClick(object sender, EventArgs e)
         {
             Logging.Write(LogEvent.Method, ProgramClass.FileSelectorForm, "ListBoxClick entered");
-            Logging.Write(LogEvent.Variable, ProgramClass.FileSelectorForm, $"Sender is: {sender}");
 
             // If the sender is a Button initialize it as button
             if (sender is Button button)

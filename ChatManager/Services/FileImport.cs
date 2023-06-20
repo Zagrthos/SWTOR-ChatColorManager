@@ -68,7 +68,7 @@
 
                 for (int i = 0; i < charFileNames.Length; i++)
                 {
-                    Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"currentFile: {i}");
+                    //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"currentFile: {i}");
                     string[] fileParts = charFileNames[i]!.Split("_");
 
                     if (fileParts.Length == 3)
