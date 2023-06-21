@@ -634,6 +634,29 @@ namespace ChatManager
 #endif
         }
 
+        // Display the Download Progress on the screen
+        private void DownloadProgressReporter_DownloadProgressChanged(object? sender, DownloadProgressEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => UpdateDownloadProgress(e.GetDownloadProgress())));
+                return;
+            }
+
+            UpdateDownloadProgress(e.GetDownloadProgress());
+        }
+
+        private void UpdateDownloadProgress(double progress)
+        {
+            if (!downloadProgressToolStripMenuItem.Visible)
+            {
+                downloadProgressToolStripMenuItem.Visible = true;
+            }
+
+            string text = Updater.GetUpdateDownloadText.Replace("PROGRESS", progress.ToString());
+            downloadProgressToolStripMenuItem.Text = text;
+        }
+
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm closing");

@@ -17,6 +17,8 @@
         private static string updatePath = string.Empty;
         private static string updateDownloadText = string.Empty;
 
+        internal static string GetUpdateDownloadText => updateDownloadText;
+
         internal static async Task CheckForUpdateInterval()
         {
             string updateInterval = GetSetSettings.GetUpdateInterval;

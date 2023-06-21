@@ -52,6 +52,7 @@
             toolStripSeparator5 = new ToolStripSeparator();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             updateToolStripMenuItem = new ToolStripMenuItem();
+            downloadProgressToolStripMenuItem = new ToolStripMenuItem();
             tabsMainForm = new TabControl();
             tpGlobal = new TabPage();
             tlpGlobal = new TableLayoutPanel();
@@ -141,7 +142,7 @@
             // menuMainForm
             // 
             tlpMainForm.SetColumnSpan(menuMainForm, 2);
-            menuMainForm.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem });
+            menuMainForm.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem, downloadProgressToolStripMenuItem });
             menuMainForm.Location = new Point(0, 0);
             menuMainForm.Name = "menuMainForm";
             menuMainForm.RenderMode = ToolStripRenderMode.Professional;
@@ -289,6 +290,14 @@
             updateToolStripMenuItem.Size = new Size(187, 22);
             updateToolStripMenuItem.Text = "Auf Updates prüfen";
             updateToolStripMenuItem.Click += ToolStripMenuHandler;
+            // 
+            // downloadProgressToolStripMenuItem
+            // 
+            downloadProgressToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            downloadProgressToolStripMenuItem.Name = "downloadProgressToolStripMenuItem";
+            downloadProgressToolStripMenuItem.Size = new Size(186, 20);
+            downloadProgressToolStripMenuItem.Text = "Update Download: PROGRESS%";
+            downloadProgressToolStripMenuItem.Visible = false;
             // 
             // tabsMainForm
             // 
@@ -1019,5 +1028,6 @@
         private ToolStripMenuItem exitToolStripMenuItem;
         private Label lblCharName;
         private Label lblServerName;
+        private ToolStripMenuItem downloadProgressToolStripMenuItem;
     }
 }

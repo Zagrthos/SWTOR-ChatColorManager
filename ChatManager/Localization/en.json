@@ -17,6 +17,7 @@
   "bugMailToolStripMenuItem": "Report bug (Mail)",
   "aboutToolStripMenuItem": "About...",
   "updateToolStripMenuItem": "Check for updates",
+  "downloadProgressToolStripMenuItem": "Download progress: PROGRESS%",
 
   "_comment2": "MainForm",
   "tpGlobal": "Global Channels",
