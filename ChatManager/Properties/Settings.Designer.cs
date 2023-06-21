@@ -17,7 +17,7 @@ namespace ChatManager.Properties {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
-        internal static Settings Default {
+        public static Settings Default {
             get {
                 return defaultInstance;
             }
@@ -26,7 +26,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        internal string localPath {
+        public string localPath {
             get {
                 return ((string)(this["localPath"]));
             }
@@ -38,7 +38,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        internal string backupPath {
+        public string backupPath {
             get {
                 return ((string)(this["backupPath"]));
             }
@@ -50,7 +50,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        internal bool backupAvailability {
+        public bool backupAvailability {
             get {
                 return ((bool)(this["backupAvailability"]));
             }
@@ -62,7 +62,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        internal bool _Initialized {
+        public bool _Initialized {
             get {
                 return ((bool)(this["_Initialized"]));
             }
@@ -74,7 +74,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        internal string logPath {
+        public string logPath {
             get {
                 return ((string)(this["logPath"]));
             }
@@ -86,7 +86,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatColorManager/issues/")]
-        internal string supportPath {
+        public string supportPath {
             get {
                 return ((string)(this["supportPath"]));
             }
@@ -95,7 +95,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatColorManager/issues/new/choose")]
-        internal string bugPath {
+        public string bugPath {
             get {
                 return ((string)(this["bugPath"]));
             }
@@ -104,7 +104,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://unsplash.com/photos/PEJtZfT6C1Q")]
-        internal string copyrightPicture {
+        public string copyrightPicture {
             get {
                 return ((string)(this["copyrightPicture"]));
             }
@@ -113,7 +113,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("mailto:swtor-chatmanager@fire.fundersclub.com?subject=[BUG]")]
-        internal string bugMailPath {
+        public string bugMailPath {
             get {
                 return ((string)(this["bugMailPath"]));
             }
@@ -122,7 +122,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        internal string _locale {
+        public string _locale {
             get {
                 return ((string)(this["_locale"]));
             }
@@ -134,7 +134,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        internal bool _autosave {
+        public bool _autosave {
             get {
                 return ((bool)(this["_autosave"]));
             }
@@ -146,7 +146,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        internal decimal _autosaveInterval {
+        public decimal _autosaveInterval {
             get {
                 return ((decimal)(this["_autosaveInterval"]));
             }
@@ -158,7 +158,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        internal bool _saveOnClose {
+        public bool _saveOnClose {
             get {
                 return ((bool)(this["_saveOnClose"]));
             }
@@ -170,7 +170,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        internal string autosavePath {
+        public string autosavePath {
             get {
                 return ((string)(this["autosavePath"]));
             }
@@ -182,7 +182,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        internal bool autosaveAvailability {
+        public bool autosaveAvailability {
             get {
                 return ((bool)(this["autosaveAvailability"]));
             }
@@ -194,7 +194,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        internal bool _reloadOnStartup {
+        public bool _reloadOnStartup {
             get {
                 return ((bool)(this["_reloadOnStartup"]));
             }
@@ -206,7 +206,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        internal bool _reset {
+        public bool _reset {
             get {
                 return ((bool)(this["_reset"]));
             }
@@ -218,7 +218,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        internal bool _upgradeRequired {
+        public bool _upgradeRequired {
             get {
                 return ((bool)(this["_upgradeRequired"]));
             }
@@ -230,7 +230,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("OnStartup")]
-        internal string updateInterval {
+        public string updateInterval {
             get {
                 return ((string)(this["updateInterval"]));
             }
@@ -241,7 +241,7 @@ namespace ChatManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.DateTime lastUpdateCheck {
+        public global::System.DateTime lastUpdateCheck {
             get {
                 return ((global::System.DateTime)(this["lastUpdateCheck"]));
             }
@@ -253,7 +253,7 @@ namespace ChatManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        internal bool updateDownload {
+        public bool updateDownload {
             get {
                 return ((bool)(this["updateDownload"]));
             }
