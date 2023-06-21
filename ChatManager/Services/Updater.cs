@@ -218,6 +218,8 @@
 
             OpenWindows.OpenProcess(updatePath);
 
+            Logging.Dispose();
+
             Environment.Exit(0);
         }
     }
