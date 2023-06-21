@@ -15,6 +15,7 @@
         private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/";
         private static string updateName = "SWTOR-ChatManager-";
         private static string updatePath = string.Empty;
+        private static string updateDownloadText = string.Empty;
 
         internal static async Task CheckForUpdateInterval()
         {
@@ -156,18 +157,48 @@
                 updatePath = Path.Combine(Path.GetTempPath(), updateName);
                 Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"Download Path: {updatePath}");
 
-                FileStream fileStream = new(updatePath, FileMode.Create, FileAccess.Write, FileShare.None);
-                Stream stream = await responseMessage.Content.ReadAsStreamAsync();
-                await stream.CopyToAsync(fileStream);
+                Localization localization = new(GetSetSettings.GetCurrentLocale);
+                updateDownloadText = localization.GetString("downloadProgressToolStripMenuItem");
+
+                // Count the length of the to download file
+                long? totalBytes = responseMessage.Content.Headers.ContentLength;
+
+                // Download the file and then log the progress
+                using (FileStream filestream = new(updatePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (Stream stream = await responseMessage.Content.ReadAsStreamAsync())
+                {
+                    byte[] buffer = new byte[8192];
+                    long totalBytesRead = 0;
+                    int bytesRead;
+                    double lastLoggedPercent = 0;
+
+                    while ((bytesRead = await stream.ReadAsync(buffer)) != 0)
+                    {
+                        await filestream.WriteAsync(buffer.AsMemory(0, bytesRead));
+                        totalBytesRead += bytesRead;
+                        double percent = totalBytes.HasValue ? ((double)totalBytesRead /  totalBytes.Value) * 100 : -1;
+
+                        if (percent > -1)
+                        {
+                            // Remove all ,xx
+                            percent = Math.Round(percent);
+
+                            // But only log if the progress has changed 1%
+                            if (Math.Abs(percent - lastLoggedPercent) >= 1)
+                            {
+                                DownloadProgressReporter.OnDownloadProgressChanged(percent);
+                                Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"progress: {percent}%");
+                                lastLoggedPercent = percent;
+                            }
+                        }
+                    }
+                }
 
                 client.Dispose();
                 responseMessage.Dispose();
-                fileStream.Dispose();
-                stream.Dispose();
 
                 Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"Update downloaded to: {updatePath}");
 
-                Localization localization = new(GetSetSettings.GetCurrentLocale);
                 ShowMessageBox.Show(localization.GetString("MessageBoxUpdate"), localization.GetString("Update_IsInstallReady"));
 
                 InstallUpdate();
@@ -186,6 +217,31 @@
             OpenWindows.OpenProcess(updatePath);
 
             Environment.Exit(0);
+        }
+    }
+
+    internal class DownloadProgressEventArgs : EventArgs
+    {
+        private readonly double progress;
+
+        internal double GetDownloadProgress()
+        {
+            return progress;
+        }
+
+        internal DownloadProgressEventArgs(double progress)
+        {
+            this.progress = progress;
+        }
+    }
+
+    internal static class DownloadProgressReporter
+    {
+        internal static event EventHandler<DownloadProgressEventArgs>? DownloadProgressChanged;
+
+        internal static void OnDownloadProgressChanged(double progress)
+        {
+            DownloadProgressChanged?.Invoke(null, new DownloadProgressEventArgs(progress));
         }
     }
 }
