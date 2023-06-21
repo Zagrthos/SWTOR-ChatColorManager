@@ -546,8 +546,6 @@ namespace ChatManager
 
             if (GetSetSettings.GetSaveOnClose)
             {
-                FormClosing += MainForm_FormClosing!;
-
                 Logging.Write(LogEvent.Info, ProgramClass.MainForm, "SaveOnClose set");
 
                 if (GetSetSettings.GetReloadOnStartup)
@@ -634,7 +632,7 @@ namespace ChatManager
 #endif
         }
 
-        // Display the Download Progress on the screen
+        // Receive the DownloadProgress from the Updater
         private void DownloadProgressReporter_DownloadProgressChanged(object? sender, DownloadProgressEventArgs e)
         {
             if (InvokeRequired)
@@ -646,6 +644,7 @@ namespace ChatManager
             UpdateDownloadProgress(e.GetDownloadProgress());
         }
 
+        // Display the Download Progress on the screen
         private void UpdateDownloadProgress(double progress)
         {
             if (!downloadProgressToolStripMenuItem.Visible)
@@ -657,6 +656,7 @@ namespace ChatManager
             downloadProgressToolStripMenuItem.Text = text;
         }
 
+        // When the Form is closing, log it, remove the DownloadProgressReporter, stop the autosaveTimer and do a autosave
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm closing");
@@ -665,7 +665,7 @@ namespace ChatManager
 
             autosaveTimer?.Stop();
 
-            if (GetSetSettings.GetAutosave)
+            if (GetSetSettings.GetSaveOnClose)
             {
                 DoSave();
             }
