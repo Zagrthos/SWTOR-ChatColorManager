@@ -3,9 +3,9 @@ using System.Globalization;
 
 namespace ChatManager
 {
-    public partial class MainForm : Form
+    internal partial class MainForm : Form
     {
-        public MainForm()
+        internal MainForm()
         {
             InitializeComponent();
         }

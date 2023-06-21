@@ -5,7 +5,7 @@ namespace ChatManager.Services
 {
     internal class OpenWindows
     {
-        public static string OpenColorPicker(string text, Color color)
+        internal static string OpenColorPicker(string text, Color color)
         {
             Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenColorPicker Entered");
 
@@ -20,7 +20,7 @@ namespace ChatManager.Services
             return hexColor;
         }
 
-        public static void OpenAbout()
+        internal static void OpenAbout()
         {
             Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenAbout Entered");
 
@@ -30,7 +30,7 @@ namespace ChatManager.Services
             aboutForm.Dispose();
         }
 
-        public static (bool, bool) OpenSettings()
+        internal static (bool, bool) OpenSettings()
         {
             Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenSettings Entered");
 
@@ -73,7 +73,7 @@ namespace ChatManager.Services
         }
 
         // Open the FileSelector but with the import Settings
-        public static (string, string) OpenFileImportSelector()
+        internal static (string, string) OpenFileImportSelector()
         {
             Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenFileImportSelector Entered");
 
@@ -90,7 +90,7 @@ namespace ChatManager.Services
         }
 
         // Open the FileSelector but with the export Settings
-        public static void OpenFileExportSelector(string[] values)
+        internal static void OpenFileExportSelector(string[] values)
         {
             Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenFileExportSelector Entered");
 
@@ -123,7 +123,7 @@ namespace ChatManager.Services
             ShowMessageBox.Show(localization.GetString("MessageBoxInfo"), exportedFilesInfo);
         }
 
-        public static void OpenBackupSelector()
+        internal static void OpenBackupSelector()
         {
             Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenBackupSelector Entered");
 
@@ -134,7 +134,7 @@ namespace ChatManager.Services
         }
 
         // Open Explorer Window with a specified path
-        public static void OpenExplorer(string path)
+        internal static void OpenExplorer(string path)
         {
             Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start explorer.exe with path: {path}");
 
@@ -151,7 +151,7 @@ namespace ChatManager.Services
             }
         }
 
-        public static void OpenLinksInBrowser(string url)
+        internal static void OpenLinksInBrowser(string url)
         {
             Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start default Browser with url: {url}");
 
@@ -171,7 +171,7 @@ namespace ChatManager.Services
             }
         }
 
-        public static void OpenProcess(string path)
+        internal static void OpenProcess(string path)
         {
             Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start process with path: {path}");
 

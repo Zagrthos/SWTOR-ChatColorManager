@@ -8,7 +8,7 @@ namespace ChatManager.Services
         private Dictionary<string, string> strings = new();
         private readonly string installPath = Application.StartupPath;
 
-        public Localization(string locale)
+        internal Localization(string locale)
         {
             Logging.Write(LogEvent.Info, ProgramClass.Localization, $"Localization Constructor created with locale: {locale}");
             CheckLocale(locale);
@@ -48,7 +48,7 @@ namespace ChatManager.Services
             }
         }
 
-        public string GetString(string name)
+        internal string GetString(string name)
         {
             if (strings.TryGetValue(name, out var result))
             {
@@ -61,7 +61,7 @@ namespace ChatManager.Services
             }
         }
 
-        public (string, string) GetLocalDateTime()
+        internal (string, string) GetLocalDateTime()
         {
             string currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
 

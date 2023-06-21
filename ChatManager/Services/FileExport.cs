@@ -2,7 +2,7 @@
 {
     internal class FileExport
     {
-        public FileExport(string[] servers, string[] files)
+        internal FileExport(string[] servers, string[] files)
         {
             Logging.Write(LogEvent.Info, ProgramClass.FileExport, "FileExport Constructor created");
             arrayCounter = 0;
@@ -19,9 +19,9 @@
         // Is used for positioning the characters in the array
         private int arrayCounter;
 
-        public int GetNumberOfChangedFiles => arrayCounter;
+        internal int GetNumberOfChangedFiles => arrayCounter;
 
-        public void BackupFilesAndWrite(string[] content)
+        internal void BackupFilesAndWrite(string[] content)
         {
             Logging.Write(LogEvent.Method, ProgramClass.FileExport, "BackupFilesAndWrite entered");
 

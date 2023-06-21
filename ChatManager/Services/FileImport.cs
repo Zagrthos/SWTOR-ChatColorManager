@@ -2,7 +2,7 @@
 {
     internal class FileImport
     {
-        public FileImport()
+        internal FileImport()
         {
             Logging.Write(LogEvent.Info, ProgramClass.FileImport, "FileImport Constructor created");
             if (filesChecked != true)
@@ -23,7 +23,7 @@
         private static readonly string[,] theLeviathanArray = new string[1000, 2];
 
         // Get Methods to exchange data to other parts of the program
-        public string[,] GetArray(string name)
+        internal string[,] GetArray(string name)
         {
             return name switch
             {
@@ -36,7 +36,7 @@
             };
         }
 
-        public List<string> GetServerList()
+        internal List<string> GetServerList()
         {
             return serverList;
         }
@@ -142,7 +142,7 @@
         }
 
         // Get the colors from the given File
-        public string[] GetContentFromFile(string fileName, bool autosaveImport)
+        internal string[] GetContentFromFile(string fileName, bool autosaveImport)
         {
             Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetContentFromFile entered");
 

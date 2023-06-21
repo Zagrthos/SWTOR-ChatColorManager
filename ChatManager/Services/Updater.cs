@@ -16,7 +16,7 @@
         private static string updateName = "SWTOR-ChatManager-";
         private static string updatePath = string.Empty;
 
-        public static async Task CheckForUpdateInterval()
+        internal static async Task CheckForUpdateInterval()
         {
             string updateInterval = GetSetSettings.GetUpdateInterval;
             bool updateSearch = false;
@@ -60,7 +60,7 @@
             }
         }
 
-        public static async Task CheckForUpdates(bool fromUser = false)
+        internal static async Task CheckForUpdates(bool fromUser = false)
         {
             Logging.Write(LogEvent.Method, ProgramClass.Updater, "CheckForUpdates entered");
 

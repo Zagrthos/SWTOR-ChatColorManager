@@ -2,9 +2,9 @@
 
 namespace ChatManager.Forms
 {
-    public partial class ColorPickerForm : Form
+    internal partial class ColorPickerForm : Form
     {
-        public ColorPickerForm(string text, Color color)
+        internal ColorPickerForm(string text, Color color)
         {
             InitializeComponent();
             Text = text;
@@ -13,7 +13,7 @@ namespace ChatManager.Forms
         }
 
         private string hexColor = string.Empty;
-        public string GetHexColor => hexColor;
+        internal string GetHexColor => hexColor;
 
         private void ColorChanged(object sender, EventArgs e)
         {

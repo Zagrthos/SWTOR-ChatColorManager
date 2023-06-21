@@ -2,7 +2,7 @@
 {
     internal class Autosave
     {
-        public Autosave()
+        internal Autosave()
         {
             Logging.Write(LogEvent.Info, ProgramClass.Autosave, "Autosave Constructor created");
             if (pathChecked != true)
@@ -16,7 +16,7 @@
         private static bool pathChecked = GetSetSettings.GetAutosaveAvailability;
         private static readonly string autosavePath = Path.Combine(GetSetSettings.GetAutosavePath, "autosave.txt");
 
-        public void DoAutosave(string charName, string serverName, string[] colorData)
+        internal void DoAutosave(string charName, string serverName, string[] colorData)
         {
             Logging.Write(LogEvent.Method, ProgramClass.Autosave, "DoAutosave entered");
 

@@ -13,7 +13,7 @@ namespace ChatManager.Services
     internal class Checks
     {
         // Check if the String is a Hex Text
-        public static bool CheckHexString(string input)
+        internal static bool CheckHexString(string input)
         {
             // Define Hex Regex
             var hexPattern = "^#?([a-fA-F0-9]{6})$";
@@ -23,7 +23,7 @@ namespace ChatManager.Services
         }
 
         // Check if SWTOR is running
-        public static bool CheckSWTORprocessFound()
+        internal static bool CheckSWTORprocessFound()
         {
             bool found = false;
 
@@ -41,7 +41,7 @@ namespace ChatManager.Services
             return found;
         }
 
-        public static bool DirectoryCheck(CheckFolder folder)
+        internal static bool DirectoryCheck(CheckFolder folder)
         {
             string path = folder switch
             {

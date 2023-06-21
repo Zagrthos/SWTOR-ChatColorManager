@@ -30,26 +30,26 @@ namespace ChatManager.Services
         private static readonly string autosavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Autosave");
         private static readonly bool autosaveDir = false;
 
-        public static string GetCurrentLocale => Settings.Default._locale;
-        public static string GetLocalPath => Settings.Default.localPath;
-        public static string GetBackupPath => Settings.Default.backupPath;
-        public static bool GetBackupAvailability => Settings.Default.backupAvailability;
-        public static string GetLogPath => Settings.Default.logPath;
-        public static string GetAutosavePath => Settings.Default.autosavePath;
-        public static bool GetAutosaveAvailability => Settings.Default.autosaveAvailability;
-        public static string GetSupportPath => Settings.Default.supportPath;
-        public static string GetBugPath => Settings.Default.bugPath;
-        public static string GetBugMailpath => Settings.Default.bugMailPath;
-        public static string GetAboutPictureLink => Settings.Default.copyrightPicture;
-        public static bool GetSaveOnClose => Settings.Default._saveOnClose;
-        public static bool GetReloadOnStartup => Settings.Default._reloadOnStartup;
-        public static bool GetAutosave => Settings.Default._autosave;
-        public static decimal GetAutosaveInterval => Settings.Default._autosaveInterval;
-        public static string GetUpdateInterval => Settings.Default.updateInterval;
-        public static DateTime GetLastUpdateCheck => Settings.Default.lastUpdateCheck;
-        public static bool GetUpdateDownload => Settings.Default.updateDownload;
+        internal static string GetCurrentLocale => Settings.Default._locale;
+        internal static string GetLocalPath => Settings.Default.localPath;
+        internal static string GetBackupPath => Settings.Default.backupPath;
+        internal static bool GetBackupAvailability => Settings.Default.backupAvailability;
+        internal static string GetLogPath => Settings.Default.logPath;
+        internal static string GetAutosavePath => Settings.Default.autosavePath;
+        internal static bool GetAutosaveAvailability => Settings.Default.autosaveAvailability;
+        internal static string GetSupportPath => Settings.Default.supportPath;
+        internal static string GetBugPath => Settings.Default.bugPath;
+        internal static string GetBugMailpath => Settings.Default.bugMailPath;
+        internal static string GetAboutPictureLink => Settings.Default.copyrightPicture;
+        internal static bool GetSaveOnClose => Settings.Default._saveOnClose;
+        internal static bool GetReloadOnStartup => Settings.Default._reloadOnStartup;
+        internal static bool GetAutosave => Settings.Default._autosave;
+        internal static decimal GetAutosaveInterval => Settings.Default._autosaveInterval;
+        internal static string GetUpdateInterval => Settings.Default.updateInterval;
+        internal static DateTime GetLastUpdateCheck => Settings.Default.lastUpdateCheck;
+        internal static bool GetUpdateDownload => Settings.Default.updateDownload;
 
-        public static void InitSettings()
+        internal static void InitSettings()
         {
             if (!Settings.Default._Initialized)
             {
@@ -74,7 +74,7 @@ namespace ChatManager.Services
         }
 
         // This is for setting strings
-        public static void SaveSettings(Setting settingName, string settingValue)
+        internal static void SaveSettings(Setting settingName, string settingValue)
         {
             switch (settingName)
             {
@@ -93,7 +93,7 @@ namespace ChatManager.Services
         }
 
         // This is for setting booleans
-        public static void SaveSettings(Setting settingName, bool value)
+        internal static void SaveSettings(Setting settingName, bool value)
         {
             switch (settingName)
             {
@@ -132,7 +132,7 @@ namespace ChatManager.Services
         }
 
         // This is for setting decimals
-        public static void SaveSettings(Setting settingName, decimal value)
+        internal static void SaveSettings(Setting settingName, decimal value)
         {
             switch (settingName)
             {
@@ -147,7 +147,7 @@ namespace ChatManager.Services
         }
 
         // This is for setting DateTimes
-        public static void SaveSettings(Setting settingName, DateTime value)
+        internal static void SaveSettings(Setting settingName, DateTime value)
         {
             switch (settingName)
             {
@@ -161,7 +161,7 @@ namespace ChatManager.Services
             Settings.Default.Save();
         }
 
-        public static void RestoreSettings()
+        internal static void RestoreSettings()
         {
             Settings.Default.Reset();
 

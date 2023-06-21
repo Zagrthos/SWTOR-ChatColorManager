@@ -5,7 +5,7 @@ namespace ChatManager.Forms
 {
     internal partial class AboutForm : Form
     {
-        public AboutForm()
+        internal AboutForm()
         {
             InitializeComponent();
             Text = string.Format("About {0}", AssemblyTitle);
@@ -18,7 +18,7 @@ namespace ChatManager.Forms
 
         #region Assembly Attribute Accessors
 
-        public static string AssemblyTitle
+        internal static string AssemblyTitle
         {
             get
             {
@@ -35,7 +35,7 @@ namespace ChatManager.Forms
             }
         }
 
-        public static string AssemblyProduct
+        internal static string AssemblyProduct
         {
             get
             {
@@ -48,7 +48,7 @@ namespace ChatManager.Forms
             }
         }
 
-        public static string AssemblyCopyright
+        internal static string AssemblyCopyright
         {
             get
             {
@@ -61,7 +61,7 @@ namespace ChatManager.Forms
             }
         }
 
-        public static string AssemblyCompany
+        internal static string AssemblyCompany
         {
             get
             {

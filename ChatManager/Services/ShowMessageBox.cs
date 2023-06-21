@@ -2,7 +2,7 @@
 {
     internal class ShowMessageBox
     {
-        public static void Show(string caption, string message)
+        internal static void Show(string caption, string message)
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
@@ -38,7 +38,7 @@
             Logging.Write(LogEvent.BoxMessage, ProgramClass.ShowMessageBox, "MessageBox accepted");
         }
 
-        public static bool ShowUpdate(string version)
+        internal static bool ShowUpdate(string version)
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
             DialogResult result = MessageBox.Show(localization.GetString("Update_IsAvailable") + $" {version}", localization.GetString("MessageBoxUpdate"), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -57,7 +57,7 @@
             }
         }
 
-        public static void ShowBug()
+        internal static void ShowBug()
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
             DialogResult result = MessageBox.Show(localization.GetString("Error_IsDetected"), localization.GetString("MessageBoxError"), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
@@ -75,13 +75,13 @@
             }
         }
 
-        public static void ShowLoggingBug(string message)
+        internal static void ShowLoggingBug(string message)
         {
             MessageBox.Show($"REPORT BUG WITH SCREENSHOT OF THIS!\n{message}", "CRITICAL ERROR");
             OpenWindows.OpenLinksInBrowser(GetSetSettings.GetBugPath);
         }
 
-        public static void ShowRestart()
+        internal static void ShowRestart()
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 

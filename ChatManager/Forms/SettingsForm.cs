@@ -2,9 +2,9 @@
 
 namespace ChatManager.Forms
 {
-    public partial class SettingsForm : Form
+    internal partial class SettingsForm : Form
     {
-        public SettingsForm()
+        internal SettingsForm()
         {
             InitializeComponent();
             autosaveTimerChanged = false;
@@ -18,8 +18,8 @@ namespace ChatManager.Forms
         private bool checkBoxFalseAlarm = false;
         private decimal currentAutosaveInterval = 0;
 
-        public bool GetAutosaveTimerChanged => autosaveTimerChanged;
-        public bool GetLanguageChanged => languageChanged;
+        internal bool GetAutosaveTimerChanged => autosaveTimerChanged;
+        internal bool GetLanguageChanged => languageChanged;
 
         private void Localize()
         {

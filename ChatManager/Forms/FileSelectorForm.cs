@@ -2,9 +2,9 @@
 
 namespace ChatManager.Forms
 {
-    public partial class FileSelectorForm : Form
+    internal partial class FileSelectorForm : Form
     {
-        public FileSelectorForm(List<string> servers, bool save)
+        internal FileSelectorForm(List<string> servers, bool save)
         {
             if (save)
             {
@@ -20,10 +20,10 @@ namespace ChatManager.Forms
         private readonly string[] selectedServers = new string[5];
         private readonly List<string> listBoxMulti = new();
 
-        public string GetListBoxString => listBoxString;
-        public string GetListBoxName => listBoxName;
-        public string[] GetSelectedServers => selectedServers;
-        public List<string> GetListBoxMulti => listBoxMulti;
+        internal string GetListBoxString => listBoxString;
+        internal string GetListBoxName => listBoxName;
+        internal string[] GetSelectedServers => selectedServers;
+        internal List<string> GetListBoxMulti => listBoxMulti;
 
         // Remove the not needed servers from the List
         private void SetTabs(List<string> servers)

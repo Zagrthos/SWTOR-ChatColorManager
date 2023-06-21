@@ -6,7 +6,7 @@ namespace ChatManager.Services
     internal class Converter
     {
         // Convert an RGB Color into Hex
-        public static string RGBtoHexAsync(Color rgb)
+        internal static string RGBtoHexAsync(Color rgb)
         {
             Logging.Write(LogEvent.Info, ProgramClass.Converter, "Try to convert RGB into Hex");
             string hex = $"{rgb.R:X2}{rgb.G:X2}{rgb.B:X2}";
@@ -16,7 +16,7 @@ namespace ChatManager.Services
         }
 
         // Convert Hex into an RGB Color
-        public static Color HexToRGBAsync(string hex)
+        internal static Color HexToRGBAsync(string hex)
         {
             Logging.Write(LogEvent.Info, ProgramClass.Converter, "Try to convert Hex into RGB");
 
@@ -40,7 +40,7 @@ namespace ChatManager.Services
         }
 
         // Associate server name to identifier
-        public static string ServerNameIdentifier(string name, bool isServerName)
+        internal static string ServerNameIdentifier(string name, bool isServerName)
         {
             if (!string.IsNullOrEmpty(name) && isServerName)
             {
@@ -72,17 +72,17 @@ namespace ChatManager.Services
             }
         }
 
-        public static string AddWhitespace(string text)
+        internal static string AddWhitespace(string text)
         {
             return Regex.Replace(text, "(\\B[A-Z])", " $1");
         }
 
-        public static string RemoveWhitespace(string text)
+        internal static string RemoveWhitespace(string text)
         {
             return text.Replace(" ", "");
         }
 
-        public static string LabelToString(string text)
+        internal static string LabelToString(string text)
         {
             string[] splitted = text.Split(":");
             return splitted[1].Trim();

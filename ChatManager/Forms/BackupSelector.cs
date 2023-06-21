@@ -2,9 +2,9 @@
 
 namespace ChatManager.Forms
 {
-    public partial class BackupSelectorForm : Form
+    internal partial class BackupSelectorForm : Form
     {
-        public BackupSelectorForm()
+        internal BackupSelectorForm()
         {
             InitializeComponent();
             Localize();
