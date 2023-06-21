@@ -249,6 +249,9 @@ namespace ChatManager
         {
             Logging.Write(LogEvent.Method, ProgramClass.MainForm, "SetAllColorData entered");
 
+            lblCharName.Visible = true;
+            lblServerName.Visible = true;
+
             FileImport fileImport = new();
             string[] colorIndexes = fileImport.GetContentFromFile(filePath, autosaveIntitiated);
 
@@ -537,10 +540,12 @@ namespace ChatManager
 
             if (GetSetSettings.GetAutosave)
             {
+                Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Autosave set to true");
                 loadAutosaveToolStripMenuItem.Enabled = true;
             }
             else
             {
+                Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Autosave set to false");
                 loadAutosaveToolStripMenuItem.Enabled = false;
             }
 

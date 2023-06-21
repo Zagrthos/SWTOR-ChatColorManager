@@ -903,6 +903,7 @@
             lblCharName.TabIndex = 45;
             lblCharName.Text = "Aktueller Char:";
             lblCharName.TextAlign = ContentAlignment.MiddleLeft;
+            lblCharName.Visible = false;
             // 
             // lblServerName
             // 
@@ -914,6 +915,7 @@
             lblServerName.TabIndex = 46;
             lblServerName.Text = "Aktueller Server:";
             lblServerName.TextAlign = ContentAlignment.MiddleLeft;
+            lblServerName.Visible = false;
             // 
             // MainForm
             // 
