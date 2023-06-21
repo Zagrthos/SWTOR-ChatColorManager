@@ -627,6 +627,8 @@ namespace ChatManager
 
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm is loading");
 
+            DownloadProgressReporter.DownloadProgressChanged += DownloadProgressReporter_DownloadProgressChanged;
+
 #if !DEBUG
             await Updater.CheckForUpdateInterval();
 #endif
@@ -635,6 +637,8 @@ namespace ChatManager
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "MainForm closing");
+
+            DownloadProgressReporter.DownloadProgressChanged -= DownloadProgressReporter_DownloadProgressChanged;
 
             autosaveTimer?.Stop();
 
