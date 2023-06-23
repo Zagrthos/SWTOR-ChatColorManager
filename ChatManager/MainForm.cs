@@ -1,3 +1,4 @@
+using ChatManager.Enums;
 using ChatManager.Services;
 using System.Globalization;
 
@@ -596,7 +597,7 @@ namespace ChatManager
             if (string.IsNullOrEmpty(GetSetSettings.GetCurrentLocale))
             {
                 Logging.Write(LogEvent.Variable, ProgramClass.MainForm, $"CurrentCulture set to: {CultureInfo.CurrentCulture.TwoLetterISOLanguageName}");
-                GetSetSettings.SaveSettings(Setting.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+                GetSetSettings.SaveSettings(SettingsEnum.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             }
 
             Localize();

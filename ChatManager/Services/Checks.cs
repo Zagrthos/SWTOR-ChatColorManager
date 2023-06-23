@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using ChatManager.Enums;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace ChatManager.Services
@@ -50,10 +51,10 @@ namespace ChatManager.Services
                 _ => throw new NotImplementedException(),
             };
 
-            Setting setting = folder switch
+            SettingsEnum setting = folder switch
             {
-                CheckFolder.AutosaveFolder => Setting.autosaveAvailability,
-                CheckFolder.BackupFolder => Setting.backupAvailability,
+                CheckFolder.AutosaveFolder => SettingsEnum.autosaveAvailability,
+                CheckFolder.BackupFolder => SettingsEnum.backupAvailability,
                 _ => throw new NotImplementedException(),
             };
 

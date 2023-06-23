@@ -111,7 +111,7 @@ namespace ChatManager.Services
                 // Save the date of the last update Check but only if the user has NOT initiated it
                 if (GetSetSettings.GetUpdateInterval != UpdateEnum.OnStartup.ToString() && !fromUser)
                 {
-                    GetSetSettings.SaveSettings(Setting.lastUpdateCheck, DateTime.Today);
+                    GetSetSettings.SaveSettings(SettingsEnum.lastUpdateCheck, DateTime.Today);
                     Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"Last Update Check: {DateTime.Today}");
                 }
             }

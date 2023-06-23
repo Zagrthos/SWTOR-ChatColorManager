@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using ChatManager.Enums;
+using System.Globalization;
 using System.Text.Json;
 
 namespace ChatManager.Services
@@ -31,7 +32,7 @@ namespace ChatManager.Services
                 if (tempStrings != null)
                 {
                     strings = tempStrings;
-                    GetSetSettings.SaveSettings(Setting.locale, locale);
+                    GetSetSettings.SaveSettings(SettingsEnum.locale, locale);
                 }
 
                 // If not log Warning

@@ -4,21 +4,6 @@ using System.Globalization;
 
 namespace ChatManager.Services
 {
-    internal enum Setting
-    {
-        autosave,
-        autosaveAvailability,
-        autosaveInterval,
-        backupAvailability,
-        lastUpdateCheck,
-        locale,
-        reloadOnStartup,
-        saveOnClose,
-        settingsUpgradeRequired,
-        updateDownload,
-        updateInterval
-    }
-
     internal class GetSetSettings
     {
         private static readonly string localPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SWTOR\\swtor\\settings");
@@ -75,15 +60,15 @@ namespace ChatManager.Services
         }
 
         // This is for setting strings
-        internal static void SaveSettings(Setting settingName, string settingValue)
+        internal static void SaveSettings(SettingsEnum settingName, string settingValue)
         {
             switch (settingName)
             {
-                case Setting.locale:
+                case SettingsEnum.locale:
                     Settings.Default._locale = settingValue;
                     break;
 
-                case Setting.updateInterval:
+                case SettingsEnum.updateInterval:
                     Settings.Default.updateInterval = settingValue;
                     break;
 
@@ -94,35 +79,35 @@ namespace ChatManager.Services
         }
 
         // This is for setting booleans
-        internal static void SaveSettings(Setting settingName, bool value)
+        internal static void SaveSettings(SettingsEnum settingName, bool value)
         {
             switch (settingName)
             {
-                case Setting.backupAvailability:
+                case SettingsEnum.backupAvailability:
                     Settings.Default.backupAvailability = value;
                     break;
 
-                case Setting.autosaveAvailability:
+                case SettingsEnum.autosaveAvailability:
                     Settings.Default.autosaveAvailability = value;
                     break;
 
-                case Setting.autosave:
+                case SettingsEnum.autosave:
                     Settings.Default._autosave = value;
                     break;
 
-                case Setting.saveOnClose:
+                case SettingsEnum.saveOnClose:
                     Settings.Default._saveOnClose = value;
                     break;
 
-                case Setting.reloadOnStartup:
+                case SettingsEnum.reloadOnStartup:
                     Settings.Default._reloadOnStartup = value;
                     break;
 
-                case Setting.settingsUpgradeRequired:
+                case SettingsEnum.settingsUpgradeRequired:
                     Settings.Default._upgradeRequired = value;
                     break;
 
-                case Setting.updateDownload:
+                case SettingsEnum.updateDownload:
                     Settings.Default.updateDownload = value;
                     break;
 
@@ -133,11 +118,11 @@ namespace ChatManager.Services
         }
 
         // This is for setting decimals
-        internal static void SaveSettings(Setting settingName, decimal value)
+        internal static void SaveSettings(SettingsEnum settingName, decimal value)
         {
             switch (settingName)
             {
-                case Setting.autosaveInterval:
+                case SettingsEnum.autosaveInterval:
                     Settings.Default._autosaveInterval = value;
                     break;
 
@@ -148,11 +133,11 @@ namespace ChatManager.Services
         }
 
         // This is for setting DateTimes
-        internal static void SaveSettings(Setting settingName, DateTime value)
+        internal static void SaveSettings(SettingsEnum settingName, DateTime value)
         {
             switch (settingName)
             {
-                case Setting.lastUpdateCheck:
+                case SettingsEnum.lastUpdateCheck:
                     Settings.Default.lastUpdateCheck = value;
                     break;
 
@@ -166,11 +151,11 @@ namespace ChatManager.Services
         {
             Settings.Default.Reset();
 
-            SaveSettings(Setting.settingsUpgradeRequired, false);
+            SaveSettings(SettingsEnum.settingsUpgradeRequired, false);
 
             if (string.IsNullOrEmpty(GetCurrentLocale))
             {
-                SaveSettings(Setting.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+                SaveSettings(SettingsEnum.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             }
 
             InitSettings();
