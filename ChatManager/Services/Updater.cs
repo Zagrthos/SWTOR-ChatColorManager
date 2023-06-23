@@ -169,7 +169,7 @@
                 using (FileStream filestream = new(updatePath, FileMode.Create, FileAccess.Write, FileShare.None))
                 using (Stream stream = await responseMessage.Content.ReadAsStreamAsync())
                 {
-                    byte[] buffer = new byte[8192];
+                    byte[] buffer = new byte[65536];
                     long totalBytesRead = 0;
                     int bytesRead;
                     double lastLoggedPercent = 0;
