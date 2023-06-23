@@ -4,13 +4,6 @@ using System.Text.RegularExpressions;
 
 namespace ChatManager.Services
 {
-    internal enum CheckFolder
-    {
-        AutosaveFolder,
-        BackupFolder,
-        LogFolder
-    }
-
     internal class Checks
     {
         // Check if the String is a Hex Text
@@ -42,19 +35,19 @@ namespace ChatManager.Services
             return found;
         }
 
-        internal static bool DirectoryCheck(CheckFolder folder)
+        internal static bool DirectoryCheck(CheckFolderEnum folder)
         {
             string path = folder switch
             {
-                CheckFolder.AutosaveFolder => GetSetSettings.GetAutosavePath,
-                CheckFolder.BackupFolder => GetSetSettings.GetBackupPath,
+                CheckFolderEnum.AutosaveFolder => GetSetSettings.GetAutosavePath,
+                CheckFolderEnum.BackupFolder => GetSetSettings.GetBackupPath,
                 _ => throw new NotImplementedException(),
             };
 
             SettingsEnum setting = folder switch
             {
-                CheckFolder.AutosaveFolder => SettingsEnum.autosaveAvailability,
-                CheckFolder.BackupFolder => SettingsEnum.backupAvailability,
+                CheckFolderEnum.AutosaveFolder => SettingsEnum.autosaveAvailability,
+                CheckFolderEnum.BackupFolder => SettingsEnum.backupAvailability,
                 _ => throw new NotImplementedException(),
             };
 
@@ -88,8 +81,8 @@ namespace ChatManager.Services
 
             bool getSettings = folder switch
             {
-                CheckFolder.AutosaveFolder => GetSetSettings.GetAutosaveAvailability,
-                CheckFolder.BackupFolder => GetSetSettings.GetBackupAvailability,
+                CheckFolderEnum.AutosaveFolder => GetSetSettings.GetAutosaveAvailability,
+                CheckFolderEnum.BackupFolder => GetSetSettings.GetBackupAvailability,
                 _ => throw new NotImplementedException(),
             };
 

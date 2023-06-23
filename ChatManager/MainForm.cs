@@ -617,7 +617,7 @@ namespace ChatManager
 #endif
 
             Logging.Write(LogEvent.Info, ProgramClass.MainForm, "Set BackupOption in Menu");
-            if (!Checks.DirectoryCheck(CheckFolder.BackupFolder))
+            if (!Checks.DirectoryCheck(CheckFolderEnum.BackupFolder))
             {
                 backupToolStripMenuItem.Enabled = false;
                 Logging.Write(LogEvent.Warning, ProgramClass.MainForm, "BackupOption is not available!");

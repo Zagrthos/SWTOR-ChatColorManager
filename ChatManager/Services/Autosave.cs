@@ -1,4 +1,6 @@
-﻿namespace ChatManager.Services
+﻿using ChatManager.Enums;
+
+namespace ChatManager.Services
 {
     internal class Autosave
     {
@@ -8,7 +10,7 @@
             if (pathChecked != true)
             {
                 Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"pathChecked = {pathChecked}");
-                pathChecked = Checks.DirectoryCheck(CheckFolder.AutosaveFolder);
+                pathChecked = Checks.DirectoryCheck(CheckFolderEnum.AutosaveFolder);
                 Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"pathChecked = {pathChecked}");
             }
         }
