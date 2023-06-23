@@ -1,4 +1,5 @@
-﻿using ChatManager.Properties;
+﻿using ChatManager.Enums;
+using ChatManager.Properties;
 using System.Globalization;
 
 namespace ChatManager.Services
@@ -60,7 +61,7 @@ namespace ChatManager.Services
                 Settings.Default.autosavePath = autosavePath;
                 Settings.Default.autosaveAvailability = autosaveDir;
                 Settings.Default._autosaveInterval = 0;
-                Settings.Default.updateInterval = UpdateInterval.OnStartup.ToString();
+                Settings.Default.updateInterval = UpdateEnum.OnStartup.ToString();
                 Settings.Default._Initialized = true;
                 Settings.Default.Save();
             }

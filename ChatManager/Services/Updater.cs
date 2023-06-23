@@ -1,12 +1,7 @@
-﻿namespace ChatManager.Services
-{
-    internal enum UpdateInterval
-    {
-        OnStartup,
-        Daily,
-        Weekly
-    }
+﻿using ChatManager.Enums;
 
+namespace ChatManager.Services
+{
     internal static class Updater
     {
         private static readonly Version currentVersion = new(Application.ProductVersion);
@@ -27,18 +22,18 @@
             DateTime today = DateTime.Today;
             TimeSpan difference = today - lastCheck;
 
-            if (updateInterval == UpdateInterval.OnStartup.ToString())
+            if (updateInterval == UpdateEnum.OnStartup.ToString())
             {
                 updateSearch = true;
             }
-            else if (updateInterval == UpdateInterval.Daily.ToString())
+            else if (updateInterval == UpdateEnum.Daily.ToString())
             {
                 if (difference.Days >= 1)
                 {
                     updateSearch = true;
                 }
             }
-            else if (updateInterval == UpdateInterval.Weekly.ToString())
+            else if (updateInterval == UpdateEnum.Weekly.ToString())
             {
                 if (difference.Days >= 7)
                 {
@@ -114,7 +109,7 @@
                 }
 
                 // Save the date of the last update Check but only if the user has NOT initiated it
-                if (GetSetSettings.GetUpdateInterval != UpdateInterval.OnStartup.ToString() && !fromUser)
+                if (GetSetSettings.GetUpdateInterval != UpdateEnum.OnStartup.ToString() && !fromUser)
                 {
                     GetSetSettings.SaveSettings(Setting.lastUpdateCheck, DateTime.Today);
                     Logging.Write(LogEvent.Variable, ProgramClass.Updater, $"Last Update Check: {DateTime.Today}");

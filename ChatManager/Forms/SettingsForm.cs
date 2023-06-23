@@ -1,4 +1,5 @@
-﻿using ChatManager.Services;
+﻿using ChatManager.Enums;
+using ChatManager.Services;
 
 namespace ChatManager.Forms
 {
@@ -250,15 +251,15 @@ namespace ChatManager.Forms
             {
                 if (cbUpdateInterval.SelectedIndex == 0)
                 {
-                    GetSetSettings.SaveSettings(Setting.updateInterval, UpdateInterval.OnStartup.ToString());
+                    GetSetSettings.SaveSettings(Setting.updateInterval, UpdateEnum.OnStartup.ToString());
                 }
                 else if (cbUpdateInterval.SelectedIndex == 1)
                 {
-                    GetSetSettings.SaveSettings(Setting.updateInterval, UpdateInterval.Daily.ToString());
+                    GetSetSettings.SaveSettings(Setting.updateInterval, UpdateEnum.Daily.ToString());
                 }
                 else if (cbUpdateInterval.SelectedIndex == 2)
                 {
-                    GetSetSettings.SaveSettings(Setting.updateInterval, UpdateInterval.Weekly.ToString());
+                    GetSetSettings.SaveSettings(Setting.updateInterval, UpdateEnum.Weekly.ToString());
                 }
 
                 Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"updateInterval set to: {GetSetSettings.GetUpdateInterval}");
