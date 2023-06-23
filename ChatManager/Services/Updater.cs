@@ -101,7 +101,7 @@ namespace ChatManager.Services
                     if (fromUser)
                     {
                         Localization localization = new(GetSetSettings.GetCurrentLocale);
-                        ShowMessageBox.Show(localization.GetString("MessageBoxNoUpdate"), localization.GetString("Update_IsNotAvailable"));
+                        ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxNoUpdate), localization.GetString(LocalizationEnum.Update_IsNotAvailable));
                     }
 
                     Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
@@ -155,7 +155,7 @@ namespace ChatManager.Services
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Download Path: {updatePath}");
 
                 Localization localization = new(GetSetSettings.GetCurrentLocale);
-                updateDownloadText = localization.GetString("downloadProgressToolStripMenuItem");
+                updateDownloadText = localization.GetString(LocalizationEnum.downloadProgressToolStripMenuItem);
 
                 // Count the length of the to download file
                 long? totalBytes = responseMessage.Content.Headers.ContentLength;
@@ -196,7 +196,7 @@ namespace ChatManager.Services
 
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Update downloaded to: {updatePath}");
 
-                ShowMessageBox.Show(localization.GetString("MessageBoxUpdate"), localization.GetString("Update_IsInstallReady"));
+                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxUpdate), localization.GetString(LocalizationEnum.Update_IsInstallReady));
 
                 InstallUpdate();
             }

@@ -118,10 +118,10 @@ namespace ChatManager.Services
 
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-            string exportedFilesInfo = localization.GetString("Inf_ExportedFiles");
+            string exportedFilesInfo = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
             exportedFilesInfo = exportedFilesInfo.Replace("FILECOUNT", fileCount.ToString());
 
-            ShowMessageBox.Show(localization.GetString("MessageBoxInfo"), exportedFilesInfo);
+            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), exportedFilesInfo);
         }
 
         internal static void OpenBackupSelector()

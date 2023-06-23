@@ -1,6 +1,9 @@
 ﻿using ChatManager.Enums;
+using Microsoft.VisualBasic;
 using System.Globalization;
 using System.Text.Json;
+using System.Xml.Linq;
+using Windows.Web.Http;
 
 namespace ChatManager.Services
 {
@@ -58,6 +61,19 @@ namespace ChatManager.Services
             else
             {
                 Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, $"No localization found for string: {name}!");
+                return string.Empty;
+            }
+        }
+
+        internal string GetString(LocalizationEnum localization)
+        {
+            if (strings.TryGetValue(localization.ToString(), out var result))
+            {
+                return result;
+            }
+            else
+            {
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, $"No localization found for string: {localization}!");
                 return string.Empty;
             }
         }

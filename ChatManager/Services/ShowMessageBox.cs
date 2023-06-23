@@ -11,23 +11,23 @@ namespace ChatManager.Services
 
             switch (caption)
             {
-                case var value when value == localization.GetString("MessageBoxError"):
+                case var value when value == localization.GetString(LocalizationEnum.MessageBoxError):
                     icon = MessageBoxIcon.Error;
                     break;
 
-                case var value when value == localization.GetString("MessageBoxInfo"):
+                case var value when value == localization.GetString(LocalizationEnum.MessageBoxInfo):
                     icon = MessageBoxIcon.Information;
                     break;
 
-                case var value when value == localization.GetString("MessageBoxWarn"):
+                case var value when value == localization.GetString(LocalizationEnum.MessageBoxWarn):
                     icon = MessageBoxIcon.Warning;
                     break;
 
-                case var value when value == localization.GetString("MessageBoxUpdate"):
+                case var value when value == localization.GetString(LocalizationEnum.MessageBoxUpdate):
                     icon = MessageBoxIcon.Information;
                     break;
 
-                case var value when value == localization.GetString("MessageBoxNoUpdate"):
+                case var value when value == localization.GetString(LocalizationEnum.MessageBoxNoUpdate):
                     icon = MessageBoxIcon.Information;
                     break;
             }
@@ -42,7 +42,7 @@ namespace ChatManager.Services
         internal static bool ShowUpdate(string version)
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
-            DialogResult result = MessageBox.Show(localization.GetString("Update_IsAvailable") + $" {version}", localization.GetString("MessageBoxUpdate"), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            DialogResult result = MessageBox.Show(localization.GetString(LocalizationEnum.Update_IsAvailable) + $" {version}", localization.GetString(LocalizationEnum.MessageBoxUpdate), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox shown");
 
@@ -61,7 +61,7 @@ namespace ChatManager.Services
         internal static void ShowBug()
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
-            DialogResult result = MessageBox.Show(localization.GetString("Error_IsDetected"), localization.GetString("MessageBoxError"), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            DialogResult result = MessageBox.Show(localization.GetString(LocalizationEnum.Error_IsDetected), localization.GetString(LocalizationEnum.MessageBoxError), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
 
             Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox shown");
 
@@ -88,7 +88,7 @@ namespace ChatManager.Services
 
             Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox shown");
 
-            MessageBox.Show(localization.GetString("Inf_RestartRequired"), localization.GetString("MessageBoxInfo"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(localization.GetString(LocalizationEnum.Inf_RestartRequired), localization.GetString(LocalizationEnum.MessageBoxInfo), MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox accepted");
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Restart initated");

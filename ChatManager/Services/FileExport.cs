@@ -30,7 +30,7 @@ namespace ChatManager.Services
             if (!backupAvailability)
             {
                 Localization localization = new(GetSetSettings.GetCurrentLocale);
-                ShowMessageBox.Show(localization.GetString("MessageBoxWarn"), localization.GetString("Warn_BackupDirMissing"));
+                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_BackupDirMissing));
             }
 
             // Check if the user selected any characters

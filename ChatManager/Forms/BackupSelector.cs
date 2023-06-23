@@ -179,10 +179,10 @@ namespace ChatManager.Forms
 
                 Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-                string changedFiles = localization.GetString("Inf_ExportedFiles");
+                string changedFiles = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
                 changedFiles = changedFiles.Replace("FILECOUNT", checkedItems.Length.ToString());
 
-                ShowMessageBox.Show(localization.GetString("MessageBoxInfo"), changedFiles);
+                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), changedFiles);
             }
             else
             {

@@ -58,7 +58,7 @@ namespace ChatManager
                         {
                             Localization localization = new(GetSetSettings.GetCurrentLocale);
                             Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "String is empty! Not starting conversion process");
-                            ShowMessageBox.Show(localization.GetString("MessageBoxWarn"), localization.GetString("Warn_NoImportFound"));
+                            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoImportFound));
                         }
                     }
                     else
@@ -206,8 +206,8 @@ namespace ChatManager
                         SetAllColorData(filePath, false);
 
                         Localization localization = new(GetSetSettings.GetCurrentLocale);
-                        string message = localization.GetString("Inf_AutosaveImport").Replace("CHARNAME", Converter.LabelToString(lblCharName.Text)).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text)).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString());
-                        ShowMessageBox.Show(localization.GetString("MessageBoxInfo"), message);
+                        string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text)).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text)).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString());
+                        ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), message);
 
                         break;
                     }
@@ -230,19 +230,19 @@ namespace ChatManager
                     Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Autosave data imported");
                     Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "ReloadOnStartup set");
 
-                    string message = localization.GetString("Inf_AutosaveImport").Replace("CHARNAME", Converter.LabelToString(lblCharName.Text)).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text)).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString());
-                    ShowMessageBox.Show(localization.GetString("MessageBoxInfo"), message);
+                    string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text)).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text)).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString());
+                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), message);
                 }
                 else
                 {
                     Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "No Autosave data found!");
-                    ShowMessageBox.Show(localization.GetString("MessageBoxError"), localization.GetString("Err_AutosaveImport"));
+                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_AutosaveImport));
                 }
             }
             else
             {
                 Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "No Autosave Directory found!");
-                ShowMessageBox.Show(localization.GetString("MessageBoxError"), localization.GetString("Err_AutosaveImport"));
+                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_AutosaveImport));
             }
         }
 
@@ -441,10 +441,10 @@ namespace ChatManager
                 Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, $"{counter} empty textBoxes found!");
                 Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-                string exportedFilesInfo = localization.GetString("Warn_TextBoxEmpty");
+                string exportedFilesInfo = localization.GetString(LocalizationEnum.Warn_TextBoxEmpty);
                 exportedFilesInfo = exportedFilesInfo.Replace("TEXTBOXCOUNTER", counter.ToString());
 
-                ShowMessageBox.Show(localization.GetString("MessageBoxError"), exportedFilesInfo);
+                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), exportedFilesInfo);
                 return;
             }
             else
