@@ -79,13 +79,13 @@ namespace ChatManager.Forms
 
         private void CopyrightButton_Click(object sender, EventArgs e)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.AboutForm, "CopyrightButtonClick entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "CopyrightButtonClick entered");
             OpenWindows.OpenLinksInBrowser(GetSetSettings.GetAboutPictureLink);
         }
 
         private void Localize()
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.AboutForm, "Localize entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "Localize entered");
 
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 

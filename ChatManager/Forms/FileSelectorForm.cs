@@ -29,7 +29,7 @@ namespace ChatManager.Forms
         // Remove the not needed servers from the List
         private void SetTabs(List<string> servers)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.FileSelectorForm, "SetTabs entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "SetTabs entered");
 
             // Create a list of all current TabPages from the tabsFileSelector
             foreach (TabPage tabPage in tabsFileSelector.TabPages.Cast<TabPage>().ToList())
@@ -42,11 +42,11 @@ namespace ChatManager.Forms
                 {
                     tabsFileSelector.TabPages.Remove(tabPage);
                     tabPage.Dispose();
-                    Logging.Write(LogEventEnum.Variable, ProgramClass.FileSelectorForm, $"Server: {tabPage.Text} removed");
+                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Server: {tabPage.Text} removed");
                 }
                 else
                 {
-                    Logging.Write(LogEventEnum.Variable, ProgramClass.FileSelectorForm, $"Server: {tabPage.Text} found");
+                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Server: {tabPage.Text} found");
                 }
             }
         }
@@ -54,7 +54,7 @@ namespace ChatManager.Forms
         // Set the correct ListBox for the correct use-case
         private void SetListBox(bool isSave)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.FileSelectorForm, "SetListBox entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "SetListBox entered");
 
             FileImport fileImport = new();
 
@@ -67,17 +67,17 @@ namespace ChatManager.Forms
                 // If there's a tlp go on
                 if (tlp != null)
                 {
-                    Logging.Write(LogEventEnum.Control, ProgramClass.FileSelectorForm, $"Selected tlp is: {tlp.Name}");
+                    Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"Selected tlp is: {tlp.Name}");
 
                     // If the user wants to save it's config, use a different ListBox
                     // ListBox
                     if (!isSave)
                     {
-                        Logging.Write(LogEventEnum.Info, ProgramClass.FileSelectorForm, "ListBox is ListBox");
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileSelectorForm, "ListBox is ListBox");
 
                         // Set the name of the ListBox
                         string name = $"lbx{tabPage.Name.Substring(2)}";
-                        Logging.Write(LogEventEnum.Control, ProgramClass.FileSelectorForm, $"ListBoxName is: {name}");
+                        Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"ListBoxName is: {name}");
 
                         // Converting the MultiDimensionalArray into a List but remove every entry that is null
                         string[,] charactersMulti = fileImport.GetArray($"{name.Substring(3)}");
@@ -88,7 +88,7 @@ namespace ChatManager.Forms
                             {
                                 // TODO: Decide if logging to be removed or not
                                 characters.Add(charactersMulti[i, 0]);
-                                //await Logging.Write(LogEventEnum.Variable, ProgramClass.FileSelectorForm, $"charakter {i+1} on {name.Substring(3)}: {characters[i]}");
+                                //await Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"charakter {i+1} on {name.Substring(3)}: {characters[i]}");
                             }
                         }
 
@@ -101,7 +101,7 @@ namespace ChatManager.Forms
                             DataSource = characters
                         };
 
-                        Logging.Write(LogEventEnum.Control, ProgramClass.FileSelectorForm, $"ListBox: {listBox.Name} created");
+                        Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"ListBox: {listBox.Name} created");
 
                         // Add it to the tlp and adjust the position
                         tlp.Controls.Add(listBox);
@@ -109,14 +109,14 @@ namespace ChatManager.Forms
                         tlp.SetColumnSpan(listBox, 2);
 
                         // Remove all useless Controls because we don't need them in this case
-                        Logging.Write(LogEventEnum.Info, ProgramClass.FileSelectorForm, "Start to remove useless Controls");
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileSelectorForm, "Start to remove useless Controls");
                         for (int columnIndex = 0; columnIndex < tlp.ColumnCount; columnIndex++)
                         {
                             Control? control = tlp.GetControlFromPosition(columnIndex, 1);
 
                             if (control != null && control.Name != $"btn{name.Substring(3)}Select")
                             {
-                                Logging.Write(LogEventEnum.Control, ProgramClass.FileSelectorForm, $"Control: {control.Name} removed");
+                                Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"Control: {control.Name} removed");
                                 tlp.Controls.Remove(control);
                                 control.Dispose();
                             }
@@ -132,11 +132,11 @@ namespace ChatManager.Forms
                     // CheckedListBox
                     else
                     {
-                        Logging.Write(LogEventEnum.Info, ProgramClass.FileSelectorForm, "ListBox is CheckedListBox");
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileSelectorForm, "ListBox is CheckedListBox");
 
                         // Set the name of the CheckedListBox
                         string name = $"clbx{tabPage.Name.Substring(2)}";
-                        Logging.Write(LogEventEnum.Control, ProgramClass.FileSelectorForm, $"CheckedListBoxName is: {name}");
+                        Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"CheckedListBoxName is: {name}");
 
                         // Converting the MultiDimensionalArray into a List but remove every entry that is null
                         string[,] charactersMulti = fileImport.GetArray($"{name.Substring(4)}");
@@ -147,7 +147,7 @@ namespace ChatManager.Forms
                             {
                                 // TODO: Decide if logging to be removed or not
                                 characters.Add(charactersMulti[i, 0]);
-                                //await Logging.Write(LogEventEnum.Variable, ProgramClass.FileSelectorForm, $"charakter {i} on {name.Substring(3)}: {characters[i]}");
+                                //await Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"charakter {i} on {name.Substring(3)}: {characters[i]}");
                             }
                         }
 
@@ -161,7 +161,7 @@ namespace ChatManager.Forms
                             DataSource = characters
                         };
 
-                        Logging.Write(LogEventEnum.Control, ProgramClass.FileSelectorForm, $"CheckedListBox: {listBox.Name} created");
+                        Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"CheckedListBox: {listBox.Name} created");
 
                         // Add it to the tlp and adjust the position
                         tlp.Controls.Add(listBox);
@@ -185,7 +185,7 @@ namespace ChatManager.Forms
                 else
                 {
                     // If there's no tlp, log it
-                    Logging.Write(LogEventEnum.Warning, ProgramClass.FileSelectorForm, $"No tlp found in TabPage: {tabPage.Name}!");
+                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileSelectorForm, $"No tlp found in TabPage: {tabPage.Name}!");
                     ShowMessageBox.ShowBug();
                 }
             }
@@ -194,21 +194,21 @@ namespace ChatManager.Forms
         // On Click of the Button "Select"
         private void ListBoxClick(object sender, EventArgs e)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.FileSelectorForm, "ListBoxClick entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "ListBoxClick entered");
 
             // If the sender is a Button initialize it as button
             if (sender is Button button)
             {
-                Logging.Write(LogEventEnum.Variable, ProgramClass.FileSelectorForm, $"Button is: {button.Name}");
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Button is: {button.Name}");
 
                 // If the button has a Tag initialize it as targetTextBox
                 if (button.Tag is string targetListBox)
                 {
-                    Logging.Write(LogEventEnum.Variable, ProgramClass.FileSelectorForm, $"Button Tag is: {button.Tag}");
+                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Button Tag is: {button.Tag}");
 
                     // Find the Control...
                     Control? control = Controls.Find(targetListBox, true).FirstOrDefault();
-                    Logging.Write(LogEventEnum.Variable, ProgramClass.FileSelectorForm, $"Control is: {control!.GetType()}");
+                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Control is: {control!.GetType()}");
 
                     // ... and if it is a CheckedListBox search for the correct panel
                     if (control is CheckedListBox)
@@ -224,14 +224,14 @@ namespace ChatManager.Forms
                         {
                             // Convert them to a CheckListBox
                             CheckedListBox? checkedListBox = getControl as CheckedListBox;
-                            Logging.Write(LogEventEnum.Variable, ProgramClass.FileSelectorForm, $"CheckedListBox is: {checkedListBox!.Name}");
+                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"CheckedListBox is: {checkedListBox!.Name}");
 
                             // Check if the Controls have ANY checkedItem
                             if (checkedListBox.CheckedItems.Count > 0)
                             {
                                 // Set the selectedServers to the correct name
                                 selectedServers[counter] = checkedListBox.Name.Substring(4);
-                                Logging.Write(LogEventEnum.Variable, ProgramClass.FileSelectorForm, $"selectedServers[{counter}] is: {selectedServers[counter]}");
+                                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"selectedServers[{counter}] is: {selectedServers[counter]}");
 
                                 // Count the CheckedListBoxes
                                 counter++;
@@ -239,7 +239,7 @@ namespace ChatManager.Forms
                                 // If yes get them all
                                 foreach (var item in checkedListBox.CheckedItems)
                                 {
-                                    Logging.Write(LogEventEnum.Variable, ProgramClass.FileSelectorForm, $"Current item is: {item}");
+                                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Current item is: {item}");
 
                                     if (item != null)
                                     {
@@ -252,7 +252,7 @@ namespace ChatManager.Forms
                     // ... and if it is a ListBox initialize it as listBox
                     else if (control is ListBox listBox)
                     {
-                        Logging.Write(LogEventEnum.Variable, ProgramClass.FileSelectorForm, $"ListBox is: {listBox.Name}");
+                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"ListBox is: {listBox.Name}");
 
                         string charName = listBox.SelectedItem!.ToString()!;
                         string listBoxNaming = listBox.Name;
@@ -265,13 +265,13 @@ namespace ChatManager.Forms
                 }
                 else
                 {
-                    Logging.Write(LogEventEnum.Warning, ProgramClass.MainForm, $"Button: {button.Name} has no Tag!");
+                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, $"Button: {button.Name} has no Tag!");
                     ShowMessageBox.ShowBug();
                 }
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClass.FileSelectorForm, $"Sender: {sender} is not a Button!");
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileSelectorForm, $"Sender: {sender} is not a Button!");
             }
 
             Close();
@@ -282,7 +282,7 @@ namespace ChatManager.Forms
 
         private void SelectClick(object sender, EventArgs e)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.FileSelectorForm, "SelectClick entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "SelectClick entered");
 
             if (sender is Button button)
             {
@@ -324,13 +324,13 @@ namespace ChatManager.Forms
                         {
                             checkedListBox.SetItemChecked(i, isChecked);
                         }
-                        Logging.Write(LogEventEnum.Info, ProgramClass.FileSelectorForm, $"All Checks set to: {isChecked}");
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileSelectorForm, $"All Checks set to: {isChecked}");
                     }
                 }
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClass.FileSelectorForm, $"Sender: {sender} is not a Button!");
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileSelectorForm, $"Sender: {sender} is not a Button!");
             }
         }
 
@@ -362,7 +362,7 @@ namespace ChatManager.Forms
                         if (button.Name == $"btn{parent}Select")
                         {
                             button.Tag = $"c{button.Tag}";
-                            Logging.Write(LogEventEnum.Method, ProgramClass.FileSelectorForm, $"New Tag of {button.Name}: {button.Tag}");
+                            Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, $"New Tag of {button.Name}: {button.Tag}");
                         }
                     }
                 }
@@ -373,7 +373,7 @@ namespace ChatManager.Forms
 
         private void Localize()
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.FileSelectorForm, "Localize entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "Localize entered");
 
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 

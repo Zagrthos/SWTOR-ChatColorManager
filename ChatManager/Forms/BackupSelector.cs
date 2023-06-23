@@ -17,21 +17,21 @@ namespace ChatManager.Forms
 
         private void DisplayBackupDirs()
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.BackupSelector, "DisplayBackupDirs entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "DisplayBackupDirs entered");
 
             // Search the given Path for Directories
             string[] backupDirs = Directory.GetDirectories(backupPath);
-            Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, $"backupDirs: {backupDirs.Length}");
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"backupDirs: {backupDirs.Length}");
 
             // Create new Array with the size of the found Paths
             string[] backupDirsName = new string[backupDirs.Length];
-            Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, $"backupDirsName: {backupDirsName.Length}");
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"backupDirsName: {backupDirsName.Length}");
 
             // Fill the Array with the Directory names
             for (int i = 0; i < backupDirs.Length; i++)
             {
                 backupDirsName[i] = Path.GetFileName(backupDirs[i]);
-                Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, backupDirsName[i]);
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, backupDirsName[i]);
             }
 
             // Reverse the names so the newest is first
@@ -43,14 +43,14 @@ namespace ChatManager.Forms
 
         private void DisplayBackupFiles(string dirName)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.BackupSelector, "DisplayBackupFiles entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "DisplayBackupFiles entered");
 
             // Clear the DataSource so the checked Items get unchecked
             clbxBackupFiles.DataSource = null;
 
             // Search the given Path for Files
             string[] dirContent = Directory.GetFiles(dirName);
-            Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, $"fileNames: {dirContent.Length}");
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"fileNames: {dirContent.Length}");
 
             // Associate the Files with their Paths
             AssociateFilesWithPaths(dirContent);
@@ -60,21 +60,21 @@ namespace ChatManager.Forms
 
             for (int i = 0; i < filesInDir.Length / 2; i++)
             {
-                Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, $"{i}");
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{i}");
 
                 // Check if all parts in array are NOT empty or null
                 if (!string.IsNullOrEmpty(filesInDir[i, 0]) && !string.IsNullOrEmpty(filesInDir[i, 1]) && !string.IsNullOrEmpty(filesInDir[i, 2]))
                 {
-                    Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, $"{filesInDir[i, 0]} & {filesInDir[i, 1]} & {filesInDir[i, 2]}");
-                    Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, $"file[{i}]");
+                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{filesInDir[i, 0]} & {filesInDir[i, 1]} & {filesInDir[i, 2]}");
+                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"file[{i}]");
 
                     // If not null or empty add the name and the server to the list
                     files[i] = $"{filesInDir[i, 0]} - {Converter.AddWhitespace(Converter.ServerNameIdentifier(filesInDir[i, 1], false))}";
-                    Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, files[i]);
+                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, files[i]);
                 }
                 else
                 {
-                    Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, "Already done or null");
+                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, "Already done or null");
                     break;
                 }
             }
@@ -85,7 +85,7 @@ namespace ChatManager.Forms
 
         private void AssociateFilesWithPaths(string[] paths)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.BackupSelector, "AssociateFilesWithPaths entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "AssociateFilesWithPaths entered");
 
             // Clear the Array
             filesInDir = new string[1000, 3];
@@ -101,15 +101,15 @@ namespace ChatManager.Forms
                 filesInDir[i, 0] = parts[1];
                 filesInDir[i, 1] = parts[0];
                 filesInDir[i, 2] = paths[i];
-                Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, filesInDir[i, 0]);
-                Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, filesInDir[i, 1]);
-                Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, filesInDir[i, 2]);
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, filesInDir[i, 0]);
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, filesInDir[i, 1]);
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, filesInDir[i, 2]);
             }
         }
 
         private void SelectBackupDir(object sender, EventArgs e)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.BackupSelector, "SelectBackupDir entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "SelectBackupDir entered");
 
             if (sender is ListBox listBox)
             {
@@ -121,18 +121,18 @@ namespace ChatManager.Forms
                 }
                 else
                 {
-                    Logging.Write(LogEventEnum.Warning, ProgramClass.BackupSelector, "dirName is null or empty!");
+                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, "dirName is null or empty!");
                 }
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClass.BackupSelector, $"Sender: {sender} is not a ListBox!");
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, $"Sender: {sender} is not a ListBox!");
             }
         }
 
         private void SelectClick(object sender, EventArgs e)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.BackupSelector, "SelectClick entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "SelectClick entered");
 
             if (sender is Button button)
             {
@@ -141,23 +141,23 @@ namespace ChatManager.Forms
                 {
                     clbxBackupFiles.SetItemChecked(i, isChecked);
                 }
-                Logging.Write(LogEventEnum.Info, ProgramClass.BackupSelector, $"All Checks set to: {isChecked}");
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.BackupSelector, $"All Checks set to: {isChecked}");
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClass.BackupSelector, $"Sender: {sender} is not a Button!");
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, $"Sender: {sender} is not a Button!");
             }
         }
 
         private void Restore(object sender, EventArgs e)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.BackupSelector, "Restore entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "Restore entered");
 
             if (sender is Button button && button.Name == btnRestore.Name)
             {
                 // Get all the checked items in an array
                 string[] checkedItems = clbxBackupFiles.CheckedItems.Cast<string>().ToArray();
-                Logging.Write(LogEventEnum.Variable, ProgramClass.BackupSelector, $"checkedItems: {checkedItems.Length}");
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"checkedItems: {checkedItems.Length}");
 
                 string localPath = GetSetSettings.GetLocalPath;
 
@@ -186,13 +186,13 @@ namespace ChatManager.Forms
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClass.BackupSelector, $"Sender: {sender} is not a Button or {btnRestore.Name}!");
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, $"Sender: {sender} is not a Button or {btnRestore.Name}!");
             }
         }
 
         private void Localize()
         {
-            Logging.Write(LogEventEnum.Method, ProgramClass.BackupSelector, "Localize entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "Localize entered");
 
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 

@@ -3,27 +3,6 @@ using System.Timers;
 
 namespace ChatManager.Services
 {
-    internal enum ProgramClass
-    {
-        MainForm,
-        ProgramConfig,
-        AboutForm,
-        BackupSelector,
-        ColorPickerForm,
-        FileSelectorForm,
-        SettingsForm,
-        Autosave,
-        Checks,
-        Converter,
-        FileExport,
-        FileImport,
-        Localization,
-        Logging,
-        OpenWindows,
-        ShowMessageBox,
-        Updater
-    }
-
     internal static class Logging
     {
         private static readonly string LogSession = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
@@ -48,8 +27,8 @@ namespace ChatManager.Services
 
             string logfilePath = Path.Combine(LogPath, $"ChatManager_{LogSession}.log");
             logWriter = new(logfilePath, true);
-            Write(LogEventEnum.Info, ProgramClass.Logging, "Logging started");
-            Write(LogEventEnum.Info, ProgramClass.Logging, $"Application version is: {Application.ProductVersion}");
+            Write(LogEventEnum.Info, ProgramClassEnum.Logging, "Logging started");
+            Write(LogEventEnum.Info, ProgramClassEnum.Logging, $"Application version is: {Application.ProductVersion}");
 
             // Add Timer to write any second all open entries in the log
             timer = new(10000);
@@ -71,7 +50,7 @@ namespace ChatManager.Services
             }
         }
 
-        internal static void Write(LogEventEnum Level, ProgramClass programClass, string Message)
+        internal static void Write(LogEventEnum Level, ProgramClassEnum ProgramClass, string Message)
         {
             string Event = Level switch
             {
@@ -89,7 +68,7 @@ namespace ChatManager.Services
 
             if (logWriter != null)
             {
-                logWriter.WriteLine($"[{DateTime.Now:HH:mm:ss}] => {Event} on {programClass}: {Message}");
+                logWriter.WriteLine($"[{DateTime.Now:HH:mm:ss}] => {Event} on {ProgramClass}: {Message}");
             }
             else
             {
@@ -102,7 +81,7 @@ namespace ChatManager.Services
             if (logWriter != null)
             {
                 timer?.Stop();
-                Write(LogEventEnum.Info, ProgramClass.Logging, "Logging stopped");
+                Write(LogEventEnum.Info, ProgramClassEnum.Logging, "Logging stopped");
                 logWriter.Flush();
                 logWriter.Close();
             }
