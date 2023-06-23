@@ -1,20 +1,8 @@
-﻿using System.Timers;
+﻿using ChatManager.Enums;
+using System.Timers;
 
 namespace ChatManager.Services
 {
-    internal enum LogEvent
-    {
-        Info,
-        Warning,
-        Error,
-        Variable,
-        Method,
-        Control,
-        ExMessage,
-        BoxMessage,
-        Setting
-    }
-
     internal enum ProgramClass
     {
         MainForm,
@@ -60,8 +48,8 @@ namespace ChatManager.Services
 
             string logfilePath = Path.Combine(LogPath, $"ChatManager_{LogSession}.log");
             logWriter = new(logfilePath, true);
-            Write(LogEvent.Info, ProgramClass.Logging, "Logging started");
-            Write(LogEvent.Info, ProgramClass.Logging, $"Application version is: {Application.ProductVersion}");
+            Write(LogEventEnum.Info, ProgramClass.Logging, "Logging started");
+            Write(LogEventEnum.Info, ProgramClass.Logging, $"Application version is: {Application.ProductVersion}");
 
             // Add Timer to write any second all open entries in the log
             timer = new(10000);
@@ -83,19 +71,19 @@ namespace ChatManager.Services
             }
         }
 
-        internal static void Write(LogEvent Level, ProgramClass programClass, string Message)
+        internal static void Write(LogEventEnum Level, ProgramClass programClass, string Message)
         {
             string Event = Level switch
             {
-                LogEvent.Info => "INFO",
-                LogEvent.Warning => "WARNING",
-                LogEvent.Error => "ERROR",
-                LogEvent.Variable => "VARIABLE",
-                LogEvent.Method => "METHOD",
-                LogEvent.Control => "CONTROL",
-                LogEvent.ExMessage => "EXECPTION",
-                LogEvent.BoxMessage => "MESSAGE-BOX",
-                LogEvent.Setting => "SETTING",
+                LogEventEnum.Info => "INFO",
+                LogEventEnum.Warning => "WARNING",
+                LogEventEnum.Error => "ERROR",
+                LogEventEnum.Variable => "VARIABLE",
+                LogEventEnum.Method => "METHOD",
+                LogEventEnum.Control => "CONTROL",
+                LogEventEnum.ExMessage => "EXECPTION",
+                LogEventEnum.BoxMessage => "MESSAGE-BOX",
+                LogEventEnum.Setting => "SETTING",
                 _ => "UNCATEGORIZED"
             };
 
@@ -114,7 +102,7 @@ namespace ChatManager.Services
             if (logWriter != null)
             {
                 timer?.Stop();
-                Write(LogEvent.Info, ProgramClass.Logging, "Logging stopped");
+                Write(LogEventEnum.Info, ProgramClass.Logging, "Logging stopped");
                 logWriter.Flush();
                 logWriter.Close();
             }

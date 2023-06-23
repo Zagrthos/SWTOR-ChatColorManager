@@ -1,13 +1,14 @@
-﻿namespace ChatManager.Services
+﻿using ChatManager.Enums;
+namespace ChatManager.Services
 {
     internal class FileImport
     {
         internal FileImport()
         {
-            Logging.Write(LogEvent.Info, ProgramClass.FileImport, "FileImport Constructor created");
+            Logging.Write(LogEventEnum.Info, ProgramClass.FileImport, "FileImport Constructor created");
             if (filesChecked != true)
             {
-                Logging.Write(LogEvent.Info, ProgramClass.FileImport, $"filesChecked = {filesChecked}");
+                Logging.Write(LogEventEnum.Info, ProgramClass.FileImport, $"filesChecked = {filesChecked}");
                 GetLocalFiles();
             }
         }
@@ -44,16 +45,16 @@
         // Get the local files
         private static void GetLocalFiles()
         {
-            Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetLocalFiles entered");
-            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePath: {filePath}");
+            Logging.Write(LogEventEnum.Method, ProgramClass.FileImport, $"GetLocalFiles entered");
+            Logging.Write(LogEventEnum.Variable, ProgramClass.FileImport, $"filePath: {filePath}");
 
             // Search the given Path for files
             string[] charFilePaths = Directory.GetFiles(filePath);
-            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"filePaths: {charFilePaths.Length}");
+            Logging.Write(LogEventEnum.Variable, ProgramClass.FileImport, $"filePaths: {charFilePaths.Length}");
 
             // Convert all filePaths to fileNames
             string?[] charFileNames = charFilePaths.Select(Path.GetFileName).ToArray();
-            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"files: {charFileNames.Length}");
+            Logging.Write(LogEventEnum.Variable, ProgramClass.FileImport, $"files: {charFileNames.Length}");
 
             byte starForgeCounter = 0;
             byte sateleShanCounter = 0;
@@ -64,11 +65,11 @@
             // Categorize the files by servers
             if (charFileNames.Length > 0)
             {
-                Logging.Write(LogEvent.Info, ProgramClass.FileImport, "Starting to count files");
+                Logging.Write(LogEventEnum.Info, ProgramClass.FileImport, "Starting to count files");
 
                 for (int i = 0; i < charFileNames.Length; i++)
                 {
-                    //Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"currentFile: {i}");
+                    //Logging.Write(LogEventEnum.Variable, ProgramClass.FileImport, $"currentFile: {i}");
                     string[] fileParts = charFileNames[i]!.Split("_");
 
                     if (fileParts.Length == 3)
@@ -110,7 +111,7 @@
                 }
             }
 
-            Logging.Write(LogEvent.Info, ProgramClass.FileImport, "Select the servers by files");
+            Logging.Write(LogEventEnum.Info, ProgramClass.FileImport, "Select the servers by files");
 
             // Select the servers by files
             if (starForgeArray[0, 0] != null && starForgeArray[0, 0] != string.Empty)
@@ -134,17 +135,17 @@
                 serverList.Add("TheLeviathan");
             }
 
-            Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"serverList.Count = {serverList.Count}");
+            Logging.Write(LogEventEnum.Variable, ProgramClass.FileImport, $"serverList.Count = {serverList.Count}");
 
             // Set the once runner true
             filesChecked = true;
-            Logging.Write(LogEvent.Info, ProgramClass.FileImport, $"Set filesChecked = {filesChecked}");
+            Logging.Write(LogEventEnum.Info, ProgramClass.FileImport, $"Set filesChecked = {filesChecked}");
         }
 
         // Get the colors from the given File
         internal string[] GetContentFromFile(string fileName, bool autosaveImport)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.FileImport, $"GetContentFromFile entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.FileImport, $"GetContentFromFile entered");
 
             // Initialize Array for saving of colorIndexes
             string[] colorIndex = new string[23];
@@ -177,7 +178,7 @@
 
                 if (colorLine == string.Empty)
                 {
-                    Logging.Write(LogEvent.Error, ProgramClass.FileImport, "Line ChatColors could not be found!");
+                    Logging.Write(LogEventEnum.Error, ProgramClass.FileImport, "Line ChatColors could not be found!");
                     ShowMessageBox.ShowBug();
                 }
             }
@@ -224,7 +225,7 @@
             byte b = 0;
             foreach (string index in colorIndex)
             {
-                Logging.Write(LogEvent.Variable, ProgramClass.FileImport, $"colorIndex {b} = {colorIndex[b]}");
+                Logging.Write(LogEventEnum.Variable, ProgramClass.FileImport, $"colorIndex {b} = {colorIndex[b]}");
                 b++;
             }
 

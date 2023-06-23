@@ -1,3 +1,4 @@
+using ChatManager.Enums;
 using ChatManager.Services;
 
 namespace ChatManager
@@ -26,15 +27,15 @@ namespace ChatManager
 
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
-            Logging.Write(LogEvent.Error, ProgramClass.ProgramConfig, "Global Application_ThreadExeption occured!");
-            Logging.Write(LogEvent.ExMessage, ProgramClass.ProgramConfig, e.Exception.Message);
+            Logging.Write(LogEventEnum.Error, ProgramClass.ProgramConfig, "Global Application_ThreadExeption occured!");
+            Logging.Write(LogEventEnum.ExMessage, ProgramClass.ProgramConfig, e.Exception.Message);
             ShowMessageBox.ShowBug();
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            Logging.Write(LogEvent.Error, ProgramClass.ProgramConfig, "Global CurrentDomain_UnhandledException occured!");
-            Logging.Write(LogEvent.ExMessage, ProgramClass.ProgramConfig, e.ExceptionObject.ToString()!);
+            Logging.Write(LogEventEnum.Error, ProgramClass.ProgramConfig, "Global CurrentDomain_UnhandledException occured!");
+            Logging.Write(LogEventEnum.ExMessage, ProgramClass.ProgramConfig, e.ExceptionObject.ToString()!);
             ShowMessageBox.ShowBug();
         }
     }

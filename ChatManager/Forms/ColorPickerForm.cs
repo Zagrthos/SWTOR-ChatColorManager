@@ -1,4 +1,5 @@
-﻿using ChatManager.Services;
+﻿using ChatManager.Enums;
+using ChatManager.Services;
 
 namespace ChatManager.Forms
 {
@@ -22,25 +23,25 @@ namespace ChatManager.Forms
 
         private void ColorPickerForm_Load(object sender, EventArgs e)
         {
-            Logging.Write(LogEvent.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm is starting as: {Text}");
-            Logging.Write(LogEvent.Variable, ProgramClass.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
+            Logging.Write(LogEventEnum.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm is starting as: {Text}");
+            Logging.Write(LogEventEnum.Variable, ProgramClass.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
         }
 
         private void ColorPickerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Logging.Write(LogEvent.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm: {Text} is closing");
-            Logging.Write(LogEvent.Variable, ProgramClass.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
+            Logging.Write(LogEventEnum.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm: {Text} is closing");
+            Logging.Write(LogEventEnum.Variable, ProgramClass.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
             hexColor = Converter.RGBtoHexAsync(colorEditor.Color);
         }
 
         private void ColorPickerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Logging.Write(LogEvent.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm: {Text} closed");
+            Logging.Write(LogEventEnum.Info, ProgramClass.ColorPickerForm, $"ColorPickerForm: {Text} closed");
         }
 
         private void Localize()
         {
-            Logging.Write(LogEvent.Method, ProgramClass.ColorPickerForm, "Localize entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.ColorPickerForm, "Localize entered");
 
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 

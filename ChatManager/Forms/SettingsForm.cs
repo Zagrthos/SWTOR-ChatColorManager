@@ -24,7 +24,7 @@ namespace ChatManager.Forms
 
         private void Localize()
         {
-            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "Localize entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.SettingsForm, "Localize entered");
 
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
@@ -85,7 +85,7 @@ namespace ChatManager.Forms
 
         private void AdjustContentOnForm()
         {
-            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "AdjustContentOnForm entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.SettingsForm, "AdjustContentOnForm entered");
 
             switch (GetSetSettings.GetCurrentLocale)
             {
@@ -129,7 +129,7 @@ namespace ChatManager.Forms
             if (numberAutosaveInterval.Enabled)
             {
                 currentAutosaveInterval = GetSetSettings.GetAutosaveInterval / 60000;
-                Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"currentAutosaveInterval: {currentAutosaveInterval}");
+                Logging.Write(LogEventEnum.Variable, ProgramClass.SettingsForm, $"currentAutosaveInterval: {currentAutosaveInterval}");
 
                 if (currentAutosaveInterval == 0)
                 {
@@ -203,7 +203,7 @@ namespace ChatManager.Forms
                 return;
             }
 
-            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "SwitchCurrentLocale entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.SettingsForm, "SwitchCurrentLocale entered");
 
             string currLocale = GetSetSettings.GetCurrentLocale;
             string newLanguage = cbLanguage.SelectedItem.ToString()!;
@@ -228,7 +228,7 @@ namespace ChatManager.Forms
 
             if (currLocale != newLanguage)
             {
-                Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, $"Saving new locale: {newLanguage}");
+                Logging.Write(LogEventEnum.Setting, ProgramClass.SettingsForm, $"Saving new locale: {newLanguage}");
                 GetSetSettings.SaveSettings(SettingsEnum.locale, newLanguage);
                 int updateIntervall = cbUpdateInterval.SelectedIndex;
                 Localize();
@@ -245,7 +245,7 @@ namespace ChatManager.Forms
                 return;
             }
 
-            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "SwitchUpdateInterval entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.SettingsForm, "SwitchUpdateInterval entered");
 
             if (cbUpdateInterval.SelectedIndex != -1)
             {
@@ -262,20 +262,20 @@ namespace ChatManager.Forms
                     GetSetSettings.SaveSettings(SettingsEnum.updateInterval, UpdateEnum.Weekly.ToString());
                 }
 
-                Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"updateInterval set to: {GetSetSettings.GetUpdateInterval}");
+                Logging.Write(LogEventEnum.Variable, ProgramClass.SettingsForm, $"updateInterval set to: {GetSetSettings.GetUpdateInterval}");
 
                 await Updater.CheckForUpdateInterval();
             }
             else
             {
-                Logging.Write(LogEvent.Error, ProgramClass.SettingsForm, "cbUpdateInterval has no value!");
+                Logging.Write(LogEventEnum.Error, ProgramClass.SettingsForm, "cbUpdateInterval has no value!");
                 ShowMessageBox.ShowBug();
             }
         }
 
         private void ComboBoxHandler(object sender, EventArgs e)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "ComboBoxHandler triggered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.SettingsForm, "ComboBoxHandler triggered");
 
             if (sender is ComboBox comboBox)
             {
@@ -295,13 +295,13 @@ namespace ChatManager.Forms
             }
             else
             {
-                Logging.Write(LogEvent.Warning, ProgramClass.SettingsForm, $"Sender: {sender} is not a ComboBox!");
+                Logging.Write(LogEventEnum.Warning, ProgramClass.SettingsForm, $"Sender: {sender} is not a ComboBox!");
             }
         }
 
         private void ChangingCheckBoxes(object sender, EventArgs e)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "ChangingSettings entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.SettingsForm, "ChangingSettings entered");
 
             if (sender is CheckBox checkBox)
             {
@@ -310,7 +310,7 @@ namespace ChatManager.Forms
                     if (checkBox.Checked)
                     {
                         GetSetSettings.SaveSettings(SettingsEnum.saveOnClose, true);
-                        Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "chbSaveOnClose = true");
+                        Logging.Write(LogEventEnum.Setting, ProgramClass.SettingsForm, "chbSaveOnClose = true");
                         if (!chbAutosave.Checked)
                         {
                             chbAutosave.Checked = true;
@@ -322,7 +322,7 @@ namespace ChatManager.Forms
                     else
                     {
                         GetSetSettings.SaveSettings(SettingsEnum.saveOnClose, false);
-                        Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "chbSaveOnClose = false");
+                        Logging.Write(LogEventEnum.Setting, ProgramClass.SettingsForm, "chbSaveOnClose = false");
                         chbAutosave.Enabled = true;
                         return;
                     }
@@ -332,7 +332,7 @@ namespace ChatManager.Forms
                     if (checkBox.Checked)
                     {
                         GetSetSettings.SaveSettings(SettingsEnum.reloadOnStartup, true);
-                        Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "chbReloadOnStartup = true");
+                        Logging.Write(LogEventEnum.Setting, ProgramClass.SettingsForm, "chbReloadOnStartup = true");
                         if (!chbAutosave.Checked)
                         {
                             chbAutosave.Checked = true;
@@ -350,7 +350,7 @@ namespace ChatManager.Forms
                     else
                     {
                         GetSetSettings.SaveSettings(SettingsEnum.reloadOnStartup, false);
-                        Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "chbReloadOnStartup = false");
+                        Logging.Write(LogEventEnum.Setting, ProgramClass.SettingsForm, "chbReloadOnStartup = false");
                         chbSaveOnClose.Enabled = true;
                         return;
                     }
@@ -360,7 +360,7 @@ namespace ChatManager.Forms
                     if (checkBox.Checked)
                     {
                         GetSetSettings.SaveSettings(SettingsEnum.autosave, true);
-                        Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "Autosave = true");
+                        Logging.Write(LogEventEnum.Setting, ProgramClass.SettingsForm, "Autosave = true");
                         numberAutosaveInterval.Enabled = true;
                         numberAutosaveInterval.Visible = true;
                         lblAutosaveInterval.Enabled = true;
@@ -374,7 +374,7 @@ namespace ChatManager.Forms
                     else
                     {
                         GetSetSettings.SaveSettings(SettingsEnum.autosave, false);
-                        Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "Autosave = false");
+                        Logging.Write(LogEventEnum.Setting, ProgramClass.SettingsForm, "Autosave = false");
                         numberAutosaveInterval.Enabled = false;
                         numberAutosaveInterval.Visible = false;
                         lblAutosaveInterval.Enabled = false;
@@ -388,24 +388,24 @@ namespace ChatManager.Forms
                     if (checkBox.Checked)
                     {
                         GetSetSettings.SaveSettings(SettingsEnum.updateDownload, true);
-                        Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "updateDownload = true");
+                        Logging.Write(LogEventEnum.Setting, ProgramClass.SettingsForm, "updateDownload = true");
                         return;
                     }
                     else
                     {
                         GetSetSettings.SaveSettings(SettingsEnum.updateDownload, false);
-                        Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, "updateDownload = false");
+                        Logging.Write(LogEventEnum.Setting, ProgramClass.SettingsForm, "updateDownload = false");
                         return;
                     }
                 }
                 else
                 {
-                    Logging.Write(LogEvent.Warning, ProgramClass.SettingsForm, $"CheckBox: {checkBox.Name} is not listed!");
+                    Logging.Write(LogEventEnum.Warning, ProgramClass.SettingsForm, $"CheckBox: {checkBox.Name} is not listed!");
                 }
             }
             else
             {
-                Logging.Write(LogEvent.Warning, ProgramClass.SettingsForm, $"Sender: {sender} is not a CheckBox!");
+                Logging.Write(LogEventEnum.Warning, ProgramClass.SettingsForm, $"Sender: {sender} is not a CheckBox!");
             }
         }
 
@@ -413,19 +413,19 @@ namespace ChatManager.Forms
         private void SetAutosaveInterval()
         {
             GetSetSettings.SaveSettings(SettingsEnum.autosaveInterval, numberAutosaveInterval.Value * 60000);
-            Logging.Write(LogEvent.Setting, ProgramClass.SettingsForm, $"AutosaveInterval = {numberAutosaveInterval.Value}");
+            Logging.Write(LogEventEnum.Setting, ProgramClass.SettingsForm, $"AutosaveInterval = {numberAutosaveInterval.Value}");
 
             if (numberAutosaveInterval.Value != currentAutosaveInterval)
             {
                 autosaveTimerChanged = true;
-                Logging.Write(LogEvent.Variable, ProgramClass.SettingsForm, $"autosaveTimerChanged = {autosaveTimerChanged}");
+                Logging.Write(LogEventEnum.Variable, ProgramClass.SettingsForm, $"autosaveTimerChanged = {autosaveTimerChanged}");
             }
         }
 
         // Triggered by the NumericUpDown
         private void SetAutosaveInterval(object sender, EventArgs e)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "SetAutosaveInterval entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.SettingsForm, "SetAutosaveInterval entered");
 
             if (sender is NumericUpDown)
             {
@@ -433,13 +433,13 @@ namespace ChatManager.Forms
             }
             else
             {
-                Logging.Write(LogEvent.Warning, ProgramClass.SettingsForm, $"Sender: {sender} is not a NumericUpDown!");
+                Logging.Write(LogEventEnum.Warning, ProgramClass.SettingsForm, $"Sender: {sender} is not a NumericUpDown!");
             }
         }
 
         private void ResetSettings(object sender, EventArgs e)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.SettingsForm, "ResetSettings entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.SettingsForm, "ResetSettings entered");
 
             if (sender is Button)
             {
@@ -455,7 +455,7 @@ namespace ChatManager.Forms
             }
             else
             {
-                Logging.Write(LogEvent.Warning, ProgramClass.SettingsForm, $"Sender: {sender} is not a Button!");
+                Logging.Write(LogEventEnum.Warning, ProgramClass.SettingsForm, $"Sender: {sender} is not a Button!");
             }
         }
     }

@@ -51,32 +51,32 @@ namespace ChatManager.Services
                 _ => throw new NotImplementedException(),
             };
 
-            Logging.Write(LogEvent.Method, ProgramClass.Checks, "DirectoryCheck entered");
-            Logging.Write(LogEvent.Info, ProgramClass.Checks, $"Checking if {folder} exists");
+            Logging.Write(LogEventEnum.Method, ProgramClass.Checks, "DirectoryCheck entered");
+            Logging.Write(LogEventEnum.Info, ProgramClass.Checks, $"Checking if {folder} exists");
 
             if (!Directory.Exists(path))
             {
-                Logging.Write(LogEvent.Info, ProgramClass.Checks, $"{folder} does not exist, creating it");
+                Logging.Write(LogEventEnum.Info, ProgramClass.Checks, $"{folder} does not exist, creating it");
                 Directory.CreateDirectory(path);
-                Logging.Write(LogEvent.Info, ProgramClass.Checks, $"Checking again if {folder} exists");
+                Logging.Write(LogEventEnum.Info, ProgramClass.Checks, $"Checking again if {folder} exists");
 
                 if (Directory.Exists(path))
                 {
-                    Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"{folder} created at: {path}");
+                    Logging.Write(LogEventEnum.Variable, ProgramClass.Checks, $"{folder} created at: {path}");
                     GetSetSettings.SaveSettings(setting, true);
-                    Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Set {setting} to: {true}");
+                    Logging.Write(LogEventEnum.Variable, ProgramClass.Checks, $"Set {setting} to: {true}");
                 }
                 else
                 {
-                    Logging.Write(LogEvent.Warning, ProgramClass.Checks, $"Could not create {folder}!");
+                    Logging.Write(LogEventEnum.Warning, ProgramClass.Checks, $"Could not create {folder}!");
                     ShowMessageBox.ShowBug();
                 }
             }
             else
             {
-                Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"{folder} exists at: {path}");
+                Logging.Write(LogEventEnum.Variable, ProgramClass.Checks, $"{folder} exists at: {path}");
                 GetSetSettings.SaveSettings(setting, true);
-                Logging.Write(LogEvent.Variable, ProgramClass.Checks, $"Set {setting} to: {true}");
+                Logging.Write(LogEventEnum.Variable, ProgramClass.Checks, $"Set {setting} to: {true}");
             }
 
             bool getSettings = folder switch

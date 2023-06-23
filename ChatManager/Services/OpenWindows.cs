@@ -1,4 +1,5 @@
-﻿using ChatManager.Forms;
+﻿using ChatManager.Enums;
+using ChatManager.Forms;
 using System.Diagnostics;
 
 namespace ChatManager.Services
@@ -7,11 +8,11 @@ namespace ChatManager.Services
     {
         internal static string OpenColorPicker(string text, Color color)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenColorPicker Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.OpenWindows, "OpenColorPicker Entered");
 
             // Create new Form with the Text of the sender Button
             ColorPickerForm colorPicker = new(text, color);
-            Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Form {colorPicker.Text} created");
+            Logging.Write(LogEventEnum.Info, ProgramClass.OpenWindows, $"Form {colorPicker.Text} created");
             colorPicker.ShowDialog();
             string hexColor = colorPicker.GetHexColor;
 
@@ -22,7 +23,7 @@ namespace ChatManager.Services
 
         internal static void OpenAbout()
         {
-            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenAbout Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.OpenWindows, "OpenAbout Entered");
 
             AboutForm aboutForm = new();
             aboutForm.ShowDialog();
@@ -32,7 +33,7 @@ namespace ChatManager.Services
 
         internal static (bool, bool) OpenSettings()
         {
-            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenSettings Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.OpenWindows, "OpenSettings Entered");
 
             SettingsForm settingsForm = new();
             settingsForm.ShowDialog();
@@ -75,7 +76,7 @@ namespace ChatManager.Services
         // Open the FileSelector but with the import Settings
         internal static (string, string) OpenFileImportSelector()
         {
-            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenFileImportSelector Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.OpenWindows, "OpenFileImportSelector Entered");
 
             FileImport fileImport = new();
             FileSelectorForm fileSelector = new(fileImport.GetServerList(), false);
@@ -92,7 +93,7 @@ namespace ChatManager.Services
         // Open the FileSelector but with the export Settings
         internal static void OpenFileExportSelector(string[] values)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenFileExportSelector Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.OpenWindows, "OpenFileExportSelector Entered");
 
             FileImport fileImport = new();
             FileSelectorForm fileSelector = new(fileImport.GetServerList(), true);
@@ -102,15 +103,15 @@ namespace ChatManager.Services
 
             if (dialogResult != DialogResult.Cancel)
             {
-                Logging.Write(LogEvent.Variable, ProgramClass.OpenWindows, $"dialogResult = {dialogResult}");
+                Logging.Write(LogEventEnum.Variable, ProgramClass.OpenWindows, $"dialogResult = {dialogResult}");
                 FileExport fileExport = new(fileSelector.GetSelectedServers, fileSelector.GetListBoxMulti.ToArray());
                 fileExport.BackupFilesAndWrite(values);
                 fileCount = fileExport.GetNumberOfChangedFiles;
-                Logging.Write(LogEvent.Variable, ProgramClass.OpenWindows, $"fileCount = {fileCount}");
+                Logging.Write(LogEventEnum.Variable, ProgramClass.OpenWindows, $"fileCount = {fileCount}");
             }
             else
             {
-                Logging.Write(LogEvent.Warning, ProgramClass.OpenWindows, $"dialogResult = {dialogResult}");
+                Logging.Write(LogEventEnum.Warning, ProgramClass.OpenWindows, $"dialogResult = {dialogResult}");
             }
 
             fileSelector.Dispose();
@@ -125,7 +126,7 @@ namespace ChatManager.Services
 
         internal static void OpenBackupSelector()
         {
-            Logging.Write(LogEvent.Method, ProgramClass.OpenWindows, "OpenBackupSelector Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.OpenWindows, "OpenBackupSelector Entered");
 
             BackupSelectorForm backupSelector = new();
             backupSelector.ShowDialog();
@@ -136,24 +137,24 @@ namespace ChatManager.Services
         // Open Explorer Window with a specified path
         internal static void OpenExplorer(string path)
         {
-            Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start explorer.exe with path: {path}");
+            Logging.Write(LogEventEnum.Info, ProgramClass.OpenWindows, $"Trying to start explorer.exe with path: {path}");
 
             try
             {
                 Process.Start("explorer.exe", path);
-                Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"explorer.exe started with path: {path}");
+                Logging.Write(LogEventEnum.Info, ProgramClass.OpenWindows, $"explorer.exe started with path: {path}");
             }
             catch (Exception ex)
             {
-                Logging.Write(LogEvent.Error, ProgramClass.OpenWindows, "explorer.exe failed to start!");
-                Logging.Write(LogEvent.ExMessage, ProgramClass.OpenWindows, ex.Message);
+                Logging.Write(LogEventEnum.Error, ProgramClass.OpenWindows, "explorer.exe failed to start!");
+                Logging.Write(LogEventEnum.ExMessage, ProgramClass.OpenWindows, ex.Message);
                 ShowMessageBox.ShowBug();
             }
         }
 
         internal static void OpenLinksInBrowser(string url)
         {
-            Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start default Browser with url: {url}");
+            Logging.Write(LogEventEnum.Info, ProgramClass.OpenWindows, $"Trying to start default Browser with url: {url}");
 
             try
             {
@@ -161,19 +162,19 @@ namespace ChatManager.Services
                 {
                     UseShellExecute = true
                 });
-                Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Browser started with url: {url}");
+                Logging.Write(LogEventEnum.Info, ProgramClass.OpenWindows, $"Browser started with url: {url}");
             }
             catch (Exception ex)
             {
-                Logging.Write(LogEvent.Error, ProgramClass.OpenWindows, "Browser failed to start!");
-                Logging.Write(LogEvent.ExMessage, ProgramClass.OpenWindows, ex.Message);
+                Logging.Write(LogEventEnum.Error, ProgramClass.OpenWindows, "Browser failed to start!");
+                Logging.Write(LogEventEnum.ExMessage, ProgramClass.OpenWindows, ex.Message);
                 ShowMessageBox.ShowBug();
             }
         }
 
         internal static void OpenProcess(string path)
         {
-            Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Trying to start process with path: {path}");
+            Logging.Write(LogEventEnum.Info, ProgramClass.OpenWindows, $"Trying to start process with path: {path}");
 
             try
             {
@@ -181,12 +182,12 @@ namespace ChatManager.Services
                 {
                     UseShellExecute = true
                 });
-                Logging.Write(LogEvent.Info, ProgramClass.OpenWindows, $"Process started with path: {path}");
+                Logging.Write(LogEventEnum.Info, ProgramClass.OpenWindows, $"Process started with path: {path}");
             }
             catch (Exception ex)
             {
-                Logging.Write(LogEvent.Error, ProgramClass.OpenWindows, "Process failed to start!");
-                Logging.Write(LogEvent.ExMessage, ProgramClass.OpenWindows, ex.Message);
+                Logging.Write(LogEventEnum.Error, ProgramClass.OpenWindows, "Process failed to start!");
+                Logging.Write(LogEventEnum.ExMessage, ProgramClass.OpenWindows, ex.Message);
                 ShowMessageBox.ShowBug();
             }
         }

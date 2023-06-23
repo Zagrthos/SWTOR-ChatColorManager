@@ -11,15 +11,15 @@ namespace ChatManager.Services
 
         internal Localization(string locale)
         {
-            Logging.Write(LogEvent.Info, ProgramClass.Localization, $"Localization Constructor created with locale: {locale}");
+            Logging.Write(LogEventEnum.Info, ProgramClass.Localization, $"Localization Constructor created with locale: {locale}");
             CheckLocale(locale);
         }
 
         private void CheckLocale(string locale)
         {
-            Logging.Write(LogEvent.Method, ProgramClass.Localization, "CheckLocale Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClass.Localization, "CheckLocale Entered");
 
-            Logging.Write(LogEvent.Variable, ProgramClass.Localization, $"Localization path is: {Path.Combine(installPath, "Localization", $"{locale}.json")}");
+            Logging.Write(LogEventEnum.Variable, ProgramClass.Localization, $"Localization path is: {Path.Combine(installPath, "Localization", $"{locale}.json")}");
             var jsonString = File.ReadAllText(Path.Combine(installPath, "Localization", $"{locale}.json"));
 
             // Check if file has content
@@ -38,14 +38,14 @@ namespace ChatManager.Services
                 // If not log Warning
                 else
                 {
-                    Logging.Write(LogEvent.Warning, ProgramClass.Localization, "JSON file without content detected!");
+                    Logging.Write(LogEventEnum.Warning, ProgramClass.Localization, "JSON file without content detected!");
                 }
             }
 
             // If not log Warning
             else
             {
-                Logging.Write(LogEvent.Warning, ProgramClass.Localization, "Localization file without content detected!");
+                Logging.Write(LogEventEnum.Warning, ProgramClass.Localization, "Localization file without content detected!");
             }
         }
 
@@ -57,7 +57,7 @@ namespace ChatManager.Services
             }
             else
             {
-                Logging.Write(LogEvent.Warning, ProgramClass.Localization, $"No localization found for string: {name}!");
+                Logging.Write(LogEventEnum.Warning, ProgramClass.Localization, $"No localization found for string: {name}!");
                 return string.Empty;
             }
         }
