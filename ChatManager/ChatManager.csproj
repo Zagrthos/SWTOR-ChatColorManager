@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <PackageReference Include="Cyotek.Windows.Forms.ColorPicker" Version="2.0.0-beta.7" />
+    <PackageReference Include="ReaLTaiizor" Version="3.7.9.3" />
   </ItemGroup>
 
   <ItemGroup>
