@@ -72,7 +72,7 @@
             lbxBackupDir.Location = new Point(3, 28);
             lbxBackupDir.Name = "lbxBackupDir";
             lbxBackupDir.Size = new Size(256, 193);
-            lbxBackupDir.TabIndex = 0;
+            lbxBackupDir.TabIndex = 1;
             lbxBackupDir.SelectedIndexChanged += SelectBackupDir;
             // 
             // clbxBackupFiles
@@ -83,7 +83,7 @@
             clbxBackupFiles.Location = new Point(265, 28);
             clbxBackupFiles.Name = "clbxBackupFiles";
             clbxBackupFiles.Size = new Size(316, 193);
-            clbxBackupFiles.TabIndex = 1;
+            clbxBackupFiles.TabIndex = 2;
             // 
             // lblBackupDir
             // 
@@ -92,7 +92,7 @@
             lblBackupDir.Location = new Point(3, 0);
             lblBackupDir.Name = "lblBackupDir";
             lblBackupDir.Size = new Size(256, 25);
-            lblBackupDir.TabIndex = 2;
+            lblBackupDir.TabIndex = 0;
             lblBackupDir.Text = "Backupverzeichnis auswählen";
             lblBackupDir.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -103,7 +103,7 @@
             lblBackupFiles.Location = new Point(265, 0);
             lblBackupFiles.Name = "lblBackupFiles";
             lblBackupFiles.Size = new Size(316, 25);
-            lblBackupFiles.TabIndex = 3;
+            lblBackupFiles.TabIndex = 0;
             lblBackupFiles.Text = "Backup Datei(en) auswählen";
             lblBackupFiles.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -122,7 +122,7 @@
             tlpBackupFiles.RowCount = 1;
             tlpBackupFiles.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tlpBackupFiles.Size = new Size(316, 31);
-            tlpBackupFiles.TabIndex = 4;
+            tlpBackupFiles.TabIndex = 0;
             // 
             // btnBackupSelectAll
             // 
@@ -130,7 +130,7 @@
             btnBackupSelectAll.Location = new Point(116, 3);
             btnBackupSelectAll.Name = "btnBackupSelectAll";
             btnBackupSelectAll.Size = new Size(95, 25);
-            btnBackupSelectAll.TabIndex = 0;
+            btnBackupSelectAll.TabIndex = 4;
             btnBackupSelectAll.Text = "Alle auswählen";
             btnBackupSelectAll.UseVisualStyleBackColor = true;
             btnBackupSelectAll.Click += SelectClick;
@@ -141,7 +141,7 @@
             btnBackupDeselectAll.Location = new Point(217, 3);
             btnBackupDeselectAll.Name = "btnBackupDeselectAll";
             btnBackupDeselectAll.Size = new Size(96, 25);
-            btnBackupDeselectAll.TabIndex = 1;
+            btnBackupDeselectAll.TabIndex = 5;
             btnBackupDeselectAll.Text = "Alle abwählen";
             btnBackupDeselectAll.UseVisualStyleBackColor = true;
             btnBackupDeselectAll.Click += SelectClick;
@@ -152,7 +152,7 @@
             btnRestore.Location = new Point(3, 3);
             btnRestore.Name = "btnRestore";
             btnRestore.Size = new Size(107, 25);
-            btnRestore.TabIndex = 2;
+            btnRestore.TabIndex = 3;
             btnRestore.Text = "Wiederherstellen";
             btnRestore.UseVisualStyleBackColor = true;
             btnRestore.Click += Restore;
@@ -164,7 +164,7 @@
             lblDateConvertion.Location = new Point(3, 224);
             lblDateConvertion.Name = "lblDateConvertion";
             lblDateConvertion.Size = new Size(256, 37);
-            lblDateConvertion.TabIndex = 5;
+            lblDateConvertion.TabIndex = 0;
             lblDateConvertion.Text = "Date Placeholder";
             lblDateConvertion.TextAlign = ContentAlignment.MiddleCenter;
             // 
