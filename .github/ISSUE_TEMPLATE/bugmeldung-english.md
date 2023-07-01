@@ -19,7 +19,7 @@ Steps to reproduce the bug:
 **Expected behavior**
 A clear and understandable expectation of what should happen.
 
-**Screenshots
+**Screenshots**
 If possible, please attach screenshots.
 
 **Operating system**
