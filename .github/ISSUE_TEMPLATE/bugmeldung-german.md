@@ -1,5 +1,5 @@
 ---
-name: Bugmeldung
+name: Bugmeldung-German
 about: Erstelle eine Bugmeldung um Fehler in der Anwendung zu reporten!
 title: "[BUG]"
 labels: bug
@@ -24,7 +24,7 @@ Eine klare und verständliche Erwartung, was passieren müsste.
 Wenn möglich, bitte Screenshots anhängen.
 
 **Betriebssytem**
-Bsp.: Windows 11 22H2 Build 22624.1755
+Bsp.: Windows 11 22H2 Build 22631.1972
 Zu finden unter "Suche" -> "winver"
 
 **Logfile**
