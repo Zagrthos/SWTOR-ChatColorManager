@@ -86,7 +86,7 @@
             labelProductName.MaximumSize = new Size(0, 20);
             labelProductName.Name = "labelProductName";
             labelProductName.Size = new Size(231, 20);
-            labelProductName.TabIndex = 19;
+            labelProductName.TabIndex = 0;
             labelProductName.Text = "Product Name";
             labelProductName.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -110,7 +110,7 @@
             labelCopyright.MaximumSize = new Size(0, 20);
             labelCopyright.Name = "labelCopyright";
             labelCopyright.Size = new Size(231, 20);
-            labelCopyright.TabIndex = 21;
+            labelCopyright.TabIndex = 0;
             labelCopyright.Text = "Copyright";
             labelCopyright.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -122,7 +122,7 @@
             labelCompanyName.MaximumSize = new Size(0, 20);
             labelCompanyName.Name = "labelCompanyName";
             labelCompanyName.Size = new Size(231, 20);
-            labelCompanyName.TabIndex = 22;
+            labelCompanyName.TabIndex = 0;
             labelCompanyName.Text = "Company Name";
             labelCompanyName.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -134,7 +134,7 @@
             okButton.Margin = new Padding(4, 3, 4, 3);
             okButton.Name = "okButton";
             okButton.Size = new Size(88, 27);
-            okButton.TabIndex = 24;
+            okButton.TabIndex = 1;
             okButton.Text = "OK";
             // 
             // copyrightButton
@@ -143,7 +143,7 @@
             copyrightButton.Location = new Point(3, 183);
             copyrightButton.Name = "copyrightButton";
             copyrightButton.Size = new Size(236, 30);
-            copyrightButton.TabIndex = 25;
+            copyrightButton.TabIndex = 2;
             copyrightButton.UseVisualStyleBackColor = true;
             copyrightButton.Click += CopyrightButton_Click;
             // 
