@@ -1,7 +1,6 @@
 # SWTOR Chat Manager
 ## Tutorials
-Available in the Wiki!
-[Wiki](https://github.com/Zagrthos/SWTOR-ChatColorManager/wiki)
+Available in the [Wiki](https://github.com/Zagrthos/SWTOR-ChatColorManager/wiki)!
 
 ## What's this?
 There were some people who complained about the untransferability of chat colors, thus this program was created.
