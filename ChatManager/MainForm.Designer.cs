@@ -147,7 +147,7 @@
             menuMainForm.Name = "menuMainForm";
             menuMainForm.RenderMode = ToolStripRenderMode.Professional;
             menuMainForm.Size = new Size(484, 24);
-            menuMainForm.TabIndex = 44;
+            menuMainForm.TabIndex = 0;
             // 
             // fileToolStripMenuItem
             // 
@@ -316,7 +316,7 @@
             tabsMainForm.SelectedIndex = 0;
             tabsMainForm.Size = new Size(478, 230);
             tabsMainForm.SizeMode = TabSizeMode.Fixed;
-            tabsMainForm.TabIndex = 43;
+            tabsMainForm.TabIndex = 1;
             tabsMainForm.DrawItem += TabsMainForm_DrawItem;
             // 
             // tpGlobal
@@ -356,7 +356,7 @@
             btnGeneral.Location = new Point(188, 150);
             btnGeneral.Name = "btnGeneral";
             btnGeneral.Size = new Size(179, 69);
-            btnGeneral.TabIndex = 2;
+            btnGeneral.TabIndex = 7;
             btnGeneral.Tag = "tbGeneral";
             btnGeneral.Text = "Allgemein";
             btnGeneral.UseVisualStyleBackColor = true;
@@ -368,7 +368,7 @@
             btnPvP.Location = new Point(188, 77);
             btnPvP.Name = "btnPvP";
             btnPvP.Size = new Size(179, 67);
-            btnPvP.TabIndex = 1;
+            btnPvP.TabIndex = 5;
             btnPvP.Tag = "tbPvP";
             btnPvP.Text = "PvP";
             btnPvP.UseVisualStyleBackColor = true;
@@ -380,7 +380,7 @@
             btnTrade.Location = new Point(188, 3);
             btnTrade.Name = "btnTrade";
             btnTrade.Size = new Size(179, 68);
-            btnTrade.TabIndex = 0;
+            btnTrade.TabIndex = 3;
             btnTrade.Tag = "tbTrade";
             btnTrade.Text = "Handel";
             btnTrade.UseVisualStyleBackColor = true;
@@ -392,7 +392,7 @@
             tbTrade.Location = new Point(3, 3);
             tbTrade.Name = "tbTrade";
             tbTrade.Size = new Size(179, 23);
-            tbTrade.TabIndex = 21;
+            tbTrade.TabIndex = 2;
             // 
             // tbPvP
             // 
@@ -400,7 +400,7 @@
             tbPvP.Location = new Point(3, 77);
             tbPvP.Name = "tbPvP";
             tbPvP.Size = new Size(179, 23);
-            tbPvP.TabIndex = 22;
+            tbPvP.TabIndex = 4;
             // 
             // tbGeneral
             // 
@@ -408,7 +408,7 @@
             tbGeneral.Location = new Point(3, 150);
             tbGeneral.Name = "tbGeneral";
             tbGeneral.Size = new Size(179, 23);
-            tbGeneral.TabIndex = 23;
+            tbGeneral.TabIndex = 6;
             // 
             // tpPlayer
             // 
@@ -457,7 +457,7 @@
             btnWhisper.Location = new Point(188, 188);
             btnWhisper.Name = "btnWhisper";
             btnWhisper.Size = new Size(179, 31);
-            btnWhisper.TabIndex = 8;
+            btnWhisper.TabIndex = 19;
             btnWhisper.Tag = "tbWhisper";
             btnWhisper.Text = "Flüstern";
             btnWhisper.UseVisualStyleBackColor = true;
@@ -469,7 +469,7 @@
             btnSay.Location = new Point(188, 151);
             btnSay.Name = "btnSay";
             btnSay.Size = new Size(179, 31);
-            btnSay.TabIndex = 7;
+            btnSay.TabIndex = 17;
             btnSay.Tag = "tbSay";
             btnSay.Text = "Sagen";
             btnSay.UseVisualStyleBackColor = true;
@@ -481,7 +481,7 @@
             btnGuild.Location = new Point(188, 114);
             btnGuild.Name = "btnGuild";
             btnGuild.Size = new Size(179, 31);
-            btnGuild.TabIndex = 6;
+            btnGuild.TabIndex = 15;
             btnGuild.Tag = "tbGuild";
             btnGuild.Text = "Gilde";
             btnGuild.UseVisualStyleBackColor = true;
@@ -493,7 +493,7 @@
             btnOfficer.Location = new Point(188, 77);
             btnOfficer.Name = "btnOfficer";
             btnOfficer.Size = new Size(179, 31);
-            btnOfficer.TabIndex = 5;
+            btnOfficer.TabIndex = 13;
             btnOfficer.Tag = "tbOfficer";
             btnOfficer.Text = "Offizier";
             btnOfficer.UseVisualStyleBackColor = true;
@@ -505,7 +505,7 @@
             btnYell.Location = new Point(188, 40);
             btnYell.Name = "btnYell";
             btnYell.Size = new Size(179, 31);
-            btnYell.TabIndex = 4;
+            btnYell.TabIndex = 11;
             btnYell.Tag = "tbYell";
             btnYell.Text = "Brüllen";
             btnYell.UseVisualStyleBackColor = true;
@@ -517,7 +517,7 @@
             btnEmote.Location = new Point(188, 3);
             btnEmote.Name = "btnEmote";
             btnEmote.Size = new Size(179, 31);
-            btnEmote.TabIndex = 3;
+            btnEmote.TabIndex = 9;
             btnEmote.Tag = "tbEmote";
             btnEmote.Text = "Emote";
             btnEmote.UseVisualStyleBackColor = true;
@@ -529,7 +529,7 @@
             tbEmote.Location = new Point(3, 3);
             tbEmote.Name = "tbEmote";
             tbEmote.Size = new Size(179, 23);
-            tbEmote.TabIndex = 24;
+            tbEmote.TabIndex = 8;
             // 
             // tbYell
             // 
@@ -537,7 +537,7 @@
             tbYell.Location = new Point(3, 40);
             tbYell.Name = "tbYell";
             tbYell.Size = new Size(179, 23);
-            tbYell.TabIndex = 25;
+            tbYell.TabIndex = 10;
             // 
             // tbOfficer
             // 
@@ -545,7 +545,7 @@
             tbOfficer.Location = new Point(3, 77);
             tbOfficer.Name = "tbOfficer";
             tbOfficer.Size = new Size(179, 23);
-            tbOfficer.TabIndex = 26;
+            tbOfficer.TabIndex = 12;
             // 
             // tbGuild
             // 
@@ -553,7 +553,7 @@
             tbGuild.Location = new Point(3, 114);
             tbGuild.Name = "tbGuild";
             tbGuild.Size = new Size(179, 23);
-            tbGuild.TabIndex = 27;
+            tbGuild.TabIndex = 14;
             // 
             // tbSay
             // 
@@ -561,7 +561,7 @@
             tbSay.Location = new Point(3, 151);
             tbSay.Name = "tbSay";
             tbSay.Size = new Size(179, 23);
-            tbSay.TabIndex = 28;
+            tbSay.TabIndex = 16;
             // 
             // tbWhisper
             // 
@@ -569,7 +569,7 @@
             tbWhisper.Location = new Point(3, 188);
             tbWhisper.Name = "tbWhisper";
             tbWhisper.Size = new Size(179, 23);
-            tbWhisper.TabIndex = 29;
+            tbWhisper.TabIndex = 18;
             // 
             // tpGroup
             // 
@@ -615,7 +615,7 @@
             btnOpsOfficer.Location = new Point(188, 179);
             btnOpsOfficer.Name = "btnOpsOfficer";
             btnOpsOfficer.Size = new Size(179, 40);
-            btnOpsOfficer.TabIndex = 13;
+            btnOpsOfficer.TabIndex = 29;
             btnOpsOfficer.Tag = "tbOpsOfficer";
             btnOpsOfficer.Text = "Ops Offizier";
             btnOpsOfficer.UseVisualStyleBackColor = true;
@@ -627,7 +627,7 @@
             btnOpsAnnou.Location = new Point(188, 135);
             btnOpsAnnou.Name = "btnOpsAnnou";
             btnOpsAnnou.Size = new Size(179, 38);
-            btnOpsAnnou.TabIndex = 12;
+            btnOpsAnnou.TabIndex = 27;
             btnOpsAnnou.Tag = "tbOpsAnnou";
             btnOpsAnnou.Text = "Ops Ankündigung";
             btnOpsAnnou.UseVisualStyleBackColor = true;
@@ -639,7 +639,7 @@
             btnGroup.Location = new Point(188, 91);
             btnGroup.Name = "btnGroup";
             btnGroup.Size = new Size(179, 38);
-            btnGroup.TabIndex = 11;
+            btnGroup.TabIndex = 25;
             btnGroup.Tag = "tbGroup";
             btnGroup.Text = "Gruppe";
             btnGroup.UseVisualStyleBackColor = true;
@@ -651,7 +651,7 @@
             btnOpsLead.Location = new Point(188, 47);
             btnOpsLead.Name = "btnOpsLead";
             btnOpsLead.Size = new Size(179, 38);
-            btnOpsLead.TabIndex = 10;
+            btnOpsLead.TabIndex = 23;
             btnOpsLead.Tag = "tbOpsLead";
             btnOpsLead.Text = "Ops Anführer";
             btnOpsLead.UseVisualStyleBackColor = true;
@@ -663,7 +663,7 @@
             btnOps.Location = new Point(188, 3);
             btnOps.Name = "btnOps";
             btnOps.Size = new Size(179, 38);
-            btnOps.TabIndex = 9;
+            btnOps.TabIndex = 21;
             btnOps.Tag = "tbOps";
             btnOps.Text = "Ops";
             btnOps.UseVisualStyleBackColor = true;
@@ -675,7 +675,7 @@
             tbOps.Location = new Point(3, 3);
             tbOps.Name = "tbOps";
             tbOps.Size = new Size(179, 23);
-            tbOps.TabIndex = 30;
+            tbOps.TabIndex = 20;
             // 
             // tbOpsLead
             // 
@@ -683,7 +683,7 @@
             tbOpsLead.Location = new Point(3, 47);
             tbOpsLead.Name = "tbOpsLead";
             tbOpsLead.Size = new Size(179, 23);
-            tbOpsLead.TabIndex = 31;
+            tbOpsLead.TabIndex = 22;
             // 
             // tbGroup
             // 
@@ -691,7 +691,7 @@
             tbGroup.Location = new Point(3, 91);
             tbGroup.Name = "tbGroup";
             tbGroup.Size = new Size(179, 23);
-            tbGroup.TabIndex = 32;
+            tbGroup.TabIndex = 24;
             // 
             // tbOpsAnnou
             // 
@@ -699,7 +699,7 @@
             tbOpsAnnou.Location = new Point(3, 135);
             tbOpsAnnou.Name = "tbOpsAnnou";
             tbOpsAnnou.Size = new Size(179, 23);
-            tbOpsAnnou.TabIndex = 33;
+            tbOpsAnnou.TabIndex = 26;
             // 
             // tbOpsOfficer
             // 
@@ -707,7 +707,7 @@
             tbOpsOfficer.Location = new Point(3, 179);
             tbOpsOfficer.Name = "tbOpsOfficer";
             tbOpsOfficer.Size = new Size(179, 23);
-            tbOpsOfficer.TabIndex = 34;
+            tbOpsOfficer.TabIndex = 28;
             // 
             // tpSystem
             // 
@@ -759,7 +759,7 @@
             btnGroupInfo.Location = new Point(188, 195);
             btnGroupInfo.Name = "btnGroupInfo";
             btnGroupInfo.Size = new Size(179, 24);
-            btnGroupInfo.TabIndex = 20;
+            btnGroupInfo.TabIndex = 43;
             btnGroupInfo.Tag = "tbGroupInfo";
             btnGroupInfo.Text = "Gruppeninfos";
             btnGroupInfo.UseVisualStyleBackColor = true;
@@ -771,7 +771,7 @@
             btnGuildInfo.Location = new Point(188, 163);
             btnGuildInfo.Name = "btnGuildInfo";
             btnGuildInfo.Size = new Size(179, 26);
-            btnGuildInfo.TabIndex = 19;
+            btnGuildInfo.TabIndex = 41;
             btnGuildInfo.Tag = "tbGuildInfo";
             btnGuildInfo.Text = "Gildeninfos";
             btnGuildInfo.UseVisualStyleBackColor = true;
@@ -783,7 +783,7 @@
             tbGroupInfo.Location = new Point(3, 195);
             tbGroupInfo.Name = "tbGroupInfo";
             tbGroupInfo.Size = new Size(179, 23);
-            tbGroupInfo.TabIndex = 41;
+            tbGroupInfo.TabIndex = 42;
             // 
             // btnSystem
             // 
@@ -791,7 +791,7 @@
             btnSystem.Location = new Point(188, 131);
             btnSystem.Name = "btnSystem";
             btnSystem.Size = new Size(179, 26);
-            btnSystem.TabIndex = 18;
+            btnSystem.TabIndex = 39;
             btnSystem.Tag = "tbSystem";
             btnSystem.Text = "System-Rückmeldung";
             btnSystem.UseVisualStyleBackColor = true;
@@ -803,7 +803,7 @@
             btnOpsInfo.Location = new Point(188, 99);
             btnOpsInfo.Name = "btnOpsInfo";
             btnOpsInfo.Size = new Size(179, 26);
-            btnOpsInfo.TabIndex = 17;
+            btnOpsInfo.TabIndex = 37;
             btnOpsInfo.Tag = "tbOpsInfo";
             btnOpsInfo.Text = "Ops Infos";
             btnOpsInfo.UseVisualStyleBackColor = true;
@@ -823,7 +823,7 @@
             btnLogin.Location = new Point(188, 67);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(179, 26);
-            btnLogin.TabIndex = 16;
+            btnLogin.TabIndex = 35;
             btnLogin.Tag = "tbLogin";
             btnLogin.Text = "Charakter Login";
             btnLogin.UseVisualStyleBackColor = true;
@@ -835,7 +835,7 @@
             btnConv.Location = new Point(188, 35);
             btnConv.Name = "btnConv";
             btnConv.Size = new Size(179, 26);
-            btnConv.TabIndex = 15;
+            btnConv.TabIndex = 33;
             btnConv.Tag = "tbConv";
             btnConv.Text = "Gespräch";
             btnConv.UseVisualStyleBackColor = true;
@@ -847,7 +847,7 @@
             tbSystem.Location = new Point(3, 131);
             tbSystem.Name = "tbSystem";
             tbSystem.Size = new Size(179, 23);
-            tbSystem.TabIndex = 39;
+            tbSystem.TabIndex = 38;
             // 
             // btnCombat
             // 
@@ -855,7 +855,7 @@
             btnCombat.Location = new Point(188, 3);
             btnCombat.Name = "btnCombat";
             btnCombat.Size = new Size(179, 26);
-            btnCombat.TabIndex = 14;
+            btnCombat.TabIndex = 31;
             btnCombat.Tag = "tbCombat";
             btnCombat.Text = "Kampfinfos";
             btnCombat.UseVisualStyleBackColor = true;
@@ -867,7 +867,7 @@
             tbCombat.Location = new Point(3, 3);
             tbCombat.Name = "tbCombat";
             tbCombat.Size = new Size(179, 23);
-            tbCombat.TabIndex = 35;
+            tbCombat.TabIndex = 30;
             // 
             // tbOpsInfo
             // 
@@ -875,7 +875,7 @@
             tbOpsInfo.Location = new Point(3, 99);
             tbOpsInfo.Name = "tbOpsInfo";
             tbOpsInfo.Size = new Size(179, 23);
-            tbOpsInfo.TabIndex = 38;
+            tbOpsInfo.TabIndex = 36;
             // 
             // tbConv
             // 
@@ -883,7 +883,7 @@
             tbConv.Location = new Point(3, 35);
             tbConv.Name = "tbConv";
             tbConv.Size = new Size(179, 23);
-            tbConv.TabIndex = 36;
+            tbConv.TabIndex = 32;
             // 
             // tbLogin
             // 
@@ -891,7 +891,7 @@
             tbLogin.Location = new Point(3, 67);
             tbLogin.Name = "tbLogin";
             tbLogin.Size = new Size(179, 23);
-            tbLogin.TabIndex = 37;
+            tbLogin.TabIndex = 34;
             // 
             // lblCharName
             // 
@@ -900,7 +900,7 @@
             lblCharName.Location = new Point(3, 261);
             lblCharName.Name = "lblCharName";
             lblCharName.Size = new Size(236, 25);
-            lblCharName.TabIndex = 45;
+            lblCharName.TabIndex = 0;
             lblCharName.Text = "Aktueller Char:";
             lblCharName.TextAlign = ContentAlignment.MiddleLeft;
             lblCharName.Visible = false;
@@ -912,7 +912,7 @@
             lblServerName.Location = new Point(245, 261);
             lblServerName.Name = "lblServerName";
             lblServerName.Size = new Size(236, 25);
-            lblServerName.TabIndex = 46;
+            lblServerName.TabIndex = 0;
             lblServerName.Text = "Aktueller Server:";
             lblServerName.TextAlign = ContentAlignment.MiddleLeft;
             lblServerName.Visible = false;
