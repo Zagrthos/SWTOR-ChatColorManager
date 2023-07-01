@@ -1,5 +1,5 @@
 ---
-name: Bugmeldung-German
+name: Bugmeldung - German
 about: Erstelle eine Bugmeldung um Fehler in der Anwendung zu reporten!
 title: "[BUG]"
 labels: bug
