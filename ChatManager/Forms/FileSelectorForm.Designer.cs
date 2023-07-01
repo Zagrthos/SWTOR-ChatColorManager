@@ -80,7 +80,7 @@
             tabsFileSelector.Name = "tabsFileSelector";
             tabsFileSelector.SelectedIndex = 0;
             tabsFileSelector.Size = new Size(484, 261);
-            tabsFileSelector.TabIndex = 0;
+            tabsFileSelector.TabIndex = 1;
             // 
             // tpStarForge
             // 
@@ -109,7 +109,7 @@
             tlpStarForge.RowStyles.Add(new RowStyle(SizeType.Percent, 85F));
             tlpStarForge.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
             tlpStarForge.Size = new Size(470, 227);
-            tlpStarForge.TabIndex = 2;
+            tlpStarForge.TabIndex = 0;
             // 
             // btnStarForgeSelectAll
             // 
@@ -117,7 +117,7 @@
             btnStarForgeSelectAll.Location = new Point(3, 195);
             btnStarForgeSelectAll.Name = "btnStarForgeSelectAll";
             btnStarForgeSelectAll.Size = new Size(150, 29);
-            btnStarForgeSelectAll.TabIndex = 0;
+            btnStarForgeSelectAll.TabIndex = 9;
             btnStarForgeSelectAll.Text = "Alle auswählen";
             btnStarForgeSelectAll.UseVisualStyleBackColor = true;
             btnStarForgeSelectAll.Click += SelectClick;
@@ -128,7 +128,7 @@
             btnStarForgeDeselectAll.Location = new Point(315, 195);
             btnStarForgeDeselectAll.Name = "btnStarForgeDeselectAll";
             btnStarForgeDeselectAll.Size = new Size(152, 29);
-            btnStarForgeDeselectAll.TabIndex = 1;
+            btnStarForgeDeselectAll.TabIndex = 10;
             btnStarForgeDeselectAll.Text = "Alle abwählen";
             btnStarForgeDeselectAll.UseVisualStyleBackColor = true;
             btnStarForgeDeselectAll.Click += SelectClick;
@@ -139,7 +139,7 @@
             btnStarForgeSelect.Location = new Point(159, 195);
             btnStarForgeSelect.Name = "btnStarForgeSelect";
             btnStarForgeSelect.Size = new Size(150, 29);
-            btnStarForgeSelect.TabIndex = 2;
+            btnStarForgeSelect.TabIndex = 11;
             btnStarForgeSelect.Tag = "lbxStarForge";
             btnStarForgeSelect.Text = "Auswählen";
             btnStarForgeSelect.UseVisualStyleBackColor = true;
@@ -172,7 +172,7 @@
             tlpSateleShan.RowStyles.Add(new RowStyle(SizeType.Percent, 85F));
             tlpSateleShan.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
             tlpSateleShan.Size = new Size(470, 227);
-            tlpSateleShan.TabIndex = 2;
+            tlpSateleShan.TabIndex = 0;
             // 
             // btnSateleShanSelect
             // 
@@ -180,7 +180,7 @@
             btnSateleShanSelect.Location = new Point(159, 195);
             btnSateleShanSelect.Name = "btnSateleShanSelect";
             btnSateleShanSelect.Size = new Size(150, 29);
-            btnSateleShanSelect.TabIndex = 3;
+            btnSateleShanSelect.TabIndex = 8;
             btnSateleShanSelect.Tag = "lbxSateleShan";
             btnSateleShanSelect.Text = "Auswählen";
             btnSateleShanSelect.UseVisualStyleBackColor = true;
@@ -192,7 +192,7 @@
             btnSateleShanSelectAll.Location = new Point(3, 195);
             btnSateleShanSelectAll.Name = "btnSateleShanSelectAll";
             btnSateleShanSelectAll.Size = new Size(150, 29);
-            btnSateleShanSelectAll.TabIndex = 0;
+            btnSateleShanSelectAll.TabIndex = 6;
             btnSateleShanSelectAll.Text = "Alle auswählen";
             btnSateleShanSelectAll.UseVisualStyleBackColor = true;
             btnSateleShanSelectAll.Click += SelectClick;
@@ -203,7 +203,7 @@
             btnSateleShanDeselectAll.Location = new Point(315, 195);
             btnSateleShanDeselectAll.Name = "btnSateleShanDeselectAll";
             btnSateleShanDeselectAll.Size = new Size(152, 29);
-            btnSateleShanDeselectAll.TabIndex = 1;
+            btnSateleShanDeselectAll.TabIndex = 7;
             btnSateleShanDeselectAll.Text = "Alle abwählen";
             btnSateleShanDeselectAll.UseVisualStyleBackColor = true;
             btnSateleShanDeselectAll.Click += SelectClick;
@@ -234,7 +234,7 @@
             tlpDarthMalgus.RowStyles.Add(new RowStyle(SizeType.Percent, 85F));
             tlpDarthMalgus.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
             tlpDarthMalgus.Size = new Size(476, 233);
-            tlpDarthMalgus.TabIndex = 1;
+            tlpDarthMalgus.TabIndex = 0;
             // 
             // btnDarthMalgusSelect
             // 
@@ -242,7 +242,7 @@
             btnDarthMalgusSelect.Location = new Point(161, 201);
             btnDarthMalgusSelect.Name = "btnDarthMalgusSelect";
             btnDarthMalgusSelect.Size = new Size(152, 29);
-            btnDarthMalgusSelect.TabIndex = 3;
+            btnDarthMalgusSelect.TabIndex = 5;
             btnDarthMalgusSelect.Tag = "lbxDarthMalgus";
             btnDarthMalgusSelect.Text = "Auswählen";
             btnDarthMalgusSelect.UseVisualStyleBackColor = true;
@@ -254,7 +254,7 @@
             btnDarthMalgusSelectAll.Location = new Point(3, 201);
             btnDarthMalgusSelectAll.Name = "btnDarthMalgusSelectAll";
             btnDarthMalgusSelectAll.Size = new Size(152, 29);
-            btnDarthMalgusSelectAll.TabIndex = 0;
+            btnDarthMalgusSelectAll.TabIndex = 3;
             btnDarthMalgusSelectAll.Text = "Alle auswählen";
             btnDarthMalgusSelectAll.UseVisualStyleBackColor = true;
             btnDarthMalgusSelectAll.Click += SelectClick;
@@ -265,7 +265,7 @@
             btnDarthMalgusDeselectAll.Location = new Point(319, 201);
             btnDarthMalgusDeselectAll.Name = "btnDarthMalgusDeselectAll";
             btnDarthMalgusDeselectAll.Size = new Size(154, 29);
-            btnDarthMalgusDeselectAll.TabIndex = 1;
+            btnDarthMalgusDeselectAll.TabIndex = 4;
             btnDarthMalgusDeselectAll.Text = "Alle abwählen";
             btnDarthMalgusDeselectAll.UseVisualStyleBackColor = true;
             btnDarthMalgusDeselectAll.Click += SelectClick;
@@ -296,7 +296,7 @@
             tlpTulakHord.RowStyles.Add(new RowStyle(SizeType.Percent, 85F));
             tlpTulakHord.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
             tlpTulakHord.Size = new Size(476, 233);
-            tlpTulakHord.TabIndex = 1;
+            tlpTulakHord.TabIndex = 0;
             // 
             // btnTulakHordSelect
             // 
@@ -304,7 +304,7 @@
             btnTulakHordSelect.Location = new Point(161, 201);
             btnTulakHordSelect.Name = "btnTulakHordSelect";
             btnTulakHordSelect.Size = new Size(152, 29);
-            btnTulakHordSelect.TabIndex = 3;
+            btnTulakHordSelect.TabIndex = 17;
             btnTulakHordSelect.Tag = "lbxTulakHord";
             btnTulakHordSelect.Text = "Auswählen";
             btnTulakHordSelect.UseVisualStyleBackColor = true;
@@ -316,7 +316,7 @@
             btnTulakHordSelectAll.Location = new Point(3, 201);
             btnTulakHordSelectAll.Name = "btnTulakHordSelectAll";
             btnTulakHordSelectAll.Size = new Size(152, 29);
-            btnTulakHordSelectAll.TabIndex = 0;
+            btnTulakHordSelectAll.TabIndex = 15;
             btnTulakHordSelectAll.Text = "Alle auswählen";
             btnTulakHordSelectAll.UseVisualStyleBackColor = true;
             btnTulakHordSelectAll.Click += SelectClick;
@@ -327,7 +327,7 @@
             btnTulakHordDeselectAll.Location = new Point(319, 201);
             btnTulakHordDeselectAll.Name = "btnTulakHordDeselectAll";
             btnTulakHordDeselectAll.Size = new Size(154, 29);
-            btnTulakHordDeselectAll.TabIndex = 1;
+            btnTulakHordDeselectAll.TabIndex = 16;
             btnTulakHordDeselectAll.Text = "Alle abwählen";
             btnTulakHordDeselectAll.UseVisualStyleBackColor = true;
             btnTulakHordDeselectAll.Click += SelectClick;
@@ -358,7 +358,7 @@
             tlpTheLeviathan.RowStyles.Add(new RowStyle(SizeType.Percent, 85F));
             tlpTheLeviathan.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
             tlpTheLeviathan.Size = new Size(476, 233);
-            tlpTheLeviathan.TabIndex = 1;
+            tlpTheLeviathan.TabIndex = 0;
             // 
             // btnTheLeviathanSelect
             // 
@@ -366,7 +366,7 @@
             btnTheLeviathanSelect.Location = new Point(161, 201);
             btnTheLeviathanSelect.Name = "btnTheLeviathanSelect";
             btnTheLeviathanSelect.Size = new Size(152, 29);
-            btnTheLeviathanSelect.TabIndex = 3;
+            btnTheLeviathanSelect.TabIndex = 14;
             btnTheLeviathanSelect.Tag = "lbxTheLeviathan";
             btnTheLeviathanSelect.Text = "Auswählen";
             btnTheLeviathanSelect.UseVisualStyleBackColor = true;
@@ -378,7 +378,7 @@
             btnTheLeviathanSelectAll.Location = new Point(3, 201);
             btnTheLeviathanSelectAll.Name = "btnTheLeviathanSelectAll";
             btnTheLeviathanSelectAll.Size = new Size(152, 29);
-            btnTheLeviathanSelectAll.TabIndex = 0;
+            btnTheLeviathanSelectAll.TabIndex = 12;
             btnTheLeviathanSelectAll.Text = "Alle auswählen";
             btnTheLeviathanSelectAll.UseVisualStyleBackColor = true;
             btnTheLeviathanSelectAll.Click += SelectClick;
@@ -389,7 +389,7 @@
             btnTheLeviathanDeselectAll.Location = new Point(319, 201);
             btnTheLeviathanDeselectAll.Name = "btnTheLeviathanDeselectAll";
             btnTheLeviathanDeselectAll.Size = new Size(154, 29);
-            btnTheLeviathanDeselectAll.TabIndex = 1;
+            btnTheLeviathanDeselectAll.TabIndex = 13;
             btnTheLeviathanDeselectAll.Text = "Alle abwählen";
             btnTheLeviathanDeselectAll.UseVisualStyleBackColor = true;
             btnTheLeviathanDeselectAll.Click += SelectClick;
