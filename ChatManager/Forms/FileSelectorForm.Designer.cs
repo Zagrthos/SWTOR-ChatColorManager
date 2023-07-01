@@ -70,11 +70,11 @@
             // 
             // tabsFileSelector
             // 
-            tabsFileSelector.Controls.Add(tpStarForge);
-            tabsFileSelector.Controls.Add(tpSateleShan);
             tabsFileSelector.Controls.Add(tpDarthMalgus);
-            tabsFileSelector.Controls.Add(tpTulakHord);
+            tabsFileSelector.Controls.Add(tpSateleShan);
+            tabsFileSelector.Controls.Add(tpStarForge);
             tabsFileSelector.Controls.Add(tpTheLeviathan);
+            tabsFileSelector.Controls.Add(tpTulakHord);
             tabsFileSelector.Dock = DockStyle.Fill;
             tabsFileSelector.Location = new Point(0, 0);
             tabsFileSelector.Name = "tabsFileSelector";
