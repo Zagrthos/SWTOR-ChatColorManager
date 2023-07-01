@@ -45,7 +45,7 @@
             colorEditor.ShowAlphaChannel = false;
             colorEditor.ShowHsl = false;
             colorEditor.Size = new Size(376, 137);
-            colorEditor.TabIndex = 0;
+            colorEditor.TabIndex = 1;
             colorEditor.TabStop = false;
             colorEditor.ColorChanged += ColorChanged;
             // 
@@ -62,7 +62,7 @@
             tlpColorPickerForm.RowStyles.Add(new RowStyle());
             tlpColorPickerForm.RowStyles.Add(new RowStyle());
             tlpColorPickerForm.Size = new Size(384, 176);
-            tlpColorPickerForm.TabIndex = 1;
+            tlpColorPickerForm.TabIndex = 0;
             // 
             // lblExample
             // 
@@ -71,7 +71,7 @@
             lblExample.Location = new Point(3, 143);
             lblExample.Name = "lblExample";
             lblExample.Size = new Size(378, 33);
-            lblExample.TabIndex = 1;
+            lblExample.TabIndex = 0;
             lblExample.Text = "Das ist ein Beispieltext in der ausgewählten Farbe.";
             // 
             // ColorPickerForm
