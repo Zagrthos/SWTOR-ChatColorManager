@@ -1,4 +1,8 @@
 # SWTOR Chat Manager
+## Tutorials
+Available in the Wiki!
+[Wiki](https://github.com/Zagrthos/SWTOR-ChatColorManager/wiki)
+
 ## What's this?
 There were some people who complained about the untransferability of chat colors, thus this program was created.
 Maybe I will expand it so you can transfer all settings from one character to another. Or the friend list... or whatever else the game has to offer.
