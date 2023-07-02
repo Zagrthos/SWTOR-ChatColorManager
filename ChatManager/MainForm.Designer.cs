@@ -160,50 +160,50 @@
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(180, 22);
+            openToolStripMenuItem.Size = new Size(155, 22);
             openToolStripMenuItem.Text = "Import";
             openToolStripMenuItem.Click += ImportFile;
             // 
             // toolStripSeparator
             // 
             toolStripSeparator.Name = "toolStripSeparator";
-            toolStripSeparator.Size = new Size(177, 6);
+            toolStripSeparator.Size = new Size(152, 6);
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(180, 22);
+            saveToolStripMenuItem.Size = new Size(155, 22);
             saveToolStripMenuItem.Text = "Export";
             saveToolStripMenuItem.Click += ExportFiles;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(177, 6);
+            toolStripSeparator1.Size = new Size(152, 6);
             // 
             // loadAutosaveToolStripMenuItem
             // 
             loadAutosaveToolStripMenuItem.Name = "loadAutosaveToolStripMenuItem";
-            loadAutosaveToolStripMenuItem.Size = new Size(180, 22);
+            loadAutosaveToolStripMenuItem.Size = new Size(155, 22);
             loadAutosaveToolStripMenuItem.Text = "Load autosave";
             loadAutosaveToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // restoreBackupToolStripMenuItem
             // 
             restoreBackupToolStripMenuItem.Name = "restoreBackupToolStripMenuItem";
-            restoreBackupToolStripMenuItem.Size = new Size(180, 22);
+            restoreBackupToolStripMenuItem.Size = new Size(155, 22);
             restoreBackupToolStripMenuItem.Text = "Restore backup";
             restoreBackupToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(177, 6);
+            toolStripSeparator2.Size = new Size(152, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Size = new Size(155, 22);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
