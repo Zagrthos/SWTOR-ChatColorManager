@@ -5,9 +5,9 @@
         // MainForm Menu Items
         fileToolStripMenuItem,
         openToolStripMenuItem,
+        saveToolStripMenuItem,
         loadAutosaveToolStripMenuItem,
         restoreBackupToolStripMenuItem,
-        saveToolStripMenuItem,
         exitToolStripMenuItem,
         toolsToolStripMenuItem,
         charFolderToolStripMenuItem,
