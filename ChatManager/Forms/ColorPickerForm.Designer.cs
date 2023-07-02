@@ -72,7 +72,7 @@
             lblExample.Name = "lblExample";
             lblExample.Size = new Size(378, 33);
             lblExample.TabIndex = 0;
-            lblExample.Text = "Das ist ein Beispieltext in der ausgewählten Farbe.";
+            lblExample.Text = "This is a sample text in the selected color.";
             // 
             // ColorPickerForm
             // 
