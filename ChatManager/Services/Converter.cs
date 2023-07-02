@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace ChatManager.Services
 {
-    internal class Converter
+    internal partial class Converter
     {
         // Convert an RGB Color into Hex
         internal static string RGBtoHexAsync(Color rgb)
@@ -75,7 +75,7 @@ namespace ChatManager.Services
 
         internal static string AddWhitespace(string text)
         {
-            return Regex.Replace(text, "(\\B[A-Z])", " $1");
+            return AddWhiteSpaceRegex().Replace(text, " $1");
         }
 
         internal static string RemoveWhitespace(string text)
@@ -88,5 +88,9 @@ namespace ChatManager.Services
             string[] splitted = text.Split(":");
             return splitted[1].Trim();
         }
+
+        // Regex for adding a whitespace
+        [GeneratedRegex("(\\B[A-Z])")]
+        private static partial Regex AddWhiteSpaceRegex();
     }
 }
