@@ -135,7 +135,7 @@
             okButton.Name = "okButton";
             okButton.Size = new Size(88, 27);
             okButton.TabIndex = 1;
-            okButton.Text = "OK";
+            okButton.Text = "Ok";
             // 
             // copyrightButton
             // 
@@ -144,6 +144,7 @@
             copyrightButton.Name = "copyrightButton";
             copyrightButton.Size = new Size(236, 30);
             copyrightButton.TabIndex = 2;
+            copyrightButton.Text = "Link to logo creator";
             copyrightButton.UseVisualStyleBackColor = true;
             copyrightButton.Click += CopyrightButton_Click;
             // 
