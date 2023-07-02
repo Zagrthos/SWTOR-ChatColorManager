@@ -19,6 +19,7 @@
 	<Copyright>© Zagrthos 2023</Copyright>
 	<Description>A GUI Manager for customizing the SWTOR Chat.</Description>
 	<ApplicationIcon>Resources\Logo.ico</ApplicationIcon>
+	<NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
