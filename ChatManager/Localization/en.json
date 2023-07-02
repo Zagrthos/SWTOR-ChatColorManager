@@ -109,7 +109,7 @@
   "lblAutosaveInterval": "Autosave interval (minutes)",
   "btnResetSettings": "Reset Settings",
   "gbUpdater": "Update settings",
-  "lblUpdateIntervall": "Search intervall",
+  "lblUpdateIntervall": "Search interval",
   "UpdateIntervalOnStart": "On startup",
   "UpdateIntervalDaily": "Daily",
   "UpdateIntervalWeekly": "Weekly",

@@ -84,7 +84,7 @@
             gbLanguage.Size = new Size(267, 46);
             gbLanguage.TabIndex = 1;
             gbLanguage.TabStop = false;
-            gbLanguage.Text = "Sprachauswahl";
+            gbLanguage.Text = "Language selection";
             // 
             // cbLanguage
             // 
@@ -112,16 +112,16 @@
             gbGeneral.Size = new Size(405, 124);
             gbGeneral.TabIndex = 2;
             gbGeneral.TabStop = false;
-            gbGeneral.Text = "Allgemeine Einstellungen";
+            gbGeneral.Text = "General settings";
             // 
             // chbReloadOnStartup
             // 
             chbReloadOnStartup.AutoSize = true;
             chbReloadOnStartup.Location = new Point(6, 100);
             chbReloadOnStartup.Name = "chbReloadOnStartup";
-            chbReloadOnStartup.Size = new Size(274, 19);
+            chbReloadOnStartup.Size = new Size(236, 19);
             chbReloadOnStartup.TabIndex = 6;
-            chbReloadOnStartup.Text = "Öffnen der letzten Farben beim starten der App";
+            chbReloadOnStartup.Text = "Reload last colors when starting the app";
             chbReloadOnStartup.UseVisualStyleBackColor = true;
             chbReloadOnStartup.CheckedChanged += ChangingCheckBoxes;
             // 
@@ -130,9 +130,9 @@
             lblAutosaveInterval.AutoSize = true;
             lblAutosaveInterval.Location = new Point(53, 48);
             lblAutosaveInterval.Name = "lblAutosaveInterval";
-            lblAutosaveInterval.Size = new Size(157, 15);
+            lblAutosaveInterval.Size = new Size(152, 15);
             lblAutosaveInterval.TabIndex = 3;
-            lblAutosaveInterval.Text = "Autosave Intervall (Minuten)";
+            lblAutosaveInterval.Text = "Autosave interval (minutes)";
             // 
             // numberAutosaveInterval
             // 
@@ -150,9 +150,9 @@
             chbAutosave.AutoSize = true;
             chbAutosave.Location = new Point(6, 21);
             chbAutosave.Name = "chbAutosave";
-            chbAutosave.Size = new Size(129, 19);
+            chbAutosave.Size = new Size(111, 19);
             chbAutosave.TabIndex = 3;
-            chbAutosave.Text = "Autosave aktivieren";
+            chbAutosave.Text = "Enable autosave";
             chbAutosave.UseVisualStyleBackColor = true;
             chbAutosave.CheckedChanged += ChangingCheckBoxes;
             // 
@@ -161,9 +161,9 @@
             chbSaveOnClose.AutoSize = true;
             chbSaveOnClose.Location = new Point(6, 75);
             chbSaveOnClose.Name = "chbSaveOnClose";
-            chbSaveOnClose.Size = new Size(303, 19);
+            chbSaveOnClose.Size = new Size(222, 19);
             chbSaveOnClose.TabIndex = 5;
-            chbSaveOnClose.Text = "Speichern der letzten Farben beim schließen der App";
+            chbSaveOnClose.Text = "Save last colors when closing the app";
             chbSaveOnClose.UseVisualStyleBackColor = true;
             chbSaveOnClose.CheckedChanged += ChangingCheckBoxes;
             // 
@@ -175,7 +175,7 @@
             btnResetSettings.Name = "btnResetSettings";
             btnResetSettings.Size = new Size(267, 25);
             btnResetSettings.TabIndex = 7;
-            btnResetSettings.Text = "Einstellungen zurücksetzen";
+            btnResetSettings.Text = "Reset Settings";
             btnResetSettings.UseVisualStyleBackColor = true;
             btnResetSettings.Click += ResetSettings;
             // 
@@ -191,16 +191,16 @@
             gbUpdater.Size = new Size(267, 98);
             gbUpdater.TabIndex = 2;
             gbUpdater.TabStop = false;
-            gbUpdater.Text = "Update-Einstellungen";
+            gbUpdater.Text = "Update settings";
             // 
             // chbUpdateDownload
             // 
             chbUpdateDownload.AutoSize = true;
             chbUpdateDownload.Location = new Point(3, 63);
             chbUpdateDownload.Name = "chbUpdateDownload";
-            chbUpdateDownload.Size = new Size(192, 19);
+            chbUpdateDownload.Size = new Size(177, 19);
             chbUpdateDownload.TabIndex = 4;
-            chbUpdateDownload.Text = "Updates manuell herunterladen";
+            chbUpdateDownload.Text = "Download updates manually";
             chbUpdateDownload.UseVisualStyleBackColor = true;
             chbUpdateDownload.CheckedChanged += ChangingCheckBoxes;
             // 
@@ -221,9 +221,9 @@
             lblUpdateIntervall.Dock = DockStyle.Top;
             lblUpdateIntervall.Location = new Point(3, 19);
             lblUpdateIntervall.Name = "lblUpdateIntervall";
-            lblUpdateIntervall.Size = new Size(75, 15);
+            lblUpdateIntervall.Size = new Size(84, 15);
             lblUpdateIntervall.TabIndex = 0;
-            lblUpdateIntervall.Text = "Suchintervall";
+            lblUpdateIntervall.Text = "Search interval";
             // 
             // SettingsForm
             // 
@@ -235,7 +235,7 @@
             MaximizeBox = false;
             Name = "SettingsForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Einstellungen";
+            Text = "Settings";
             Load += SettingsForm_Load;
             tlpSettings.ResumeLayout(false);
             gbLanguage.ResumeLayout(false);
