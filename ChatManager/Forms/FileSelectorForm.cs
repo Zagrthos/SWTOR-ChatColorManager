@@ -254,6 +254,12 @@ namespace ChatManager.Forms
                                     }
                                 }
                             }
+                            else
+                            {
+                                Localization localization = new(GetSetSettings.GetCurrentLocale);
+                                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), (localization.GetString(LocalizationEnum.Err_NoExportFileSelected)));
+                                return;
+                            }
                         }
                     }
                     // ... and if it is a ListBox initialize it as listBox

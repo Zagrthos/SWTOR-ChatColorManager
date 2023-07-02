@@ -81,6 +81,7 @@
 
   "_comment6": "MessageBox Strings",
   "Err_ColorNotHex": "La couleur spécifiée dans la zone de texte ne correspond pas à la norme HEX.",
+  "Err_NoExportFileSelected": "Choisis au moins une entrée dans la liste!",
   "Error_IsDetected": "Quelque chose a mal tourné!\nVeux-tu signaler le bogue?",
   "Inf_ExportedFiles": "FILECOUNT le(s) fichier(s) a (ont) été édité(s).",
   "Inf_RestartRequired": "L'application doit être redémarrée après cette modification!",

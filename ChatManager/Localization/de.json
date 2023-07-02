@@ -82,6 +82,7 @@
   "_comment6": "MessageBox Strings",
   "Err_AutosaveImport": "Es wurde keine Autosave Datei gefunden!",
   "Err_ColorNotHex": "Die angegebene Farbe in der Textbox entspricht nicht dem HEX-Standard.",
+  "Err_NoExportFileSelected": "Bitte wähle mindestens einen Eintrag aus der Liste aus!",
   "Error_IsDetected": "Da ist was schief gelaufen!\nMöchtest du den Bug melden?",
   "Inf_AutosaveImport": "Es wurde erfolgreich der Charakter CHARNAME von dem Server SERVERNAME importiert!\nLetzte Bearbeitung am: TIMESTAMP",
   "Inf_ExportedFiles": "Es wurde(n) FILECOUNT Datei(en) bearbeitet.",
