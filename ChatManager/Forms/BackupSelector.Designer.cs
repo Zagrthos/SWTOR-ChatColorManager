@@ -93,7 +93,7 @@
             lblBackupDir.Name = "lblBackupDir";
             lblBackupDir.Size = new Size(256, 25);
             lblBackupDir.TabIndex = 0;
-            lblBackupDir.Text = "Backupverzeichnis auswählen";
+            lblBackupDir.Text = "Choose backup directory";
             lblBackupDir.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblBackupFiles
@@ -104,7 +104,7 @@
             lblBackupFiles.Name = "lblBackupFiles";
             lblBackupFiles.Size = new Size(316, 25);
             lblBackupFiles.TabIndex = 0;
-            lblBackupFiles.Text = "Backup Datei(en) auswählen";
+            lblBackupFiles.Text = "Choose backup file(s)";
             lblBackupFiles.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tlpBackupFiles
@@ -131,7 +131,7 @@
             btnBackupSelectAll.Name = "btnBackupSelectAll";
             btnBackupSelectAll.Size = new Size(95, 25);
             btnBackupSelectAll.TabIndex = 4;
-            btnBackupSelectAll.Text = "Alle auswählen";
+            btnBackupSelectAll.Text = "Select all";
             btnBackupSelectAll.UseVisualStyleBackColor = true;
             btnBackupSelectAll.Click += SelectClick;
             // 
@@ -142,7 +142,7 @@
             btnBackupDeselectAll.Name = "btnBackupDeselectAll";
             btnBackupDeselectAll.Size = new Size(96, 25);
             btnBackupDeselectAll.TabIndex = 5;
-            btnBackupDeselectAll.Text = "Alle abwählen";
+            btnBackupDeselectAll.Text = "Deselect all";
             btnBackupDeselectAll.UseVisualStyleBackColor = true;
             btnBackupDeselectAll.Click += SelectClick;
             // 
@@ -153,7 +153,7 @@
             btnRestore.Name = "btnRestore";
             btnRestore.Size = new Size(107, 25);
             btnRestore.TabIndex = 3;
-            btnRestore.Text = "Wiederherstellen";
+            btnRestore.Text = "Restore";
             btnRestore.UseVisualStyleBackColor = true;
             btnRestore.Click += Restore;
             // 
@@ -178,7 +178,7 @@
             MaximizeBox = false;
             Name = "BackupSelectorForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Backup wiederherstellen";
+            Text = "Restore backup";
             tlpMain.ResumeLayout(false);
             tlpMain.PerformLayout();
             tlpBackupFiles.ResumeLayout(false);
