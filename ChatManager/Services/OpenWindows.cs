@@ -116,12 +116,15 @@ namespace ChatManager.Services
 
             fileSelector.Dispose();
 
-            Localization localization = new(GetSetSettings.GetCurrentLocale);
+            if (fileCount != 0)
+            {
+                Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-            string exportedFilesInfo = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
-            exportedFilesInfo = exportedFilesInfo.Replace("FILECOUNT", fileCount.ToString());
+                string exportedFilesInfo = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
+                exportedFilesInfo = exportedFilesInfo.Replace("FILECOUNT", fileCount.ToString());
 
-            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), exportedFilesInfo);
+                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), exportedFilesInfo);
+            }
         }
 
         internal static void OpenBackupSelector()

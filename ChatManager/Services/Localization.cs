@@ -1,9 +1,6 @@
 ﻿using ChatManager.Enums;
-using Microsoft.VisualBasic;
 using System.Globalization;
 using System.Text.Json;
-using System.Xml.Linq;
-using Windows.Web.Http;
 
 namespace ChatManager.Services
 {

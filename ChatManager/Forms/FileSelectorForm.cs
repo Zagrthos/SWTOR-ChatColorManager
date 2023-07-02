@@ -20,6 +20,7 @@ namespace ChatManager.Forms
         private string listBoxName = string.Empty;
         private readonly string[] selectedServers = new string[5];
         private readonly List<string> listBoxMulti = new();
+        private int tabIndex = 2;
 
         internal string GetListBoxString => listBoxString;
         internal string GetListBoxName => listBoxName;
@@ -98,8 +99,11 @@ namespace ChatManager.Forms
                             Name = name,
                             Location = new Point(3, 3),
                             Dock = DockStyle.Fill,
-                            DataSource = characters
+                            DataSource = characters,
+                            TabIndex = tabIndex,
                         };
+
+                        tabIndex++;
 
                         Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"ListBox: {listBox.Name} created");
 
@@ -158,8 +162,11 @@ namespace ChatManager.Forms
                             Location = new Point(3, 3),
                             Dock = DockStyle.Fill,
                             CheckOnClick = true,
-                            DataSource = characters
+                            DataSource = characters,
+                            TabIndex = tabIndex
                         };
+
+                        tabIndex++;
 
                         Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"CheckedListBox: {listBox.Name} created");
 
@@ -246,6 +253,12 @@ namespace ChatManager.Forms
                                         listBoxMulti.Add(item.ToString()!);
                                     }
                                 }
+                            }
+                            else
+                            {
+                                Localization localization = new(GetSetSettings.GetCurrentLocale);
+                                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), (localization.GetString(LocalizationEnum.Err_NoExportFileSelected)));
+                                return;
                             }
                         }
                     }

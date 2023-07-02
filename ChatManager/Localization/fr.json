@@ -2,9 +2,9 @@
   "_comment1": "MainForm Menu",
   "fileToolStripMenuItem": "Fichier",
   "openToolStripMenuItem": "Importation",
+  "saveToolStripMenuItem": "Exportation",
   "loadAutosaveToolStripMenuItem": "Charger la sauvegarde automatique",
   "restoreBackupToolStripMenuItem": "Restaurer la sauvegarde",
-  "saveToolStripMenuItem": "Exportation",
   "exitToolStripMenuItem": "Sortie",
   "toolsToolStripMenuItem": "Outils",
   "charFolderToolStripMenuItem": "Ouvre le dossier des personnages",
@@ -81,6 +81,7 @@
 
   "_comment6": "MessageBox Strings",
   "Err_ColorNotHex": "La couleur spécifiée dans la zone de texte ne correspond pas à la norme HEX.",
+  "Err_NoExportFileSelected": "Choisis au moins une entrée dans la liste!",
   "Error_IsDetected": "Quelque chose a mal tourné!\nVeux-tu signaler le bogue?",
   "Inf_ExportedFiles": "FILECOUNT le(s) fichier(s) a (ont) été édité(s).",
   "Inf_RestartRequired": "L'application doit être redémarrée après cette modification!",
@@ -114,7 +115,7 @@
   "UpdateIntervalWeekly": "Hebdomadaire",
   "chbUpdateDownload": "Télécharge les mises à jour manuellement",
 
-  "_comment8": "BackupSelector Strings",
+  "_comment8": "BackupSelectorForm",
   "BackupSelectorForm": "Restaurer la sauvegarde",
   "lblBackupDir": "Choisis le répertoire de sauvegarde",
   "lblBackupFiles": "Choisis le(s) fichier(s) de sauvegarde",

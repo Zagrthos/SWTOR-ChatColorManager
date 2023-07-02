@@ -5,9 +5,9 @@
         // MainForm Menu Items
         fileToolStripMenuItem,
         openToolStripMenuItem,
+        saveToolStripMenuItem,
         loadAutosaveToolStripMenuItem,
         restoreBackupToolStripMenuItem,
-        saveToolStripMenuItem,
         exitToolStripMenuItem,
         toolsToolStripMenuItem,
         charFolderToolStripMenuItem,
@@ -85,6 +85,7 @@
         // MessageBox Strings
         Err_AutosaveImport,
         Err_ColorNotHex,
+        Err_NoExportFileSelected,
         Error_IsDetected,
         Inf_AutosaveImport,
         Inf_ExportedFiles,

@@ -147,64 +147,64 @@
             menuMainForm.Name = "menuMainForm";
             menuMainForm.RenderMode = ToolStripRenderMode.Professional;
             menuMainForm.Size = new Size(484, 24);
-            menuMainForm.TabIndex = 44;
+            menuMainForm.TabIndex = 0;
             // 
             // fileToolStripMenuItem
             // 
             fileToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, toolStripSeparator1, loadAutosaveToolStripMenuItem, restoreBackupToolStripMenuItem, toolStripSeparator2, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(46, 20);
-            fileToolStripMenuItem.Text = "Datei";
+            fileToolStripMenuItem.Size = new Size(37, 20);
+            fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(202, 22);
-            openToolStripMenuItem.Text = "Öffnen";
+            openToolStripMenuItem.Size = new Size(155, 22);
+            openToolStripMenuItem.Text = "Import";
             openToolStripMenuItem.Click += ImportFile;
             // 
             // toolStripSeparator
             // 
             toolStripSeparator.Name = "toolStripSeparator";
-            toolStripSeparator.Size = new Size(199, 6);
+            toolStripSeparator.Size = new Size(152, 6);
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(202, 22);
-            saveToolStripMenuItem.Text = "Speichern";
+            saveToolStripMenuItem.Size = new Size(155, 22);
+            saveToolStripMenuItem.Text = "Export";
             saveToolStripMenuItem.Click += ExportFiles;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(199, 6);
+            toolStripSeparator1.Size = new Size(152, 6);
             // 
             // loadAutosaveToolStripMenuItem
             // 
             loadAutosaveToolStripMenuItem.Name = "loadAutosaveToolStripMenuItem";
-            loadAutosaveToolStripMenuItem.Size = new Size(202, 22);
-            loadAutosaveToolStripMenuItem.Text = "Autosave laden";
+            loadAutosaveToolStripMenuItem.Size = new Size(155, 22);
+            loadAutosaveToolStripMenuItem.Text = "Load autosave";
             loadAutosaveToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // restoreBackupToolStripMenuItem
             // 
             restoreBackupToolStripMenuItem.Name = "restoreBackupToolStripMenuItem";
-            restoreBackupToolStripMenuItem.Size = new Size(202, 22);
-            restoreBackupToolStripMenuItem.Text = "Backup wiederherstellen";
+            restoreBackupToolStripMenuItem.Size = new Size(155, 22);
+            restoreBackupToolStripMenuItem.Text = "Restore backup";
             restoreBackupToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(199, 6);
+            toolStripSeparator2.Size = new Size(152, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(202, 22);
-            exitToolStripMenuItem.Text = "Beenden";
+            exitToolStripMenuItem.Size = new Size(155, 22);
+            exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // toolsToolStripMenuItem
@@ -218,29 +218,29 @@
             // charFolderToolStripMenuItem
             // 
             charFolderToolStripMenuItem.Name = "charFolderToolStripMenuItem";
-            charFolderToolStripMenuItem.Size = new Size(209, 22);
-            charFolderToolStripMenuItem.Text = "Charakter Ordner öffnen";
+            charFolderToolStripMenuItem.Size = new Size(189, 22);
+            charFolderToolStripMenuItem.Text = "Open character folder";
             charFolderToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // backupToolStripMenuItem
             // 
             backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            backupToolStripMenuItem.Size = new Size(209, 22);
-            backupToolStripMenuItem.Text = "Backupverzeichnis öffnen";
+            backupToolStripMenuItem.Size = new Size(189, 22);
+            backupToolStripMenuItem.Text = "Open backup folder";
             backupToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // logFolderToolStripMenuItem
             // 
             logFolderToolStripMenuItem.Name = "logFolderToolStripMenuItem";
-            logFolderToolStripMenuItem.Size = new Size(209, 22);
-            logFolderToolStripMenuItem.Text = "Log Dateien öffnen";
+            logFolderToolStripMenuItem.Size = new Size(189, 22);
+            logFolderToolStripMenuItem.Text = "Open log files";
             logFolderToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // settingsToolStripMenuItem
             // 
             settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            settingsToolStripMenuItem.Size = new Size(209, 22);
-            settingsToolStripMenuItem.Text = "Einstellungen";
+            settingsToolStripMenuItem.Size = new Size(189, 22);
+            settingsToolStripMenuItem.Text = "Settings";
             settingsToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // helpToolStripMenuItem
@@ -249,54 +249,54 @@
             helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supportToolStripMenuItem, bugToolStripMenuItem, bugMailToolStripMenuItem, toolStripSeparator5, aboutToolStripMenuItem, updateToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             helpToolStripMenuItem.Size = new Size(44, 20);
-            helpToolStripMenuItem.Text = "Hilfe";
+            helpToolStripMenuItem.Text = "Help";
             // 
             // supportToolStripMenuItem
             // 
             supportToolStripMenuItem.Name = "supportToolStripMenuItem";
-            supportToolStripMenuItem.Size = new Size(187, 22);
+            supportToolStripMenuItem.Size = new Size(182, 22);
             supportToolStripMenuItem.Text = "Support";
             supportToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // bugToolStripMenuItem
             // 
             bugToolStripMenuItem.Name = "bugToolStripMenuItem";
-            bugToolStripMenuItem.Size = new Size(187, 22);
-            bugToolStripMenuItem.Text = "Bug melden (GitHub)";
+            bugToolStripMenuItem.Size = new Size(182, 22);
+            bugToolStripMenuItem.Text = "Report bug (GitHub)";
             bugToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // bugMailToolStripMenuItem
             // 
             bugMailToolStripMenuItem.Name = "bugMailToolStripMenuItem";
-            bugMailToolStripMenuItem.Size = new Size(187, 22);
-            bugMailToolStripMenuItem.Text = "Bug melden (E-Mail)";
+            bugMailToolStripMenuItem.Size = new Size(182, 22);
+            bugMailToolStripMenuItem.Text = "Report bug (E-Mail)";
             bugMailToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(184, 6);
+            toolStripSeparator5.Size = new Size(179, 6);
             // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(187, 22);
-            aboutToolStripMenuItem.Text = "Über...";
+            aboutToolStripMenuItem.Size = new Size(182, 22);
+            aboutToolStripMenuItem.Text = "About...";
             aboutToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // updateToolStripMenuItem
             // 
             updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            updateToolStripMenuItem.Size = new Size(187, 22);
-            updateToolStripMenuItem.Text = "Auf Updates prüfen";
+            updateToolStripMenuItem.Size = new Size(182, 22);
+            updateToolStripMenuItem.Text = "Check for updates";
             updateToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // downloadProgressToolStripMenuItem
             // 
             downloadProgressToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             downloadProgressToolStripMenuItem.Name = "downloadProgressToolStripMenuItem";
-            downloadProgressToolStripMenuItem.Size = new Size(186, 20);
-            downloadProgressToolStripMenuItem.Text = "Update Download: PROGRESS%";
+            downloadProgressToolStripMenuItem.Size = new Size(193, 20);
+            downloadProgressToolStripMenuItem.Text = "Download progress: PROGRESS%";
             downloadProgressToolStripMenuItem.Visible = false;
             // 
             // tabsMainForm
@@ -316,7 +316,7 @@
             tabsMainForm.SelectedIndex = 0;
             tabsMainForm.Size = new Size(478, 230);
             tabsMainForm.SizeMode = TabSizeMode.Fixed;
-            tabsMainForm.TabIndex = 43;
+            tabsMainForm.TabIndex = 1;
             tabsMainForm.DrawItem += TabsMainForm_DrawItem;
             // 
             // tpGlobal
@@ -326,7 +326,7 @@
             tpGlobal.Name = "tpGlobal";
             tpGlobal.Size = new Size(370, 222);
             tpGlobal.TabIndex = 0;
-            tpGlobal.Text = "Standardkanäle";
+            tpGlobal.Text = "Global channels";
             tpGlobal.UseVisualStyleBackColor = true;
             // 
             // tlpGlobal
@@ -356,9 +356,9 @@
             btnGeneral.Location = new Point(188, 150);
             btnGeneral.Name = "btnGeneral";
             btnGeneral.Size = new Size(179, 69);
-            btnGeneral.TabIndex = 2;
+            btnGeneral.TabIndex = 7;
             btnGeneral.Tag = "tbGeneral";
-            btnGeneral.Text = "Allgemein";
+            btnGeneral.Text = "General";
             btnGeneral.UseVisualStyleBackColor = true;
             btnGeneral.Click += ClickChangeColorButton;
             // 
@@ -368,7 +368,7 @@
             btnPvP.Location = new Point(188, 77);
             btnPvP.Name = "btnPvP";
             btnPvP.Size = new Size(179, 67);
-            btnPvP.TabIndex = 1;
+            btnPvP.TabIndex = 5;
             btnPvP.Tag = "tbPvP";
             btnPvP.Text = "PvP";
             btnPvP.UseVisualStyleBackColor = true;
@@ -380,9 +380,9 @@
             btnTrade.Location = new Point(188, 3);
             btnTrade.Name = "btnTrade";
             btnTrade.Size = new Size(179, 68);
-            btnTrade.TabIndex = 0;
+            btnTrade.TabIndex = 3;
             btnTrade.Tag = "tbTrade";
-            btnTrade.Text = "Handel";
+            btnTrade.Text = "Trade";
             btnTrade.UseVisualStyleBackColor = true;
             btnTrade.Click += ClickChangeColorButton;
             // 
@@ -392,7 +392,7 @@
             tbTrade.Location = new Point(3, 3);
             tbTrade.Name = "tbTrade";
             tbTrade.Size = new Size(179, 23);
-            tbTrade.TabIndex = 21;
+            tbTrade.TabIndex = 2;
             // 
             // tbPvP
             // 
@@ -400,7 +400,7 @@
             tbPvP.Location = new Point(3, 77);
             tbPvP.Name = "tbPvP";
             tbPvP.Size = new Size(179, 23);
-            tbPvP.TabIndex = 22;
+            tbPvP.TabIndex = 4;
             // 
             // tbGeneral
             // 
@@ -408,7 +408,7 @@
             tbGeneral.Location = new Point(3, 150);
             tbGeneral.Name = "tbGeneral";
             tbGeneral.Size = new Size(179, 23);
-            tbGeneral.TabIndex = 23;
+            tbGeneral.TabIndex = 6;
             // 
             // tpPlayer
             // 
@@ -417,7 +417,7 @@
             tpPlayer.Name = "tpPlayer";
             tpPlayer.Size = new Size(370, 222);
             tpPlayer.TabIndex = 1;
-            tpPlayer.Text = "Spielerkanäle";
+            tpPlayer.Text = "Player channels";
             tpPlayer.UseVisualStyleBackColor = true;
             // 
             // tlpPlayer
@@ -457,9 +457,9 @@
             btnWhisper.Location = new Point(188, 188);
             btnWhisper.Name = "btnWhisper";
             btnWhisper.Size = new Size(179, 31);
-            btnWhisper.TabIndex = 8;
+            btnWhisper.TabIndex = 19;
             btnWhisper.Tag = "tbWhisper";
-            btnWhisper.Text = "Flüstern";
+            btnWhisper.Text = "Whisper";
             btnWhisper.UseVisualStyleBackColor = true;
             btnWhisper.Click += ClickChangeColorButton;
             // 
@@ -469,9 +469,9 @@
             btnSay.Location = new Point(188, 151);
             btnSay.Name = "btnSay";
             btnSay.Size = new Size(179, 31);
-            btnSay.TabIndex = 7;
+            btnSay.TabIndex = 17;
             btnSay.Tag = "tbSay";
-            btnSay.Text = "Sagen";
+            btnSay.Text = "Say";
             btnSay.UseVisualStyleBackColor = true;
             btnSay.Click += ClickChangeColorButton;
             // 
@@ -481,9 +481,9 @@
             btnGuild.Location = new Point(188, 114);
             btnGuild.Name = "btnGuild";
             btnGuild.Size = new Size(179, 31);
-            btnGuild.TabIndex = 6;
+            btnGuild.TabIndex = 15;
             btnGuild.Tag = "tbGuild";
-            btnGuild.Text = "Gilde";
+            btnGuild.Text = "Guild";
             btnGuild.UseVisualStyleBackColor = true;
             btnGuild.Click += ClickChangeColorButton;
             // 
@@ -493,9 +493,9 @@
             btnOfficer.Location = new Point(188, 77);
             btnOfficer.Name = "btnOfficer";
             btnOfficer.Size = new Size(179, 31);
-            btnOfficer.TabIndex = 5;
+            btnOfficer.TabIndex = 13;
             btnOfficer.Tag = "tbOfficer";
-            btnOfficer.Text = "Offizier";
+            btnOfficer.Text = "Officer";
             btnOfficer.UseVisualStyleBackColor = true;
             btnOfficer.Click += ClickChangeColorButton;
             // 
@@ -505,9 +505,9 @@
             btnYell.Location = new Point(188, 40);
             btnYell.Name = "btnYell";
             btnYell.Size = new Size(179, 31);
-            btnYell.TabIndex = 4;
+            btnYell.TabIndex = 11;
             btnYell.Tag = "tbYell";
-            btnYell.Text = "Brüllen";
+            btnYell.Text = "Yell";
             btnYell.UseVisualStyleBackColor = true;
             btnYell.Click += ClickChangeColorButton;
             // 
@@ -517,7 +517,7 @@
             btnEmote.Location = new Point(188, 3);
             btnEmote.Name = "btnEmote";
             btnEmote.Size = new Size(179, 31);
-            btnEmote.TabIndex = 3;
+            btnEmote.TabIndex = 9;
             btnEmote.Tag = "tbEmote";
             btnEmote.Text = "Emote";
             btnEmote.UseVisualStyleBackColor = true;
@@ -529,7 +529,7 @@
             tbEmote.Location = new Point(3, 3);
             tbEmote.Name = "tbEmote";
             tbEmote.Size = new Size(179, 23);
-            tbEmote.TabIndex = 24;
+            tbEmote.TabIndex = 8;
             // 
             // tbYell
             // 
@@ -537,7 +537,7 @@
             tbYell.Location = new Point(3, 40);
             tbYell.Name = "tbYell";
             tbYell.Size = new Size(179, 23);
-            tbYell.TabIndex = 25;
+            tbYell.TabIndex = 10;
             // 
             // tbOfficer
             // 
@@ -545,7 +545,7 @@
             tbOfficer.Location = new Point(3, 77);
             tbOfficer.Name = "tbOfficer";
             tbOfficer.Size = new Size(179, 23);
-            tbOfficer.TabIndex = 26;
+            tbOfficer.TabIndex = 12;
             // 
             // tbGuild
             // 
@@ -553,7 +553,7 @@
             tbGuild.Location = new Point(3, 114);
             tbGuild.Name = "tbGuild";
             tbGuild.Size = new Size(179, 23);
-            tbGuild.TabIndex = 27;
+            tbGuild.TabIndex = 14;
             // 
             // tbSay
             // 
@@ -561,7 +561,7 @@
             tbSay.Location = new Point(3, 151);
             tbSay.Name = "tbSay";
             tbSay.Size = new Size(179, 23);
-            tbSay.TabIndex = 28;
+            tbSay.TabIndex = 16;
             // 
             // tbWhisper
             // 
@@ -569,7 +569,7 @@
             tbWhisper.Location = new Point(3, 188);
             tbWhisper.Name = "tbWhisper";
             tbWhisper.Size = new Size(179, 23);
-            tbWhisper.TabIndex = 29;
+            tbWhisper.TabIndex = 18;
             // 
             // tpGroup
             // 
@@ -578,7 +578,7 @@
             tpGroup.Name = "tpGroup";
             tpGroup.Size = new Size(370, 222);
             tpGroup.TabIndex = 2;
-            tpGroup.Text = "Gruppenkanäle";
+            tpGroup.Text = "Group channels";
             tpGroup.UseVisualStyleBackColor = true;
             // 
             // tlpGroup
@@ -615,9 +615,9 @@
             btnOpsOfficer.Location = new Point(188, 179);
             btnOpsOfficer.Name = "btnOpsOfficer";
             btnOpsOfficer.Size = new Size(179, 40);
-            btnOpsOfficer.TabIndex = 13;
+            btnOpsOfficer.TabIndex = 29;
             btnOpsOfficer.Tag = "tbOpsOfficer";
-            btnOpsOfficer.Text = "Ops Offizier";
+            btnOpsOfficer.Text = "Ops officer";
             btnOpsOfficer.UseVisualStyleBackColor = true;
             btnOpsOfficer.Click += ClickChangeColorButton;
             // 
@@ -627,9 +627,9 @@
             btnOpsAnnou.Location = new Point(188, 135);
             btnOpsAnnou.Name = "btnOpsAnnou";
             btnOpsAnnou.Size = new Size(179, 38);
-            btnOpsAnnou.TabIndex = 12;
+            btnOpsAnnou.TabIndex = 27;
             btnOpsAnnou.Tag = "tbOpsAnnou";
-            btnOpsAnnou.Text = "Ops Ankündigung";
+            btnOpsAnnou.Text = "Ops announce";
             btnOpsAnnou.UseVisualStyleBackColor = true;
             btnOpsAnnou.Click += ClickChangeColorButton;
             // 
@@ -639,9 +639,9 @@
             btnGroup.Location = new Point(188, 91);
             btnGroup.Name = "btnGroup";
             btnGroup.Size = new Size(179, 38);
-            btnGroup.TabIndex = 11;
+            btnGroup.TabIndex = 25;
             btnGroup.Tag = "tbGroup";
-            btnGroup.Text = "Gruppe";
+            btnGroup.Text = "Group";
             btnGroup.UseVisualStyleBackColor = true;
             btnGroup.Click += ClickChangeColorButton;
             // 
@@ -651,9 +651,9 @@
             btnOpsLead.Location = new Point(188, 47);
             btnOpsLead.Name = "btnOpsLead";
             btnOpsLead.Size = new Size(179, 38);
-            btnOpsLead.TabIndex = 10;
+            btnOpsLead.TabIndex = 23;
             btnOpsLead.Tag = "tbOpsLead";
-            btnOpsLead.Text = "Ops Anführer";
+            btnOpsLead.Text = "Ops lead";
             btnOpsLead.UseVisualStyleBackColor = true;
             btnOpsLead.Click += ClickChangeColorButton;
             // 
@@ -663,7 +663,7 @@
             btnOps.Location = new Point(188, 3);
             btnOps.Name = "btnOps";
             btnOps.Size = new Size(179, 38);
-            btnOps.TabIndex = 9;
+            btnOps.TabIndex = 21;
             btnOps.Tag = "tbOps";
             btnOps.Text = "Ops";
             btnOps.UseVisualStyleBackColor = true;
@@ -675,7 +675,7 @@
             tbOps.Location = new Point(3, 3);
             tbOps.Name = "tbOps";
             tbOps.Size = new Size(179, 23);
-            tbOps.TabIndex = 30;
+            tbOps.TabIndex = 20;
             // 
             // tbOpsLead
             // 
@@ -683,7 +683,7 @@
             tbOpsLead.Location = new Point(3, 47);
             tbOpsLead.Name = "tbOpsLead";
             tbOpsLead.Size = new Size(179, 23);
-            tbOpsLead.TabIndex = 31;
+            tbOpsLead.TabIndex = 22;
             // 
             // tbGroup
             // 
@@ -691,7 +691,7 @@
             tbGroup.Location = new Point(3, 91);
             tbGroup.Name = "tbGroup";
             tbGroup.Size = new Size(179, 23);
-            tbGroup.TabIndex = 32;
+            tbGroup.TabIndex = 24;
             // 
             // tbOpsAnnou
             // 
@@ -699,7 +699,7 @@
             tbOpsAnnou.Location = new Point(3, 135);
             tbOpsAnnou.Name = "tbOpsAnnou";
             tbOpsAnnou.Size = new Size(179, 23);
-            tbOpsAnnou.TabIndex = 33;
+            tbOpsAnnou.TabIndex = 26;
             // 
             // tbOpsOfficer
             // 
@@ -707,7 +707,7 @@
             tbOpsOfficer.Location = new Point(3, 179);
             tbOpsOfficer.Name = "tbOpsOfficer";
             tbOpsOfficer.Size = new Size(179, 23);
-            tbOpsOfficer.TabIndex = 34;
+            tbOpsOfficer.TabIndex = 28;
             // 
             // tpSystem
             // 
@@ -716,7 +716,7 @@
             tpSystem.Name = "tpSystem";
             tpSystem.Size = new Size(370, 222);
             tpSystem.TabIndex = 3;
-            tpSystem.Text = "Systemkanäle";
+            tpSystem.Text = "System channels";
             tpSystem.UseVisualStyleBackColor = true;
             // 
             // tlpSystem
@@ -759,9 +759,9 @@
             btnGroupInfo.Location = new Point(188, 195);
             btnGroupInfo.Name = "btnGroupInfo";
             btnGroupInfo.Size = new Size(179, 24);
-            btnGroupInfo.TabIndex = 20;
+            btnGroupInfo.TabIndex = 43;
             btnGroupInfo.Tag = "tbGroupInfo";
-            btnGroupInfo.Text = "Gruppeninfos";
+            btnGroupInfo.Text = "Group info";
             btnGroupInfo.UseVisualStyleBackColor = true;
             btnGroupInfo.Click += ClickChangeColorButton;
             // 
@@ -771,9 +771,9 @@
             btnGuildInfo.Location = new Point(188, 163);
             btnGuildInfo.Name = "btnGuildInfo";
             btnGuildInfo.Size = new Size(179, 26);
-            btnGuildInfo.TabIndex = 19;
+            btnGuildInfo.TabIndex = 41;
             btnGuildInfo.Tag = "tbGuildInfo";
-            btnGuildInfo.Text = "Gildeninfos";
+            btnGuildInfo.Text = "Guild info";
             btnGuildInfo.UseVisualStyleBackColor = true;
             btnGuildInfo.Click += ClickChangeColorButton;
             // 
@@ -783,7 +783,7 @@
             tbGroupInfo.Location = new Point(3, 195);
             tbGroupInfo.Name = "tbGroupInfo";
             tbGroupInfo.Size = new Size(179, 23);
-            tbGroupInfo.TabIndex = 41;
+            tbGroupInfo.TabIndex = 42;
             // 
             // btnSystem
             // 
@@ -791,9 +791,9 @@
             btnSystem.Location = new Point(188, 131);
             btnSystem.Name = "btnSystem";
             btnSystem.Size = new Size(179, 26);
-            btnSystem.TabIndex = 18;
+            btnSystem.TabIndex = 39;
             btnSystem.Tag = "tbSystem";
-            btnSystem.Text = "System-Rückmeldung";
+            btnSystem.Text = "System feedback";
             btnSystem.UseVisualStyleBackColor = true;
             btnSystem.Click += ClickChangeColorButton;
             // 
@@ -803,9 +803,9 @@
             btnOpsInfo.Location = new Point(188, 99);
             btnOpsInfo.Name = "btnOpsInfo";
             btnOpsInfo.Size = new Size(179, 26);
-            btnOpsInfo.TabIndex = 17;
+            btnOpsInfo.TabIndex = 37;
             btnOpsInfo.Tag = "tbOpsInfo";
-            btnOpsInfo.Text = "Ops Infos";
+            btnOpsInfo.Text = "Ops info";
             btnOpsInfo.UseVisualStyleBackColor = true;
             btnOpsInfo.Click += ClickChangeColorButton;
             // 
@@ -823,9 +823,9 @@
             btnLogin.Location = new Point(188, 67);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(179, 26);
-            btnLogin.TabIndex = 16;
+            btnLogin.TabIndex = 35;
             btnLogin.Tag = "tbLogin";
-            btnLogin.Text = "Charakter Login";
+            btnLogin.Text = "Character login";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += ClickChangeColorButton;
             // 
@@ -835,9 +835,9 @@
             btnConv.Location = new Point(188, 35);
             btnConv.Name = "btnConv";
             btnConv.Size = new Size(179, 26);
-            btnConv.TabIndex = 15;
+            btnConv.TabIndex = 33;
             btnConv.Tag = "tbConv";
-            btnConv.Text = "Gespräch";
+            btnConv.Text = "Conversation";
             btnConv.UseVisualStyleBackColor = true;
             btnConv.Click += ClickChangeColorButton;
             // 
@@ -847,7 +847,7 @@
             tbSystem.Location = new Point(3, 131);
             tbSystem.Name = "tbSystem";
             tbSystem.Size = new Size(179, 23);
-            tbSystem.TabIndex = 39;
+            tbSystem.TabIndex = 38;
             // 
             // btnCombat
             // 
@@ -855,9 +855,9 @@
             btnCombat.Location = new Point(188, 3);
             btnCombat.Name = "btnCombat";
             btnCombat.Size = new Size(179, 26);
-            btnCombat.TabIndex = 14;
+            btnCombat.TabIndex = 31;
             btnCombat.Tag = "tbCombat";
-            btnCombat.Text = "Kampfinfos";
+            btnCombat.Text = "Combat info";
             btnCombat.UseVisualStyleBackColor = true;
             btnCombat.Click += ClickChangeColorButton;
             // 
@@ -867,7 +867,7 @@
             tbCombat.Location = new Point(3, 3);
             tbCombat.Name = "tbCombat";
             tbCombat.Size = new Size(179, 23);
-            tbCombat.TabIndex = 35;
+            tbCombat.TabIndex = 30;
             // 
             // tbOpsInfo
             // 
@@ -875,7 +875,7 @@
             tbOpsInfo.Location = new Point(3, 99);
             tbOpsInfo.Name = "tbOpsInfo";
             tbOpsInfo.Size = new Size(179, 23);
-            tbOpsInfo.TabIndex = 38;
+            tbOpsInfo.TabIndex = 36;
             // 
             // tbConv
             // 
@@ -883,7 +883,7 @@
             tbConv.Location = new Point(3, 35);
             tbConv.Name = "tbConv";
             tbConv.Size = new Size(179, 23);
-            tbConv.TabIndex = 36;
+            tbConv.TabIndex = 32;
             // 
             // tbLogin
             // 
@@ -891,7 +891,7 @@
             tbLogin.Location = new Point(3, 67);
             tbLogin.Name = "tbLogin";
             tbLogin.Size = new Size(179, 23);
-            tbLogin.TabIndex = 37;
+            tbLogin.TabIndex = 34;
             // 
             // lblCharName
             // 
@@ -900,8 +900,8 @@
             lblCharName.Location = new Point(3, 261);
             lblCharName.Name = "lblCharName";
             lblCharName.Size = new Size(236, 25);
-            lblCharName.TabIndex = 45;
-            lblCharName.Text = "Aktueller Char:";
+            lblCharName.TabIndex = 0;
+            lblCharName.Text = "Current character:";
             lblCharName.TextAlign = ContentAlignment.MiddleLeft;
             lblCharName.Visible = false;
             // 
@@ -912,8 +912,8 @@
             lblServerName.Location = new Point(245, 261);
             lblServerName.Name = "lblServerName";
             lblServerName.Size = new Size(236, 25);
-            lblServerName.TabIndex = 46;
-            lblServerName.Text = "Aktueller Server:";
+            lblServerName.TabIndex = 0;
+            lblServerName.Text = "Current server:";
             lblServerName.TextAlign = ContentAlignment.MiddleLeft;
             lblServerName.Visible = false;
             // 
