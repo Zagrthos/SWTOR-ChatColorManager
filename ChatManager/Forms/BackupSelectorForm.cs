@@ -155,6 +155,14 @@ namespace ChatManager.Forms
 
             if (sender is Button button && button.Name == btnRestore.Name)
             {
+                Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+                if (clbxBackupFiles.CheckedItems.Count == 0)
+                {
+                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_NoExportFileSelected));
+                    return;
+                }
+
                 // Get all the checked items in an array
                 string[] checkedItems = clbxBackupFiles.CheckedItems.Cast<string>().ToArray();
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"checkedItems: {checkedItems.Length}");
@@ -176,8 +184,6 @@ namespace ChatManager.Forms
                     // Replace the file
                     File.Copy(path, Path.Combine(localPath, fileName), true);
                 }
-
-                Localization localization = new(GetSetSettings.GetCurrentLocale);
 
                 string changedFiles = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
                 changedFiles = changedFiles.Replace("FILECOUNT", checkedItems.Length.ToString());
