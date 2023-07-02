@@ -115,7 +115,7 @@
   "UpdateIntervalWeekly": "Weekly",
   "chbUpdateDownload": "Download updates manually",
 
-  "_comment8": "BackupSelector Strings",
+  "_comment8": "BackupSelectorForm",
   "BackupSelectorForm": "Restore backup",
   "lblBackupDir": "Choose backup directory",
   "lblBackupFiles": "Choose backup file(s)",
