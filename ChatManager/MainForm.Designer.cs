@@ -154,57 +154,57 @@
             fileToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, toolStripSeparator1, loadAutosaveToolStripMenuItem, restoreBackupToolStripMenuItem, toolStripSeparator2, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(46, 20);
-            fileToolStripMenuItem.Text = "Datei";
+            fileToolStripMenuItem.Size = new Size(37, 20);
+            fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(202, 22);
-            openToolStripMenuItem.Text = "Öffnen";
+            openToolStripMenuItem.Size = new Size(180, 22);
+            openToolStripMenuItem.Text = "Import";
             openToolStripMenuItem.Click += ImportFile;
             // 
             // toolStripSeparator
             // 
             toolStripSeparator.Name = "toolStripSeparator";
-            toolStripSeparator.Size = new Size(199, 6);
+            toolStripSeparator.Size = new Size(177, 6);
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(202, 22);
-            saveToolStripMenuItem.Text = "Speichern";
+            saveToolStripMenuItem.Size = new Size(180, 22);
+            saveToolStripMenuItem.Text = "Export";
             saveToolStripMenuItem.Click += ExportFiles;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(199, 6);
+            toolStripSeparator1.Size = new Size(177, 6);
             // 
             // loadAutosaveToolStripMenuItem
             // 
             loadAutosaveToolStripMenuItem.Name = "loadAutosaveToolStripMenuItem";
-            loadAutosaveToolStripMenuItem.Size = new Size(202, 22);
-            loadAutosaveToolStripMenuItem.Text = "Autosave laden";
+            loadAutosaveToolStripMenuItem.Size = new Size(180, 22);
+            loadAutosaveToolStripMenuItem.Text = "Load autosave";
             loadAutosaveToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // restoreBackupToolStripMenuItem
             // 
             restoreBackupToolStripMenuItem.Name = "restoreBackupToolStripMenuItem";
-            restoreBackupToolStripMenuItem.Size = new Size(202, 22);
-            restoreBackupToolStripMenuItem.Text = "Backup wiederherstellen";
+            restoreBackupToolStripMenuItem.Size = new Size(180, 22);
+            restoreBackupToolStripMenuItem.Text = "Restore backup";
             restoreBackupToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(199, 6);
+            toolStripSeparator2.Size = new Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(202, 22);
-            exitToolStripMenuItem.Text = "Beenden";
+            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // toolsToolStripMenuItem
@@ -218,29 +218,29 @@
             // charFolderToolStripMenuItem
             // 
             charFolderToolStripMenuItem.Name = "charFolderToolStripMenuItem";
-            charFolderToolStripMenuItem.Size = new Size(209, 22);
-            charFolderToolStripMenuItem.Text = "Charakter Ordner öffnen";
+            charFolderToolStripMenuItem.Size = new Size(189, 22);
+            charFolderToolStripMenuItem.Text = "Open character folder";
             charFolderToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // backupToolStripMenuItem
             // 
             backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            backupToolStripMenuItem.Size = new Size(209, 22);
-            backupToolStripMenuItem.Text = "Backupverzeichnis öffnen";
+            backupToolStripMenuItem.Size = new Size(189, 22);
+            backupToolStripMenuItem.Text = "Open backup folder";
             backupToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // logFolderToolStripMenuItem
             // 
             logFolderToolStripMenuItem.Name = "logFolderToolStripMenuItem";
-            logFolderToolStripMenuItem.Size = new Size(209, 22);
-            logFolderToolStripMenuItem.Text = "Log Dateien öffnen";
+            logFolderToolStripMenuItem.Size = new Size(189, 22);
+            logFolderToolStripMenuItem.Text = "Open log files";
             logFolderToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // settingsToolStripMenuItem
             // 
             settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            settingsToolStripMenuItem.Size = new Size(209, 22);
-            settingsToolStripMenuItem.Text = "Einstellungen";
+            settingsToolStripMenuItem.Size = new Size(189, 22);
+            settingsToolStripMenuItem.Text = "Settings";
             settingsToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // helpToolStripMenuItem
@@ -249,54 +249,54 @@
             helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supportToolStripMenuItem, bugToolStripMenuItem, bugMailToolStripMenuItem, toolStripSeparator5, aboutToolStripMenuItem, updateToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             helpToolStripMenuItem.Size = new Size(44, 20);
-            helpToolStripMenuItem.Text = "Hilfe";
+            helpToolStripMenuItem.Text = "Help";
             // 
             // supportToolStripMenuItem
             // 
             supportToolStripMenuItem.Name = "supportToolStripMenuItem";
-            supportToolStripMenuItem.Size = new Size(187, 22);
+            supportToolStripMenuItem.Size = new Size(182, 22);
             supportToolStripMenuItem.Text = "Support";
             supportToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // bugToolStripMenuItem
             // 
             bugToolStripMenuItem.Name = "bugToolStripMenuItem";
-            bugToolStripMenuItem.Size = new Size(187, 22);
-            bugToolStripMenuItem.Text = "Bug melden (GitHub)";
+            bugToolStripMenuItem.Size = new Size(182, 22);
+            bugToolStripMenuItem.Text = "Report bug (GitHub)";
             bugToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // bugMailToolStripMenuItem
             // 
             bugMailToolStripMenuItem.Name = "bugMailToolStripMenuItem";
-            bugMailToolStripMenuItem.Size = new Size(187, 22);
-            bugMailToolStripMenuItem.Text = "Bug melden (E-Mail)";
+            bugMailToolStripMenuItem.Size = new Size(182, 22);
+            bugMailToolStripMenuItem.Text = "Report bug (E-Mail)";
             bugMailToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(184, 6);
+            toolStripSeparator5.Size = new Size(179, 6);
             // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(187, 22);
-            aboutToolStripMenuItem.Text = "Über...";
+            aboutToolStripMenuItem.Size = new Size(182, 22);
+            aboutToolStripMenuItem.Text = "About...";
             aboutToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // updateToolStripMenuItem
             // 
             updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            updateToolStripMenuItem.Size = new Size(187, 22);
-            updateToolStripMenuItem.Text = "Auf Updates prüfen";
+            updateToolStripMenuItem.Size = new Size(182, 22);
+            updateToolStripMenuItem.Text = "Check for updates";
             updateToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // downloadProgressToolStripMenuItem
             // 
             downloadProgressToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             downloadProgressToolStripMenuItem.Name = "downloadProgressToolStripMenuItem";
-            downloadProgressToolStripMenuItem.Size = new Size(186, 20);
-            downloadProgressToolStripMenuItem.Text = "Update Download: PROGRESS%";
+            downloadProgressToolStripMenuItem.Size = new Size(193, 20);
+            downloadProgressToolStripMenuItem.Text = "Download progress: PROGRESS%";
             downloadProgressToolStripMenuItem.Visible = false;
             // 
             // tabsMainForm
@@ -326,7 +326,7 @@
             tpGlobal.Name = "tpGlobal";
             tpGlobal.Size = new Size(370, 222);
             tpGlobal.TabIndex = 0;
-            tpGlobal.Text = "Standardkanäle";
+            tpGlobal.Text = "Global channels";
             tpGlobal.UseVisualStyleBackColor = true;
             // 
             // tlpGlobal
@@ -358,7 +358,7 @@
             btnGeneral.Size = new Size(179, 69);
             btnGeneral.TabIndex = 7;
             btnGeneral.Tag = "tbGeneral";
-            btnGeneral.Text = "Allgemein";
+            btnGeneral.Text = "General";
             btnGeneral.UseVisualStyleBackColor = true;
             btnGeneral.Click += ClickChangeColorButton;
             // 
@@ -382,7 +382,7 @@
             btnTrade.Size = new Size(179, 68);
             btnTrade.TabIndex = 3;
             btnTrade.Tag = "tbTrade";
-            btnTrade.Text = "Handel";
+            btnTrade.Text = "Trade";
             btnTrade.UseVisualStyleBackColor = true;
             btnTrade.Click += ClickChangeColorButton;
             // 
@@ -417,7 +417,7 @@
             tpPlayer.Name = "tpPlayer";
             tpPlayer.Size = new Size(370, 222);
             tpPlayer.TabIndex = 1;
-            tpPlayer.Text = "Spielerkanäle";
+            tpPlayer.Text = "Player channels";
             tpPlayer.UseVisualStyleBackColor = true;
             // 
             // tlpPlayer
@@ -459,7 +459,7 @@
             btnWhisper.Size = new Size(179, 31);
             btnWhisper.TabIndex = 19;
             btnWhisper.Tag = "tbWhisper";
-            btnWhisper.Text = "Flüstern";
+            btnWhisper.Text = "Whisper";
             btnWhisper.UseVisualStyleBackColor = true;
             btnWhisper.Click += ClickChangeColorButton;
             // 
@@ -471,7 +471,7 @@
             btnSay.Size = new Size(179, 31);
             btnSay.TabIndex = 17;
             btnSay.Tag = "tbSay";
-            btnSay.Text = "Sagen";
+            btnSay.Text = "Say";
             btnSay.UseVisualStyleBackColor = true;
             btnSay.Click += ClickChangeColorButton;
             // 
@@ -483,7 +483,7 @@
             btnGuild.Size = new Size(179, 31);
             btnGuild.TabIndex = 15;
             btnGuild.Tag = "tbGuild";
-            btnGuild.Text = "Gilde";
+            btnGuild.Text = "Guild";
             btnGuild.UseVisualStyleBackColor = true;
             btnGuild.Click += ClickChangeColorButton;
             // 
@@ -495,7 +495,7 @@
             btnOfficer.Size = new Size(179, 31);
             btnOfficer.TabIndex = 13;
             btnOfficer.Tag = "tbOfficer";
-            btnOfficer.Text = "Offizier";
+            btnOfficer.Text = "Officer";
             btnOfficer.UseVisualStyleBackColor = true;
             btnOfficer.Click += ClickChangeColorButton;
             // 
@@ -507,7 +507,7 @@
             btnYell.Size = new Size(179, 31);
             btnYell.TabIndex = 11;
             btnYell.Tag = "tbYell";
-            btnYell.Text = "Brüllen";
+            btnYell.Text = "Yell";
             btnYell.UseVisualStyleBackColor = true;
             btnYell.Click += ClickChangeColorButton;
             // 
@@ -578,7 +578,7 @@
             tpGroup.Name = "tpGroup";
             tpGroup.Size = new Size(370, 222);
             tpGroup.TabIndex = 2;
-            tpGroup.Text = "Gruppenkanäle";
+            tpGroup.Text = "Group channels";
             tpGroup.UseVisualStyleBackColor = true;
             // 
             // tlpGroup
@@ -617,7 +617,7 @@
             btnOpsOfficer.Size = new Size(179, 40);
             btnOpsOfficer.TabIndex = 29;
             btnOpsOfficer.Tag = "tbOpsOfficer";
-            btnOpsOfficer.Text = "Ops Offizier";
+            btnOpsOfficer.Text = "Ops officer";
             btnOpsOfficer.UseVisualStyleBackColor = true;
             btnOpsOfficer.Click += ClickChangeColorButton;
             // 
@@ -629,7 +629,7 @@
             btnOpsAnnou.Size = new Size(179, 38);
             btnOpsAnnou.TabIndex = 27;
             btnOpsAnnou.Tag = "tbOpsAnnou";
-            btnOpsAnnou.Text = "Ops Ankündigung";
+            btnOpsAnnou.Text = "Ops announce";
             btnOpsAnnou.UseVisualStyleBackColor = true;
             btnOpsAnnou.Click += ClickChangeColorButton;
             // 
@@ -641,7 +641,7 @@
             btnGroup.Size = new Size(179, 38);
             btnGroup.TabIndex = 25;
             btnGroup.Tag = "tbGroup";
-            btnGroup.Text = "Gruppe";
+            btnGroup.Text = "Group";
             btnGroup.UseVisualStyleBackColor = true;
             btnGroup.Click += ClickChangeColorButton;
             // 
@@ -653,7 +653,7 @@
             btnOpsLead.Size = new Size(179, 38);
             btnOpsLead.TabIndex = 23;
             btnOpsLead.Tag = "tbOpsLead";
-            btnOpsLead.Text = "Ops Anführer";
+            btnOpsLead.Text = "Ops lead";
             btnOpsLead.UseVisualStyleBackColor = true;
             btnOpsLead.Click += ClickChangeColorButton;
             // 
@@ -716,7 +716,7 @@
             tpSystem.Name = "tpSystem";
             tpSystem.Size = new Size(370, 222);
             tpSystem.TabIndex = 3;
-            tpSystem.Text = "Systemkanäle";
+            tpSystem.Text = "System channels";
             tpSystem.UseVisualStyleBackColor = true;
             // 
             // tlpSystem
@@ -761,7 +761,7 @@
             btnGroupInfo.Size = new Size(179, 24);
             btnGroupInfo.TabIndex = 43;
             btnGroupInfo.Tag = "tbGroupInfo";
-            btnGroupInfo.Text = "Gruppeninfos";
+            btnGroupInfo.Text = "Group info";
             btnGroupInfo.UseVisualStyleBackColor = true;
             btnGroupInfo.Click += ClickChangeColorButton;
             // 
@@ -773,7 +773,7 @@
             btnGuildInfo.Size = new Size(179, 26);
             btnGuildInfo.TabIndex = 41;
             btnGuildInfo.Tag = "tbGuildInfo";
-            btnGuildInfo.Text = "Gildeninfos";
+            btnGuildInfo.Text = "Guild info";
             btnGuildInfo.UseVisualStyleBackColor = true;
             btnGuildInfo.Click += ClickChangeColorButton;
             // 
@@ -793,7 +793,7 @@
             btnSystem.Size = new Size(179, 26);
             btnSystem.TabIndex = 39;
             btnSystem.Tag = "tbSystem";
-            btnSystem.Text = "System-Rückmeldung";
+            btnSystem.Text = "System feedback";
             btnSystem.UseVisualStyleBackColor = true;
             btnSystem.Click += ClickChangeColorButton;
             // 
@@ -805,7 +805,7 @@
             btnOpsInfo.Size = new Size(179, 26);
             btnOpsInfo.TabIndex = 37;
             btnOpsInfo.Tag = "tbOpsInfo";
-            btnOpsInfo.Text = "Ops Infos";
+            btnOpsInfo.Text = "Ops info";
             btnOpsInfo.UseVisualStyleBackColor = true;
             btnOpsInfo.Click += ClickChangeColorButton;
             // 
@@ -825,7 +825,7 @@
             btnLogin.Size = new Size(179, 26);
             btnLogin.TabIndex = 35;
             btnLogin.Tag = "tbLogin";
-            btnLogin.Text = "Charakter Login";
+            btnLogin.Text = "Character login";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += ClickChangeColorButton;
             // 
@@ -837,7 +837,7 @@
             btnConv.Size = new Size(179, 26);
             btnConv.TabIndex = 33;
             btnConv.Tag = "tbConv";
-            btnConv.Text = "Gespräch";
+            btnConv.Text = "Conversation";
             btnConv.UseVisualStyleBackColor = true;
             btnConv.Click += ClickChangeColorButton;
             // 
@@ -857,7 +857,7 @@
             btnCombat.Size = new Size(179, 26);
             btnCombat.TabIndex = 31;
             btnCombat.Tag = "tbCombat";
-            btnCombat.Text = "Kampfinfos";
+            btnCombat.Text = "Combat info";
             btnCombat.UseVisualStyleBackColor = true;
             btnCombat.Click += ClickChangeColorButton;
             // 
@@ -901,7 +901,7 @@
             lblCharName.Name = "lblCharName";
             lblCharName.Size = new Size(236, 25);
             lblCharName.TabIndex = 0;
-            lblCharName.Text = "Aktueller Char:";
+            lblCharName.Text = "Current character:";
             lblCharName.TextAlign = ContentAlignment.MiddleLeft;
             lblCharName.Visible = false;
             // 
@@ -913,7 +913,7 @@
             lblServerName.Name = "lblServerName";
             lblServerName.Size = new Size(236, 25);
             lblServerName.TabIndex = 0;
-            lblServerName.Text = "Aktueller Server:";
+            lblServerName.Text = "Current server:";
             lblServerName.TextAlign = ContentAlignment.MiddleLeft;
             lblServerName.Visible = false;
             // 
