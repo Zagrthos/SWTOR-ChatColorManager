@@ -254,7 +254,7 @@ namespace ChatManager.Forms
                                     }
                                 }
                             }
-                            else
+                            else if (checkedListBox.Name == button.Tag.ToString())
                             {
                                 Localization localization = new(GetSetSettings.GetCurrentLocale);
                                 ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_NoExportFileSelected));
