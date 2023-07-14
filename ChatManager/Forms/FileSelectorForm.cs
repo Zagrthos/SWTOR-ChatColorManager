@@ -375,7 +375,7 @@ namespace ChatManager.Forms
                         if (button.Name == $"btn{parent}Select")
                         {
                             button.Tag = $"c{button.Tag}";
-                            Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, $"New Tag of {button.Name}: {button.Tag}");
+                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"New Tag of {button.Name}: {button.Tag}");
                         }
                     }
                 }
