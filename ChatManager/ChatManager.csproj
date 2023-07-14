@@ -11,9 +11,9 @@
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <AnalysisLevel>latest</AnalysisLevel>
-	<Version>1.3.3</Version>
-	<FileVersion>1.3.3.0</FileVersion>
-	<AssemblyVersion>1.3.3.0</AssemblyVersion>
+	<Version>1.3.4</Version>
+	<FileVersion>1.3.4.0</FileVersion>
+	<AssemblyVersion>1.3.4.0</AssemblyVersion>
 	<Authors>Zagrthos</Authors>
 	<Product>SWTOR Chat Manager</Product>
 	<Copyright>© Zagrthos 2023</Copyright>
