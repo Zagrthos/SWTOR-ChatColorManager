@@ -33,7 +33,9 @@ namespace ChatManager.Services
                     break;
             }
 
-            Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox shown");
+            Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox will be shown");
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ShowMessageBox, $"caption: {caption}");
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ShowMessageBox, $"message: {message}");
 
             MessageBox.Show(message, caption, MessageBoxButtons.OK, icon);
 
