@@ -93,10 +93,11 @@ namespace ChatManager.Services
                                     lineNumber = line;
                                     break;
                                 }
-                                else
-                                {
-                                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileExport, "No ChatColors line found!");
-                                }
+                            }
+
+                            if (lineNumber == 0)
+                            {
+                                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileExport, "No ChatColors line found!");
                             }
 
                             // Split the string to only get the wanted numbers
