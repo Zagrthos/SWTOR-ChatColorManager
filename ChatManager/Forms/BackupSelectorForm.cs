@@ -179,7 +179,7 @@ namespace ChatManager.Forms
                 switch (button.Name)
                 {
                     case "btnDeleteDir":
-                        if (string.IsNullOrEmpty(lbxBackupDir.SelectedItem!.ToString()))
+                        if (!string.IsNullOrEmpty(lbxBackupDir.SelectedItem!.ToString()))
                         {
                             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"DirToDelete: {lbxBackupDir.SelectedItem}");
 
@@ -188,6 +188,9 @@ namespace ChatManager.Forms
                             {
                                 string[] array = (string[])lbxBackupDir.DataSource;
                                 List<string> dataSource = array.ToList();
+
+                                // Delete the Directory
+                                Directory.Delete(Path.Combine(backupPath, lbxBackupDir.SelectedItem.ToString()!), true);
 
                                 // Remove item from DataSource
                                 dataSource.Remove(lbxBackupDir.SelectedItem.ToString()!);
@@ -207,9 +210,6 @@ namespace ChatManager.Forms
                                 ShowMessageBox.ShowBug();
                                 return;
                             }
-
-                            // Delete the Directory
-                            Directory.Delete(Path.Combine(backupPath, lbxBackupDir.SelectedItem.ToString()!), true);
                         }
                         else
                         {
