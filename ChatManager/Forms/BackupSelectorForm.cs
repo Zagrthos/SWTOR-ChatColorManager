@@ -60,7 +60,7 @@ namespace ChatManager.Forms
 
             for (int i = 0; i < filesInDir.Length / 2; i++)
             {
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{i}");
+                //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{i}");
 
                 // Check if all parts in array are NOT empty or null
                 if (!string.IsNullOrEmpty(filesInDir[i, 0]) && !string.IsNullOrEmpty(filesInDir[i, 1]) && !string.IsNullOrEmpty(filesInDir[i, 2]))
