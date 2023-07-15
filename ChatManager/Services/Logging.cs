@@ -34,6 +34,35 @@ namespace ChatManager.Services
             timer = new(10000);
             timer.Elapsed += TimerElapsed;
             timer.Start();
+
+            LogfilesCleaning();
+        }
+
+        // Logfile Cleaning
+        internal static void LogfilesCleaning()
+        {
+            Write(LogEventEnum.Method, ProgramClassEnum.Logging, "LogfilesCleaning entered");
+
+            string logPath = GetSetSettings.GetLogPath;
+
+            DateTime dateSevenDaysAgo = DateTime.Today.AddDays(-7);
+            Write(LogEventEnum.Variable, ProgramClassEnum.Logging, dateSevenDaysAgo.ToString());
+
+            string[] logFiles = Directory.GetFiles(logPath);
+            Write(LogEventEnum.Variable, ProgramClassEnum.Logging, logFiles.Length.ToString());
+
+            int counter = 0;
+
+            foreach (string file in logFiles)
+            {
+                if (File.GetLastWriteTime(file) < dateSevenDaysAgo)
+                {
+                    File.Delete(file);
+                    counter++;
+                }
+            }
+
+            Write(LogEventEnum.Info, ProgramClassEnum.Logging, $"{counter} logs deleted");
         }
 
         // Stop logWriter and restart it
