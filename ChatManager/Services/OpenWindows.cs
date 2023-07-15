@@ -131,6 +131,14 @@ namespace ChatManager.Services
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenBackupSelector Entered");
 
+            if (!Checks.IsBackupDirEmpty())
+            {
+                Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), localization.GetString(LocalizationEnum.Inf_NoFilesInBackupDir));
+                return;
+            }
+
             BackupSelectorForm backupSelector = new();
             backupSelector.ShowDialog();
 

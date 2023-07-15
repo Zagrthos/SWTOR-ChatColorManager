@@ -88,5 +88,17 @@ namespace ChatManager.Services
 
             return getSettings;
         }
+
+        internal static bool IsBackupDirEmpty()
+        {
+            if (Directory.GetFiles(GetSetSettings.GetBackupPath).Length >= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

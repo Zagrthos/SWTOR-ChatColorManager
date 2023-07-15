@@ -89,6 +89,7 @@
         Error_IsDetected,
         Inf_AutosaveImport,
         Inf_ExportedFiles,
+        Inf_NoFilesInBackupDir,
         Inf_RestartRequired,
         MessageBoxError,
         MessageBoxInfo,

@@ -86,6 +86,7 @@
   "Error_IsDetected": "Something went wrong!\nDo you want to report the bug?",
   "Inf_AutosaveImport": "Import of character CHARNAME of server SERVERNAME was sucessful!\nLast edited: TIMESTAMP",
   "Inf_ExportedFiles": "FILECOUNT file(s) have been edited.",
+  "Inf_NoFilesInBackupDir": "There are no files in the backup directory!",
   "Inf_RestartRequired": "The application must be restarted after this change!",
   "MessageBoxError": "Error",
   "MessageBoxInfo": "Information",

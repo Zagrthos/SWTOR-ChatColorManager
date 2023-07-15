@@ -86,6 +86,7 @@
   "Error_IsDetected": "Da ist was schief gelaufen!\nMöchtest du den Bug melden?",
   "Inf_AutosaveImport": "Es wurde erfolgreich der Charakter CHARNAME von dem Server SERVERNAME importiert!\nLetzte Bearbeitung am: TIMESTAMP",
   "Inf_ExportedFiles": "Es wurde(n) FILECOUNT Datei(en) bearbeitet.",
+  "Inf_NoFilesInBackupDir": "Es befinden sich keine Dateien im Backup Verzeichnis!",
   "Inf_RestartRequired": "Die Applikation muss nach dieser Änderung neu gestartet werden!",
   "MessageBoxError": "Fehler",
   "MessageBoxInfo": "Information",
