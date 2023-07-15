@@ -31,7 +31,7 @@ namespace ChatManager.Forms
             for (int i = 0; i < backupDirs.Length; i++)
             {
                 backupDirsName[i] = Path.GetFileName(backupDirs[i]);
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, backupDirsName[i]);
+                //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, backupDirsName[i]);
             }
 
             // Reverse the names so the newest is first
@@ -65,8 +65,8 @@ namespace ChatManager.Forms
                 // Check if all parts in array are NOT empty or null
                 if (!string.IsNullOrEmpty(filesInDir[i, 0]) && !string.IsNullOrEmpty(filesInDir[i, 1]) && !string.IsNullOrEmpty(filesInDir[i, 2]))
                 {
-                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{filesInDir[i, 0]} & {filesInDir[i, 1]} & {filesInDir[i, 2]}");
-                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"file[{i}]");
+                    //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{filesInDir[i, 0]} & {filesInDir[i, 1]} & {filesInDir[i, 2]}");
+                    //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"file[{i}]");
 
                     // If not null or empty add the name and the server to the list
                     files[i] = $"{filesInDir[i, 0]} - {Converter.AddWhitespace(Converter.ServerNameIdentifier(filesInDir[i, 1], false))}";
