@@ -85,6 +85,7 @@
         // MessageBox Strings
         Err_AutosaveImport,
         Err_ColorNotHex,
+        Err_NoFileToDeleteSelected,
         Err_NoExportFileSelected,
         Error_IsDetected,
         Inf_AutosaveImport,
@@ -127,6 +128,8 @@
         lblBackupFiles,
         btnBackupSelectAll,
         btnBackupDeselectAll,
+        btnDeleteDir,
+        btnDeleteFiles,
         btnRestore
     }
 }

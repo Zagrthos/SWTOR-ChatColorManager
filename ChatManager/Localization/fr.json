@@ -82,6 +82,7 @@
   "_comment6": "MessageBox Strings",
   "Err_AutosaveImport": "Aucun fichier de sauvegarde automatique n'a été trouvé!",
   "Err_ColorNotHex": "La couleur spécifiée dans la zone de texte ne correspond pas à la norme HEX.",
+  "Err_NoFileToDeleteSelected": "Choisis au moins un fichier dans la liste!",
   "Err_NoExportFileSelected": "Choisis au moins une entrée dans la liste!",
   "Error_IsDetected": "Quelque chose a mal tourné!\nVeux-tu signaler le bogue?",
   "Inf_AutosaveImport": "L'importation du caractère CHARNAME du serveur SERVERNAME a réussi!\nDernière modification: TIMESTAMP",
@@ -124,5 +125,7 @@
   "lblBackupFiles": "Choisis le(s) fichier(s) de sauvegarde",
   "btnBackupSelectAll": "Sélectionner tout",
   "btnBackupDeselectAll": "Désélectionne tout",
+  "btnDeleteDir": "Supprimer le répertoire",
+  "btnDeleteFiles": "Supprimer le(s) fichier(s)",
   "btnRestore": "Restaurer"
 }

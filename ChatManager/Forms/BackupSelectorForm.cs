@@ -39,6 +39,15 @@ namespace ChatManager.Forms
 
             // Set the DataSource
             lbxBackupDir.DataSource = backupDirsName;
+
+            if (backupDirsName.Length == 0)
+            {
+                btnDeleteDir.Enabled = false;
+            }
+            else
+            {
+                btnDeleteDir.Enabled = true;
+            }
         }
 
         private void DisplayBackupFiles(string dirName)
@@ -51,6 +60,16 @@ namespace ChatManager.Forms
             // Search the given Path for Files
             string[] dirContent = Directory.GetFiles(dirName);
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"fileNames: {dirContent.Length}");
+
+            if (dirContent.Length == 0 )
+            {
+                btnDeleteFiles.Enabled = false;
+                return;
+            }
+            else
+            {
+                btnDeleteFiles.Enabled = true;
+            }
 
             // Associate the Files with their Paths
             AssociateFilesWithPaths(dirContent);
@@ -142,6 +161,116 @@ namespace ChatManager.Forms
                     clbxBackupFiles.SetItemChecked(i, isChecked);
                 }
                 Logging.Write(LogEventEnum.Info, ProgramClassEnum.BackupSelector, $"All Checked items are set to: {isChecked}");
+            }
+            else
+            {
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, $"Sender: {sender} is not a Button!");
+            }
+        }
+
+        private void DeleteClick(object sender, EventArgs e)
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "DeleteClick entered");
+
+            if (sender is Button button)
+            {
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"Button is: {button.Name}");
+
+                switch (button.Name)
+                {
+                    case "btnDeleteDir":
+                        if (string.IsNullOrEmpty(lbxBackupDir.SelectedItem!.ToString()))
+                        {
+                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"DirToDelete: {lbxBackupDir.SelectedItem}");
+
+                            // Convert DataSource to List if not null
+                            if (lbxBackupDir.DataSource != null)
+                            {
+                                string[] array = (string[])lbxBackupDir.DataSource;
+                                List<string> dataSource = array.ToList();
+
+                                // Remove item from DataSource
+                                dataSource.Remove(lbxBackupDir.SelectedItem.ToString()!);
+                                
+                                // Set List as DataSource back in
+                                lbxBackupDir.DataSource = dataSource.ToArray();
+
+                                // If no items left disable button
+                                if (dataSource.Count == 0)
+                                {
+                                    btnDeleteDir.Enabled = false;
+                                }
+                            }
+                            else
+                            {
+                                Logging.Write(LogEventEnum.Error, ProgramClassEnum.BackupSelector, $"DataSource is missing from {lbxBackupDir.Name}!");
+                                ShowMessageBox.ShowBug();
+                                return;
+                            }
+
+                            // Delete the Directory
+                            Directory.Delete(Path.Combine(backupPath, lbxBackupDir.SelectedItem.ToString()!), true);
+                        }
+                        else
+                        {
+                            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, "SelectedItem is null or empty!");
+                            return;
+                        }
+                        break;
+
+                    case "btnDeleteFiles":
+                        if (clbxBackupFiles.CheckedItems.Count > 0)
+                        {
+                            if (clbxBackupFiles.DataSource != null)
+                            {
+                                string[] array = (string[])clbxBackupFiles.DataSource;
+                                List<string> dataSource = array.ToList();
+
+                                foreach (string item in clbxBackupFiles.CheckedItems)
+                                {
+                                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"FileToDelete: {item}");
+
+                                    // Split the name in two parts
+                                    string[] parts = item.Split(" - ");
+
+                                    // Generate the fileName
+                                    string fileName = Converter.ServerNameIdentifier(Converter.RemoveWhitespace(parts[1]), true) + $"_{parts[0]}_PlayerGUIState.ini";
+
+                                    // Generate the filePath
+                                    string path = Path.Combine(backupPath, lbxBackupDir.SelectedItem!.ToString()!, fileName);
+
+                                    // Remove item from DataSource
+                                    dataSource.Remove(item);
+
+                                    // Delete the file
+                                    File.Delete(path);
+                                }
+
+                                // Set List as DataSource back in
+                                clbxBackupFiles.DataSource = dataSource.ToArray();
+
+                                // Deselect everything else
+                                btnBackupDeselectAll.PerformClick();
+
+                                // If no items left disable button
+                                if (dataSource.Count == 0)
+                                {
+                                    btnDeleteFiles.Enabled = false;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+                            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_NoFileToDeleteSelected));
+                            return;
+                        }
+                        break;
+
+                    default:
+                        throw new NotImplementedException();
+                }
             }
             else
             {

@@ -39,6 +39,8 @@
             btnBackupDeselectAll = new Button();
             btnRestore = new Button();
             lblDateConvertion = new Label();
+            btnDeleteDir = new Button();
+            btnDeleteFiles = new Button();
             tlpMain.SuspendLayout();
             tlpBackupFiles.SuspendLayout();
             SuspendLayout();
@@ -54,14 +56,17 @@
             tlpMain.Controls.Add(lblBackupFiles, 1, 0);
             tlpMain.Controls.Add(tlpBackupFiles, 1, 2);
             tlpMain.Controls.Add(lblDateConvertion, 0, 2);
+            tlpMain.Controls.Add(btnDeleteDir, 0, 3);
+            tlpMain.Controls.Add(btnDeleteFiles, 1, 3);
             tlpMain.Dock = DockStyle.Fill;
             tlpMain.Location = new Point(0, 0);
             tlpMain.Name = "tlpMain";
-            tlpMain.RowCount = 3;
+            tlpMain.RowCount = 4;
             tlpMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
             tlpMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tlpMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 37F));
-            tlpMain.Size = new Size(584, 261);
+            tlpMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 37F));
+            tlpMain.Size = new Size(584, 298);
             tlpMain.TabIndex = 0;
             // 
             // lbxBackupDir
@@ -168,11 +173,33 @@
             lblDateConvertion.Text = "Date Placeholder";
             lblDateConvertion.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // btnDeleteDir
+            // 
+            btnDeleteDir.Dock = DockStyle.Fill;
+            btnDeleteDir.Location = new Point(3, 264);
+            btnDeleteDir.Name = "btnDeleteDir";
+            btnDeleteDir.Size = new Size(256, 31);
+            btnDeleteDir.TabIndex = 3;
+            btnDeleteDir.Text = "Delete Directory";
+            btnDeleteDir.UseVisualStyleBackColor = true;
+            btnDeleteDir.Click += DeleteClick;
+            // 
+            // btnDeleteFiles
+            // 
+            btnDeleteFiles.Dock = DockStyle.Fill;
+            btnDeleteFiles.Location = new Point(265, 264);
+            btnDeleteFiles.Name = "btnDeleteFiles";
+            btnDeleteFiles.Size = new Size(316, 31);
+            btnDeleteFiles.TabIndex = 4;
+            btnDeleteFiles.Text = "Delete File(s)";
+            btnDeleteFiles.UseVisualStyleBackColor = true;
+            btnDeleteFiles.Click += DeleteClick;
+            // 
             // BackupSelectorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(584, 261);
+            ClientSize = new Size(584, 298);
             Controls.Add(tlpMain);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -197,5 +224,7 @@
         private Button btnBackupDeselectAll;
         private Label lblDateConvertion;
         private Button btnRestore;
+        private Button btnDeleteDir;
+        private Button btnDeleteFiles;
     }
 }

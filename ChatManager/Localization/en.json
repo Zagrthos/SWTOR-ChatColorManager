@@ -82,6 +82,7 @@
   "_comment6": "MessageBox Strings",
   "Err_AutosaveImport": "No autosave file was found!",
   "Err_ColorNotHex": "The specified color in the text box does not correspond to the HEX standard.",
+  "Err_NoFileToDeleteSelected": "Please select at least one file from the list!",
   "Err_NoExportFileSelected": "Please select at least one entry from the list!",
   "Error_IsDetected": "Something went wrong!\nDo you want to report the bug?",
   "Inf_AutosaveImport": "Import of character CHARNAME of server SERVERNAME was sucessful!\nLast edited: TIMESTAMP",
@@ -124,5 +125,7 @@
   "lblBackupFiles": "Choose backup file(s)",
   "btnBackupSelectAll": "Select all",
   "btnBackupDeselectAll": "Deselect all",
+  "btnDeleteDir": "Delete directory",
+  "btnDeleteFiles": "Delete file(s)",
   "btnRestore": "Restore"
 }
