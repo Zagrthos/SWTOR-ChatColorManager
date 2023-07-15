@@ -141,7 +141,7 @@ namespace ChatManager.Forms
                 {
                     clbxBackupFiles.SetItemChecked(i, isChecked);
                 }
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.BackupSelector, $"All Checks set to: {isChecked}");
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.BackupSelector, $"All Checked items are set to: {isChecked}");
             }
             else
             {
