@@ -93,11 +93,11 @@ namespace ChatManager.Services
         {
             if (Directory.GetDirectories(GetSetSettings.GetBackupPath).Length >= 0)
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
     }
