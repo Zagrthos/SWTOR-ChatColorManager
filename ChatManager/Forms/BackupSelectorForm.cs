@@ -214,6 +214,7 @@ namespace ChatManager.Forms
                         else
                         {
                             Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, "SelectedItem is null or empty!");
+                            ShowMessageBox.ShowBug();
                             return;
                         }
                         break;
