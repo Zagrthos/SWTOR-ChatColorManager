@@ -91,7 +91,7 @@ namespace ChatManager.Services
 
         internal static bool IsBackupDirEmpty()
         {
-            if (Directory.GetFiles(GetSetSettings.GetBackupPath).Length >= 0)
+            if (Directory.GetDirectories(GetSetSettings.GetBackupPath).Length >= 0)
             {
                 return false;
             }
