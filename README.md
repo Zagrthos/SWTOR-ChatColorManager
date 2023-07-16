@@ -1,4 +1,7 @@
 # SWTOR Chat Manager
+
+![GitHub](https://img.shields.io/github/license/zagrthos/SWTOR-ChatColorManager) ![GitHub issues](https://img.shields.io/github/issues/zagrthos/SWTOR-ChatColorManager) ![GitHub release (with filter)](https://img.shields.io/github/v/release/zagrthos/SWTOR-ChatColorManager) ![GitHub all releases](https://img.shields.io/github/downloads/zagrthos/SWTOR-ChatColorManager/total)
+
 ## Tutorials
 Available in the [Wiki](https://github.com/Zagrthos/SWTOR-ChatColorManager/wiki)!
 
