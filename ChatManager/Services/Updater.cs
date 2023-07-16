@@ -8,7 +8,7 @@ namespace ChatManager.Services
         private static readonly Version currentVersion = new(Application.ProductVersion);
         private static Version? onlineVersion;
         private static readonly string updateCheckURL = "https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/version.txt";
-        private static readonly string hashCheckURL = "https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/hash_VERSION.txt";
+        private static readonly string hashCheckURL = "https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/Hashes/hash_VERSION.txt";
         private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/";
         private static string updateName = "SWTOR-ChatManager-";
         private static string updatePath = string.Empty;
