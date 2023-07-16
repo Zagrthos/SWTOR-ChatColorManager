@@ -61,7 +61,7 @@ namespace ChatManager.Forms
             string[] dirContent = Directory.GetFiles(dirName);
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"fileNames: {dirContent.Length}");
 
-            if (dirContent.Length == 0 )
+            if (dirContent.Length == 0)
             {
                 btnDeleteFiles.Enabled = false;
                 return;
@@ -202,6 +202,8 @@ namespace ChatManager.Forms
                                 if (dataSource.Count == 0)
                                 {
                                     btnDeleteDir.Enabled = false;
+                                    btnDeleteFiles.Enabled = false;
+                                    clbxBackupFiles.DataSource = null;
                                 }
                             }
                             else
