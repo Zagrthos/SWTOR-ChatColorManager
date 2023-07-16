@@ -64,11 +64,17 @@ namespace ChatManager.Forms
             if (dirContent.Length == 0)
             {
                 btnDeleteFiles.Enabled = false;
+                btnBackupDeselectAll.Enabled = false;
+                btnBackupSelectAll.Enabled = false;
+                btnRestore.Enabled = false;
                 return;
             }
             else
             {
                 btnDeleteFiles.Enabled = true;
+                btnBackupDeselectAll.Enabled = true;
+                btnBackupSelectAll.Enabled = true;
+                btnRestore.Enabled = true;
             }
 
             // Associate the Files with their Paths
@@ -198,12 +204,15 @@ namespace ChatManager.Forms
                                 // Set List as DataSource back in
                                 lbxBackupDir.DataSource = dataSource.ToArray();
 
-                                // If no items left disable button
+                                // If no items left disable buttons and clear ListBox
                                 if (dataSource.Count == 0)
                                 {
                                     btnDeleteDir.Enabled = false;
                                     btnDeleteFiles.Enabled = false;
                                     clbxBackupFiles.DataSource = null;
+                                    btnBackupDeselectAll.Enabled = false;
+                                    btnBackupSelectAll.Enabled = false;
+                                    btnRestore.Enabled = false;
                                 }
                             }
                             else
@@ -255,10 +264,13 @@ namespace ChatManager.Forms
                                 // Deselect everything else
                                 btnBackupDeselectAll.PerformClick();
 
-                                // If no items left disable button
+                                // If no items left disable buttons
                                 if (dataSource.Count == 0)
                                 {
                                     btnDeleteFiles.Enabled = false;
+                                    btnBackupDeselectAll.Enabled = false;
+                                    btnBackupSelectAll.Enabled = false;
+                                    btnRestore.Enabled = false;
                                 }
                             }
                         }
