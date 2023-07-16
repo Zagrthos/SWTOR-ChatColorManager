@@ -47,16 +47,16 @@ namespace ChatManager.Services
             Localization localization = new(GetSetSettings.GetCurrentLocale);
             DialogResult result = MessageBox.Show(localization.GetString(LocalizationEnum.Update_IsAvailable) + $" {version}", localization.GetString(LocalizationEnum.MessageBoxUpdate), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
-            Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox shown");
+            Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Update MessageBox shown");
 
             if (result == DialogResult.Yes)
             {
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "DialogResult is yes");
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Update DialogResult is yes");
                 return true;
             }
             else
             {
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "DialogResult is no");
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Update DialogResult is no");
                 return false;
             }
         }
@@ -66,16 +66,16 @@ namespace ChatManager.Services
             Localization localization = new(GetSetSettings.GetCurrentLocale);
             DialogResult result = MessageBox.Show(localization.GetString(LocalizationEnum.Error_IsDetected), localization.GetString(LocalizationEnum.MessageBoxError), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
 
-            Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox shown");
+            Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Bug MessageBox shown");
 
             if (result == DialogResult.Yes)
             {
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "DialogResult is yes");
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Bug DialogResult is yes");
                 OpenWindows.OpenLinksInBrowser(GetSetSettings.GetBugPath);
             }
             else
             {
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "DialogResult is no");
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Bug DialogResult is no");
             }
         }
 
@@ -89,11 +89,11 @@ namespace ChatManager.Services
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-            Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox shown");
+            Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Restart MessageBox shown");
 
             MessageBox.Show(localization.GetString(LocalizationEnum.Inf_RestartRequired), localization.GetString(LocalizationEnum.MessageBoxInfo), MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox accepted");
+            Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Restart accepted");
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Restart initated");
 
             Application.Restart();
