@@ -1,4 +1,5 @@
 ﻿using ChatManager.Enums;
+using System.Security.Cryptography;
 
 namespace ChatManager.Services
 {
@@ -7,6 +8,7 @@ namespace ChatManager.Services
         private static readonly Version currentVersion = new(Application.ProductVersion);
         private static Version? onlineVersion;
         private static readonly string updateCheckURL = "https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/version.txt";
+        private static readonly string hashCheckURL = "https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/hash_VERSION.txt";
         private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/";
         private static string updateName = "SWTOR-ChatManager-";
         private static string updatePath = string.Empty;
@@ -196,14 +198,84 @@ namespace ChatManager.Services
 
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Update downloaded to: {updatePath}");
 
-                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxUpdate), localization.GetString(LocalizationEnum.Update_IsInstallReady));
-
-                InstallUpdate();
+                if (await VerifyUpdateHash(updatePath, onlineVersion!.ToString()))
+                {
+                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Application update started!");
+                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxUpdate), localization.GetString(LocalizationEnum.Update_IsInstallReady));
+                    InstallUpdate();
+                }
+                else
+                {
+                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Updater, "Updating not started because of incorrect hashes!");
+                    ShowMessageBox.ShowBug();
+                }
             }
             catch (HttpRequestException ex)
             {
                 Logging.Write(LogEventEnum.Error, ProgramClassEnum.Updater, "Update download failed!");
                 Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.Updater, $"{ex.Message}");
+            }
+        }
+
+        private static async Task<bool> VerifyUpdateHash(string filePath, string version)
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "VerifyUpdateHash entered");
+
+            string onlineHash = string.Empty;
+            string localHash = string.Empty;
+
+            HttpClient client = new();
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient created");
+
+            try
+            {
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Downloading hash initiated");
+
+                string hashURL = hashCheckURL.Replace("VERSION", version);
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"hashURL is: {hashURL}");
+
+                onlineHash = new(await client.GetStringAsync(hashURL));
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineHash is: {onlineHash}");
+
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
+                client.Dispose();
+            }
+            catch (HttpRequestException ex)
+            {
+                Logging.Write(LogEventEnum.Error, ProgramClassEnum.Updater, "Downloading hash failed!");
+                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.Updater, $"{ex.Message}");
+                ShowMessageBox.ShowBug();
+
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
+                client.Dispose();
+            }
+
+            using (var stream = File.OpenRead(filePath))
+            {
+                using var sha256 = SHA256.Create();
+                byte[] byteHash = sha256.ComputeHash(stream);
+                localHash = BitConverter.ToString(byteHash).Replace("-", string.Empty);
+
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"localHash is: {localHash}");
+            }
+
+            if (!string.IsNullOrEmpty(onlineHash) && !string.IsNullOrEmpty(localHash))
+            {
+                if (onlineHash == localHash)
+                {
+                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Hashes are equal!");
+                    return true;
+                }
+                else
+                {
+                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Updater, "Hashes are not equal!");
+                    return false;
+                }
+            }
+            else
+            {
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Updater, "Hashes are empty!");
+                return false;
             }
         }
 
