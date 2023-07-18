@@ -37,6 +37,8 @@ namespace ChatManager.Services
 
         internal static bool DirectoryCheck(CheckFolderEnum folder)
         {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.Checks, "DirectoryCheck entered");
+
             string path = folder switch
             {
                 CheckFolderEnum.AutosaveFolder => GetSetSettings.GetAutosavePath,
@@ -51,7 +53,6 @@ namespace ChatManager.Services
                 _ => throw new NotImplementedException(),
             };
 
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.Checks, "DirectoryCheck entered");
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, $"Checking if {folder} exists");
 
             if (!Directory.Exists(path))
@@ -68,7 +69,7 @@ namespace ChatManager.Services
                 }
                 else
                 {
-                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, $"Could not create {folder}!");
+                    Logging.Write(LogEventEnum.Error, ProgramClassEnum.Checks, $"Could not create {folder}!");
                     ShowMessageBox.ShowBug();
                 }
             }
