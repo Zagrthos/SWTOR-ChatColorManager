@@ -237,7 +237,7 @@ namespace ChatManager.Forms
             }
         }
 
-        private async void SwitchUpdateInterval()
+        private void SwitchUpdateInterval()
         {
             if (cbUpdaterIntervallFalseAlarm)
             {
