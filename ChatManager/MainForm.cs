@@ -123,7 +123,10 @@ namespace ChatManager
 
                     case "updateToolStripMenuItem":
                         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Update Check requested");
-                        await Updater.CheckForUpdates(true);
+                        if (Checks.CheckForInternetConnection())
+                        {
+                            await Updater.CheckForUpdates(true);
+                        }
                         return;
 
                     case "exitToolStripMenuItem":
@@ -634,7 +637,10 @@ namespace ChatManager
             DownloadProgressReporter.DownloadProgressChanged += DownloadProgressReporter_DownloadProgressChanged;
 
 #if !DEBUG
-            await Updater.CheckForUpdateInterval();
+            if (Checks.CheckForInternetConnection())
+            {
+                await Updater.CheckForUpdateInterval();
+            }
 #endif
         }
 
