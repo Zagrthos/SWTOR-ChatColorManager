@@ -89,6 +89,11 @@ namespace ChatManager.Services
             return splitted[1].Trim();
         }
 
+        internal static double ConvertByteToMegabyte(long bytes)
+        {
+            return Math.Round((double)bytes / (1024 * 1024), 2);
+        }
+
         // Regex for adding a whitespace
         [GeneratedRegex("(\\B[A-Z])")]
         private static partial Regex AddWhiteSpaceRegex();

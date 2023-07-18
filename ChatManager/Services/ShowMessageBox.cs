@@ -42,10 +42,10 @@ namespace ChatManager.Services
             Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox accepted");
         }
 
-        internal static bool ShowUpdate(string version)
+        internal static bool ShowUpdate(string version, double fileSize)
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
-            DialogResult result = MessageBox.Show(localization.GetString(LocalizationEnum.Update_IsAvailable) + $" {version}", localization.GetString(LocalizationEnum.MessageBoxUpdate), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            DialogResult result = MessageBox.Show($"{localization.GetString(LocalizationEnum.Update_IsAvailable)} {version}\n\n{localization.GetString(LocalizationEnum.Update_FileSize).Replace("FILESIZE", fileSize.ToString())} MB", localization.GetString(LocalizationEnum.MessageBoxUpdate), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Update MessageBox shown");
 

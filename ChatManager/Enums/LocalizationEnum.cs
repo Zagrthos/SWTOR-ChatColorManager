@@ -99,6 +99,7 @@
         MessageBoxWarn,
         Question_MeteredConnection,
         Update_IsAvailable,
+        Update_FileSize,
         Update_IsInstallReady,
         Update_IsNotAvailable,
         Warn_BackupDirMissing,

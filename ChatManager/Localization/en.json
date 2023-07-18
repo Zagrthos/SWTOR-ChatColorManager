@@ -98,6 +98,7 @@
   "Update_IsAvailable": "Do you want to update now?\nAn update to the following version is available:",
   "Update_IsInstallReady": "The update is ready for installation!\nClicking on 'OK' will start the installation.",
   "Update_IsNotAvailable": "There is no update available!",
+  "Update_FileSize": "File size: FILESIZE",
   "Warn_BackupDirMissing": "No backup directory could be created!\nProceed at your own risk!",
   "Warn_NoImportFound": "A file must be imported first!",
   "Warn_NoInternetConnection": "No active internet connection found!",

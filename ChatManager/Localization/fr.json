@@ -98,6 +98,7 @@
   "Update_IsAvailable": "Veux-tu mettre à jour maintenant?\nUne mise à jour de la version suivante est disponible:",
   "Update_IsInstallReady": "La mise à jour est prête à être installée!\nEn cliquant sur 'OK', l'installation démarre.",
   "Update_IsNotAvailable": "Il n'y a pas de mise à jour disponible!",
+  "Update_FileSize": "Taille du fichier: FILESIZE",
   "Warn_BackupDirMissing": "Aucun répertoire de sauvegarde n'a pu être créé!\nProcède à tes propres risques!",
   "Warn_NoImportFound": "Un fichier doit d'abord être importé!",
   "Warn_NoInternetConnection": "Aucune connexion Internet active n'a été trouvée!",

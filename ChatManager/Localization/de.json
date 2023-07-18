@@ -96,6 +96,7 @@
   "MessageBoxWarn": "Warnung",
   "Question_MeteredConnection": "Es wurde eine gebührenpflichtige Verbindung entdeckt!\n\nDas herunterladen eines Updates über eine solche Verbindung kann zusätzliche Kosten verursachen.\n\nWillst du fortfahren?",
   "Update_IsAvailable": "Möchtest du jetzt aktualisieren?\nEs ist ein Update auf folgende Version verfügbar:",
+  "Update_FileSize": "Updategröße: FILESIZE",
   "Update_IsInstallReady": "Das Update ist bereit zur Installation!\nMit einem Klick auf 'OK' wird die Installation gestartet.",
   "Update_IsNotAvailable": "Es ist kein Update verfügbar!",
   "Warn_BackupDirMissing": "Es konnte kein Backup Verzeichnis erstellt werden!\nFortfahren auf eigene Gefahr!",

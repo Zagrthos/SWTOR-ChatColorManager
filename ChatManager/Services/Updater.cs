@@ -1,9 +1,10 @@
 ﻿using ChatManager.Enums;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace ChatManager.Services
 {
-    internal static class Updater
+    internal static partial class Updater
     {
         private static readonly Version currentVersion = new(Application.ProductVersion);
         private static Version? onlineVersion;
@@ -13,6 +14,7 @@ namespace ChatManager.Services
         private static string updateName = "SWTOR-ChatManager-";
         private static string updatePath = string.Empty;
         private static string updateDownloadText = string.Empty;
+        private static long? totalBytesToDownload = 0;
 
         internal static string GetUpdateDownloadText => updateDownloadText;
 
@@ -72,14 +74,16 @@ namespace ChatManager.Services
                 Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Check for Updates initiated");
 
                 onlineVersion = new(await client.GetStringAsync(updateCheckURL));
-
+                
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineVersion is: {onlineVersion}");
 
                 if (onlineVersion > currentVersion)
                 {
                     Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Update is available!");
 
-                    if (ShowMessageBox.ShowUpdate(onlineVersion.ToString()))
+                    long fileSize = await GetFileSize();
+
+                    if (ShowMessageBox.ShowUpdate(onlineVersion.ToString(), Converter.ConvertByteToMegabyte(fileSize)))
                     {
                         if (GetSetSettings.GetUpdateDownload)
                         {
@@ -124,6 +128,65 @@ namespace ChatManager.Services
 
                 Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
                 client.Dispose();
+
+                ShowMessageBox.ShowBug();
+            }
+        }
+
+        private static async Task<long> GetFileSize()
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "GetFileSize entered");
+
+            if (onlineVersion != null && !updateName.Contains(onlineVersion.ToString()))
+            {
+                if (updateName.Contains(".exe"))
+                {
+                    updateName = ReplaceVersionNumber().Replace(updateName, onlineVersion.ToString());
+                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateName set to: {updateName}");
+
+                    updateURL = ReplaceVersionNumber().Replace(updateURL, onlineVersion.ToString());
+                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateURL set to: {updateURL}");
+                }
+
+                updateName += $"v{onlineVersion}.exe";
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateName set to: {updateName}");
+
+                updateURL += $"download/v{onlineVersion}/{updateName}";
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateURL set to: {updateURL}");
+            }
+
+            HttpClient client = new();
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient created");
+
+            try
+            {
+                HttpResponseMessage responseMessage = await client.GetAsync(updateURL, HttpCompletionOption.ResponseHeadersRead);
+
+                // Count the length of the to download file
+                totalBytesToDownload = responseMessage.Content.Headers.ContentLength;
+
+                client.Dispose();
+                responseMessage.Dispose();
+
+                if (totalBytesToDownload.HasValue)
+                {
+                    return totalBytesToDownload.Value;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Logging.Write(LogEventEnum.Error, ProgramClassEnum.Updater, "GetFileSize failed!");
+                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.Updater, $"{ex.Message}");
+
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
+                client.Dispose();
+
+                ShowMessageBox.ShowBug();
+                return 0;
             }
         }
 
@@ -131,36 +194,18 @@ namespace ChatManager.Services
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "DownloadUpdate entered");
 
-            updateName += $"v{onlineVersion}.exe";
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateName set to: {updateName}");
-
-            updateURL += $"download/v{onlineVersion}/{updateName}";
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateURL set to: {updateURL}");
-
             HttpClient client = new();
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient created");
 
             try
             {
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Connection Test initiated");
-
                 HttpResponseMessage responseMessage = await client.GetAsync(updateURL, HttpCompletionOption.ResponseHeadersRead);
-
-                if (!responseMessage.IsSuccessStatusCode)
-                {
-                    Logging.Write(LogEventEnum.Error, ProgramClassEnum.Updater, "Connection Test failed!");
-                    Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.Updater, $"{responseMessage}");
-                    return;
-                }
 
                 updatePath = Path.Combine(Path.GetTempPath(), updateName);
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Download Path: {updatePath}");
 
                 Localization localization = new(GetSetSettings.GetCurrentLocale);
                 updateDownloadText = localization.GetString(LocalizationEnum.downloadProgressToolStripMenuItem);
-
-                // Count the length of the to download file
-                long? totalBytes = responseMessage.Content.Headers.ContentLength;
 
                 // Download the file and then log the progress
                 using (FileStream filestream = new(updatePath, FileMode.Create, FileAccess.Write, FileShare.None))
@@ -175,7 +220,7 @@ namespace ChatManager.Services
                     {
                         await filestream.WriteAsync(buffer.AsMemory(0, bytesRead));
                         totalBytesRead += bytesRead;
-                        double percent = totalBytes.HasValue ? ((double)totalBytesRead /  totalBytes.Value) * 100 : -1;
+                        double percent = totalBytesToDownload.HasValue ? (double)totalBytesRead /  totalBytesToDownload.Value * 100 : -1;
 
                         if (percent > -1)
                         {
@@ -214,6 +259,11 @@ namespace ChatManager.Services
             {
                 Logging.Write(LogEventEnum.Error, ProgramClassEnum.Updater, "Update download failed!");
                 Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.Updater, $"{ex.Message}");
+
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
+                client.Dispose();
+
+                ShowMessageBox.ShowBug();
             }
         }
 
@@ -244,10 +294,11 @@ namespace ChatManager.Services
             {
                 Logging.Write(LogEventEnum.Error, ProgramClassEnum.Updater, "Downloading hash failed!");
                 Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.Updater, $"{ex.Message}");
-                ShowMessageBox.ShowBug();
 
                 Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
                 client.Dispose();
+
+                ShowMessageBox.ShowBug();
             }
 
             using (var stream = File.OpenRead(filePath))
@@ -289,6 +340,9 @@ namespace ChatManager.Services
 
             Environment.Exit(0);
         }
+
+        [GeneratedRegex("v\\d+\\.\\d+\\.\\d+")]
+        private static partial Regex ReplaceVersionNumber();
     }
 
     internal class DownloadProgressEventArgs : EventArgs
