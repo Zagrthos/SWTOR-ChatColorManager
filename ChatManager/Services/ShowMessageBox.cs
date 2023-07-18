@@ -98,5 +98,25 @@ namespace ChatManager.Services
 
             Application.Restart();
         }
+
+        internal static bool ShowQuestion(string message)
+        {
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+            Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Question MessageBox shown");
+
+            DialogResult result = MessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), message, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (result == DialogResult.Yes)
+            {
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Question DialogResult is yes");
+                return true;
+            }
+            else
+            {
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Question DialogResult is no");
+                return false;
+            }
+        }
     }
 }
