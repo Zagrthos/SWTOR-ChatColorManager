@@ -52,7 +52,7 @@ namespace ChatManager.Services
                 }
                 else
                 {
-                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileExport, "Backup Folder could NOT be created!");
+                    Logging.Write(LogEventEnum.Error, ProgramClassEnum.FileExport, "Backup Folder could NOT be created!");
                     ShowMessageBox.ShowBug();
                 }
 
