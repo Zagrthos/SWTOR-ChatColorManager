@@ -35,6 +35,7 @@ namespace ChatManager.Services
         internal static DateTime GetLastUpdateCheck => Settings.Default.lastUpdateCheck;
         internal static bool GetUpdateDownload => Settings.Default.updateDownload;
         internal static string GetLastUpdatePath => Settings.Default.lastUpdatePath;
+        internal static string GetGitHubPath => Settings.Default.githubPath;
 
         internal static void InitSettings()
         {

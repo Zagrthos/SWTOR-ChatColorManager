@@ -68,5 +68,8 @@
     <Setting Name="lastUpdatePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="githubPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://github.com/Zagrthos/SWTOR-ChatColorManager/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

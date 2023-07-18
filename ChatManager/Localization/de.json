@@ -51,6 +51,7 @@
   "_comment3": "AboutForm",
   "AboutForm": "Über diese App",
   "copyrightButton": "Link zum Logo Ersteller",
+  "gitHubLinkButton": "Link zum GitHub Repository",
   "okButton": "Ok",
 
   "_comment4": "ColorPickerForm",

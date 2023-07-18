@@ -273,5 +273,14 @@ namespace ChatManager.Properties {
                 this["lastUpdatePath"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatColorManager/")]
+        public string githubPath {
+            get {
+                return ((string)(this["githubPath"]));
+            }
+        }
     }
 }

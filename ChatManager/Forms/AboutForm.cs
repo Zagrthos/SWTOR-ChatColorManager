@@ -83,6 +83,12 @@ namespace ChatManager.Forms
             OpenWindows.OpenLinksInBrowser(GetSetSettings.GetAboutPictureLink);
         }
 
+        private void GitHubLinkButton_Click(object sender, EventArgs e)
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "GitHubLinkButtonClick entered");
+            OpenWindows.OpenLinksInBrowser(GetSetSettings.GetGitHubPath);
+        }
+
         private void Localize()
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "Localize entered");

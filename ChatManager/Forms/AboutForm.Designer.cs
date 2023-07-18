@@ -35,6 +35,7 @@
             labelCompanyName = new Label();
             okButton = new Button();
             copyrightButton = new Button();
+            gitHubLinkButton = new Button();
             tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)logoPictureBox).BeginInit();
             SuspendLayout();
@@ -51,6 +52,7 @@
             tableLayoutPanel.Controls.Add(labelCompanyName, 1, 3);
             tableLayoutPanel.Controls.Add(okButton, 1, 5);
             tableLayoutPanel.Controls.Add(copyrightButton, 0, 5);
+            tableLayoutPanel.Controls.Add(gitHubLinkButton, 1, 4);
             tableLayoutPanel.Dock = DockStyle.Fill;
             tableLayoutPanel.Location = new Point(10, 10);
             tableLayoutPanel.Margin = new Padding(4, 3, 4, 3);
@@ -143,10 +145,21 @@
             copyrightButton.Location = new Point(3, 183);
             copyrightButton.Name = "copyrightButton";
             copyrightButton.Size = new Size(236, 30);
-            copyrightButton.TabIndex = 2;
+            copyrightButton.TabIndex = 3;
             copyrightButton.Text = "Link to logo creator";
             copyrightButton.UseVisualStyleBackColor = true;
             copyrightButton.Click += CopyrightButton_Click;
+            // 
+            // gitHubLinkButton
+            // 
+            gitHubLinkButton.Dock = DockStyle.Fill;
+            gitHubLinkButton.Location = new Point(245, 147);
+            gitHubLinkButton.Name = "gitHubLinkButton";
+            gitHubLinkButton.Size = new Size(236, 30);
+            gitHubLinkButton.TabIndex = 2;
+            gitHubLinkButton.Text = "Link to GitHub";
+            gitHubLinkButton.UseVisualStyleBackColor = true;
+            gitHubLinkButton.Click += GitHubLinkButton_Click;
             // 
             // AboutForm
             // 
@@ -180,5 +193,6 @@
         private Label labelCompanyName;
         private Button okButton;
         private Button copyrightButton;
+        private Button gitHubLinkButton;
     }
 }
