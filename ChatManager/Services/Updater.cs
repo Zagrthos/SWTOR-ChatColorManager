@@ -334,6 +334,8 @@ namespace ChatManager.Services
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "InstallUpdate entered");
 
+            GetSetSettings.SaveSettings(SettingsEnum.lastUpdatePath, updatePath);
+
             OpenWindows.OpenProcess(updatePath);
 
             Logging.Dispose();

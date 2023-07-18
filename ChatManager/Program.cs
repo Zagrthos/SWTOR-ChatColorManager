@@ -22,6 +22,12 @@ namespace ChatManager
             Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
+            if (!string.IsNullOrEmpty(GetSetSettings.GetLastUpdatePath))
+            {
+                File.Delete(GetSetSettings.GetLastUpdatePath);
+                GetSetSettings.SaveSettings(SettingsEnum.lastUpdatePath, string.Empty);
+            }
+
             Application.Run(new MainForm());
         }
 

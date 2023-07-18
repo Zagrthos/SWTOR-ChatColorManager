@@ -34,6 +34,7 @@ namespace ChatManager.Services
         internal static string GetUpdateInterval => Settings.Default.updateInterval;
         internal static DateTime GetLastUpdateCheck => Settings.Default.lastUpdateCheck;
         internal static bool GetUpdateDownload => Settings.Default.updateDownload;
+        internal static string GetLastUpdatePath => Settings.Default.lastUpdatePath;
 
         internal static void InitSettings()
         {
@@ -60,16 +61,20 @@ namespace ChatManager.Services
         }
 
         // This is for setting strings
-        internal static void SaveSettings(SettingsEnum settingName, string settingValue)
+        internal static void SaveSettings(SettingsEnum settingName, string value)
         {
             switch (settingName)
             {
+                case SettingsEnum.lastUpdatePath:
+                    Settings.Default.lastUpdatePath = value;
+                    break;
+
                 case SettingsEnum.locale:
-                    Settings.Default._locale = settingValue;
+                    Settings.Default._locale = value;
                     break;
 
                 case SettingsEnum.updateInterval:
-                    Settings.Default.updateInterval = settingValue;
+                    Settings.Default.updateInterval = value;
                     break;
 
                 default:
@@ -83,10 +88,6 @@ namespace ChatManager.Services
         {
             switch (settingName)
             {
-                case SettingsEnum.backupAvailability:
-                    Settings.Default.backupAvailability = value;
-                    break;
-
                 case SettingsEnum.autosaveAvailability:
                     Settings.Default.autosaveAvailability = value;
                     break;
@@ -95,12 +96,16 @@ namespace ChatManager.Services
                     Settings.Default._autosave = value;
                     break;
 
-                case SettingsEnum.saveOnClose:
-                    Settings.Default._saveOnClose = value;
+                case SettingsEnum.backupAvailability:
+                    Settings.Default.backupAvailability = value;
                     break;
 
                 case SettingsEnum.reloadOnStartup:
                     Settings.Default._reloadOnStartup = value;
+                    break;
+
+                case SettingsEnum.saveOnClose:
+                    Settings.Default._saveOnClose = value;
                     break;
 
                 case SettingsEnum.settingsUpgradeRequired:

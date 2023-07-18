@@ -7,6 +7,7 @@
         autosaveInterval,
         backupAvailability,
         lastUpdateCheck,
+        lastUpdatePath,
         locale,
         reloadOnStartup,
         saveOnClose,
