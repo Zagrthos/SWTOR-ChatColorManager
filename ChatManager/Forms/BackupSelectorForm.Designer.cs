@@ -179,7 +179,7 @@
             btnDeleteDir.Location = new Point(3, 264);
             btnDeleteDir.Name = "btnDeleteDir";
             btnDeleteDir.Size = new Size(256, 31);
-            btnDeleteDir.TabIndex = 3;
+            btnDeleteDir.TabIndex = 6;
             btnDeleteDir.Text = "Delete Directory";
             btnDeleteDir.UseVisualStyleBackColor = true;
             btnDeleteDir.Click += DeleteClick;
@@ -190,7 +190,7 @@
             btnDeleteFiles.Location = new Point(265, 264);
             btnDeleteFiles.Name = "btnDeleteFiles";
             btnDeleteFiles.Size = new Size(316, 31);
-            btnDeleteFiles.TabIndex = 4;
+            btnDeleteFiles.TabIndex = 7;
             btnDeleteFiles.Text = "Delete File(s)";
             btnDeleteFiles.UseVisualStyleBackColor = true;
             btnDeleteFiles.Click += DeleteClick;

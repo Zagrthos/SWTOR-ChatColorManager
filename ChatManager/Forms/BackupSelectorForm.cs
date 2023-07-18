@@ -200,7 +200,7 @@ namespace ChatManager.Forms
 
                                 // Remove item from DataSource
                                 dataSource.Remove(lbxBackupDir.SelectedItem.ToString()!);
-                                
+
                                 // Set List as DataSource back in
                                 lbxBackupDir.DataSource = dataSource.ToArray();
 
