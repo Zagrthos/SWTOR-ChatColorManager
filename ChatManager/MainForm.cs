@@ -123,7 +123,7 @@ namespace ChatManager
 
                     case "updateToolStripMenuItem":
                         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Update Check requested");
-                        if (Checks.CheckForInternetConnection())
+                        if (Checks.CheckForInternetConnection(true))
                         {
                             await Updater.CheckForUpdates(true);
                         }

@@ -103,7 +103,7 @@ namespace ChatManager.Services
             }
         }
 
-        internal static bool CheckForInternetConnection()
+        internal static bool CheckForInternetConnection(bool fromUser = false)
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.Checks, "CheckForInternetConnection entered");
 
@@ -116,60 +116,64 @@ namespace ChatManager.Services
             {
                 isConnected = false;
                 Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
-                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
+
+                if (fromUser)
+                {
+                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
+                }
+
                 return isConnected;
             }
 
-            switch (NetworkInformation.GetInternetConnectionProfile().GetNetworkConnectivityLevel())
+            isConnected = NetworkInformation.GetInternetConnectionProfile().GetNetworkConnectivityLevel() switch
             {
-                case NetworkConnectivityLevel.None:
-                    isConnected = false;
-                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
+                NetworkConnectivityLevel.None => false,
+                NetworkConnectivityLevel.LocalAccess => false,
+                NetworkConnectivityLevel.ConstrainedInternetAccess => false,
+                NetworkConnectivityLevel.InternetAccess => true,
+                _ => throw new NotImplementedException(),
+            };
+
+            if (!isConnected)
+            {
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
+
+                if (fromUser)
+                {
                     ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
-                    return isConnected;
+                }
 
-                case NetworkConnectivityLevel.LocalAccess:
-                    isConnected = false;
-                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
-                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
-                    return isConnected;
+                return isConnected;
+            }
 
-                case NetworkConnectivityLevel.ConstrainedInternetAccess:
-                    isConnected = false;
-                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
-                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
-                    return isConnected;
-
-                case NetworkConnectivityLevel.InternetAccess:
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "User is connected to the internet");
-
-                    // Check if connection is metered
-                    if (NetworkInformation.GetInternetConnectionProfile().GetConnectionCost().NetworkCostType != NetworkCostType.Unrestricted)
+            if (isConnected)
+            {
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "User is connected to the internet");
+                
+                // Check if connection is metered
+                if (NetworkInformation.GetInternetConnectionProfile().GetConnectionCost().NetworkCostType != NetworkCostType.Unrestricted)
+                {
+                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "Connection is metered!");
+                    // If yes ask the user if he wants to continue
+                    if (!ShowMessageBox.ShowQuestion(localization.GetString(LocalizationEnum.Question_MeteredConnection)))
                     {
-                        Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "Connection is metered!");
-                        // If yes ask the user if he wants to continue
-                        if (!ShowMessageBox.ShowQuestion(localization.GetString(LocalizationEnum.Question_MeteredConnection)))
-                        {
-                            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User does not agree to download over metered connection!");
-                            isConnected = false;
-                        }
-                        else
-                        {
-                            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "User agree to download over metered connection");
-                            isConnected = true;
-                        }
+                        Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User does not agree to download over metered connection!");
+                        isConnected = false;
                     }
                     else
                     {
-                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "Connection is not metered");
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "User agree to download over metered connection");
                         isConnected = true;
                     }
-
-                    return isConnected;
-
-                default:
-                    throw new NotImplementedException();
+                }
+                else
+                {
+                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "Connection is not metered");
+                    isConnected = true;
+                }
             }
+
+            return isConnected;
         }
     }
 }
