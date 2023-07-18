@@ -111,6 +111,15 @@ namespace ChatManager.Services
 
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
+            // Returns null if not connected to anything!
+            if (NetworkInformation.GetInternetConnectionProfile() == null)
+            {
+                isConnected = false;
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
+                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
+                return isConnected;
+            }
+
             switch (NetworkInformation.GetInternetConnectionProfile().GetNetworkConnectivityLevel())
             {
                 case NetworkConnectivityLevel.None:
