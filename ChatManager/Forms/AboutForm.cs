@@ -97,6 +97,7 @@ namespace ChatManager.Forms
 
             Text = localization.GetString(Name);
             copyrightButton.Text = localization.GetString(copyrightButton.Name);
+            gitHubLinkButton.Text = localization.GetString(gitHubLinkButton.Name);
         }
     }
 }
