@@ -1,6 +1,7 @@
 ﻿using ChatManager.Enums;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using Windows.Networking.Connectivity;
 
 namespace ChatManager.Services
 {
@@ -99,6 +100,66 @@ namespace ChatManager.Services
             else
             {
                 return false;
+            }
+        }
+
+        internal static bool CheckForInternetConnection()
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.Checks, "CheckForInternetConnection entered");
+
+            bool isConnected;
+
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+            switch (NetworkInformation.GetInternetConnectionProfile().GetNetworkConnectivityLevel())
+            {
+                case NetworkConnectivityLevel.None:
+                    isConnected = false;
+                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
+                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
+                    return isConnected;
+
+                case NetworkConnectivityLevel.LocalAccess:
+                    isConnected = false;
+                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
+                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
+                    return isConnected;
+
+                case NetworkConnectivityLevel.ConstrainedInternetAccess:
+                    isConnected = false;
+                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
+                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
+                    return isConnected;
+
+                case NetworkConnectivityLevel.InternetAccess:
+                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "User is connected to the internet");
+
+                    // Check if connection is metered
+                    if (NetworkInformation.GetInternetConnectionProfile().GetConnectionCost().NetworkCostType != NetworkCostType.Unrestricted)
+                    {
+                        Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "Connection is metered!");
+                        // If yes ask the user if he wants to continue
+                        if (!ShowMessageBox.ShowQuestion(localization.GetString(LocalizationEnum.Question_MeteredConnection)))
+                        {
+                            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User does not agree to download over metered connection!");
+                            isConnected = false;
+                        }
+                        else
+                        {
+                            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "User agree to download over metered connection");
+                            isConnected = true;
+                        }
+                    }
+                    else
+                    {
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "Connection is not metered");
+                        isConnected = true;
+                    }
+
+                    return isConnected;
+
+                default:
+                    throw new NotImplementedException();
             }
         }
     }
