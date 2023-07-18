@@ -263,8 +263,6 @@ namespace ChatManager.Forms
                 }
 
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"updateInterval set to: {GetSetSettings.GetUpdateInterval}");
-
-                await Updater.CheckForUpdateInterval();
             }
             else
             {
