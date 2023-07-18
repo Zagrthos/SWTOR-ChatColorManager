@@ -105,7 +105,7 @@ namespace ChatManager.Services
 
             Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Question MessageBox shown");
 
-            DialogResult result = MessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), message, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            DialogResult result = MessageBox.Show(message, localization.GetString(LocalizationEnum.MessageBoxInfo), MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
 
             if (result == DialogResult.Yes)
             {
