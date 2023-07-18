@@ -4,6 +4,5 @@
     {
         AutosaveFolder,
         BackupFolder,
-        LogFolder
     }
 }
