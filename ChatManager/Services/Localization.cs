@@ -17,7 +17,7 @@ namespace ChatManager.Services
 
         private void CheckLocale(string locale)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.Localization, "CheckLocale Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.Localization, "CheckLocale entered");
 
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Localization, $"Localization path is: {Path.Combine(installPath, "Localization", $"{locale}.json")}");
             var jsonString = File.ReadAllText(Path.Combine(installPath, "Localization", $"{locale}.json"));

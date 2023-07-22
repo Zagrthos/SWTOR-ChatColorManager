@@ -8,7 +8,7 @@ namespace ChatManager.Services
     {
         internal static string OpenColorPicker(string text, Color color)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenColorPicker Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenColorPicker entered");
 
             // Create new Form with the Text of the sender Button
             ColorPickerForm colorPicker = new(text, color);
@@ -23,7 +23,7 @@ namespace ChatManager.Services
 
         internal static void OpenAbout()
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenAbout Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenAbout entered");
 
             AboutForm aboutForm = new();
             aboutForm.ShowDialog();
@@ -33,7 +33,7 @@ namespace ChatManager.Services
 
         internal static (bool, bool) OpenSettings()
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenSettings Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenSettings entered");
 
             SettingsForm settingsForm = new();
             settingsForm.ShowDialog();
@@ -76,7 +76,7 @@ namespace ChatManager.Services
         // Open the FileSelector but with the import Settings
         internal static (string, string) OpenFileImportSelector()
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenFileImportSelector Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenFileImportSelector entered");
 
             FileImport fileImport = new();
             FileSelectorForm fileSelector = new(fileImport.GetServerList(), false);
@@ -93,7 +93,7 @@ namespace ChatManager.Services
         // Open the FileSelector but with the export Settings
         internal static void OpenFileExportSelector(string[] values)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenFileExportSelector Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenFileExportSelector entered");
 
             FileImport fileImport = new();
             FileSelectorForm fileSelector = new(fileImport.GetServerList(), true);
@@ -129,7 +129,7 @@ namespace ChatManager.Services
 
         internal static void OpenBackupSelector()
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenBackupSelector Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenBackupSelector entered");
 
             if (!Checks.IsBackupDirEmpty())
             {

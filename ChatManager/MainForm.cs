@@ -16,7 +16,7 @@ namespace ChatManager
         // Button Click Handler for every button next to the TextBox
         private void ClickChangeColorButton(object sender, EventArgs e)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ClickChangeColorButton Entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ClickChangeColorButton entered");
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"Sender is: {sender}");
 
             // If the sender is a Button initialize it as button
