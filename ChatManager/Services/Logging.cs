@@ -46,10 +46,8 @@ namespace ChatManager.Services
             string logPath = GetSetSettings.GetLogPath;
 
             DateTime dateSevenDaysAgo = DateTime.Today.AddDays(-7);
-            Write(LogEventEnum.Variable, ProgramClassEnum.Logging, dateSevenDaysAgo.ToString());
 
             string[] logFiles = Directory.GetFiles(logPath);
-            Write(LogEventEnum.Variable, ProgramClassEnum.Logging, logFiles.Length.ToString());
 
             int counter = 0;
 
