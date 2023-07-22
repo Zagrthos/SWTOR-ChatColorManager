@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tableLayoutPanel1 = new TableLayoutPanel();
+            tlpLicences = new TableLayoutPanel();
             lblLicencesHead = new Label();
             rtbLicences = new RichTextBox();
-            tableLayoutPanel1.SuspendLayout();
+            tlpLicences.SuspendLayout();
             SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // tlpLicences
             // 
-            tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(lblLicencesHead, 0, 0);
-            tableLayoutPanel1.Controls.Add(rtbLicences, 0, 1);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 90F));
-            tableLayoutPanel1.Size = new Size(634, 261);
-            tableLayoutPanel1.TabIndex = 0;
+            tlpLicences.ColumnCount = 1;
+            tlpLicences.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tlpLicences.Controls.Add(lblLicencesHead, 0, 0);
+            tlpLicences.Controls.Add(rtbLicences, 0, 1);
+            tlpLicences.Dock = DockStyle.Fill;
+            tlpLicences.Location = new Point(0, 0);
+            tlpLicences.Name = "tlpLicences";
+            tlpLicences.RowCount = 2;
+            tlpLicences.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlpLicences.RowStyles.Add(new RowStyle(SizeType.Percent, 90F));
+            tlpLicences.Size = new Size(634, 261);
+            tlpLicences.TabIndex = 0;
             // 
             // lblLicencesHead
             // 
@@ -85,21 +85,21 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(634, 261);
-            Controls.Add(tableLayoutPanel1);
+            Controls.Add(tlpLicences);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "LicencesForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Licences";
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
+            tlpLicences.ResumeLayout(false);
+            tlpLicences.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tlpLicences;
         private Label lblLicencesHead;
         private RichTextBox rtbLicences;
     }
