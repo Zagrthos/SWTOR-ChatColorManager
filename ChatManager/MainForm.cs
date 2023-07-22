@@ -270,7 +270,7 @@ namespace ChatManager
                 lblServerName.Text = $"{localization.GetString(lblServerName.Name)} {Converter.AddWhitespace(Converter.ServerNameIdentifier(colorIndexes[0], false))}";
             }
 
-            lblCharName.Text = $"{localization.GetString(lblServerName.Name)} {colorIndexes[1]}";
+            lblCharName.Text = $"{localization.GetString(lblCharName.Name)} {colorIndexes[1]}";
             tbTrade.Text = colorIndexes[2];
             tbPvP.Text = colorIndexes[3];
             tbGeneral.Text = colorIndexes[4];
