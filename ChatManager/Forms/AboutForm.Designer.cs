@@ -32,10 +32,10 @@
             labelProductName = new Label();
             labelVersion = new Label();
             labelCopyright = new Label();
-            labelCompanyName = new Label();
             okButton = new Button();
             licencesButton = new Button();
             gitHubLinkButton = new Button();
+            rtbCompany = new RichTextBox();
             tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)logoPictureBox).BeginInit();
             SuspendLayout();
@@ -49,10 +49,10 @@
             tableLayoutPanel.Controls.Add(labelProductName, 1, 0);
             tableLayoutPanel.Controls.Add(labelVersion, 1, 1);
             tableLayoutPanel.Controls.Add(labelCopyright, 1, 2);
-            tableLayoutPanel.Controls.Add(labelCompanyName, 1, 3);
             tableLayoutPanel.Controls.Add(okButton, 1, 5);
             tableLayoutPanel.Controls.Add(licencesButton, 0, 5);
             tableLayoutPanel.Controls.Add(gitHubLinkButton, 1, 4);
+            tableLayoutPanel.Controls.Add(rtbCompany, 1, 3);
             tableLayoutPanel.Dock = DockStyle.Fill;
             tableLayoutPanel.Location = new Point(10, 10);
             tableLayoutPanel.Margin = new Padding(4, 3, 4, 3);
@@ -116,18 +116,6 @@
             labelCopyright.Text = "Copyright";
             labelCopyright.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // labelCompanyName
-            // 
-            labelCompanyName.Dock = DockStyle.Fill;
-            labelCompanyName.Location = new Point(249, 108);
-            labelCompanyName.Margin = new Padding(7, 0, 4, 0);
-            labelCompanyName.MaximumSize = new Size(0, 20);
-            labelCompanyName.Name = "labelCompanyName";
-            labelCompanyName.Size = new Size(231, 20);
-            labelCompanyName.TabIndex = 0;
-            labelCompanyName.Text = "Company Name";
-            labelCompanyName.TextAlign = ContentAlignment.MiddleLeft;
-            // 
             // okButton
             // 
             okButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -161,6 +149,27 @@
             gitHubLinkButton.UseVisualStyleBackColor = true;
             gitHubLinkButton.Click += GitHubLinkButton_Click;
             // 
+            // rtbCompany
+            // 
+            rtbCompany.BackColor = SystemColors.Control;
+            rtbCompany.BorderStyle = BorderStyle.None;
+            rtbCompany.CausesValidation = false;
+            rtbCompany.DetectUrls = false;
+            rtbCompany.Dock = DockStyle.Fill;
+            rtbCompany.Location = new Point(249, 108);
+            rtbCompany.Margin = new Padding(7, 0, 4, 0);
+            rtbCompany.Multiline = false;
+            rtbCompany.Name = "rtbCompany";
+            rtbCompany.ReadOnly = true;
+            rtbCompany.ScrollBars = RichTextBoxScrollBars.None;
+            rtbCompany.Size = new Size(231, 36);
+            rtbCompany.TabIndex = 0;
+            rtbCompany.TabStop = false;
+            rtbCompany.Text = "Placeholder";
+            rtbCompany.SelectionChanged += RtbCompany_SelectionChanged;
+            rtbCompany.Click += RtbCompany_GotFocus;
+            rtbCompany.GotFocus += RtbCompany_GotFocus;
+            // 
             // AboutForm
             // 
             AcceptButton = okButton;
@@ -190,9 +199,9 @@
         private Label labelProductName;
         private Label labelVersion;
         private Label labelCopyright;
-        private Label labelCompanyName;
         private Button okButton;
         private Button licencesButton;
         private Button gitHubLinkButton;
+        private RichTextBox rtbCompany;
     }
 }

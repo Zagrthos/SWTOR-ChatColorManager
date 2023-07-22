@@ -1,6 +1,7 @@
 ﻿using ChatManager.Enums;
 using ChatManager.Services;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace ChatManager.Forms
 {
@@ -13,7 +14,7 @@ namespace ChatManager.Forms
             labelProductName.Text = AssemblyProduct;
             labelVersion.Text = string.Format("Version {0}", ProductVersion);
             labelCopyright.Text = AssemblyCopyright;
-            labelCompanyName.Text = AssemblyCompany;
+            SetRichTextBox(AssemblyCompany);
             Localize();
         }
 
@@ -98,6 +99,34 @@ namespace ChatManager.Forms
             Text = localization.GetString(Name);
             licencesButton.Text = localization.GetString(licencesButton.Name);
             gitHubLinkButton.Text = localization.GetString(gitHubLinkButton.Name);
+        }
+
+        private void SetRichTextBox(string company)
+        {
+            rtbCompany.SelectionColor = Color.Black;
+            rtbCompany.AppendText("Made with ");
+            rtbCompany.SelectionColor = Color.Red;
+            rtbCompany.AppendText("\u2764");
+            rtbCompany.SelectionColor = Color.Black;
+            rtbCompany.AppendText($" by {company}");
+        }
+
+        private void RtbCompany_SelectionChanged(object sender, EventArgs e)
+        {
+            RichTextBox rtb = (RichTextBox)sender;
+
+            if (rtb.SelectionLength > 0)
+            {
+                rtb.SelectionLength = 0;
+            }
+        }
+
+        [DllImport("user32.dll", EntryPoint = "HideCaret")]
+        private static extern bool HideCaret(IntPtr hWnd);
+
+        private void RtbCompany_GotFocus(object sender, EventArgs e)
+        {
+            HideCaret(rtbCompany.Handle);
         }
     }
 }
