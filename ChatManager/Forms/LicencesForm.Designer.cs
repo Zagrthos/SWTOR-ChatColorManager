@@ -46,7 +46,7 @@
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 90F));
-            tableLayoutPanel1.Size = new Size(784, 361);
+            tableLayoutPanel1.Size = new Size(634, 261);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // lblLicencesHead
@@ -57,29 +57,33 @@
             lblLicencesHead.Location = new Point(3, 3);
             lblLicencesHead.Margin = new Padding(3);
             lblLicencesHead.Name = "lblLicencesHead";
-            lblLicencesHead.Size = new Size(778, 30);
+            lblLicencesHead.Size = new Size(628, 20);
             lblLicencesHead.TabIndex = 0;
-            lblLicencesHead.Text = "Licenses from every software part which is used in this application";
+            lblLicencesHead.Text = "Licences from every software part which is used in this application";
             lblLicencesHead.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // rtbLicences
             // 
             rtbLicences.BorderStyle = BorderStyle.None;
+            rtbLicences.CausesValidation = false;
             rtbLicences.Dock = DockStyle.Fill;
-            rtbLicences.Location = new Point(5, 41);
+            rtbLicences.Location = new Point(5, 31);
             rtbLicences.Margin = new Padding(5);
             rtbLicences.MaxLength = 0;
             rtbLicences.Name = "rtbLicences";
             rtbLicences.ReadOnly = true;
-            rtbLicences.Size = new Size(774, 315);
-            rtbLicences.TabIndex = 1;
+            rtbLicences.Size = new Size(624, 225);
+            rtbLicences.TabIndex = 0;
+            rtbLicences.TabStop = false;
             rtbLicences.Text = "";
+            rtbLicences.LinkClicked += RtbLicences_LinkClicked;
+            rtbLicences.Click += RtbLicences_GotFocus;
             // 
             // LicencesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(784, 361);
+            ClientSize = new Size(634, 261);
             Controls.Add(tableLayoutPanel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
