@@ -75,9 +75,10 @@
             rtbLicences.Size = new Size(624, 225);
             rtbLicences.TabIndex = 0;
             rtbLicences.TabStop = false;
-            rtbLicences.Text = "";
+            rtbLicences.Text = "Placeholder";
             rtbLicences.LinkClicked += RtbLicences_LinkClicked;
             rtbLicences.Click += RtbLicences_GotFocus;
+            rtbLicences.GotFocus += RtbLicences_GotFocus;
             // 
             // LicencesForm
             // 

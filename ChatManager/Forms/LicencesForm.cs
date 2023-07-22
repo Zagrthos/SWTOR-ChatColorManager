@@ -10,10 +10,6 @@ namespace ChatManager.Forms
         {
             InitializeComponent();
             Localize();
-
-#pragma warning disable CS8622
-            rtbLicences.GotFocus += RtbLicences_GotFocus;
-#pragma warning restore CS8622
         }
 
         private void Localize()
