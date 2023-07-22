@@ -56,6 +56,17 @@
         copyrightButton,
         okButton,
 
+        // BackupSelectorForm Strings
+        BackupSelectorForm,
+        lblBackupDir,
+        lblBackupFiles,
+        btnBackupSelectAll,
+        btnBackupDeselectAll,
+        btnDeleteDir,
+        btnDeleteFiles,
+        btnRestore,
+
+
         // ColorPickerForm
         lblExample,
 
@@ -81,6 +92,22 @@
         btnTheLeviathanSelectAll,
         btnTheLeviathanSelect,
         btnTheLeviathanDeselectAll,
+
+        // SettingsForm Strings
+        SettingsForm,
+        gbLanguage,
+        gbGeneral,
+        chbReloadOnStartup,
+        chbSaveOnClose,
+        chbAutosave,
+        lblAutosaveInterval,
+        btnResetSettings,
+        gbUpdater,
+        lblUpdateIntervall,
+        UpdateIntervalOnStart,
+        UpdateIntervalDaily,
+        UpdateIntervalWeekly,
+        chbUpdateDownload,
 
         // MessageBox Strings
         Err_AutosaveImport,
@@ -108,31 +135,5 @@
         Warn_SWTORpathNotFound,
         Warn_SWTORrunning,
         Warn_TextBoxEmpty,
-
-        // SettingsForm Strings
-        SettingsForm,
-        gbLanguage,
-        gbGeneral,
-        chbReloadOnStartup,
-        chbSaveOnClose,
-        chbAutosave,
-        lblAutosaveInterval,
-        btnResetSettings,
-        gbUpdater,
-        lblUpdateIntervall,
-        UpdateIntervalOnStart,
-        UpdateIntervalDaily,
-        UpdateIntervalWeekly,
-        chbUpdateDownload,
-
-        // BackupSelector Strings
-        BackupSelectorForm,
-        lblBackupDir,
-        lblBackupFiles,
-        btnBackupSelectAll,
-        btnBackupDeselectAll,
-        btnDeleteDir,
-        btnDeleteFiles,
-        btnRestore
     }
 }
