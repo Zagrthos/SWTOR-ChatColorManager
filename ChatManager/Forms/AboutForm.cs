@@ -103,6 +103,8 @@ namespace ChatManager.Forms
 
         private void SetRichTextBox(string company)
         {
+            rtbCompany.Text = string.Empty;
+
             rtbCompany.SelectionColor = Color.Black;
             rtbCompany.AppendText("Made with ");
             rtbCompany.SelectionColor = Color.Red;
