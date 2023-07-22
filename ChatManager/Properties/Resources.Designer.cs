@@ -79,6 +79,16 @@ namespace ChatManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Font {
+            get {
+                object obj = ResourceManager.GetObject("Font", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://github.com/Zagrthos/SWTOR-ChatColorManager/.
         /// </summary>
         internal static string githubPath {

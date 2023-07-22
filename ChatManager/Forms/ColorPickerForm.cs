@@ -1,5 +1,6 @@
 ﻿using ChatManager.Enums;
 using ChatManager.Services;
+using System.Drawing.Text;
 
 namespace ChatManager.Forms
 {
@@ -8,6 +9,7 @@ namespace ChatManager.Forms
         internal ColorPickerForm(string text, Color color)
         {
             InitializeComponent();
+            ChangeFont();
             Text = text;
             colorEditor.Color = color;
             Localize();
@@ -19,6 +21,19 @@ namespace ChatManager.Forms
         private void ColorChanged(object sender, EventArgs e)
         {
             lblExample.ForeColor = colorEditor.Color;
+        }
+
+        private void ChangeFont()
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.ColorPickerForm, "ChangeFont entered");
+
+            PrivateFontCollection fontCollection = new();
+
+            fontCollection.AddFontFile(Path.Combine(Application.StartupPath, "Resources", "Font.ttf"));
+
+            Font swtorFont = new(fontCollection.Families[0], 9);
+
+            lblExample.Font = swtorFont;
         }
 
         private void ColorPickerForm_Load(object sender, EventArgs e)
