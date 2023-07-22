@@ -77,10 +77,10 @@ namespace ChatManager.Forms
 
         #endregion Assembly Attribute Accessors
 
-        private void CopyrightButton_Click(object sender, EventArgs e)
+        private void LicencesButton_Click(object sender, EventArgs e)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "CopyrightButtonClick entered");
-            OpenWindows.OpenLinksInBrowser(GetSetSettings.GetAboutPictureLink);
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "LicensesButtonClick entered");
+            OpenWindows.OpenLicences();
         }
 
         private void GitHubLinkButton_Click(object sender, EventArgs e)
@@ -96,7 +96,7 @@ namespace ChatManager.Forms
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
             Text = localization.GetString(Name);
-            copyrightButton.Text = localization.GetString(copyrightButton.Name);
+            licencesButton.Text = localization.GetString(licencesButton.Name);
             gitHubLinkButton.Text = localization.GetString(gitHubLinkButton.Name);
         }
     }

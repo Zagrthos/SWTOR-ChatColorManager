@@ -145,6 +145,16 @@ namespace ChatManager.Services
             backupSelector.Dispose();
         }
 
+        internal static void OpenLicences()
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenLicences entered");
+
+            LicencesForm licencesForm = new();
+            licencesForm.ShowDialog();
+
+            licencesForm.Dispose();
+        }
+
         // Open Explorer Window with a specified path
         internal static void OpenExplorer(string path)
         {

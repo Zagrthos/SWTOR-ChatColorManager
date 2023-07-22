@@ -87,6 +87,29 @@ namespace ChatManager.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to .NET 7 &amp; Windows Forms
+        ///https://github.com/dotnet/
+        ///
+        ///The MIT License (MIT)
+        ///
+        ///Copyright (c) .NET Foundation and Contributors
+        ///
+        ///All rights reserved.
+        ///
+        ///Permission is hereby granted, free of charge, to any person obtaining a copy
+        ///of this software and associated documentation files (the &quot;Software&quot;), to deal
+        ///in the Software without restriction, including without limitation the rights
+        ///to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        ///copies of the Software, and to permit persons to  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Licences {
+            get {
+                return ResourceManager.GetString("Licences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon Logo {

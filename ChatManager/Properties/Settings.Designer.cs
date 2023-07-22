@@ -83,13 +83,6 @@ namespace ChatManager.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://unsplash.com/photos/PEJtZfT6C1Q")]
-        public string copyrightPicture {
-            get {
-                return ((string)(this["copyrightPicture"]));
-            }
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]

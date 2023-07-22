@@ -50,7 +50,7 @@
 
   "_comment3": "AboutForm",
   "AboutForm": "A propos de cette application",
-  "copyrightButton": "Lien vers le créateur de logo",
+  "licencesButton": "Licences",
   "gitHubLinkButton": "Lien vers le dépôt GitHub",
   "okButton": "Ok",
 
@@ -90,7 +90,11 @@
   "btnTheLeviathanSelect": "Sélectionne",
   "btnTheLeviathanDeselectAll": "Désélectionne tout",
 
-  "_comment7": "SettingsForm Strings",
+  "_comment7": "LicencesForm Strings",
+  "LicencesForm": "Licences",
+  "lblLicencesHead": "Licences de tous les logiciels utilisés dans cette application",
+
+  "_comment8": "SettingsForm Strings",
   "SettingsForm": "Paramètres",
   "gbLanguage": "Choix de la langue",
   "gbGeneral": "Paramètres généraux",
@@ -106,7 +110,7 @@
   "UpdateIntervalWeekly": "Hebdomadaire",
   "chbUpdateDownload": "Télécharge les mises à jour manuellement",
 
-  "_comment8": "MessageBox Strings",
+  "_comment9": "MessageBox Strings",
   "Err_AutosaveImport": "Aucun fichier de sauvegarde automatique n'a été trouvé!",
   "Err_ColorNotHex": "La couleur spécifiée dans la zone de texte ne correspond pas à la norme HEX.",
   "Err_NoFileToDeleteSelected": "Choisis au moins un fichier dans la liste!",

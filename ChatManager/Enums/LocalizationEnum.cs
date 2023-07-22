@@ -53,7 +53,7 @@
 
         // AboutForm
         AboutForm,
-        copyrightButton,
+        licencesButton,
         gitHubLinkButton,
         okButton,
 
@@ -93,6 +93,10 @@
         btnTheLeviathanSelectAll,
         btnTheLeviathanSelect,
         btnTheLeviathanDeselectAll,
+
+        // LicencesForm
+        LicencesForm,
+        lblLicencesHead,
 
         // SettingsForm Strings
         SettingsForm,

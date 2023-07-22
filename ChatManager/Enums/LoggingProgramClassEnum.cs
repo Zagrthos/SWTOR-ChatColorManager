@@ -8,6 +8,7 @@
         BackupSelector,
         ColorPickerForm,
         FileSelectorForm,
+        LicencesForm,
         SettingsForm,
         Autosave,
         Checks,

@@ -34,7 +34,7 @@
             labelCopyright = new Label();
             labelCompanyName = new Label();
             okButton = new Button();
-            copyrightButton = new Button();
+            licencesButton = new Button();
             gitHubLinkButton = new Button();
             tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)logoPictureBox).BeginInit();
@@ -51,7 +51,7 @@
             tableLayoutPanel.Controls.Add(labelCopyright, 1, 2);
             tableLayoutPanel.Controls.Add(labelCompanyName, 1, 3);
             tableLayoutPanel.Controls.Add(okButton, 1, 5);
-            tableLayoutPanel.Controls.Add(copyrightButton, 0, 5);
+            tableLayoutPanel.Controls.Add(licencesButton, 0, 5);
             tableLayoutPanel.Controls.Add(gitHubLinkButton, 1, 4);
             tableLayoutPanel.Dock = DockStyle.Fill;
             tableLayoutPanel.Location = new Point(10, 10);
@@ -139,16 +139,16 @@
             okButton.TabIndex = 1;
             okButton.Text = "Ok";
             // 
-            // copyrightButton
+            // licencesButton
             // 
-            copyrightButton.Dock = DockStyle.Fill;
-            copyrightButton.Location = new Point(3, 183);
-            copyrightButton.Name = "copyrightButton";
-            copyrightButton.Size = new Size(236, 30);
-            copyrightButton.TabIndex = 3;
-            copyrightButton.Text = "Link to logo creator";
-            copyrightButton.UseVisualStyleBackColor = true;
-            copyrightButton.Click += CopyrightButton_Click;
+            licencesButton.Dock = DockStyle.Fill;
+            licencesButton.Location = new Point(3, 183);
+            licencesButton.Name = "licencesButton";
+            licencesButton.Size = new Size(236, 30);
+            licencesButton.TabIndex = 3;
+            licencesButton.Text = "Licences";
+            licencesButton.UseVisualStyleBackColor = true;
+            licencesButton.Click += LicencesButton_Click;
             // 
             // gitHubLinkButton
             // 
@@ -192,7 +192,7 @@
         private Label labelCopyright;
         private Label labelCompanyName;
         private Button okButton;
-        private Button copyrightButton;
+        private Button licencesButton;
         private Button gitHubLinkButton;
     }
 }

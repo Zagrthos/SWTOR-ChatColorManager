@@ -50,7 +50,7 @@
 
   "_comment3": "AboutForm",
   "AboutForm": "Über diese App",
-  "copyrightButton": "Link zum Logo Ersteller",
+  "licencesButton": "Lizenzen",
   "gitHubLinkButton": "Link zum GitHub Repository",
   "okButton": "Ok",
 
@@ -90,7 +90,11 @@
   "btnTheLeviathanSelect": "Auswählen",
   "btnTheLeviathanDeselectAll": "Alle abwählen",
 
-  "_comment7": "SettingsForm Strings",
+  "_comment7": "LicencesForm Strings",
+  "LicencesForm": "Lizenzen",
+  "lblLicencesHead": "Lizenzen von jeder Software, die in dieser Anwendung verwendet wird",
+
+  "_comment8": "SettingsForm Strings",
   "SettingsForm": "Einstellungen",
   "gbLanguage": "Sprachauswahl",
   "gbGeneral": "Allgemeine Einstellungen",
@@ -106,7 +110,7 @@
   "UpdateIntervalWeekly": "Wöchentlich",
   "chbUpdateDownload": "Updates manuell herunterladen",
 
-  "_comment8": "MessageBox Strings",
+  "_comment9": "MessageBox Strings",
   "Err_AutosaveImport": "Es wurde keine Autosave Datei gefunden!",
   "Err_ColorNotHex": "Die angegebene Farbe in der Textbox entspricht nicht dem HEX-Standard.",
   "Err_NoFileToDeleteSelected": "Bitte wähle mindestens eine Datei zum löschen aus!",

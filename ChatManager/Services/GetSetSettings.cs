@@ -26,7 +26,7 @@ namespace ChatManager.Services
         internal static string GetSupportPath => Resources.supportPath;
         internal static string GetBugPath => Resources.bugPath;
         internal static string GetBugMailpath => Resources.bugMailPath;
-        internal static string GetAboutPictureLink => Settings.Default.copyrightPicture;
+        internal static string GetLicences => Resources.Licences;
         internal static bool GetSaveOnClose => Settings.Default._saveOnClose;
         internal static bool GetReloadOnStartup => Settings.Default._reloadOnStartup;
         internal static bool GetAutosave => Settings.Default._autosave;
