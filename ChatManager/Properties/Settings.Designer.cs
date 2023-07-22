@@ -85,40 +85,11 @@ namespace ChatManager.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatColorManager/issues/")]
-        public string supportPath {
-            get {
-                return ((string)(this["supportPath"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatColorManager/issues/new/choose")]
-        public string bugPath {
-            get {
-                return ((string)(this["bugPath"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://unsplash.com/photos/PEJtZfT6C1Q")]
         public string copyrightPicture {
             get {
                 return ((string)(this["copyrightPicture"]));
             }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("mailto:swtor-chatmanager@fire.fundersclub.com?subject=[BUG]")]
-        public string bugMailPath {
-            get {
-                return ((string)(this["bugMailPath"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -271,15 +242,6 @@ namespace ChatManager.Properties {
             }
             set {
                 this["lastUpdatePath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Zagrthos/SWTOR-ChatColorManager/")]
-        public string githubPath {
-            get {
-                return ((string)(this["githubPath"]));
             }
         }
     }

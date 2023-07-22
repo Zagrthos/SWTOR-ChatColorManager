@@ -23,9 +23,9 @@ namespace ChatManager.Services
         internal static string GetLogPath => Settings.Default.logPath;
         internal static string GetAutosavePath => Settings.Default.autosavePath;
         internal static bool GetAutosaveAvailability => Settings.Default.autosaveAvailability;
-        internal static string GetSupportPath => Settings.Default.supportPath;
-        internal static string GetBugPath => Settings.Default.bugPath;
-        internal static string GetBugMailpath => Settings.Default.bugMailPath;
+        internal static string GetSupportPath => Resources.supportPath;
+        internal static string GetBugPath => Resources.bugPath;
+        internal static string GetBugMailpath => Resources.bugMailPath;
         internal static string GetAboutPictureLink => Settings.Default.copyrightPicture;
         internal static bool GetSaveOnClose => Settings.Default._saveOnClose;
         internal static bool GetReloadOnStartup => Settings.Default._reloadOnStartup;
@@ -35,7 +35,7 @@ namespace ChatManager.Services
         internal static DateTime GetLastUpdateCheck => Settings.Default.lastUpdateCheck;
         internal static bool GetUpdateDownload => Settings.Default.updateDownload;
         internal static string GetLastUpdatePath => Settings.Default.lastUpdatePath;
-        internal static string GetGitHubPath => Settings.Default.githubPath;
+        internal static string GetGitHubPath => Resources.githubPath;
 
         internal static void InitSettings()
         {

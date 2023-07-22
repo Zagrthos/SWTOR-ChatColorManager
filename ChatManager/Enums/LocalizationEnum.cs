@@ -54,6 +54,7 @@
         // AboutForm
         AboutForm,
         copyrightButton,
+        gitHubLinkButton,
         okButton,
 
         // BackupSelectorForm Strings

@@ -61,6 +61,32 @@ namespace ChatManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to mailto:swtor-chatmanager@fire.fundersclub.com?subject=[BUG].
+        /// </summary>
+        internal static string bugMailPath {
+            get {
+                return ResourceManager.GetString("bugMailPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/Zagrthos/SWTOR-ChatColorManager/issues/new/choose.
+        /// </summary>
+        internal static string bugPath {
+            get {
+                return ResourceManager.GetString("bugPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/Zagrthos/SWTOR-ChatColorManager/.
+        /// </summary>
+        internal static string githubPath {
+            get {
+                return ResourceManager.GetString("githubPath", resourceCulture);
+            }
+        }
+        
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon Logo {
@@ -97,6 +123,15 @@ namespace ChatManager.Properties {
             get {
                 object obj = ResourceManager.GetObject("Logo_small", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/Zagrthos/SWTOR-ChatColorManager/issues/.
+        /// </summary>
+        internal static string supportPath {
+            get {
+                return ResourceManager.GetString("supportPath", resourceCulture);
             }
         }
     }
