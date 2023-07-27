@@ -9,9 +9,9 @@ namespace ChatManager.Forms
         internal ColorPickerForm(string text, Color color)
         {
             InitializeComponent();
-            ChangeFont();
             Text = text;
             colorEditor.Color = color;
+            nbFontSize.Value = 9;
             Localize();
         }
 
@@ -23,17 +23,23 @@ namespace ChatManager.Forms
             lblExample.ForeColor = colorEditor.Color;
         }
 
-        private void ChangeFont()
+        private void ChangeFont(float fontSize)
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.ColorPickerForm, "ChangeFont entered");
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ColorPickerForm, $"FontSize: {fontSize}");
 
             PrivateFontCollection fontCollection = new();
 
             fontCollection.AddFontFile(Path.Combine(Application.StartupPath, "Resources", "Font.ttf"));
 
-            Font swtorFont = new(fontCollection.Families[0], 9);
+            Font swtorFont = new(fontCollection.Families[0], fontSize);
 
             lblExample.Font = swtorFont;
+        }
+
+        private void FontSizeChanged(object sender, EventArgs e)
+        {
+            ChangeFont((float)nbFontSize.Value);
         }
 
         private void ColorPickerForm_Load(object sender, EventArgs e)
@@ -61,6 +67,7 @@ namespace ChatManager.Forms
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
             lblExample.Text = localization.GetString(lblExample.Name);
+            lblFontSize.Text = localization.GetString(lblFontSize.Name);
         }
     }
 }

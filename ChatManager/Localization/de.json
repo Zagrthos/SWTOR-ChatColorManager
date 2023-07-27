@@ -66,6 +66,7 @@
 
   "_comment5": "ColorPickerForm",
   "lblExample": "Das ist ein Beispieltext in der ausgewählten Farbe.",
+  "lblFontSize": "Schriftgröße",
 
   "_comment6": "FileSelectorForm",
   "FileSelectorForm": "Charakter wählen",
