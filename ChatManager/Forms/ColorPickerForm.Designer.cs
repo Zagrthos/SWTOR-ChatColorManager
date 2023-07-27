@@ -31,8 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColorPickerForm));
             colorEditor = new Cyotek.Windows.Forms.ColorEditor();
             tlpColorPickerForm = new TableLayoutPanel();
+            pnlExample = new Panel();
             lblExample = new Label();
             tlpColorPickerForm.SuspendLayout();
+            pnlExample.SuspendLayout();
             SuspendLayout();
             // 
             // colorEditor
@@ -54,31 +56,42 @@
             tlpColorPickerForm.ColumnCount = 1;
             tlpColorPickerForm.ColumnStyles.Add(new ColumnStyle());
             tlpColorPickerForm.Controls.Add(colorEditor, 0, 0);
-            tlpColorPickerForm.Controls.Add(lblExample, 0, 1);
+            tlpColorPickerForm.Controls.Add(pnlExample, 0, 1);
             tlpColorPickerForm.Dock = DockStyle.Fill;
             tlpColorPickerForm.Location = new Point(0, 0);
             tlpColorPickerForm.Name = "tlpColorPickerForm";
             tlpColorPickerForm.RowCount = 2;
             tlpColorPickerForm.RowStyles.Add(new RowStyle());
-            tlpColorPickerForm.RowStyles.Add(new RowStyle());
-            tlpColorPickerForm.Size = new Size(384, 176);
+            tlpColorPickerForm.RowStyles.Add(new RowStyle(SizeType.Percent, 95F));
+            tlpColorPickerForm.Size = new Size(384, 311);
             tlpColorPickerForm.TabIndex = 0;
+            // 
+            // pnlExample
+            // 
+            pnlExample.Controls.Add(lblExample);
+            pnlExample.Dock = DockStyle.Fill;
+            pnlExample.Location = new Point(3, 146);
+            pnlExample.Name = "pnlExample";
+            pnlExample.Size = new Size(378, 162);
+            pnlExample.TabIndex = 2;
             // 
             // lblExample
             // 
-            lblExample.AutoSize = true;
+            lblExample.BackColor = Color.DimGray;
             lblExample.Dock = DockStyle.Fill;
-            lblExample.Location = new Point(3, 143);
+            lblExample.Image = Properties.Resources.Chat_Layer;
+            lblExample.Location = new Point(0, 0);
             lblExample.Name = "lblExample";
-            lblExample.Size = new Size(378, 33);
+            lblExample.Size = new Size(378, 162);
             lblExample.TabIndex = 0;
             lblExample.Text = "This is a sample text in the selected color.";
+            lblExample.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // ColorPickerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(384, 176);
+            ClientSize = new Size(384, 311);
             Controls.Add(tlpColorPickerForm);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -92,7 +105,7 @@
             FormClosed += ColorPickerForm_FormClosed;
             Load += ColorPickerForm_Load;
             tlpColorPickerForm.ResumeLayout(false);
-            tlpColorPickerForm.PerformLayout();
+            pnlExample.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -101,5 +114,6 @@
         private Cyotek.Windows.Forms.ColorEditor colorEditor;
         private TableLayoutPanel tlpColorPickerForm;
         private Label lblExample;
+        private Panel pnlExample;
     }
 }
