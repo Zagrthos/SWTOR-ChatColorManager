@@ -39,7 +39,7 @@ namespace ChatManager.Services
         }
 
         // Logfile Cleaning
-        internal static void LogfilesCleaning()
+        private static void LogfilesCleaning()
         {
             Write(LogEventEnum.Method, ProgramClassEnum.Logging, "LogfilesCleaning entered");
 
