@@ -2,117 +2,13 @@
 {
     internal enum LocalizationEnum
     {
-        // MainForm Menu Items
-        fileToolStripMenuItem,
-        openToolStripMenuItem,
-        saveToolStripMenuItem,
-        loadAutosaveToolStripMenuItem,
-        restoreBackupToolStripMenuItem,
-        exitToolStripMenuItem,
-        toolsToolStripMenuItem,
-        charFolderToolStripMenuItem,
-        backupToolStripMenuItem,
-        logFolderToolStripMenuItem,
-        settingsToolStripMenuItem,
-        helpToolStripMenuItem,
-        supportToolStripMenuItem,
-        bugToolStripMenuItem,
-        bugMailToolStripMenuItem,
-        aboutToolStripMenuItem,
-        updateToolStripMenuItem,
+        // MainForm Strings
         downloadProgressToolStripMenuItem,
 
-        // MainForm Strings
-        tpGlobal,
-        tpPlayer,
-        tpGroup,
-        tpSystem,
-        btnTrade,
-        btnPvP,
-        btnGeneral,
-        btnEmote,
-        btnYell,
-        btnOfficer,
-        btnGuild,
-        btnSay,
-        btnWhisper,
-        btnOps,
-        btnOpsLead,
-        btnGroup,
-        btnOpsAnnou,
-        btnOpsOfficer,
-        btnCombat,
-        btnConv,
-        btnLogin,
-        btnOpsInfo,
-        btnSystem,
-        btnGuildInfo,
-        btnGroupInfo,
-        lblServerName,
-        lblCharName,
-
-        // AboutForm
-        AboutForm,
-        licencesButton,
-        gitHubLinkButton,
-        okButton,
-
-        // BackupSelectorForm Strings
-        BackupSelectorForm,
-        lblBackupDir,
-        lblBackupFiles,
-        btnBackupSelectAll,
-        btnBackupDeselectAll,
-        btnDeleteDir,
-        btnDeleteFiles,
-        btnRestore,
-
-
-        // ColorPickerForm
-        lblExample,
-
-        // FileSelectorForm
-        FileSelectorForm,
-        tabStarForge,
-        tabSateleShan,
-        tabDarthMalgus,
-        tabTulakHord,
-        tabTheLeviathan,
-        btnStarForgeSelectAll,
-        btnStarForgeSelect,
-        btnStarForgeDeselectAll,
-        btnSateleShanSelectAll,
-        btnSateleShanSelect,
-        btnSateleShanDeselectAll,
-        btnDarthMalgusSelectAll,
-        btnDarthMalgusSelect,
-        btnDarthMalgusDeselectAll,
-        btnTulakHordSelectAll,
-        btnTulakHordSelect,
-        btnTulakHordDeselectAll,
-        btnTheLeviathanSelectAll,
-        btnTheLeviathanSelect,
-        btnTheLeviathanDeselectAll,
-
-        // LicencesForm
-        LicencesForm,
-        lblLicencesHead,
-
         // SettingsForm Strings
-        SettingsForm,
-        gbLanguage,
-        gbGeneral,
-        chbReloadOnStartup,
-        chbSaveOnClose,
-        chbAutosave,
-        lblAutosaveInterval,
-        btnResetSettings,
-        gbUpdater,
-        lblUpdateIntervall,
         UpdateIntervalOnStart,
         UpdateIntervalDaily,
         UpdateIntervalWeekly,
-        chbUpdateDownload,
 
         // MessageBox Strings
         Err_AutosaveImport,
