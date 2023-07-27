@@ -50,7 +50,6 @@
             colorEditor.ShowHsl = false;
             colorEditor.Size = new Size(401, 137);
             colorEditor.TabIndex = 1;
-            colorEditor.TabStop = false;
             colorEditor.ColorChanged += ColorChanged;
             // 
             // tlpColorPickerForm
@@ -103,7 +102,8 @@
             nbFontSize.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nbFontSize.Name = "nbFontSize";
             nbFontSize.Size = new Size(199, 23);
-            nbFontSize.TabIndex = 4;
+            nbFontSize.TabIndex = 0;
+            nbFontSize.TabStop = false;
             nbFontSize.TextAlign = HorizontalAlignment.Center;
             nbFontSize.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nbFontSize.ValueChanged += FontSizeChanged;
