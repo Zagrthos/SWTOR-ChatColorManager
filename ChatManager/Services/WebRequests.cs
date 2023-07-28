@@ -1,5 +1,6 @@
 ﻿using ChatManager.Enums;
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -7,8 +8,6 @@ namespace ChatManager.Services
 {
     internal class WebRequests
     {
-
-        // TODO: Replace the Updater ones with these
         internal static async Task<long?> GetLongAsync(string url)
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetLongAsync entered");
@@ -74,6 +73,41 @@ namespace ChatManager.Services
                 return getString;
             }
         }
+
+        internal static async Task<HttpResponseMessage> GetResponseMessageAsync(string url)
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetResponseMessageAsync entered");
+
+            HttpResponseMessage response = new();
+
+            HttpClient client = new();
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
+
+            try
+            {
+                response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
+                client.Dispose();
+
+                return response;
+            }
+            catch(HttpRequestException ex)
+            {
+                Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get string failed!");
+                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
+
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
+                client.Dispose();
+
+                ShowMessageBox.ShowBug();
+
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+        }
+
         internal static async Task<Version> GetVersionAsync(string url)
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetVersionAsync entered");

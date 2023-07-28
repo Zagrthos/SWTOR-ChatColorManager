@@ -153,75 +153,64 @@ namespace ChatManager.Services
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "DownloadUpdate entered");
 
-            HttpClient client = new();
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient created");
+            HttpResponseMessage responseMessage = await WebRequests.GetResponseMessageAsync(updateURL);
 
-            try
+            if (!responseMessage.IsSuccessStatusCode)
             {
-                HttpResponseMessage responseMessage = await client.GetAsync(updateURL, HttpCompletionOption.ResponseHeadersRead);
+                ShowMessageBox.ShowBug();
+                return;
+            }
 
-                updatePath = Path.Combine(Path.GetTempPath(), updateName);
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Download Path: {updatePath}");
+            updatePath = Path.Combine(Path.GetTempPath(), updateName);
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Download Path: {updatePath}");
 
-                Localization localization = new(GetSetSettings.GetCurrentLocale);
-                updateDownloadText = localization.GetString(LocalizationEnum.downloadProgressToolStripMenuItem);
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
+            updateDownloadText = localization.GetString(LocalizationEnum.downloadProgressToolStripMenuItem);
 
-                // Download the file and then log the progress
-                using (FileStream filestream = new(updatePath, FileMode.Create, FileAccess.Write, FileShare.None))
-                using (Stream stream = await responseMessage.Content.ReadAsStreamAsync())
+            // Download the file and then log the progress
+            using (FileStream filestream = new(updatePath, FileMode.Create, FileAccess.Write, FileShare.None))
+            using (Stream stream = await responseMessage.Content.ReadAsStreamAsync())
+            {
+                byte[] buffer = new byte[65536];
+                long totalBytesRead = 0;
+                int bytesRead;
+                double lastLoggedPercent = 0;
+
+                while ((bytesRead = await stream.ReadAsync(buffer)) != 0)
                 {
-                    byte[] buffer = new byte[65536];
-                    long totalBytesRead = 0;
-                    int bytesRead;
-                    double lastLoggedPercent = 0;
+                    await filestream.WriteAsync(buffer.AsMemory(0, bytesRead));
+                    totalBytesRead += bytesRead;
+                    double percent = totalBytesToDownload.HasValue ? (double)totalBytesRead / totalBytesToDownload.Value * 100 : -1;
 
-                    while ((bytesRead = await stream.ReadAsync(buffer)) != 0)
+                    if (percent > -1)
                     {
-                        await filestream.WriteAsync(buffer.AsMemory(0, bytesRead));
-                        totalBytesRead += bytesRead;
-                        double percent = totalBytesToDownload.HasValue ? (double)totalBytesRead /  totalBytesToDownload.Value * 100 : -1;
+                        // Remove all ,xx
+                        percent = Math.Round(percent);
 
-                        if (percent > -1)
+                        // But only log if the progress has changed 1%
+                        if (Math.Abs(percent - lastLoggedPercent) >= 1)
                         {
-                            // Remove all ,xx
-                            percent = Math.Round(percent);
-
-                            // But only log if the progress has changed 1%
-                            if (Math.Abs(percent - lastLoggedPercent) >= 1)
-                            {
-                                DownloadProgressReporter.OnDownloadProgressChanged(percent);
-                                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"progress: {percent}%");
-                                lastLoggedPercent = percent;
-                            }
+                            DownloadProgressReporter.OnDownloadProgressChanged(percent);
+                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"progress: {percent}%");
+                            lastLoggedPercent = percent;
                         }
                     }
                 }
-
-                client.Dispose();
-                responseMessage.Dispose();
-
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Update downloaded to: {updatePath}");
-
-                if (await VerifyUpdateHash(updatePath, onlineVersion!.ToString()))
-                {
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Application update started!");
-                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxUpdate), localization.GetString(LocalizationEnum.Update_IsInstallReady));
-                    InstallUpdate();
-                }
-                else
-                {
-                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Updater, "Updating not started because of incorrect hashes!");
-                    ShowMessageBox.ShowBug();
-                }
             }
-            catch (HttpRequestException ex)
+
+            responseMessage.Dispose();
+
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Update downloaded to: {updatePath}");
+
+            if (await VerifyUpdateHash(updatePath, onlineVersion!.ToString()))
             {
-                Logging.Write(LogEventEnum.Error, ProgramClassEnum.Updater, "Update download failed!");
-                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.Updater, $"{ex.Message}");
-
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
-                client.Dispose();
-
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Application update started!");
+                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxUpdate), localization.GetString(LocalizationEnum.Update_IsInstallReady));
+                InstallUpdate();
+            }
+            else
+            {
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Updater, "Updating not started because of incorrect hashes!");
                 ShowMessageBox.ShowBug();
             }
         }
