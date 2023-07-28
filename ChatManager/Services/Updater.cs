@@ -219,36 +219,15 @@ namespace ChatManager.Services
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "VerifyUpdateHash entered");
 
-            string onlineHash = string.Empty;
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Downloading hash initiated");
+
+            string hashURL = hashCheckURL.Replace("VERSION", version);
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"hashURL is: {hashURL}");
+
+            string onlineHash = await WebRequests.GetStringAsync(hashURL);
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineHash is: {onlineHash}");
+
             string localHash = string.Empty;
-
-            HttpClient client = new();
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient created");
-
-            try
-            {
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Downloading hash initiated");
-
-                string hashURL = hashCheckURL.Replace("VERSION", version);
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"hashURL is: {hashURL}");
-
-                onlineHash = new(await client.GetStringAsync(hashURL));
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineHash is: {onlineHash}");
-
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
-                client.Dispose();
-            }
-            catch (HttpRequestException ex)
-            {
-                Logging.Write(LogEventEnum.Error, ProgramClassEnum.Updater, "Downloading hash failed!");
-                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.Updater, $"{ex.Message}");
-
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
-                client.Dispose();
-
-                ShowMessageBox.ShowBug();
-            }
-
             using (var stream = File.OpenRead(filePath))
             {
                 using var sha256 = SHA256.Create();
