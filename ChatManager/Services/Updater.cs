@@ -1,7 +1,11 @@
 ﻿using ChatManager.Enums;
+using System;
+using System.IO;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
-using Windows.Media.Protection.PlayReady;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ChatManager.Services
 {

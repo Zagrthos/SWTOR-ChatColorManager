@@ -1,6 +1,8 @@
 ﻿using ChatManager.Enums;
 using ChatManager.Services;
+using System;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace ChatManager.Forms
 {

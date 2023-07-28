@@ -1,4 +1,5 @@
 ﻿using ChatManager.Enums;
+using System.Windows.Forms;
 
 namespace ChatManager.Services
 {

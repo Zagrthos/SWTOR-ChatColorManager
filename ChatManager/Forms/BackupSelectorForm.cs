@@ -1,5 +1,10 @@
 ﻿using ChatManager.Enums;
 using ChatManager.Services;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace ChatManager.Forms
 {

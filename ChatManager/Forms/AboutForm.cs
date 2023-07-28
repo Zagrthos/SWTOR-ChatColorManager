@@ -1,7 +1,11 @@
 ﻿using ChatManager.Enums;
 using ChatManager.Services;
+using System;
+using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace ChatManager.Forms
 {
