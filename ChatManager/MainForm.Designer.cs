@@ -52,9 +52,11 @@ namespace ChatManager
             supportToolStripMenuItem = new ToolStripMenuItem();
             bugToolStripMenuItem = new ToolStripMenuItem();
             bugMailToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator5 = new ToolStripSeparator();
+            toolStripSeparator3 = new ToolStripSeparator();
             aboutToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator4 = new ToolStripSeparator();
             updateToolStripMenuItem = new ToolStripMenuItem();
+            changelogToolStripMenuItem = new ToolStripMenuItem();
             downloadProgressToolStripMenuItem = new ToolStripMenuItem();
             tabsMainForm = new TabControl();
             tpGlobal = new TabPage();
@@ -163,50 +165,50 @@ namespace ChatManager
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(155, 22);
+            openToolStripMenuItem.Size = new Size(180, 22);
             openToolStripMenuItem.Text = "Import";
             openToolStripMenuItem.Click += ImportFile;
             // 
             // toolStripSeparator
             // 
             toolStripSeparator.Name = "toolStripSeparator";
-            toolStripSeparator.Size = new Size(152, 6);
+            toolStripSeparator.Size = new Size(177, 6);
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(155, 22);
+            saveToolStripMenuItem.Size = new Size(180, 22);
             saveToolStripMenuItem.Text = "Export";
             saveToolStripMenuItem.Click += ExportFiles;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(152, 6);
+            toolStripSeparator1.Size = new Size(177, 6);
             // 
             // loadAutosaveToolStripMenuItem
             // 
             loadAutosaveToolStripMenuItem.Name = "loadAutosaveToolStripMenuItem";
-            loadAutosaveToolStripMenuItem.Size = new Size(155, 22);
+            loadAutosaveToolStripMenuItem.Size = new Size(180, 22);
             loadAutosaveToolStripMenuItem.Text = "Load autosave";
             loadAutosaveToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // restoreBackupToolStripMenuItem
             // 
             restoreBackupToolStripMenuItem.Name = "restoreBackupToolStripMenuItem";
-            restoreBackupToolStripMenuItem.Size = new Size(155, 22);
+            restoreBackupToolStripMenuItem.Size = new Size(180, 22);
             restoreBackupToolStripMenuItem.Text = "Restore backup";
             restoreBackupToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(152, 6);
+            toolStripSeparator2.Size = new Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(155, 22);
+            exitToolStripMenuItem.Size = new Size(180, 22);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
@@ -249,7 +251,7 @@ namespace ChatManager
             // helpToolStripMenuItem
             // 
             helpToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supportToolStripMenuItem, bugToolStripMenuItem, bugMailToolStripMenuItem, toolStripSeparator5, aboutToolStripMenuItem, updateToolStripMenuItem });
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { supportToolStripMenuItem, bugToolStripMenuItem, bugMailToolStripMenuItem, toolStripSeparator3, aboutToolStripMenuItem, toolStripSeparator4, updateToolStripMenuItem, changelogToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             helpToolStripMenuItem.Size = new Size(44, 20);
             helpToolStripMenuItem.Text = "Help";
@@ -275,10 +277,10 @@ namespace ChatManager
             bugMailToolStripMenuItem.Text = "Report bug (E-Mail)";
             bugMailToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
-            // toolStripSeparator5
+            // toolStripSeparator3
             // 
-            toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(179, 6);
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(179, 6);
             // 
             // aboutToolStripMenuItem
             // 
@@ -287,12 +289,24 @@ namespace ChatManager
             aboutToolStripMenuItem.Text = "About...";
             aboutToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new Size(179, 6);
+            // 
             // updateToolStripMenuItem
             // 
             updateToolStripMenuItem.Name = "updateToolStripMenuItem";
             updateToolStripMenuItem.Size = new Size(182, 22);
             updateToolStripMenuItem.Text = "Check for updates";
             updateToolStripMenuItem.Click += ToolStripMenuHandler;
+            // 
+            // changelogToolStripMenuItem
+            // 
+            changelogToolStripMenuItem.Name = "changelogToolStripMenuItem";
+            changelogToolStripMenuItem.Size = new Size(182, 22);
+            changelogToolStripMenuItem.Text = "What's new?";
+            changelogToolStripMenuItem.Click += ToolStripMenuHandler;
             // 
             // downloadProgressToolStripMenuItem
             // 
@@ -1023,7 +1037,7 @@ namespace ChatManager
         private ToolStripMenuItem charFolderToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripSeparator toolStripSeparator3;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem logFolderToolStripMenuItem;
         private ToolStripMenuItem supportToolStripMenuItem;
@@ -1035,5 +1049,7 @@ namespace ChatManager
         private Label lblCharName;
         private Label lblServerName;
         private ToolStripMenuItem downloadProgressToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripMenuItem changelogToolStripMenuItem;
     }
 }

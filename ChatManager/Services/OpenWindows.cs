@@ -148,14 +148,15 @@ namespace ChatManager.Services
             backupSelector.Dispose();
         }
 
-        internal static void OpenLicences()
+        internal static void OpenTextViewer(bool isChangelog = false)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenLicences entered");
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenTextViewer entered");
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.OpenWindows, $"isChangelog = {isChangelog}");
 
-            LicencesForm licencesForm = new();
-            licencesForm.ShowDialog();
+            TextViewerForm textViewer = new(isChangelog);
+            textViewer.ShowDialog();
 
-            licencesForm.Dispose();
+            textViewer.Dispose();
         }
 
         // Open Explorer Window with a specified path

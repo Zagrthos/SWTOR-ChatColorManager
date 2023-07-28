@@ -179,6 +179,15 @@ namespace ChatManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://api.github.com/repos/Zagrthos/SWTOR-ChatColorManager/releases/tags/.
+        /// </summary>
+        internal static string releaseApiPath {
+            get {
+                return ResourceManager.GetString("releaseApiPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://github.com/Zagrthos/SWTOR-ChatColorManager/issues/.
         /// </summary>
         internal static string supportPath {

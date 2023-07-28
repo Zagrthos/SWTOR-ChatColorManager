@@ -18,6 +18,7 @@
   "aboutToolStripMenuItem": "About...",
   "updateToolStripMenuItem": "Check for updates",
   "downloadProgressToolStripMenuItem": "Download progress: PROGRESS%",
+  "changelogToolStripMenuItem": "What's new?",
 
   "_comment2": "MainForm",
   "tpGlobal": "Global channels",
@@ -91,11 +92,7 @@
   "btnTheLeviathanSelect": "Select",
   "btnTheLeviathanDeselectAll": "Deselect all",
 
-  "_comment7": "LicencesForm Strings",
-  "LicencesForm": "Licences",
-  "lblLicencesHead": "Licences from every software part which is used in this application",
-
-  "_comment8": "SettingsForm Strings",
+  "_comment7": "SettingsForm Strings",
   "SettingsForm": "Settings",
   "gbLanguage": "Language selection",
   "gbGeneral": "General settings",
@@ -110,6 +107,13 @@
   "UpdateIntervalDaily": "Daily",
   "UpdateIntervalWeekly": "Weekly",
   "chbUpdateDownload": "Download updates manually",
+
+  "_comment8": "TextViewerForm Strings",
+  "ChangelogFormName": "What's new?",
+  "ChangelogLabelName": "Here you can see every change since the last update!",
+  "ChangelogTryAgainLater": "Please try again later!",
+  "LicenceFormName": "Licences",
+  "LicenceLabelName": "Licences from every software part which is used in this application",
 
   "_comment9": "MessageBox Strings",
   "Err_AutosaveImport": "No autosave file was found!",

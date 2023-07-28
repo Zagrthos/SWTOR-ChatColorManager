@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace ChatManager.Forms
 {
-    partial class LicencesForm
+    partial class TextViewerForm
     {
         /// <summary>
         /// Required designer variable.

@@ -153,9 +153,9 @@ namespace ChatManager
                         }
                         return;
 
-                    case "exitToolStripMenuItem":
-                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Application Exit requested");
-                        Application.Exit();
+                    case nameof(changelogToolStripMenuItem):
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Changelog requested");
+                        OpenWindows.OpenTextViewer(true);
                         return;
 
                     case nameof(loadAutosaveToolStripMenuItem):

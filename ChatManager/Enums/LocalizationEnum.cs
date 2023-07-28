@@ -4,11 +4,19 @@
     {
         // MainForm Strings
         downloadProgressToolStripMenuItem,
+        changelogToolStripMenuItem,
 
         // SettingsForm Strings
         UpdateIntervalOnStart,
         UpdateIntervalDaily,
         UpdateIntervalWeekly,
+
+        // TextViewerForm Strings
+        ChangelogFormName,
+        ChangelogLabelName,
+        ChangelogTryAgainLater,
+        LicenceFormName,
+        LicenceLabelName,
 
         // MessageBox Strings
         Err_AutosaveImport,

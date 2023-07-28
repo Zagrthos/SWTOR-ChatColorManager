@@ -18,6 +18,7 @@
   "aboutToolStripMenuItem": "À propos de...",
   "updateToolStripMenuItem": "Vérifier les mises à jour",
   "downloadProgressToolStripMenuItem": "Télécharger le progrès: PROGRESS%",
+  "changelogToolStripMenuItem": "Qu'est-ce qui est nouveau?",
 
   "_comment2": "MainForm",
   "tpGlobal": "Canaux mondiaux",
@@ -91,11 +92,7 @@
   "btnTheLeviathanSelect": "Sélectionne",
   "btnTheLeviathanDeselectAll": "Désélectionne tout",
 
-  "_comment7": "LicencesForm Strings",
-  "LicencesForm": "Licences",
-  "lblLicencesHead": "Licences de tous les logiciels utilisés dans cette application",
-
-  "_comment8": "SettingsForm Strings",
+  "_comment7": "SettingsForm Strings",
   "SettingsForm": "Paramètres",
   "gbLanguage": "Choix de la langue",
   "gbGeneral": "Paramètres généraux",
@@ -110,6 +107,13 @@
   "UpdateIntervalDaily": "Quotidiennement",
   "UpdateIntervalWeekly": "Hebdomadaire",
   "chbUpdateDownload": "Télécharge les mises à jour manuellement",
+
+  "_comment8": "TextViewerForm Strings",
+  "ChangelogFormName": "Qu'est-ce qui est nouveau?",
+  "ChangelogLabelName": "Ici, tu peux voir tous les changements depuis la dernière mise à jour!",
+  "ChangelogTryAgainLater": "Réessaie plus tard!",
+  "LicenceFormName": "Licences",
+  "LicenceLabelName": "Licences de tous les logiciels utilisés dans cette application",
 
   "_comment9": "MessageBox Strings",
   "Err_AutosaveImport": "Aucun fichier de sauvegarde automatique n'a été trouvé!",

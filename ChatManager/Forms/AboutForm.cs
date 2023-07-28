@@ -85,7 +85,7 @@ namespace ChatManager.Forms
         private void LicencesButton_Click(object sender, EventArgs e)
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "LicensesButtonClick entered");
-            OpenWindows.OpenLicences();
+            OpenWindows.OpenTextViewer();
         }
 
         private void GitHubLinkButton_Click(object sender, EventArgs e)
