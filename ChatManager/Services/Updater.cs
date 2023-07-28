@@ -66,70 +66,46 @@ namespace ChatManager.Services
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "CheckForUpdates entered");
 
-            HttpClient client = new();
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient created");
+            onlineVersion = await WebRequests.GetVersionAsync(updateCheckURL);
 
-            try
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineVersion is: {onlineVersion}");
+
+            if (onlineVersion > currentVersion)
             {
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Check for Updates initiated");
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Update is available!");
 
-                onlineVersion = new(await client.GetStringAsync(updateCheckURL));
-                
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineVersion is: {onlineVersion}");
+                long fileSize = await GetFileSize();
 
-                if (onlineVersion > currentVersion)
+                if (ShowMessageBox.ShowUpdate(onlineVersion.ToString(), Converter.ConvertByteToMegabyte(fileSize)))
                 {
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Update is available!");
-
-                    long fileSize = await GetFileSize();
-
-                    if (ShowMessageBox.ShowUpdate(onlineVersion.ToString(), Converter.ConvertByteToMegabyte(fileSize)))
+                    if (GetSetSettings.GetUpdateDownload)
                     {
-                        if (GetSetSettings.GetUpdateDownload)
-                        {
-                            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Manual download initiated");
-                            OpenWindows.OpenLinksInBrowser($"{updateURL}/tag/v{onlineVersion}/");
-                        }
-                        else
-                        {
-                            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Background download initiated");
-                            await DownloadUpdate();
-                        }
-
-                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
-                        client.Dispose();
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Manual download initiated");
+                        OpenWindows.OpenLinksInBrowser($"{updateURL}/tag/v{onlineVersion}/");
                     }
-                }
-                else
-                {
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "No Update available!");
-
-                    if (fromUser)
+                    else
                     {
-                        Localization localization = new(GetSetSettings.GetCurrentLocale);
-                        ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxNoUpdate), localization.GetString(LocalizationEnum.Update_IsNotAvailable));
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Background download initiated");
+                        await DownloadUpdate();
                     }
-
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
-                    client.Dispose();
-                }
-
-                // Save the date of the last update Check but only if the user has NOT initiated it
-                if (GetSetSettings.GetUpdateInterval != UpdateEnum.OnStartup.ToString() && !fromUser)
-                {
-                    GetSetSettings.SaveSettings(SettingsEnum.lastUpdateCheck, DateTime.Today);
-                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Last Update Check: {DateTime.Today}");
                 }
             }
-            catch (HttpRequestException ex)
+            else
             {
-                Logging.Write(LogEventEnum.Error, ProgramClassEnum.Updater, "Check for Updates failed!");
-                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.Updater, $"{ex.Message}");
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "No Update available!");
 
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
-                client.Dispose();
+                if (fromUser)
+                {
+                    Localization localization = new(GetSetSettings.GetCurrentLocale);
+                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxNoUpdate), localization.GetString(LocalizationEnum.Update_IsNotAvailable));
+                }
+            }
 
-                ShowMessageBox.ShowBug();
+            // Save the date of the last update Check but only if the user has NOT initiated it
+            if (GetSetSettings.GetUpdateInterval != UpdateEnum.OnStartup.ToString() && !fromUser)
+            {
+                GetSetSettings.SaveSettings(SettingsEnum.lastUpdateCheck, DateTime.Today);
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Last Update Check: {DateTime.Today}");
             }
         }
 
