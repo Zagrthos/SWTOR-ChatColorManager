@@ -19,6 +19,7 @@
         Logging,
         OpenWindows,
         ShowMessageBox,
-        Updater
+        Updater,
+        WebRequests
     }
 }
