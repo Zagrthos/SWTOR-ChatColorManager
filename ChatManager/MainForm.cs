@@ -96,51 +96,18 @@ namespace ChatManager
                 // Initialize variable and declare path based on the name of the menuItem
                 string path = menuItem.Name switch
                 {
-                    "charFolderToolStripMenuItem" => GetSetSettings.GetLocalPath,
-                    "logFolderToolStripMenuItem" => GetSetSettings.GetLogPath,
-                    "backupToolStripMenuItem" => GetSetSettings.GetBackupPath,
-                    "supportToolStripMenuItem" => GetSetSettings.GetSupportPath,
-                    "bugToolStripMenuItem" => GetSetSettings.GetBugPath,
-                    "bugMailToolStripMenuItem" => GetSetSettings.GetBugMailpath,
+                    nameof(charFolderToolStripMenuItem) => GetSetSettings.GetLocalPath,
+                    nameof(backupToolStripMenuItem) => GetSetSettings.GetBackupPath,
+                    nameof(logFolderToolStripMenuItem) => GetSetSettings.GetLogPath,
+                    nameof(supportToolStripMenuItem) => GetSetSettings.GetSupportPath,
+                    nameof(bugToolStripMenuItem) => GetSetSettings.GetBugPath,
+                    nameof(bugMailToolStripMenuItem) => GetSetSettings.GetBugMailpath,
                     _ => string.Empty,
                 };
 
                 switch (menuItem.Name)
                 {
-                    case "supportToolStripMenuItem":
-                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Support Site requested");
-                        OpenWindows.OpenLinksInBrowser(path);
-                        return;
-
-                    case "bugToolStripMenuItem":
-                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Bug report Site requested");
-                        OpenWindows.OpenLinksInBrowser(path);
-                        return;
-
-                    case "bugMailToolStripMenuItem":
-                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Bug report Site requested");
-                        OpenWindows.OpenProcess(path);
-                        return;
-
-                    case "aboutToolStripMenuItem":
-                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "About Form requested");
-                        OpenWindows.OpenAbout();
-                        return;
-
-                    case "updateToolStripMenuItem":
-                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Update Check requested");
-                        if (Checks.CheckForInternetConnection(true))
-                        {
-                            await Updater.CheckForUpdates(true);
-                        }
-                        return;
-
-                    case "exitToolStripMenuItem":
-                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Application Exit requested");
-                        Application.Exit();
-                        return;
-
-                    case "settingsToolStripMenuItem":
+                    case nameof(settingsToolStripMenuItem):
                         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Settings Form requested");
                         Hide();
                         (bool languageChanged, bool autosaveTimerChanged) = OpenWindows.OpenSettings();
@@ -158,14 +125,52 @@ namespace ChatManager
                         Show();
                         return;
 
-                    case "loadAutosaveToolStripMenuItem":
+                    case nameof(supportToolStripMenuItem):
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Support Site requested");
+                        OpenWindows.OpenLinksInBrowser(path);
+                        return;
+
+                    case nameof(bugToolStripMenuItem):
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Bug report Site requested");
+                        OpenWindows.OpenLinksInBrowser(path);
+                        return;
+
+                    case nameof(bugMailToolStripMenuItem):
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Bug report Site requested");
+                        OpenWindows.OpenProcess(path);
+                        return;
+
+                    case nameof(aboutToolStripMenuItem):
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "About Form requested");
+                        OpenWindows.OpenAbout();
+                        return;
+
+                    case nameof(updateToolStripMenuItem):
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Update Check requested");
+                        if (Checks.CheckForInternetConnection(true))
+                        {
+                            await Updater.CheckForUpdates(true);
+                        }
+                        return;
+
+                    case "exitToolStripMenuItem":
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Application Exit requested");
+                        Application.Exit();
+                        return;
+
+                    case nameof(loadAutosaveToolStripMenuItem):
                         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Load Autosave requested");
                         ImportAutosave();
                         return;
 
-                    case "restoreBackupToolStripMenuItem":
+                    case nameof(restoreBackupToolStripMenuItem):
                         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Restore Backup requested");
                         OpenWindows.OpenBackupSelector();
+                        return;
+
+                    case nameof(exitToolStripMenuItem):
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Application Exit requested");
+                        Application.Exit();
                         return;
                 }
 
