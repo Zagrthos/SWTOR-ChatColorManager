@@ -13,8 +13,6 @@ namespace ChatManager.Services
     {
         private static readonly Version currentVersion = new(Application.ProductVersion);
         private static Version? onlineVersion;
-        private static readonly string updateCheckURL = "https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/version.txt";
-        private static readonly string hashCheckURL = "https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/Hashes/hash_VERSION.txt";
         private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/";
         private static string updateName = "SWTOR-ChatManager-";
         private static string updatePath = string.Empty;
@@ -71,7 +69,7 @@ namespace ChatManager.Services
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "CheckForUpdates entered");
 
-            onlineVersion = await WebRequests.GetVersionAsync(updateCheckURL);
+            onlineVersion = await WebRequests.GetVersionAsync(GetSetSettings.GetUpdateCheckURL);
 
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineVersion is: {onlineVersion}");
 
@@ -221,7 +219,7 @@ namespace ChatManager.Services
 
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Downloading hash initiated");
 
-            string hashURL = hashCheckURL.Replace("VERSION", version);
+            string hashURL = GetSetSettings.GetHashCheckURL.Replace("VERSION", version);
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"hashURL is: {hashURL}");
 
             string onlineHash = await WebRequests.GetStringAsync(hashURL);

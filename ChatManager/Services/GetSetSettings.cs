@@ -38,6 +38,8 @@ namespace ChatManager.Services
         internal static bool GetUpdateDownload => Settings.Default.updateDownload;
         internal static string GetLastUpdatePath => Settings.Default.lastUpdatePath;
         internal static string GetGitHubPath => Resources.githubPath;
+        internal static string GetUpdateCheckURL => Resources.updateCheckURL;
+        internal static string GetHashCheckURL => Resources.hashCheckURL;
 
         internal static void InitSettings()
         {

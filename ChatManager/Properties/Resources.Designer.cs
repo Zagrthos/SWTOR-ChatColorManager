@@ -108,6 +108,15 @@ namespace ChatManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/Hashes/hash_VERSION.txt.
+        /// </summary>
+        internal static string hashCheckURL {
+            get {
+                return ResourceManager.GetString("hashCheckURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .NET 7 &amp; Windows Forms
         ///https://github.com/dotnet/
         ///
@@ -175,6 +184,15 @@ namespace ChatManager.Properties {
         internal static string supportPath {
             get {
                 return ResourceManager.GetString("supportPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/version.txt.
+        /// </summary>
+        internal static string updateCheckURL {
+            get {
+                return ResourceManager.GetString("updateCheckURL", resourceCulture);
             }
         }
     }

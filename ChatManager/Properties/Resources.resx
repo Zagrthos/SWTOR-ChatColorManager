@@ -133,6 +133,9 @@
   <data name="githubPath" xml:space="preserve">
     <value>https://github.com/Zagrthos/SWTOR-ChatColorManager/</value>
   </data>
+  <data name="hashCheckURL" xml:space="preserve">
+    <value>https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/Hashes/hash_VERSION.txt</value>
+  </data>
   <data name="Licences" xml:space="preserve">
     <value>.NET 7 &amp; Windows Forms
 https://github.com/dotnet/
@@ -210,5 +213,8 @@ Unsplash grants you an irrevocable, nonexclusive, worldwide copyright license to
   </data>
   <data name="supportPath" xml:space="preserve">
     <value>https://github.com/Zagrthos/SWTOR-ChatColorManager/issues/</value>
+  </data>
+  <data name="updateCheckURL" xml:space="preserve">
+    <value>https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/version.txt</value>
   </data>
 </root>
