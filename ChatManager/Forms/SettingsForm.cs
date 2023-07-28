@@ -170,17 +170,17 @@ namespace ChatManager.Forms
 
             switch (GetSetSettings.GetUpdateInterval)
             {
-                case "OnStartup":
+                case nameof(UpdateEnum.OnStartup):
                     cbUpdaterIntervallFalseAlarm = true;
                     cbUpdateInterval.SelectedIndex = 0;
                     break;
 
-                case "Daily":
+                case nameof(UpdateEnum.Daily):
                     cbUpdaterIntervallFalseAlarm = true;
                     cbUpdateInterval.SelectedIndex = 1;
                     break;
 
-                case "Weekly":
+                case nameof(UpdateEnum.Weekly):
                     cbUpdaterIntervallFalseAlarm = true;
                     cbUpdateInterval.SelectedIndex = 2;
                     break;
@@ -283,11 +283,11 @@ namespace ChatManager.Forms
             {
                 switch (comboBox.Name)
                 {
-                    case "cbLanguage":
+                    case nameof(cbLanguage):
                         SwitchCurrentLocale();
                         break;
 
-                    case "cbUpdateInterval":
+                    case nameof(cbUpdateInterval):
                         SwitchUpdateInterval();
                         break;
 
