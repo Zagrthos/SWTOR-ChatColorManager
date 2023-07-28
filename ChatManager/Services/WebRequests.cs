@@ -42,6 +42,45 @@ namespace ChatManager.Services
             }
         }
 
+        internal static async Task<HttpResponseMessage> GetResponseMessageAsync(string url, string headers = "")
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetResponseMessageAsync entered");
+
+            HttpResponseMessage response = new();
+
+            HttpClient client = new();
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
+
+            if (!string.IsNullOrEmpty(headers))
+            {
+                client.DefaultRequestHeaders.UserAgent.ParseAdd(headers);
+            }
+
+            try
+            {
+                response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
+                client.Dispose();
+
+                return response;
+            }
+            catch(HttpRequestException ex)
+            {
+                Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get string failed!");
+                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
+
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
+                client.Dispose();
+
+                ShowMessageBox.ShowBug();
+
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+        }
+
         internal static async Task<string> GetStringAsync(string url)
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetStringAsync entered");
@@ -71,40 +110,6 @@ namespace ChatManager.Services
                 ShowMessageBox.ShowBug();
 
                 return getString;
-            }
-        }
-
-        internal static async Task<HttpResponseMessage> GetResponseMessageAsync(string url)
-        {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetResponseMessageAsync entered");
-
-            HttpResponseMessage response = new();
-
-            HttpClient client = new();
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
-
-            try
-            {
-                response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-                client.Dispose();
-
-                return response;
-            }
-            catch(HttpRequestException ex)
-            {
-                Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get string failed!");
-                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
-
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-                client.Dispose();
-
-                ShowMessageBox.ShowBug();
-
-                response.StatusCode = HttpStatusCode.NotFound;
-
-                return response;
             }
         }
 
