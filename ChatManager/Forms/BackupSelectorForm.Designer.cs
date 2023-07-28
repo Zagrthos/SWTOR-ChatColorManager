@@ -1,4 +1,7 @@
-﻿namespace ChatManager.Forms
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace ChatManager.Forms
 {
     partial class BackupSelectorForm
     {

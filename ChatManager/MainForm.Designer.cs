@@ -1,4 +1,7 @@
-﻿namespace ChatManager
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace ChatManager
 {
     partial class MainForm
     {
