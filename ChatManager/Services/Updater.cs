@@ -1,6 +1,7 @@
 ﻿using ChatManager.Enums;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using Windows.Media.Protection.PlayReady;
 
 namespace ChatManager.Services
 {
@@ -131,37 +132,15 @@ namespace ChatManager.Services
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateURL set to: {updateURL}");
             }
 
-            HttpClient client = new();
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient created");
+            // Count the length of the to download file
+            totalBytesToDownload = await WebRequests.GetLongAsync(updateURL);
 
-            try
+            if (totalBytesToDownload.HasValue)
             {
-                HttpResponseMessage responseMessage = await client.GetAsync(updateURL, HttpCompletionOption.ResponseHeadersRead);
-
-                // Count the length of the to download file
-                totalBytesToDownload = responseMessage.Content.Headers.ContentLength;
-
-                client.Dispose();
-                responseMessage.Dispose();
-
-                if (totalBytesToDownload.HasValue)
-                {
-                    return totalBytesToDownload.Value;
-                }
-                else
-                {
-                    return 0;
-                }
+                return totalBytesToDownload.Value;
             }
-            catch (HttpRequestException ex)
+            else
             {
-                Logging.Write(LogEventEnum.Error, ProgramClassEnum.Updater, "GetFileSize failed!");
-                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.Updater, $"{ex.Message}");
-
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "HttpClient disposed!");
-                client.Dispose();
-
-                ShowMessageBox.ShowBug();
                 return 0;
             }
         }

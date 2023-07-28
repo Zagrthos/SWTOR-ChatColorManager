@@ -22,6 +22,7 @@ namespace ChatManager.Services
 
                 Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
                 client.Dispose();
+                response.Dispose();
 
                 return getLong;
             }
