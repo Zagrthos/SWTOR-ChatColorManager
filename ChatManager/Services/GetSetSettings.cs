@@ -46,8 +46,16 @@ namespace ChatManager.Services
         {
             if (!Settings.Default._Initialized)
             {
-                Settings.Default.localPath = localPath;
-                Settings.Default.backupPath = backupPath;
+                if (!Directory.Exists(localPath))
+                {
+                    Settings.Default.localPath = string.Empty;
+                    Settings.Default.backupPath = string.Empty;
+                }
+                else
+                {
+                    Settings.Default.localPath = localPath;
+                    Settings.Default.backupPath = backupPath;
+                }
                 Settings.Default.backupAvailability = backupDir;
                 Settings.Default.logPath = logPath;
                 Settings.Default.autosavePath = autosavePath;

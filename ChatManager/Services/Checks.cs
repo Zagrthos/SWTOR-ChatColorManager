@@ -56,9 +56,16 @@ namespace ChatManager.Services
                 _ => throw new NotImplementedException(),
             };
 
+            // Check if SWTOR is installed
+            bool localPath = false;
+            if (!string.IsNullOrEmpty(GetSetSettings.GetLocalPath))
+            {
+                localPath = true;
+            }
+
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, $"Checking if {folder} exists");
 
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(path) && localPath)
             {
                 Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, $"{folder} does not exist, creating it");
                 Directory.CreateDirectory(path);
@@ -75,6 +82,10 @@ namespace ChatManager.Services
                     Logging.Write(LogEventEnum.Error, ProgramClassEnum.Checks, $"Could not create {folder}!");
                     ShowMessageBox.ShowBug();
                 }
+            }
+            else if (!localPath)
+            {
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, $"Could not create {folder} because SWTOR is not installed!");
             }
             else
             {
