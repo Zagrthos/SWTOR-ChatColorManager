@@ -630,17 +630,6 @@ namespace ChatManager
             }
 #endif
 
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Set CharacterOption in Menu");
-            if (string.IsNullOrEmpty(GetSetSettings.GetLocalPath))
-            {
-                charFolderToolStripMenuItem.Enabled = false;
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "CharacterOption is not available!");
-            }
-            else
-            {
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "CharacterOption is available!");
-            }
-
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Set BackupOption in Menu");
             if (!Checks.DirectoryCheck(CheckFolderEnum.BackupFolder))
             {
@@ -651,6 +640,19 @@ namespace ChatManager
             else
             {
                 Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "BackupOption is available!");
+            }
+
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Set CharacterOption in Menu");
+            if (string.IsNullOrEmpty(GetSetSettings.GetLocalPath))
+            {
+                charFolderToolStripMenuItem.Enabled = false;
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "CharacterOption is not available!");
+                Localization localization = new(GetSetSettings.GetCurrentLocale);
+                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_SWTORpathNotFound));
+            }
+            else
+            {
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "CharacterOption is available!");
             }
 
             InitializeCustomSettings();

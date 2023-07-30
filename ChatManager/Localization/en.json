@@ -138,7 +138,7 @@
   "Warn_BackupDirMissing": "No backup directory could be created!\nProceed at your own risk!",
   "Warn_NoImportFound": "A file must be imported first!",
   "Warn_NoInternetConnection": "No active internet connection found!",
-  "Warn_SWTORpathNotFound": "The path for SWTOR's local files was not found!\n\nIs the game installed?",
+  "Warn_SWTORpathNotFound": "The path for SWTOR local files was not found!\n\nIs the game installed?",
   "Warn_SWTORrunning": "An active SWTOR instance was found, please close the game first!\n\nOtherwise, the correct function of the changes cannot be guaranteed.",
   "Warn_TextBoxEmpty": "TEXTBOXCOUNTER empty color fields were found!\nImport a file first or fill them!"
 }
