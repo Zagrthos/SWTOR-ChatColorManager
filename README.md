@@ -1,6 +1,6 @@
 # SWTOR Chat Manager
 
-[![GitHub](https://img.shields.io/github/license/zagrthos/SWTOR-ChatColorManager)](https://github.com/Zagrthos/SWTOR-ChatColorManager/blob/master/LICENSE.txt) [![GitHub release (with filter)](https://img.shields.io/github/v/release/zagrthos/SWTOR-ChatColorManager)](https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/latest) [![GitHub release (by tag)](https://img.shields.io/github/downloads/zagrthos/SWTOR-ChatColorManager/v1.4.2/total)](https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/tag/v1.4.2) [![GitHub all releases](https://img.shields.io/github/downloads/zagrthos/SWTOR-ChatColorManager/total)](https://github.com/Zagrthos/SWTOR-ChatColorManager/releases)
+[![GitHub](https://img.shields.io/github/license/zagrthos/SWTOR-ChatColorManager)](https://github.com/Zagrthos/SWTOR-ChatColorManager/blob/master/LICENSE.txt) [![GitHub release (with filter)](https://img.shields.io/github/v/release/zagrthos/SWTOR-ChatColorManager)](https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/latest) [![GitHub release (by tag)](https://img.shields.io/github/downloads/zagrthos/SWTOR-ChatColorManager/v1.5.0/total)](https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/tag/v1.5.0) [![GitHub all releases](https://img.shields.io/github/downloads/zagrthos/SWTOR-ChatColorManager/total)](https://github.com/Zagrthos/SWTOR-ChatColorManager/releases)
 
 ## Tutorials
 Available in the [Wiki](https://github.com/Zagrthos/SWTOR-ChatColorManager/wiki)!
