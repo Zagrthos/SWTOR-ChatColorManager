@@ -25,6 +25,8 @@ An Operating System with the following versions:
 - Windows 11 21H2 (Initial Release Version) 64-Bit or upwards
 - And the [.NET 7.0.9 Desktop Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-7.0.9-windows-x64-installer)
 
+Don't worry if you haven't installed it. The installer will download the latest version for you!
+
 ## Something more?
 Nope!
 
