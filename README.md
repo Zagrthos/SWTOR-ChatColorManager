@@ -23,6 +23,7 @@ Maybe I will expand it so you can transfer all settings from one character to an
 An Operating System with the following versions:
 - Windows 10 2004 (May 2020 Update) 64-Bit or upwards
 - Windows 11 21H2 (Initial Release Version) 64-Bit or upwards
+- And the [.NET 7.0.9 Desktop Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-7.0.9-windows-x64-installer)
 
 ## Something more?
 Nope!
