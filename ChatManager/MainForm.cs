@@ -217,7 +217,7 @@ namespace ChatManager
                         // But get the correct Colors from the right character file
                         string filePath = filePaths[i, 1];
 
-                        SetAllColorData(filePath, false);
+                        GetFileColors(filePath, false);
 
                         Localization localization = new(GetSetSettings.GetCurrentLocale);
                         string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text)).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text)).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString());
@@ -239,7 +239,7 @@ namespace ChatManager
 
                 if (File.Exists(filePath))
                 {
-                    SetAllColorData(filePath, true);
+                    GetFileColors(filePath, true);
 
                     Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Autosave data imported");
                     Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "ReloadOnStartup set");
@@ -260,15 +260,20 @@ namespace ChatManager
             }
         }
 
-        private void SetAllColorData(string filePath, bool autosaveIntitiated)
+        private void GetFileColors(string filePath, bool autosaveIntitiated)
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "GetFileColors entered");
+
+            FileImport fileImport = new();
+            SetAllColorData(fileImport.GetContentFromFile(filePath, autosaveIntitiated), autosaveIntitiated);
+        }
+
+        private void SetAllColorData(string[] colorIndexes, bool autosaveIntitiated)
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "SetAllColorData entered");
 
             lblCharName.Visible = true;
             lblServerName.Visible = true;
-
-            FileImport fileImport = new();
-            string[] colorIndexes = fileImport.GetContentFromFile(filePath, autosaveIntitiated);
 
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
