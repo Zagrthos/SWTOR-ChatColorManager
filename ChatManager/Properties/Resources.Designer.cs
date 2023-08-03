@@ -89,6 +89,15 @@ namespace ChatManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to b3ecff;ff7397;ff8022;a59ff3;eeee00;eeee00;B3ECFF;B3ECFF;B3ECFF;1d8cfe;82ec89;FF00FF;EFBC55;317A3C;eeee00;FF0000;eeee00;ff7f7f;EEEE00;EEEE00;EEEE00;eeee00;eeee00;eeee00;eeee00;eeee00;eeee00;eeee00;eeee00;FF5400;eeee00;eeee00;eeee00;A00000;C92E56;BB4FD2;1FAB29;FF6600;.
+        /// </summary>
+        internal static string defaultChatColors {
+            get {
+                return ResourceManager.GetString("defaultChatColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Font {

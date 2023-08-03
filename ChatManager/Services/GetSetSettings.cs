@@ -41,6 +41,7 @@ namespace ChatManager.Services
         internal static string GetReleaseApiPath => Resources.releaseApiPath;
         internal static string GetUpdateCheckURL => Resources.updateCheckURL;
         internal static string GetHashCheckURL => Resources.hashCheckURL;
+        internal static string GetDefaultColors => Resources.defaultChatColors;
 
         internal static void InitSettings()
         {

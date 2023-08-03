@@ -46,6 +46,7 @@
   "btnSystem": "System-Rückmeldung",
   "btnGuildInfo": "Gildeninfos",
   "btnGroupInfo": "Gruppeninfos",
+  "btnResetColors": "Farben zurücksetzen",
   "lblServerName": "Aktueller Server:",
   "lblCharName": "Aktueller Charakter:",
 
@@ -122,6 +123,7 @@
   "Err_NoExportFileSelected": "Bitte wähle mindestens einen Eintrag aus der Liste aus!",
   "Error_IsDetected": "Da ist was schief gelaufen!\nMöchtest du den Bug melden?",
   "Inf_AutosaveImport": "Es wurde erfolgreich der Charakter CHARNAME von dem Server SERVERNAME importiert!\nLetzte Bearbeitung am: TIMESTAMP",
+  "Inf_ColorsReset": "Die Chatfarben wurden erfolgreich zurückgesetzt!",
   "Inf_ExportedFiles": "Es wurde(n) FILECOUNT Datei(en) bearbeitet.",
   "Inf_NoFilesInBackupDir": "Es befinden sich keine Dateien im Backup Verzeichnis!",
   "Inf_RestartRequired": "Die Applikation muss nach dieser Änderung neu gestartet werden!",

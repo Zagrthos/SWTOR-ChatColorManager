@@ -25,6 +25,7 @@
         Err_NoExportFileSelected,
         Error_IsDetected,
         Inf_AutosaveImport,
+        Inf_ColorsReset,
         Inf_ExportedFiles,
         Inf_NoFilesInBackupDir,
         Inf_RestartRequired,

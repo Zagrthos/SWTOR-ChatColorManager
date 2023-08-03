@@ -265,28 +265,58 @@ namespace ChatManager
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "GetFileColors entered");
 
             FileImport fileImport = new();
-            SetAllColorData(fileImport.GetContentFromFile(filePath, autosaveIntitiated), autosaveIntitiated);
+
+            string[] content = fileImport.GetContentFromFile(filePath, autosaveIntitiated);
+
+            SetCharServerText(content[1], content[0], autosaveIntitiated);
+
+            SetAllColorData(content, autosaveIntitiated);
+
+            btnResetColors.Visible = true;
+
+            if (GetSetSettings.GetAutosave)
+            {
+                // Stop previously intialized Timer
+                if (autosaveTimer != null)
+                {
+                    autosaveTimer.Stop();
+                    autosaveTimer.Elapsed -= AutosaveTimer_Elapsed;
+                }
+
+                // Initialize Autosave Timer
+                autosaveTimer = new(Convert.ToDouble(GetSetSettings.GetAutosaveInterval));
+                autosaveTimer.Elapsed += AutosaveTimer_Elapsed;
+                autosaveTimer.Start();
+
+                Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "autosaveTimer set");
+            }
+        }
+
+        private void SetCharServerText(string charText, string serverText, bool autosaveIntitiated)
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "SetCharServerText entered");
+
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+            lblServerName.Visible = true;
+
+            if (autosaveIntitiated)
+            {
+                lblServerName.Text = $"{localization.GetString(lblServerName.Name)} {serverText}";
+            }
+            else
+            {
+                lblServerName.Text = $"{localization.GetString(lblServerName.Name)} {Converter.AddWhitespace(Converter.ServerNameIdentifier(serverText, false))}";
+            }
+
+            lblCharName.Visible = true;
+            lblCharName.Text = $"{localization.GetString(lblCharName.Name)} {charText}"; ;
         }
 
         private void SetAllColorData(string[] colorIndexes, bool autosaveIntitiated)
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "SetAllColorData entered");
 
-            lblCharName.Visible = true;
-            lblServerName.Visible = true;
-
-            Localization localization = new(GetSetSettings.GetCurrentLocale);
-
-            if (autosaveIntitiated)
-            {
-                lblServerName.Text = $"{localization.GetString(lblServerName.Name)} {colorIndexes[0]}";
-            }
-            else
-            {
-                lblServerName.Text = $"{localization.GetString(lblServerName.Name)} {Converter.AddWhitespace(Converter.ServerNameIdentifier(colorIndexes[0], false))}";
-            }
-
-            lblCharName.Text = $"{localization.GetString(lblCharName.Name)} {colorIndexes[1]}";
             tbTrade.Text = colorIndexes[2];
             tbPvP.Text = colorIndexes[3];
             tbGeneral.Text = colorIndexes[4];
@@ -308,23 +338,6 @@ namespace ChatManager
             tbSystem.Text = colorIndexes[20];
             tbGuildInfo.Text = colorIndexes[21];
             tbGroupInfo.Text = colorIndexes[22];
-
-            if (GetSetSettings.GetAutosave)
-            {
-                // Stop previously intialized Timer
-                if (autosaveTimer != null)
-                {
-                    autosaveTimer.Stop();
-                    autosaveTimer.Elapsed -= AutosaveTimer_Elapsed;
-                }
-
-                // Initialize Autosave Timer
-                autosaveTimer = new(Convert.ToDouble(GetSetSettings.GetAutosaveInterval));
-                autosaveTimer.Elapsed += AutosaveTimer_Elapsed;
-                autosaveTimer.Start();
-
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "autosaveTimer set");
-            }
         }
 
         private string[] GetAllColorData()
@@ -474,6 +487,44 @@ namespace ChatManager
             string[] colorIndexes = GetAllColorData();
 
             OpenWindows.OpenFileExportSelector(colorIndexes);
+        }
+
+        private void ResetColors(object sender, EventArgs e)
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ResetColors entered");
+
+            string[] tempIndexes = GetSetSettings.GetDefaultColors.Split(";");
+
+            string[] colorIndexes = new string[23];
+
+            // Set each colorIndex position to the correct colorLineIndex position
+            colorIndexes[2] = tempIndexes[7]; // Trade
+            colorIndexes[3] = tempIndexes[8]; // PvP
+            colorIndexes[4] = tempIndexes[6]; // General
+            colorIndexes[5] = tempIndexes[2]; // Emote
+            colorIndexes[6] = tempIndexes[1]; // Yell
+            colorIndexes[7] = tempIndexes[11]; // Officer
+            colorIndexes[8] = tempIndexes[10]; // Guild
+            colorIndexes[9] = tempIndexes[0]; // Say
+            colorIndexes[10] = tempIndexes[3]; // Whisper
+            colorIndexes[11] = tempIndexes[12]; // Ops
+            colorIndexes[12] = tempIndexes[29]; // Ops Leader
+            colorIndexes[13] = tempIndexes[9]; // Group
+            colorIndexes[14] = tempIndexes[33]; // Ops Announcement
+            colorIndexes[15] = tempIndexes[13]; // Ops Officer
+            colorIndexes[16] = tempIndexes[37]; // Combat Information
+            colorIndexes[17] = tempIndexes[19]; // Conversation
+            colorIndexes[18] = tempIndexes[20]; // Character Login
+            colorIndexes[19] = tempIndexes[34]; // Ops Information
+            colorIndexes[20] = tempIndexes[18]; // System Feedback
+            colorIndexes[21] = tempIndexes[36]; // Guild Information
+            colorIndexes[22] = tempIndexes[35]; // Group Information
+
+            SetAllColorData(colorIndexes, false);
+
+            Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), localization.GetString(LocalizationEnum.Inf_ColorsReset));
         }
 
         private void Localize()
