@@ -214,15 +214,15 @@ namespace ChatManager.Services
             colorIndex[11] = colorLineIndex[12]; // Ops
             colorIndex[12] = colorLineIndex[29]; // Ops Leader
             colorIndex[13] = colorLineIndex[9]; // Group
-            colorIndex[14] = colorLineIndex[32]; // Ops Announcement
+            colorIndex[14] = colorLineIndex[33]; // Ops Announcement
             colorIndex[15] = colorLineIndex[13]; // Ops Officer
-            colorIndex[16] = colorLineIndex[36]; // Combat Information
+            colorIndex[16] = colorLineIndex[37]; // Combat Information
             colorIndex[17] = colorLineIndex[19]; // Conversation
             colorIndex[18] = colorLineIndex[20]; // Character Login
-            colorIndex[19] = colorLineIndex[33]; // Ops Information
+            colorIndex[19] = colorLineIndex[34]; // Ops Information
             colorIndex[20] = colorLineIndex[18]; // System Feedback
-            colorIndex[21] = colorLineIndex[35]; // Guild Information
-            colorIndex[22] = colorLineIndex[34]; // Group Information
+            colorIndex[21] = colorLineIndex[36]; // Guild Information
+            colorIndex[22] = colorLineIndex[35]; // Group Information
 
             // TODO: Decide if logging to be removed or not
             // Debug Purposes
