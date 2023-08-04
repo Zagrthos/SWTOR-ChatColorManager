@@ -3,13 +3,13 @@
 
 ; Define some variables to use
 #define MyAppName "SWTOR Chat Manager"
-#define MyAppVersion "1.5.0"
+#define MyAppVersion "1.5.1"
 #define MyAppPublisher "Zagrthos"
 #define MyAppURL "https://github.com/Zagrthos/SWTOR-ChatColorManager"
 #define MyAppSupportURL "https://github.com/Zagrthos/SWTOR-ChatColorManager/issues"
 #define MyAppUpdateURL "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases"
 #define MyAppExeName "ChatManager.exe"
-#define SetupVersion "1.5.0.0"
+#define SetupVersion "1.5.1.0"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -54,7 +54,7 @@ de.DotNet7DownloadFail = Fehler bei dem Download von .NET 7
 de.DotNet7Install = .NET 7 wird installiert... 
 de.DotNet7InstallDesc = Bitte warte während .NET 7 auf deinem System installiert wird... 
 de.DotNet7Installing = Installiere .NET 7... 
-de.DotNet7DownloadFailError = Fehler bei dem Download .NET 7:
+de.DotNet7DownloadFailError = Fehler bei dem Download von .NET 7:
 en.DotNet7Fail = Error while installing .NET 7
 en.DotNet7DownloadFail = Error while downloading .NET 7
 en.DotNet7Install = .NET 7 is being installed... 
@@ -115,7 +115,7 @@ begin
   if Exec(ExpandConstant('{cmd}'), '/C ' + BatchFilePath, '', SW_HIDE, ewWaitUntilTerminated, ErrorCode) then
   begin
     LoadStringFromFile(OutputFilePath, Output);
-    if (Pos('Microsoft.WindowsDesktop.App 7.', Output) = 0) then 
+    if (Pos('Microsoft.WindowsDesktop.App 7.0.9', Output) = 0) then 
     begin
       Result := False;
     end;
