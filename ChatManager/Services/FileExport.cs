@@ -100,6 +100,7 @@ namespace ChatManager.Services
                             if (lineNumber == 0)
                             {
                                 Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileExport, "No ChatColors line found!");
+                                arrayCounter--;
                                 ShowMessageBox.ShowBug();
                                 return;
                             }
