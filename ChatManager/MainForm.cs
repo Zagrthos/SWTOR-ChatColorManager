@@ -219,6 +219,13 @@ namespace ChatManager
 
                         GetFileColors(filePath, false);
 
+                        byte counter = CheckForEmptyTextboxes();
+
+                        if (counter != 0)
+                        {
+                            break;
+                        }
+
                         Localization localization = new(GetSetSettings.GetCurrentLocale);
                         string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text)).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text)).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString());
                         ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), message);
@@ -267,6 +274,11 @@ namespace ChatManager
             FileImport fileImport = new();
 
             string[] content = fileImport.GetContentFromFile(filePath, autosaveIntitiated);
+
+            if (content == Array.Empty<string>())
+            {
+                return;
+            }
 
             SetCharServerText(content[1], content[0], autosaveIntitiated);
 
@@ -452,21 +464,7 @@ namespace ChatManager
         {
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ExportFiles entered");
 
-            var textBoxes = GetControls(this, typeof(TextBox));
-            byte counter = 0;
-
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Checking for empty textBoxes...");
-            foreach (Control control in textBoxes)
-            {
-                if (control is TextBox textBox)
-                {
-                    if (string.IsNullOrEmpty(textBox.Text))
-                    {
-                        counter++;
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"counter: {counter}");
-                    }
-                }
-            }
+            byte counter = CheckForEmptyTextboxes();
 
             if (counter != 0)
             {
@@ -525,6 +523,29 @@ namespace ChatManager
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
             ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), localization.GetString(LocalizationEnum.Inf_ColorsReset));
+        }
+
+        private byte CheckForEmptyTextboxes()
+        {
+            Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "CheckForEmptyTextboxes entered");
+
+            var textBoxes = GetControls(this, typeof(TextBox));
+            byte counter = 0;
+
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Checking for empty textBoxes...");
+            foreach (Control control in textBoxes)
+            {
+                if (control is TextBox textBox)
+                {
+                    if (string.IsNullOrEmpty(textBox.Text))
+                    {
+                        counter++;
+                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"counter: {counter}");
+                    }
+                }
+            }
+
+            return counter;
         }
 
         private void Localize()

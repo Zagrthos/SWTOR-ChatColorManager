@@ -185,6 +185,7 @@ namespace ChatManager.Services
                 {
                     Logging.Write(LogEventEnum.Error, ProgramClassEnum.FileImport, "Line ChatColors could not be found!");
                     ShowMessageBox.ShowBug();
+                    return Array.Empty<string>();
                 }
             }
             else

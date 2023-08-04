@@ -100,6 +100,8 @@ namespace ChatManager.Services
                             if (lineNumber == 0)
                             {
                                 Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileExport, "No ChatColors line found!");
+                                ShowMessageBox.ShowBug();
+                                return;
                             }
 
                             // Split the string to only get the wanted numbers
@@ -133,10 +135,6 @@ namespace ChatManager.Services
                                     }
                                 }
                             }
-
-                            // TODO: Calculate the difference how many ; are between the new and the old string array.
-                            // Then start to remove the useless ; and only replace the numbers
-                            // Maybe implement it in the code above?
 
                             // Put the array into a string
                             string colorIndexes = string.Join(";", content);
