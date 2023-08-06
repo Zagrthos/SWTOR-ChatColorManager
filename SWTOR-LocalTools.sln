@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatManager", "ChatManager\ChatManager.csproj", "{881A697A-B012-42AF-9073-918FBD2EB827}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI.ChatColorManager", "UI.ChatColorManager\UI.ChatColorManager.csproj", "{881A697A-B012-42AF-9073-918FBD2EB827}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
