@@ -3,13 +3,13 @@
 
 ; Define some variables to use
 #define MyAppName "SWTOR Chat Manager"
-#define MyAppVersion "1.5.1"
+#define MyAppVersion "1.5.2"
 #define MyAppPublisher "Zagrthos"
 #define MyAppURL "https://github.com/Zagrthos/SWTOR-ChatColorManager"
 #define MyAppSupportURL "https://github.com/Zagrthos/SWTOR-ChatColorManager/issues"
 #define MyAppUpdateURL "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases"
 #define MyAppExeName "ChatManager.exe"
-#define SetupVersion "1.5.1.0"
+#define SetupVersion "1.5.2.0"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -115,7 +115,7 @@ begin
   if Exec(ExpandConstant('{cmd}'), '/C ' + BatchFilePath, '', SW_HIDE, ewWaitUntilTerminated, ErrorCode) then
   begin
     LoadStringFromFile(OutputFilePath, Output);
-    if (Pos('Microsoft.WindowsDesktop.App 7.0.9', Output) = 0) then 
+    if (Pos('Microsoft.WindowsDesktop.App 7.0.10', Output) = 0) then 
     begin
       Result := False;
     end;
@@ -153,7 +153,7 @@ begin
   if CurPageID = wpReady then begin
     if not CheckDotNetVersion then begin
       DownloadPage.Clear;
-      DownloadPage.Add('https://download.visualstudio.microsoft.com/download/pr/7727acb3-25ca-473b-a392-75afeb33cab7/f11f0477fd2fcfbb3111881377d0c9bb/windowsdesktop-runtime-7.0.9-win-x64.exe', 'dotnet7-installer.exe', '');
+      DownloadPage.Add('https://download.visualstudio.microsoft.com/download/pr/747f4a98-2586-4bc6-b828-34f35e384a7d/44225cfd9d365855ec77d00c4812133c/windowsdesktop-runtime-7.0.10-win-x64.exe', 'dotnet7-installer.exe', '');
       DownloadPage.Show;
       try
         try
