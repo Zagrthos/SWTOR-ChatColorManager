@@ -20,7 +20,7 @@ internal static partial class Updater
 
     internal static string GetUpdateDownloadText { get; private set; } = string.Empty;
 
-    internal static async Task CheckForUpdateInterval()
+    internal static async Task CheckForUpdateIntervalAsync()
     {
         string updateInterval = GetSetSettings.GetUpdateInterval;
         bool updateSearch = false;
@@ -60,13 +60,13 @@ internal static partial class Updater
 
         if (updateSearch)
         {
-            await CheckForUpdates();
+            await CheckForUpdatesAsync();
         }
     }
 
-    internal static async Task CheckForUpdates(bool fromUser = false)
+    internal static async Task CheckForUpdatesAsync(bool fromUser = false)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "CheckForUpdates entered");
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "CheckForUpdatesAsync entered");
 
         OnlineVersion = await WebRequests.GetVersionAsync(GetSetSettings.GetUpdateCheckURL);
 
@@ -76,7 +76,7 @@ internal static partial class Updater
         {
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Update is available!");
 
-            long fileSize = await GetFileSize();
+            long fileSize = await GetFileSizeAsync();
 
             if (ShowMessageBox.ShowUpdate(OnlineVersion.ToString(), Converter.ConvertByteToMegabyte(fileSize)))
             {
@@ -88,7 +88,7 @@ internal static partial class Updater
                 else
                 {
                     Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Background download initiated");
-                    await DownloadUpdate();
+                    await DownloadUpdateAsync();
                 }
             }
         }
@@ -111,9 +111,9 @@ internal static partial class Updater
         }
     }
 
-    private static async Task<long> GetFileSize()
+    private static async Task<long> GetFileSizeAsync()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "GetFileSize entered");
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "GetFileSizeAsync entered");
 
         if (OnlineVersion != null && !UpdateName.Contains(OnlineVersion.ToString()))
         {
@@ -146,9 +146,9 @@ internal static partial class Updater
         }
     }
 
-    private static async Task DownloadUpdate()
+    private static async Task DownloadUpdateAsync()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "DownloadUpdate entered");
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "DownloadUpdateAsync entered");
 
         HttpResponseMessage responseMessage = await WebRequests.GetResponseMessageAsync(UpdateURL);
 
@@ -199,7 +199,7 @@ internal static partial class Updater
 
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Update downloaded to: {UpdatePath}");
 
-        if (await VerifyUpdateHash(UpdatePath, OnlineVersion!.ToString()))
+        if (await VerifyUpdateHashAsync(UpdatePath, OnlineVersion!.ToString()))
         {
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Application update started!");
             ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxUpdate), localization.GetString(LocalizationEnum.Update_IsInstallReady));
@@ -212,9 +212,9 @@ internal static partial class Updater
         }
     }
 
-    private static async Task<bool> VerifyUpdateHash(string filePath, string version)
+    private static async Task<bool> VerifyUpdateHashAsync(string filePath, string version)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "VerifyUpdateHash entered");
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "VerifyUpdateHashAsync entered");
 
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Downloading hash initiated");
 

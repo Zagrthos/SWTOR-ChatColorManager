@@ -146,7 +146,7 @@ internal partial class MainForm : Form
                     Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Update Check requested");
                     if (Checks.CheckForInternetConnection(true))
                     {
-                        await Updater.CheckForUpdates(true);
+                        await Updater.CheckForUpdatesAsync(true);
                     }
 
                     return;
