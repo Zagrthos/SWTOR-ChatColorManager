@@ -59,11 +59,10 @@ internal class Localization
         {
             return result;
         }
-        else
-        {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, $"No localization found for string: {name}!");
-            return string.Empty;
-        }
+
+        Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, $"No localization found for string: {name}!");
+
+        return string.Empty;
     }
 
     internal string GetString(LocalizationEnum localization)
@@ -72,11 +71,10 @@ internal class Localization
         {
             return result;
         }
-        else
-        {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, $"No localization found for string: {localization}!");
-            return string.Empty;
-        }
+
+        Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, $"No localization found for string: {localization}!");
+
+        return string.Empty;
     }
 
     internal (string, string) GetLocalDateTime()

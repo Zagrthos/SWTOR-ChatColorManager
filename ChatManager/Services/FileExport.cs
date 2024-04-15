@@ -259,10 +259,8 @@ internal class FileExport
 
                             break;
                         }
-                        else
-                        {
-                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, "Already done or null");
-                        }
+
+                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, "Already done or null");
                     }
                 }
             }

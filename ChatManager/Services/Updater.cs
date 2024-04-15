@@ -238,17 +238,15 @@ internal static partial class Updater
                 Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Hashes are equal!");
                 return true;
             }
-            else
-            {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Updater, "Hashes are not equal!");
-                return false;
-            }
-        }
-        else
-        {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Updater, "Hashes are empty!");
+
+            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Updater, "Hashes are not equal!");
+
             return false;
         }
+
+        Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Updater, "Hashes are empty!");
+
+        return false;
     }
 
     private static void InstallUpdate()

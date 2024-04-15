@@ -66,13 +66,11 @@ internal partial class BackupSelectorForm : Form
             btnRestore.Enabled = false;
             return;
         }
-        else
-        {
-            btnDeleteFiles.Enabled = true;
-            btnBackupDeselectAll.Enabled = true;
-            btnBackupSelectAll.Enabled = true;
-            btnRestore.Enabled = true;
-        }
+
+        btnDeleteFiles.Enabled = true;
+        btnBackupDeselectAll.Enabled = true;
+        btnBackupSelectAll.Enabled = true;
+        btnRestore.Enabled = true;
 
         // Associate the Files with their Paths
         AssociateFilesWithPaths(dirContent);

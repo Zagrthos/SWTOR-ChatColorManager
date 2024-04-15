@@ -55,11 +55,10 @@ internal static class ShowMessageBox
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Update DialogResult is yes");
             return true;
         }
-        else
-        {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Update DialogResult is no");
-            return false;
-        }
+
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Update DialogResult is no");
+
+        return false;
     }
 
     internal static void ShowBug()
@@ -113,10 +112,9 @@ internal static class ShowMessageBox
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Question DialogResult is yes");
             return true;
         }
-        else
-        {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Question DialogResult is no");
-            return false;
-        }
+
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Question DialogResult is no");
+
+        return false;
     }
 }

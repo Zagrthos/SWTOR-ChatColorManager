@@ -487,10 +487,8 @@ internal partial class MainForm : Form
             ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), exportedFilesInfo);
             return;
         }
-        else
-        {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "0 empty textboxes found!");
-        }
+
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "0 empty textboxes found!");
 
         string[] colorIndexes = GetAllColorData();
 

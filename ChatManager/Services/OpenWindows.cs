@@ -52,29 +52,25 @@ internal static class OpenWindows
                 settingsForm.Dispose();
                 return (true, true);
             }
-            else
-            {
-                // AND if AutosaveTimer was NOT changed
-                settingsForm.Dispose();
-                return (true, false);
-            }
+
+            // AND if AutosaveTimer was NOT changed
+            settingsForm.Dispose();
+
+            return (true, false);
         }
-        else
+
+        // If Language was NOT changed
+        if (settingsForm.GetAutosaveTimerChanged)
         {
-            // If Language was NOT changed
-            if (settingsForm.GetAutosaveTimerChanged)
-            {
-                // AND if AutosaveTimer was changed
-                settingsForm.Dispose();
-                return (false, true);
-            }
-            else
-            {
-                // AND if AutosaveTimer was NOT changed
-                settingsForm.Dispose();
-                return (false, false);
-            }
+            // AND if AutosaveTimer was changed
+            settingsForm.Dispose();
+            return (false, true);
         }
+
+        // AND if AutosaveTimer was NOT changed
+        settingsForm.Dispose();
+
+        return (false, false);
     }
 
     internal static (string, string) OpenFileImportSelector()
