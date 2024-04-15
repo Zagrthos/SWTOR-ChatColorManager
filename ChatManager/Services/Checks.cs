@@ -46,14 +46,14 @@ internal static class Checks
         {
             CheckFolderEnum.AutosaveFolder => GetSetSettings.GetAutosavePath,
             CheckFolderEnum.BackupFolder => GetSetSettings.GetBackupPath,
-            _ => throw new NotImplementedException(),
+            _ => throw new InvalidOperationException($"{folder} does not exist!"),
         };
 
         SettingsEnum setting = folder switch
         {
             CheckFolderEnum.AutosaveFolder => SettingsEnum.autosaveAvailability,
             CheckFolderEnum.BackupFolder => SettingsEnum.backupAvailability,
-            _ => throw new NotImplementedException(),
+            _ => throw new InvalidOperationException($"{folder} does not exist!"),
         };
 
         // Check if SWTOR is installed
@@ -98,7 +98,7 @@ internal static class Checks
         {
             CheckFolderEnum.AutosaveFolder => GetSetSettings.GetAutosaveAvailability,
             CheckFolderEnum.BackupFolder => GetSetSettings.GetBackupAvailability,
-            _ => throw new NotImplementedException(),
+            _ => throw new InvalidOperationException($"{folder} does not exist!"),
         };
 
         return getSettings;
@@ -128,13 +128,14 @@ internal static class Checks
             return isConnected;
         }
 
-        isConnected = NetworkInformation.GetInternetConnectionProfile().GetNetworkConnectivityLevel() switch
+        NetworkConnectivityLevel level = NetworkInformation.GetInternetConnectionProfile().GetNetworkConnectivityLevel();
+        isConnected = level switch
         {
             NetworkConnectivityLevel.None => false,
             NetworkConnectivityLevel.LocalAccess => false,
             NetworkConnectivityLevel.ConstrainedInternetAccess => false,
             NetworkConnectivityLevel.InternetAccess => true,
-            _ => throw new NotImplementedException(),
+            _ => throw new InvalidOperationException($"{level} is not implemented!"),
         };
 
         if (!isConnected)

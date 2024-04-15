@@ -292,7 +292,7 @@ internal partial class BackupSelectorForm : Form
                     break;
 
                 default:
-                    throw new NotImplementedException();
+                    throw new InvalidOperationException($"{button.Name} was not expected!");
             }
         }
         else

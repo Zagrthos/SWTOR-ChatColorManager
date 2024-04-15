@@ -91,7 +91,7 @@ internal static class GetSetSettings
                 break;
 
             default:
-                throw new NotImplementedException();
+                throw new InvalidOperationException($"{settingName} does not exist!");
         }
 
         Settings.Default.Save();
@@ -131,7 +131,7 @@ internal static class GetSetSettings
                 break;
 
             default:
-                throw new NotImplementedException();
+                throw new InvalidOperationException($"{settingName} does not exist!");
         }
 
         Settings.Default.Save();

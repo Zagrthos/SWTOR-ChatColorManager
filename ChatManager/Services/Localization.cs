@@ -83,12 +83,13 @@ internal class Localization
     {
         string currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
 
-        CultureInfo? culture = GetSetSettings.GetCurrentLocale switch
+        string currentLocale = GetSetSettings.GetCurrentLocale;
+        CultureInfo? culture = currentLocale switch
         {
             "de" => new("de"),
             "en" => new("en"),
             "fr" => new("fr"),
-            _ => throw new NotImplementedException(),
+            _ => throw new InvalidOperationException($"{currentLocale} is not implemented!"),
         };
 
         Application.CurrentCulture = culture!;

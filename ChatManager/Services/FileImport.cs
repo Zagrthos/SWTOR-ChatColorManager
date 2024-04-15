@@ -37,7 +37,7 @@ internal class FileImport
             "DarthMalgus" => DarthMalgusArray,
             "TulakHord" => TulakHordArray,
             "TheLeviathan" => TheLeviathanArray,
-            _ => throw new NotImplementedException()
+            _ => throw new InvalidOperationException($"{name} does not exist!")
         };
     }
 

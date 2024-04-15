@@ -89,7 +89,8 @@ internal partial class SettingsForm : Form
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "AdjustContentOnForm entered");
 
-        switch (GetSetSettings.GetCurrentLocale)
+        string locale = GetSetSettings.GetCurrentLocale;
+        switch (locale)
         {
             case "de":
                 CbLanguageFalseAlarm = true;
@@ -107,7 +108,7 @@ internal partial class SettingsForm : Form
                 break;
 
             default:
-                throw new NotImplementedException();
+                throw new InvalidOperationException($"{locale} is not implemented!");
         }
 
         if (GetSetSettings.GetAutosave)
@@ -166,7 +167,8 @@ internal partial class SettingsForm : Form
             chbSaveOnClose.Enabled = true;
         }
 
-        switch (GetSetSettings.GetUpdateInterval)
+        string updateInterval = GetSetSettings.GetUpdateInterval;
+        switch (updateInterval)
         {
             case nameof(UpdateEnum.OnStartup):
                 CbUpdaterIntervallFalseAlarm = true;
@@ -184,7 +186,7 @@ internal partial class SettingsForm : Form
                 break;
 
             default:
-                throw new NotImplementedException();
+                throw new InvalidOperationException($"{updateInterval} is not implemented!");
         }
 
         if (GetSetSettings.GetUpdateDownload)
@@ -280,7 +282,7 @@ internal partial class SettingsForm : Form
                     break;
 
                 default:
-                    throw new NotImplementedException();
+                    throw new InvalidOperationException($"{comboBox.Name} was not expected!");
             }
         }
         else
