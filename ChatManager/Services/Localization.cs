@@ -1,106 +1,106 @@
-﻿using ChatManager.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Forms;
+using ChatManager.Enums;
 
-namespace ChatManager.Services
+namespace ChatManager.Services;
+
+[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Right now there is no static needed.")]
+internal class Localization
 {
-    internal class Localization
+    private Dictionary<string, string> Strings = [];
+    private readonly string InstallPath = Application.StartupPath;
+
+    internal Localization(string locale)
     {
-        private Dictionary<string, string> strings = new();
-        private readonly string installPath = Application.StartupPath;
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Localization, $"Localization Constructor created with locale: {locale}");
+        CheckLocale(locale);
+    }
 
-        internal Localization(string locale)
+    private void CheckLocale(string locale)
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Localization, "CheckLocale entered");
+
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Localization, $"Localization path is: {Path.Combine(InstallPath, "Localization", $"{locale}.json")}");
+        string jsonString = File.ReadAllText(Path.Combine(InstallPath, "Localization", $"{locale}.json"));
+
+        // Check if file has content
+        if (jsonString is not null)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Localization, $"Localization Constructor created with locale: {locale}");
-            CheckLocale(locale);
-        }
+            // If yes decode the JSON
+            Dictionary<string, string>? tempStrings = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonString);
 
-        private void CheckLocale(string locale)
-        {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.Localization, "CheckLocale entered");
-
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Localization, $"Localization path is: {Path.Combine(installPath, "Localization", $"{locale}.json")}");
-            var jsonString = File.ReadAllText(Path.Combine(installPath, "Localization", $"{locale}.json"));
-
-            // Check if file has content
-            if (jsonString != null)
+            // Check if JSON has content
+            if (tempStrings is not null)
             {
-                // If yes decode the JSON
-                var tempStrings = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonString);
-
-                // Check if JSON has content
-                if (tempStrings != null)
-                {
-                    strings = tempStrings;
-                    GetSetSettings.SaveSettings(SettingsEnum.locale, locale);
-                }
-
-                // If not log Warning
-                else
-                {
-                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, "JSON file without content detected!");
-                }
+                Strings = tempStrings;
+                GetSetSettings.SaveSettings(SettingsEnum.locale, locale);
             }
 
             // If not log Warning
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, "Localization file without content detected!");
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, "JSON file without content detected!");
             }
         }
 
-        internal string GetString(string name)
+        // If not log Warning
+        else
         {
-            if (strings.TryGetValue(name, out var result))
-            {
-                return result;
-            }
-            else
-            {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, $"No localization found for string: {name}!");
-                return string.Empty;
-            }
+            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, "Localization file without content detected!");
         }
+    }
 
-        internal string GetString(LocalizationEnum localization)
+    internal string GetString(string name)
+    {
+        if (Strings.TryGetValue(name, out string? result))
         {
-            if (strings.TryGetValue(localization.ToString(), out var result))
-            {
-                return result;
-            }
-            else
-            {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, $"No localization found for string: {localization}!");
-                return string.Empty;
-            }
+            return result;
         }
 
-        internal (string, string) GetLocalDateTime()
+        Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, $"No localization found for string: {name}!");
+
+        return string.Empty;
+    }
+
+    internal string GetString(LocalizationEnum localization)
+    {
+        if (Strings.TryGetValue(localization.ToString(), out string? result))
         {
-            string currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
-
-            CultureInfo? culture = GetSetSettings.GetCurrentLocale switch
-            {
-                "de" => new("de"),
-                "en" => new("en"),
-                "fr" => new("fr"),
-                _ => throw new NotImplementedException(),
-            };
-
-            Application.CurrentCulture = culture!;
-
-            string date = DateTime.Now.ToString("d");
-            string time = DateTime.Now.ToString("T");
-
-            culture = new(currentCulture);
-
-            Application.CurrentCulture = culture;
-
-            return (date, time);
+            return result;
         }
+
+        Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, $"No localization found for string: {localization}!");
+
+        return string.Empty;
+    }
+
+    internal (string, string) GetLocalDateTime()
+    {
+        string currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+
+        string currentLocale = GetSetSettings.GetCurrentLocale;
+        CultureInfo? culture = currentLocale switch
+        {
+            "de" => new("de"),
+            "en" => new("en"),
+            "fr" => new("fr"),
+            _ => throw new InvalidOperationException($"{currentLocale} is not implemented!"),
+        };
+
+        Application.CurrentCulture = culture!;
+
+        string date = DateTime.Now.ToString("d");
+        string time = DateTime.Now.ToString("T");
+
+        culture = new(currentCulture);
+
+        Application.CurrentCulture = culture;
+
+        return (date, time);
     }
 }

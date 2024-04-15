@@ -3,13 +3,13 @@
 
 ; Define some variables to use
 #define MyAppName "SWTOR Chat Manager"
-#define MyAppVersion "1.5.2"
+#define MyAppVersion "1.6.0"
 #define MyAppPublisher "Zagrthos"
 #define MyAppURL "https://github.com/Zagrthos/SWTOR-ChatColorManager"
 #define MyAppSupportURL "https://github.com/Zagrthos/SWTOR-ChatColorManager/issues"
 #define MyAppUpdateURL "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases"
 #define MyAppExeName "ChatManager.exe"
-#define SetupVersion "1.5.2.0"
+#define SetupVersion "1.6.0.0"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -49,24 +49,24 @@ Name: en; MessagesFile: "compiler:Default.isl"
 Name: fr; MessagesFile: "compiler:Languages\French.isl"
 
 [CustomMessages]
-de.DotNet7Fail = Fehler bei der Installation von .NET 7
-de.DotNet7DownloadFail = Fehler bei dem Download von .NET 7
-de.DotNet7Install = .NET 7 wird installiert... 
-de.DotNet7InstallDesc = Bitte warte während .NET 7 auf deinem System installiert wird... 
-de.DotNet7Installing = Installiere .NET 7... 
-de.DotNet7DownloadFailError = Fehler bei dem Download von .NET 7:
-en.DotNet7Fail = Error while installing .NET 7
-en.DotNet7DownloadFail = Error while downloading .NET 7
-en.DotNet7Install = .NET 7 is being installed... 
-en.DotNet7InstallDesc = Please wait while .NET 7 is being installed on your system... 
-en.DotNet7Installing = Installing .NET 7... 
-en.DotNet7DownloadFailError = Error while downloading .NET 7:
-fr.DotNet7Fail = Erreur lors de l'installation de .NET 7
-fr.DotNet7DownloadFail = Erreur lors du téléchargement de .NET 7
-fr.DotNet7Install = .NET 7 est en cours d'installation... 
-fr.DotNet7InstallDesc = Merci de patienter pendant l'installation de .NET 7 sur ton système... 
-fr.DotNet7Installing = Installation de .NET 7... 
-fr.DotNet7DownloadFailError = Erreur lors du téléchargement de .NET 7: 
+de.DotNetFail = Fehler bei der Installation von .NET 8
+de.DotNetDownloadFail = Fehler bei dem Download von .NET 8
+de.DotNetInstall = .NET 8 wird installiert... 
+de.DotNetInstallDesc = Bitte warte während .NET 8 auf deinem System installiert wird... 
+de.DotNetInstalling = Installiere .NET 8... 
+de.DotNetDownloadFailError = Fehler bei dem Download von .NET 8:
+en.DotNetFail = Error while installing .NET 8
+en.DotNetDownloadFail = Error while downloading .NET 8
+en.DotNetInstall = .NET 8 is being installed... 
+en.DotNetInstallDesc = Please wait while .NET 8 is being installed on your system... 
+en.DotNetInstalling = Installing .NET 8... 
+en.DotNetDownloadFailError = Error while downloading .NET 8:
+fr.DotNetFail = Erreur lors de l'installation de .NET 8
+fr.DotNetDownloadFail = Erreur lors du téléchargement de .NET 8
+fr.DotNetInstall = .NET 8 est en cours d'installation... 
+fr.DotNetInstallDesc = Merci de patienter pendant l'installation de .NET 8 sur ton système... 
+fr.DotNetInstalling = Installation de .NET 8... 
+fr.DotNetDownloadFailError = Erreur lors du téléchargement de .NET 8: 
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
@@ -91,9 +91,9 @@ Type: filesandordirs; Name: "{app}"
 
 [Code]
 var
-  DotNet7RuntimeInstaller: string;
+  DotNetRuntimeInstaller: string;
   DownloadPage: TDownloadWizardPage;
-  DotNet7InstallProgressPage: TOutputProgressWizardPage;
+  DotNetInstallProgressPage: TOutputProgressWizardPage;
 
 function CheckDotNetVersion: Boolean;
 var
@@ -115,37 +115,37 @@ begin
   if Exec(ExpandConstant('{cmd}'), '/C ' + BatchFilePath, '', SW_HIDE, ewWaitUntilTerminated, ErrorCode) then
   begin
     LoadStringFromFile(OutputFilePath, Output);
-    if (Pos('Microsoft.WindowsDesktop.App 7.0.10', Output) = 0) then 
+    if (Pos('Microsoft.WindowsDesktop.App 8.0.4', Output) = 0) then 
     begin
       Result := False;
     end;
   end;
 end;
 
-procedure InstallDotNet7();
+procedure InstallDotNet();
 var
   ResultCode: Integer;
 begin
-  if FileExists(DotNet7RuntimeInstaller) then
+  if FileExists(DotNetRuntimeInstaller) then
   begin
-    if not Exec(DotNet7RuntimeInstaller, '/quiet /norestart', '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
+    if not Exec(DotNetRuntimeInstaller, '/quiet /norestart', '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
     begin
-      Log(Format('Failed to install .NET 7.0. Error code: %d', [ResultCode]));
-      MsgBox(CustomMessage('DotNet7Fail'), mbError, MB_OK);
+      Log(Format('Failed to install .NET 8.0. Error code: %d', [ResultCode]));
+      MsgBox(CustomMessage('DotNetFail'), mbError, MB_OK);
     end;
   end
   else
   begin
-    Log(Format('Installer file does not exist: %s', [DotNet7RuntimeInstaller]));
-    MsgBox(CustomMessage('DotNet7DownloadFail'), mbError, MB_OK);
+    Log(Format('Installer file does not exist: %s', [DotNetRuntimeInstaller]));
+    MsgBox(CustomMessage('DotNetDownloadFail'), mbError, MB_OK);
   end;
 end;
 
 procedure InitializeWizard;
 begin
-  DotNet7RuntimeInstaller := ExpandConstant('{tmp}\dotnet7-installer.exe');
+  DotNetRuntimeInstaller := ExpandConstant('{tmp}\dotnet-installer.exe');
   DownloadPage := CreateDownloadPage(SetupMessage(msgWizardPreparing), SetupMessage(msgPreparingDesc), nil);
-  DotNet7InstallProgressPage := CreateOutputProgressPage(CustomMessage('DotNet7Install'), CustomMessage('DotNet7InstallDesc'));
+  DotNetInstallProgressPage := CreateOutputProgressPage(CustomMessage('DotNetInstall'), CustomMessage('DotNetInstallDesc'));
 end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;
@@ -153,24 +153,24 @@ begin
   if CurPageID = wpReady then begin
     if not CheckDotNetVersion then begin
       DownloadPage.Clear;
-      DownloadPage.Add('https://download.visualstudio.microsoft.com/download/pr/747f4a98-2586-4bc6-b828-34f35e384a7d/44225cfd9d365855ec77d00c4812133c/windowsdesktop-runtime-7.0.10-win-x64.exe', 'dotnet7-installer.exe', '');
+      DownloadPage.Add('https://download.visualstudio.microsoft.com/download/pr/c1d08a81-6e65-4065-b606-ed1127a954d3/14fe55b8a73ebba2b05432b162ab3aa8/windowsdesktop-runtime-8.0.4-win-x64.exe', 'dotnet-installer.exe', '');
       DownloadPage.Show;
       try
         try
           DownloadPage.Download;
-          DotNet7RuntimeInstaller := ExpandConstant('{tmp}\dotnet7-installer.exe');
-          Log(Format('Downloaded .NET 7 installer to: %s', [DotNet7RuntimeInstaller]));
+          DotNetRuntimeInstaller := ExpandConstant('{tmp}\dotnet-installer.exe');
+          Log(Format('Downloaded .NET 8 installer to: %s', [DotNetRuntimeInstaller]));
           DownloadPage.Hide;
 
-          DotNet7InstallProgressPage.Show;
-          DotNet7InstallProgressPage.SetText(CustomMessage('DotNet7Installing'), '');
-          InstallDotNet7();
-          DotNet7InstallProgressPage.Hide;
+          DotNetInstallProgressPage.Show;
+          DotNetInstallProgressPage.SetText(CustomMessage('DotNetInstalling'), '');
+          InstallDotNet();
+          DotNetInstallProgressPage.Hide;
 
           Result := True;
         except
-          Log(Format('Failed to download .NET 7 installer: %s', [GetExceptionMessage]));
-          MsgBox(CustomMessage('DotNet7DownloadFailError') + GetExceptionMessage, mbError, MB_OK);
+          Log(Format('Failed to download .NET 8 installer: %s', [GetExceptionMessage]));
+          MsgBox(CustomMessage('DotNetDownloadFailError') + GetExceptionMessage, mbError, MB_OK);
           Result := False;
         end;
       finally

@@ -1,8 +1,7 @@
-﻿namespace ChatManager.Enums
+﻿namespace ChatManager.Enums;
+
+internal enum CheckFolderEnum
 {
-    internal enum CheckFolderEnum
-    {
-        AutosaveFolder,
-        BackupFolder,
-    }
+    AutosaveFolder,
+    BackupFolder
 }

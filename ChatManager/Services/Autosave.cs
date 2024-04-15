@@ -1,34 +1,38 @@
-﻿using ChatManager.Enums;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using ChatManager.Enums;
 
-namespace ChatManager.Services
+namespace ChatManager.Services;
+
+[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Right now there is no static needed.")]
+internal class Autosave
 {
-    internal class Autosave
+    internal Autosave()
     {
-        internal Autosave()
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Autosave, "Autosave Constructor created");
+
+        if (PathChecked)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Autosave, "Autosave Constructor created");
-            if (pathChecked != true)
-            {
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"pathChecked = {pathChecked}");
-                pathChecked = Checks.DirectoryCheck(CheckFolderEnum.AutosaveFolder);
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"pathChecked = {pathChecked}");
-            }
+            return;
         }
 
-        private static bool pathChecked = GetSetSettings.GetAutosaveAvailability;
-        private static readonly string autosavePath = Path.Combine(GetSetSettings.GetAutosavePath, "autosave.txt");
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"pathChecked = {PathChecked}");
+        PathChecked = Checks.DirectoryCheck(CheckFolderEnum.AutosaveFolder);
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"pathChecked = {PathChecked}");
+    }
 
-        internal void DoAutosave(string charName, string serverName, string[] colorData)
-        {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.Autosave, "DoAutosave entered");
+    private static bool PathChecked = GetSetSettings.GetAutosaveAvailability;
+    private static readonly string AutosavePath = Path.Combine(GetSetSettings.GetAutosavePath, "autosave.txt");
 
-            string colorDataString = string.Join(";", colorData);
-            string data = string.Join(";", serverName, charName, colorDataString);
+    internal void DoAutosave(string charName, string serverName, string[] colorData)
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Autosave, "DoAutosave entered");
 
-            File.WriteAllText(autosavePath, data);
+        string colorDataString = string.Join(";", colorData);
+        string data = string.Join(";", serverName, charName, colorDataString);
 
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Autosave, "Autosave created");
-        }
+        File.WriteAllText(AutosavePath, data);
+
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Autosave, "Autosave created");
     }
 }

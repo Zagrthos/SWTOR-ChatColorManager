@@ -1,464 +1,447 @@
-﻿using ChatManager.Enums;
-using ChatManager.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
+using ChatManager.Enums;
+using ChatManager.Services;
 
-namespace ChatManager.Forms
+namespace ChatManager.Forms;
+
+internal partial class SettingsForm : Form
 {
-    internal partial class SettingsForm : Form
+    internal SettingsForm()
     {
-        internal SettingsForm()
+        InitializeComponent();
+        GetAutosaveTimerChanged = false;
+        GetLanguageChanged = false;
+    }
+
+    private bool CbLanguageFalseAlarm;
+    private bool CbUpdaterIntervallFalseAlarm;
+    private bool CheckBoxFalseAlarm;
+    private decimal CurrentAutosaveInterval;
+
+    internal bool GetAutosaveTimerChanged { get; private set; }
+    internal bool GetLanguageChanged { get; private set; }
+
+    private void Localize()
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "Localize entered");
+
+        Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+        // Change the Text of the Form
+        Text = localization.GetString(Name);
+
+        // Find all Controls of the desired Type and pack them in a Control List
+        static List<T> GetControls<T>(Control parent) where T : Control
         {
-            InitializeComponent();
-            autosaveTimerChanged = false;
-            languageChanged = false;
+            List<T> controls = [];
+
+            foreach (Control control in parent.Controls)
+            {
+                if (control is T typedControl)
+                {
+                    controls.Add(typedControl);
+                }
+
+                controls.AddRange(GetControls<T>(control));
+            }
+
+            return controls;
         }
 
-        private bool autosaveTimerChanged = false;
-        private bool languageChanged = false;
-        private bool cbLanguageFalseAlarm = false;
-        private bool cbUpdaterIntervallFalseAlarm = false;
-        private bool checkBoxFalseAlarm = false;
-        private decimal currentAutosaveInterval = 0;
+        List<GroupBox> groups = GetControls<GroupBox>(this);
+        List<CheckBox> checkBoxes = GetControls<CheckBox>(this);
+        List<Label> labels = GetControls<Label>(this);
 
-        internal bool GetAutosaveTimerChanged => autosaveTimerChanged;
-        internal bool GetLanguageChanged => languageChanged;
-
-        private void Localize()
+        foreach (GroupBox group in groups)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "Localize entered");
-
-            Localization localization = new(GetSetSettings.GetCurrentLocale);
-
-            // Change the Text of the Form
-            Text = localization.GetString(Name);
-
-            // Find all Controls of the desired Type and pack them in a Control List
-            IEnumerable<Control> GetControls(Control parent, Type type)
-            {
-                var controls = parent.Controls.Cast<Control>();
-
-                return controls
-                    .Where(c => c.GetType() == type)
-                    .Concat(controls.SelectMany(c => GetControls(c, type)));
-            }
-
-            var groups = GetControls(this, typeof(GroupBox));
-            var checkBoxes = GetControls(this, typeof(CheckBox));
-            var labels = GetControls(this, typeof(Label));
-
-            foreach (Control control in groups)
-            {
-                if (control is GroupBox group)
-                {
-                    group.Text = localization.GetString(group.Name);
-                }
-            }
-
-            foreach (Control control in checkBoxes)
-            {
-                if (control is CheckBox checkBox)
-                {
-                    checkBox.Text = localization.GetString(checkBox.Name);
-                }
-            }
-
-            foreach (Control control in labels)
-            {
-                if (control is Label label)
-                {
-                    label.Text = localization.GetString(label.Name);
-                }
-            }
-
-            btnResetSettings.Text = localization.GetString(btnResetSettings.Name);
-
-            cbUpdateInterval.Items.Clear();
-            cbUpdateInterval.Items.Add(localization.GetString(LocalizationEnum.UpdateIntervalOnStart));
-            cbUpdateInterval.Items.Add(localization.GetString(LocalizationEnum.UpdateIntervalDaily));
-            cbUpdateInterval.Items.Add(localization.GetString(LocalizationEnum.UpdateIntervalWeekly));
+            group.Text = localization.GetString(group.Name);
         }
 
-        private void SettingsForm_Load(object sender, EventArgs e)
+        foreach (CheckBox checkBox in checkBoxes)
         {
-            Localize();
-            AdjustContentOnForm();
+            checkBox.Text = localization.GetString(checkBox.Name);
         }
 
-        private void AdjustContentOnForm()
+        foreach (Label label in labels)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "AdjustContentOnForm entered");
-
-            switch (GetSetSettings.GetCurrentLocale)
-            {
-                case "de":
-                    cbLanguageFalseAlarm = true;
-                    cbLanguage.SelectedIndex = 2;
-                    break;
-
-                case "en":
-                    cbLanguageFalseAlarm = true;
-                    cbLanguage.SelectedIndex = 0;
-                    break;
-
-                case "fr":
-                    cbLanguageFalseAlarm = true;
-                    cbLanguage.SelectedIndex = 1;
-                    break;
-
-                default:
-                    throw new NotImplementedException();
-            }
-
-            if (GetSetSettings.GetAutosave)
-            {
-                checkBoxFalseAlarm = true;
-                chbAutosave.Checked = true;
-                numberAutosaveInterval.Enabled = true;
-                numberAutosaveInterval.Visible = true;
-                lblAutosaveInterval.Enabled = true;
-                lblAutosaveInterval.Visible = true;
-            }
-            else
-            {
-                chbAutosave.Checked = false;
-                numberAutosaveInterval.Enabled = false;
-                numberAutosaveInterval.Visible = false;
-                lblAutosaveInterval.Enabled = false;
-                lblAutosaveInterval.Visible = false;
-            }
-
-            if (numberAutosaveInterval.Enabled)
-            {
-                currentAutosaveInterval = GetSetSettings.GetAutosaveInterval / 60000;
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"currentAutosaveInterval: {currentAutosaveInterval}");
-
-                if (currentAutosaveInterval == 0)
-                {
-                    numberAutosaveInterval.Value = 1;
-                    SetAutosaveInterval();
-                }
-                else
-                {
-                    numberAutosaveInterval.Value = currentAutosaveInterval;
-                }
-            }
-
-            if (GetSetSettings.GetSaveOnClose)
-            {
-                chbSaveOnClose.Checked = true;
-                chbAutosave.Enabled = false;
-            }
-            else
-            {
-                chbSaveOnClose.Checked = false;
-                chbAutosave.Enabled = true;
-            }
-
-            if (GetSetSettings.GetReloadOnStartup)
-            {
-                chbReloadOnStartup.Checked = true;
-                chbSaveOnClose.Enabled = false;
-            }
-            else
-            {
-                chbReloadOnStartup.Checked = false;
-                chbSaveOnClose.Enabled = true;
-            }
-
-            switch (GetSetSettings.GetUpdateInterval)
-            {
-                case nameof(UpdateEnum.OnStartup):
-                    cbUpdaterIntervallFalseAlarm = true;
-                    cbUpdateInterval.SelectedIndex = 0;
-                    break;
-
-                case nameof(UpdateEnum.Daily):
-                    cbUpdaterIntervallFalseAlarm = true;
-                    cbUpdateInterval.SelectedIndex = 1;
-                    break;
-
-                case nameof(UpdateEnum.Weekly):
-                    cbUpdaterIntervallFalseAlarm = true;
-                    cbUpdateInterval.SelectedIndex = 2;
-                    break;
-
-                default:
-                    throw new NotImplementedException();
-            }
-
-            if (GetSetSettings.GetUpdateDownload)
-            {
-                chbUpdateDownload.Checked = true;
-            }
-            else
-            {
-                chbUpdateDownload.Checked = false;
-            }
+            label.Text = localization.GetString(label.Name);
         }
 
-        private void SwitchCurrentLocale()
+        btnResetSettings.Text = localization.GetString(btnResetSettings.Name);
+
+        cbUpdateInterval.Items.Clear();
+        cbUpdateInterval.Items.Add(localization.GetString(LocalizationEnum.UpdateIntervalOnStart));
+        cbUpdateInterval.Items.Add(localization.GetString(LocalizationEnum.UpdateIntervalDaily));
+        cbUpdateInterval.Items.Add(localization.GetString(LocalizationEnum.UpdateIntervalWeekly));
+    }
+
+    private void SettingsForm_Load(object sender, EventArgs e)
+    {
+        Localize();
+        AdjustContentOnForm();
+    }
+
+    private void AdjustContentOnForm()
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "AdjustContentOnForm entered");
+
+        string locale = GetSetSettings.GetCurrentLocale;
+        switch (locale)
         {
-            if (cbLanguageFalseAlarm)
-            {
-                cbLanguageFalseAlarm = false;
-                return;
-            }
+            case "de":
+                CbLanguageFalseAlarm = true;
+                cbLanguage.SelectedIndex = 2;
+                break;
 
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "SwitchCurrentLocale entered");
+            case "en":
+                CbLanguageFalseAlarm = true;
+                cbLanguage.SelectedIndex = 0;
+                break;
 
-            string currLocale = GetSetSettings.GetCurrentLocale;
-            string newLanguage = cbLanguage.SelectedItem.ToString()!;
+            case "fr":
+                CbLanguageFalseAlarm = true;
+                cbLanguage.SelectedIndex = 1;
+                break;
 
-            switch (newLanguage)
-            {
-                case "English":
-                    newLanguage = "en";
-                    break;
-
-                case "France":
-                    newLanguage = "fr";
-                    break;
-
-                case "German":
-                    newLanguage = "de";
-                    break;
-
-                default:
-                    throw new NotImplementedException();
-            }
-
-            if (currLocale != newLanguage)
-            {
-                Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, $"Saving new locale: {newLanguage}");
-                GetSetSettings.SaveSettings(SettingsEnum.locale, newLanguage);
-                int updateIntervall = cbUpdateInterval.SelectedIndex;
-                Localize();
-                cbUpdateInterval.SelectedIndex = updateIntervall;
-                languageChanged = true;
-            }
+            default:
+                throw new InvalidOperationException($"{locale} is not implemented!");
         }
 
-        private void SwitchUpdateInterval()
+        if (GetSetSettings.GetAutosave)
         {
-            if (cbUpdaterIntervallFalseAlarm)
-            {
-                cbUpdaterIntervallFalseAlarm = false;
-                return;
-            }
-
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "SwitchUpdateInterval entered");
-
-            if (cbUpdateInterval.SelectedIndex != -1)
-            {
-                if (cbUpdateInterval.SelectedIndex == 0)
-                {
-                    GetSetSettings.SaveSettings(SettingsEnum.updateInterval, UpdateEnum.OnStartup.ToString());
-                }
-                else if (cbUpdateInterval.SelectedIndex == 1)
-                {
-                    GetSetSettings.SaveSettings(SettingsEnum.updateInterval, UpdateEnum.Daily.ToString());
-                }
-                else if (cbUpdateInterval.SelectedIndex == 2)
-                {
-                    GetSetSettings.SaveSettings(SettingsEnum.updateInterval, UpdateEnum.Weekly.ToString());
-                }
-
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"updateInterval set to: {GetSetSettings.GetUpdateInterval}");
-            }
-            else
-            {
-                Logging.Write(LogEventEnum.Error, ProgramClassEnum.SettingsForm, "cbUpdateInterval has no value!");
-                ShowMessageBox.ShowBug();
-            }
+            CheckBoxFalseAlarm = true;
+            chbAutosave.Checked = true;
+            numberAutosaveInterval.Enabled = true;
+            numberAutosaveInterval.Visible = true;
+            lblAutosaveInterval.Enabled = true;
+            lblAutosaveInterval.Visible = true;
+        }
+        else
+        {
+            chbAutosave.Checked = false;
+            numberAutosaveInterval.Enabled = false;
+            numberAutosaveInterval.Visible = false;
+            lblAutosaveInterval.Enabled = false;
+            lblAutosaveInterval.Visible = false;
         }
 
-        private void ComboBoxHandler(object sender, EventArgs e)
+        if (numberAutosaveInterval.Enabled)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "ComboBoxHandler triggered");
+            CurrentAutosaveInterval = GetSetSettings.GetAutosaveInterval / 60000;
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"currentAutosaveInterval: {CurrentAutosaveInterval}");
 
-            if (sender is ComboBox comboBox)
+            if (CurrentAutosaveInterval == 0)
             {
-                switch (comboBox.Name)
-                {
-                    case nameof(cbLanguage):
-                        SwitchCurrentLocale();
-                        break;
-
-                    case nameof(cbUpdateInterval):
-                        SwitchUpdateInterval();
-                        break;
-
-                    default:
-                        throw new NotImplementedException();
-                }
-            }
-            else
-            {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"Sender: {sender} is not a ComboBox!");
-            }
-        }
-
-        private void ChangingCheckBoxes(object sender, EventArgs e)
-        {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "ChangingSettings entered");
-
-            if (sender is CheckBox checkBox)
-            {
-                if (checkBox.Name == "chbSaveOnClose")
-                {
-                    if (checkBox.Checked)
-                    {
-                        GetSetSettings.SaveSettings(SettingsEnum.saveOnClose, true);
-                        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbSaveOnClose = true");
-                        if (!chbAutosave.Checked)
-                        {
-                            chbAutosave.Checked = true;
-                            SetAutosaveInterval();
-                        }
-                        chbAutosave.Enabled = false;
-                        return;
-                    }
-                    else
-                    {
-                        GetSetSettings.SaveSettings(SettingsEnum.saveOnClose, false);
-                        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbSaveOnClose = false");
-                        chbAutosave.Enabled = true;
-                        return;
-                    }
-                }
-                else if (checkBox.Name == "chbReloadOnStartup")
-                {
-                    if (checkBox.Checked)
-                    {
-                        GetSetSettings.SaveSettings(SettingsEnum.reloadOnStartup, true);
-                        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbReloadOnStartup = true");
-                        if (!chbAutosave.Checked)
-                        {
-                            chbAutosave.Checked = true;
-                            SetAutosaveInterval();
-                        }
-                        chbAutosave.Enabled = false;
-
-                        if (!chbSaveOnClose.Checked)
-                        {
-                            chbSaveOnClose.Checked = true;
-                        }
-                        chbSaveOnClose.Enabled = false;
-                        return;
-                    }
-                    else
-                    {
-                        GetSetSettings.SaveSettings(SettingsEnum.reloadOnStartup, false);
-                        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbReloadOnStartup = false");
-                        chbSaveOnClose.Enabled = true;
-                        return;
-                    }
-                }
-                else if (checkBox.Name == "chbAutosave")
-                {
-                    if (checkBox.Checked)
-                    {
-                        GetSetSettings.SaveSettings(SettingsEnum.autosave, true);
-                        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "Autosave = true");
-                        numberAutosaveInterval.Enabled = true;
-                        numberAutosaveInterval.Visible = true;
-                        lblAutosaveInterval.Enabled = true;
-                        lblAutosaveInterval.Visible = true;
-                        if (!checkBoxFalseAlarm)
-                        {
-                            SetAutosaveInterval();
-                        }
-                        return;
-                    }
-                    else
-                    {
-                        GetSetSettings.SaveSettings(SettingsEnum.autosave, false);
-                        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "Autosave = false");
-                        numberAutosaveInterval.Enabled = false;
-                        numberAutosaveInterval.Visible = false;
-                        lblAutosaveInterval.Enabled = false;
-                        lblAutosaveInterval.Visible = false;
-                        autosaveTimerChanged = false;
-                        return;
-                    }
-                }
-                else if (checkBox.Name == "chbUpdateDownload")
-                {
-                    if (checkBox.Checked)
-                    {
-                        GetSetSettings.SaveSettings(SettingsEnum.updateDownload, true);
-                        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "updateDownload = true");
-                        return;
-                    }
-                    else
-                    {
-                        GetSetSettings.SaveSettings(SettingsEnum.updateDownload, false);
-                        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "updateDownload = false");
-                        return;
-                    }
-                }
-                else
-                {
-                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"CheckBox: {checkBox.Name} is not listed!");
-                }
-            }
-            else
-            {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"Sender: {sender} is not a CheckBox!");
-            }
-        }
-
-        // Triggered programmatically
-        private void SetAutosaveInterval()
-        {
-            GetSetSettings.SaveSettings(SettingsEnum.autosaveInterval, numberAutosaveInterval.Value * 60000);
-            Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, $"AutosaveInterval = {numberAutosaveInterval.Value}");
-
-            if (numberAutosaveInterval.Value != currentAutosaveInterval)
-            {
-                autosaveTimerChanged = true;
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"autosaveTimerChanged = {autosaveTimerChanged}");
-            }
-        }
-
-        // Triggered by the NumericUpDown
-        private void SetAutosaveInterval(object sender, EventArgs e)
-        {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "SetAutosaveInterval entered");
-
-            if (sender is NumericUpDown)
-            {
+                numberAutosaveInterval.Value = 1;
                 SetAutosaveInterval();
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"Sender: {sender} is not a NumericUpDown!");
+                numberAutosaveInterval.Value = CurrentAutosaveInterval;
             }
         }
 
-        private void ResetSettings(object sender, EventArgs e)
+        if (GetSetSettings.GetSaveOnClose)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "ResetSettings entered");
+            chbSaveOnClose.Checked = true;
+            chbAutosave.Enabled = false;
+        }
+        else
+        {
+            chbSaveOnClose.Checked = false;
+            chbAutosave.Enabled = true;
+        }
 
-            if (sender is Button)
+        if (GetSetSettings.GetReloadOnStartup)
+        {
+            chbReloadOnStartup.Checked = true;
+            chbSaveOnClose.Enabled = false;
+        }
+        else
+        {
+            chbReloadOnStartup.Checked = false;
+            chbSaveOnClose.Enabled = true;
+        }
+
+        string updateInterval = GetSetSettings.GetUpdateInterval;
+        switch (updateInterval)
+        {
+            case nameof(UpdateEnum.OnStartup):
+                CbUpdaterIntervallFalseAlarm = true;
+                cbUpdateInterval.SelectedIndex = 0;
+                break;
+
+            case nameof(UpdateEnum.Daily):
+                CbUpdaterIntervallFalseAlarm = true;
+                cbUpdateInterval.SelectedIndex = 1;
+                break;
+
+            case nameof(UpdateEnum.Weekly):
+                CbUpdaterIntervallFalseAlarm = true;
+                cbUpdateInterval.SelectedIndex = 2;
+                break;
+
+            default:
+                throw new InvalidOperationException($"{updateInterval} is not implemented!");
+        }
+
+        chbUpdateDownload.Checked = GetSetSettings.GetUpdateDownload;
+    }
+
+    private void SwitchCurrentLocale()
+    {
+        if (CbLanguageFalseAlarm)
+        {
+            CbLanguageFalseAlarm = false;
+            return;
+        }
+
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "SwitchCurrentLocale entered");
+
+        string currLocale = GetSetSettings.GetCurrentLocale;
+        string selectedLanguage = cbLanguage.SelectedItem?.ToString() ?? string.Empty;
+
+        string newLanguage = selectedLanguage switch
+        {
+            "English" => "en",
+            "France" => "fr",
+            "German" => "de",
+            _ => throw new InvalidOperationException($"{selectedLanguage} is not implemented!"),
+        };
+
+        if (currLocale == newLanguage)
+        {
+            return;
+        }
+
+        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, $"Saving new locale: {newLanguage}");
+        GetSetSettings.SaveSettings(SettingsEnum.locale, newLanguage);
+        int updateIntervall = cbUpdateInterval.SelectedIndex;
+        Localize();
+        cbUpdateInterval.SelectedIndex = updateIntervall;
+        GetLanguageChanged = true;
+    }
+
+    private void SwitchUpdateInterval()
+    {
+        if (CbUpdaterIntervallFalseAlarm)
+        {
+            CbUpdaterIntervallFalseAlarm = false;
+            return;
+        }
+
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "SwitchUpdateInterval entered");
+
+        if (cbUpdateInterval.SelectedIndex != -1)
+        {
+            if (cbUpdateInterval.SelectedIndex == 0)
             {
-                string currentLocale = GetSetSettings.GetCurrentLocale;
-                GetSetSettings.RestoreSettings();
-                Localize();
-                AdjustContentOnForm();
+                GetSetSettings.SaveSettings(SettingsEnum.updateInterval, nameof(UpdateEnum.OnStartup));
+            }
+            else if (cbUpdateInterval.SelectedIndex == 1)
+            {
+                GetSetSettings.SaveSettings(SettingsEnum.updateInterval, nameof(UpdateEnum.Daily));
+            }
+            else if (cbUpdateInterval.SelectedIndex == 2)
+            {
+                GetSetSettings.SaveSettings(SettingsEnum.updateInterval, nameof(UpdateEnum.Weekly));
+            }
 
-                if (currentLocale != GetSetSettings.GetCurrentLocale)
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"updateInterval set to: {GetSetSettings.GetUpdateInterval}");
+        }
+        else
+        {
+            Logging.Write(LogEventEnum.Error, ProgramClassEnum.SettingsForm, "cbUpdateInterval has no value!");
+            ShowMessageBox.ShowBug();
+        }
+    }
+
+    private void ComboBoxHandler(object sender, EventArgs e)
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "ComboBoxHandler triggered");
+
+        if (sender is ComboBox comboBox)
+        {
+            switch (comboBox.Name)
+            {
+                case nameof(cbLanguage):
+                    SwitchCurrentLocale();
+                    break;
+
+                case nameof(cbUpdateInterval):
+                    SwitchUpdateInterval();
+                    break;
+
+                default:
+                    throw new InvalidOperationException($"{comboBox.Name} was not expected!");
+            }
+        }
+        else
+        {
+            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"Sender: {sender} is not a ComboBox!");
+        }
+    }
+
+    private void ChangingCheckBoxes(object sender, EventArgs e)
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "ChangingSettings entered");
+
+        if (sender is CheckBox checkBox)
+        {
+            if (checkBox.Name == "chbSaveOnClose")
+            {
+                if (checkBox.Checked)
                 {
-                    languageChanged = true;
+                    GetSetSettings.SaveSettings(SettingsEnum.saveOnClose, true);
+                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbSaveOnClose = true");
+                    if (!chbAutosave.Checked)
+                    {
+                        chbAutosave.Checked = true;
+                        SetAutosaveInterval();
+                    }
+
+                    chbAutosave.Enabled = false;
+                }
+                else
+                {
+                    GetSetSettings.SaveSettings(SettingsEnum.saveOnClose, false);
+                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbSaveOnClose = false");
+                    chbAutosave.Enabled = true;
+                }
+            }
+            else if (checkBox.Name == "chbReloadOnStartup")
+            {
+                if (checkBox.Checked)
+                {
+                    GetSetSettings.SaveSettings(SettingsEnum.reloadOnStartup, true);
+                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbReloadOnStartup = true");
+                    if (!chbAutosave.Checked)
+                    {
+                        chbAutosave.Checked = true;
+                        SetAutosaveInterval();
+                    }
+
+                    chbAutosave.Enabled = false;
+
+                    if (!chbSaveOnClose.Checked)
+                    {
+                        chbSaveOnClose.Checked = true;
+                    }
+
+                    chbSaveOnClose.Enabled = false;
+                }
+                else
+                {
+                    GetSetSettings.SaveSettings(SettingsEnum.reloadOnStartup, false);
+                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbReloadOnStartup = false");
+                    chbSaveOnClose.Enabled = true;
+                }
+            }
+            else if (checkBox.Name == "chbAutosave")
+            {
+                if (checkBox.Checked)
+                {
+                    GetSetSettings.SaveSettings(SettingsEnum.autosave, true);
+                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "Autosave = true");
+                    numberAutosaveInterval.Enabled = true;
+                    numberAutosaveInterval.Visible = true;
+                    lblAutosaveInterval.Enabled = true;
+                    lblAutosaveInterval.Visible = true;
+                    if (!CheckBoxFalseAlarm)
+                    {
+                        SetAutosaveInterval();
+                    }
+                }
+                else
+                {
+                    GetSetSettings.SaveSettings(SettingsEnum.autosave, false);
+                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "Autosave = false");
+                    numberAutosaveInterval.Enabled = false;
+                    numberAutosaveInterval.Visible = false;
+                    lblAutosaveInterval.Enabled = false;
+                    lblAutosaveInterval.Visible = false;
+                    GetAutosaveTimerChanged = false;
+                }
+            }
+            else if (checkBox.Name == "chbUpdateDownload")
+            {
+                if (checkBox.Checked)
+                {
+                    GetSetSettings.SaveSettings(SettingsEnum.updateDownload, true);
+                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "updateDownload = true");
+                }
+                else
+                {
+                    GetSetSettings.SaveSettings(SettingsEnum.updateDownload, false);
+                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "updateDownload = false");
                 }
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"Sender: {sender} is not a Button!");
+                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"CheckBox: {checkBox.Name} is not listed!");
             }
+        }
+        else
+        {
+            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"Sender: {sender} is not a CheckBox!");
+        }
+    }
+
+    /// <summary>
+    /// Triggered programmatically.
+    /// </summary>
+    private void SetAutosaveInterval()
+    {
+        GetSetSettings.SaveSettings(SettingsEnum.autosaveInterval, numberAutosaveInterval.Value * 60000);
+        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, $"AutosaveInterval = {numberAutosaveInterval.Value}");
+
+        if (numberAutosaveInterval.Value == CurrentAutosaveInterval)
+        {
+            return;
+        }
+
+        GetAutosaveTimerChanged = true;
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"autosaveTimerChanged = {GetAutosaveTimerChanged}");
+    }
+
+    /// <summary>
+    /// Triggered by the <seealso cref="NumericUpDown"/>.
+    /// </summary>
+    private void SetAutosaveInterval(object sender, EventArgs e)
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "SetAutosaveInterval entered");
+
+        if (sender is NumericUpDown)
+        {
+            SetAutosaveInterval();
+        }
+        else
+        {
+            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"Sender: {sender} is not a NumericUpDown!");
+        }
+    }
+
+    private void ResetSettings(object sender, EventArgs e)
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "ResetSettings entered");
+
+        if (sender is Button)
+        {
+            string currentLocale = GetSetSettings.GetCurrentLocale;
+            GetSetSettings.RestoreSettings();
+            Localize();
+            AdjustContentOnForm();
+
+            if (currentLocale != GetSetSettings.GetCurrentLocale)
+            {
+                GetLanguageChanged = true;
+            }
+        }
+        else
+        {
+            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"Sender: {sender} is not a Button!");
         }
     }
 }
