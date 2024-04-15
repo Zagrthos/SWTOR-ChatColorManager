@@ -21,8 +21,8 @@ internal partial class SettingsForm : Form
     private bool CheckBoxFalseAlarm;
     private decimal CurrentAutosaveInterval;
 
-    internal bool GetAutosaveTimerChanged { get; private set; } = false;
-    internal bool GetLanguageChanged { get; private set; } = false;
+    internal bool GetAutosaveTimerChanged { get; private set; }
+    internal bool GetLanguageChanged { get; private set; }
 
     private void Localize()
     {
