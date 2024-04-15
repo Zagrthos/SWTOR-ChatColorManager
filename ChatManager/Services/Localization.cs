@@ -10,8 +10,8 @@ namespace ChatManager.Services;
 
 internal class Localization
 {
-    private Dictionary<string, string> strings = [];
-    private readonly string installPath = Application.StartupPath;
+    private Dictionary<string, string> Strings = [];
+    private readonly string InstallPath = Application.StartupPath;
 
     internal Localization(string locale)
     {
@@ -23,8 +23,8 @@ internal class Localization
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.Localization, "CheckLocale entered");
 
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Localization, $"Localization path is: {Path.Combine(installPath, "Localization", $"{locale}.json")}");
-        string jsonString = File.ReadAllText(Path.Combine(installPath, "Localization", $"{locale}.json"));
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Localization, $"Localization path is: {Path.Combine(InstallPath, "Localization", $"{locale}.json")}");
+        string jsonString = File.ReadAllText(Path.Combine(InstallPath, "Localization", $"{locale}.json"));
 
         // Check if file has content
         if (jsonString != null)
@@ -35,7 +35,7 @@ internal class Localization
             // Check if JSON has content
             if (tempStrings != null)
             {
-                strings = tempStrings;
+                Strings = tempStrings;
                 GetSetSettings.SaveSettings(SettingsEnum.locale, locale);
             }
 
@@ -55,7 +55,7 @@ internal class Localization
 
     internal string GetString(string name)
     {
-        if (strings.TryGetValue(name, out string? result))
+        if (Strings.TryGetValue(name, out string? result))
         {
             return result;
         }
@@ -68,7 +68,7 @@ internal class Localization
 
     internal string GetString(LocalizationEnum localization)
     {
-        if (strings.TryGetValue(localization.ToString(), out string? result))
+        if (Strings.TryGetValue(localization.ToString(), out string? result))
         {
             return result;
         }

@@ -11,50 +11,50 @@ internal class FileImport
     internal FileImport()
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, "FileImport Constructor created");
-        if (filesChecked != true)
+        if (FilesChecked != true)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, $"filesChecked = {filesChecked}");
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, $"filesChecked = {FilesChecked}");
             GetLocalFiles();
         }
     }
 
-    private static bool filesChecked = false;
-    private static readonly string filePath = GetSetSettings.GetLocalPath;
-    private static readonly List<string> serverList = [];
+    private static bool FilesChecked = false;
+    private static readonly string FilePath = GetSetSettings.GetLocalPath;
+    private static readonly List<string> ServerList = [];
 
-    private static readonly string[,] starForgeArray = new string[1000, 2];
-    private static readonly string[,] sateleShanArray = new string[1000, 2];
-    private static readonly string[,] darthMalgusArray = new string[1000, 2];
-    private static readonly string[,] tulakHordArray = new string[1000, 2];
-    private static readonly string[,] theLeviathanArray = new string[1000, 2];
+    private static readonly string[,] StarForgeArray = new string[1000, 2];
+    private static readonly string[,] SateleShanArray = new string[1000, 2];
+    private static readonly string[,] DarthMalgusArray = new string[1000, 2];
+    private static readonly string[,] TulakHordArray = new string[1000, 2];
+    private static readonly string[,] TheLeviathanArray = new string[1000, 2];
 
     // Get Methods to exchange data to other parts of the program
     internal string[,] GetArray(string name)
     {
         return name switch
         {
-            "StarForge" => starForgeArray,
-            "SateleShan" => sateleShanArray,
-            "DarthMalgus" => darthMalgusArray,
-            "TulakHord" => tulakHordArray,
-            "TheLeviathan" => theLeviathanArray,
+            "StarForge" => StarForgeArray,
+            "SateleShan" => SateleShanArray,
+            "DarthMalgus" => DarthMalgusArray,
+            "TulakHord" => TulakHordArray,
+            "TheLeviathan" => TheLeviathanArray,
             _ => throw new NotImplementedException()
         };
     }
 
     internal List<string> GetServerList()
     {
-        return serverList;
+        return ServerList;
     }
 
     // Get the local files
     private static void GetLocalFiles()
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileImport, $"GetLocalFiles entered");
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"filePath: {filePath}");
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"filePath: {FilePath}");
 
         // Search the given Path for files
-        string[] charFilePaths = Directory.GetFiles(filePath);
+        string[] charFilePaths = Directory.GetFiles(FilePath);
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"filePaths: {charFilePaths.Length}");
 
         // Convert all filePaths to fileNames
@@ -83,32 +83,32 @@ internal class FileImport
                     {
                         if (fileParts[0] == "he3000")
                         {
-                            starForgeArray[starForgeCounter, 0] = fileParts[1];
-                            starForgeArray[starForgeCounter, 1] = charFilePaths[i];
+                            StarForgeArray[starForgeCounter, 0] = fileParts[1];
+                            StarForgeArray[starForgeCounter, 1] = charFilePaths[i];
                             starForgeCounter++;
                         }
                         else if (fileParts[0] == "he3001")
                         {
-                            sateleShanArray[sateleShanCounter, 0] = fileParts[1];
-                            sateleShanArray[sateleShanCounter, 1] = charFilePaths[i];
+                            SateleShanArray[sateleShanCounter, 0] = fileParts[1];
+                            SateleShanArray[sateleShanCounter, 1] = charFilePaths[i];
                             sateleShanCounter++;
                         }
                         else if (fileParts[0] == "he4000")
                         {
-                            darthMalgusArray[darthMalgusCounter, 0] = fileParts[1];
-                            darthMalgusArray[darthMalgusCounter, 1] = charFilePaths[i];
+                            DarthMalgusArray[darthMalgusCounter, 0] = fileParts[1];
+                            DarthMalgusArray[darthMalgusCounter, 1] = charFilePaths[i];
                             darthMalgusCounter++;
                         }
                         else if (fileParts[0] == "he4001")
                         {
-                            tulakHordArray[tulakHordCounter, 0] = fileParts[1];
-                            tulakHordArray[tulakHordCounter, 1] = charFilePaths[i];
+                            TulakHordArray[tulakHordCounter, 0] = fileParts[1];
+                            TulakHordArray[tulakHordCounter, 1] = charFilePaths[i];
                             tulakHordCounter++;
                         }
                         else if (fileParts[0] == "he4002")
                         {
-                            theLeviathanArray[theLeviathanCounter, 0] = fileParts[1];
-                            theLeviathanArray[theLeviathanCounter, 1] = charFilePaths[i];
+                            TheLeviathanArray[theLeviathanCounter, 0] = fileParts[1];
+                            TheLeviathanArray[theLeviathanCounter, 1] = charFilePaths[i];
                             theLeviathanCounter++;
                         }
                     }
@@ -119,32 +119,32 @@ internal class FileImport
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, "Select the servers by files");
 
         // Select the servers by files
-        if (starForgeArray[0, 0] != null && starForgeArray[0, 0] != string.Empty)
+        if (StarForgeArray[0, 0] != null && StarForgeArray[0, 0] != string.Empty)
         {
-            serverList.Add("StarForge");
+            ServerList.Add("StarForge");
         }
-        if (sateleShanArray[0, 0] != null && sateleShanArray[0, 0] != string.Empty)
+        if (SateleShanArray[0, 0] != null && SateleShanArray[0, 0] != string.Empty)
         {
-            serverList.Add("SateleShan");
+            ServerList.Add("SateleShan");
         }
-        if (darthMalgusArray[0, 0] != null && darthMalgusArray[0, 0] != string.Empty)
+        if (DarthMalgusArray[0, 0] != null && DarthMalgusArray[0, 0] != string.Empty)
         {
-            serverList.Add("DarthMalgus");
+            ServerList.Add("DarthMalgus");
         }
-        if (tulakHordArray[0, 0] != null && tulakHordArray[0, 0] != string.Empty)
+        if (TulakHordArray[0, 0] != null && TulakHordArray[0, 0] != string.Empty)
         {
-            serverList.Add("TulakHord");
+            ServerList.Add("TulakHord");
         }
-        if (theLeviathanArray[0, 0] != null && theLeviathanArray[0, 0] != string.Empty)
+        if (TheLeviathanArray[0, 0] != null && TheLeviathanArray[0, 0] != string.Empty)
         {
-            serverList.Add("TheLeviathan");
+            ServerList.Add("TheLeviathan");
         }
 
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"serverList.Count = {serverList.Count}");
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"serverList.Count = {ServerList.Count}");
 
         // Set the once runner true
-        filesChecked = true;
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, $"Set filesChecked = {filesChecked}");
+        FilesChecked = true;
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, $"Set filesChecked = {FilesChecked}");
     }
 
     // Get the colors from the given File

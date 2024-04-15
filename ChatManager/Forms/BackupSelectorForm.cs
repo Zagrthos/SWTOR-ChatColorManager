@@ -17,15 +17,15 @@ internal partial class BackupSelectorForm : Form
         DisplayBackupDirs();
     }
 
-    private static readonly string backupPath = GetSetSettings.GetBackupPath;
-    private string[,] filesInDir = new string[1000, 2];
+    private static readonly string BackupPath = GetSetSettings.GetBackupPath;
+    private string[,] FilesInDir = new string[1000, 2];
 
     private void DisplayBackupDirs()
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "DisplayBackupDirs entered");
 
         // Search the given Path for Directories
-        string[] backupDirs = Directory.GetDirectories(backupPath);
+        string[] backupDirs = Directory.GetDirectories(BackupPath);
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"backupDirs: {backupDirs.Length}");
 
         // Create new Array with the size of the found Paths
@@ -88,18 +88,18 @@ internal partial class BackupSelectorForm : Form
         // Create new Array with the size of the found Files
         string[] files = new string[dirContent.Length];
 
-        for (int i = 0; i < filesInDir.Length / 2; i++)
+        for (int i = 0; i < FilesInDir.Length / 2; i++)
         {
             //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{i}");
 
             // Check if all parts in array are NOT empty or null
-            if (!string.IsNullOrEmpty(filesInDir[i, 0]) && !string.IsNullOrEmpty(filesInDir[i, 1]) && !string.IsNullOrEmpty(filesInDir[i, 2]))
+            if (!string.IsNullOrEmpty(FilesInDir[i, 0]) && !string.IsNullOrEmpty(FilesInDir[i, 1]) && !string.IsNullOrEmpty(FilesInDir[i, 2]))
             {
                 //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{filesInDir[i, 0]} & {filesInDir[i, 1]} & {filesInDir[i, 2]}");
                 //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"file[{i}]");
 
                 // If not null or empty add the name and the server to the list
-                files[i] = $"{filesInDir[i, 0]} - {Converter.AddWhitespace(Converter.ServerNameIdentifier(filesInDir[i, 1], false))}";
+                files[i] = $"{FilesInDir[i, 0]} - {Converter.AddWhitespace(Converter.ServerNameIdentifier(FilesInDir[i, 1], false))}";
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, files[i]);
             }
             else
@@ -118,7 +118,7 @@ internal partial class BackupSelectorForm : Form
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "AssociateFilesWithPaths entered");
 
         // Clear the Array
-        filesInDir = new string[1000, 3];
+        FilesInDir = new string[1000, 3];
 
         // Now get the FileName, split it into parts and then
         // Set the name to pos 0
@@ -128,12 +128,12 @@ internal partial class BackupSelectorForm : Form
         {
             string fileName = Path.GetFileName(paths[i]);
             string[] parts = fileName.Split("_");
-            filesInDir[i, 0] = parts[1];
-            filesInDir[i, 1] = parts[0];
-            filesInDir[i, 2] = paths[i];
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, filesInDir[i, 0]);
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, filesInDir[i, 1]);
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, filesInDir[i, 2]);
+            FilesInDir[i, 0] = parts[1];
+            FilesInDir[i, 1] = parts[0];
+            FilesInDir[i, 2] = paths[i];
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, FilesInDir[i, 0]);
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, FilesInDir[i, 1]);
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, FilesInDir[i, 2]);
         }
     }
 
@@ -147,7 +147,7 @@ internal partial class BackupSelectorForm : Form
 
             if (!string.IsNullOrEmpty(dirName))
             {
-                DisplayBackupFiles(Path.Combine(backupPath, dirName));
+                DisplayBackupFiles(Path.Combine(BackupPath, dirName));
             }
             else
             {
@@ -201,7 +201,7 @@ internal partial class BackupSelectorForm : Form
                             List<string> dataSource = [.. array];
 
                             // Delete the Directory
-                            Directory.Delete(Path.Combine(backupPath, lbxBackupDir.SelectedItem.ToString()!), true);
+                            Directory.Delete(Path.Combine(BackupPath, lbxBackupDir.SelectedItem.ToString()!), true);
 
                             // Remove item from DataSource
                             dataSource.Remove(lbxBackupDir.SelectedItem.ToString()!);
@@ -254,7 +254,7 @@ internal partial class BackupSelectorForm : Form
                                 string fileName = Converter.ServerNameIdentifier(Converter.RemoveWhitespace(parts[1]), true) + $"_{parts[0]}_PlayerGUIState.ini";
 
                                 // Generate the filePath
-                                string path = Path.Combine(backupPath, lbxBackupDir.SelectedItem!.ToString()!, fileName);
+                                string path = Path.Combine(BackupPath, lbxBackupDir.SelectedItem!.ToString()!, fileName);
 
                                 // Remove item from DataSource
                                 dataSource.Remove(item);
@@ -328,7 +328,7 @@ internal partial class BackupSelectorForm : Form
                 string fileName = Converter.ServerNameIdentifier(Converter.RemoveWhitespace(parts[1]), true) + $"_{parts[0]}_PlayerGUIState.ini";
 
                 // Generate the filePath
-                string path = Path.Combine(backupPath, lbxBackupDir.SelectedItem!.ToString()!, fileName);
+                string path = Path.Combine(BackupPath, lbxBackupDir.SelectedItem!.ToString()!, fileName);
 
                 // Replace the file
                 File.Copy(path, Path.Combine(localPath, fileName), true);

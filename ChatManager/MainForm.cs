@@ -17,7 +17,7 @@ internal partial class MainForm : Form
         InitializeComponent();
     }
 
-    private System.Timers.Timer? autosaveTimer;
+    private System.Timers.Timer? AutosaveTimer;
 
     // Button Click Handler for every button next to the TextBox
     private void ClickChangeColorButton(object sender, EventArgs e)
@@ -289,16 +289,16 @@ internal partial class MainForm : Form
         if (GetSetSettings.GetAutosave)
         {
             // Stop previously intialized Timer
-            if (autosaveTimer != null)
+            if (AutosaveTimer != null)
             {
-                autosaveTimer.Stop();
-                autosaveTimer.Elapsed -= AutosaveTimer_Elapsed;
+                AutosaveTimer.Stop();
+                AutosaveTimer.Elapsed -= AutosaveTimer_Elapsed;
             }
 
             // Initialize Autosave Timer
-            autosaveTimer = new(Convert.ToDouble(GetSetSettings.GetAutosaveInterval));
-            autosaveTimer.Elapsed += AutosaveTimer_Elapsed;
-            autosaveTimer.Start();
+            AutosaveTimer = new(Convert.ToDouble(GetSetSettings.GetAutosaveInterval));
+            AutosaveTimer.Elapsed += AutosaveTimer_Elapsed;
+            AutosaveTimer.Start();
 
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "autosaveTimer set");
         }
@@ -777,7 +777,7 @@ internal partial class MainForm : Form
 
         DownloadProgressReporter.DownloadProgressChanged -= DownloadProgressReporter_DownloadProgressChanged;
 
-        autosaveTimer?.Stop();
+        AutosaveTimer?.Stop();
 
         if (GetSetSettings.GetSaveOnClose)
         {

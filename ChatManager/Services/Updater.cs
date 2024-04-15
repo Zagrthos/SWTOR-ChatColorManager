@@ -11,12 +11,12 @@ namespace ChatManager.Services;
 
 internal static partial class Updater
 {
-    private static readonly Version currentVersion = new(Application.ProductVersion);
-    private static Version? onlineVersion;
-    private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/";
-    private static string updateName = "SWTOR-ChatManager-";
-    private static string updatePath = string.Empty;
-    private static long? totalBytesToDownload = 0;
+    private static readonly Version CurrentVersion = new(Application.ProductVersion);
+    private static Version? OnlineVersion;
+    private static string UpdateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/";
+    private static string UpdateName = "SWTOR-ChatManager-";
+    private static string UpdatePath = string.Empty;
+    private static long? TotalBytesToDownload = 0;
 
     internal static string GetUpdateDownloadText { get; private set; } = string.Empty;
 
@@ -68,22 +68,22 @@ internal static partial class Updater
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "CheckForUpdates entered");
 
-        onlineVersion = await WebRequests.GetVersionAsync(GetSetSettings.GetUpdateCheckURL);
+        OnlineVersion = await WebRequests.GetVersionAsync(GetSetSettings.GetUpdateCheckURL);
 
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineVersion is: {onlineVersion}");
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineVersion is: {OnlineVersion}");
 
-        if (onlineVersion > currentVersion)
+        if (OnlineVersion > CurrentVersion)
         {
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Update is available!");
 
             long fileSize = await GetFileSize();
 
-            if (ShowMessageBox.ShowUpdate(onlineVersion.ToString(), Converter.ConvertByteToMegabyte(fileSize)))
+            if (ShowMessageBox.ShowUpdate(OnlineVersion.ToString(), Converter.ConvertByteToMegabyte(fileSize)))
             {
                 if (GetSetSettings.GetUpdateDownload)
                 {
                     Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Manual download initiated");
-                    OpenWindows.OpenLinksInBrowser($"{updateURL}/tag/v{onlineVersion}/");
+                    OpenWindows.OpenLinksInBrowser($"{UpdateURL}/tag/v{OnlineVersion}/");
                 }
                 else
                 {
@@ -115,30 +115,30 @@ internal static partial class Updater
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "GetFileSize entered");
 
-        if (onlineVersion != null && !updateName.Contains(onlineVersion.ToString()))
+        if (OnlineVersion != null && !UpdateName.Contains(OnlineVersion.ToString()))
         {
-            if (updateName.Contains(".exe"))
+            if (UpdateName.Contains(".exe"))
             {
-                updateName = ReplaceVersionNumber().Replace(updateName, onlineVersion.ToString());
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateName set to: {updateName}");
+                UpdateName = ReplaceVersionNumber().Replace(UpdateName, OnlineVersion.ToString());
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateName set to: {UpdateName}");
 
-                updateURL = ReplaceVersionNumber().Replace(updateURL, onlineVersion.ToString());
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateURL set to: {updateURL}");
+                UpdateURL = ReplaceVersionNumber().Replace(UpdateURL, OnlineVersion.ToString());
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateURL set to: {UpdateURL}");
             }
 
-            updateName += $"v{onlineVersion}.exe";
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateName set to: {updateName}");
+            UpdateName += $"v{OnlineVersion}.exe";
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateName set to: {UpdateName}");
 
-            updateURL += $"download/v{onlineVersion}/{updateName}";
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateURL set to: {updateURL}");
+            UpdateURL += $"download/v{OnlineVersion}/{UpdateName}";
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateURL set to: {UpdateURL}");
         }
 
         // Count the length of the to download file
-        totalBytesToDownload = await WebRequests.GetLongAsync(updateURL);
+        TotalBytesToDownload = await WebRequests.GetLongAsync(UpdateURL);
 
-        if (totalBytesToDownload.HasValue)
+        if (TotalBytesToDownload.HasValue)
         {
-            return totalBytesToDownload.Value;
+            return TotalBytesToDownload.Value;
         }
         else
         {
@@ -150,7 +150,7 @@ internal static partial class Updater
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "DownloadUpdate entered");
 
-        HttpResponseMessage responseMessage = await WebRequests.GetResponseMessageAsync(updateURL);
+        HttpResponseMessage responseMessage = await WebRequests.GetResponseMessageAsync(UpdateURL);
 
         if (!responseMessage.IsSuccessStatusCode)
         {
@@ -158,14 +158,14 @@ internal static partial class Updater
             return;
         }
 
-        updatePath = Path.Combine(Path.GetTempPath(), updateName);
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Download Path: {updatePath}");
+        UpdatePath = Path.Combine(Path.GetTempPath(), UpdateName);
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Download Path: {UpdatePath}");
 
         Localization localization = new(GetSetSettings.GetCurrentLocale);
         GetUpdateDownloadText = localization.GetString(LocalizationEnum.downloadProgressToolStripMenuItem);
 
         // Download the file and then log the progress
-        using (FileStream filestream = new(updatePath, FileMode.Create, FileAccess.Write, FileShare.None))
+        using (FileStream filestream = new(UpdatePath, FileMode.Create, FileAccess.Write, FileShare.None))
         using (Stream stream = await responseMessage.Content.ReadAsStreamAsync())
         {
             byte[] buffer = new byte[65536];
@@ -177,7 +177,7 @@ internal static partial class Updater
             {
                 await filestream.WriteAsync(buffer.AsMemory(0, bytesRead));
                 totalBytesRead += bytesRead;
-                double percent = totalBytesToDownload.HasValue ? (double)totalBytesRead / totalBytesToDownload.Value * 100 : -1;
+                double percent = TotalBytesToDownload.HasValue ? (double)totalBytesRead / TotalBytesToDownload.Value * 100 : -1;
 
                 if (percent > -1)
                 {
@@ -197,9 +197,9 @@ internal static partial class Updater
 
         responseMessage.Dispose();
 
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Update downloaded to: {updatePath}");
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Update downloaded to: {UpdatePath}");
 
-        if (await VerifyUpdateHash(updatePath, onlineVersion!.ToString()))
+        if (await VerifyUpdateHash(UpdatePath, OnlineVersion!.ToString()))
         {
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Application update started!");
             ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxUpdate), localization.GetString(LocalizationEnum.Update_IsInstallReady));
@@ -258,9 +258,9 @@ internal static partial class Updater
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "InstallUpdate entered");
 
-        GetSetSettings.SaveSettings(SettingsEnum.lastUpdatePath, updatePath);
+        GetSetSettings.SaveSettings(SettingsEnum.lastUpdatePath, UpdatePath);
 
-        OpenWindows.OpenProcess(updatePath);
+        OpenWindows.OpenProcess(UpdatePath);
 
         Logging.Dispose();
 
@@ -273,16 +273,16 @@ internal static partial class Updater
 
 internal class DownloadProgressEventArgs : EventArgs
 {
-    private readonly double progress;
+    private readonly double Progress;
 
     internal double GetDownloadProgress()
     {
-        return progress;
+        return Progress;
     }
 
     internal DownloadProgressEventArgs(double progress)
     {
-        this.progress = progress;
+        this.Progress = progress;
     }
 }
 

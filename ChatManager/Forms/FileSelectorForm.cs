@@ -14,14 +14,14 @@ internal partial class FileSelectorForm : Form
     {
         if (save)
         {
-            isSave = true;
+            IsSave = true;
         }
         InitializeComponent();
         SetTabs(servers);
     }
 
-    private readonly bool isSave = false;
-    private int tabIndex = 2;
+    private readonly bool IsSave = false;
+    private int NewTabIndex = 2;
 
     internal string GetListBoxString { get; private set; } = string.Empty;
     internal string GetListBoxName { get; private set; } = string.Empty;
@@ -101,10 +101,10 @@ internal partial class FileSelectorForm : Form
                         Location = new Point(3, 3),
                         Dock = DockStyle.Fill,
                         DataSource = characters,
-                        TabIndex = tabIndex,
+                        TabIndex = NewTabIndex,
                     };
 
-                    tabIndex++;
+                    NewTabIndex++;
 
                     Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"ListBox: {listBox.Name} created");
 
@@ -164,10 +164,10 @@ internal partial class FileSelectorForm : Form
                         Dock = DockStyle.Fill,
                         CheckOnClick = true,
                         DataSource = characters,
-                        TabIndex = tabIndex
+                        TabIndex = NewTabIndex
                     };
 
-                    tabIndex++;
+                    NewTabIndex++;
 
                     Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"CheckedListBox: {listBox.Name} created");
 
@@ -361,9 +361,9 @@ internal partial class FileSelectorForm : Form
     // Change the Tags of the Buttons if the Form is opened in the Save Context
     private void FileSelectorForm_Load(object sender, EventArgs e)
     {
-        SetListBox(isSave);
+        SetListBox(IsSave);
 
-        if (isSave)
+        if (IsSave)
         {
             IEnumerable<Control> buttons = GetControls(this, typeof(Button));
 

@@ -8,15 +8,15 @@ namespace ChatManager.Services;
 
 internal static class GetSetSettings
 {
-    private static readonly string localPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SWTOR\\swtor\\settings");
+    private static readonly string LocalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SWTOR\\swtor\\settings");
 
-    private static readonly string backupPath = Path.Combine(localPath, "Backups");
-    private static readonly bool backupDir = false;
+    private static readonly string BackupPath = Path.Combine(LocalPath, "Backups");
+    private static readonly bool BackupDir = false;
 
-    private static readonly string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Logs");
+    private static readonly string LogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Logs");
 
-    private static readonly string autosavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Autosave");
-    private static readonly bool autosaveDir = false;
+    private static readonly string AutosavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Autosave");
+    private static readonly bool AutosaveDir = false;
 
     internal static string GetCurrentLocale => Settings.Default._locale;
     internal static string GetLocalPath => Settings.Default.localPath;
@@ -47,20 +47,20 @@ internal static class GetSetSettings
     {
         if (!Settings.Default._Initialized)
         {
-            if (!Directory.Exists(localPath))
+            if (!Directory.Exists(LocalPath))
             {
                 Settings.Default.localPath = string.Empty;
                 Settings.Default.backupPath = string.Empty;
             }
             else
             {
-                Settings.Default.localPath = localPath;
-                Settings.Default.backupPath = backupPath;
+                Settings.Default.localPath = LocalPath;
+                Settings.Default.backupPath = BackupPath;
             }
-            Settings.Default.backupAvailability = backupDir;
-            Settings.Default.logPath = logPath;
-            Settings.Default.autosavePath = autosavePath;
-            Settings.Default.autosaveAvailability = autosaveDir;
+            Settings.Default.backupAvailability = BackupDir;
+            Settings.Default.logPath = LogPath;
+            Settings.Default.autosavePath = AutosavePath;
+            Settings.Default.autosaveAvailability = AutosaveDir;
             Settings.Default._autosaveInterval = 0;
             Settings.Default.updateInterval = UpdateEnum.OnStartup.ToString();
             Settings.Default._Initialized = true;

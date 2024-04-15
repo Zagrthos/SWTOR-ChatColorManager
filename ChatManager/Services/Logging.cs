@@ -10,8 +10,8 @@ internal static class Logging
 {
     private static readonly string LogSession = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
     private static readonly string LogPath = GetSetSettings.GetLogPath;
-    private static StreamWriter? logWriter;
-    private static System.Timers.Timer? timer;
+    private static StreamWriter? LogWriter;
+    private static System.Timers.Timer? Timer;
 
     internal static void Initialize()
     {
@@ -29,14 +29,14 @@ internal static class Logging
         }
 
         string logfilePath = Path.Combine(LogPath, $"ChatManager_{LogSession}.log");
-        logWriter = new(logfilePath, true);
+        LogWriter = new(logfilePath, true);
         Write(LogEventEnum.Info, ProgramClassEnum.Logging, "Logging started");
         Write(LogEventEnum.Info, ProgramClassEnum.Logging, $"Application version is: {Application.ProductVersion}");
 
         // Add Timer to write any second all open entries in the log
-        timer = new(10000);
-        timer.Elapsed += TimerElapsed;
-        timer.Start();
+        Timer = new(10000);
+        Timer.Elapsed += TimerElapsed;
+        Timer.Start();
 
         LogfilesCleaning();
     }
@@ -69,13 +69,13 @@ internal static class Logging
     // Stop logWriter and restart it
     private static void TimerElapsed(object? sender, ElapsedEventArgs e)
     {
-        if (logWriter != null)
+        if (LogWriter != null)
         {
-            lock (logWriter)
+            lock (LogWriter)
             {
-                logWriter.Flush();
-                logWriter.Close();
-                logWriter = new(Path.Combine(LogPath, $"ChatManager_{LogSession}.log"), true);
+                LogWriter.Flush();
+                LogWriter.Close();
+                LogWriter = new(Path.Combine(LogPath, $"ChatManager_{LogSession}.log"), true);
             }
         }
     }
@@ -96,9 +96,9 @@ internal static class Logging
             _ => "UNCATEGORIZED"
         };
 
-        if (logWriter != null)
+        if (LogWriter != null)
         {
-            logWriter.WriteLine($"[{DateTime.Now:HH:mm:ss}] => {Event} on {ProgramClass}: {Message}");
+            LogWriter.WriteLine($"[{DateTime.Now:HH:mm:ss}] => {Event} on {ProgramClass}: {Message}");
         }
         else
         {
@@ -108,12 +108,12 @@ internal static class Logging
 
     internal static void Dispose()
     {
-        if (logWriter != null)
+        if (LogWriter != null)
         {
-            timer?.Stop();
+            Timer?.Stop();
             Write(LogEventEnum.Info, ProgramClassEnum.Logging, "Logging stopped");
-            logWriter.Flush();
-            logWriter.Close();
+            LogWriter.Flush();
+            LogWriter.Close();
         }
     }
 }

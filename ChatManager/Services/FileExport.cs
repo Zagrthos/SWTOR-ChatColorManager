@@ -10,15 +10,15 @@ internal class FileExport
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileExport, "FileExport Constructor created");
         GetNumberOfChangedFiles = 0;
-        selectedServers = servers;
-        fileNames = files;
+        SelectedServers = servers;
+        FileNames = files;
     }
 
-    private static readonly bool backupAvailability = GetSetSettings.GetBackupAvailability;
-    private static readonly string backupPath = GetSetSettings.GetBackupPath;
+    private static readonly bool BackupAvailability = GetSetSettings.GetBackupAvailability;
+    private static readonly string BackupPath = GetSetSettings.GetBackupPath;
 
-    private readonly string[] selectedServers;
-    private readonly string[] fileNames;
+    private readonly string[] SelectedServers;
+    private readonly string[] FileNames;
 
     // Is used for positioning the characters in the array
     internal int GetNumberOfChangedFiles { get; private set; }
@@ -28,20 +28,20 @@ internal class FileExport
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileExport, "BackupFilesAndWrite entered");
 
         // Check if backupDir exists and if not show a warning Box
-        if (!backupAvailability)
+        if (!BackupAvailability)
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
             ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_BackupDirMissing));
         }
 
         // Check if the user selected any characters
-        if (fileNames.Length != 0)
+        if (FileNames.Length != 0)
         {
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileExport, "fileNames Array selected");
 
             string timestamp = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd_HH-mm-ss");
 
-            string deeperBackup = Path.Combine(backupPath, timestamp);
+            string deeperBackup = Path.Combine(BackupPath, timestamp);
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Create new backup Folder with timestamp: {deeperBackup}");
 
             Directory.CreateDirectory(deeperBackup);
@@ -76,7 +76,7 @@ internal class FileExport
                     //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current newPath is: {newPath}");
 
                     // Copy only if the dir is present
-                    if (backupAvailability)
+                    if (BackupAvailability)
                     {
                         File.Copy(path, newPath, true);
                         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"File {name[i, 0]} copied to: {newPath}");
@@ -177,7 +177,7 @@ internal class FileExport
         string[,] namesWithServers = new string[1000, 3];
 
         // Loop through all servers
-        foreach (string server in selectedServers)
+        foreach (string server in SelectedServers)
         {
             // If server is not filled stop it
             if (string.IsNullOrEmpty(server))
@@ -191,7 +191,7 @@ internal class FileExport
             string[,] name = fileImport.GetArray(server);
 
             // Loop through and check them
-            for (int i = 0; i < fileNames.Length; i++)
+            for (int i = 0; i < FileNames.Length; i++)
             {
                 // i is used to identify the name of the available characters
 
@@ -200,16 +200,16 @@ internal class FileExport
                 {
                     // j is used to identify the selected filename by the user
 
-                    if (GetNumberOfChangedFiles > fileNames.Length || GetNumberOfChangedFiles == fileNames.Length)
+                    if (GetNumberOfChangedFiles > FileNames.Length || GetNumberOfChangedFiles == FileNames.Length)
                     {
                         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"arrayCounter is: {GetNumberOfChangedFiles}");
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"fileNames.Length is: {fileNames.Length}");
+                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"fileNames.Length is: {FileNames.Length}");
 
                         break;
                     }
 
                     // Get the path
-                    string file = fileNames[GetNumberOfChangedFiles];
+                    string file = FileNames[GetNumberOfChangedFiles];
                     //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current file is: {file}");
 
                     // Get the filename
@@ -240,7 +240,7 @@ internal class FileExport
                         if (!string.IsNullOrEmpty(name[j, 1]))
                         {
                             // the fileName
-                            namesWithServers[GetNumberOfChangedFiles, 0] = fileNames[GetNumberOfChangedFiles];
+                            namesWithServers[GetNumberOfChangedFiles, 0] = FileNames[GetNumberOfChangedFiles];
 
                             // the filePath
                             namesWithServers[GetNumberOfChangedFiles, 1] = name[j, 1];
@@ -248,7 +248,7 @@ internal class FileExport
                             // the server
                             namesWithServers[GetNumberOfChangedFiles, 2] = server;
 
-                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"{fileNames[GetNumberOfChangedFiles]}");
+                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"{FileNames[GetNumberOfChangedFiles]}");
 
                             GetNumberOfChangedFiles++;
 

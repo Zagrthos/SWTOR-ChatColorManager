@@ -16,10 +16,10 @@ internal partial class SettingsForm : Form
         GetLanguageChanged = false;
     }
 
-    private bool cbLanguageFalseAlarm = false;
-    private bool cbUpdaterIntervallFalseAlarm = false;
-    private bool checkBoxFalseAlarm = false;
-    private decimal currentAutosaveInterval = 0;
+    private bool CbLanguageFalseAlarm = false;
+    private bool CbUpdaterIntervallFalseAlarm = false;
+    private bool CheckBoxFalseAlarm = false;
+    private decimal CurrentAutosaveInterval = 0;
 
     internal bool GetAutosaveTimerChanged { get; private set; } = false;
     internal bool GetLanguageChanged { get; private set; } = false;
@@ -92,17 +92,17 @@ internal partial class SettingsForm : Form
         switch (GetSetSettings.GetCurrentLocale)
         {
             case "de":
-                cbLanguageFalseAlarm = true;
+                CbLanguageFalseAlarm = true;
                 cbLanguage.SelectedIndex = 2;
                 break;
 
             case "en":
-                cbLanguageFalseAlarm = true;
+                CbLanguageFalseAlarm = true;
                 cbLanguage.SelectedIndex = 0;
                 break;
 
             case "fr":
-                cbLanguageFalseAlarm = true;
+                CbLanguageFalseAlarm = true;
                 cbLanguage.SelectedIndex = 1;
                 break;
 
@@ -112,7 +112,7 @@ internal partial class SettingsForm : Form
 
         if (GetSetSettings.GetAutosave)
         {
-            checkBoxFalseAlarm = true;
+            CheckBoxFalseAlarm = true;
             chbAutosave.Checked = true;
             numberAutosaveInterval.Enabled = true;
             numberAutosaveInterval.Visible = true;
@@ -130,17 +130,17 @@ internal partial class SettingsForm : Form
 
         if (numberAutosaveInterval.Enabled)
         {
-            currentAutosaveInterval = GetSetSettings.GetAutosaveInterval / 60000;
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"currentAutosaveInterval: {currentAutosaveInterval}");
+            CurrentAutosaveInterval = GetSetSettings.GetAutosaveInterval / 60000;
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"currentAutosaveInterval: {CurrentAutosaveInterval}");
 
-            if (currentAutosaveInterval == 0)
+            if (CurrentAutosaveInterval == 0)
             {
                 numberAutosaveInterval.Value = 1;
                 SetAutosaveInterval();
             }
             else
             {
-                numberAutosaveInterval.Value = currentAutosaveInterval;
+                numberAutosaveInterval.Value = CurrentAutosaveInterval;
             }
         }
 
@@ -169,17 +169,17 @@ internal partial class SettingsForm : Form
         switch (GetSetSettings.GetUpdateInterval)
         {
             case nameof(UpdateEnum.OnStartup):
-                cbUpdaterIntervallFalseAlarm = true;
+                CbUpdaterIntervallFalseAlarm = true;
                 cbUpdateInterval.SelectedIndex = 0;
                 break;
 
             case nameof(UpdateEnum.Daily):
-                cbUpdaterIntervallFalseAlarm = true;
+                CbUpdaterIntervallFalseAlarm = true;
                 cbUpdateInterval.SelectedIndex = 1;
                 break;
 
             case nameof(UpdateEnum.Weekly):
-                cbUpdaterIntervallFalseAlarm = true;
+                CbUpdaterIntervallFalseAlarm = true;
                 cbUpdateInterval.SelectedIndex = 2;
                 break;
 
@@ -199,9 +199,9 @@ internal partial class SettingsForm : Form
 
     private void SwitchCurrentLocale()
     {
-        if (cbLanguageFalseAlarm)
+        if (CbLanguageFalseAlarm)
         {
-            cbLanguageFalseAlarm = false;
+            CbLanguageFalseAlarm = false;
             return;
         }
 
@@ -231,9 +231,9 @@ internal partial class SettingsForm : Form
 
     private void SwitchUpdateInterval()
     {
-        if (cbUpdaterIntervallFalseAlarm)
+        if (CbUpdaterIntervallFalseAlarm)
         {
-            cbUpdaterIntervallFalseAlarm = false;
+            CbUpdaterIntervallFalseAlarm = false;
             return;
         }
 
@@ -355,7 +355,7 @@ internal partial class SettingsForm : Form
                     numberAutosaveInterval.Visible = true;
                     lblAutosaveInterval.Enabled = true;
                     lblAutosaveInterval.Visible = true;
-                    if (!checkBoxFalseAlarm)
+                    if (!CheckBoxFalseAlarm)
                     {
                         SetAutosaveInterval();
                     }
@@ -405,7 +405,7 @@ internal partial class SettingsForm : Form
         GetSetSettings.SaveSettings(SettingsEnum.autosaveInterval, numberAutosaveInterval.Value * 60000);
         Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, $"AutosaveInterval = {numberAutosaveInterval.Value}");
 
-        if (numberAutosaveInterval.Value != currentAutosaveInterval)
+        if (numberAutosaveInterval.Value != CurrentAutosaveInterval)
         {
             GetAutosaveTimerChanged = true;
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"autosaveTimerChanged = {GetAutosaveTimerChanged}");
