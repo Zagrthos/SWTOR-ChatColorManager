@@ -207,6 +207,7 @@ internal partial class MainForm : Form
     /// <summary>
     /// Import the colorIndexes from the given File into all <seealso cref="TextBox"/>es.
     /// </summary>
+    /// <exception cref="InvalidOperationException">Throws when the file name is empty.</exception>
     private void ImportFile(object sender, EventArgs e)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ImportFile entered");
@@ -219,7 +220,7 @@ internal partial class MainForm : Form
 
         if (string.IsNullOrWhiteSpace(selectedFile))
         {
-            return;
+            throw new InvalidOperationException("File is empty!");
         }
 
         // Get the whole Character List for the requested name
@@ -600,7 +601,7 @@ internal partial class MainForm : Form
                 {
                     if (moreItems is ToolStripMenuItem moreItem && moreItem.Enabled)
                     {
-                        moreItem.Text = localization.GetString(menuItem.Name ?? throw new InvalidOperationException("MenuItem.Name is null"));
+                        moreItem.Text = localization.GetString(moreItem.Name ?? throw new InvalidOperationException("MenuItem.Name is null"));
                     }
                 }
             }
