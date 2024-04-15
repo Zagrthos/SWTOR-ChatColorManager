@@ -533,13 +533,10 @@ internal partial class MainForm : Form
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Checking for empty textBoxes...");
         foreach (Control control in textBoxes)
         {
-            if (control is TextBox textBox)
+            if (control is TextBox textBox && string.IsNullOrEmpty(textBox.Text))
             {
-                if (string.IsNullOrEmpty(textBox.Text))
-                {
-                    counter++;
-                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"counter: {counter}");
-                }
+                counter++;
+                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"counter: {counter}");
             }
         }
 

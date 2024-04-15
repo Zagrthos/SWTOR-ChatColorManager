@@ -73,40 +73,37 @@ internal class FileImport
                 //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"currentFile: {i}");
                 string[] fileParts = charFileNames[i]!.Split("_");
 
-                if (fileParts.Length == 3)
+                if (fileParts.Length == 3 && fileParts[2] == "PlayerGUIState.ini")
                 {
-                    if (fileParts[2] == "PlayerGUIState.ini")
+                    if (fileParts[0] == "he3000")
                     {
-                        if (fileParts[0] == "he3000")
-                        {
-                            StarForgeArray[starForgeCounter, 0] = fileParts[1];
-                            StarForgeArray[starForgeCounter, 1] = charFilePaths[i];
-                            starForgeCounter++;
-                        }
-                        else if (fileParts[0] == "he3001")
-                        {
-                            SateleShanArray[sateleShanCounter, 0] = fileParts[1];
-                            SateleShanArray[sateleShanCounter, 1] = charFilePaths[i];
-                            sateleShanCounter++;
-                        }
-                        else if (fileParts[0] == "he4000")
-                        {
-                            DarthMalgusArray[darthMalgusCounter, 0] = fileParts[1];
-                            DarthMalgusArray[darthMalgusCounter, 1] = charFilePaths[i];
-                            darthMalgusCounter++;
-                        }
-                        else if (fileParts[0] == "he4001")
-                        {
-                            TulakHordArray[tulakHordCounter, 0] = fileParts[1];
-                            TulakHordArray[tulakHordCounter, 1] = charFilePaths[i];
-                            tulakHordCounter++;
-                        }
-                        else if (fileParts[0] == "he4002")
-                        {
-                            TheLeviathanArray[theLeviathanCounter, 0] = fileParts[1];
-                            TheLeviathanArray[theLeviathanCounter, 1] = charFilePaths[i];
-                            theLeviathanCounter++;
-                        }
+                        StarForgeArray[starForgeCounter, 0] = fileParts[1];
+                        StarForgeArray[starForgeCounter, 1] = charFilePaths[i];
+                        starForgeCounter++;
+                    }
+                    else if (fileParts[0] == "he3001")
+                    {
+                        SateleShanArray[sateleShanCounter, 0] = fileParts[1];
+                        SateleShanArray[sateleShanCounter, 1] = charFilePaths[i];
+                        sateleShanCounter++;
+                    }
+                    else if (fileParts[0] == "he4000")
+                    {
+                        DarthMalgusArray[darthMalgusCounter, 0] = fileParts[1];
+                        DarthMalgusArray[darthMalgusCounter, 1] = charFilePaths[i];
+                        darthMalgusCounter++;
+                    }
+                    else if (fileParts[0] == "he4001")
+                    {
+                        TulakHordArray[tulakHordCounter, 0] = fileParts[1];
+                        TulakHordArray[tulakHordCounter, 1] = charFilePaths[i];
+                        tulakHordCounter++;
+                    }
+                    else if (fileParts[0] == "he4002")
+                    {
+                        TheLeviathanArray[theLeviathanCounter, 0] = fileParts[1];
+                        TheLeviathanArray[theLeviathanCounter, 1] = charFilePaths[i];
+                        theLeviathanCounter++;
                     }
                 }
             }
