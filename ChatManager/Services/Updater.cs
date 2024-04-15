@@ -162,8 +162,8 @@ internal static partial class Updater
         GetUpdateDownloadText = localization.GetString(LocalizationEnum.downloadProgressToolStripMenuItem);
 
         // Download the file and then log the progress
-        using (FileStream filestream = new(UpdatePath, FileMode.Create, FileAccess.Write, FileShare.None))
-        using (Stream stream = await responseMessage.Content.ReadAsStreamAsync())
+        await using (FileStream filestream = new(UpdatePath, FileMode.Create, FileAccess.Write, FileShare.None))
+        await using (Stream stream = await responseMessage.Content.ReadAsStreamAsync())
         {
             byte[] buffer = new byte[65536];
             long totalBytesRead = 0;
@@ -222,7 +222,7 @@ internal static partial class Updater
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineHash is: {onlineHash}");
 
         string localHash = string.Empty;
-        using (FileStream stream = File.OpenRead(filePath))
+        await using (FileStream stream = File.OpenRead(filePath))
         {
             using var sha256 = SHA256.Create();
             byte[] byteHash = sha256.ComputeHash(stream);
