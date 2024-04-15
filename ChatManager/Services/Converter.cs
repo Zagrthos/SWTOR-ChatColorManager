@@ -13,7 +13,7 @@ internal partial class Converter
     /// </summary>
     /// <param name="rgb">The <seealso cref="Color"/> to be converted.</param>
     /// <returns>The <see langword="string"/> in Hex.</returns>
-    internal static string RGBtoHex(Color rgb)
+    internal static string RGBtoHex(in Color rgb)
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, "Try to convert RGB into Hex");
         string hex = $"{rgb.R:X2}{rgb.G:X2}{rgb.B:X2}";

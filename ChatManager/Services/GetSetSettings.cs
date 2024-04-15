@@ -147,7 +147,7 @@ internal static class GetSetSettings
         Settings.Default.Save();
     }
 
-    internal static void SaveSettings(SettingsEnum settingName, DateTime value)
+    internal static void SaveSettings(SettingsEnum settingName, in DateTime value)
     {
         if (settingName == SettingsEnum.lastUpdateCheck)
         {

@@ -10,7 +10,7 @@ namespace ChatManager.Forms;
 
 internal partial class ColorPickerForm : Form
 {
-    internal ColorPickerForm(string text, Color color)
+    internal ColorPickerForm(string text, in Color color)
     {
         InitializeComponent();
         Text = text;

@@ -10,7 +10,7 @@ namespace ChatManager.Services;
 
 internal static class OpenWindows
 {
-    internal static string OpenColorPicker(string text, Color color)
+    internal static string OpenColorPicker(string text, in Color color)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenColorPicker entered");
 
