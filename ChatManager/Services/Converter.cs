@@ -25,7 +25,7 @@ internal partial class Converter
 
         if (hex.IndexOf("#") != -1)
         {
-            hex = hex.Replace("#", "");
+            hex = hex.Replace("#", string.Empty);
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, "Trailing # removed.");
         }
 
@@ -82,7 +82,7 @@ internal partial class Converter
 
     internal static string RemoveWhitespace(string text)
     {
-        return text.Replace(" ", "");
+        return text.Replace(" ", string.Empty);
     }
 
     internal static string LabelToString(string text)
