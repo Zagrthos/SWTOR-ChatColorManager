@@ -342,6 +342,7 @@ internal partial class MainForm : Form
         lblCharName.Text = $"{localization.GetString(lblCharName.Name)} {charText}";
     }
 
+    // TODO: Why is this there???
     private void SetAllColorData(string[] colorIndexes, bool autosaveIntitiated)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "SetAllColorData entered");
