@@ -8,7 +8,7 @@ internal class Autosave
     internal Autosave()
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.Autosave, "Autosave Constructor created");
-        if (PathChecked != true)
+        if (!PathChecked)
         {
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"pathChecked = {PathChecked}");
             PathChecked = Checks.DirectoryCheck(CheckFolderEnum.AutosaveFolder);
