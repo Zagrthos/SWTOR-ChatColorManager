@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
 using ChatManager.Enums;
 
 namespace ChatManager.Services;
@@ -57,7 +56,12 @@ internal class FileImport
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"filePaths: {charFilePaths.Length}");
 
         // Convert all filePaths to fileNames
-        string?[] charFileNames = charFilePaths.Select(Path.GetFileName).ToArray();
+        string[] charFileNames = new string[charFilePaths.Length];
+        for (int i = 0; i < charFilePaths.Length; i++)
+        {
+            charFileNames[i] = Path.GetFileName(charFilePaths[i]);
+        }
+
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"files: {charFileNames.Length}");
 
         byte starForgeCounter = 0;
@@ -201,7 +205,9 @@ internal class FileImport
             colorIndex[1] = colorLines[1];
 
             // Rejoin the array to a string without the first two
-            colorLine = string.Join(";", colorLines.Skip(2));
+            string[] remainingColorLines = new string[colorLines.Length - 2];
+            Array.Copy(colorLines, 2, remainingColorLines, 0, remainingColorLines.Length);
+            colorLine = string.Join(";", remainingColorLines);
         }
 
         // Create new Array out of the line

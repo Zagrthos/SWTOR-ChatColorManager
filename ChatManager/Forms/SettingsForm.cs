@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using ChatManager.Enums;
 using ChatManager.Services;
@@ -34,41 +33,40 @@ internal partial class SettingsForm : Form
         Text = localization.GetString(Name);
 
         // Find all Controls of the desired Type and pack them in a Control List
-        IEnumerable<Control> GetControls(Control parent, Type type)
+        static List<T> GetControls<T>(Control parent) where T : Control
         {
-            IEnumerable<Control> controls = parent.Controls.Cast<Control>();
+            List<T> controls = [];
 
-            return controls
-                .Where(c => c.GetType() == type)
-                .Concat(controls.SelectMany(c => GetControls(c, type)));
+            foreach (Control control in parent.Controls)
+            {
+                if (control is T typedControl)
+                {
+                    controls.Add(typedControl);
+                }
+
+                controls.AddRange(GetControls<T>(control));
+            }
+
+            return controls;
         }
 
-        IEnumerable<Control> groups = GetControls(this, typeof(GroupBox));
-        IEnumerable<Control> checkBoxes = GetControls(this, typeof(CheckBox));
-        IEnumerable<Control> labels = GetControls(this, typeof(Label));
+        List<GroupBox> groups = GetControls<GroupBox>(this);
+        List<CheckBox> checkBoxes = GetControls<CheckBox>(this);
+        List<Label> labels = GetControls<Label>(this);
 
-        foreach (Control control in groups)
+        foreach (GroupBox group in groups)
         {
-            if (control is GroupBox group)
-            {
-                group.Text = localization.GetString(group.Name);
-            }
+            group.Text = localization.GetString(group.Name);
         }
 
-        foreach (Control control in checkBoxes)
+        foreach (CheckBox checkBox in checkBoxes)
         {
-            if (control is CheckBox checkBox)
-            {
-                checkBox.Text = localization.GetString(checkBox.Name);
-            }
+            checkBox.Text = localization.GetString(checkBox.Name);
         }
 
-        foreach (Control control in labels)
+        foreach (Label label in labels)
         {
-            if (control is Label label)
-            {
-                label.Text = localization.GetString(label.Name);
-            }
+            label.Text = localization.GetString(label.Name);
         }
 
         btnResetSettings.Text = localization.GetString(btnResetSettings.Name);

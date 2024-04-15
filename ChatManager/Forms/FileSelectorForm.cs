@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Windows.Forms;
 using ChatManager.Enums;
 using ChatManager.Services;
@@ -39,7 +38,13 @@ internal partial class FileSelectorForm : Form
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "SetTabs entered");
 
         // Create a list of all current TabPages from the tabsFileSelector
-        foreach (TabPage tabPage in tabsFileSelector.TabPages.Cast<TabPage>().ToList())
+        List<TabPage> tabPages = [];
+        foreach (object? page in tabsFileSelector.TabPages)
+        {
+            tabPages.Add((TabPage)page);
+        }
+
+        foreach (TabPage tabPage in tabPages)
         {
             // Compare only the TabName without the "tb" prefix
             string tabServerName = tabPage.Name.Substring(2);
@@ -69,10 +74,24 @@ internal partial class FileSelectorForm : Form
         FileImport fileImport = new();
 
         // Create a list of all current TabPages from the tabsFileSelector
-        foreach (TabPage tabPage in tabsFileSelector.TabPages.Cast<TabPage>().ToList())
+        List<TabPage> tabPages = [];
+        foreach (object? page in tabsFileSelector.TabPages)
+        {
+            tabPages.Add((TabPage)page);
+        }
+
+        foreach (TabPage tabPage in tabPages)
         {
             // Get the TableLayoutPanel on the TabPage
-            TableLayoutPanel? tlp = tabPage.Controls.OfType<TableLayoutPanel>().FirstOrDefault();
+            TableLayoutPanel? tlp = null;
+            foreach (Control control in tabPage.Controls)
+            {
+                if (control is TableLayoutPanel table)
+                {
+                    tlp = table;
+                    break;
+                }
+            }
 
             // If there's a tlp go on
             if (tlp is not null)
@@ -225,24 +244,29 @@ internal partial class FileSelectorForm : Form
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Button Tag is: {button.Tag}");
 
                 // Find the Control...
-                Control? control = Controls.Find(targetListBox, true).FirstOrDefault();
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Control is: {control!.GetType()}");
+                Control? control = null;
+                foreach (Control c in Controls)
+                {
+                    if (c.Name == targetListBox)
+                    {
+                        control = c;
+                        break;
+                    }
+                }
 
                 // ... and if it is a CheckedListBox search for the correct panel
                 if (control is CheckedListBox)
                 {
                     // Get all CheckedListBox Controls
-                    IEnumerable<Control> checkedListBoxes = GetControls(this, typeof(CheckedListBox));
+                    List<CheckedListBox> checkedListBoxes = GetControls<CheckedListBox>(this);
 
                     // Set counter to 0
                     byte counter = 0;
 
                     // Loop all Controls and get the SelectedItems from them
-                    foreach (Control getControl in checkedListBoxes)
+                    foreach (CheckedListBox checkedListBox in checkedListBoxes)
                     {
-                        // Convert them to a CheckListBox
-                        CheckedListBox? checkedListBox = getControl as CheckedListBox;
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"CheckedListBox is: {checkedListBox!.Name}");
+                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"CheckedListBox is: {checkedListBox.Name}");
 
                         // Check if the Controls have ANY checkedItem
                         if (checkedListBox.CheckedItems.Count > 0)
@@ -255,13 +279,14 @@ internal partial class FileSelectorForm : Form
                             counter++;
 
                             // If yes get them all
-                            foreach (object? item in checkedListBox.CheckedItems)
+                            foreach (object item in checkedListBox.CheckedItems)
                             {
                                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Current item is: {item}");
 
-                                if (item is not null)
+                                string? objectString = item?.ToString();
+                                if (!string.IsNullOrWhiteSpace(objectString))
                                 {
-                                    GetListBoxMulti.Add(item.ToString()!);
+                                    GetListBoxMulti.Add(objectString);
                                 }
                             }
                         }
@@ -278,9 +303,9 @@ internal partial class FileSelectorForm : Form
                 {
                     Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"ListBox is: {listBox.Name}");
 
-                    string charName = listBox.SelectedItem!.ToString()!;
+                    string? charName = listBox.SelectedItem?.ToString();
                     string listBoxNaming = listBox.Name;
-                    if (!string.IsNullOrEmpty(charName) && !string.IsNullOrEmpty(listBoxNaming))
+                    if (!string.IsNullOrWhiteSpace(charName) && !string.IsNullOrWhiteSpace(listBoxNaming))
                     {
                         GetListBoxString = charName;
                         GetListBoxName = listBoxNaming;
@@ -360,18 +385,26 @@ internal partial class FileSelectorForm : Form
     }
 
     /// <summary>
-    /// Find all <seealso cref="Control"/>s of the desired <seealso cref="Type"/> and pack them in an <seealso cref="IEnumerable{Control}"/>.
+    /// Find all <seealso cref="Control"/>s of the desired <seealso cref="Type"/>.
     /// </summary>
-    /// <param name="parent">The parent control.</param>
-    /// <param name="type">The control type.</param>
-    /// <returns>An <seealso cref="IEnumerable{Control}"/> of the found controls.</returns>
-    private IEnumerable<Control> GetControls(Control parent, Type type)
+    /// <typeparam name="T">The <seealso cref="Control"/> <seealso cref="Type"/>.</typeparam>
+    /// <param name="parent">The parent <seealso cref="Control"/>.</param>
+    /// <returns>A <seealso cref="List{T}"/>.</returns>
+    private List<T> GetControls<T>(Control parent) where T : Control
     {
-        IEnumerable<Control> controls = parent.Controls.Cast<Control>();
+        List<T> controls = [];
 
-        return controls
-            .Where(c => c.GetType() == type)
-            .Concat(controls.SelectMany(c => GetControls(c, type)));
+        foreach (Control control in parent.Controls)
+        {
+            if (control is T typedControl)
+            {
+                controls.Add(typedControl);
+            }
+
+            controls.AddRange(GetControls<T>(control));
+        }
+
+        return controls;
     }
 
     /// <summary>
@@ -383,17 +416,14 @@ internal partial class FileSelectorForm : Form
 
         if (IsSave)
         {
-            foreach (Control control in GetControls(this, typeof(Button)))
+            foreach (Button button in GetControls<Button>(this))
             {
-                if (control is Button button)
-                {
-                    string parent = button.Parent!.Name.Substring(3);
+                string parent = button.Parent!.Name.Substring(3);
 
-                    if (button.Name == $"btn{parent}Select")
-                    {
-                        button.Tag = $"c{button.Tag}";
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"New Tag of {button.Name}: {button.Tag}");
-                    }
+                if (button.Name == $"btn{parent}Select")
+                {
+                    button.Tag = $"c{button.Tag}";
+                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"New Tag of {button.Name}: {button.Tag}");
                 }
             }
         }
@@ -410,12 +440,9 @@ internal partial class FileSelectorForm : Form
         // Change the Text of the Form
         Text = localization.GetString(Name);
 
-        foreach (Control control in GetControls(this, typeof(Button)))
+        foreach (Button button in GetControls<Button>(this))
         {
-            if (control is Button button)
-            {
-                button.Text = localization.GetString(button.Name);
-            }
+            button.Text = localization.GetString(button.Name);
         }
     }
 }

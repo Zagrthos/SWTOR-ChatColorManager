@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 using ChatManager.Enums;
 using ChatManager.Services;
@@ -306,7 +305,21 @@ internal partial class BackupSelectorForm : Form
             }
 
             // Get all the checked items in an array
-            string[] checkedItems = clbxBackupFiles.CheckedItems.Cast<string>().ToArray();
+            string[] checkedItems = new string[clbxBackupFiles.CheckedItems.Count];
+            for (int i = 0; i < checkedItems.Length; i++)
+            {
+                string? item = clbxBackupFiles.CheckedItems[i]?.ToString();
+
+                if (!string.IsNullOrWhiteSpace(item))
+                {
+                    checkedItems[i] = item;
+                }
+                else
+                {
+                    throw new InvalidOperationException($"{nameof(item)}[{i}] is null!");
+                }
+            }
+
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"checkedItems: {checkedItems.Length}");
 
             string localPath = GetSetSettings.GetLocalPath;
@@ -346,29 +359,34 @@ internal partial class BackupSelectorForm : Form
 
         Text = localization.GetString(Name);
 
-        IEnumerable<Control> GetControls(Control parent, Type type)
+        static List<T> GetControls<T>(Control parent) where T : Control
         {
-            IEnumerable<Control> controls = parent.Controls.Cast<Control>();
+            List<T> controls = [];
 
-            return controls
-                .Where(c => c.GetType() == type)
-                .Concat(controls.SelectMany(c => GetControls(c, type)));
-        }
-
-        IEnumerable<Control> buttons = GetControls(this, typeof(Button));
-        IEnumerable<Control> labels = GetControls(this, typeof(Label));
-
-        foreach (Control control in buttons)
-        {
-            if (control is Button button)
+            foreach (Control control in parent.Controls)
             {
-                button.Text = localization.GetString(button.Name);
+                if (control is T typedControl)
+                {
+                    controls.Add(typedControl);
+                }
+
+                controls.AddRange(GetControls<T>(control));
             }
+
+            return controls;
         }
 
-        foreach (Control control in labels)
+        List<Button> buttons = GetControls<Button>(this);
+        List<Label> labels = GetControls<Label>(this);
+
+        foreach (Button button in buttons)
         {
-            if (control is Label label && label.Name != lblDateConvertion.Name)
+            button.Text = localization.GetString(button.Name);
+        }
+
+        foreach (Label label in labels)
+        {
+            if (label.Name != lblDateConvertion.Name)
             {
                 label.Text = localization.GetString(label.Name);
             }
