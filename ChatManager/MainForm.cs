@@ -765,10 +765,12 @@ internal partial class MainForm : Form
         DownloadProgressReporter.DownloadProgressChanged += DownloadProgressReporter_DownloadProgressChanged;
 
 #if !DEBUG
-        if (Checks.CheckForInternetConnection())
+        if (!Checks.CheckForInternetConnection())
         {
-            await Updater.CheckForUpdateInterval();
+            return;
         }
+
+        await Updater.CheckForUpdateIntervalAsync();
 #endif
     }
 
