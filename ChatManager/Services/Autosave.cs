@@ -1,8 +1,10 @@
-﻿using System.IO;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using ChatManager.Enums;
 
 namespace ChatManager.Services;
 
+[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Right now there is no static needed.")]
 internal class Autosave
 {
     internal Autosave()

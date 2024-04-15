@@ -11,6 +11,7 @@ using ChatManager.Services;
 
 namespace ChatManager;
 
+[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Right now there is no static needed.")]
 internal partial class MainForm : Form
 {
     internal MainForm() => InitializeComponent();

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Forms;
 using ChatManager.Enums;
@@ -8,6 +8,7 @@ using ChatManager.Services;
 
 namespace ChatManager.Forms;
 
+[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Right now there is no static needed.")]
 internal partial class FileSelectorForm : Form
 {
     internal FileSelectorForm(List<string> servers, bool save)
