@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -360,6 +361,7 @@ internal partial class MainForm : Form
         tbGroupInfo.Text = colorIndexes[22];
     }
 
+    [SuppressMessage("Style", "IDE0300:Use collection expression for array", Justification = "This is better for readability.")]
     private string[] GetAllColorData()
     {
         string[] colorData = new string[100];

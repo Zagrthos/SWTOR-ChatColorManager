@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -134,6 +135,7 @@ internal partial class AboutForm : Form
     }
 
     [DllImport("user32.dll", EntryPoint = "HideCaret")]
+    [SuppressMessage("Interoperability", "SYSLIB1054:Use 'LibraryImportAttribute' instead of 'DllImportAttribute' to generate P/Invoke marshalling code at compile time", Justification = "No unsafe Code.")]
     private static extern bool HideCaret(IntPtr hWnd);
 
     private void RtbCompany_GotFocus(object sender, EventArgs e) => HideCaret(rtbCompany.Handle);
