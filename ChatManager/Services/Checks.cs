@@ -7,21 +7,17 @@ using Windows.Networking.Connectivity;
 
 namespace ChatManager.Services;
 
-internal static class Checks
+internal static partial class Checks
 {
+    [GeneratedRegex("^#?([a-fA-F0-9]{6})$")]
+    private static partial Regex CheckHexRegex();
+
     /// <summary>
     /// Check if the <see langword="string"/> is a Hex Text.
     /// </summary>
     /// <param name="input">The <seealso langword="string"/> to be checked.</param>
     /// <returns><see langword="true"/> if succeeded, <see langword="false"/> if not.</returns>
-    internal static bool CheckHexString(string input)
-    {
-        // Define Hex Regex
-        const string hexPattern = "^#?([a-fA-F0-9]{6})$";
-
-        // Check the String
-        return Regex.IsMatch(input, hexPattern);
-    }
+    internal static bool CheckHexString(string input) => CheckHexRegex().IsMatch(input);
 
     /// <summary>
     /// Check if SWTOR is running.
