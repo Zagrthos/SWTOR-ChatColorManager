@@ -1,18 +1,17 @@
-﻿namespace ChatManager.Enums
+﻿namespace ChatManager.Enums;
+
+internal enum SettingsEnum
 {
-    internal enum SettingsEnum
-    {
-        autosave,
-        autosaveAvailability,
-        autosaveInterval,
-        backupAvailability,
-        lastUpdateCheck,
-        lastUpdatePath,
-        locale,
-        reloadOnStartup,
-        saveOnClose,
-        settingsUpgradeRequired,
-        updateDownload,
-        updateInterval
-    }
+    autosave,
+    autosaveAvailability,
+    autosaveInterval,
+    backupAvailability,
+    lastUpdateCheck,
+    lastUpdatePath,
+    locale,
+    reloadOnStartup,
+    saveOnClose,
+    settingsUpgradeRequired,
+    updateDownload,
+    updateInterval
 }

@@ -6,72 +6,71 @@ using System.Drawing.Text;
 using System.IO;
 using System.Windows.Forms;
 
-namespace ChatManager.Forms
+namespace ChatManager.Forms;
+
+internal partial class ColorPickerForm : Form
 {
-    internal partial class ColorPickerForm : Form
+    internal ColorPickerForm(string text, Color color)
     {
-        internal ColorPickerForm(string text, Color color)
-        {
-            InitializeComponent();
-            Text = text;
-            colorEditor.Color = color;
-            nbFontSize.Value = 9;
-            Localize();
-        }
+        InitializeComponent();
+        Text = text;
+        colorEditor.Color = color;
+        nbFontSize.Value = 9;
+        Localize();
+    }
 
-        private string hexColor = string.Empty;
-        internal string GetHexColor => hexColor;
+    private string hexColor = string.Empty;
+    internal string GetHexColor => hexColor;
 
-        private void ColorChanged(object sender, EventArgs e)
-        {
-            lblExample.ForeColor = colorEditor.Color;
-        }
+    private void ColorChanged(object sender, EventArgs e)
+    {
+        lblExample.ForeColor = colorEditor.Color;
+    }
 
-        private void ChangeFont(float fontSize)
-        {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.ColorPickerForm, "ChangeFont entered");
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ColorPickerForm, $"FontSize: {fontSize}");
+    private void ChangeFont(float fontSize)
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.ColorPickerForm, "ChangeFont entered");
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ColorPickerForm, $"FontSize: {fontSize}");
 
-            PrivateFontCollection fontCollection = new();
+        PrivateFontCollection fontCollection = new();
 
-            fontCollection.AddFontFile(Path.Combine(Application.StartupPath, "Resources", "Font.ttf"));
+        fontCollection.AddFontFile(Path.Combine(Application.StartupPath, "Resources", "Font.ttf"));
 
-            Font swtorFont = new(fontCollection.Families[0], fontSize);
+        Font swtorFont = new(fontCollection.Families[0], fontSize);
 
-            lblExample.Font = swtorFont;
-        }
+        lblExample.Font = swtorFont;
+    }
 
-        private void FontSizeChanged(object sender, EventArgs e)
-        {
-            ChangeFont((float)nbFontSize.Value);
-        }
+    private void FontSizeChanged(object sender, EventArgs e)
+    {
+        ChangeFont((float)nbFontSize.Value);
+    }
 
-        private void ColorPickerForm_Load(object sender, EventArgs e)
-        {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm is starting as: {Text}");
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
-        }
+    private void ColorPickerForm_Load(object sender, EventArgs e)
+    {
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm is starting as: {Text}");
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
+    }
 
-        private void ColorPickerForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm: {Text} is closing");
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
-            hexColor = Converter.RGBtoHexAsync(colorEditor.Color);
-        }
+    private void ColorPickerForm_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm: {Text} is closing");
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
+        hexColor = Converter.RGBtoHexAsync(colorEditor.Color);
+    }
 
-        private void ColorPickerForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm: {Text} closed");
-        }
+    private void ColorPickerForm_FormClosed(object sender, FormClosedEventArgs e)
+    {
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm: {Text} closed");
+    }
 
-        private void Localize()
-        {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.ColorPickerForm, "Localize entered");
+    private void Localize()
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.ColorPickerForm, "Localize entered");
 
-            Localization localization = new(GetSetSettings.GetCurrentLocale);
+        Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-            lblExample.Text = localization.GetString(lblExample.Name);
-            lblFontSize.Text = localization.GetString(lblFontSize.Name);
-        }
+        lblExample.Text = localization.GetString(lblExample.Name);
+        lblFontSize.Text = localization.GetString(lblFontSize.Name);
     }
 }

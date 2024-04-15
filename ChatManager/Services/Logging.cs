@@ -4,117 +4,116 @@ using System.IO;
 using System.Timers;
 using System.Windows.Forms;
 
-namespace ChatManager.Services
+namespace ChatManager.Services;
+
+internal static class Logging
 {
-    internal static class Logging
+    private static readonly string LogSession = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+    private static readonly string LogPath = GetSetSettings.GetLogPath;
+    private static StreamWriter? logWriter;
+    private static System.Timers.Timer? timer;
+
+    internal static void Initialize()
     {
-        private static readonly string LogSession = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-        private static readonly string LogPath = GetSetSettings.GetLogPath;
-        private static StreamWriter? logWriter;
-        private static System.Timers.Timer? timer;
-
-        internal static void Initialize()
+        if (!Directory.Exists(LogPath))
         {
-            if (!Directory.Exists(LogPath))
+            try
             {
-                try
-                {
-                    Directory.CreateDirectory(LogPath);
-                }
-                catch (Exception ex)
-                {
-                    ShowMessageBox.ShowLoggingBug(ex.Message);
-                    Environment.Exit(0);
-                }
+                Directory.CreateDirectory(LogPath);
             }
-
-            string logfilePath = Path.Combine(LogPath, $"ChatManager_{LogSession}.log");
-            logWriter = new(logfilePath, true);
-            Write(LogEventEnum.Info, ProgramClassEnum.Logging, "Logging started");
-            Write(LogEventEnum.Info, ProgramClassEnum.Logging, $"Application version is: {Application.ProductVersion}");
-
-            // Add Timer to write any second all open entries in the log
-            timer = new(10000);
-            timer.Elapsed += TimerElapsed;
-            timer.Start();
-
-            LogfilesCleaning();
-        }
-
-        // Logfile Cleaning
-        private static void LogfilesCleaning()
-        {
-            Write(LogEventEnum.Method, ProgramClassEnum.Logging, "LogfilesCleaning entered");
-
-            string logPath = GetSetSettings.GetLogPath;
-
-            DateTime dateSevenDaysAgo = DateTime.Today.AddDays(-7);
-
-            string[] logFiles = Directory.GetFiles(logPath);
-
-            int counter = 0;
-
-            foreach (string file in logFiles)
+            catch (Exception ex)
             {
-                if (File.GetLastWriteTime(file) < dateSevenDaysAgo)
-                {
-                    File.Delete(file);
-                    counter++;
-                }
-            }
-
-            Write(LogEventEnum.Info, ProgramClassEnum.Logging, $"{counter} logs deleted");
-        }
-
-        // Stop logWriter and restart it
-        private static void TimerElapsed(object? sender, ElapsedEventArgs e)
-        {
-            if (logWriter != null)
-            {
-                lock (logWriter)
-                {
-                    logWriter.Flush();
-                    logWriter.Close();
-                    logWriter = new(Path.Combine(LogPath, $"ChatManager_{LogSession}.log"), true);
-                }
+                ShowMessageBox.ShowLoggingBug(ex.Message);
+                Environment.Exit(0);
             }
         }
 
-        internal static void Write(LogEventEnum Level, ProgramClassEnum ProgramClass, string Message)
-        {
-            string Event = Level switch
-            {
-                LogEventEnum.Info => "INFO",
-                LogEventEnum.Warning => "WARNING",
-                LogEventEnum.Error => "ERROR",
-                LogEventEnum.Variable => "VARIABLE",
-                LogEventEnum.Method => "METHOD",
-                LogEventEnum.Control => "CONTROL",
-                LogEventEnum.ExMessage => "EXECPTION",
-                LogEventEnum.BoxMessage => "MESSAGE-BOX",
-                LogEventEnum.Setting => "SETTING",
-                _ => "UNCATEGORIZED"
-            };
+        string logfilePath = Path.Combine(LogPath, $"ChatManager_{LogSession}.log");
+        logWriter = new(logfilePath, true);
+        Write(LogEventEnum.Info, ProgramClassEnum.Logging, "Logging started");
+        Write(LogEventEnum.Info, ProgramClassEnum.Logging, $"Application version is: {Application.ProductVersion}");
 
-            if (logWriter != null)
+        // Add Timer to write any second all open entries in the log
+        timer = new(10000);
+        timer.Elapsed += TimerElapsed;
+        timer.Start();
+
+        LogfilesCleaning();
+    }
+
+    // Logfile Cleaning
+    private static void LogfilesCleaning()
+    {
+        Write(LogEventEnum.Method, ProgramClassEnum.Logging, "LogfilesCleaning entered");
+
+        string logPath = GetSetSettings.GetLogPath;
+
+        DateTime dateSevenDaysAgo = DateTime.Today.AddDays(-7);
+
+        string[] logFiles = Directory.GetFiles(logPath);
+
+        int counter = 0;
+
+        foreach (string file in logFiles)
+        {
+            if (File.GetLastWriteTime(file) < dateSevenDaysAgo)
             {
-                logWriter.WriteLine($"[{DateTime.Now:HH:mm:ss}] => {Event} on {ProgramClass}: {Message}");
-            }
-            else
-            {
-                Initialize();
+                File.Delete(file);
+                counter++;
             }
         }
 
-        internal static void Dispose()
+        Write(LogEventEnum.Info, ProgramClassEnum.Logging, $"{counter} logs deleted");
+    }
+
+    // Stop logWriter and restart it
+    private static void TimerElapsed(object? sender, ElapsedEventArgs e)
+    {
+        if (logWriter != null)
         {
-            if (logWriter != null)
+            lock (logWriter)
             {
-                timer?.Stop();
-                Write(LogEventEnum.Info, ProgramClassEnum.Logging, "Logging stopped");
                 logWriter.Flush();
                 logWriter.Close();
+                logWriter = new(Path.Combine(LogPath, $"ChatManager_{LogSession}.log"), true);
             }
+        }
+    }
+
+    internal static void Write(LogEventEnum Level, ProgramClassEnum ProgramClass, string Message)
+    {
+        string Event = Level switch
+        {
+            LogEventEnum.Info => "INFO",
+            LogEventEnum.Warning => "WARNING",
+            LogEventEnum.Error => "ERROR",
+            LogEventEnum.Variable => "VARIABLE",
+            LogEventEnum.Method => "METHOD",
+            LogEventEnum.Control => "CONTROL",
+            LogEventEnum.ExMessage => "EXECPTION",
+            LogEventEnum.BoxMessage => "MESSAGE-BOX",
+            LogEventEnum.Setting => "SETTING",
+            _ => "UNCATEGORIZED"
+        };
+
+        if (logWriter != null)
+        {
+            logWriter.WriteLine($"[{DateTime.Now:HH:mm:ss}] => {Event} on {ProgramClass}: {Message}");
+        }
+        else
+        {
+            Initialize();
+        }
+    }
+
+    internal static void Dispose()
+    {
+        if (logWriter != null)
+        {
+            timer?.Stop();
+            Write(LogEventEnum.Info, ProgramClassEnum.Logging, "Logging stopped");
+            logWriter.Flush();
+            logWriter.Close();
         }
     }
 }

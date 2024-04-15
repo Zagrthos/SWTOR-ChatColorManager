@@ -4,145 +4,144 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace ChatManager.Services
+namespace ChatManager.Services;
+
+internal static class WebRequests
 {
-    internal static class WebRequests
+    internal static async Task<long?> GetLongAsync(string url)
     {
-        internal static async Task<long?> GetLongAsync(string url)
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetLongAsync entered");
+
+        long? getLong = 0;
+
+        HttpClient client = new();
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
+
+        try
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetLongAsync entered");
+            HttpResponseMessage response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+            getLong = response.Content.Headers.ContentLength;
 
-            long? getLong = 0;
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
+            client.Dispose();
+            response.Dispose();
 
-            HttpClient client = new();
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
+            return getLong;
+        }
+        catch (HttpRequestException ex)
+        {
+            Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get long failed!");
+            Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
 
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-                getLong = response.Content.Headers.ContentLength;
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
+            client.Dispose();
 
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-                client.Dispose();
-                response.Dispose();
+            ShowMessageBox.ShowBug();
 
-                return getLong;
-            }
-            catch (HttpRequestException ex)
-            {
-                Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get long failed!");
-                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
+            return getLong;
+        }
+    }
 
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-                client.Dispose();
+    internal static async Task<HttpResponseMessage> GetResponseMessageAsync(string url, string headers = "")
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetResponseMessageAsync entered");
 
-                ShowMessageBox.ShowBug();
+        HttpResponseMessage response = new();
 
-                return getLong;
-            }
+        HttpClient client = new();
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
+
+        if (!string.IsNullOrEmpty(headers))
+        {
+            client.DefaultRequestHeaders.UserAgent.ParseAdd(headers);
         }
 
-        internal static async Task<HttpResponseMessage> GetResponseMessageAsync(string url, string headers = "")
+        try
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetResponseMessageAsync entered");
+            response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
 
-            HttpResponseMessage response = new();
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
+            client.Dispose();
 
-            HttpClient client = new();
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
-
-            if (!string.IsNullOrEmpty(headers))
-            {
-                client.DefaultRequestHeaders.UserAgent.ParseAdd(headers);
-            }
-
-            try
-            {
-                response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-                client.Dispose();
-
-                return response;
-            }
-            catch(HttpRequestException ex)
-            {
-                Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get string failed!");
-                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
-
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-                client.Dispose();
-
-                ShowMessageBox.ShowBug();
-
-                response.StatusCode = HttpStatusCode.NotFound;
-
-                return response;
-            }
+            return response;
         }
-
-        internal static async Task<string> GetStringAsync(string url)
+        catch(HttpRequestException ex)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetStringAsync entered");
+            Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get string failed!");
+            Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
 
-            string getString = string.Empty;
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
+            client.Dispose();
 
-            HttpClient client = new();
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
+            ShowMessageBox.ShowBug();
 
-            try
-            {
-                getString = await client.GetStringAsync(url);
+            response.StatusCode = HttpStatusCode.NotFound;
 
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-                client.Dispose();
-
-                return getString;
-            }
-            catch (HttpRequestException ex)
-            {
-                Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get string failed!");
-                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
-
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-                client.Dispose();
-
-                ShowMessageBox.ShowBug();
-
-                return getString;
-            }
+            return response;
         }
+    }
 
-        internal static async Task<Version> GetVersionAsync(string url)
+    internal static async Task<string> GetStringAsync(string url)
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetStringAsync entered");
+
+        string getString = string.Empty;
+
+        HttpClient client = new();
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
+
+        try
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetVersionAsync entered");
+            getString = await client.GetStringAsync(url);
 
-            Version getVersion = new(0, 0, 0);
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
+            client.Dispose();
 
-            HttpClient client = new();
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
+            return getString;
+        }
+        catch (HttpRequestException ex)
+        {
+            Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get string failed!");
+            Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
 
-            try
-            {
-                getVersion = new(await client.GetStringAsync(url));
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
+            client.Dispose();
 
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-                client.Dispose();
+            ShowMessageBox.ShowBug();
 
-                return getVersion;
-            }
-            catch (HttpRequestException ex)
-            {
-                Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get version failed!");
-                Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
+            return getString;
+        }
+    }
 
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-                client.Dispose();
+    internal static async Task<Version> GetVersionAsync(string url)
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetVersionAsync entered");
 
-                ShowMessageBox.ShowBug();
+        Version getVersion = new(0, 0, 0);
 
-                return getVersion;
-            }
+        HttpClient client = new();
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
+
+        try
+        {
+            getVersion = new(await client.GetStringAsync(url));
+
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
+            client.Dispose();
+
+            return getVersion;
+        }
+        catch (HttpRequestException ex)
+        {
+            Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get version failed!");
+            Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
+
+            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
+            client.Dispose();
+
+            ShowMessageBox.ShowBug();
+
+            return getVersion;
         }
     }
 }

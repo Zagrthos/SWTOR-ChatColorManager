@@ -1,15 +1,14 @@
-﻿namespace ChatManager.Enums
+﻿namespace ChatManager.Enums;
+
+internal enum LogEventEnum
 {
-    internal enum LogEventEnum
-    {
-        Info,
-        Warning,
-        Error,
-        Variable,
-        Method,
-        Control,
-        ExMessage,
-        BoxMessage,
-        Setting
-    }
+    Info,
+    Warning,
+    Error,
+    Variable,
+    Method,
+    Control,
+    ExMessage,
+    BoxMessage,
+    Setting
 }

@@ -1,9 +1,8 @@
-﻿namespace ChatManager.Enums
+﻿namespace ChatManager.Enums;
+
+internal enum UpdateEnum
 {
-    internal enum UpdateEnum
-    {
-        OnStartup,
-        Daily,
-        Weekly
-    }
+    OnStartup,
+    Daily,
+    Weekly
 }

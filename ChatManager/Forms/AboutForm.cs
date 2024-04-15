@@ -7,132 +7,131 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace ChatManager.Forms
+namespace ChatManager.Forms;
+
+internal partial class AboutForm : Form
 {
-    internal partial class AboutForm : Form
+    internal AboutForm()
     {
-        internal AboutForm()
-        {
-            InitializeComponent();
-            Text = string.Format("About {0}", AssemblyTitle);
-            labelProductName.Text = AssemblyProduct;
-            labelVersion.Text = string.Format("Version {0}", ProductVersion);
-            labelCopyright.Text = AssemblyCopyright;
-            SetRichTextBox(AssemblyCompany);
-            Localize();
-        }
+        InitializeComponent();
+        Text = string.Format("About {0}", AssemblyTitle);
+        labelProductName.Text = AssemblyProduct;
+        labelVersion.Text = string.Format("Version {0}", ProductVersion);
+        labelCopyright.Text = AssemblyCopyright;
+        SetRichTextBox(AssemblyCompany);
+        Localize();
+    }
 
-        #region Assembly Attribute Accessors
+    #region Assembly Attribute Accessors
 
-        internal static string AssemblyTitle
+    internal static string AssemblyTitle
+    {
+        get
         {
-            get
+            object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+            if (attributes.Length > 0)
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-                if (attributes.Length > 0)
+                AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
+                if (titleAttribute.Title != "")
                 {
-                    AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-                    if (titleAttribute.Title != "")
-                    {
-                        return titleAttribute.Title;
-                    }
+                    return titleAttribute.Title;
                 }
-                return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
             }
+            return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
         }
+    }
 
-        internal static string AssemblyProduct
+    internal static string AssemblyProduct
+    {
+        get
         {
-            get
+            object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+            if (attributes.Length == 0)
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyProductAttribute)attributes[0]).Product;
+                return "";
             }
+            return ((AssemblyProductAttribute)attributes[0]).Product;
         }
+    }
 
-        internal static string AssemblyCopyright
+    internal static string AssemblyCopyright
+    {
+        get
         {
-            get
+            object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+            if (attributes.Length == 0)
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+                return "";
             }
+            return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
         }
+    }
 
-        internal static string AssemblyCompany
+    internal static string AssemblyCompany
+    {
+        get
         {
-            get
+            object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+            if (attributes.Length == 0)
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyCompanyAttribute)attributes[0]).Company;
+                return "";
             }
+            return ((AssemblyCompanyAttribute)attributes[0]).Company;
         }
+    }
 
-        #endregion Assembly Attribute Accessors
+    #endregion Assembly Attribute Accessors
 
-        private void LicencesButton_Click(object sender, EventArgs e)
+    private void LicencesButton_Click(object sender, EventArgs e)
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "LicensesButtonClick entered");
+        OpenWindows.OpenTextViewer();
+    }
+
+    private void GitHubLinkButton_Click(object sender, EventArgs e)
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "GitHubLinkButtonClick entered");
+        OpenWindows.OpenLinksInBrowser(GetSetSettings.GetGitHubPath);
+    }
+
+    private void Localize()
+    {
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "Localize entered");
+
+        Localization localization = new(GetSetSettings.GetCurrentLocale);
+
+        Text = localization.GetString(Name);
+        licencesButton.Text = localization.GetString(licencesButton.Name);
+        gitHubLinkButton.Text = localization.GetString(gitHubLinkButton.Name);
+    }
+
+    private void SetRichTextBox(string company)
+    {
+        rtbCompany.Text = string.Empty;
+
+        rtbCompany.SelectionColor = Color.Black;
+        rtbCompany.AppendText("Made with ");
+        rtbCompany.SelectionColor = Color.Red;
+        rtbCompany.AppendText("\u2764");
+        rtbCompany.SelectionColor = Color.Black;
+        rtbCompany.AppendText($" by {company}");
+    }
+
+    private void RtbCompany_SelectionChanged(object sender, EventArgs e)
+    {
+        RichTextBox rtb = (RichTextBox)sender;
+
+        if (rtb.SelectionLength > 0)
         {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "LicensesButtonClick entered");
-            OpenWindows.OpenTextViewer();
+            rtb.SelectionLength = 0;
         }
+    }
 
-        private void GitHubLinkButton_Click(object sender, EventArgs e)
-        {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "GitHubLinkButtonClick entered");
-            OpenWindows.OpenLinksInBrowser(GetSetSettings.GetGitHubPath);
-        }
+    [DllImport("user32.dll", EntryPoint = "HideCaret")]
+    private static extern bool HideCaret(IntPtr hWnd);
 
-        private void Localize()
-        {
-            Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "Localize entered");
-
-            Localization localization = new(GetSetSettings.GetCurrentLocale);
-
-            Text = localization.GetString(Name);
-            licencesButton.Text = localization.GetString(licencesButton.Name);
-            gitHubLinkButton.Text = localization.GetString(gitHubLinkButton.Name);
-        }
-
-        private void SetRichTextBox(string company)
-        {
-            rtbCompany.Text = string.Empty;
-
-            rtbCompany.SelectionColor = Color.Black;
-            rtbCompany.AppendText("Made with ");
-            rtbCompany.SelectionColor = Color.Red;
-            rtbCompany.AppendText("\u2764");
-            rtbCompany.SelectionColor = Color.Black;
-            rtbCompany.AppendText($" by {company}");
-        }
-
-        private void RtbCompany_SelectionChanged(object sender, EventArgs e)
-        {
-            RichTextBox rtb = (RichTextBox)sender;
-
-            if (rtb.SelectionLength > 0)
-            {
-                rtb.SelectionLength = 0;
-            }
-        }
-
-        [DllImport("user32.dll", EntryPoint = "HideCaret")]
-        private static extern bool HideCaret(IntPtr hWnd);
-
-        private void RtbCompany_GotFocus(object sender, EventArgs e)
-        {
-            HideCaret(rtbCompany.Handle);
-        }
+    private void RtbCompany_GotFocus(object sender, EventArgs e)
+    {
+        HideCaret(rtbCompany.Handle);
     }
 }
