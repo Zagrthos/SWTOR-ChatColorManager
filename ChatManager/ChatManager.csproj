@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <RootNamespace>ChatManager</RootNamespace>
@@ -22,6 +22,7 @@
     <Configurations>Debug;Release</Configurations>
     <ApplicationIcon>Resources\Logo.ico</ApplicationIcon>
     <UseWindowsForms>true</UseWindowsForms>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
