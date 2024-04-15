@@ -58,7 +58,7 @@ internal partial class Converter
     /// <returns>The wanted <see langword="string"/>.</returns>
     internal static string ServerNameIdentifier(string name, bool isServerName)
     {
-        if (!string.IsNullOrEmpty(name) && isServerName)
+        if (!string.IsNullOrWhiteSpace(name) && isServerName)
         {
             return name switch
             {
@@ -70,7 +70,7 @@ internal partial class Converter
                 _ => string.Empty,
             };
         }
-        else if (!string.IsNullOrEmpty(name) && !isServerName)
+        else if (!string.IsNullOrWhiteSpace(name) && !isServerName)
         {
             return name switch
             {

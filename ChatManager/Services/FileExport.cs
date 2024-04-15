@@ -65,7 +65,7 @@ internal class FileExport
             {
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current i is: {i}");
 
-                if (!string.IsNullOrEmpty(name[i, 0]) && !string.IsNullOrEmpty(name[i, 1]))
+                if (!string.IsNullOrWhiteSpace(name[i, 0]) && !string.IsNullOrWhiteSpace(name[i, 1]))
                 {
                     string path = name[i, 1];
                     //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current path is: {path}");
@@ -184,7 +184,7 @@ internal class FileExport
         foreach (string server in SelectedServers)
         {
             // If server is not filled stop it
-            if (string.IsNullOrEmpty(server))
+            if (string.IsNullOrWhiteSpace(server))
             {
                 break;
             }
@@ -221,7 +221,7 @@ internal class FileExport
                     //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current fileName is: {fileName}");
 
                     // If file or fileName is null or empty stop it
-                    if (string.IsNullOrEmpty(name[j, 0]) && string.IsNullOrEmpty(fileName))
+                    if (string.IsNullOrWhiteSpace(name[j, 0]) && string.IsNullOrWhiteSpace(fileName))
                     {
                         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, "Current name and fileName is empty!");
                         break;
@@ -242,7 +242,7 @@ internal class FileExport
                         // If the entry in the array is not null or empty do it,
                         // insert the data in the array, set the counter one up
                         // and then stop if it was inserted in the array
-                        if (!string.IsNullOrEmpty(name[j, 1]))
+                        if (!string.IsNullOrWhiteSpace(name[j, 1]))
                         {
                             // the fileName
                             namesWithServers[GetNumberOfChangedFiles, 0] = FileNames[GetNumberOfChangedFiles];

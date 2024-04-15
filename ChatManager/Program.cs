@@ -26,7 +26,7 @@ internal static class Program
         Application.ThreadException += Application_ThreadException;
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-        if (!string.IsNullOrEmpty(GetSetSettings.GetLastUpdatePath))
+        if (!string.IsNullOrWhiteSpace(GetSetSettings.GetLastUpdatePath))
         {
             File.Delete(GetSetSettings.GetLastUpdatePath);
             GetSetSettings.SaveSettings(SettingsEnum.lastUpdatePath, string.Empty);

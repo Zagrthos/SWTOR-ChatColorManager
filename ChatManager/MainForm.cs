@@ -62,7 +62,7 @@ internal partial class MainForm : Form
                     }
 
                     // Get the Text from it, if it is not Empty
-                    if (!string.IsNullOrEmpty(textBoxText))
+                    if (!string.IsNullOrWhiteSpace(textBoxText))
                     {
                         Color color = Converter.HexToRGB(textBoxText);
                         textBox.Text = OpenWindows.OpenColorPicker(button.Text, color);
@@ -217,7 +217,7 @@ internal partial class MainForm : Form
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, $"selectedFile: {selectedFile}");
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, $"selectedListBox: {selectedListBox}");
 
-        if (string.IsNullOrEmpty(selectedFile))
+        if (string.IsNullOrWhiteSpace(selectedFile))
         {
             return;
         }
@@ -551,7 +551,7 @@ internal partial class MainForm : Form
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Checking for empty textBoxes...");
         foreach (TextBox textBox in textBoxes)
         {
-            if (string.IsNullOrEmpty(textBox.Text))
+            if (string.IsNullOrWhiteSpace(textBox.Text))
             {
                 counter++;
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"counter: {counter}");
@@ -710,7 +710,7 @@ internal partial class MainForm : Form
     private async void MainForm_Load(object sender, EventArgs e)
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     {
-        if (string.IsNullOrEmpty(GetSetSettings.GetCurrentLocale))
+        if (string.IsNullOrWhiteSpace(GetSetSettings.GetCurrentLocale))
         {
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"CurrentCulture set to: {CultureInfo.CurrentCulture.TwoLetterISOLanguageName}");
             GetSetSettings.SaveSettings(SettingsEnum.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
@@ -745,7 +745,7 @@ internal partial class MainForm : Form
         }
 
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Set CharacterOption in Menu");
-        if (string.IsNullOrEmpty(GetSetSettings.GetLocalPath))
+        if (string.IsNullOrWhiteSpace(GetSetSettings.GetLocalPath))
         {
             charFolderToolStripMenuItem.Enabled = false;
             Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "CharacterOption is not available!");

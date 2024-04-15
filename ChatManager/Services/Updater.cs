@@ -231,7 +231,7 @@ internal static partial class Updater
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"localHash is: {localHash}");
         }
 
-        if (!string.IsNullOrEmpty(onlineHash) && !string.IsNullOrEmpty(localHash))
+        if (!string.IsNullOrWhiteSpace(onlineHash) && !string.IsNullOrWhiteSpace(localHash))
         {
             if (onlineHash == localHash)
             {

@@ -82,7 +82,7 @@ internal partial class BackupSelectorForm : Form
             //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{i}");
 
             // Check if all parts in array are NOT empty or null
-            if (!string.IsNullOrEmpty(FilesInDir[i, 0]) && !string.IsNullOrEmpty(FilesInDir[i, 1]) && !string.IsNullOrEmpty(FilesInDir[i, 2]))
+            if (!string.IsNullOrWhiteSpace(FilesInDir[i, 0]) && !string.IsNullOrWhiteSpace(FilesInDir[i, 1]) && !string.IsNullOrWhiteSpace(FilesInDir[i, 2]))
             {
                 //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{filesInDir[i, 0]} & {filesInDir[i, 1]} & {filesInDir[i, 2]}");
                 //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"file[{i}]");
@@ -134,7 +134,7 @@ internal partial class BackupSelectorForm : Form
         {
             string? dirName = listBox.SelectedItem?.ToString();
 
-            if (!string.IsNullOrEmpty(dirName))
+            if (!string.IsNullOrWhiteSpace(dirName))
             {
                 DisplayBackupFiles(Path.Combine(BackupPath, dirName));
             }
@@ -180,7 +180,7 @@ internal partial class BackupSelectorForm : Form
             switch (button.Name)
             {
                 case "btnDeleteDir":
-                    if (!string.IsNullOrEmpty(lbxBackupDir.SelectedItem!.ToString()))
+                    if (!string.IsNullOrWhiteSpace(lbxBackupDir.SelectedItem!.ToString()))
                     {
                         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"DirToDelete: {lbxBackupDir.SelectedItem}");
 

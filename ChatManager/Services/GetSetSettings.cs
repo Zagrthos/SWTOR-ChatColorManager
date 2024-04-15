@@ -163,7 +163,7 @@ internal static class GetSetSettings
 
         SaveSettings(SettingsEnum.settingsUpgradeRequired, false);
 
-        if (string.IsNullOrEmpty(GetCurrentLocale))
+        if (string.IsNullOrWhiteSpace(GetCurrentLocale))
         {
             SaveSettings(SettingsEnum.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
         }

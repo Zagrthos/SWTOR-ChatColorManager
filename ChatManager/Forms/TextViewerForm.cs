@@ -48,7 +48,7 @@ internal partial class TextViewerForm : Form
 
             string? body = jsonDoc.RootElement.GetProperty("body").GetString();
 
-            if (!string.IsNullOrEmpty(body))
+            if (!string.IsNullOrWhiteSpace(body))
             {
                 rtbLicences.Text = body;
             }
@@ -71,7 +71,7 @@ internal partial class TextViewerForm : Form
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.TextViewerForm, "rtbLicencesLinkClicked entered");
 
-        if (!string.IsNullOrEmpty(e.LinkText))
+        if (!string.IsNullOrWhiteSpace(e.LinkText))
         {
             OpenWindows.OpenLinksInBrowser(e.LinkText);
         }

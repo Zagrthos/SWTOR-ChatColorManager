@@ -61,7 +61,7 @@ internal static partial class Checks
 
         // Check if SWTOR is installed
         bool localPath = false;
-        if (!string.IsNullOrEmpty(GetSetSettings.GetLocalPath))
+        if (!string.IsNullOrWhiteSpace(GetSetSettings.GetLocalPath))
         {
             localPath = true;
         }

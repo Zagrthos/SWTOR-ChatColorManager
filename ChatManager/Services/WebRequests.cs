@@ -51,7 +51,7 @@ internal static class WebRequests
         HttpClient client = new();
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
 
-        if (!string.IsNullOrEmpty(headers))
+        if (!string.IsNullOrWhiteSpace(headers))
         {
             client.DefaultRequestHeaders.UserAgent.ParseAdd(headers);
         }
