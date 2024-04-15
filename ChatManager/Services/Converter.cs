@@ -1,8 +1,8 @@
-﻿using ChatManager.Enums;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using ChatManager.Enums;
 
 namespace ChatManager.Services;
 

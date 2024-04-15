@@ -1,10 +1,10 @@
-﻿using ChatManager.Enums;
-using ChatManager.Services;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Windows.Forms;
+using ChatManager.Enums;
+using ChatManager.Services;
 
 namespace ChatManager.Forms;
 
@@ -28,10 +28,10 @@ public partial class TextViewerForm : Form
             {
                 return;
             }
-            
+
             Text = localization.GetString(LocalizationEnum.ChangelogFormName);
             lblLicencesHead.Text = localization.GetString(LocalizationEnum.ChangelogLabelName);
-            
+
             HttpResponseMessage response = await WebRequests.GetResponseMessageAsync($"{GetSetSettings.GetReleaseApiPath}v{await WebRequests.GetVersionAsync(GetSetSettings.GetUpdateCheckURL)}", $"{Application.ProductName}/{Application.ProductVersion}");
 
             if (!response.IsSuccessStatusCode)
@@ -47,7 +47,7 @@ public partial class TextViewerForm : Form
 
             string? body = jsonDoc.RootElement.GetProperty("body").GetString();
 
-            if(!string.IsNullOrEmpty(body))
+            if (!string.IsNullOrEmpty(body))
             {
                 rtbLicences.Text = body;
             }

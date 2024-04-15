@@ -1,11 +1,11 @@
-﻿using ChatManager.Enums;
-using System;
+﻿using System;
 using System.IO;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ChatManager.Enums;
 
 namespace ChatManager.Services;
 

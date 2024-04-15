@@ -1,5 +1,5 @@
-﻿using ChatManager.Enums;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using ChatManager.Enums;
 
 namespace ChatManager.Services;
 

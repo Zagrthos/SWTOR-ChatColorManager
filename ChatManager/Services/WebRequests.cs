@@ -1,8 +1,8 @@
-﻿using ChatManager.Enums;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using ChatManager.Enums;
 
 namespace ChatManager.Services;
 
@@ -65,7 +65,7 @@ internal static class WebRequests
 
             return response;
         }
-        catch(HttpRequestException ex)
+        catch (HttpRequestException ex)
         {
             Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get string failed!");
             Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");

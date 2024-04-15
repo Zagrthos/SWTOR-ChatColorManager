@@ -1,8 +1,8 @@
-﻿using ChatManager.Enums;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
+using ChatManager.Enums;
 using Windows.Networking.Connectivity;
 
 namespace ChatManager.Services;
@@ -162,7 +162,7 @@ internal static class Checks
         if (isConnected)
         {
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "User is connected to the internet");
-            
+
             // Check if connection is metered
             if (NetworkInformation.GetInternetConnectionProfile().GetConnectionCost().NetworkCostType != NetworkCostType.Unrestricted)
             {

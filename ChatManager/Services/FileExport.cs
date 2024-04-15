@@ -1,6 +1,6 @@
-﻿using ChatManager.Enums;
-using System;
+﻿using System;
 using System.IO;
+using ChatManager.Enums;
 
 namespace ChatManager.Services;
 

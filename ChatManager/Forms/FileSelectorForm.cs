@@ -1,10 +1,10 @@
-﻿using ChatManager.Enums;
-using ChatManager.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ChatManager.Enums;
+using ChatManager.Services;
 
 namespace ChatManager.Forms;
 

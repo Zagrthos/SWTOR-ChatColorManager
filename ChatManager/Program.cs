@@ -1,9 +1,9 @@
-using ChatManager.Enums;
-using ChatManager.Services;
 using System;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using ChatManager.Enums;
+using ChatManager.Services;
 
 namespace ChatManager;
 

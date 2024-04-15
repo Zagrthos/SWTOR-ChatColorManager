@@ -1,8 +1,8 @@
-﻿using ChatManager.Enums;
-using ChatManager.Properties;
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
+using ChatManager.Enums;
+using ChatManager.Properties;
 
 namespace ChatManager.Services;
 
