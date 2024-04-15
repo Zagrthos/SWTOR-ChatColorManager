@@ -13,7 +13,7 @@ internal static class Checks
     internal static bool CheckHexString(string input)
     {
         // Define Hex Regex
-        string hexPattern = "^#?([a-fA-F0-9]{6})$";
+        const string hexPattern = "^#?([a-fA-F0-9]{6})$";
 
         // Check the String
         return Regex.IsMatch(input, hexPattern);
