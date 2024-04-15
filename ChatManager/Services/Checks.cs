@@ -104,17 +104,7 @@ internal static class Checks
         return getSettings;
     }
 
-    internal static bool IsBackupDirEmpty()
-    {
-        if (Directory.GetDirectories(GetSetSettings.GetBackupPath).Length > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    internal static bool IsBackupDirEmpty() => Directory.GetDirectories(GetSetSettings.GetBackupPath).Length > 0;
 
     internal static bool CheckForInternetConnection(bool fromUser = false)
     {
