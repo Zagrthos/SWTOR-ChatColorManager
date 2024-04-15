@@ -60,7 +60,7 @@ internal static class GetSetSettings
             Settings.Default.autosavePath = AutosavePath;
             Settings.Default.autosaveAvailability = AutosaveDir;
             Settings.Default._autosaveInterval = 0;
-            Settings.Default.updateInterval = UpdateEnum.OnStartup.ToString();
+            Settings.Default.updateInterval = nameof(UpdateEnum.OnStartup);
             Settings.Default._Initialized = true;
             Settings.Default.Save();
         }

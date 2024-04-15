@@ -28,18 +28,18 @@ internal static partial class Updater
         DateTime today = DateTime.Today;
         TimeSpan difference = today - lastCheck;
 
-        if (updateInterval == UpdateEnum.OnStartup.ToString())
+        if (updateInterval == nameof(UpdateEnum.OnStartup))
         {
             updateSearch = true;
         }
-        else if (updateInterval == UpdateEnum.Daily.ToString())
+        else if (updateInterval == nameof(UpdateEnum.Daily))
         {
             if (difference.Days >= 1)
             {
                 updateSearch = true;
             }
         }
-        else if (updateInterval == UpdateEnum.Weekly.ToString())
+        else if (updateInterval == nameof(UpdateEnum.Weekly))
         {
             if (difference.Days >= 7)
             {
@@ -104,7 +104,7 @@ internal static partial class Updater
         }
 
         // Save the date of the last update Check but only if the user has NOT initiated it
-        if (GetSetSettings.GetUpdateInterval != UpdateEnum.OnStartup.ToString() && !fromUser)
+        if (GetSetSettings.GetUpdateInterval != nameof(UpdateEnum.OnStartup) && !fromUser)
         {
             GetSetSettings.SaveSettings(SettingsEnum.lastUpdateCheck, DateTime.Today);
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Last Update Check: {DateTime.Today}");

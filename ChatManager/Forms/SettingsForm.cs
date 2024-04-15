@@ -243,15 +243,15 @@ internal partial class SettingsForm : Form
         {
             if (cbUpdateInterval.SelectedIndex == 0)
             {
-                GetSetSettings.SaveSettings(SettingsEnum.updateInterval, UpdateEnum.OnStartup.ToString());
+                GetSetSettings.SaveSettings(SettingsEnum.updateInterval, nameof(UpdateEnum.OnStartup));
             }
             else if (cbUpdateInterval.SelectedIndex == 1)
             {
-                GetSetSettings.SaveSettings(SettingsEnum.updateInterval, UpdateEnum.Daily.ToString());
+                GetSetSettings.SaveSettings(SettingsEnum.updateInterval, nameof(UpdateEnum.Daily));
             }
             else if (cbUpdateInterval.SelectedIndex == 2)
             {
-                GetSetSettings.SaveSettings(SettingsEnum.updateInterval, UpdateEnum.Weekly.ToString());
+                GetSetSettings.SaveSettings(SettingsEnum.updateInterval, nameof(UpdateEnum.Weekly));
             }
 
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"updateInterval set to: {GetSetSettings.GetUpdateInterval}");
