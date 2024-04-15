@@ -10,10 +10,8 @@ internal static class GetSetSettings
 {
     private static readonly string LocalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SWTOR\\swtor\\settings");
     private static readonly string BackupPath = Path.Combine(LocalPath, "Backups");
-    private static readonly bool BackupDir;
     private static readonly string LogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Logs");
     private static readonly string AutosavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Autosave");
-    private static readonly bool AutosaveDir;
 
     internal static string GetCurrentLocale => Settings.Default._locale;
     internal static string GetLocalPath => Settings.Default.localPath;
@@ -55,10 +53,10 @@ internal static class GetSetSettings
                 Settings.Default.backupPath = BackupPath;
             }
 
-            Settings.Default.backupAvailability = BackupDir;
+            Settings.Default.backupAvailability = false;
             Settings.Default.logPath = LogPath;
             Settings.Default.autosavePath = AutosavePath;
-            Settings.Default.autosaveAvailability = AutosaveDir;
+            Settings.Default.autosaveAvailability = false;
             Settings.Default._autosaveInterval = 0;
             Settings.Default.updateInterval = nameof(UpdateEnum.OnStartup);
             Settings.Default._Initialized = true;
