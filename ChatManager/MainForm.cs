@@ -330,7 +330,7 @@ internal partial class MainForm : Form
         }
 
         lblCharName.Visible = true;
-        lblCharName.Text = $"{localization.GetString(lblCharName.Name)} {charText}"; ;
+        lblCharName.Text = $"{localization.GetString(lblCharName.Name)} {charText}";
     }
 
     private void SetAllColorData(string[] colorIndexes, bool autosaveIntitiated)
