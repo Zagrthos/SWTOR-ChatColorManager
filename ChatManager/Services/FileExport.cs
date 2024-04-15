@@ -119,7 +119,7 @@ internal class FileExport
                         // If yes fill it with the old value
                         for (int color = 0; color < content.Length; color++)
                         {
-                            if (content[color] == string.Empty)
+                            if (content[color].Length == 0)
                             {
                                 if (color >= colorLines.Length)
                                 {
