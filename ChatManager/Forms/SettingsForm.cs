@@ -303,14 +303,12 @@ internal partial class SettingsForm : Form
                     }
 
                     chbAutosave.Enabled = false;
-                    return;
                 }
                 else
                 {
                     GetSetSettings.SaveSettings(SettingsEnum.saveOnClose, false);
                     Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbSaveOnClose = false");
                     chbAutosave.Enabled = true;
-                    return;
                 }
             }
             else if (checkBox.Name == "chbReloadOnStartup")
@@ -333,14 +331,12 @@ internal partial class SettingsForm : Form
                     }
 
                     chbSaveOnClose.Enabled = false;
-                    return;
                 }
                 else
                 {
                     GetSetSettings.SaveSettings(SettingsEnum.reloadOnStartup, false);
                     Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbReloadOnStartup = false");
                     chbSaveOnClose.Enabled = true;
-                    return;
                 }
             }
             else if (checkBox.Name == "chbAutosave")
@@ -357,8 +353,6 @@ internal partial class SettingsForm : Form
                     {
                         SetAutosaveInterval();
                     }
-
-                    return;
                 }
                 else
                 {
@@ -369,7 +363,6 @@ internal partial class SettingsForm : Form
                     lblAutosaveInterval.Enabled = false;
                     lblAutosaveInterval.Visible = false;
                     GetAutosaveTimerChanged = false;
-                    return;
                 }
             }
             else if (checkBox.Name == "chbUpdateDownload")
@@ -378,13 +371,11 @@ internal partial class SettingsForm : Form
                 {
                     GetSetSettings.SaveSettings(SettingsEnum.updateDownload, true);
                     Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "updateDownload = true");
-                    return;
                 }
                 else
                 {
                     GetSetSettings.SaveSettings(SettingsEnum.updateDownload, false);
                     Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "updateDownload = false");
-                    return;
                 }
             }
             else
