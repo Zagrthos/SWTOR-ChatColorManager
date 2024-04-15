@@ -140,30 +140,22 @@ internal static class GetSetSettings
     // This is for setting decimals
     internal static void SaveSettings(SettingsEnum settingName, decimal value)
     {
-        switch (settingName)
+        if (settingName == SettingsEnum.autosaveInterval)
         {
-            case SettingsEnum.autosaveInterval:
-                Settings.Default._autosaveInterval = value;
-                break;
-
-            default:
-                throw new NotImplementedException();
+            Settings.Default._autosaveInterval = value;
         }
+
         Settings.Default.Save();
     }
 
     // This is for setting DateTimes
     internal static void SaveSettings(SettingsEnum settingName, DateTime value)
     {
-        switch (settingName)
+        if (settingName == SettingsEnum.lastUpdateCheck)
         {
-            case SettingsEnum.lastUpdateCheck:
-                Settings.Default.lastUpdateCheck = value;
-                break;
-
-            default:
-                throw new NotImplementedException();
+            Settings.Default.lastUpdateCheck = value;
         }
+
         Settings.Default.Save();
     }
 

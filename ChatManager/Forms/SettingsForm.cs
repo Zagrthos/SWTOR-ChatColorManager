@@ -208,25 +208,15 @@ internal partial class SettingsForm : Form
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "SwitchCurrentLocale entered");
 
         string currLocale = GetSetSettings.GetCurrentLocale;
-        string newLanguage = cbLanguage.SelectedItem?.ToString() ?? string.Empty;
+        string selectedLanguage = cbLanguage.SelectedItem?.ToString() ?? string.Empty;
 
-        switch (newLanguage)
+        string newLanguage = selectedLanguage switch
         {
-            case "English":
-                newLanguage = "en";
-                break;
-
-            case "France":
-                newLanguage = "fr";
-                break;
-
-            case "German":
-                newLanguage = "de";
-                break;
-
-            default:
-                throw new InvalidOperationException($"Given language {newLanguage} is not implemented!");
-        }
+            "English" => "en",
+            "France" => "fr",
+            "German" => "de",
+            _ => throw new InvalidOperationException($"{selectedLanguage} is not implemented!"),
+        };
 
         if (currLocale != newLanguage)
         {
