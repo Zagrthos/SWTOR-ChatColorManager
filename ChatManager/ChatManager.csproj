@@ -1,25 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <RootNamespace>ChatManager</RootNamespace>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows10.0.22621.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>disable</ImplicitUsings>
-    <Platforms>x64</Platforms>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
-    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPublishable>True</IsPublishable>
+    <Platforms>x64</Platforms>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <Authors>Zagrthos</Authors>
+    <Version>1.5.3</Version>
+    <Copyright>© Zagrthos 2024</Copyright>
+    <Product>SWTOR Chat Manager</Product>
+    <Description>A GUI Manager for customizing the SWTOR Chat.</Description>
+    <RepositoryUrl>https://github.com/Zagrthos/SWTOR-ChatColorManager</RepositoryUrl>
+    <PathMap>$(MSBuildProjectDirectory)\$(IntermediateOutputPath)=.</PathMap>
     <AnalysisLevel>latest</AnalysisLevel>
-	<Version>1.5.2</Version>
-	<FileVersion>1.5.2.0</FileVersion>
-	<AssemblyVersion>1.5.2.0</AssemblyVersion>
-	<Authors>Zagrthos</Authors>
-	<Product>SWTOR Chat Manager</Product>
-	<Copyright>© Zagrthos 2023</Copyright>
-	<Description>A GUI Manager for customizing the SWTOR Chat.</Description>
-	<ApplicationIcon>Resources\Logo.ico</ApplicationIcon>
-	<NeutralLanguage>en</NeutralLanguage>
+    <Configurations>Debug;Release</Configurations>
+    <ApplicationIcon>Resources\Logo.ico</ApplicationIcon>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -36,6 +38,26 @@
 
   <ItemGroup>
     <PackageReference Include="Cyotek.Windows.Forms.ColorPicker" Version="2.0.0-beta.7" />
+    <PackageReference Include="Roslynator.Analyzers" Version="4.12.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="4.12.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Roslynator.CodeFixes" Version="4.12.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.12.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Roslynator.Refactorings" Version="4.12.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
