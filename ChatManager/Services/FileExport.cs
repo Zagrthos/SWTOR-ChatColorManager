@@ -16,7 +16,6 @@ internal class FileExport
 
     private static readonly bool BackupAvailability = GetSetSettings.GetBackupAvailability;
     private static readonly string BackupPath = GetSetSettings.GetBackupPath;
-
     private readonly string[] SelectedServers;
     private readonly string[] FileNames;
 
@@ -228,6 +227,7 @@ internal class FileExport
                     {
                         continue;
                     }
+
                     // Check if the name of the character is the same as the one that was selected
                     // and check if the fileName starts with the server prefix
                     if (name[j, 0] == file && fileName.StartsWith(Converter.ServerNameIdentifier(server, true)))
@@ -262,6 +262,7 @@ internal class FileExport
                 }
             }
         }
+
         return namesWithServers;
     }
 }

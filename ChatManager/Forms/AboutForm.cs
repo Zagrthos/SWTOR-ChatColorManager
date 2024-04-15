@@ -37,6 +37,7 @@ internal partial class AboutForm : Form
                     return titleAttribute.Title;
                 }
             }
+
             return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
         }
     }
@@ -50,6 +51,7 @@ internal partial class AboutForm : Form
             {
                 return string.Empty;
             }
+
             return ((AssemblyProductAttribute)attributes[0]).Product;
         }
     }
@@ -63,6 +65,7 @@ internal partial class AboutForm : Form
             {
                 return string.Empty;
             }
+
             return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
         }
     }
@@ -76,6 +79,7 @@ internal partial class AboutForm : Form
             {
                 return string.Empty;
             }
+
             return ((AssemblyCompanyAttribute)attributes[0]).Company;
         }
     }

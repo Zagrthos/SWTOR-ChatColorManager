@@ -151,6 +151,7 @@ internal partial class MainForm : Form
                     {
                         await Updater.CheckForUpdates(true);
                     }
+
                     return;
 
                 case nameof(changelogToolStripMenuItem):

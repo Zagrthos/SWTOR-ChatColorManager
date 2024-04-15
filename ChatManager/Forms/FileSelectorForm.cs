@@ -16,6 +16,7 @@ internal partial class FileSelectorForm : Form
         {
             IsSave = true;
         }
+
         InitializeComponent();
         SetTabs(servers);
     }
@@ -338,6 +339,7 @@ internal partial class FileSelectorForm : Form
                     {
                         checkedListBox.SetItemChecked(i, isChecked);
                     }
+
                     Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileSelectorForm, $"All Checks set to: {isChecked}");
                 }
             }

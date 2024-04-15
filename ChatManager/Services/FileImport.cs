@@ -21,7 +21,6 @@ internal class FileImport
     private static bool FilesChecked = false;
     private static readonly string FilePath = GetSetSettings.GetLocalPath;
     private static readonly List<string> ServerList = [];
-
     private static readonly string[,] StarForgeArray = new string[1000, 2];
     private static readonly string[,] SateleShanArray = new string[1000, 2];
     private static readonly string[,] DarthMalgusArray = new string[1000, 2];
@@ -123,18 +122,22 @@ internal class FileImport
         {
             ServerList.Add("StarForge");
         }
+
         if (SateleShanArray[0, 0] != null && SateleShanArray[0, 0] != string.Empty)
         {
             ServerList.Add("SateleShan");
         }
+
         if (DarthMalgusArray[0, 0] != null && DarthMalgusArray[0, 0] != string.Empty)
         {
             ServerList.Add("DarthMalgus");
         }
+
         if (TulakHordArray[0, 0] != null && TulakHordArray[0, 0] != string.Empty)
         {
             ServerList.Add("TulakHord");
         }
+
         if (TheLeviathanArray[0, 0] != null && TheLeviathanArray[0, 0] != string.Empty)
         {
             ServerList.Add("TheLeviathan");

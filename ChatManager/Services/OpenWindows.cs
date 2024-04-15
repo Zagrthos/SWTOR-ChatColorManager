@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Security.Policy;
 using System.Windows.Forms;
 using ChatManager.Enums;
 using ChatManager.Forms;
@@ -183,10 +184,9 @@ internal static class OpenWindows
 
         try
         {
-            Process.Start(new ProcessStartInfo(url)
-            {
-                UseShellExecute = true
-            });
+            ProcessStartInfo info = new(url) { UseShellExecute = true };
+            Process.Start(info);
+
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"Browser started with url: {url}");
         }
         catch (Exception ex)
@@ -203,10 +203,9 @@ internal static class OpenWindows
 
         try
         {
-            Process.Start(new ProcessStartInfo(path)
-            {
-                UseShellExecute = true
-            });
+            ProcessStartInfo info = new(path) { UseShellExecute = true };
+            Process.Start(info);
+
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"Process started with path: {path}");
         }
         catch (Exception ex)

@@ -171,6 +171,7 @@ internal partial class BackupSelectorForm : Form
             {
                 clbxBackupFiles.SetItemChecked(i, isChecked);
             }
+
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.BackupSelector, $"All Checked items are set to: {isChecked}");
         }
         else
@@ -233,6 +234,7 @@ internal partial class BackupSelectorForm : Form
                         ShowMessageBox.ShowBug();
                         return;
                     }
+
                     break;
 
                 case "btnDeleteFiles":
@@ -286,6 +288,7 @@ internal partial class BackupSelectorForm : Form
                         ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_NoFileToDeleteSelected));
                         return;
                     }
+
                     break;
 
                 default:

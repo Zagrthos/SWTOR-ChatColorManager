@@ -1,5 +1,8 @@
-﻿namespace ChatManager.Enums;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace ChatManager.Enums;
+
+[SuppressMessage("Roslynator", "RCS0036:Remove blank line between single-line declarations of same kind", Justification = "Code Style")]
 internal enum LocalizationEnum
 {
     // MainForm Strings

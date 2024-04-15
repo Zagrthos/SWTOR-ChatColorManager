@@ -9,12 +9,9 @@ namespace ChatManager.Services;
 internal static class GetSetSettings
 {
     private static readonly string LocalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SWTOR\\swtor\\settings");
-
     private static readonly string BackupPath = Path.Combine(LocalPath, "Backups");
     private static readonly bool BackupDir = false;
-
     private static readonly string LogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Logs");
-
     private static readonly string AutosavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Autosave");
     private static readonly bool AutosaveDir = false;
 
@@ -57,6 +54,7 @@ internal static class GetSetSettings
                 Settings.Default.localPath = LocalPath;
                 Settings.Default.backupPath = BackupPath;
             }
+
             Settings.Default.backupAvailability = BackupDir;
             Settings.Default.logPath = LogPath;
             Settings.Default.autosavePath = AutosavePath;
@@ -95,6 +93,7 @@ internal static class GetSetSettings
             default:
                 throw new NotImplementedException();
         }
+
         Settings.Default.Save();
     }
 
@@ -134,6 +133,7 @@ internal static class GetSetSettings
             default:
                 throw new NotImplementedException();
         }
+
         Settings.Default.Save();
     }
 

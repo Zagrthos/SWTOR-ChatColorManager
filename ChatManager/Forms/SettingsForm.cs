@@ -306,6 +306,7 @@ internal partial class SettingsForm : Form
                         chbAutosave.Checked = true;
                         SetAutosaveInterval();
                     }
+
                     chbAutosave.Enabled = false;
                     return;
                 }
@@ -328,12 +329,14 @@ internal partial class SettingsForm : Form
                         chbAutosave.Checked = true;
                         SetAutosaveInterval();
                     }
+
                     chbAutosave.Enabled = false;
 
                     if (!chbSaveOnClose.Checked)
                     {
                         chbSaveOnClose.Checked = true;
                     }
+
                     chbSaveOnClose.Enabled = false;
                     return;
                 }
@@ -359,6 +362,7 @@ internal partial class SettingsForm : Form
                     {
                         SetAutosaveInterval();
                     }
+
                     return;
                 }
                 else
