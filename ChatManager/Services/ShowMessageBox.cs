@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace ChatManager.Services
 {
-    internal class ShowMessageBox
+    internal static class ShowMessageBox
     {
         internal static void Show(string caption, string message)
         {

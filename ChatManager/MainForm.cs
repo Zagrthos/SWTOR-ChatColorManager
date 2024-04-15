@@ -580,13 +580,13 @@ namespace ChatManager
             {
                 if (item is ToolStripMenuItem menuItem && menuItem.Enabled)
                 {
-                    menuItem.Text = localization.GetString(menuItem.Name);
+                    menuItem.Text = localization.GetString(menuItem.Name ?? throw new InvalidOperationException("MenuItem.Name is null"));
 
                     foreach (var moreItems in menuItem.DropDownItems)
                     {
                         if (moreItems is ToolStripMenuItem moreItem && moreItem.Enabled)
                         {
-                            moreItem.Text = localization.GetString(moreItem.Name);
+                            moreItem.Text = localization.GetString(menuItem.Name ?? throw new InvalidOperationException("MenuItem.Name is null"));
                         }
                     }
                 }

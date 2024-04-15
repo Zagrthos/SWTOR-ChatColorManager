@@ -210,7 +210,7 @@ namespace ChatManager.Forms
             Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "SwitchCurrentLocale entered");
 
             string currLocale = GetSetSettings.GetCurrentLocale;
-            string newLanguage = cbLanguage.SelectedItem.ToString()!;
+            string newLanguage = cbLanguage.SelectedItem?.ToString() ?? string.Empty;
 
             switch (newLanguage)
             {
@@ -227,7 +227,7 @@ namespace ChatManager.Forms
                     break;
 
                 default:
-                    throw new NotImplementedException();
+                    throw new InvalidOperationException($"Given language {newLanguage} is not implemented!");
             }
 
             if (currLocale != newLanguage)

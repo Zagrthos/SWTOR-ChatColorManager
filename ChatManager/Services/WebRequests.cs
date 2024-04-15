@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChatManager.Services
 {
-    internal class WebRequests
+    internal static class WebRequests
     {
         internal static async Task<long?> GetLongAsync(string url)
         {

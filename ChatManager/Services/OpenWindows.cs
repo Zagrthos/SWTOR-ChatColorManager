@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace ChatManager.Services
 {
-    internal class OpenWindows
+    internal static class OpenWindows
     {
         internal static string OpenColorPicker(string text, Color color)
         {

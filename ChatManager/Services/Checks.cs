@@ -7,7 +7,7 @@ using Windows.Networking.Connectivity;
 
 namespace ChatManager.Services
 {
-    internal class Checks
+    internal static class Checks
     {
         // Check if the String is a Hex Text
         internal static bool CheckHexString(string input)

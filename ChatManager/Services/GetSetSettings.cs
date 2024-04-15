@@ -6,7 +6,7 @@ using System.IO;
 
 namespace ChatManager.Services
 {
-    internal class GetSetSettings
+    internal static class GetSetSettings
     {
         private static readonly string localPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SWTOR\\swtor\\settings");
 
