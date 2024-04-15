@@ -53,7 +53,7 @@ internal partial class MainForm : Form
                     // Get the Text from it, if it is not Empty
                     if (!string.IsNullOrEmpty(textBoxText))
                     {
-                        Color color = Converter.HexToRGBAsync(textBoxText);
+                        Color color = Converter.HexToRGB(textBoxText);
                         textBox.Text = OpenWindows.OpenColorPicker(button.Text, color);
                         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"New hexColor is: {textBox.Text}");
                     }

@@ -49,7 +49,7 @@ internal partial class ColorPickerForm : Form
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm: {Text} is closing");
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
-        GetHexColor = Converter.RGBtoHexAsync(colorEditor.Color);
+        GetHexColor = Converter.RGBtoHex(colorEditor.Color);
     }
 
     private void ColorPickerForm_FormClosed(object sender, FormClosedEventArgs e) => Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm: {Text} closed");

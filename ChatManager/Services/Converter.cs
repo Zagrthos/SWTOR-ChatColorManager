@@ -9,7 +9,7 @@ namespace ChatManager.Services;
 internal partial class Converter
 {
     // Convert an RGB Color into Hex
-    internal static string RGBtoHexAsync(Color rgb)
+    internal static string RGBtoHex(Color rgb)
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, "Try to convert RGB into Hex");
         string hex = $"{rgb.R:X2}{rgb.G:X2}{rgb.B:X2}";
@@ -19,7 +19,7 @@ internal partial class Converter
     }
 
     // Convert Hex into an RGB Color
-    internal static Color HexToRGBAsync(string hex)
+    internal static Color HexToRGB(string hex)
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, "Try to convert Hex into RGB");
 
