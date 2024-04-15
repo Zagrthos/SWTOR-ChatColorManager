@@ -65,12 +65,14 @@ internal static class GetSetSettings
             Settings.Default.Save();
         }
 
-        if (Settings.Default._upgradeRequired)
+        if (!Settings.Default._upgradeRequired)
         {
-            Settings.Default.Upgrade();
-            Settings.Default._upgradeRequired = false;
-            Settings.Default.Save();
+            return;
         }
+
+        Settings.Default.Upgrade();
+        Settings.Default._upgradeRequired = false;
+        Settings.Default.Save();
     }
 
     internal static void SaveSettings(SettingsEnum settingName, string value)

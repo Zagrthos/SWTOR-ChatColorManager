@@ -125,10 +125,12 @@ internal partial class AboutForm : Form
     {
         RichTextBox rtb = (RichTextBox)sender;
 
-        if (rtb.SelectionLength > 0)
+        if (rtb.SelectionLength <= 0)
         {
-            rtb.SelectionLength = 0;
+            return;
         }
+
+        rtb.SelectionLength = 0;
     }
 
     [DllImport("user32.dll", EntryPoint = "HideCaret")]

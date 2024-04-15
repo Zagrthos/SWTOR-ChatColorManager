@@ -118,15 +118,16 @@ internal static class OpenWindows
 
         fileSelector.Dispose();
 
-        if (fileCount != 0)
+        if (fileCount == 0)
         {
-            Localization localization = new(GetSetSettings.GetCurrentLocale);
-
-            string exportedFilesInfo = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
-            exportedFilesInfo = exportedFilesInfo.Replace("FILECOUNT", fileCount.ToString());
-
-            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), exportedFilesInfo);
+            return;
         }
+
+        Localization localization = new(GetSetSettings.GetCurrentLocale);
+        string exportedFilesInfo = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
+        exportedFilesInfo = exportedFilesInfo.Replace("FILECOUNT", fileCount.ToString());
+
+        ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), exportedFilesInfo);
     }
 
     internal static void OpenBackupSelector()

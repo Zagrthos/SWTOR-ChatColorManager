@@ -11,11 +11,14 @@ internal class FileImport
     internal FileImport()
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, "FileImport Constructor created");
-        if (!FilesChecked)
+
+        if (FilesChecked)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, $"filesChecked = {FilesChecked}");
-            GetLocalFiles();
+            return;
         }
+
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, $"filesChecked = {FilesChecked}");
+        GetLocalFiles();
     }
 
     private static bool FilesChecked;

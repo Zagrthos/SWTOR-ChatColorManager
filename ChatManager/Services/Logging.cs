@@ -67,14 +67,16 @@ internal static class Logging
 
     private static void TimerElapsed(object? sender, ElapsedEventArgs e)
     {
-        if (LogWriter != null)
+        if (LogWriter == null)
         {
-            lock (LogWriter)
-            {
-                LogWriter.Flush();
-                LogWriter.Close();
-                LogWriter = new(Path.Combine(LogPath, $"ChatManager_{LogSession}.log"), true);
-            }
+            return;
+        }
+
+        lock (LogWriter)
+        {
+            LogWriter.Flush();
+            LogWriter.Close();
+            LogWriter = new(Path.Combine(LogPath, $"ChatManager_{LogSession}.log"), true);
         }
     }
 
@@ -106,12 +108,14 @@ internal static class Logging
 
     internal static void Dispose()
     {
-        if (LogWriter != null)
+        if (LogWriter == null)
         {
-            Timer?.Stop();
-            Write(LogEventEnum.Info, ProgramClassEnum.Logging, "Logging stopped");
-            LogWriter.Flush();
-            LogWriter.Close();
+            return;
         }
+
+        Timer?.Stop();
+        Write(LogEventEnum.Info, ProgramClassEnum.Logging, "Logging stopped");
+        LogWriter.Flush();
+        LogWriter.Close();
     }
 }

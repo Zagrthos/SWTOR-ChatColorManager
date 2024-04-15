@@ -208,34 +208,36 @@ internal partial class MainForm : Form
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, $"selectedFile: {selectedFile}");
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, $"selectedListBox: {selectedListBox}");
 
-        if (!string.IsNullOrEmpty(selectedFile))
+        if (string.IsNullOrEmpty(selectedFile))
         {
-            // Get the whole Character List for the requested name
-            string[,] filePaths = fileImport.GetArray($"{selectedListBox.Substring(3)}");
+            return;
+        }
 
-            // Loop through and set the colors to the corresponding textBox
-            for (int i = 0; i < 1000; i++)
+        // Get the whole Character List for the requested name
+        string[,] filePaths = fileImport.GetArray($"{selectedListBox.Substring(3)}");
+
+        // Loop through and set the colors to the corresponding textBox
+        for (int i = 0; i < 1000; i++)
+        {
+            if (selectedFile == filePaths[i, 0])
             {
-                if (selectedFile == filePaths[i, 0])
+                // But get the correct Colors from the right character file
+                string filePath = filePaths[i, 1];
+
+                GetFileColors(filePath, false);
+
+                byte counter = CheckForEmptyTextboxes();
+
+                if (counter != 0)
                 {
-                    // But get the correct Colors from the right character file
-                    string filePath = filePaths[i, 1];
-
-                    GetFileColors(filePath, false);
-
-                    byte counter = CheckForEmptyTextboxes();
-
-                    if (counter != 0)
-                    {
-                        break;
-                    }
-
-                    Localization localization = new(GetSetSettings.GetCurrentLocale);
-                    string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text)).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text)).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString());
-                    ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), message);
-
                     break;
                 }
+
+                Localization localization = new(GetSetSettings.GetCurrentLocale);
+                string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text)).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text)).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString());
+                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), message);
+
+                break;
             }
         }
     }
@@ -290,22 +292,24 @@ internal partial class MainForm : Form
 
         btnResetColors.Visible = true;
 
-        if (GetSetSettings.GetAutosave)
+        if (!GetSetSettings.GetAutosave)
         {
-            // Stop previously intialized Timer
-            if (AutosaveTimer != null)
-            {
-                AutosaveTimer.Stop();
-                AutosaveTimer.Elapsed -= AutosaveTimer_Elapsed;
-            }
-
-            // Initialize Autosave Timer
-            AutosaveTimer = new(Convert.ToDouble(GetSetSettings.GetAutosaveInterval));
-            AutosaveTimer.Elapsed += AutosaveTimer_Elapsed;
-            AutosaveTimer.Start();
-
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "autosaveTimer set");
+            return;
         }
+
+        // Stop previously intialized Timer
+        if (AutosaveTimer != null)
+        {
+            AutosaveTimer.Stop();
+            AutosaveTimer.Elapsed -= AutosaveTimer_Elapsed;
+        }
+
+        // Initialize Autosave Timer
+        AutosaveTimer = new(Convert.ToDouble(GetSetSettings.GetAutosaveInterval));
+        AutosaveTimer.Elapsed += AutosaveTimer_Elapsed;
+        AutosaveTimer.Start();
+
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "autosaveTimer set");
     }
 
     private void SetCharServerText(string charText, string serverText, bool autosaveIntitiated)
@@ -642,15 +646,19 @@ internal partial class MainForm : Form
             loadAutosaveToolStripMenuItem.Enabled = false;
         }
 
-        if (GetSetSettings.GetSaveOnClose)
+        if (!GetSetSettings.GetSaveOnClose)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "SaveOnClose set");
-
-            if (GetSetSettings.GetReloadOnStartup)
-            {
-                ImportAutosave();
-            }
+            return;
         }
+
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "SaveOnClose set");
+
+        if (!GetSetSettings.GetReloadOnStartup)
+        {
+            return;
+        }
+
+        ImportAutosave();
     }
 
     private void DoSave()
@@ -792,10 +800,12 @@ internal partial class MainForm : Form
 
         AutosaveTimer?.Stop();
 
-        if (GetSetSettings.GetSaveOnClose)
+        if (!GetSetSettings.GetSaveOnClose)
         {
-            DoSave();
+            return;
         }
+
+        DoSave();
     }
 
     /// <summary>

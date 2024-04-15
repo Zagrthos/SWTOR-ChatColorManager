@@ -213,15 +213,17 @@ internal partial class SettingsForm : Form
             _ => throw new InvalidOperationException($"{selectedLanguage} is not implemented!"),
         };
 
-        if (currLocale != newLanguage)
+        if (currLocale == newLanguage)
         {
-            Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, $"Saving new locale: {newLanguage}");
-            GetSetSettings.SaveSettings(SettingsEnum.locale, newLanguage);
-            int updateIntervall = cbUpdateInterval.SelectedIndex;
-            Localize();
-            cbUpdateInterval.SelectedIndex = updateIntervall;
-            GetLanguageChanged = true;
+            return;
         }
+
+        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, $"Saving new locale: {newLanguage}");
+        GetSetSettings.SaveSettings(SettingsEnum.locale, newLanguage);
+        int updateIntervall = cbUpdateInterval.SelectedIndex;
+        Localize();
+        cbUpdateInterval.SelectedIndex = updateIntervall;
+        GetLanguageChanged = true;
     }
 
     private void SwitchUpdateInterval()
@@ -397,11 +399,13 @@ internal partial class SettingsForm : Form
         GetSetSettings.SaveSettings(SettingsEnum.autosaveInterval, numberAutosaveInterval.Value * 60000);
         Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, $"AutosaveInterval = {numberAutosaveInterval.Value}");
 
-        if (numberAutosaveInterval.Value != CurrentAutosaveInterval)
+        if (numberAutosaveInterval.Value == CurrentAutosaveInterval)
         {
-            GetAutosaveTimerChanged = true;
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"autosaveTimerChanged = {GetAutosaveTimerChanged}");
+            return;
         }
+
+        GetAutosaveTimerChanged = true;
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"autosaveTimerChanged = {GetAutosaveTimerChanged}");
     }
 
     /// <summary>

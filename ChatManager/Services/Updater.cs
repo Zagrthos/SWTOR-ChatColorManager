@@ -58,10 +58,12 @@ internal static partial class Updater
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"difference set to: {difference}");
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateSearch set to: {updateSearch}");
 
-        if (updateSearch)
+        if (!updateSearch)
         {
-            await CheckForUpdatesAsync();
+            return;
         }
+
+        await CheckForUpdatesAsync();
     }
 
     internal static async Task CheckForUpdatesAsync(bool fromUser = false)
@@ -104,11 +106,13 @@ internal static partial class Updater
         }
 
         // Save the date of the last update Check but only if the user has NOT initiated it
-        if (GetSetSettings.GetUpdateInterval != nameof(UpdateEnum.OnStartup) && !fromUser)
+        if (GetSetSettings.GetUpdateInterval == nameof(UpdateEnum.OnStartup) || fromUser)
         {
-            GetSetSettings.SaveSettings(SettingsEnum.lastUpdateCheck, DateTime.Today);
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Last Update Check: {DateTime.Today}");
+            return;
         }
+
+        GetSetSettings.SaveSettings(SettingsEnum.lastUpdateCheck, DateTime.Today);
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Last Update Check: {DateTime.Today}");
     }
 
     private static async Task<long> GetFileSizeAsync()
