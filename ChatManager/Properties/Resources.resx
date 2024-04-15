@@ -140,7 +140,7 @@
     <value>https://raw.githubusercontent.com/Zagrthos/SWTOR-ChatColorManager/master/ChatManager/Update/Hashes/hash_VERSION.txt</value>
   </data>
   <data name="Licences" xml:space="preserve">
-    <value>.NET 7 &amp; Windows Forms
+    <value>.NET 8 &amp; Windows Forms
 https://github.com/dotnet/
 
 The MIT License (MIT)
