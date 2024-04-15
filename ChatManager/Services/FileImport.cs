@@ -20,7 +20,7 @@ internal class FileImport
 
     private static bool filesChecked = false;
     private static readonly string filePath = GetSetSettings.GetLocalPath;
-    private static readonly List<string> serverList = new();
+    private static readonly List<string> serverList = [];
 
     private static readonly string[,] starForgeArray = new string[1000, 2];
     private static readonly string[,] sateleShanArray = new string[1000, 2];

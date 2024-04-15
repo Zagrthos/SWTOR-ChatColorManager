@@ -10,7 +10,7 @@ namespace ChatManager.Services;
 
 internal class Localization
 {
-    private Dictionary<string, string> strings = new();
+    private Dictionary<string, string> strings = [];
     private readonly string installPath = Application.StartupPath;
 
     internal Localization(string locale)

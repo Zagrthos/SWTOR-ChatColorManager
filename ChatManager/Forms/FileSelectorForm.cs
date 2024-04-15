@@ -24,7 +24,7 @@ internal partial class FileSelectorForm : Form
     private string listBoxString = string.Empty;
     private string listBoxName = string.Empty;
     private readonly string[] selectedServers = new string[5];
-    private readonly List<string> listBoxMulti = new();
+    private readonly List<string> listBoxMulti = [];
     private int tabIndex = 2;
 
     internal string GetListBoxString => listBoxString;
@@ -87,7 +87,7 @@ internal partial class FileSelectorForm : Form
 
                     // Converting the MultiDimensionalArray into a List but remove every entry that is null
                     string[,] charactersMulti = fileImport.GetArray($"{name.Substring(3)}");
-                    List<string> characters = new();
+                    List<string> characters = [];
                     for (int i = 0; i < 100; i++)
                     {
                         if (charactersMulti[i, 0] != null)
@@ -149,7 +149,7 @@ internal partial class FileSelectorForm : Form
 
                     // Converting the MultiDimensionalArray into a List but remove every entry that is null
                     string[,] charactersMulti = fileImport.GetArray($"{name.Substring(4)}");
-                    List<string> characters = new();
+                    List<string> characters = [];
                     for (int i = 0; i < 100; i++)
                     {
                         if (charactersMulti[i, 0] != null)
