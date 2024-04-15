@@ -32,9 +32,7 @@ internal partial class ColorPickerForm : Form
 
         fontCollection.AddFontFile(Path.Combine(Application.StartupPath, "Resources", "Font.ttf"));
 
-        Font swtorFont = new(fontCollection.Families[0], fontSize);
-
-        lblExample.Font = swtorFont;
+        lblExample.Font = new(fontCollection.Families[0], fontSize);
     }
 
     private void FontSizeChanged(object sender, EventArgs e) => ChangeFont((float)nbFontSize.Value);

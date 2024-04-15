@@ -94,14 +94,12 @@ internal static class Checks
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Checks, $"Set {setting} to: {true}");
         }
 
-        bool getSettings = folder switch
+        return folder switch
         {
             CheckFolderEnum.AutosaveFolder => GetSetSettings.GetAutosaveAvailability,
             CheckFolderEnum.BackupFolder => GetSetSettings.GetBackupAvailability,
             _ => throw new InvalidOperationException($"{folder} does not exist!"),
         };
-
-        return getSettings;
     }
 
     internal static bool IsBackupDirEmpty() => Directory.GetDirectories(GetSetSettings.GetBackupPath).Length > 0;

@@ -367,9 +367,7 @@ internal partial class FileSelectorForm : Form
 
         if (IsSave)
         {
-            IEnumerable<Control> buttons = GetControls(this, typeof(Button));
-
-            foreach (Control control in buttons)
+            foreach (Control control in GetControls(this, typeof(Button)))
             {
                 if (control is Button button)
                 {
@@ -396,9 +394,7 @@ internal partial class FileSelectorForm : Form
         // Change the Text of the Form
         Text = localization.GetString(Name);
 
-        IEnumerable<Control> buttons = GetControls(this, typeof(Button));
-
-        foreach (Control control in buttons)
+        foreach (Control control in GetControls(this, typeof(Button)))
         {
             if (control is Button button)
             {

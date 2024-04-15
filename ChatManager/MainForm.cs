@@ -761,8 +761,7 @@ internal partial class MainForm : Form
             downloadProgressToolStripMenuItem.Visible = true;
         }
 
-        string text = Updater.GetUpdateDownloadText.Replace("PROGRESS", progress.ToString());
-        downloadProgressToolStripMenuItem.Text = text;
+        downloadProgressToolStripMenuItem.Text = Updater.GetUpdateDownloadText.Replace("PROGRESS", progress.ToString());
     }
 
     // When the Form is closing, log it, remove the DownloadProgressReporter, stop the autosaveTimer and do a autosave
