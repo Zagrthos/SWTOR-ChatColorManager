@@ -136,14 +136,7 @@ internal static partial class Updater
         // Count the length of the to download file
         TotalBytesToDownload = await WebRequests.GetLongAsync(UpdateURL);
 
-        if (TotalBytesToDownload.HasValue)
-        {
-            return TotalBytesToDownload.Value;
-        }
-        else
-        {
-            return 0;
-        }
+        return TotalBytesToDownload ?? 0;
     }
 
     private static async Task DownloadUpdateAsync()
