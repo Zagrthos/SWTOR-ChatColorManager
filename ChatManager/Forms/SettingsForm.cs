@@ -38,16 +38,16 @@ internal partial class SettingsForm : Form
         // Find all Controls of the desired Type and pack them in a Control List
         IEnumerable<Control> GetControls(Control parent, Type type)
         {
-            var controls = parent.Controls.Cast<Control>();
+            IEnumerable<Control> controls = parent.Controls.Cast<Control>();
 
             return controls
                 .Where(c => c.GetType() == type)
                 .Concat(controls.SelectMany(c => GetControls(c, type)));
         }
 
-        var groups = GetControls(this, typeof(GroupBox));
-        var checkBoxes = GetControls(this, typeof(CheckBox));
-        var labels = GetControls(this, typeof(Label));
+        IEnumerable<Control> groups = GetControls(this, typeof(GroupBox));
+        IEnumerable<Control> checkBoxes = GetControls(this, typeof(CheckBox));
+        IEnumerable<Control> labels = GetControls(this, typeof(Label));
 
         foreach (Control control in groups)
         {

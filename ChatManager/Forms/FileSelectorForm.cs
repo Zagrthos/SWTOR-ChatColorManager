@@ -226,7 +226,7 @@ internal partial class FileSelectorForm : Form
                 if (control is CheckedListBox)
                 {
                     // Get all CheckedListBox Controls
-                    var checkedListBoxes = GetControls(this, typeof(CheckedListBox));
+                    IEnumerable<Control> checkedListBoxes = GetControls(this, typeof(CheckedListBox));
 
                     // Set counter to 0
                     byte counter = 0;
@@ -249,7 +249,7 @@ internal partial class FileSelectorForm : Form
                             counter++;
 
                             // If yes get them all
-                            foreach (var item in checkedListBox.CheckedItems)
+                            foreach (object? item in checkedListBox.CheckedItems)
                             {
                                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Current item is: {item}");
 
@@ -355,7 +355,7 @@ internal partial class FileSelectorForm : Form
     // Find all Controls of the desired Type and pack them in a Control List
     private IEnumerable<Control> GetControls(Control parent, Type type)
     {
-        var controls = parent.Controls.Cast<Control>();
+        IEnumerable<Control> controls = parent.Controls.Cast<Control>();
 
         return controls
             .Where(c => c.GetType() == type)
@@ -369,7 +369,7 @@ internal partial class FileSelectorForm : Form
 
         if (isSave)
         {
-            var buttons = GetControls(this, typeof(Button));
+            IEnumerable<Control> buttons = GetControls(this, typeof(Button));
 
             foreach (Control control in buttons)
             {
@@ -398,7 +398,7 @@ internal partial class FileSelectorForm : Form
         // Change the Text of the Form
         Text = localization.GetString(Name);
 
-        var buttons = GetControls(this, typeof(Button));
+        IEnumerable<Control> buttons = GetControls(this, typeof(Button));
 
         foreach (Control control in buttons)
         {

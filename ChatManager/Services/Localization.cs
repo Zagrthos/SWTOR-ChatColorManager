@@ -24,13 +24,13 @@ internal class Localization
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.Localization, "CheckLocale entered");
 
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Localization, $"Localization path is: {Path.Combine(installPath, "Localization", $"{locale}.json")}");
-        var jsonString = File.ReadAllText(Path.Combine(installPath, "Localization", $"{locale}.json"));
+        string jsonString = File.ReadAllText(Path.Combine(installPath, "Localization", $"{locale}.json"));
 
         // Check if file has content
         if (jsonString != null)
         {
             // If yes decode the JSON
-            var tempStrings = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonString);
+            Dictionary<string, string>? tempStrings = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonString);
 
             // Check if JSON has content
             if (tempStrings != null)
@@ -55,7 +55,7 @@ internal class Localization
 
     internal string GetString(string name)
     {
-        if (strings.TryGetValue(name, out var result))
+        if (strings.TryGetValue(name, out string? result))
         {
             return result;
         }
@@ -68,7 +68,7 @@ internal class Localization
 
     internal string GetString(LocalizationEnum localization)
     {
-        if (strings.TryGetValue(localization.ToString(), out var result))
+        if (strings.TryGetValue(localization.ToString(), out string? result))
         {
             return result;
         }

@@ -226,7 +226,7 @@ internal static partial class Updater
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineHash is: {onlineHash}");
 
         string localHash = string.Empty;
-        using (var stream = File.OpenRead(filePath))
+        using (FileStream stream = File.OpenRead(filePath))
         {
             using var sha256 = SHA256.Create();
             byte[] byteHash = sha256.ComputeHash(stream);

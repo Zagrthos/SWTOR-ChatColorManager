@@ -529,7 +529,7 @@ internal partial class MainForm : Form
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "CheckForEmptyTextboxes entered");
 
-        var textBoxes = GetControls(this, typeof(TextBox));
+        IEnumerable<Control> textBoxes = GetControls(this, typeof(TextBox));
         byte counter = 0;
 
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Checking for empty textBoxes...");
@@ -563,9 +563,9 @@ internal partial class MainForm : Form
             tabsMainForm.ItemSize = new Size(25, 100);
         }
 
-        var tabs = GetControls(this, typeof(TabControl));
-        var buttons = GetControls(this, typeof(Button));
-        var labels = GetControls(this, typeof(Label));
+        IEnumerable<Control> tabs = GetControls(this, typeof(TabControl));
+        IEnumerable<Control> buttons = GetControls(this, typeof(Button));
+        IEnumerable<Control> labels = GetControls(this, typeof(Label));
 
         // Needed because it's disabled by default and does not change the localization
         // It will be enabled, the state will be saved and downwards it will be disabled again
@@ -576,13 +576,13 @@ internal partial class MainForm : Form
             loadAutosaveEnabled = true;
         }
 
-        foreach (var item in menuMainForm.Items)
+        foreach (object? item in menuMainForm.Items)
         {
             if (item is ToolStripMenuItem menuItem && menuItem.Enabled)
             {
                 menuItem.Text = localization.GetString(menuItem.Name ?? throw new InvalidOperationException("MenuItem.Name is null"));
 
-                foreach (var moreItems in menuItem.DropDownItems)
+                foreach (object? moreItems in menuItem.DropDownItems)
                 {
                     if (moreItems is ToolStripMenuItem moreItem && moreItem.Enabled)
                     {
@@ -665,7 +665,7 @@ internal partial class MainForm : Form
     // Find all Controls of the desired Type and pack them in a Control List
     private IEnumerable<Control> GetControls(Control parent, Type type)
     {
-        var controls = parent.Controls.Cast<Control>();
+        IEnumerable<Control> controls = parent.Controls.Cast<Control>();
 
         return controls
             .Where(c => c.GetType() == type)

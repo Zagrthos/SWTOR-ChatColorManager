@@ -355,15 +355,15 @@ internal partial class BackupSelectorForm : Form
 
         IEnumerable<Control> GetControls(Control parent, Type type)
         {
-            var controls = parent.Controls.Cast<Control>();
+            IEnumerable<Control> controls = parent.Controls.Cast<Control>();
 
             return controls
                 .Where(c => c.GetType() == type)
                 .Concat(controls.SelectMany(c => GetControls(c, type)));
         }
 
-        var buttons = GetControls(this, typeof(Button));
-        var labels = GetControls(this, typeof(Label));
+        IEnumerable<Control> buttons = GetControls(this, typeof(Button));
+        IEnumerable<Control> labels = GetControls(this, typeof(Label));
 
         foreach (Control control in buttons)
         {
