@@ -177,7 +177,7 @@ internal static partial class Updater
             {
                 await filestream.WriteAsync(buffer.AsMemory(0, bytesRead));
                 totalBytesRead += bytesRead;
-                double percent = TotalBytesToDownload.HasValue ? (double)totalBytesRead / TotalBytesToDownload.Value * 100 : -1;
+                double percent = (TotalBytesToDownload.HasValue) ? (double)totalBytesRead / TotalBytesToDownload.Value * 100 : -1;
 
                 if (percent > -1)
                 {
