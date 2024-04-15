@@ -107,7 +107,7 @@ internal static class OpenWindows
         if (dialogResult != DialogResult.Cancel)
         {
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.OpenWindows, $"dialogResult = {dialogResult}");
-            FileExport fileExport = new(fileSelector.GetSelectedServers, fileSelector.GetListBoxMulti.ToArray());
+            FileExport fileExport = new(fileSelector.GetSelectedServers, [.. fileSelector.GetListBoxMulti]);
             fileExport.BackupFilesAndWrite(values);
             fileCount = fileExport.GetNumberOfChangedFiles;
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.OpenWindows, $"fileCount = {fileCount}");

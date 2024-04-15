@@ -198,7 +198,7 @@ internal partial class BackupSelectorForm : Form
                         if (lbxBackupDir.DataSource != null)
                         {
                             string[] array = (string[])lbxBackupDir.DataSource;
-                            List<string> dataSource = array.ToList();
+                            List<string> dataSource = [.. array];
 
                             // Delete the Directory
                             Directory.Delete(Path.Combine(backupPath, lbxBackupDir.SelectedItem.ToString()!), true);
@@ -241,7 +241,7 @@ internal partial class BackupSelectorForm : Form
                         if (clbxBackupFiles.DataSource != null)
                         {
                             string[] array = (string[])clbxBackupFiles.DataSource;
-                            List<string> dataSource = array.ToList();
+                            List<string> dataSource = [.. array];
 
                             foreach (string item in clbxBackupFiles.CheckedItems)
                             {

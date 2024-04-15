@@ -185,7 +185,7 @@ internal class FileImport
             {
                 Logging.Write(LogEventEnum.Error, ProgramClassEnum.FileImport, "Line ChatColors could not be found!");
                 ShowMessageBox.ShowBug();
-                return Array.Empty<string>();
+                return [];
             }
         }
         else

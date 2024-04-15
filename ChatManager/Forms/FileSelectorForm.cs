@@ -302,7 +302,7 @@ internal partial class FileSelectorForm : Form
         {
             string tabName = button.Name.Substring(2);
 
-            Control[] controls = Array.Empty<Control>();
+            Control[] controls = [];
 
             CheckedListBox? checkedListBox;
 
