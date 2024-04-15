@@ -47,7 +47,7 @@ internal class FileImport
 
     private static void GetLocalFiles()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileImport, $"GetLocalFiles entered");
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileImport, "GetLocalFiles entered");
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"filePath: {FilePath}");
 
         // Search the given Path for files
@@ -153,7 +153,7 @@ internal class FileImport
     /// <returns>The <see langword="string"/> <seealso cref="Array"/> with the content colors.</returns>
     internal string[] GetContentFromFile(string fileName, bool autosaveImport)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileImport, $"GetContentFromFile entered");
+        Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileImport, "GetContentFromFile entered");
 
         // Initialize Array for saving of colorIndexes
         string[] colorIndex = new string[23];

@@ -48,7 +48,7 @@ internal partial class MainForm : Form
                     if (Checks.CheckHexString(textBox.Text))
                     {
                         textBoxText = textBox.Text;
-                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, $"TextBox.Text is Hex");
+                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "TextBox.Text is Hex");
                         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"Hex Text is: {textBoxText}");
                     }
 
