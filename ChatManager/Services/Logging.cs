@@ -36,7 +36,9 @@ internal static class Logging
         // Add Timer to write any second all open entries in the log
         Timer = new(10000);
         Timer.Elapsed += TimerElapsed;
+#if !DEBUG
         Timer.Start();
+#endif
 
         LogfilesCleaning();
     }
