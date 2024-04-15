@@ -44,15 +44,7 @@ internal partial class BackupSelectorForm : Form
 
         // Set the DataSource
         lbxBackupDir.DataSource = backupDirsName;
-
-        if (backupDirsName.Length == 0)
-        {
-            btnDeleteDir.Enabled = false;
-        }
-        else
-        {
-            btnDeleteDir.Enabled = true;
-        }
+        btnDeleteDir.Enabled = backupDirsName.Length != 0;
     }
 
     private void DisplayBackupFiles(string dirName)

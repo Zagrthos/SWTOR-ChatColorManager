@@ -189,14 +189,7 @@ internal partial class SettingsForm : Form
                 throw new InvalidOperationException($"{updateInterval} is not implemented!");
         }
 
-        if (GetSetSettings.GetUpdateDownload)
-        {
-            chbUpdateDownload.Checked = true;
-        }
-        else
-        {
-            chbUpdateDownload.Checked = false;
-        }
+        chbUpdateDownload.Checked = GetSetSettings.GetUpdateDownload;
     }
 
     private void SwitchCurrentLocale()
