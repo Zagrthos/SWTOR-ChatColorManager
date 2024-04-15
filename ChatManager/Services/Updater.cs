@@ -16,10 +16,9 @@ internal static partial class Updater
     private static string updateURL = "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases/";
     private static string updateName = "SWTOR-ChatManager-";
     private static string updatePath = string.Empty;
-    private static string updateDownloadText = string.Empty;
     private static long? totalBytesToDownload = 0;
 
-    internal static string GetUpdateDownloadText => updateDownloadText;
+    internal static string GetUpdateDownloadText { get; private set; } = string.Empty;
 
     internal static async Task CheckForUpdateInterval()
     {
@@ -163,7 +162,7 @@ internal static partial class Updater
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Download Path: {updatePath}");
 
         Localization localization = new(GetSetSettings.GetCurrentLocale);
-        updateDownloadText = localization.GetString(LocalizationEnum.downloadProgressToolStripMenuItem);
+        GetUpdateDownloadText = localization.GetString(LocalizationEnum.downloadProgressToolStripMenuItem);
 
         // Download the file and then log the progress
         using (FileStream filestream = new(updatePath, FileMode.Create, FileAccess.Write, FileShare.None))

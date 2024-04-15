@@ -19,8 +19,7 @@ internal partial class ColorPickerForm : Form
         Localize();
     }
 
-    private string hexColor = string.Empty;
-    internal string GetHexColor => hexColor;
+    internal string GetHexColor { get; private set; } = string.Empty;
 
     private void ColorChanged(object sender, EventArgs e)
     {
@@ -56,7 +55,7 @@ internal partial class ColorPickerForm : Form
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm: {Text} is closing");
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
-        hexColor = Converter.RGBtoHexAsync(colorEditor.Color);
+        GetHexColor = Converter.RGBtoHexAsync(colorEditor.Color);
     }
 
     private void ColorPickerForm_FormClosed(object sender, FormClosedEventArgs e)

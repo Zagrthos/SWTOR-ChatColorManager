@@ -21,16 +21,12 @@ internal partial class FileSelectorForm : Form
     }
 
     private readonly bool isSave = false;
-    private string listBoxString = string.Empty;
-    private string listBoxName = string.Empty;
-    private readonly string[] selectedServers = new string[5];
-    private readonly List<string> listBoxMulti = [];
     private int tabIndex = 2;
 
-    internal string GetListBoxString => listBoxString;
-    internal string GetListBoxName => listBoxName;
-    internal string[] GetSelectedServers => selectedServers;
-    internal List<string> GetListBoxMulti => listBoxMulti;
+    internal string GetListBoxString { get; private set; } = string.Empty;
+    internal string GetListBoxName { get; private set; } = string.Empty;
+    internal string[] GetSelectedServers { get; } = new string[5];
+    internal List<string> GetListBoxMulti { get; } = [];
 
     // Remove the not needed servers from the List
     private void SetTabs(List<string> servers)
@@ -242,8 +238,8 @@ internal partial class FileSelectorForm : Form
                         if (checkedListBox.CheckedItems.Count > 0)
                         {
                             // Set the selectedServers to the correct name
-                            selectedServers[counter] = checkedListBox.Name.Substring(4);
-                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"selectedServers[{counter}] is: {selectedServers[counter]}");
+                            GetSelectedServers[counter] = checkedListBox.Name.Substring(4);
+                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"selectedServers[{counter}] is: {GetSelectedServers[counter]}");
 
                             // Count the CheckedListBoxes
                             counter++;
@@ -255,7 +251,7 @@ internal partial class FileSelectorForm : Form
 
                                 if (item != null)
                                 {
-                                    listBoxMulti.Add(item.ToString()!);
+                                    GetListBoxMulti.Add(item.ToString()!);
                                 }
                             }
                         }
@@ -276,8 +272,8 @@ internal partial class FileSelectorForm : Form
                     string listBoxNaming = listBox.Name;
                     if (!string.IsNullOrEmpty(charName) && !string.IsNullOrEmpty(listBoxNaming))
                     {
-                        listBoxString = charName;
-                        listBoxName = listBoxNaming;
+                        GetListBoxString = charName;
+                        GetListBoxName = listBoxNaming;
                     }
                 }
             }

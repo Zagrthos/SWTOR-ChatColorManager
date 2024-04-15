@@ -9,7 +9,7 @@ internal class FileExport
     internal FileExport(string[] servers, string[] files)
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileExport, "FileExport Constructor created");
-        arrayCounter = 0;
+        GetNumberOfChangedFiles = 0;
         selectedServers = servers;
         fileNames = files;
     }
@@ -21,9 +21,7 @@ internal class FileExport
     private readonly string[] fileNames;
 
     // Is used for positioning the characters in the array
-    private int arrayCounter;
-
-    internal int GetNumberOfChangedFiles => arrayCounter;
+    internal int GetNumberOfChangedFiles { get; private set; }
 
     internal void BackupFilesAndWrite(string[] content)
     {
@@ -62,7 +60,7 @@ internal class FileExport
             string[,] name = AssociateFileWithServer();
 
             // Loop through the arrayCounter and Copy all files in the array to the backup position
-            for (int i = 0; i < arrayCounter; i++)
+            for (int i = 0; i < GetNumberOfChangedFiles; i++)
             {
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current i is: {i}");
 
@@ -100,7 +98,7 @@ internal class FileExport
                         if (lineNumber == 0)
                         {
                             Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileExport, "No ChatColors line found!");
-                            arrayCounter--;
+                            GetNumberOfChangedFiles--;
                             ShowMessageBox.ShowBug();
                             return;
                         }
@@ -202,16 +200,16 @@ internal class FileExport
                 {
                     // j is used to identify the selected filename by the user
 
-                    if (arrayCounter > fileNames.Length || arrayCounter == fileNames.Length)
+                    if (GetNumberOfChangedFiles > fileNames.Length || GetNumberOfChangedFiles == fileNames.Length)
                     {
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"arrayCounter is: {arrayCounter}");
+                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"arrayCounter is: {GetNumberOfChangedFiles}");
                         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"fileNames.Length is: {fileNames.Length}");
 
                         break;
                     }
 
                     // Get the path
-                    string file = fileNames[arrayCounter];
+                    string file = fileNames[GetNumberOfChangedFiles];
                     //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current file is: {file}");
 
                     // Get the filename
@@ -234,7 +232,7 @@ internal class FileExport
                     // and check if the fileName starts with the server prefix
                     if (name[j, 0] == file && fileName.StartsWith(Converter.ServerNameIdentifier(server, true)))
                     {
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"arrayCounter is: {arrayCounter}");
+                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"arrayCounter is: {GetNumberOfChangedFiles}");
 
                         // If the entry in the array is not null or empty do it,
                         // insert the data in the array, set the counter one up
@@ -242,17 +240,17 @@ internal class FileExport
                         if (!string.IsNullOrEmpty(name[j, 1]))
                         {
                             // the fileName
-                            namesWithServers[arrayCounter, 0] = fileNames[arrayCounter];
+                            namesWithServers[GetNumberOfChangedFiles, 0] = fileNames[GetNumberOfChangedFiles];
 
                             // the filePath
-                            namesWithServers[arrayCounter, 1] = name[j, 1];
+                            namesWithServers[GetNumberOfChangedFiles, 1] = name[j, 1];
 
                             // the server
-                            namesWithServers[arrayCounter, 2] = server;
+                            namesWithServers[GetNumberOfChangedFiles, 2] = server;
 
-                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"{fileNames[arrayCounter]}");
+                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"{fileNames[GetNumberOfChangedFiles]}");
 
-                            arrayCounter++;
+                            GetNumberOfChangedFiles++;
 
                             break;
                         }

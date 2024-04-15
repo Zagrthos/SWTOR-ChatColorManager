@@ -12,19 +12,17 @@ internal partial class SettingsForm : Form
     internal SettingsForm()
     {
         InitializeComponent();
-        autosaveTimerChanged = false;
-        languageChanged = false;
+        GetAutosaveTimerChanged = false;
+        GetLanguageChanged = false;
     }
 
-    private bool autosaveTimerChanged = false;
-    private bool languageChanged = false;
     private bool cbLanguageFalseAlarm = false;
     private bool cbUpdaterIntervallFalseAlarm = false;
     private bool checkBoxFalseAlarm = false;
     private decimal currentAutosaveInterval = 0;
 
-    internal bool GetAutosaveTimerChanged => autosaveTimerChanged;
-    internal bool GetLanguageChanged => languageChanged;
+    internal bool GetAutosaveTimerChanged { get; private set; } = false;
+    internal bool GetLanguageChanged { get; private set; } = false;
 
     private void Localize()
     {
@@ -237,7 +235,7 @@ internal partial class SettingsForm : Form
             int updateIntervall = cbUpdateInterval.SelectedIndex;
             Localize();
             cbUpdateInterval.SelectedIndex = updateIntervall;
-            languageChanged = true;
+            GetLanguageChanged = true;
         }
     }
 
@@ -381,7 +379,7 @@ internal partial class SettingsForm : Form
                     numberAutosaveInterval.Visible = false;
                     lblAutosaveInterval.Enabled = false;
                     lblAutosaveInterval.Visible = false;
-                    autosaveTimerChanged = false;
+                    GetAutosaveTimerChanged = false;
                     return;
                 }
             }
@@ -419,8 +417,8 @@ internal partial class SettingsForm : Form
 
         if (numberAutosaveInterval.Value != currentAutosaveInterval)
         {
-            autosaveTimerChanged = true;
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"autosaveTimerChanged = {autosaveTimerChanged}");
+            GetAutosaveTimerChanged = true;
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"autosaveTimerChanged = {GetAutosaveTimerChanged}");
         }
     }
 
@@ -452,7 +450,7 @@ internal partial class SettingsForm : Form
 
             if (currentLocale != GetSetSettings.GetCurrentLocale)
             {
-                languageChanged = true;
+                GetLanguageChanged = true;
             }
         }
         else
