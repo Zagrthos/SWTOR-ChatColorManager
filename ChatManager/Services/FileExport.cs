@@ -19,7 +19,9 @@ internal class FileExport
     private readonly string[] SelectedServers;
     private readonly string[] FileNames;
 
-    // Is used for positioning the characters in the array
+    /// <summary>
+    /// Is used for positioning the characters in the array
+    /// </summary>
     internal int GetNumberOfChangedFiles { get; private set; }
 
     internal void BackupFilesAndWrite(string[] content)
@@ -166,7 +168,10 @@ internal class FileExport
         }
     }
 
-    // Create a multidimensional Array that has all files associated with the servers
+    /// <summary>
+    /// Create a multidimensional Array that has all files associated with the servers
+    /// </summary>
+    /// <returns>The multidimensional <see langword="string"/> <seealso cref="Array"/>.</returns>
     private string[,] AssociateFileWithServer()
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileExport, "AssociateFileWithServer entered");

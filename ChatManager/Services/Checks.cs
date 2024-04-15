@@ -9,7 +9,11 @@ namespace ChatManager.Services;
 
 internal static class Checks
 {
-    // Check if the String is a Hex Text
+    /// <summary>
+    /// Check if the <see langword="string"/> is a Hex Text.
+    /// </summary>
+    /// <param name="input">The <seealso langword="string"/> to be checked.</param>
+    /// <returns><see langword="true"/> if succeeded, <see langword="false"/> if not.</returns>
     internal static bool CheckHexString(string input)
     {
         // Define Hex Regex
@@ -19,7 +23,10 @@ internal static class Checks
         return Regex.IsMatch(input, hexPattern);
     }
 
-    // Check if SWTOR is running
+    /// <summary>
+    /// Check if SWTOR is running.
+    /// </summary>
+    /// <returns><see langword="true"/> if yes, <see langword="false"/> if not.</returns>
     internal static bool CheckSWTORprocessFound()
     {
         bool found = false;

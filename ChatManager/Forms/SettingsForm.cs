@@ -389,7 +389,9 @@ internal partial class SettingsForm : Form
         }
     }
 
-    // Triggered programmatically
+    /// <summary>
+    /// Triggered programmatically.
+    /// </summary>
     private void SetAutosaveInterval()
     {
         GetSetSettings.SaveSettings(SettingsEnum.autosaveInterval, numberAutosaveInterval.Value * 60000);
@@ -402,7 +404,9 @@ internal partial class SettingsForm : Form
         }
     }
 
-    // Triggered by the NumericUpDown
+    /// <summary>
+    /// Triggered by the <seealso cref="NumericUpDown"/>.
+    /// </summary>
     private void SetAutosaveInterval(object sender, EventArgs e)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "SetAutosaveInterval entered");

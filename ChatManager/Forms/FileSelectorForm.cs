@@ -29,7 +29,10 @@ internal partial class FileSelectorForm : Form
     internal string[] GetSelectedServers { get; } = new string[5];
     internal List<string> GetListBoxMulti { get; } = [];
 
-    // Remove the not needed servers from the List
+    /// <summary>
+    /// Remove the not needed servers from the List
+    /// </summary>
+    /// <param name="servers">The List of servers which should be removed.</param>
     private void SetTabs(List<string> servers)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "SetTabs entered");
@@ -54,7 +57,10 @@ internal partial class FileSelectorForm : Form
         }
     }
 
-    // Set the correct ListBox for the correct use-case
+    /// <summary>
+    /// Set the correct ListBox for the correct use-case
+    /// </summary>
+    /// <param name="isSave">Sets if the ListBox should be used in saving mode.</param>
     private void SetListBox(bool isSave)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "SetListBox entered");
@@ -200,7 +206,9 @@ internal partial class FileSelectorForm : Form
         }
     }
 
-    // On Click of the Button "Select"
+    /// <summary>
+    /// On Click of the Button "Select"
+    /// </summary>
     private void ListBoxClick(object sender, EventArgs e)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "ListBoxClick entered");
@@ -350,7 +358,12 @@ internal partial class FileSelectorForm : Form
         }
     }
 
-    // Find all Controls of the desired Type and pack them in a Control List
+    /// <summary>
+    /// Find all <seealso cref="Control"/>s of the desired <seealso cref="Type"/> and pack them in an <seealso cref="IEnumerable{Control}"/>.
+    /// </summary>
+    /// <param name="parent">The parent control.</param>
+    /// <param name="type">The control type.</param>
+    /// <returns>An <seealso cref="IEnumerable{Control}"/> of the found controls.</returns>
     private IEnumerable<Control> GetControls(Control parent, Type type)
     {
         IEnumerable<Control> controls = parent.Controls.Cast<Control>();
@@ -360,7 +373,9 @@ internal partial class FileSelectorForm : Form
             .Concat(controls.SelectMany(c => GetControls(c, type)));
     }
 
-    // Change the Tags of the Buttons if the Form is opened in the Save Context
+    /// <summary>
+    /// Change the Tags of the Buttons if the Form is opened in the Save Context.
+    /// </summary>
     private void FileSelectorForm_Load(object sender, EventArgs e)
     {
         SetListBox(IsSave);

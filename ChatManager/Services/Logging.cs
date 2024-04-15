@@ -41,7 +41,6 @@ internal static class Logging
         LogfilesCleaning();
     }
 
-    // Logfile Cleaning
     private static void LogfilesCleaning()
     {
         Write(LogEventEnum.Method, ProgramClassEnum.Logging, "LogfilesCleaning entered");
@@ -66,7 +65,6 @@ internal static class Logging
         Write(LogEventEnum.Info, ProgramClassEnum.Logging, $"{counter} logs deleted");
     }
 
-    // Stop logWriter and restart it
     private static void TimerElapsed(object? sender, ElapsedEventArgs e)
     {
         if (LogWriter != null)

@@ -27,7 +27,6 @@ internal class FileImport
     private static readonly string[,] TulakHordArray = new string[1000, 2];
     private static readonly string[,] TheLeviathanArray = new string[1000, 2];
 
-    // Get Methods to exchange data to other parts of the program
     internal string[,] GetArray(string name)
     {
         return name switch
@@ -43,7 +42,6 @@ internal class FileImport
 
     internal List<string> GetServerList() => ServerList;
 
-    // Get the local files
     private static void GetLocalFiles()
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileImport, $"GetLocalFiles entered");
@@ -144,7 +142,12 @@ internal class FileImport
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, $"Set filesChecked = {FilesChecked}");
     }
 
-    // Get the colors from the given File
+    /// <summary>
+    /// Get the colors from the given File
+    /// </summary>
+    /// <param name="fileName">The file name as <see langword="string"/>.</param>
+    /// <param name="autosaveImport"><see langword="true"/> if it's an autosave import, otherwise <see langword="false"/>.</param>
+    /// <returns>The <see langword="string"/> <seealso cref="Array"/> with the content colors.</returns>
     internal string[] GetContentFromFile(string fileName, bool autosaveImport)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileImport, $"GetContentFromFile entered");

@@ -16,7 +16,9 @@ internal partial class MainForm : Form
 
     private System.Timers.Timer? AutosaveTimer;
 
-    // Button Click Handler for every button next to the TextBox
+    /// <summary>
+    /// <seealso cref="Button"/> Click Handler for every <seealso cref="Button"/> next to the <seealso cref="TextBox"/>.
+    /// </summary>
     private void ClickChangeColorButton(object sender, EventArgs e)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ClickChangeColorButton entered");
@@ -82,7 +84,9 @@ internal partial class MainForm : Form
         }
     }
 
-    // ToolStripMenu Program Handler
+    /// <summary>
+    /// <seealso cref="ToolStripMenuItem"/> Program Handler.
+    /// </summary>
     private async void ToolStripMenuHandler(object sender, EventArgs e)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ToolStripMainMenuHandler entered");
@@ -191,7 +195,9 @@ internal partial class MainForm : Form
         }
     }
 
-    // Import the colorIndexes from the given File into all textBoxes
+    /// <summary>
+    /// Import the colorIndexes from the given File into all <seealso cref="TextBox"/>es.
+    /// </summary>
     private void ImportFile(object sender, EventArgs e)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ImportFile entered");
@@ -657,7 +663,12 @@ internal partial class MainForm : Form
         autosave.DoAutosave(Converter.LabelToString(lblCharName.Text), Converter.LabelToString(lblServerName.Text), colorIndexes);
     }
 
-    // Find all Controls of the desired Type and pack them in a Control List
+    /// <summary>
+    /// Find all <seealso cref="Control"/>s of the desired <seealso cref="Type"/> and pack them in an <seealso cref="IEnumerable{Control}"/>.
+    /// </summary>
+    /// <param name="parent">The parent control.</param>
+    /// <param name="type">The control type.</param>
+    /// <returns>An <seealso cref="IEnumerable{Control}"/> of the found controls.</returns>
     private IEnumerable<Control> GetControls(Control parent, Type type)
     {
         IEnumerable<Control> controls = parent.Controls.Cast<Control>();
@@ -674,9 +685,10 @@ internal partial class MainForm : Form
         DoSave();
     }
 
-    // Perform basic Checks when the Form is loading
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-
+    /// <summary>
+    /// Perform basic Checks when the <seealso cref="Form"/> is loading.
+    /// </summary>
     private async void MainForm_Load(object sender, EventArgs e)
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     {
@@ -741,7 +753,9 @@ internal partial class MainForm : Form
 #endif
     }
 
-    // Receive the DownloadProgress from the Updater
+    /// <summary>
+    /// Receive the download progress from the Updater.
+    /// </summary>
     private void DownloadProgressReporter_DownloadProgressChanged(object? sender, DownloadProgressEventArgs e)
     {
         if (InvokeRequired)
@@ -753,7 +767,10 @@ internal partial class MainForm : Form
         UpdateDownloadProgress(e.GetDownloadProgress());
     }
 
-    // Display the Download Progress on the screen
+    /// <summary>
+    /// Display the download progress on the screen.
+    /// </summary>
+    /// <param name="progress">The download progress.</param>
     private void UpdateDownloadProgress(double progress)
     {
         if (!downloadProgressToolStripMenuItem.Visible)
@@ -764,7 +781,9 @@ internal partial class MainForm : Form
         downloadProgressToolStripMenuItem.Text = Updater.GetUpdateDownloadText.Replace("PROGRESS", progress.ToString());
     }
 
-    // When the Form is closing, log it, remove the DownloadProgressReporter, stop the autosaveTimer and do a autosave
+    /// <summary>
+    /// When the <seealso cref="Form"/> is closing, log it, remove the DownloadProgressReporter, stop the autosaveTimer and do an autosave.
+    /// </summary>
     private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "MainForm closing");
@@ -779,14 +798,18 @@ internal partial class MainForm : Form
         }
     }
 
-    // When the Form is closed, log it and stop the logger
+    /// <summary>
+    /// When the <seealso cref="Form"/> is closed, log it and stop the logger.
+    /// </summary>
     private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "MainForm closed");
         Logging.Dispose();
     }
 
-    // Draw the Tabs on the left side
+    /// <summary>
+    /// Draw the <seealso cref="TabPage"/>s on the left side.
+    /// </summary>
     private void TabsMainForm_DrawItem(object sender, DrawItemEventArgs e)
     {
         Graphics g = e.Graphics;

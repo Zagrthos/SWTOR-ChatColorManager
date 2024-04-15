@@ -73,7 +73,6 @@ internal static class GetSetSettings
         }
     }
 
-    // This is for setting strings
     internal static void SaveSettings(SettingsEnum settingName, string value)
     {
         switch (settingName)
@@ -97,7 +96,6 @@ internal static class GetSetSettings
         Settings.Default.Save();
     }
 
-    // This is for setting booleans
     internal static void SaveSettings(SettingsEnum settingName, bool value)
     {
         switch (settingName)
@@ -137,7 +135,6 @@ internal static class GetSetSettings
         Settings.Default.Save();
     }
 
-    // This is for setting decimals
     internal static void SaveSettings(SettingsEnum settingName, decimal value)
     {
         if (settingName == SettingsEnum.autosaveInterval)
@@ -148,7 +145,6 @@ internal static class GetSetSettings
         Settings.Default.Save();
     }
 
-    // This is for setting DateTimes
     internal static void SaveSettings(SettingsEnum settingName, DateTime value)
     {
         if (settingName == SettingsEnum.lastUpdateCheck)

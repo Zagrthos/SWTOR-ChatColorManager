@@ -77,7 +77,6 @@ internal static class OpenWindows
         }
     }
 
-    // Open the FileSelector but with the import Settings
     internal static (string, string) OpenFileImportSelector()
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenFileImportSelector entered");
@@ -94,7 +93,6 @@ internal static class OpenWindows
         return (listBoxString, listBoxName);
     }
 
-    // Open the FileSelector but with the export Settings
     internal static void OpenFileExportSelector(string[] values)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenFileExportSelector entered");
@@ -160,7 +158,6 @@ internal static class OpenWindows
         textViewer.Dispose();
     }
 
-    // Open Explorer Window with a specified path
     internal static void OpenExplorer(string path)
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"Trying to start explorer.exe with path: {path}");

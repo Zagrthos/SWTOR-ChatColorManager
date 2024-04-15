@@ -8,7 +8,11 @@ namespace ChatManager.Services;
 
 internal partial class Converter
 {
-    // Convert an RGB Color into Hex
+    /// <summary>
+    /// Convert an RGB <seealso cref="Color"/> into Hex.
+    /// </summary>
+    /// <param name="rgb">The <seealso cref="Color"/> to be converted.</param>
+    /// <returns>The <see langword="string"/> in Hex.</returns>
     internal static string RGBtoHex(Color rgb)
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, "Try to convert RGB into Hex");
@@ -18,7 +22,11 @@ internal partial class Converter
         return hex;
     }
 
-    // Convert Hex into an RGB Color
+    /// <summary>
+    /// Convert Hex into an RGB <seealso cref="Color"/>.
+    /// </summary>
+    /// <param name="hex">The <see langword="string"/> in Hex to be converted.</param>
+    /// <returns>The <seealso cref="Color"/> in RGB.</returns>
     internal static Color HexToRGB(string hex)
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, "Try to convert Hex into RGB");
@@ -42,7 +50,12 @@ internal partial class Converter
         return rgb;
     }
 
-    // Associate server name to identifier
+    /// <summary>
+    /// Associate the server name to the SWTOR identifier.
+    /// </summary>
+    /// <param name="name">The server name as <see langword="string"/>.</param>
+    /// <param name="isServerName"><see langword="true"/> if it's the server name, otherwise <see langword="false"/>.</param>
+    /// <returns>The wanted <see langword="string"/>.</returns>
     internal static string ServerNameIdentifier(string name, bool isServerName)
     {
         if (!string.IsNullOrEmpty(name) && isServerName)
