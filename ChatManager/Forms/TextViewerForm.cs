@@ -8,9 +8,9 @@ using ChatManager.Services;
 
 namespace ChatManager.Forms;
 
-public partial class TextViewerForm : Form
+internal partial class TextViewerForm : Form
 {
-    public TextViewerForm(bool isChangelog = false)
+    internal TextViewerForm(bool isChangelog = false)
     {
         InitializeComponent();
         Localize(isChangelog);
