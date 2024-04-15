@@ -18,7 +18,7 @@ internal class FileImport
         }
     }
 
-    private static bool FilesChecked = false;
+    private static bool FilesChecked;
     private static readonly string FilePath = GetSetSettings.GetLocalPath;
     private static readonly List<string> ServerList = [];
     private static readonly string[,] StarForgeArray = new string[1000, 2];

@@ -16,10 +16,10 @@ internal partial class SettingsForm : Form
         GetLanguageChanged = false;
     }
 
-    private bool CbLanguageFalseAlarm = false;
-    private bool CbUpdaterIntervallFalseAlarm = false;
-    private bool CheckBoxFalseAlarm = false;
-    private decimal CurrentAutosaveInterval = 0;
+    private bool CbLanguageFalseAlarm;
+    private bool CbUpdaterIntervallFalseAlarm;
+    private bool CheckBoxFalseAlarm;
+    private decimal CurrentAutosaveInterval;
 
     internal bool GetAutosaveTimerChanged { get; private set; } = false;
     internal bool GetLanguageChanged { get; private set; } = false;

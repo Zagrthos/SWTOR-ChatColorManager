@@ -21,7 +21,7 @@ internal partial class FileSelectorForm : Form
         SetTabs(servers);
     }
 
-    private readonly bool IsSave = false;
+    private readonly bool IsSave;
     private int NewTabIndex = 2;
 
     internal string GetListBoxString { get; private set; } = string.Empty;

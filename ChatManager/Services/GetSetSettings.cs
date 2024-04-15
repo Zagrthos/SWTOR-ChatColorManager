@@ -10,10 +10,10 @@ internal static class GetSetSettings
 {
     private static readonly string LocalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SWTOR\\swtor\\settings");
     private static readonly string BackupPath = Path.Combine(LocalPath, "Backups");
-    private static readonly bool BackupDir = false;
+    private static readonly bool BackupDir;
     private static readonly string LogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Logs");
     private static readonly string AutosavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Autosave");
-    private static readonly bool AutosaveDir = false;
+    private static readonly bool AutosaveDir;
 
     internal static string GetCurrentLocale => Settings.Default._locale;
     internal static string GetLocalPath => Settings.Default.localPath;
