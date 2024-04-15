@@ -282,7 +282,7 @@ internal class DownloadProgressEventArgs : EventArgs
 
     internal DownloadProgressEventArgs(double progress)
     {
-        this.Progress = progress;
+        Progress = progress;
     }
 }
 
