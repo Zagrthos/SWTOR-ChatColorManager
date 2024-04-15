@@ -112,27 +112,27 @@ internal class FileImport
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, "Select the servers by files");
 
         // Select the servers by files
-        if (StarForgeArray[0, 0] != null && StarForgeArray[0, 0] != string.Empty)
+        if (!string.IsNullOrWhiteSpace(StarForgeArray[0, 0]))
         {
             ServerList.Add("StarForge");
         }
 
-        if (SateleShanArray[0, 0] != null && SateleShanArray[0, 0] != string.Empty)
+        if (!string.IsNullOrWhiteSpace(SateleShanArray[0, 0]))
         {
             ServerList.Add("SateleShan");
         }
 
-        if (DarthMalgusArray[0, 0] != null && DarthMalgusArray[0, 0] != string.Empty)
+        if (!string.IsNullOrWhiteSpace(DarthMalgusArray[0, 0]))
         {
             ServerList.Add("DarthMalgus");
         }
 
-        if (TulakHordArray[0, 0] != null && TulakHordArray[0, 0] != string.Empty)
+        if (!string.IsNullOrWhiteSpace(TulakHordArray[0, 0]))
         {
             ServerList.Add("TulakHord");
         }
 
-        if (TheLeviathanArray[0, 0] != null && TheLeviathanArray[0, 0] != string.Empty)
+        if (!string.IsNullOrWhiteSpace(TheLeviathanArray[0, 0]))
         {
             ServerList.Add("TheLeviathan");
         }
