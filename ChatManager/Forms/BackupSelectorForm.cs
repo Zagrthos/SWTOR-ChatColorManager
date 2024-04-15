@@ -188,7 +188,7 @@ internal partial class BackupSelectorForm : Form
                         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"DirToDelete: {lbxBackupDir.SelectedItem}");
 
                         // Convert DataSource to List if not null
-                        if (lbxBackupDir.DataSource != null)
+                        if (lbxBackupDir.DataSource is not null)
                         {
                             string[] array = (string[])lbxBackupDir.DataSource;
                             List<string> dataSource = [.. array];
@@ -232,7 +232,7 @@ internal partial class BackupSelectorForm : Form
                 case "btnDeleteFiles":
                     if (clbxBackupFiles.CheckedItems.Count > 0)
                     {
-                        if (clbxBackupFiles.DataSource != null)
+                        if (clbxBackupFiles.DataSource is not null)
                         {
                             string[] array = (string[])clbxBackupFiles.DataSource;
                             List<string> dataSource = [.. array];

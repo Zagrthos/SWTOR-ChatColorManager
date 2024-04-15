@@ -67,7 +67,7 @@ internal static class Logging
 
     private static void TimerElapsed(object? sender, ElapsedEventArgs e)
     {
-        if (LogWriter == null)
+        if (LogWriter is null)
         {
             return;
         }
@@ -96,7 +96,7 @@ internal static class Logging
             _ => "UNCATEGORIZED"
         };
 
-        if (LogWriter != null)
+        if (LogWriter is not null)
         {
             LogWriter.WriteLine($"[{DateTime.Now:HH:mm:ss}] => {Event} on {ProgramClass}: {Message}");
         }
@@ -108,7 +108,7 @@ internal static class Logging
 
     internal static void Dispose()
     {
-        if (LogWriter == null)
+        if (LogWriter is null)
         {
             return;
         }

@@ -120,7 +120,7 @@ internal static class Checks
         Localization localization = new(GetSetSettings.GetCurrentLocale);
 
         // Returns null if not connected to anything!
-        if (NetworkInformation.GetInternetConnectionProfile() == null)
+        if (NetworkInformation.GetInternetConnectionProfile() is null)
         {
             isConnected = false;
             Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");

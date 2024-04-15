@@ -27,13 +27,13 @@ internal class Localization
         string jsonString = File.ReadAllText(Path.Combine(InstallPath, "Localization", $"{locale}.json"));
 
         // Check if file has content
-        if (jsonString != null)
+        if (jsonString is not null)
         {
             // If yes decode the JSON
             Dictionary<string, string>? tempStrings = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonString);
 
             // Check if JSON has content
-            if (tempStrings != null)
+            if (tempStrings is not null)
             {
                 Strings = tempStrings;
                 GetSetSettings.SaveSettings(SettingsEnum.locale, locale);

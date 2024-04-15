@@ -298,7 +298,7 @@ internal partial class MainForm : Form
         }
 
         // Stop previously intialized Timer
-        if (AutosaveTimer != null)
+        if (AutosaveTimer is not null)
         {
             AutosaveTimer.Stop();
             AutosaveTimer.Elapsed -= AutosaveTimer_Elapsed;
@@ -607,7 +607,7 @@ internal partial class MainForm : Form
         {
             foreach (TabPage tab in tabControl.Controls)
             {
-                if (tab != null)
+                if (tab is not null)
                 {
                     tab.Text = localization.GetString(tab.Name);
                 }

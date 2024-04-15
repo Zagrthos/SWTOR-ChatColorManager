@@ -119,7 +119,7 @@ internal static partial class Updater
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "GetFileSizeAsync entered");
 
-        if (OnlineVersion != null && !UpdateName.Contains(OnlineVersion.ToString()))
+        if (OnlineVersion is not null && !UpdateName.Contains(OnlineVersion.ToString()))
         {
             if (UpdateName.Contains(".exe"))
             {

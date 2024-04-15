@@ -74,7 +74,7 @@ internal partial class FileSelectorForm : Form
             TableLayoutPanel? tlp = tabPage.Controls.OfType<TableLayoutPanel>().FirstOrDefault();
 
             // If there's a tlp go on
-            if (tlp != null)
+            if (tlp is not null)
             {
                 Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"Selected tlp is: {tlp.Name}");
 
@@ -93,7 +93,7 @@ internal partial class FileSelectorForm : Form
                     List<string> characters = [];
                     for (int i = 0; i < 100; i++)
                     {
-                        if (charactersMulti[i, 0] != null)
+                        if (charactersMulti[i, 0] is not null)
                         {
                             // TODO: Decide if logging to be removed or not
                             characters.Add(charactersMulti[i, 0]);
@@ -126,7 +126,7 @@ internal partial class FileSelectorForm : Form
                     {
                         Control? control = tlp.GetControlFromPosition(columnIndex, 1);
 
-                        if (control != null && control.Name != $"btn{name.Substring(3)}Select")
+                        if (control is not null && control.Name != $"btn{name.Substring(3)}Select")
                         {
                             Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"Control: {control.Name} removed");
                             tlp.Controls.Remove(control);
@@ -136,7 +136,7 @@ internal partial class FileSelectorForm : Form
 
                     // Set the btnSelect to Column 1 and so in the middle of the Window
                     Control? btnSelect = tlp.GetControlFromPosition(0, 1);
-                    if (btnSelect != null)
+                    if (btnSelect is not null)
                     {
                         tlp.SetColumn(btnSelect, 1);
                     }
@@ -155,7 +155,7 @@ internal partial class FileSelectorForm : Form
                     List<string> characters = [];
                     for (int i = 0; i < 100; i++)
                     {
-                        if (charactersMulti[i, 0] != null)
+                        if (charactersMulti[i, 0] is not null)
                         {
                             // TODO: Decide if logging to be removed or not
                             characters.Add(charactersMulti[i, 0]);
@@ -189,7 +189,7 @@ internal partial class FileSelectorForm : Form
                     Control? btnSelect = tlp.GetControlFromPosition(0, 1);
                     Control? btnSelectAll = tlp.GetControlFromPosition(1, 1);
                     Control? btnDeselectAll = tlp.GetControlFromPosition(2, 1);
-                    if (btnSelect != null && btnSelectAll != null && btnDeselectAll != null)
+                    if (btnSelect is not null && btnSelectAll is not null && btnDeselectAll is not null)
                     {
                         tlp.SetColumn(btnSelectAll, 0);
                         tlp.SetColumn(btnSelect, 1);
@@ -258,7 +258,7 @@ internal partial class FileSelectorForm : Form
                             {
                                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Current item is: {item}");
 
-                                if (item != null)
+                                if (item is not null)
                                 {
                                     GetListBoxMulti.Add(item.ToString()!);
                                 }
@@ -340,7 +340,7 @@ internal partial class FileSelectorForm : Form
             {
                 checkedListBox = controls[0] as CheckedListBox;
 
-                if (checkedListBox != null)
+                if (checkedListBox is not null)
                 {
                     bool isChecked = !button.Name.Contains("Deselect");
                     for (int i = 0; i < checkedListBox.Items.Count; i++)
