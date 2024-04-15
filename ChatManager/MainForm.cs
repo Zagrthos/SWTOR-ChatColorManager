@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 using ChatManager.Enums;
 using ChatManager.Services;
@@ -37,7 +36,15 @@ internal partial class MainForm : Form
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"Button Tag is: {button.Tag}");
 
                 // Find the TextBox...
-                Control? control = Controls.Find(targetTextBox, true).FirstOrDefault();
+                Control? control = null;
+                foreach (Control c in Controls)
+                {
+                    if (c.Name == targetTextBox)
+                    {
+                        control = c;
+                        break;
+                    }
+                }
 
                 // ... and initialize it as textBox
                 if (control is TextBox textBox)
@@ -538,13 +545,13 @@ internal partial class MainForm : Form
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "CheckForEmptyTextboxes entered");
 
-        IEnumerable<Control> textBoxes = GetControls(this, typeof(TextBox));
+        List<TextBox> textBoxes = GetControls<TextBox>(this);
         byte counter = 0;
 
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Checking for empty textBoxes...");
-        foreach (Control control in textBoxes)
+        foreach (TextBox textBox in textBoxes)
         {
-            if (control is TextBox textBox && string.IsNullOrEmpty(textBox.Text))
+            if (string.IsNullOrEmpty(textBox.Text))
             {
                 counter++;
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"counter: {counter}");
@@ -569,9 +576,9 @@ internal partial class MainForm : Form
             tabsMainForm.ItemSize = new(25, 100);
         }
 
-        IEnumerable<Control> tabs = GetControls(this, typeof(TabControl));
-        IEnumerable<Control> buttons = GetControls(this, typeof(Button));
-        IEnumerable<Control> labels = GetControls(this, typeof(Label));
+        List<TabControl> tabs = GetControls<TabControl>(this);
+        List<Button> buttons = GetControls<Button>(this);
+        List<Label> labels = GetControls<Label>(this);
 
         // Needed because it's disabled by default and does not change the localization
         // It will be enabled, the state will be saved and downwards it will be disabled again
@@ -604,7 +611,7 @@ internal partial class MainForm : Form
             loadAutosaveToolStripMenuItem.Enabled = false;
         }
 
-        foreach (TabControl tabControl in tabs.Cast<TabControl>())
+        foreach (TabControl tabControl in tabs)
         {
             foreach (TabPage tab in tabControl.Controls)
             {
@@ -615,20 +622,14 @@ internal partial class MainForm : Form
             }
         }
 
-        foreach (Control control in buttons)
+        foreach (Button button in buttons)
         {
-            if (control is Button button)
-            {
-                button.Text = localization.GetString(button.Name);
-            }
+            button.Text = localization.GetString(button.Name);
         }
 
-        foreach (Control control in labels)
+        foreach (Label label in labels)
         {
-            if (control is Label label)
-            {
-                label.Text = localization.GetString(label.Name);
-            }
+            label.Text = localization.GetString(label.Name);
         }
     }
 
@@ -673,18 +674,26 @@ internal partial class MainForm : Form
     }
 
     /// <summary>
-    /// Find all <seealso cref="Control"/>s of the desired <seealso cref="Type"/> and pack them in an <seealso cref="IEnumerable{Control}"/>.
+    /// Find all <seealso cref="Control"/>s of the desired <seealso cref="Type"/>.
     /// </summary>
-    /// <param name="parent">The parent control.</param>
-    /// <param name="type">The control type.</param>
-    /// <returns>An <seealso cref="IEnumerable{Control}"/> of the found controls.</returns>
-    private IEnumerable<Control> GetControls(Control parent, Type type)
+    /// <typeparam name="T">The <seealso cref="Control"/> <seealso cref="Type"/>.</typeparam>
+    /// <param name="parent">The parent <seealso cref="Control"/>.</param>
+    /// <returns>A <seealso cref="List{T}"/>.</returns>
+    private List<T> GetControls<T>(Control parent) where T : Control
     {
-        IEnumerable<Control> controls = parent.Controls.Cast<Control>();
+        List<T> controls = [];
 
-        return controls
-            .Where(c => c.GetType() == type)
-            .Concat(controls.SelectMany(c => GetControls(c, type)));
+        foreach (Control control in parent.Controls)
+        {
+            if (control is T typedControl)
+            {
+                controls.Add(typedControl);
+            }
+
+            controls.AddRange(GetControls<T>(control));
+        }
+
+        return controls;
     }
 
     private void AutosaveTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
