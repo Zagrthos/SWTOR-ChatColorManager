@@ -561,11 +561,11 @@ internal partial class MainForm : Form
 
         if (GetSetSettings.GetCurrentLocale == "fr")
         {
-            tabsMainForm.ItemSize = new Size(50, 100);
+            tabsMainForm.ItemSize = new(50, 100);
         }
         else
         {
-            tabsMainForm.ItemSize = new Size(25, 100);
+            tabsMainForm.ItemSize = new(25, 100);
         }
 
         IEnumerable<Control> tabs = GetControls(this, typeof(TabControl));

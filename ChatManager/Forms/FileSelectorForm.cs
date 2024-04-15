@@ -105,7 +105,7 @@ internal partial class FileSelectorForm : Form
                     ListBox listBox = new()
                     {
                         Name = name,
-                        Location = new Point(3, 3),
+                        Location = new(3, 3),
                         Dock = DockStyle.Fill,
                         DataSource = characters,
                         TabIndex = NewTabIndex,
@@ -167,7 +167,7 @@ internal partial class FileSelectorForm : Form
                     CheckedListBox listBox = new()
                     {
                         Name = name,
-                        Location = new Point(3, 3),
+                        Location = new(3, 3),
                         Dock = DockStyle.Fill,
                         CheckOnClick = true,
                         DataSource = characters,
