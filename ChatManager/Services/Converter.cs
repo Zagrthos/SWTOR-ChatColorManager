@@ -31,7 +31,7 @@ internal partial class Converter
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, "Try to convert Hex into RGB");
 
-        if (hex.IndexOf("#") != -1)
+        if (hex.Contains('#', StringComparison.OrdinalIgnoreCase))
         {
             hex = hex.Replace("#", string.Empty);
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, "Trailing # removed.");
