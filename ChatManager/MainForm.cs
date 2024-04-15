@@ -37,7 +37,9 @@ internal partial class MainForm : Form
 
                 // Find the TextBox...
                 Control? control = null;
-                foreach (Control c in Controls)
+
+                // Yes we have to use the parent because somehow it focus itself on the damn button
+                foreach (Control c in button.Parent!.Controls)
                 {
                     if (c.Name == targetTextBox)
                     {
