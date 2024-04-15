@@ -108,7 +108,7 @@ internal partial class FileSelectorForm : Form
                         Location = new(3, 3),
                         Dock = DockStyle.Fill,
                         DataSource = characters,
-                        TabIndex = NewTabIndex,
+                        TabIndex = NewTabIndex
                     };
 
                     NewTabIndex++;

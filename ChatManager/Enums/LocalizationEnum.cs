@@ -48,5 +48,5 @@ internal enum LocalizationEnum
     Warn_NoInternetConnection,
     Warn_SWTORpathNotFound,
     Warn_SWTORrunning,
-    Warn_TextBoxEmpty,
+    Warn_TextBoxEmpty
 }

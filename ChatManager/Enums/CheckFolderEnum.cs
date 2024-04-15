@@ -3,5 +3,5 @@
 internal enum CheckFolderEnum
 {
     AutosaveFolder,
-    BackupFolder,
+    BackupFolder
 }
