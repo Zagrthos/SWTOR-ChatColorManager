@@ -12,10 +12,7 @@ namespace ChatManager;
 
 internal partial class MainForm : Form
 {
-    internal MainForm()
-    {
-        InitializeComponent();
-    }
+    internal MainForm() => InitializeComponent();
 
     private System.Timers.Timer? AutosaveTimer;
 

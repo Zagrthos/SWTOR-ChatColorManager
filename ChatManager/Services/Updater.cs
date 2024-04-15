@@ -275,23 +275,13 @@ internal class DownloadProgressEventArgs : EventArgs
 {
     private readonly double Progress;
 
-    internal double GetDownloadProgress()
-    {
-        return Progress;
-    }
-
-    internal DownloadProgressEventArgs(double progress)
-    {
-        Progress = progress;
-    }
+    internal double GetDownloadProgress() => Progress;
+    internal DownloadProgressEventArgs(double progress) => Progress = progress;
 }
 
 internal static class DownloadProgressReporter
 {
     internal static event EventHandler<DownloadProgressEventArgs>? DownloadProgressChanged;
 
-    internal static void OnDownloadProgressChanged(double progress)
-    {
-        DownloadProgressChanged?.Invoke(null, new DownloadProgressEventArgs(progress));
-    }
+    internal static void OnDownloadProgressChanged(double progress) => DownloadProgressChanged?.Invoke(null, new DownloadProgressEventArgs(progress));
 }

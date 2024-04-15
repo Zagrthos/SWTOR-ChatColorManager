@@ -21,10 +21,7 @@ internal partial class ColorPickerForm : Form
 
     internal string GetHexColor { get; private set; } = string.Empty;
 
-    private void ColorChanged(object sender, EventArgs e)
-    {
-        lblExample.ForeColor = colorEditor.Color;
-    }
+    private void ColorChanged(object sender, EventArgs e) => lblExample.ForeColor = colorEditor.Color;
 
     private void ChangeFont(float fontSize)
     {
@@ -40,10 +37,7 @@ internal partial class ColorPickerForm : Form
         lblExample.Font = swtorFont;
     }
 
-    private void FontSizeChanged(object sender, EventArgs e)
-    {
-        ChangeFont((float)nbFontSize.Value);
-    }
+    private void FontSizeChanged(object sender, EventArgs e) => ChangeFont((float)nbFontSize.Value);
 
     private void ColorPickerForm_Load(object sender, EventArgs e)
     {
@@ -58,10 +52,7 @@ internal partial class ColorPickerForm : Form
         GetHexColor = Converter.RGBtoHexAsync(colorEditor.Color);
     }
 
-    private void ColorPickerForm_FormClosed(object sender, FormClosedEventArgs e)
-    {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm: {Text} closed");
-    }
+    private void ColorPickerForm_FormClosed(object sender, FormClosedEventArgs e) => Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm: {Text} closed");
 
     private void Localize()
     {

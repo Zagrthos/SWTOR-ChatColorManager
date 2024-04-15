@@ -134,8 +134,5 @@ internal partial class AboutForm : Form
     [DllImport("user32.dll", EntryPoint = "HideCaret")]
     private static extern bool HideCaret(IntPtr hWnd);
 
-    private void RtbCompany_GotFocus(object sender, EventArgs e)
-    {
-        HideCaret(rtbCompany.Handle);
-    }
+    private void RtbCompany_GotFocus(object sender, EventArgs e) => HideCaret(rtbCompany.Handle);
 }

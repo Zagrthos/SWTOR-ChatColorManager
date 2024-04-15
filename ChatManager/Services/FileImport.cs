@@ -41,10 +41,7 @@ internal class FileImport
         };
     }
 
-    internal List<string> GetServerList()
-    {
-        return ServerList;
-    }
+    internal List<string> GetServerList() => ServerList;
 
     // Get the local files
     private static void GetLocalFiles()

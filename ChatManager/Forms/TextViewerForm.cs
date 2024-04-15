@@ -84,8 +84,5 @@ public partial class TextViewerForm : Form
     [DllImport("user32.dll", EntryPoint = "HideCaret")]
     private static extern bool HideCaret(IntPtr hWnd);
 
-    private void RtbLicences_GotFocus(object sender, EventArgs e)
-    {
-        HideCaret(rtbLicences.Handle);
-    }
+    private void RtbLicences_GotFocus(object sender, EventArgs e) => HideCaret(rtbLicences.Handle);
 }

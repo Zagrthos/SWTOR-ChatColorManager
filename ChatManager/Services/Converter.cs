@@ -75,15 +75,8 @@ internal partial class Converter
         }
     }
 
-    internal static string AddWhitespace(string text)
-    {
-        return AddWhiteSpaceRegex().Replace(text, " $1");
-    }
-
-    internal static string RemoveWhitespace(string text)
-    {
-        return text.Replace(" ", string.Empty);
-    }
+    internal static string AddWhitespace(string text) => AddWhiteSpaceRegex().Replace(text, " $1");
+    internal static string RemoveWhitespace(string text) => text.Replace(" ", string.Empty);
 
     internal static string LabelToString(string text)
     {
@@ -91,10 +84,7 @@ internal partial class Converter
         return splitted[1].Trim();
     }
 
-    internal static double ConvertByteToMegabyte(long bytes)
-    {
-        return Math.Round((double)bytes / (1024 * 1024), 2);
-    }
+    internal static double ConvertByteToMegabyte(long bytes) => Math.Round((double)bytes / (1024 * 1024), 2);
 
     // Regex for adding a whitespace
     [GeneratedRegex("(\\B[A-Z])")]
