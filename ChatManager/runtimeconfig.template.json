@@ -5,6 +5,7 @@
         "System.Runtime.TieredCompilation.QuickJitForLoops": true,
         "System.Globalization.Invariant": false,
         "System.Net.Http.SocketsHttpHandler.Http2Support": true,
+        "System.Windows.Forms.AnchorLayoutV2": true,
         "System.Windows.Forms.ScaleTopLevelFormMinMaxSizeForDpi": true
     }
 }

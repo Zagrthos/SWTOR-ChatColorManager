@@ -217,13 +217,15 @@ internal partial class MainForm : Form
 
         // Get the selectedFile and the selectedListBox from the tuple
         (string selectedFile, string selectedListBox) = OpenWindows.OpenFileImportSelector();
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, $"selectedFile: {selectedFile}");
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, $"selectedListBox: {selectedListBox}");
 
         if (string.IsNullOrWhiteSpace(selectedFile))
         {
-            throw new InvalidOperationException("File is empty!");
+            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "No file was selected!");
+            return;
         }
+
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, $"selectedFile: {selectedFile}");
+        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, $"selectedListBox: {selectedListBox}");
 
         // Get the whole Character List for the requested name
         string[,] filePaths = fileImport.GetArray($"{selectedListBox.Substring(3)}");
