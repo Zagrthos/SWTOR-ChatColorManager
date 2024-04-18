@@ -234,6 +234,7 @@ namespace ChatManager.Forms
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(684, 211);
             Controls.Add(tlpSettings);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "SettingsForm";

@@ -204,6 +204,7 @@ namespace ChatManager.Forms
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(584, 298);
             Controls.Add(tlpMain);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "BackupSelectorForm";

@@ -403,6 +403,7 @@ namespace ChatManager.Forms
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(484, 261);
             Controls.Add(tabsFileSelector);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FileSelectorForm";
             StartPosition = FormStartPosition.CenterScreen;

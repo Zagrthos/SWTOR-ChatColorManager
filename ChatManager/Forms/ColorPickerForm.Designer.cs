@@ -117,7 +117,7 @@ namespace ChatManager.Forms
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(409, 321);
             Controls.Add(tlpColorPickerForm);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
