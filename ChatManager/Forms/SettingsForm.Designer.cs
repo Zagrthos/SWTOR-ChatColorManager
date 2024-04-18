@@ -70,8 +70,8 @@ namespace ChatManager.Forms
             tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
             tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
             tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
-            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
-            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
+            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
+            tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
             tlpSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
             tlpSettings.Size = new Size(684, 211);
