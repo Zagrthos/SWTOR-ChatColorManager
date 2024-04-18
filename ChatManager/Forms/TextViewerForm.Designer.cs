@@ -83,7 +83,7 @@ namespace ChatManager.Forms
             rtbLicences.Click += RtbLicences_GotFocus;
             rtbLicences.GotFocus += RtbLicences_GotFocus;
             // 
-            // LicencesForm
+            // TextViewerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -92,7 +92,7 @@ namespace ChatManager.Forms
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "LicencesForm";
+            Name = "TextViewerForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Licences";
             tlpLicences.ResumeLayout(false);
