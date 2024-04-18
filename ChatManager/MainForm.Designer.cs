@@ -331,7 +331,7 @@ namespace ChatManager
             tabsMainForm.Controls.Add(tpSystem);
             tabsMainForm.Dock = DockStyle.Fill;
             tabsMainForm.DrawMode = TabDrawMode.OwnerDrawFixed;
-            tabsMainForm.ItemSize = new Size(25, 100);
+            tabsMainForm.ItemSize = new Size(33, 175);
             tabsMainForm.Location = new Point(3, 28);
             tabsMainForm.Multiline = true;
             tabsMainForm.Name = "tabsMainForm";
@@ -344,9 +344,9 @@ namespace ChatManager
             // tpGlobal
             // 
             tpGlobal.Controls.Add(tlpGlobal);
-            tpGlobal.Location = new Point(104, 4);
+            tpGlobal.Location = new Point(179, 4);
             tpGlobal.Name = "tpGlobal";
-            tpGlobal.Size = new Size(370, 227);
+            tpGlobal.Size = new Size(295, 227);
             tpGlobal.TabIndex = 0;
             tpGlobal.Text = "Global channels";
             tpGlobal.UseVisualStyleBackColor = true;
@@ -369,15 +369,15 @@ namespace ChatManager
             tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33334F));
             tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333244F));
             tlpGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tlpGlobal.Size = new Size(370, 227);
+            tlpGlobal.Size = new Size(295, 227);
             tlpGlobal.TabIndex = 0;
             // 
             // btnGeneral
             // 
             btnGeneral.Dock = DockStyle.Fill;
-            btnGeneral.Location = new Point(188, 153);
+            btnGeneral.Location = new Point(150, 153);
             btnGeneral.Name = "btnGeneral";
-            btnGeneral.Size = new Size(179, 71);
+            btnGeneral.Size = new Size(142, 71);
             btnGeneral.TabIndex = 7;
             btnGeneral.Tag = "tbGeneral";
             btnGeneral.Text = "General";
@@ -387,9 +387,9 @@ namespace ChatManager
             // btnPvP
             // 
             btnPvP.Dock = DockStyle.Fill;
-            btnPvP.Location = new Point(188, 78);
+            btnPvP.Location = new Point(150, 78);
             btnPvP.Name = "btnPvP";
-            btnPvP.Size = new Size(179, 69);
+            btnPvP.Size = new Size(142, 69);
             btnPvP.TabIndex = 5;
             btnPvP.Tag = "tbPvP";
             btnPvP.Text = "PvP";
@@ -399,9 +399,9 @@ namespace ChatManager
             // btnTrade
             // 
             btnTrade.Dock = DockStyle.Fill;
-            btnTrade.Location = new Point(188, 3);
+            btnTrade.Location = new Point(150, 3);
             btnTrade.Name = "btnTrade";
-            btnTrade.Size = new Size(179, 69);
+            btnTrade.Size = new Size(142, 69);
             btnTrade.TabIndex = 3;
             btnTrade.Tag = "tbTrade";
             btnTrade.Text = "Trade";
@@ -413,7 +413,7 @@ namespace ChatManager
             tbTrade.Dock = DockStyle.Fill;
             tbTrade.Location = new Point(3, 3);
             tbTrade.Name = "tbTrade";
-            tbTrade.Size = new Size(179, 23);
+            tbTrade.Size = new Size(141, 23);
             tbTrade.TabIndex = 2;
             // 
             // tbPvP
@@ -421,7 +421,7 @@ namespace ChatManager
             tbPvP.Dock = DockStyle.Fill;
             tbPvP.Location = new Point(3, 78);
             tbPvP.Name = "tbPvP";
-            tbPvP.Size = new Size(179, 23);
+            tbPvP.Size = new Size(141, 23);
             tbPvP.TabIndex = 4;
             // 
             // tbGeneral
@@ -429,15 +429,15 @@ namespace ChatManager
             tbGeneral.Dock = DockStyle.Fill;
             tbGeneral.Location = new Point(3, 153);
             tbGeneral.Name = "tbGeneral";
-            tbGeneral.Size = new Size(179, 23);
+            tbGeneral.Size = new Size(141, 23);
             tbGeneral.TabIndex = 6;
             // 
             // tpPlayer
             // 
             tpPlayer.Controls.Add(tlpPlayer);
-            tpPlayer.Location = new Point(104, 4);
+            tpPlayer.Location = new Point(179, 4);
             tpPlayer.Name = "tpPlayer";
-            tpPlayer.Size = new Size(370, 227);
+            tpPlayer.Size = new Size(295, 227);
             tpPlayer.TabIndex = 1;
             tpPlayer.Text = "Player channels";
             tpPlayer.UseVisualStyleBackColor = true;
@@ -470,15 +470,15 @@ namespace ChatManager
             tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
             tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
             tlpPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
-            tlpPlayer.Size = new Size(370, 227);
+            tlpPlayer.Size = new Size(295, 227);
             tlpPlayer.TabIndex = 0;
             // 
             // btnWhisper
             // 
             btnWhisper.Dock = DockStyle.Fill;
-            btnWhisper.Location = new Point(188, 188);
+            btnWhisper.Location = new Point(150, 188);
             btnWhisper.Name = "btnWhisper";
-            btnWhisper.Size = new Size(179, 36);
+            btnWhisper.Size = new Size(142, 36);
             btnWhisper.TabIndex = 19;
             btnWhisper.Tag = "tbWhisper";
             btnWhisper.Text = "Whisper";
@@ -488,9 +488,9 @@ namespace ChatManager
             // btnSay
             // 
             btnSay.Dock = DockStyle.Fill;
-            btnSay.Location = new Point(188, 151);
+            btnSay.Location = new Point(150, 151);
             btnSay.Name = "btnSay";
-            btnSay.Size = new Size(179, 31);
+            btnSay.Size = new Size(142, 31);
             btnSay.TabIndex = 17;
             btnSay.Tag = "tbSay";
             btnSay.Text = "Say";
@@ -500,9 +500,9 @@ namespace ChatManager
             // btnGuild
             // 
             btnGuild.Dock = DockStyle.Fill;
-            btnGuild.Location = new Point(188, 114);
+            btnGuild.Location = new Point(150, 114);
             btnGuild.Name = "btnGuild";
-            btnGuild.Size = new Size(179, 31);
+            btnGuild.Size = new Size(142, 31);
             btnGuild.TabIndex = 15;
             btnGuild.Tag = "tbGuild";
             btnGuild.Text = "Guild";
@@ -512,9 +512,9 @@ namespace ChatManager
             // btnOfficer
             // 
             btnOfficer.Dock = DockStyle.Fill;
-            btnOfficer.Location = new Point(188, 77);
+            btnOfficer.Location = new Point(150, 77);
             btnOfficer.Name = "btnOfficer";
-            btnOfficer.Size = new Size(179, 31);
+            btnOfficer.Size = new Size(142, 31);
             btnOfficer.TabIndex = 13;
             btnOfficer.Tag = "tbOfficer";
             btnOfficer.Text = "Officer";
@@ -524,9 +524,9 @@ namespace ChatManager
             // btnYell
             // 
             btnYell.Dock = DockStyle.Fill;
-            btnYell.Location = new Point(188, 40);
+            btnYell.Location = new Point(150, 40);
             btnYell.Name = "btnYell";
-            btnYell.Size = new Size(179, 31);
+            btnYell.Size = new Size(142, 31);
             btnYell.TabIndex = 11;
             btnYell.Tag = "tbYell";
             btnYell.Text = "Yell";
@@ -536,9 +536,9 @@ namespace ChatManager
             // btnEmote
             // 
             btnEmote.Dock = DockStyle.Fill;
-            btnEmote.Location = new Point(188, 3);
+            btnEmote.Location = new Point(150, 3);
             btnEmote.Name = "btnEmote";
-            btnEmote.Size = new Size(179, 31);
+            btnEmote.Size = new Size(142, 31);
             btnEmote.TabIndex = 9;
             btnEmote.Tag = "tbEmote";
             btnEmote.Text = "Emote";
@@ -550,7 +550,7 @@ namespace ChatManager
             tbEmote.Dock = DockStyle.Fill;
             tbEmote.Location = new Point(3, 3);
             tbEmote.Name = "tbEmote";
-            tbEmote.Size = new Size(179, 23);
+            tbEmote.Size = new Size(141, 23);
             tbEmote.TabIndex = 8;
             // 
             // tbYell
@@ -558,7 +558,7 @@ namespace ChatManager
             tbYell.Dock = DockStyle.Fill;
             tbYell.Location = new Point(3, 40);
             tbYell.Name = "tbYell";
-            tbYell.Size = new Size(179, 23);
+            tbYell.Size = new Size(141, 23);
             tbYell.TabIndex = 10;
             // 
             // tbOfficer
@@ -566,7 +566,7 @@ namespace ChatManager
             tbOfficer.Dock = DockStyle.Fill;
             tbOfficer.Location = new Point(3, 77);
             tbOfficer.Name = "tbOfficer";
-            tbOfficer.Size = new Size(179, 23);
+            tbOfficer.Size = new Size(141, 23);
             tbOfficer.TabIndex = 12;
             // 
             // tbGuild
@@ -574,7 +574,7 @@ namespace ChatManager
             tbGuild.Dock = DockStyle.Fill;
             tbGuild.Location = new Point(3, 114);
             tbGuild.Name = "tbGuild";
-            tbGuild.Size = new Size(179, 23);
+            tbGuild.Size = new Size(141, 23);
             tbGuild.TabIndex = 14;
             // 
             // tbSay
@@ -582,7 +582,7 @@ namespace ChatManager
             tbSay.Dock = DockStyle.Fill;
             tbSay.Location = new Point(3, 151);
             tbSay.Name = "tbSay";
-            tbSay.Size = new Size(179, 23);
+            tbSay.Size = new Size(141, 23);
             tbSay.TabIndex = 16;
             // 
             // tbWhisper
@@ -590,15 +590,15 @@ namespace ChatManager
             tbWhisper.Dock = DockStyle.Fill;
             tbWhisper.Location = new Point(3, 188);
             tbWhisper.Name = "tbWhisper";
-            tbWhisper.Size = new Size(179, 23);
+            tbWhisper.Size = new Size(141, 23);
             tbWhisper.TabIndex = 18;
             // 
             // tpGroup
             // 
             tpGroup.Controls.Add(tlpGroup);
-            tpGroup.Location = new Point(104, 4);
+            tpGroup.Location = new Point(179, 4);
             tpGroup.Name = "tpGroup";
-            tpGroup.Size = new Size(370, 227);
+            tpGroup.Size = new Size(295, 227);
             tpGroup.TabIndex = 2;
             tpGroup.Text = "Group channels";
             tpGroup.UseVisualStyleBackColor = true;
@@ -628,15 +628,15 @@ namespace ChatManager
             tlpGroup.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tlpGroup.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tlpGroup.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tlpGroup.Size = new Size(370, 227);
+            tlpGroup.Size = new Size(295, 227);
             tlpGroup.TabIndex = 0;
             // 
             // btnOpsOfficer
             // 
             btnOpsOfficer.Dock = DockStyle.Fill;
-            btnOpsOfficer.Location = new Point(188, 183);
+            btnOpsOfficer.Location = new Point(150, 183);
             btnOpsOfficer.Name = "btnOpsOfficer";
-            btnOpsOfficer.Size = new Size(179, 41);
+            btnOpsOfficer.Size = new Size(142, 41);
             btnOpsOfficer.TabIndex = 29;
             btnOpsOfficer.Tag = "tbOpsOfficer";
             btnOpsOfficer.Text = "Ops officer";
@@ -646,9 +646,9 @@ namespace ChatManager
             // btnOpsAnnou
             // 
             btnOpsAnnou.Dock = DockStyle.Fill;
-            btnOpsAnnou.Location = new Point(188, 138);
+            btnOpsAnnou.Location = new Point(150, 138);
             btnOpsAnnou.Name = "btnOpsAnnou";
-            btnOpsAnnou.Size = new Size(179, 39);
+            btnOpsAnnou.Size = new Size(142, 39);
             btnOpsAnnou.TabIndex = 27;
             btnOpsAnnou.Tag = "tbOpsAnnou";
             btnOpsAnnou.Text = "Ops announce";
@@ -658,9 +658,9 @@ namespace ChatManager
             // btnGroup
             // 
             btnGroup.Dock = DockStyle.Fill;
-            btnGroup.Location = new Point(188, 93);
+            btnGroup.Location = new Point(150, 93);
             btnGroup.Name = "btnGroup";
-            btnGroup.Size = new Size(179, 39);
+            btnGroup.Size = new Size(142, 39);
             btnGroup.TabIndex = 25;
             btnGroup.Tag = "tbGroup";
             btnGroup.Text = "Group";
@@ -670,9 +670,9 @@ namespace ChatManager
             // btnOpsLead
             // 
             btnOpsLead.Dock = DockStyle.Fill;
-            btnOpsLead.Location = new Point(188, 48);
+            btnOpsLead.Location = new Point(150, 48);
             btnOpsLead.Name = "btnOpsLead";
-            btnOpsLead.Size = new Size(179, 39);
+            btnOpsLead.Size = new Size(142, 39);
             btnOpsLead.TabIndex = 23;
             btnOpsLead.Tag = "tbOpsLead";
             btnOpsLead.Text = "Ops lead";
@@ -682,9 +682,9 @@ namespace ChatManager
             // btnOps
             // 
             btnOps.Dock = DockStyle.Fill;
-            btnOps.Location = new Point(188, 3);
+            btnOps.Location = new Point(150, 3);
             btnOps.Name = "btnOps";
-            btnOps.Size = new Size(179, 39);
+            btnOps.Size = new Size(142, 39);
             btnOps.TabIndex = 21;
             btnOps.Tag = "tbOps";
             btnOps.Text = "Ops";
@@ -696,7 +696,7 @@ namespace ChatManager
             tbOps.Dock = DockStyle.Fill;
             tbOps.Location = new Point(3, 3);
             tbOps.Name = "tbOps";
-            tbOps.Size = new Size(179, 23);
+            tbOps.Size = new Size(141, 23);
             tbOps.TabIndex = 20;
             // 
             // tbOpsLead
@@ -704,7 +704,7 @@ namespace ChatManager
             tbOpsLead.Dock = DockStyle.Fill;
             tbOpsLead.Location = new Point(3, 48);
             tbOpsLead.Name = "tbOpsLead";
-            tbOpsLead.Size = new Size(179, 23);
+            tbOpsLead.Size = new Size(141, 23);
             tbOpsLead.TabIndex = 22;
             // 
             // tbGroup
@@ -712,7 +712,7 @@ namespace ChatManager
             tbGroup.Dock = DockStyle.Fill;
             tbGroup.Location = new Point(3, 93);
             tbGroup.Name = "tbGroup";
-            tbGroup.Size = new Size(179, 23);
+            tbGroup.Size = new Size(141, 23);
             tbGroup.TabIndex = 24;
             // 
             // tbOpsAnnou
@@ -720,7 +720,7 @@ namespace ChatManager
             tbOpsAnnou.Dock = DockStyle.Fill;
             tbOpsAnnou.Location = new Point(3, 138);
             tbOpsAnnou.Name = "tbOpsAnnou";
-            tbOpsAnnou.Size = new Size(179, 23);
+            tbOpsAnnou.Size = new Size(141, 23);
             tbOpsAnnou.TabIndex = 26;
             // 
             // tbOpsOfficer
@@ -728,15 +728,15 @@ namespace ChatManager
             tbOpsOfficer.Dock = DockStyle.Fill;
             tbOpsOfficer.Location = new Point(3, 183);
             tbOpsOfficer.Name = "tbOpsOfficer";
-            tbOpsOfficer.Size = new Size(179, 23);
+            tbOpsOfficer.Size = new Size(141, 23);
             tbOpsOfficer.TabIndex = 28;
             // 
             // tpSystem
             // 
             tpSystem.Controls.Add(tlpSystem);
-            tpSystem.Location = new Point(104, 4);
+            tpSystem.Location = new Point(179, 4);
             tpSystem.Name = "tpSystem";
-            tpSystem.Size = new Size(370, 227);
+            tpSystem.Size = new Size(295, 227);
             tpSystem.TabIndex = 3;
             tpSystem.Text = "System channels";
             tpSystem.UseVisualStyleBackColor = true;
@@ -772,15 +772,15 @@ namespace ChatManager
             tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.43022F));
             tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 14.4302235F));
             tlpSystem.RowStyles.Add(new RowStyle(SizeType.Percent, 13.4186764F));
-            tlpSystem.Size = new Size(370, 227);
+            tlpSystem.Size = new Size(295, 227);
             tlpSystem.TabIndex = 0;
             // 
             // btnGroupInfo
             // 
             btnGroupInfo.Dock = DockStyle.Fill;
-            btnGroupInfo.Location = new Point(188, 195);
+            btnGroupInfo.Location = new Point(150, 195);
             btnGroupInfo.Name = "btnGroupInfo";
-            btnGroupInfo.Size = new Size(179, 29);
+            btnGroupInfo.Size = new Size(142, 29);
             btnGroupInfo.TabIndex = 43;
             btnGroupInfo.Tag = "tbGroupInfo";
             btnGroupInfo.Text = "Group info";
@@ -790,9 +790,9 @@ namespace ChatManager
             // btnGuildInfo
             // 
             btnGuildInfo.Dock = DockStyle.Fill;
-            btnGuildInfo.Location = new Point(188, 163);
+            btnGuildInfo.Location = new Point(150, 163);
             btnGuildInfo.Name = "btnGuildInfo";
-            btnGuildInfo.Size = new Size(179, 26);
+            btnGuildInfo.Size = new Size(142, 26);
             btnGuildInfo.TabIndex = 41;
             btnGuildInfo.Tag = "tbGuildInfo";
             btnGuildInfo.Text = "Guild info";
@@ -804,15 +804,15 @@ namespace ChatManager
             tbGroupInfo.Dock = DockStyle.Fill;
             tbGroupInfo.Location = new Point(3, 195);
             tbGroupInfo.Name = "tbGroupInfo";
-            tbGroupInfo.Size = new Size(179, 23);
+            tbGroupInfo.Size = new Size(141, 23);
             tbGroupInfo.TabIndex = 42;
             // 
             // btnSystem
             // 
             btnSystem.Dock = DockStyle.Fill;
-            btnSystem.Location = new Point(188, 131);
+            btnSystem.Location = new Point(150, 131);
             btnSystem.Name = "btnSystem";
-            btnSystem.Size = new Size(179, 26);
+            btnSystem.Size = new Size(142, 26);
             btnSystem.TabIndex = 39;
             btnSystem.Tag = "tbSystem";
             btnSystem.Text = "System feedback";
@@ -822,9 +822,9 @@ namespace ChatManager
             // btnOpsInfo
             // 
             btnOpsInfo.Dock = DockStyle.Fill;
-            btnOpsInfo.Location = new Point(188, 99);
+            btnOpsInfo.Location = new Point(150, 99);
             btnOpsInfo.Name = "btnOpsInfo";
-            btnOpsInfo.Size = new Size(179, 26);
+            btnOpsInfo.Size = new Size(142, 26);
             btnOpsInfo.TabIndex = 37;
             btnOpsInfo.Tag = "tbOpsInfo";
             btnOpsInfo.Text = "Ops info";
@@ -836,15 +836,15 @@ namespace ChatManager
             tbGuildInfo.Dock = DockStyle.Fill;
             tbGuildInfo.Location = new Point(3, 163);
             tbGuildInfo.Name = "tbGuildInfo";
-            tbGuildInfo.Size = new Size(179, 23);
+            tbGuildInfo.Size = new Size(141, 23);
             tbGuildInfo.TabIndex = 40;
             // 
             // btnLogin
             // 
             btnLogin.Dock = DockStyle.Fill;
-            btnLogin.Location = new Point(188, 67);
+            btnLogin.Location = new Point(150, 67);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(179, 26);
+            btnLogin.Size = new Size(142, 26);
             btnLogin.TabIndex = 35;
             btnLogin.Tag = "tbLogin";
             btnLogin.Text = "Character login";
@@ -854,9 +854,9 @@ namespace ChatManager
             // btnConv
             // 
             btnConv.Dock = DockStyle.Fill;
-            btnConv.Location = new Point(188, 35);
+            btnConv.Location = new Point(150, 35);
             btnConv.Name = "btnConv";
-            btnConv.Size = new Size(179, 26);
+            btnConv.Size = new Size(142, 26);
             btnConv.TabIndex = 33;
             btnConv.Tag = "tbConv";
             btnConv.Text = "Conversation";
@@ -868,15 +868,15 @@ namespace ChatManager
             tbSystem.Dock = DockStyle.Fill;
             tbSystem.Location = new Point(3, 131);
             tbSystem.Name = "tbSystem";
-            tbSystem.Size = new Size(179, 23);
+            tbSystem.Size = new Size(141, 23);
             tbSystem.TabIndex = 38;
             // 
             // btnCombat
             // 
             btnCombat.Dock = DockStyle.Fill;
-            btnCombat.Location = new Point(188, 3);
+            btnCombat.Location = new Point(150, 3);
             btnCombat.Name = "btnCombat";
-            btnCombat.Size = new Size(179, 26);
+            btnCombat.Size = new Size(142, 26);
             btnCombat.TabIndex = 31;
             btnCombat.Tag = "tbCombat";
             btnCombat.Text = "Combat info";
@@ -888,7 +888,7 @@ namespace ChatManager
             tbCombat.Dock = DockStyle.Fill;
             tbCombat.Location = new Point(3, 3);
             tbCombat.Name = "tbCombat";
-            tbCombat.Size = new Size(179, 23);
+            tbCombat.Size = new Size(141, 23);
             tbCombat.TabIndex = 30;
             // 
             // tbOpsInfo
@@ -896,7 +896,7 @@ namespace ChatManager
             tbOpsInfo.Dock = DockStyle.Fill;
             tbOpsInfo.Location = new Point(3, 99);
             tbOpsInfo.Name = "tbOpsInfo";
-            tbOpsInfo.Size = new Size(179, 23);
+            tbOpsInfo.Size = new Size(141, 23);
             tbOpsInfo.TabIndex = 36;
             // 
             // tbConv
@@ -904,7 +904,7 @@ namespace ChatManager
             tbConv.Dock = DockStyle.Fill;
             tbConv.Location = new Point(3, 35);
             tbConv.Name = "tbConv";
-            tbConv.Size = new Size(179, 23);
+            tbConv.Size = new Size(141, 23);
             tbConv.TabIndex = 32;
             // 
             // tbLogin
@@ -912,7 +912,7 @@ namespace ChatManager
             tbLogin.Dock = DockStyle.Fill;
             tbLogin.Location = new Point(3, 67);
             tbLogin.Name = "tbLogin";
-            tbLogin.Size = new Size(179, 23);
+            tbLogin.Size = new Size(141, 23);
             tbLogin.TabIndex = 34;
             // 
             // lblCharName
