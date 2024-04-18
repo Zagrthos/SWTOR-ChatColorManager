@@ -24,6 +24,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <NeutralLanguage>en</NeutralLanguage>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <ForceDesignerDPIUnaware>true</ForceDesignerDPIUnaware>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
