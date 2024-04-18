@@ -573,15 +573,6 @@ internal partial class MainForm : Form
 
         Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-        if (GetSetSettings.GetCurrentLocale == "fr")
-        {
-            tabsMainForm.ItemSize = new(50, 100);
-        }
-        else
-        {
-            tabsMainForm.ItemSize = new(25, 100);
-        }
-
         List<TabControl> tabs = GetControls<TabControl>(this);
         List<Button> buttons = GetControls<Button>(this);
         List<Label> labels = GetControls<Label>(this);

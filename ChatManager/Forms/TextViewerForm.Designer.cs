@@ -56,7 +56,7 @@ namespace ChatManager.Forms
             // 
             lblLicencesHead.AutoSize = true;
             lblLicencesHead.Dock = DockStyle.Fill;
-            lblLicencesHead.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblLicencesHead.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblLicencesHead.Location = new Point(3, 3);
             lblLicencesHead.Margin = new Padding(3);
             lblLicencesHead.Name = "lblLicencesHead";
@@ -85,8 +85,8 @@ namespace ChatManager.Forms
             // 
             // TextViewerForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(634, 261);
             Controls.Add(tlpLicences);
             FormBorderStyle = FormBorderStyle.FixedDialog;

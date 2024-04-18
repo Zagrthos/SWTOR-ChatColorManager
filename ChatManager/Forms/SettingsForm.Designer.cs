@@ -112,7 +112,7 @@ namespace ChatManager.Forms
             gbGeneral.Location = new Point(276, 3);
             gbGeneral.Name = "gbGeneral";
             tlpSettings.SetRowSpan(gbGeneral, 5);
-            gbGeneral.Size = new Size(405, 124);
+            gbGeneral.Size = new Size(405, 129);
             gbGeneral.TabIndex = 2;
             gbGeneral.TabStop = false;
             gbGeneral.Text = "General settings";
@@ -230,8 +230,8 @@ namespace ChatManager.Forms
             // 
             // SettingsForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(684, 211);
             Controls.Add(tlpSettings);
             FormBorderStyle = FormBorderStyle.FixedDialog;
