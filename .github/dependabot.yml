@@ -10,11 +10,66 @@ updates:
     schedule:
       interval: "daily"
     assignees:
-    - "zagrthos"
-      
+      - "Zagrthos"
+    commit-message:
+      prefix: "[Actions]"
+      include: "scope"
+    groups:
+      GitHub:
+        applies-to: version-updates
+        patterns:
+        - "actions*"
+        update-types:
+        - "minor"
+        - "patch"
+      Non-GitHub:
+        applies-to: version-updates
+        exclude-patterns:
+        - "actions*"
+        update-types:
+        - "minor"
+        - "patch"
+    open-pull-requests-limit: 25
+    milestone: 2
+
   - package-ecosystem: "nuget" # See documentation for possible values
-    directory: "/ChatManager" # Location of package manifests
+    directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
     assignees:
-    - "zagrthos"
+      - "Zagrthos"
+    commit-message:
+      prefix: "[NuGet]"
+      include: "scope"
+    groups:
+      Microsoft:
+        applies-to: version-updates
+        patterns:
+        - "Microsoft.*"
+        update-types:
+        - "minor"
+        - "patch"
+      Roslynator:
+        applies-to: version-updates
+        patterns:
+        - "Roslynator.*"
+        update-types:
+        - "minor"
+        - "patch"
+      System:
+        applies-to: version-updates
+        patterns:
+        - "System.*"
+        update-types:
+        - "minor"
+        - "patch"
+      Others:
+        applies-to: version-updates
+        exclude-patterns:
+        - "Microsoft.*"
+        - "Roslynator.*"
+        - "System.*"
+        update-types:
+        - "minor"
+        - "patch"
+    open-pull-requests-limit: 25
