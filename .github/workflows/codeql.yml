@@ -19,7 +19,7 @@ on:
       - "**.json"
       - "**.props"
       - "**.sln"
-      - "**/codeql.yml"
+      - ".github/workflows/codeql.yml"
 
 jobs:
   analyze:
