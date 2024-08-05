@@ -302,7 +302,7 @@ internal partial class MainForm : Form
 
         SetCharServerText(content[1], content[0], autosaveIntitiated);
 
-        SetAllColorData(content, autosaveIntitiated);
+        SetAllColorData(content/*, autosaveIntitiated*/);
 
         btnResetColors.Visible = true;
 
@@ -348,7 +348,7 @@ internal partial class MainForm : Form
     }
 
     // TODO: Why is this there???
-    private void SetAllColorData(string[] colorIndexes, bool autosaveIntitiated)
+    private void SetAllColorData(string[] colorIndexes/*, bool autosaveIntitiated*/)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "SetAllColorData entered");
 
@@ -540,7 +540,7 @@ internal partial class MainForm : Form
         colorIndexes[21] = tempIndexes[36]; // Guild Information
         colorIndexes[22] = tempIndexes[35]; // Group Information
 
-        SetAllColorData(colorIndexes, false);
+        SetAllColorData(colorIndexes/*, false*/);
 
         Localization localization = new(GetSetSettings.GetCurrentLocale);
 
