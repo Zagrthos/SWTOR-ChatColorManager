@@ -3,13 +3,13 @@
 
 ; Define some variables to use
 #define MyAppName "SWTOR Chat Manager"
-#define MyAppVersion "1.6.1"
+#define MyAppVersion "1.6.2"
 #define MyAppPublisher "Zagrthos"
 #define MyAppURL "https://github.com/Zagrthos/SWTOR-ChatColorManager"
 #define MyAppSupportURL "https://github.com/Zagrthos/SWTOR-ChatColorManager/issues"
 #define MyAppUpdateURL "https://github.com/Zagrthos/SWTOR-ChatColorManager/releases"
 #define MyAppExeName "ChatManager.exe"
-#define SetupVersion "1.6.1.0"
+#define SetupVersion "1.6.2.0"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -39,8 +39,8 @@ Compression=lzma2/max
 LZMAUseSeparateProcess=yes
 SolidCompression=yes
 WizardStyle=modern
-ArchitecturesAllowed=x64
-ArchitecturesInstallIn64BitMode=x64
+ArchitecturesAllowed=x64compatible
+ArchitecturesInstallIn64BitMode=x64compatible
 MinVersion=10.0
 
 [Languages]
@@ -52,7 +52,7 @@ Name: fr; MessagesFile: "compiler:Languages\French.isl"
 de.DotNetFail = Fehler bei der Installation von .NET 8
 de.DotNetDownloadFail = Fehler bei dem Download von .NET 8
 de.DotNetInstall = .NET 8 wird installiert... 
-de.DotNetInstallDesc = Bitte warte w‰hrend .NET 8 auf deinem System installiert wird... 
+de.DotNetInstallDesc = Bitte warte w√§hrend .NET 8 auf deinem System installiert wird... 
 de.DotNetInstalling = Installiere .NET 8... 
 de.DotNetDownloadFailError = Fehler bei dem Download von .NET 8:
 en.DotNetFail = Error while installing .NET 8
@@ -62,11 +62,11 @@ en.DotNetInstallDesc = Please wait while .NET 8 is being installed on your syste
 en.DotNetInstalling = Installing .NET 8... 
 en.DotNetDownloadFailError = Error while downloading .NET 8:
 fr.DotNetFail = Erreur lors de l'installation de .NET 8
-fr.DotNetDownloadFail = Erreur lors du tÈlÈchargement de .NET 8
+fr.DotNetDownloadFail = Erreur lors du t√©l√©chargement de .NET 8
 fr.DotNetInstall = .NET 8 est en cours d'installation... 
-fr.DotNetInstallDesc = Merci de patienter pendant l'installation de .NET 8 sur ton systËme... 
+fr.DotNetInstallDesc = Merci de patienter pendant l'installation de .NET 8 sur ton syst√®me... 
 fr.DotNetInstalling = Installation de .NET 8... 
-fr.DotNetDownloadFailError = Erreur lors du tÈlÈchargement de .NET 8: 
+fr.DotNetDownloadFailError = Erreur lors du t√©l√©chargement de .NET 8: 
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
@@ -115,7 +115,7 @@ begin
   if Exec(ExpandConstant('{cmd}'), '/C ' + BatchFilePath, '', SW_HIDE, ewWaitUntilTerminated, ErrorCode) then
   begin
     LoadStringFromFile(OutputFilePath, Output);
-    if (Pos('Microsoft.WindowsDesktop.App 8.0.4', Output) = 0) then 
+    if (Pos('Microsoft.WindowsDesktop.App 8.0.7', Output) = 0) then 
     begin
       Result := False;
     end;
@@ -153,7 +153,7 @@ begin
   if CurPageID = wpReady then begin
     if not CheckDotNetVersion then begin
       DownloadPage.Clear;
-      DownloadPage.Add('https://download.visualstudio.microsoft.com/download/pr/c1d08a81-6e65-4065-b606-ed1127a954d3/14fe55b8a73ebba2b05432b162ab3aa8/windowsdesktop-runtime-8.0.4-win-x64.exe', 'dotnet-installer.exe', '');
+      DownloadPage.Add('https://download.visualstudio.microsoft.com/download/pr/bb581716-4cca-466e-9857-512e2371734b/5fe261422a7305171866fd7812d0976f/windowsdesktop-runtime-8.0.7-win-x64.exe', 'dotnet-installer.exe', '');
       DownloadPage.Show;
       try
         try
