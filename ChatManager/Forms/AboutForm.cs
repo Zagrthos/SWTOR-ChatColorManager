@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -15,9 +16,9 @@ internal partial class AboutForm : Form
     internal AboutForm()
     {
         InitializeComponent();
-        Text = string.Format("About {0}", AssemblyTitle);
+        Text = string.Format(CultureInfo.InvariantCulture, "About {0}", AssemblyTitle);
         labelProductName.Text = AssemblyProduct;
-        labelVersion.Text = string.Format("Version {0}", ProductVersion);
+        labelVersion.Text = string.Format(CultureInfo.InvariantCulture, "Version {0}", ProductVersion);
         labelCopyright.Text = AssemblyCopyright;
         SetRichTextBox(AssemblyCompany);
         Localize();
@@ -30,13 +31,11 @@ internal partial class AboutForm : Form
         get
         {
             object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-            if (attributes.Length > 0)
+            if (attributes.Length is > 0)
             {
                 AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-                if (titleAttribute.Title != string.Empty)
-                {
+                if (!string.IsNullOrWhiteSpace(titleAttribute.Title))
                     return titleAttribute.Title;
-                }
             }
 
             return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
@@ -48,10 +47,8 @@ internal partial class AboutForm : Form
         get
         {
             object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-            if (attributes.Length == 0)
-            {
+            if (attributes.Length is 0)
                 return string.Empty;
-            }
 
             return ((AssemblyProductAttribute)attributes[0]).Product;
         }
@@ -62,10 +59,8 @@ internal partial class AboutForm : Form
         get
         {
             object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-            if (attributes.Length == 0)
-            {
+            if (attributes.Length is 0)
                 return string.Empty;
-            }
 
             return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
         }
@@ -76,10 +71,8 @@ internal partial class AboutForm : Form
         get
         {
             object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-            if (attributes.Length == 0)
-            {
+            if (attributes.Length is 0)
                 return string.Empty;
-            }
 
             return ((AssemblyCompanyAttribute)attributes[0]).Company;
         }
@@ -126,15 +119,14 @@ internal partial class AboutForm : Form
     {
         RichTextBox rtb = (RichTextBox)sender;
 
-        if (rtb.SelectionLength <= 0)
-        {
+        if (rtb.SelectionLength is <= 0)
             return;
-        }
 
         rtb.SelectionLength = 0;
     }
 
     [DllImport("user32.dll", EntryPoint = "HideCaret")]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     [SuppressMessage("Interoperability", "SYSLIB1054:Use 'LibraryImportAttribute' instead of 'DllImportAttribute' to generate P/Invoke marshalling code at compile time", Justification = "No unsafe Code.")]
     private static extern bool HideCaret(IntPtr hWnd);
 
