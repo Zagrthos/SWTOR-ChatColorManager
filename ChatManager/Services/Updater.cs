@@ -225,7 +225,7 @@ internal static partial class Updater
         await using (FileStream stream = File.OpenRead(filePath))
         {
             using var sha256 = SHA256.Create();
-            byte[] byteHash = sha256.ComputeHash(stream);
+            byte[] byteHash = await sha256.ComputeHashAsync(stream);
             localHash = Convert.ToHexString(byteHash);
 
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"localHash is: {localHash}");
