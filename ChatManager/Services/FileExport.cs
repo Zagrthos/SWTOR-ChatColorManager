@@ -90,7 +90,7 @@ internal class FileExport
                         // Search the correct line in the file
                         for (int line = 0; line < lines.Length; line++)
                         {
-                            if (lines[line].StartsWith("ChatColors"))
+                            if (lines[line].StartsWith("ChatColors", StringComparison.OrdinalIgnoreCase))
                             {
                                 lineNumber = line;
                                 break;
@@ -236,7 +236,7 @@ internal class FileExport
 
                     // Check if the name of the character is the same as the one that was selected
                     // and check if the fileName starts with the server prefix
-                    if (name[j, 0] == file && fileName.StartsWith(Converter.ServerNameIdentifier(server, true)))
+                    if (name[j, 0] == file && fileName.StartsWith(Converter.ServerNameIdentifier(server, true), StringComparison.OrdinalIgnoreCase))
                     {
                         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"arrayCounter is: {GetNumberOfChangedFiles}");
 

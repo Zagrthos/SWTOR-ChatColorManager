@@ -183,7 +183,7 @@ internal class FileImport
             // Search for the correct line in the File
             foreach (string line in fileLines)
             {
-                if (line.StartsWith("ChatColors"))
+                if (line.StartsWith("ChatColors", StringComparison.OrdinalIgnoreCase))
                 {
                     colorLine = line.Substring(line.IndexOf('=', StringComparison.OrdinalIgnoreCase) + 1).Trim();
                     break;
