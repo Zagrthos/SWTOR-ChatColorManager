@@ -19,7 +19,7 @@ namespace ChatManager
             if (disposing && (components != null))
             {
                 components.Dispose();
-                AutosaveTimer?.Dispose();
+                _autosaveTimer?.Dispose();
             }
             base.Dispose(disposing);
         }

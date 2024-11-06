@@ -20,9 +20,8 @@ internal static class WebRequests
         try
         {
             using HttpResponseMessage response = await Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-            getLong = response.Content.Headers.ContentLength;
 
-            return getLong;
+            return response.Content.Headers.ContentLength;
         }
         catch (HttpRequestException ex)
         {
@@ -46,9 +45,7 @@ internal static class WebRequests
 
         try
         {
-            response = await Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-
-            return response;
+            return await Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
         }
         catch (HttpRequestException ex)
         {
@@ -73,9 +70,7 @@ internal static class WebRequests
 
         try
         {
-            getString = await Client.GetStringAsync(url);
-
-            return getString;
+            return await Client.GetStringAsync(url);
         }
         catch (HttpRequestException ex)
         {
@@ -96,9 +91,7 @@ internal static class WebRequests
 
         try
         {
-            getVersion = new(await Client.GetStringAsync(url));
-
-            return getVersion;
+            return new(await Client.GetStringAsync(url));
         }
         catch (HttpRequestException ex)
         {
@@ -113,10 +106,10 @@ internal static class WebRequests
 
     private static void AddHeaders(string headers)
     {
-        if (!string.IsNullOrWhiteSpace(headers))
-        {
-            Client.DefaultRequestHeaders.Clear();
-            Client.DefaultRequestHeaders.UserAgent.ParseAdd(headers);
-        }
+        if (string.IsNullOrWhiteSpace(headers))
+            return;
+
+        Client.DefaultRequestHeaders.Clear();
+        Client.DefaultRequestHeaders.UserAgent.ParseAdd(headers);
     }
 }

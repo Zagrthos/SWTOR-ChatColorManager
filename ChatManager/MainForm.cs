@@ -15,7 +15,7 @@ internal partial class MainForm : Form
 {
     internal MainForm() => InitializeComponent();
 
-    private System.Timers.Timer? AutosaveTimer;
+    private System.Timers.Timer? _autosaveTimer;
 
     /// <summary>
     /// <seealso cref="Button"/> Click Handler for every <seealso cref="Button"/> next to the <seealso cref="TextBox"/>.
@@ -179,6 +179,10 @@ internal partial class MainForm : Form
                     Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Application Exit requested");
                     Application.Exit();
                     return;
+
+                default:
+                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, $"MenuItem: {menuItem.Name} does not exist!");
+                    break;
             }
 
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Check if local Path exists");
@@ -207,7 +211,6 @@ internal partial class MainForm : Form
     private void ImportFile(object sender, EventArgs e)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ImportFile entered");
-        FileImport fileImport = new();
 
         // Get the selectedFile and the selectedListBox from the tuple
         (string selectedFile, string selectedListBox) = OpenWindows.OpenFileImportSelector();
@@ -222,7 +225,7 @@ internal partial class MainForm : Form
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, $"selectedListBox: {selectedListBox}");
 
         // Get the whole Character List for the requested name
-        string[,] filePaths = fileImport.GetArray($"{selectedListBox.Substring(3)}");
+        string[,] filePaths = FileImport.GetArray($"{selectedListBox.Substring(3)}");
 
         // Loop through and set the colors to the corresponding textBox
         for (int i = 0; i < 1000; i++)
@@ -283,14 +286,10 @@ internal partial class MainForm : Form
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "GetFileColors entered");
 
-        FileImport fileImport = new();
-
-        string[] content = fileImport.GetContentFromFile(filePath, autosaveIntitiated);
+        string[] content = FileImport.GetContentFromFile(filePath, autosaveIntitiated);
 
         if (content == Array.Empty<string>())
-        {
             return;
-        }
 
         SetCharServerText(content[1], content[0], autosaveIntitiated);
 
@@ -299,21 +298,19 @@ internal partial class MainForm : Form
         btnResetColors.Visible = true;
 
         if (!GetSetSettings.GetAutosave)
-        {
             return;
-        }
 
         // Stop previously intialized Timer
-        if (AutosaveTimer is not null)
+        if (_autosaveTimer is not null)
         {
-            AutosaveTimer.Stop();
-            AutosaveTimer.Elapsed -= AutosaveTimer_Elapsed;
+            _autosaveTimer.Stop();
+            _autosaveTimer.Elapsed -= AutosaveTimer_Elapsed;
         }
 
         // Initialize Autosave Timer
-        AutosaveTimer = new(Convert.ToDouble(GetSetSettings.GetAutosaveInterval));
-        AutosaveTimer.Elapsed += AutosaveTimer_Elapsed;
-        AutosaveTimer.Start();
+        _autosaveTimer = new(Convert.ToDouble(GetSetSettings.GetAutosaveInterval));
+        _autosaveTimer.Elapsed += AutosaveTimer_Elapsed;
+        _autosaveTimer.Start();
 
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "autosaveTimer set");
     }
@@ -326,14 +323,9 @@ internal partial class MainForm : Form
 
         lblServerName.Visible = true;
 
-        if (autosaveIntitiated)
-        {
-            lblServerName.Text = $"{localization.GetString(lblServerName.Name)} {serverText}";
-        }
-        else
-        {
-            lblServerName.Text = $"{localization.GetString(lblServerName.Name)} {Converter.AddWhitespace(Converter.ServerNameIdentifier(serverText, false))}";
-        }
+        lblServerName.Text = (autosaveIntitiated)
+            ? $"{localization.GetString(lblServerName.Name)} {serverText}"
+            : $"{localization.GetString(lblServerName.Name)} {Converter.AddWhitespace(Converter.ServerNameIdentifier(serverText, false))}";
 
         lblCharName.Visible = true;
         lblCharName.Text = $"{localization.GetString(lblCharName.Name)} {charText}";
@@ -594,9 +586,7 @@ internal partial class MainForm : Form
 
         // Disable the control again if the state is true
         if (loadAutosaveEnabled)
-        {
             loadAutosaveToolStripMenuItem.Enabled = false;
-        }
 
         foreach (TabControl tabControl in tabs)
         {
@@ -650,8 +640,7 @@ internal partial class MainForm : Form
 
         string[] colorIndexes = GetAllColorData();
 
-        Autosave autosave = new();
-        autosave.DoAutosave(Converter.LabelToString(lblCharName.Text), Converter.LabelToString(lblServerName.Text), colorIndexes);
+        Autosave.DoAutosave(Converter.LabelToString(lblCharName.Text), Converter.LabelToString(lblServerName.Text), colorIndexes);
     }
 
     /// <summary>
@@ -785,7 +774,7 @@ internal partial class MainForm : Form
 
         DownloadProgressReporter.DownloadProgressChanged -= DownloadProgressReporter_DownloadProgressChanged;
 
-        AutosaveTimer?.Stop();
+        _autosaveTimer?.Stop();
 
         if (!GetSetSettings.GetSaveOnClose)
             return;

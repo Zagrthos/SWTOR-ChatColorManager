@@ -13,16 +13,14 @@ internal partial class FileSelectorForm : Form
     internal FileSelectorForm(List<string> servers, bool save)
     {
         if (save)
-        {
-            IsSave = true;
-        }
+            _isSave = true;
 
         InitializeComponent();
         SetTabs(servers);
     }
 
-    private readonly bool IsSave;
-    private int NewTabIndex = 2;
+    private readonly bool _isSave;
+    private int _newTabIndex = 2;
 
     internal string GetListBoxString { get; private set; } = string.Empty;
     internal string GetListBoxName { get; private set; } = string.Empty;
@@ -71,8 +69,6 @@ internal partial class FileSelectorForm : Form
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "SetListBox entered");
 
-        FileImport fileImport = new();
-
         // Create a list of all current TabPages from the tabsFileSelector
         List<TabPage> tabPages = [];
         foreach (object? page in tabsFileSelector.TabPages)
@@ -109,7 +105,7 @@ internal partial class FileSelectorForm : Form
                     Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"ListBoxName is: {name}");
 
                     // Converting the MultiDimensionalArray into a List but remove every entry that is null
-                    string[,] charactersMulti = fileImport.GetArray($"{name.Substring(3)}");
+                    string[,] charactersMulti = FileImport.GetArray($"{name.Substring(3)}");
                     List<string> characters = [];
                     for (int i = 0; i < 100; i++)
                     {
@@ -128,10 +124,10 @@ internal partial class FileSelectorForm : Form
                         Location = new(3, 3),
                         Dock = DockStyle.Fill,
                         DataSource = characters,
-                        TabIndex = NewTabIndex
+                        TabIndex = _newTabIndex
                     };
 
-                    NewTabIndex++;
+                    _newTabIndex++;
 
                     Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"ListBox: {listBox.Name} created");
 
@@ -171,7 +167,7 @@ internal partial class FileSelectorForm : Form
                     Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"CheckedListBoxName is: {name}");
 
                     // Converting the MultiDimensionalArray into a List but remove every entry that is null
-                    string[,] charactersMulti = fileImport.GetArray($"{name.Substring(4)}");
+                    string[,] charactersMulti = FileImport.GetArray($"{name.Substring(4)}");
                     List<string> characters = [];
                     for (int i = 0; i < 100; i++)
                     {
@@ -191,10 +187,10 @@ internal partial class FileSelectorForm : Form
                         Dock = DockStyle.Fill,
                         CheckOnClick = true,
                         DataSource = characters,
-                        TabIndex = NewTabIndex
+                        TabIndex = _newTabIndex
                     };
 
-                    NewTabIndex++;
+                    _newTabIndex++;
 
                     Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"CheckedListBox: {listBox.Name} created");
 
@@ -287,9 +283,7 @@ internal partial class FileSelectorForm : Form
 
                                 string? objectString = item?.ToString();
                                 if (!string.IsNullOrWhiteSpace(objectString))
-                                {
                                     GetListBoxMulti.Add(objectString);
-                                }
                             }
                         }
                         else if (checkedListBox.Name == button.Tag.ToString())
@@ -399,9 +393,7 @@ internal partial class FileSelectorForm : Form
         foreach (Control control in parent.Controls)
         {
             if (control is T typedControl)
-            {
                 controls.Add(typedControl);
-            }
 
             controls.AddRange(GetControls<T>(control));
         }
@@ -414,9 +406,9 @@ internal partial class FileSelectorForm : Form
     /// </summary>
     private void FileSelectorForm_Load(object sender, EventArgs e)
     {
-        SetListBox(IsSave);
+        SetListBox(_isSave);
 
-        if (IsSave)
+        if (_isSave)
         {
             foreach (Button button in GetControls<Button>(this))
             {

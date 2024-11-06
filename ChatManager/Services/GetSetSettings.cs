@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using ChatManager.Enums;
@@ -73,6 +74,7 @@ internal static class GetSetSettings
         Settings.Default.Save();
     }
 
+    [SuppressMessage("Style", "IDE0010:Add missing cases", Justification = "Missing cases are not needed here.")]
     internal static void SaveSettings(SettingsEnum settingName, string value)
     {
         switch (settingName)
@@ -96,6 +98,7 @@ internal static class GetSetSettings
         Settings.Default.Save();
     }
 
+    [SuppressMessage("Style", "IDE0010:Add missing cases", Justification = "Missing cases are not needed here.")]
     internal static void SaveSettings(SettingsEnum settingName, bool value)
     {
         switch (settingName)

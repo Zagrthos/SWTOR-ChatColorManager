@@ -10,31 +10,15 @@ internal static class ShowMessageBox
     internal static void Show(string caption, string message)
     {
         Localization localization = new(GetSetSettings.GetCurrentLocale);
-
-        MessageBoxIcon icon = MessageBoxIcon.None;
-
-        switch (caption)
+        MessageBoxIcon icon = caption switch
         {
-            case var value when value == localization.GetString(LocalizationEnum.MessageBoxError):
-                icon = MessageBoxIcon.Error;
-                break;
-
-            case var value when value == localization.GetString(LocalizationEnum.MessageBoxInfo):
-                icon = MessageBoxIcon.Information;
-                break;
-
-            case var value when value == localization.GetString(LocalizationEnum.MessageBoxWarn):
-                icon = MessageBoxIcon.Warning;
-                break;
-
-            case var value when value == localization.GetString(LocalizationEnum.MessageBoxUpdate):
-                icon = MessageBoxIcon.Information;
-                break;
-
-            case var value when value == localization.GetString(LocalizationEnum.MessageBoxNoUpdate):
-                icon = MessageBoxIcon.Information;
-                break;
-        }
+            var value when value == localization.GetString(LocalizationEnum.MessageBoxError) => MessageBoxIcon.Error,
+            var value when value == localization.GetString(LocalizationEnum.MessageBoxInfo) => MessageBoxIcon.Information,
+            var value when value == localization.GetString(LocalizationEnum.MessageBoxWarn) => MessageBoxIcon.Warning,
+            var value when value == localization.GetString(LocalizationEnum.MessageBoxUpdate) => MessageBoxIcon.Information,
+            var value when value == localization.GetString(LocalizationEnum.MessageBoxNoUpdate) => MessageBoxIcon.Information,
+            _ => MessageBoxIcon.None,
+        };
 
         Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox will be shown");
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ShowMessageBox, $"caption: {caption}");

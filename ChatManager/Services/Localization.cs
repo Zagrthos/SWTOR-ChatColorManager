@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text.Json;
@@ -9,11 +8,10 @@ using ChatManager.Enums;
 
 namespace ChatManager.Services;
 
-[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Right now there is no static needed.")]
 internal sealed class Localization
 {
-    private Dictionary<string, string> Strings = [];
-    private readonly string InstallPath = Application.StartupPath;
+    private Dictionary<string, string> _strings = [];
+    private readonly string _installPath = Application.StartupPath;
 
     internal Localization(string locale)
     {
@@ -25,8 +23,8 @@ internal sealed class Localization
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.Localization, "CheckLocale entered");
 
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Localization, $"Localization path is: {Path.Combine(InstallPath, "Localization", $"{locale}.json")}");
-        string jsonString = File.ReadAllText(Path.Combine(InstallPath, "Localization", $"{locale}.json"));
+        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Localization, $"Localization path is: {Path.Combine(_installPath, "Localization", $"{locale}.json")}");
+        string jsonString = File.ReadAllText(Path.Combine(_installPath, "Localization", $"{locale}.json"));
 
         // Check if file has content
         if (jsonString is not null)
@@ -37,7 +35,7 @@ internal sealed class Localization
             // Check if JSON has content
             if (tempStrings is not null)
             {
-                Strings = tempStrings;
+                _strings = tempStrings;
                 GetSetSettings.SaveSettings(SettingsEnum.locale, locale);
             }
 
@@ -57,10 +55,8 @@ internal sealed class Localization
 
     internal string GetString(string name)
     {
-        if (Strings.TryGetValue(name, out string? result))
-        {
+        if (_strings.TryGetValue(name, out string? result))
             return result;
-        }
 
         Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, $"No localization found for string: {name}!");
 
@@ -69,17 +65,15 @@ internal sealed class Localization
 
     internal string GetString(LocalizationEnum localization)
     {
-        if (Strings.TryGetValue(localization.ToString(), out string? result))
-        {
+        if (_strings.TryGetValue(localization.ToString(), out string? result))
             return result;
-        }
 
         Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Localization, $"No localization found for string: {localization}!");
 
         return string.Empty;
     }
 
-    internal (string, string) GetLocalDateTime()
+    internal static (string, string) GetLocalDateTime()
     {
         string currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
 

@@ -47,10 +47,8 @@ internal sealed partial class AboutForm : Form
         get
         {
             object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-            if (attributes.Length is 0)
-                return string.Empty;
 
-            return ((AssemblyProductAttribute)attributes[0]).Product;
+            return (attributes.Length is not 0) ? ((AssemblyProductAttribute)attributes[0]).Product : string.Empty;
         }
     }
 
@@ -59,10 +57,8 @@ internal sealed partial class AboutForm : Form
         get
         {
             object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-            if (attributes.Length is 0)
-                return string.Empty;
 
-            return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+            return (attributes.Length is not 0) ? ((AssemblyCopyrightAttribute)attributes[0]).Copyright : string.Empty;
         }
     }
 
@@ -71,10 +67,8 @@ internal sealed partial class AboutForm : Form
         get
         {
             object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-            if (attributes.Length is 0)
-                return string.Empty;
 
-            return ((AssemblyCompanyAttribute)attributes[0]).Company;
+            return (attributes.Length is not 0) ? ((AssemblyCompanyAttribute)attributes[0]).Company : string.Empty;
         }
     }
 
@@ -125,9 +119,9 @@ internal sealed partial class AboutForm : Form
         rtb.SelectionLength = 0;
     }
 
-    [DllImport("user32.dll", EntryPoint = "HideCaret")]
-    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     [SuppressMessage("Interoperability", "SYSLIB1054:Use 'LibraryImportAttribute' instead of 'DllImportAttribute' to generate P/Invoke marshalling code at compile time", Justification = "No unsafe Code.")]
+    [DllImport("user32.dll", EntryPoint = "HideCaret", SetLastError = true, CharSet = CharSet.Auto, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     private static extern bool HideCaret(IntPtr hWnd);
 
     private void RtbCompany_GotFocus(object sender, EventArgs e) => HideCaret(rtbCompany.Handle);

@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.Security.Policy;
 using System.Windows.Forms;
 using ChatManager.Enums;
 using ChatManager.Forms;
@@ -79,8 +78,7 @@ internal static class OpenWindows
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenFileImportSelector entered");
 
-        FileImport fileImport = new();
-        FileSelectorForm fileSelector = new(fileImport.GetServerList(), false);
+        FileSelectorForm fileSelector = new(FileImport.GetServerList(), false);
         fileSelector.ShowDialog();
 
         string listBoxString = fileSelector.GetListBoxString;
@@ -95,8 +93,7 @@ internal static class OpenWindows
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenFileExportSelector entered");
 
-        FileImport fileImport = new();
-        FileSelectorForm fileSelector = new(fileImport.GetServerList(), true);
+        FileSelectorForm fileSelector = new(FileImport.GetServerList(), true);
         DialogResult dialogResult = fileSelector.ShowDialog();
 
         int fileCount = 0;
@@ -117,9 +114,7 @@ internal static class OpenWindows
         fileSelector.Dispose();
 
         if (fileCount == 0)
-        {
             return;
-        }
 
         Localization localization = new(GetSetSettings.GetCurrentLocale);
         string exportedFilesInfo = localization.GetString(LocalizationEnum.Inf_ExportedFiles);

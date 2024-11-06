@@ -35,14 +35,7 @@ internal sealed partial class TextViewerForm : Form
 
             string? body = jsonDoc.RootElement.GetProperty("body").GetString();
 
-            if (!string.IsNullOrWhiteSpace(body))
-            {
-                rtbLicences.Text = body;
-            }
-            else
-            {
-                rtbLicences.Text = localization.GetString(LocalizationEnum.ChangelogTryAgainLater);
-            }
+            rtbLicences.Text = (!string.IsNullOrWhiteSpace(body)) ? body : localization.GetString(LocalizationEnum.ChangelogTryAgainLater);
 
             jsonDoc.Dispose();
         }

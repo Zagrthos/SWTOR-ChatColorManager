@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -6,7 +7,7 @@ using ChatManager.Enums;
 
 namespace ChatManager.Services;
 
-internal sealed partial class Converter
+internal static partial class Converter
 {
     /// <summary>
     /// Convert an RGB <seealso cref="Color"/> into Hex.
@@ -56,36 +57,29 @@ internal sealed partial class Converter
     /// <param name="name">The server name as <see langword="string"/>.</param>
     /// <param name="isServerName"><see langword="true"/> if it's the server name, otherwise <see langword="false"/>.</param>
     /// <returns>The wanted <see langword="string"/>.</returns>
+    [SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "No nested ternaries.")]
     internal static string ServerNameIdentifier(string name, bool isServerName)
     {
-        if (!string.IsNullOrWhiteSpace(name) && isServerName)
-        {
-            return name switch
-            {
-                "StarForge" => "he3000",
-                "SateleShan" => "he3001",
-                "DarthMalgus" => "he4000",
-                "TulakHord" => "he4001",
-                "TheLeviathan" => "he4002",
-                _ => string.Empty,
-            };
-        }
-        else if (!string.IsNullOrWhiteSpace(name) && !isServerName)
-        {
-            return name switch
-            {
-                "he3000" => "StarForge",
-                "he3001" => "SateleShan",
-                "he4000" => "DarthMalgus",
-                "he4001" => "TulakHord",
-                "he4002" => "TheLeviathan",
-                _ => string.Empty,
-            };
-        }
-        else
-        {
+        if (string.IsNullOrWhiteSpace(name))
             return string.Empty;
-        }
+
+        return (isServerName) ? name switch
+        {
+            "StarForge" => "he3000",
+            "SateleShan" => "he3001",
+            "DarthMalgus" => "he4000",
+            "TulakHord" => "he4001",
+            "TheLeviathan" => "he4002",
+            _ => string.Empty,
+        } : name switch
+        {
+            "he3000" => "StarForge",
+            "he3001" => "SateleShan",
+            "he4000" => "DarthMalgus",
+            "he4001" => "TulakHord",
+            "he4002" => "TheLeviathan",
+            _ => string.Empty,
+        };
     }
 
     internal static string AddWhitespace(string text) => AddWhiteSpaceRegex().Replace(text, " $1");

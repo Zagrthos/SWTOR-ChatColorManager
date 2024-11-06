@@ -11,14 +11,14 @@ internal sealed class FileExport
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileExport, "FileExport Constructor created");
         GetNumberOfChangedFiles = 0;
-        SelectedServers = servers;
-        FileNames = files;
+        _selectedServers = servers;
+        _fileNames = files;
     }
 
     private static readonly bool BackupAvailability = GetSetSettings.GetBackupAvailability;
     private static readonly string BackupPath = GetSetSettings.GetBackupPath;
-    private readonly string[] SelectedServers;
-    private readonly string[] FileNames;
+    private readonly string[] _selectedServers;
+    private readonly string[] _fileNames;
 
     /// <summary>
     /// Is used for positioning the characters in the array
@@ -37,7 +37,7 @@ internal sealed class FileExport
         }
 
         // Check if the user selected any characters
-        if (FileNames.Length != 0)
+        if (_fileNames.Length != 0)
         {
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileExport, "fileNames Array selected");
 
@@ -131,9 +131,7 @@ internal sealed class FileExport
                                 }
 
                                 if (!string.IsNullOrWhiteSpace(colorLines[color]))
-                                {
                                     content[color] = colorLines[color];
-                                }
                             }
                         }
 
@@ -177,26 +175,22 @@ internal sealed class FileExport
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileExport, "AssociateFileWithServer entered");
 
-        FileImport fileImport = new();
-
         string[,] namesWithServers = new string[1000, 3];
 
         // Loop through all servers
-        foreach (string server in SelectedServers)
+        foreach (string server in _selectedServers)
         {
             // If server is not filled stop it
             if (string.IsNullOrWhiteSpace(server))
-            {
                 break;
-            }
 
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current server is: {server}");
 
             // Get the names from all characters on this server
-            string[,] name = fileImport.GetArray(server);
+            string[,] name = FileImport.GetArray(server);
 
             // Loop through and check them
-            for (int i = 0; i < FileNames.Length; i++)
+            for (int i = 0; i < _fileNames.Length; i++)
             {
                 // i is used to identify the name of the available characters
 
@@ -205,16 +199,16 @@ internal sealed class FileExport
                 {
                     // j is used to identify the selected filename by the user
 
-                    if (GetNumberOfChangedFiles > FileNames.Length || GetNumberOfChangedFiles == FileNames.Length)
+                    if (GetNumberOfChangedFiles > _fileNames.Length || GetNumberOfChangedFiles == _fileNames.Length)
                     {
                         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"arrayCounter is: {GetNumberOfChangedFiles}");
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"fileNames.Length is: {FileNames.Length}");
+                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"fileNames.Length is: {_fileNames.Length}");
 
                         break;
                     }
 
                     // Get the path
-                    string file = FileNames[GetNumberOfChangedFiles];
+                    string file = _fileNames[GetNumberOfChangedFiles];
                     //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current file is: {file}");
 
                     // Get the filename
@@ -230,9 +224,7 @@ internal sealed class FileExport
 
                     // If the current file or fileName are equally with the ones in the array, skip this iteration
                     if (namesWithServers[j, 0] == file && namesWithServers[j, 1] == name[j, 1])
-                    {
                         continue;
-                    }
 
                     // Check if the name of the character is the same as the one that was selected
                     // and check if the fileName starts with the server prefix
@@ -246,7 +238,7 @@ internal sealed class FileExport
                         if (!string.IsNullOrWhiteSpace(name[j, 1]))
                         {
                             // the fileName
-                            namesWithServers[GetNumberOfChangedFiles, 0] = FileNames[GetNumberOfChangedFiles];
+                            namesWithServers[GetNumberOfChangedFiles, 0] = _fileNames[GetNumberOfChangedFiles];
 
                             // the filePath
                             namesWithServers[GetNumberOfChangedFiles, 1] = name[j, 1];
@@ -254,7 +246,7 @@ internal sealed class FileExport
                             // the server
                             namesWithServers[GetNumberOfChangedFiles, 2] = server;
 
-                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"{FileNames[GetNumberOfChangedFiles]}");
+                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"{_fileNames[GetNumberOfChangedFiles]}");
 
                             GetNumberOfChangedFiles++;
 

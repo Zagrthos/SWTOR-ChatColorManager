@@ -18,7 +18,7 @@ internal sealed partial class BackupSelectorForm : Form
     }
 
     private static readonly string BackupPath = GetSetSettings.GetBackupPath;
-    private string[,] FilesInDir = new string[1000, 2];
+    private string[,] _filesInDir = new string[1000, 2];
 
     private void DisplayBackupDirs()
     {
@@ -78,18 +78,18 @@ internal sealed partial class BackupSelectorForm : Form
         // Create new Array with the size of the found Files
         string[] files = new string[dirContent.Length];
 
-        for (int i = 0; i < FilesInDir.Length / 2; i++)
+        for (int i = 0; i < _filesInDir.Length / 2; i++)
         {
             //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{i}");
 
             // Check if all parts in array are NOT empty or null
-            if (!string.IsNullOrWhiteSpace(FilesInDir[i, 0]) && !string.IsNullOrWhiteSpace(FilesInDir[i, 1]) && !string.IsNullOrWhiteSpace(FilesInDir[i, 2]))
+            if (!string.IsNullOrWhiteSpace(_filesInDir[i, 0]) && !string.IsNullOrWhiteSpace(_filesInDir[i, 1]) && !string.IsNullOrWhiteSpace(_filesInDir[i, 2]))
             {
                 //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{filesInDir[i, 0]} & {filesInDir[i, 1]} & {filesInDir[i, 2]}");
                 //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"file[{i}]");
 
                 // If not null or empty add the name and the server to the list
-                files[i] = $"{FilesInDir[i, 0]} - {Converter.AddWhitespace(Converter.ServerNameIdentifier(FilesInDir[i, 1], false))}";
+                files[i] = $"{_filesInDir[i, 0]} - {Converter.AddWhitespace(Converter.ServerNameIdentifier(_filesInDir[i, 1], false))}";
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, files[i]);
             }
             else
@@ -108,7 +108,7 @@ internal sealed partial class BackupSelectorForm : Form
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "AssociateFilesWithPaths entered");
 
         // Clear the Array
-        FilesInDir = new string[1000, 3];
+        _filesInDir = new string[1000, 3];
 
         // Now get the FileName, split it into parts and then
         // Set the name to pos 0
@@ -118,12 +118,12 @@ internal sealed partial class BackupSelectorForm : Form
         {
             string fileName = Path.GetFileName(paths[i]);
             string[] parts = fileName.Split("_");
-            FilesInDir[i, 0] = parts[1];
-            FilesInDir[i, 1] = parts[0];
-            FilesInDir[i, 2] = paths[i];
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, FilesInDir[i, 0]);
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, FilesInDir[i, 1]);
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, FilesInDir[i, 2]);
+            _filesInDir[i, 0] = parts[1];
+            _filesInDir[i, 1] = parts[0];
+            _filesInDir[i, 2] = paths[i];
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, _filesInDir[i, 0]);
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, _filesInDir[i, 1]);
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, _filesInDir[i, 2]);
         }
     }
 
@@ -158,9 +158,7 @@ internal sealed partial class BackupSelectorForm : Form
         {
             bool isChecked = !button.Name.Contains("Deselect", StringComparison.OrdinalIgnoreCase);
             for (int i = 0; i < clbxBackupFiles.Items.Count; i++)
-            {
                 clbxBackupFiles.SetItemChecked(i, isChecked);
-            }
 
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.BackupSelector, $"All Checked items are set to: {isChecked}");
         }
@@ -311,14 +309,7 @@ internal sealed partial class BackupSelectorForm : Form
             {
                 string? item = clbxBackupFiles.CheckedItems[i]?.ToString();
 
-                if (!string.IsNullOrWhiteSpace(item))
-                {
-                    checkedItems[i] = item;
-                }
-                else
-                {
-                    throw new InvalidOperationException($"{nameof(item)}[{i}] is null!");
-                }
+                checkedItems[i] = (!string.IsNullOrWhiteSpace(item)) ? item : throw new InvalidOperationException($"{nameof(item)}[{i}] is null!");
             }
 
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"checkedItems: {checkedItems.Length}");
@@ -388,12 +379,10 @@ internal sealed partial class BackupSelectorForm : Form
         foreach (Label label in labels)
         {
             if (label.Name != lblDateConvertion.Name)
-            {
                 label.Text = localization.GetString(label.Name);
-            }
         }
 
-        (string date, string time) = localization.GetLocalDateTime();
+        (string date, string time) = Localization.GetLocalDateTime();
 
         lblDateConvertion.Text = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss} = {date} - {time}";
     }

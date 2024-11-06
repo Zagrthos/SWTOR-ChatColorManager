@@ -224,7 +224,7 @@ internal static partial class Updater
         string localHash = string.Empty;
         await using (FileStream stream = File.OpenRead(filePath))
         {
-            using var sha256 = SHA256.Create();
+            using SHA256 sha256 = SHA256.Create();
             byte[] byteHash = await sha256.ComputeHashAsync(stream);
             localHash = Convert.ToHexString(byteHash);
 
@@ -268,10 +268,10 @@ internal static partial class Updater
 
 internal sealed class DownloadProgressEventArgs : EventArgs
 {
-    private readonly double Progress;
+    private readonly double _progress;
 
-    internal double GetDownloadProgress() => Progress;
-    internal DownloadProgressEventArgs(double progress) => Progress = progress;
+    internal double GetDownloadProgress() => _progress;
+    internal DownloadProgressEventArgs(double progress) => _progress = progress;
 }
 
 internal static class DownloadProgressReporter

@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using ChatManager.Enums;
 
 namespace ChatManager.Services;
 
-[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Right now there is no static needed.")]
-internal sealed class FileImport
+internal static class FileImport
 {
-    internal FileImport()
+    static FileImport()
     {
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, "FileImport Constructor created");
 
         if (FilesChecked)
-        {
             return;
-        }
 
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileImport, $"filesChecked = {FilesChecked}");
         GetLocalFiles();
@@ -31,7 +27,7 @@ internal sealed class FileImport
     private static readonly string[,] TulakHordArray = new string[1000, 2];
     private static readonly string[,] TheLeviathanArray = new string[1000, 2];
 
-    internal string[,] GetArray(string name)
+    internal static string[,] GetArray(string name)
     {
         return name switch
         {
@@ -44,7 +40,7 @@ internal sealed class FileImport
         };
     }
 
-    internal List<string> GetServerList() => ServerList;
+    internal static List<string> GetServerList() => ServerList;
 
     private static void GetLocalFiles()
     {
@@ -120,29 +116,19 @@ internal sealed class FileImport
 
         // Select the servers by files
         if (!string.IsNullOrWhiteSpace(StarForgeArray[0, 0]))
-        {
             ServerList.Add("StarForge");
-        }
 
         if (!string.IsNullOrWhiteSpace(SateleShanArray[0, 0]))
-        {
             ServerList.Add("SateleShan");
-        }
 
         if (!string.IsNullOrWhiteSpace(DarthMalgusArray[0, 0]))
-        {
             ServerList.Add("DarthMalgus");
-        }
 
         if (!string.IsNullOrWhiteSpace(TulakHordArray[0, 0]))
-        {
             ServerList.Add("TulakHord");
-        }
 
         if (!string.IsNullOrWhiteSpace(TheLeviathanArray[0, 0]))
-        {
             ServerList.Add("TheLeviathan");
-        }
 
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"serverList.Count = {ServerList.Count}");
 
@@ -157,7 +143,7 @@ internal sealed class FileImport
     /// <param name="fileName">The file name as <see langword="string"/>.</param>
     /// <param name="autosaveImport"><see langword="true"/> if it's an autosave import, otherwise <see langword="false"/>.</param>
     /// <returns>The <see langword="string"/> <seealso cref="Array"/> with the content colors.</returns>
-    internal string[] GetContentFromFile(string fileName, bool autosaveImport)
+    internal static string[] GetContentFromFile(string fileName, bool autosaveImport)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileImport, "GetContentFromFile entered");
 
