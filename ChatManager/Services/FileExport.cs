@@ -130,7 +130,7 @@ internal class FileExport
                                     break;
                                 }
 
-                                if (colorLines[color] != string.Empty)
+                                if (!string.IsNullOrWhiteSpace(colorLines[color]))
                                 {
                                     content[color] = colorLines[color];
                                 }
