@@ -8,7 +8,7 @@ using ChatManager.Services;
 
 namespace ChatManager.Forms;
 
-internal partial class BackupSelectorForm : Form
+internal sealed partial class BackupSelectorForm : Form
 {
     internal BackupSelectorForm()
     {

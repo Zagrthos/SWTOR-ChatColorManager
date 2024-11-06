@@ -10,7 +10,7 @@ using ChatManager.Enums;
 namespace ChatManager.Services;
 
 [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Right now there is no static needed.")]
-internal class Localization
+internal sealed class Localization
 {
     private Dictionary<string, string> Strings = [];
     private readonly string InstallPath = Application.StartupPath;

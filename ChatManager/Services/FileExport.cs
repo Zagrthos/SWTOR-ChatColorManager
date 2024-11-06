@@ -5,7 +5,7 @@ using ChatManager.Enums;
 
 namespace ChatManager.Services;
 
-internal class FileExport
+internal sealed class FileExport
 {
     internal FileExport(string[] servers, string[] files)
     {

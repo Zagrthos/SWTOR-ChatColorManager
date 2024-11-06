@@ -266,7 +266,7 @@ internal static partial class Updater
     private static partial Regex ReplaceVersionNumber();
 }
 
-internal class DownloadProgressEventArgs : EventArgs
+internal sealed class DownloadProgressEventArgs : EventArgs
 {
     private readonly double Progress;
 

@@ -9,7 +9,7 @@ using ChatManager.Services;
 
 namespace ChatManager.Forms;
 
-internal partial class TextViewerForm : Form
+internal sealed partial class TextViewerForm : Form
 {
     internal TextViewerForm(bool isChangelog = false)
     {

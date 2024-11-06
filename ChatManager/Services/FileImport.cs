@@ -7,7 +7,7 @@ using ChatManager.Enums;
 namespace ChatManager.Services;
 
 [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Right now there is no static needed.")]
-internal class FileImport
+internal sealed class FileImport
 {
     internal FileImport()
     {

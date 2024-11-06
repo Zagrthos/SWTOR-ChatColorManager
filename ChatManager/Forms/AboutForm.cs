@@ -11,7 +11,7 @@ using ChatManager.Services;
 
 namespace ChatManager.Forms;
 
-internal partial class AboutForm : Form
+internal sealed partial class AboutForm : Form
 {
     internal AboutForm()
     {

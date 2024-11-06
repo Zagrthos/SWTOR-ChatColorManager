@@ -6,7 +6,7 @@ using ChatManager.Enums;
 
 namespace ChatManager.Services;
 
-internal partial class Converter
+internal sealed partial class Converter
 {
     /// <summary>
     /// Convert an RGB <seealso cref="Color"/> into Hex.
