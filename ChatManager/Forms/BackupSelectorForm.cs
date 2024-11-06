@@ -358,9 +358,7 @@ internal sealed partial class BackupSelectorForm : Form
             foreach (Control control in parent.Controls)
             {
                 if (control is T typedControl)
-                {
                     controls.Add(typedControl);
-                }
 
                 controls.AddRange(GetControls<T>(control));
             }

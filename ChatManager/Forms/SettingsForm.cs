@@ -344,9 +344,7 @@ internal partial class SettingsForm : Form
                     lblAutosaveInterval.Enabled = true;
                     lblAutosaveInterval.Visible = true;
                     if (!_checkBoxFalseAlarm)
-                    {
                         SetAutosaveInterval();
-                    }
                 }
                 else
                 {

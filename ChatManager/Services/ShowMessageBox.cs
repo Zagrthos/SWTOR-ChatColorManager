@@ -12,11 +12,11 @@ internal static class ShowMessageBox
         Localization localization = new(GetSetSettings.GetCurrentLocale);
         MessageBoxIcon icon = caption switch
         {
-            var value when value == localization.GetString(LocalizationEnum.MessageBoxError) => MessageBoxIcon.Error,
-            var value when value == localization.GetString(LocalizationEnum.MessageBoxInfo) => MessageBoxIcon.Information,
-            var value when value == localization.GetString(LocalizationEnum.MessageBoxWarn) => MessageBoxIcon.Warning,
-            var value when value == localization.GetString(LocalizationEnum.MessageBoxUpdate) => MessageBoxIcon.Information,
-            var value when value == localization.GetString(LocalizationEnum.MessageBoxNoUpdate) => MessageBoxIcon.Information,
+            string value when value == localization.GetString(LocalizationEnum.MessageBoxError) => MessageBoxIcon.Error,
+            string value when value == localization.GetString(LocalizationEnum.MessageBoxInfo) => MessageBoxIcon.Information,
+            string value when value == localization.GetString(LocalizationEnum.MessageBoxWarn) => MessageBoxIcon.Warning,
+            string value when value == localization.GetString(LocalizationEnum.MessageBoxUpdate) => MessageBoxIcon.Information,
+            string value when value == localization.GetString(LocalizationEnum.MessageBoxNoUpdate) => MessageBoxIcon.Information,
             _ => MessageBoxIcon.None,
         };
 

@@ -35,16 +35,12 @@ internal static partial class Updater
         else if (updateInterval == nameof(UpdateEnum.Daily))
         {
             if (difference.Days >= 1)
-            {
                 updateSearch = true;
-            }
         }
         else if (updateInterval == nameof(UpdateEnum.Weekly))
         {
             if (difference.Days >= 7)
-            {
                 updateSearch = true;
-            }
         }
         else
         {
@@ -59,9 +55,7 @@ internal static partial class Updater
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateSearch set to: {updateSearch}");
 
         if (!updateSearch)
-        {
             return;
-        }
 
         await CheckForUpdatesAsync();
     }
@@ -107,9 +101,7 @@ internal static partial class Updater
 
         // Save the date of the last update Check but only if the user has NOT initiated it
         if (GetSetSettings.GetUpdateInterval == nameof(UpdateEnum.OnStartup) || fromUser)
-        {
             return;
-        }
 
         GetSetSettings.SaveSettings(SettingsEnum.lastUpdateCheck, DateTime.Today);
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Last Update Check: {DateTime.Today}");
@@ -271,6 +263,7 @@ internal sealed class DownloadProgressEventArgs : EventArgs
     private readonly double _progress;
 
     internal double GetDownloadProgress() => _progress;
+
     internal DownloadProgressEventArgs(double progress) => _progress = progress;
 }
 

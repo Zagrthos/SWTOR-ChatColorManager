@@ -62,9 +62,7 @@ internal static partial class Checks
         // Check if SWTOR is installed
         bool localPath = false;
         if (!string.IsNullOrWhiteSpace(GetSetSettings.GetLocalPath))
-        {
             localPath = true;
-        }
 
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, $"Checking if {folder} exists");
 
@@ -122,9 +120,7 @@ internal static partial class Checks
             Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
 
             if (fromUser)
-            {
                 ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
-            }
 
             return isConnected;
         }
@@ -144,9 +140,7 @@ internal static partial class Checks
             Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
 
             if (fromUser)
-            {
                 ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
-            }
 
             return isConnected;
         }

@@ -153,9 +153,7 @@ internal partial class FileSelectorForm : Form
                     // Set the btnSelect to Column 1 and so in the middle of the Window
                     Control? btnSelect = tlp.GetControlFromPosition(0, 1);
                     if (btnSelect is not null)
-                    {
                         tlp.SetColumn(btnSelect, 1);
-                    }
                 }
                 // CheckedListBox
                 else

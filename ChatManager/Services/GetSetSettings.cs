@@ -65,9 +65,7 @@ internal static class GetSetSettings
         }
 
         if (!Settings.Default._upgradeRequired)
-        {
             return;
-        }
 
         Settings.Default.Upgrade();
         Settings.Default._upgradeRequired = false;
@@ -141,9 +139,7 @@ internal static class GetSetSettings
     internal static void SaveSettings(SettingsEnum settingName, decimal value)
     {
         if (settingName == SettingsEnum.autosaveInterval)
-        {
             Settings.Default._autosaveInterval = value;
-        }
 
         Settings.Default.Save();
     }
@@ -151,9 +147,7 @@ internal static class GetSetSettings
     internal static void SaveSettings(SettingsEnum settingName, in DateTime value)
     {
         if (settingName == SettingsEnum.lastUpdateCheck)
-        {
             Settings.Default.lastUpdateCheck = value;
-        }
 
         Settings.Default.Save();
     }
@@ -165,9 +159,7 @@ internal static class GetSetSettings
         SaveSettings(SettingsEnum.settingsUpgradeRequired, false);
 
         if (string.IsNullOrWhiteSpace(GetCurrentLocale))
-        {
             SaveSettings(SettingsEnum.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
-        }
 
         InitSettings();
     }
