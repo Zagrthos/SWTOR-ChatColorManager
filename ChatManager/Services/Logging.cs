@@ -21,7 +21,7 @@ internal static class Logging
             {
                 Directory.CreateDirectory(LogPath);
             }
-            catch (Exception ex)
+            catch (UnauthorizedAccessException ex)
             {
                 ShowMessageBox.ShowLoggingBug(ex.Message);
                 Environment.Exit(0);

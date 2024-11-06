@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Security.Policy;
@@ -164,7 +165,7 @@ internal static class OpenWindows
             Process.Start("explorer.exe", path);
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"explorer.exe started with path: {path}");
         }
-        catch (Exception ex)
+        catch (Win32Exception ex)
         {
             Logging.Write(LogEventEnum.Error, ProgramClassEnum.OpenWindows, "explorer.exe failed to start!");
             Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.OpenWindows, ex.Message);
@@ -183,7 +184,7 @@ internal static class OpenWindows
 
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"Browser started with url: {url}");
         }
-        catch (Exception ex)
+        catch (Win32Exception ex)
         {
             Logging.Write(LogEventEnum.Error, ProgramClassEnum.OpenWindows, "Browser failed to start!");
             Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.OpenWindows, ex.Message);
@@ -202,7 +203,7 @@ internal static class OpenWindows
 
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"Process started with path: {path}");
         }
-        catch (Exception ex)
+        catch (Win32Exception ex)
         {
             Logging.Write(LogEventEnum.Error, ProgramClassEnum.OpenWindows, "Process failed to start!");
             Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.OpenWindows, ex.Message);
