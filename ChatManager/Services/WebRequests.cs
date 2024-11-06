@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,23 +9,18 @@ namespace ChatManager.Services;
 
 internal static class WebRequests
 {
-    internal static async Task<long?> GetLongAsync(string url)
+    private static readonly HttpClient Client = new();
+
+    internal static async Task<long?> GetLongAsync(Uri url)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetLongAsync entered");
 
         long? getLong = 0;
 
-        HttpClient client = new();
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
-
         try
         {
-            HttpResponseMessage response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+            using HttpResponseMessage response = await Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
             getLong = response.Content.Headers.ContentLength;
-
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-            client.Dispose();
-            response.Dispose();
 
             return getLong;
         }
@@ -33,35 +29,24 @@ internal static class WebRequests
             Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get long failed!");
             Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
 
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-            client.Dispose();
-
             ShowMessageBox.ShowBug();
 
             return getLong;
         }
     }
 
-    internal static async Task<HttpResponseMessage> GetResponseMessageAsync(string url, string headers = "")
+    [SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "We still need the object (sadly)")]
+    internal static async Task<HttpResponseMessage> GetResponseMessageAsync(Uri url, string headers = "")
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetResponseMessageAsync entered");
 
         HttpResponseMessage response = new();
 
-        HttpClient client = new();
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
-
-        if (!string.IsNullOrWhiteSpace(headers))
-        {
-            client.DefaultRequestHeaders.UserAgent.ParseAdd(headers);
-        }
+        AddHeaders(headers);
 
         try
         {
-            response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-            client.Dispose();
+            response = await Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
 
             return response;
         }
@@ -69,9 +54,6 @@ internal static class WebRequests
         {
             Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get string failed!");
             Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
-
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-            client.Dispose();
 
             ShowMessageBox.ShowBug();
 
@@ -81,21 +63,17 @@ internal static class WebRequests
         }
     }
 
-    internal static async Task<string> GetStringAsync(string url)
+    internal static async Task<string> GetStringAsync(Uri url, string headers = "")
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetStringAsync entered");
 
         string getString = string.Empty;
 
-        HttpClient client = new();
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
+        AddHeaders(headers);
 
         try
         {
-            getString = await client.GetStringAsync(url);
-
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-            client.Dispose();
+            getString = await Client.GetStringAsync(url);
 
             return getString;
         }
@@ -104,30 +82,21 @@ internal static class WebRequests
             Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get string failed!");
             Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
 
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-            client.Dispose();
-
             ShowMessageBox.ShowBug();
 
             return getString;
         }
     }
 
-    internal static async Task<Version> GetVersionAsync(string url)
+    internal static async Task<Version> GetVersionAsync(Uri url)
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetVersionAsync entered");
 
         Version getVersion = new(0, 0, 0);
 
-        HttpClient client = new();
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient created");
-
         try
         {
-            getVersion = new(await client.GetStringAsync(url));
-
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-            client.Dispose();
+            getVersion = new(await Client.GetStringAsync(url));
 
             return getVersion;
         }
@@ -136,12 +105,18 @@ internal static class WebRequests
             Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get version failed!");
             Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
 
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.WebRequests, "HttpClient disposed!");
-            client.Dispose();
-
             ShowMessageBox.ShowBug();
 
             return getVersion;
+        }
+    }
+
+    private static void AddHeaders(string headers)
+    {
+        if (!string.IsNullOrWhiteSpace(headers))
+        {
+            Client.DefaultRequestHeaders.Clear();
+            Client.DefaultRequestHeaders.UserAgent.ParseAdd(headers);
         }
     }
 }

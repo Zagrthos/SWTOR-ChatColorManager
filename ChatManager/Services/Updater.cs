@@ -70,7 +70,7 @@ internal static partial class Updater
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "CheckForUpdatesAsync entered");
 
-        OnlineVersion = await WebRequests.GetVersionAsync(GetSetSettings.GetUpdateCheckURL);
+        OnlineVersion = await WebRequests.GetVersionAsync(new(GetSetSettings.GetUpdateCheckURL));
 
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineVersion is: {OnlineVersion}");
 
@@ -138,7 +138,7 @@ internal static partial class Updater
         }
 
         // Count the length of the to download file
-        TotalBytesToDownload = await WebRequests.GetLongAsync(UpdateURL);
+        TotalBytesToDownload = await WebRequests.GetLongAsync(new(UpdateURL));
 
         return TotalBytesToDownload ?? 0;
     }
@@ -147,7 +147,7 @@ internal static partial class Updater
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "DownloadUpdateAsync entered");
 
-        HttpResponseMessage responseMessage = await WebRequests.GetResponseMessageAsync(UpdateURL);
+        HttpResponseMessage responseMessage = await WebRequests.GetResponseMessageAsync(new(UpdateURL));
 
         if (!responseMessage.IsSuccessStatusCode)
         {
@@ -218,7 +218,7 @@ internal static partial class Updater
         string hashURL = GetSetSettings.GetHashCheckURL.Replace("VERSION", version, StringComparison.OrdinalIgnoreCase);
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"hashURL is: {hashURL}");
 
-        string onlineHash = await WebRequests.GetStringAsync(hashURL);
+        string onlineHash = await WebRequests.GetStringAsync(new(hashURL));
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineHash is: {onlineHash}");
 
         string localHash = string.Empty;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Windows.Forms;
@@ -26,24 +25,12 @@ internal sealed partial class TextViewerForm : Form
         if (isChangelog)
         {
             if (!Checks.CheckForInternetConnection(true))
-            {
                 return;
-            }
 
             Text = localization.GetString(LocalizationEnum.ChangelogFormName);
             lblLicencesHead.Text = localization.GetString(LocalizationEnum.ChangelogLabelName);
 
-            HttpResponseMessage response = await WebRequests.GetResponseMessageAsync($"{GetSetSettings.GetReleaseApiPath}v{await WebRequests.GetVersionAsync(GetSetSettings.GetUpdateCheckURL)}", $"{Application.ProductName}/{Application.ProductVersion}");
-
-            if (!response.IsSuccessStatusCode)
-            {
-                ShowMessageBox.ShowBug();
-                return;
-            }
-
-            string content = await response.Content.ReadAsStringAsync();
-            response.Dispose();
-
+            string content = await WebRequests.GetStringAsync(new($"{GetSetSettings.GetReleaseApiPath}v{await WebRequests.GetVersionAsync(new(GetSetSettings.GetUpdateCheckURL))}"), $"{Application.ProductName}/{Application.ProductVersion}");
             using JsonDocument jsonDoc = JsonDocument.Parse(content);
 
             string? body = jsonDoc.RootElement.GetProperty("body").GetString();
