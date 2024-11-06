@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using ChatManager.Enums;
@@ -341,7 +342,7 @@ internal partial class BackupSelectorForm : Form
             }
 
             string changedFiles = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
-            changedFiles = changedFiles.Replace("FILECOUNT", checkedItems.Length.ToString());
+            changedFiles = changedFiles.Replace("FILECOUNT", checkedItems.Length.ToString(CultureInfo.InvariantCulture));
 
             ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), changedFiles);
         }

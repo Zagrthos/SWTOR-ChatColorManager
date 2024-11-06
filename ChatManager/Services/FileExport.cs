@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using ChatManager.Enums;
 
@@ -40,7 +41,7 @@ internal class FileExport
         {
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileExport, "fileNames Array selected");
 
-            string timestamp = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd_HH-mm-ss");
+            string timestamp = DateTimeOffset.Now.ToString("yyyy-MM-dd_HH-mm-ss", CultureInfo.InvariantCulture);
 
             string deeperBackup = Path.Combine(BackupPath, timestamp);
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Create new backup Folder with timestamp: {deeperBackup}");

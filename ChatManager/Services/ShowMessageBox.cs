@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Globalization;
+using System.Windows.Forms;
 using ChatManager.Enums;
 
 namespace ChatManager.Services;
@@ -46,7 +47,7 @@ internal static class ShowMessageBox
     internal static bool ShowUpdate(string version, double fileSize)
     {
         Localization localization = new(GetSetSettings.GetCurrentLocale);
-        DialogResult result = MessageBox.Show($"{localization.GetString(LocalizationEnum.Update_IsAvailable)} {version}\n\n{localization.GetString(LocalizationEnum.Update_FileSize).Replace("FILESIZE", fileSize.ToString())} MB", localization.GetString(LocalizationEnum.MessageBoxUpdate), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+        DialogResult result = MessageBox.Show($"{localization.GetString(LocalizationEnum.Update_IsAvailable)} {version}\n\n{localization.GetString(LocalizationEnum.Update_FileSize).Replace("FILESIZE", fileSize.ToString(CultureInfo.InvariantCulture))} MB", localization.GetString(LocalizationEnum.MessageBoxUpdate), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
         Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Update MessageBox shown");
 

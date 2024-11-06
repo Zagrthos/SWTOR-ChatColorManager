@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Security.Policy;
 using System.Windows.Forms;
 using ChatManager.Enums;
@@ -122,7 +123,7 @@ internal static class OpenWindows
 
         Localization localization = new(GetSetSettings.GetCurrentLocale);
         string exportedFilesInfo = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
-        exportedFilesInfo = exportedFilesInfo.Replace("FILECOUNT", fileCount.ToString());
+        exportedFilesInfo = exportedFilesInfo.Replace("FILECOUNT", fileCount.ToString(CultureInfo.InvariantCulture));
 
         ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), exportedFilesInfo);
     }

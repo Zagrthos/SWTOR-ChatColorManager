@@ -38,9 +38,9 @@ internal partial class Converter
         }
 
         // Set r g b to the correspodending values
-        byte r = byte.Parse(hex.Substring(0, 2), NumberStyles.AllowHexSpecifier);
-        byte g = byte.Parse(hex.Substring(2, 2), NumberStyles.AllowHexSpecifier);
-        byte b = byte.Parse(hex.Substring(4, 2), NumberStyles.AllowHexSpecifier);
+        byte r = byte.Parse(hex.AsSpan(0, 2), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
+        byte g = byte.Parse(hex.AsSpan(2, 2), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
+        byte b = byte.Parse(hex.AsSpan(4, 2), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Converter, $"RGB is: {r}, {g}, {b}");
 
         // Convert the r g b to Color

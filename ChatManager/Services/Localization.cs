@@ -94,8 +94,9 @@ internal class Localization
 
         Application.CurrentCulture = culture!;
 
-        string date = DateTime.Now.ToString("d");
-        string time = DateTime.Now.ToString("T");
+        DateTimeOffset now = DateTimeOffset.Now;
+        string date = now.ToString("d", CultureInfo.InvariantCulture);
+        string time = now.ToString("T", CultureInfo.InvariantCulture);
 
         culture = new(currentCulture);
 
