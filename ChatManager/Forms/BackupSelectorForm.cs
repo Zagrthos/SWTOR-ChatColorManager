@@ -156,7 +156,7 @@ internal partial class BackupSelectorForm : Form
 
         if (sender is Button button)
         {
-            bool isChecked = !button.Name.Contains("Deselect");
+            bool isChecked = !button.Name.Contains("Deselect", StringComparison.OrdinalIgnoreCase);
             for (int i = 0; i < clbxBackupFiles.Items.Count; i++)
             {
                 clbxBackupFiles.SetItemChecked(i, isChecked);
@@ -342,7 +342,7 @@ internal partial class BackupSelectorForm : Form
             }
 
             string changedFiles = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
-            changedFiles = changedFiles.Replace("FILECOUNT", checkedItems.Length.ToString(CultureInfo.InvariantCulture));
+            changedFiles = changedFiles.Replace("FILECOUNT", checkedItems.Length.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
 
             ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), changedFiles);
         }

@@ -33,7 +33,7 @@ internal partial class Converter
 
         if (hex.Contains('#', StringComparison.OrdinalIgnoreCase))
         {
-            hex = hex.Replace("#", string.Empty);
+            hex = hex.Replace("#", string.Empty, StringComparison.OrdinalIgnoreCase);
             Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, "Trailing # removed.");
         }
 
@@ -89,7 +89,7 @@ internal partial class Converter
     }
 
     internal static string AddWhitespace(string text) => AddWhiteSpaceRegex().Replace(text, " $1");
-    internal static string RemoveWhitespace(string text) => text.Replace(" ", string.Empty);
+    internal static string RemoveWhitespace(string text) => text.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase);
 
     internal static string LabelToString(string text)
     {

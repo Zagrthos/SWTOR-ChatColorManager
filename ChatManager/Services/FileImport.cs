@@ -185,7 +185,7 @@ internal class FileImport
             {
                 if (line.StartsWith("ChatColors"))
                 {
-                    colorLine = line.Substring(line.IndexOf('=') + 1).Trim();
+                    colorLine = line.Substring(line.IndexOf('=', StringComparison.OrdinalIgnoreCase) + 1).Trim();
                     break;
                 }
             }

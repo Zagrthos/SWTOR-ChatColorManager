@@ -123,7 +123,7 @@ internal static class OpenWindows
 
         Localization localization = new(GetSetSettings.GetCurrentLocale);
         string exportedFilesInfo = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
-        exportedFilesInfo = exportedFilesInfo.Replace("FILECOUNT", fileCount.ToString(CultureInfo.InvariantCulture));
+        exportedFilesInfo = exportedFilesInfo.Replace("FILECOUNT", fileCount.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
 
         ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), exportedFilesInfo);
     }

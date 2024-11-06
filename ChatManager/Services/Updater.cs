@@ -119,9 +119,9 @@ internal static partial class Updater
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "GetFileSizeAsync entered");
 
-        if (OnlineVersion is not null && !UpdateName.Contains(OnlineVersion.ToString()))
+        if (OnlineVersion is not null && !UpdateName.Contains(OnlineVersion.ToString(), StringComparison.OrdinalIgnoreCase))
         {
-            if (UpdateName.Contains(".exe"))
+            if (UpdateName.Contains(".exe", StringComparison.OrdinalIgnoreCase))
             {
                 UpdateName = ReplaceVersionNumber().Replace(UpdateName, OnlineVersion.ToString());
                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateName set to: {UpdateName}");
@@ -215,7 +215,7 @@ internal static partial class Updater
 
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Downloading hash initiated");
 
-        string hashURL = GetSetSettings.GetHashCheckURL.Replace("VERSION", version);
+        string hashURL = GetSetSettings.GetHashCheckURL.Replace("VERSION", version, StringComparison.OrdinalIgnoreCase);
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"hashURL is: {hashURL}");
 
         string onlineHash = await WebRequests.GetStringAsync(hashURL);
@@ -226,7 +226,7 @@ internal static partial class Updater
         {
             using var sha256 = SHA256.Create();
             byte[] byteHash = sha256.ComputeHash(stream);
-            localHash = BitConverter.ToString(byteHash).Replace("-", string.Empty);
+            localHash = Convert.ToHexString(byteHash);
 
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"localHash is: {localHash}");
         }

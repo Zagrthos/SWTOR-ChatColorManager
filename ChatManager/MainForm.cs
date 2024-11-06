@@ -248,7 +248,7 @@ internal partial class MainForm : Form
                 }
 
                 Localization localization = new(GetSetSettings.GetCurrentLocale);
-                string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text)).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text)).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString(CultureInfo.InvariantCulture));
+                string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text), StringComparison.OrdinalIgnoreCase).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text), StringComparison.OrdinalIgnoreCase).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
                 ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), message);
 
                 break;
@@ -271,7 +271,7 @@ internal partial class MainForm : Form
                 Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Autosave data imported");
                 Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "ReloadOnStartup set");
 
-                string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text)).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text)).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString(CultureInfo.InvariantCulture));
+                string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text), StringComparison.OrdinalIgnoreCase).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text), StringComparison.OrdinalIgnoreCase).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
                 ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), message);
             }
             else
@@ -496,7 +496,7 @@ internal partial class MainForm : Form
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
             string exportedFilesInfo = localization.GetString(LocalizationEnum.Warn_TextBoxEmpty);
-            exportedFilesInfo = exportedFilesInfo.Replace("TEXTBOXCOUNTER", counter.ToString(CultureInfo.InvariantCulture));
+            exportedFilesInfo = exportedFilesInfo.Replace("TEXTBOXCOUNTER", counter.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
 
             ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), exportedFilesInfo);
             return;
@@ -721,7 +721,7 @@ internal partial class MainForm : Form
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
             Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "SWTOR is running!");
-            ShowMessageBox.Show(localization.GetString("MessageBoxWarn"), localization.GetString("Warn_SWTORrunning"));
+            ShowMessageBox.Show(localization.GetString("MessageBoxWarn", StringComparison.OrdinalIgnoreCase), localization.GetString("Warn_SWTORrunning", StringComparison.OrdinalIgnoreCase));
         }
         else
         {
@@ -795,7 +795,7 @@ internal partial class MainForm : Form
             downloadProgressToolStripMenuItem.Visible = true;
         }
 
-        downloadProgressToolStripMenuItem.Text = Updater.GetUpdateDownloadText.Replace("PROGRESS", progress.ToString(CultureInfo.InvariantCulture));
+        downloadProgressToolStripMenuItem.Text = Updater.GetUpdateDownloadText.Replace("PROGRESS", progress.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>

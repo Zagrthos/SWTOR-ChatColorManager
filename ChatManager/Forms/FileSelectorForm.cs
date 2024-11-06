@@ -343,23 +343,23 @@ internal partial class FileSelectorForm : Form
 
             CheckedListBox? checkedListBox;
 
-            if (tabName.Contains("StarForge"))
+            if (tabName.Contains("StarForge", StringComparison.OrdinalIgnoreCase))
             {
                 controls = Controls.Find("clbxStarForge", true);
             }
-            else if (tabName.Contains("SateleShan"))
+            else if (tabName.Contains("SateleShan", StringComparison.OrdinalIgnoreCase))
             {
                 controls = Controls.Find("clbxSateleShan", true);
             }
-            else if (tabName.Contains("DarthMalgus"))
+            else if (tabName.Contains("DarthMalgus", StringComparison.OrdinalIgnoreCase))
             {
                 controls = Controls.Find("clbxDarthMalgus", true);
             }
-            else if (tabName.Contains("TulakHord"))
+            else if (tabName.Contains("TulakHord", StringComparison.OrdinalIgnoreCase))
             {
                 controls = Controls.Find("clbxTulakHord", true);
             }
-            else if (tabName.Contains("TheLeviathan"))
+            else if (tabName.Contains("TheLeviathan", StringComparison.OrdinalIgnoreCase))
             {
                 controls = Controls.Find("clbxTheLeviathan", true);
             }
@@ -370,7 +370,7 @@ internal partial class FileSelectorForm : Form
 
                 if (checkedListBox is not null)
                 {
-                    bool isChecked = !button.Name.Contains("Deselect");
+                    bool isChecked = !button.Name.Contains("Deselect", StringComparison.OrdinalIgnoreCase);
                     for (int i = 0; i < checkedListBox.Items.Count; i++)
                     {
                         checkedListBox.SetItemChecked(i, isChecked);
