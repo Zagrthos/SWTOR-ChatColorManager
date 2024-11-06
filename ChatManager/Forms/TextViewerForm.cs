@@ -69,8 +69,9 @@ internal sealed partial class TextViewerForm : Form
         }
     }
 
-    [DllImport("user32.dll", EntryPoint = "HideCaret")]
     [SuppressMessage("Interoperability", "SYSLIB1054:Use 'LibraryImportAttribute' instead of 'DllImportAttribute' to generate P/Invoke marshalling code at compile time", Justification = "No unsafe Code.")]
+    [DllImport("user32.dll", EntryPoint = "HideCaret", SetLastError = true, CharSet = CharSet.Auto, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     private static extern bool HideCaret(IntPtr hWnd);
 
     private void RtbLicences_GotFocus(object sender, EventArgs e) => HideCaret(rtbLicences.Handle);
