@@ -125,14 +125,10 @@ internal partial class MainForm : Form
                     (bool languageChanged, bool autosaveTimerChanged) = OpenWindows.OpenSettings();
 
                     if (autosaveTimerChanged)
-                    {
                         ShowMessageBox.ShowRestart();
-                    }
 
                     if (languageChanged)
-                    {
                         Localize();
-                    }
 
                     Show();
                     return;
@@ -160,9 +156,7 @@ internal partial class MainForm : Form
                 case nameof(updateToolStripMenuItem):
                     Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Update Check requested");
                     if (Checks.CheckForInternetConnection(true))
-                    {
                         await Updater.CheckForUpdatesAsync(true);
-                    }
 
                     return;
 
@@ -243,9 +237,7 @@ internal partial class MainForm : Form
                 byte counter = CheckForEmptyTextboxes();
 
                 if (counter != 0)
-                {
                     break;
-                }
 
                 Localization localization = new(GetSetSettings.GetCurrentLocale);
                 string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text), StringComparison.OrdinalIgnoreCase).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text), StringComparison.OrdinalIgnoreCase).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
@@ -595,9 +587,7 @@ internal partial class MainForm : Form
                 foreach (object? moreItems in menuItem.DropDownItems)
                 {
                     if (moreItems is ToolStripMenuItem moreItem && moreItem.Enabled)
-                    {
                         moreItem.Text = localization.GetString(moreItem.Name ?? throw new InvalidOperationException("MenuItem.Name is null"));
-                    }
                 }
             }
         }
@@ -613,9 +603,7 @@ internal partial class MainForm : Form
             foreach (TabPage tab in tabControl.Controls)
             {
                 if (tab is not null)
-                {
                     tab.Text = localization.GetString(tab.Name);
-                }
             }
         }
 
@@ -646,16 +634,12 @@ internal partial class MainForm : Form
         }
 
         if (!GetSetSettings.GetSaveOnClose)
-        {
             return;
-        }
 
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "SaveOnClose set");
 
         if (!GetSetSettings.GetReloadOnStartup)
-        {
             return;
-        }
 
         ImportAutosave();
     }
@@ -683,9 +667,7 @@ internal partial class MainForm : Form
         foreach (Control control in parent.Controls)
         {
             if (control is T typedControl)
-            {
                 controls.Add(typedControl);
-            }
 
             controls.AddRange(GetControls<T>(control));
         }
@@ -762,9 +744,7 @@ internal partial class MainForm : Form
 
 #if !DEBUG
         if (!Checks.CheckForInternetConnection())
-        {
             return;
-        }
 
         await Updater.CheckForUpdateIntervalAsync();
 #endif
@@ -791,9 +771,7 @@ internal partial class MainForm : Form
     private void UpdateDownloadProgress(double progress)
     {
         if (!downloadProgressToolStripMenuItem.Visible)
-        {
             downloadProgressToolStripMenuItem.Visible = true;
-        }
 
         downloadProgressToolStripMenuItem.Text = Updater.GetUpdateDownloadText.Replace("PROGRESS", progress.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
     }
@@ -810,9 +788,7 @@ internal partial class MainForm : Form
         AutosaveTimer?.Stop();
 
         if (!GetSetSettings.GetSaveOnClose)
-        {
             return;
-        }
 
         DoSave();
     }
