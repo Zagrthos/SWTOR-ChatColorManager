@@ -60,11 +60,11 @@ internal static class FileImport
 
         Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"files: {charFileNames.Length}");
 
-        byte starForgeCounter = 0;
-        byte sateleShanCounter = 0;
-        byte darthMalgusCounter = 0;
-        byte tulakHordCounter = 0;
-        byte theLeviathanCounter = 0;
+        int starForgeCounter = 0;
+        int sateleShanCounter = 0;
+        int darthMalgusCounter = 0;
+        int tulakHordCounter = 0;
+        int theLeviathanCounter = 0;
 
         // Categorize the files by servers
         if (charFileNames.Length > 0)
@@ -225,7 +225,7 @@ internal static class FileImport
         // TODO: Decide if logging to be removed or not
         // Debug Purposes
         // Log every Index
-        byte b = 0;
+        int b = 0;
         foreach (string index in colorIndex)
         {
             Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"colorIndex {b} = {colorIndex[b]}");

@@ -6,7 +6,7 @@ using ChatManager.Services;
 
 namespace ChatManager.Forms;
 
-internal partial class SettingsForm : Form
+internal sealed partial class SettingsForm : Form
 {
     internal SettingsForm()
     {

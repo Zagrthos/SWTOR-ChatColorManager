@@ -8,7 +8,7 @@ using ChatManager.Services;
 namespace ChatManager.Forms;
 
 [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Right now there is no static needed.")]
-internal partial class FileSelectorForm : Form
+internal sealed partial class FileSelectorForm : Form
 {
     internal FileSelectorForm(List<string> servers, bool save)
     {
@@ -257,7 +257,7 @@ internal partial class FileSelectorForm : Form
                     List<CheckedListBox> checkedListBoxes = GetControls<CheckedListBox>(this);
 
                     // Set counter to 0
-                    byte counter = 0;
+                    int counter = 0;
 
                     // Loop all Controls and get the SelectedItems from them
                     foreach (CheckedListBox checkedListBox in checkedListBoxes)

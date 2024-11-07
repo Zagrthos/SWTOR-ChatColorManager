@@ -11,7 +11,7 @@ using ChatManager.Services;
 namespace ChatManager;
 
 [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Right now there is no static needed.")]
-internal partial class MainForm : Form
+internal sealed partial class MainForm : Form
 {
     internal MainForm() => InitializeComponent();
 
@@ -237,7 +237,7 @@ internal partial class MainForm : Form
 
                 GetFileColors(filePath, false);
 
-                byte counter = CheckForEmptyTextboxes();
+                int counter = CheckForEmptyTextboxes();
 
                 if (counter != 0)
                     break;
@@ -472,7 +472,7 @@ internal partial class MainForm : Form
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ExportFiles entered");
 
-        byte counter = CheckForEmptyTextboxes();
+        int counter = CheckForEmptyTextboxes();
 
         if (counter != 0)
         {
@@ -531,12 +531,12 @@ internal partial class MainForm : Form
         ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), localization.GetString(LocalizationEnum.Inf_ColorsReset));
     }
 
-    private byte CheckForEmptyTextboxes()
+    private int CheckForEmptyTextboxes()
     {
         Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "CheckForEmptyTextboxes entered");
 
         List<TextBox> textBoxes = GetControls<TextBox>(this);
-        byte counter = 0;
+        int counter = 0;
 
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Checking for empty textBoxes...");
         foreach (TextBox textBox in textBoxes)
