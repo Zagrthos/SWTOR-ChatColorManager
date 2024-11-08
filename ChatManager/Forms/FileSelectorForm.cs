@@ -106,8 +106,8 @@ internal sealed partial class FileSelectorForm : Form
 
                     // Converting the MultiDimensionalArray into a List but remove every entry that is null
                     string[,] charactersMulti = FileImport.GetArray($"{name.Substring(3)}");
-                    List<string> characters = [];
-                    for (int i = 0; i < 100; i++)
+                    List<string> characters = new(charactersMulti.Length / 2);
+                    for (int i = 0; i < charactersMulti.Length / 2; i++)
                     {
                         if (charactersMulti[i, 0] is not null)
                         {
@@ -166,8 +166,8 @@ internal sealed partial class FileSelectorForm : Form
 
                     // Converting the MultiDimensionalArray into a List but remove every entry that is null
                     string[,] charactersMulti = FileImport.GetArray($"{name.Substring(4)}");
-                    List<string> characters = [];
-                    for (int i = 0; i < 100; i++)
+                    List<string> characters = new(charactersMulti.Length / 2);
+                    for (int i = 0; i < charactersMulti.Length / 2; i++)
                     {
                         if (charactersMulti[i, 0] is not null)
                         {
@@ -256,26 +256,18 @@ internal sealed partial class FileSelectorForm : Form
                     // Get all CheckedListBox Controls
                     List<CheckedListBox> checkedListBoxes = GetControls<CheckedListBox>(this);
 
-                    // Set counter to 0
-                    int counter = 0;
-
-                    // Loop all Controls and get the SelectedItems from them
-                    foreach (CheckedListBox checkedListBox in checkedListBoxes)
+                    // Loop all controls and get the SelectedItems from them
+                    for (int i = 0; i < checkedListBoxes.Count; i++)
                     {
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"CheckedListBox is: {checkedListBox.Name}");
-
                         // Check if the Controls have ANY checkedItem
-                        if (checkedListBox.CheckedItems.Count > 0)
+                        if (checkedListBoxes[i].CheckedItems.Count > 0)
                         {
                             // Set the selectedServers to the correct name
-                            GetSelectedServers[counter] = checkedListBox.Name.Substring(4);
-                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"selectedServers[{counter}] is: {GetSelectedServers[counter]}");
-
-                            // Count the CheckedListBoxes
-                            counter++;
+                            GetSelectedServers[i] = checkedListBoxes[i].Name.Substring(4);
+                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"selectedServers[{i}] is: {GetSelectedServers[i]}");
 
                             // If yes get them all
-                            foreach (object item in checkedListBox.CheckedItems)
+                            foreach (object item in checkedListBoxes[i].CheckedItems)
                             {
                                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Current item is: {item}");
 
@@ -284,7 +276,7 @@ internal sealed partial class FileSelectorForm : Form
                                     GetListBoxMulti.Add(objectString);
                             }
                         }
-                        else if (checkedListBox.Name == button.Tag.ToString())
+                        else if (checkedListBoxes[i].Name == button.Tag.ToString())
                         {
                             Localization localization = new(GetSetSettings.GetCurrentLocale);
                             ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_NoExportFileSelected));

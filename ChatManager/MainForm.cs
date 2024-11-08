@@ -228,7 +228,7 @@ internal sealed partial class MainForm : Form
         string[,] filePaths = FileImport.GetArray($"{selectedListBox.Substring(3)}");
 
         // Loop through and set the colors to the corresponding textBox
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < filePaths.Length / 2; i++)
         {
             if (selectedFile == filePaths[i, 0])
             {
@@ -237,9 +237,7 @@ internal sealed partial class MainForm : Form
 
                 GetFileColors(filePath, false);
 
-                int counter = CheckForEmptyTextboxes();
-
-                if (counter != 0)
+                if (CheckForEmptyTextboxes() != 0)
                     break;
 
                 Localization localization = new(GetSetSettings.GetCurrentLocale);
