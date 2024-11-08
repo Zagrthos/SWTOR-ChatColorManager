@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using ChatManager.Enums;
 using ChatManager.Services;
@@ -374,10 +375,9 @@ internal sealed partial class BackupSelectorForm : Form
             button.Text = localization.GetString(button.Name);
         }
 
-        foreach (Label label in labels)
+        foreach (Label label in labels.Where(l => l.Name != lblDateConvertion.Name))
         {
-            if (label.Name != lblDateConvertion.Name)
-                label.Text = localization.GetString(label.Name);
+            label.Text = localization.GetString(label.Name);
         }
 
         (string date, string time) = Localization.GetLocalDateTime();

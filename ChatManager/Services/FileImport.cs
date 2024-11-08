@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using ChatManager.Enums;
 
 namespace ChatManager.Services;
@@ -167,13 +168,10 @@ internal static class FileImport
             colorIndex[1] = fileNameParts[1];
 
             // Search for the correct line in the File
-            foreach (string line in fileLines)
+            foreach (string line in fileLines.Where(l => l.StartsWith("ChatColors", StringComparison.OrdinalIgnoreCase)))
             {
-                if (line.StartsWith("ChatColors", StringComparison.OrdinalIgnoreCase))
-                {
-                    colorLine = line.Substring(line.IndexOf('=', StringComparison.OrdinalIgnoreCase) + 1).Trim();
-                    break;
-                }
+                colorLine = line.Substring(line.IndexOf('=', StringComparison.OrdinalIgnoreCase) + 1).Trim();
+                break;
             }
 
             if (colorLine.Length == 0)
@@ -225,11 +223,9 @@ internal static class FileImport
         // TODO: Decide if logging to be removed or not
         // Debug Purposes
         // Log every Index
-        int b = 0;
-        foreach (string index in colorIndex)
+        for (int i = 0; i < colorIndex.Length; i++)
         {
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"colorIndex {b} = {colorIndex[b]}");
-            b++;
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"colorIndex {i} = {colorIndex[i]}");
         }
 
         return colorIndex;

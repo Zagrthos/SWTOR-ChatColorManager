@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using ChatManager.Enums;
 using ChatManager.Services;
@@ -537,13 +538,10 @@ internal sealed partial class MainForm : Form
         int counter = 0;
 
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Checking for empty textBoxes...");
-        foreach (TextBox textBox in textBoxes)
+        foreach (TextBox textBox in textBoxes.Where(static t => string.IsNullOrWhiteSpace(t.Text)))
         {
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-            {
-                counter++;
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"counter: {counter}");
-            }
+            counter++;
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"counter: {counter}");
         }
 
         return counter;

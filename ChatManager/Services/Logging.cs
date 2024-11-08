@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Timers;
 using System.Windows.Forms;
 using ChatManager.Enums;
@@ -55,14 +56,10 @@ internal static class Logging
         string[] logFiles = Directory.GetFiles(logPath);
 
         int counter = 0;
-
-        foreach (string file in logFiles)
+        foreach (string file in logFiles.Where(f => File.GetLastWriteTime(f) < dateSevenDaysAgo))
         {
-            if (File.GetLastWriteTime(file) < dateSevenDaysAgo)
-            {
-                File.Delete(file);
-                counter++;
-            }
+            File.Delete(file);
+            counter++;
         }
 
         Write(LogEventEnum.Info, ProgramClassEnum.Logging, $"{counter} logs deleted");
