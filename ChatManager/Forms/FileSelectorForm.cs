@@ -256,18 +256,25 @@ internal sealed partial class FileSelectorForm : Form
                     // Get all CheckedListBox Controls
                     List<CheckedListBox> checkedListBoxes = GetControls<CheckedListBox>(this);
 
-                    // Loop all controls and get the SelectedItems from them
-                    for (int i = 0; i < checkedListBoxes.Count; i++)
+                    int counter = 0;
+
+                    // Loop all Controls and get the SelectedItems from them
+                    foreach (CheckedListBox checkedListBox in checkedListBoxes)
                     {
+                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"CheckedListBox is: {checkedListBox.Name}");
+
                         // Check if the Controls have ANY checkedItem
-                        if (checkedListBoxes[i].CheckedItems.Count > 0)
+                        if (checkedListBox.CheckedItems.Count > 0)
                         {
                             // Set the selectedServers to the correct name
-                            GetSelectedServers[i] = checkedListBoxes[i].Name.Substring(4);
-                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"selectedServers[{i}] is: {GetSelectedServers[i]}");
+                            GetSelectedServers[counter] = checkedListBox.Name.Substring(4);
+                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"selectedServers[{counter}] is: {GetSelectedServers[counter]}");
+
+                            // Count the CheckedListBoxes
+                            counter++;
 
                             // If yes get them all
-                            foreach (object item in checkedListBoxes[i].CheckedItems)
+                            foreach (object item in checkedListBox.CheckedItems)
                             {
                                 Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Current item is: {item}");
 
@@ -276,7 +283,7 @@ internal sealed partial class FileSelectorForm : Form
                                     GetListBoxMulti.Add(objectString);
                             }
                         }
-                        else if (checkedListBoxes[i].Name == button.Tag.ToString())
+                        else if (checkedListBox.Name == button.Tag.ToString())
                         {
                             Localization localization = new(GetSetSettings.GetCurrentLocale);
                             ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_NoExportFileSelected));
