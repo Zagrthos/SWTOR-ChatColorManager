@@ -153,7 +153,7 @@ begin
   if CurPageID = wpReady then begin
     if not CheckDotNetVersion then begin
       DownloadPage.Clear;
-      DownloadPage.Add('https://download.visualstudio.microsoft.com/download/pr/bb581716-4cca-466e-9857-512e2371734b/5fe261422a7305171866fd7812d0976f/windowsdesktop-runtime-8.0.7-win-x64.exe', 'dotnet-installer.exe', '');
+      DownloadPage.Add('https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/8.0.16/windowsdesktop-runtime-8.0.16-win-x64.exe', 'dotnet-installer.exe', '');
       DownloadPage.Show;
       try
         try
