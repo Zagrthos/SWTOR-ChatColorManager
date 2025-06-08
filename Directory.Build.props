@@ -1,5 +1,58 @@
 <Project>
+
+  <!-- Build stuff -->
   <PropertyGroup>
-	<UseArtifactsOutput>true</UseArtifactsOutput>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DebugType>embedded</DebugType>
+    <Platforms>x64</Platforms>
+  </PropertyGroup>
+
+  <!-- Development stuff -->
+  <PropertyGroup>
+    <AnalysisLevel>latest-all</AnalysisLevel>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <Features>Strict</Features> <!-- Enables the strict mode of the compiler, guaranteeing more safety -->
+    <GenerateDocumentationFile>True</GenerateDocumentationFile> <!-- Workaround for https://github.com/dotnet/roslyn/issues/41640 -->
+    <ImplicitUsings>disable</ImplicitUsings>
+    <IsPublishable>True</IsPublishable>
+    <JsonSerializerIsReflectionEnabledByDefault>False</JsonSerializerIsReflectionEnabledByDefault> <!-- JsonSourceGen -->
+    <NoWarn>$(NoWarn);CA2007</NoWarn>
+    <NuGetAuditMode>all</NuGetAuditMode>
+    <Nullable>enable</Nullable>
+    <PathMap>$(MSBuildProjectDirectory)=./$(MSBuildProjectName)</PathMap>
+    <RootNamespace>ChatManager</RootNamespace>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <SatelliteResourceLanguages>none</SatelliteResourceLanguages>
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+    <WarningsAsErrors>nullable</WarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- File Properties -->
+  <PropertyGroup>
+    <Authors>Zagrthos</Authors>
+    <Copyright>© $([System.DateTimeOffset]::Now.ToString('yyyy')) - $(Authors). All rights reserved.</Copyright>
+    <Description>A GUI Manager for customizing the SWTOR Chat.</Description>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Product>SWTOR Chat Manager</Product>
+    <RepositoryUrl>https://github.com/Zagrthos/SWTOR-ChatColorManager</RepositoryUrl>
+    <VersionPrefix>1.6.2</VersionPrefix>
+  </PropertyGroup>
+
+  <!-- JIT Runtime Configuration -->
+  <PropertyGroup>
+    <!-- Compiler -->
+    <TieredCompilation>True</TieredCompilation>
+    <TieredCompilationQuickJit>True</TieredCompilationQuickJit>
+    <TieredCompilationQuickJitForLoops>True</TieredCompilationQuickJitForLoops>
+    <TieredPGO>True</TieredPGO>
+
+    <!-- Garbage collection -->
+    <ServerGarbageCollection>False</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>True</ConcurrentGarbageCollection>
+    <GarbageCollectionAdaptationMode>1</GarbageCollectionAdaptationMode>
+
+    <!-- Globalization -->
+    <InvariantGlobalization>False</InvariantGlobalization>
   </PropertyGroup>
 </Project>

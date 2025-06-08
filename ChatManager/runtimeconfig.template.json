@@ -1,11 +1,5 @@
 ﻿{
     "configProperties": {
-        "System.Runtime.TieredCompilation": true,
-        "System.Runtime.TieredCompilation.QuickJit": true,
-        "System.Runtime.TieredCompilation.QuickJitForLoops": false,
-        "System.Globalization.Invariant": false,
-        "System.Net.Http.SocketsHttpHandler.Http2Support": true,
-        "System.Windows.Forms.AnchorLayoutV2": true,
-        "System.Windows.Forms.ScaleTopLevelFormMinMaxSizeForDpi": true
+        "System.Windows.Forms.AnchorLayoutV2": true
     }
 }

@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Cyotek.Windows.Forms.ColorPicker" Version="2.0.0-beta.7" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="4.13.1" />
+    <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.13.1" />
+    <PackageVersion Include="Roslynator.CodeFixes" Version="4.13.1" />
+    <PackageVersion Include="Roslynator.Formatting.Analyzers" Version="4.13.1" />
+    <PackageVersion Include="Roslynator.Refactorings" Version="4.13.1" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.11.0.117924" />
+  </ItemGroup>
+</Project>
