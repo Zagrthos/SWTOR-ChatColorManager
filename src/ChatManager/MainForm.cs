@@ -684,11 +684,11 @@ internal sealed partial class MainForm : Form
 
 #if !DEBUG
         Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Check if SWTOR is running");
-        if (Checks.CheckSWTORprocessFound())
+        if (Checks.CheckSwtorProcessFound)
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
             Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "SWTOR is running!");
-            ShowMessageBox.Show(localization.GetString("MessageBoxWarn", StringComparison.OrdinalIgnoreCase), localization.GetString("Warn_SWTORrunning", StringComparison.OrdinalIgnoreCase));
+            ShowMessageBox.Show(localization.GetString("MessageBoxWarn"), localization.GetString("Warn_SWTORrunning"));
         }
         else
         {

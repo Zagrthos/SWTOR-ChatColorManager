@@ -23,8 +23,8 @@ internal static partial class Checks
     /// Check if SWTOR is running.
     /// </summary>
     /// <returns><see langword="true"/> if yes, <see langword="false"/> if not.</returns>
-    internal static bool CheckSWTORprocessFound
-        => Process.GetProcessesByName("swtor").Length >= 1;
+    internal static bool CheckSwtorProcessFound
+        => Process.GetProcessesByName("swtor").Length is >= 1;
 
     internal static bool DirectoryCheck(CheckFolderEnum folder)
     {
