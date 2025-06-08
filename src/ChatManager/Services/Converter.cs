@@ -16,9 +16,9 @@ internal static partial class Converter
     /// <returns>The <see langword="string"/> in Hex.</returns>
     internal static string RGBtoHex(in Color rgb)
     {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, "Try to convert RGB into Hex");
+        Logging.Write(LogEvent.Info, LogClass.Converter, "Try to convert RGB into Hex");
         string hex = $"{rgb.R:X2}{rgb.G:X2}{rgb.B:X2}";
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, $"Converted Hex is: {hex}");
+        Logging.Write(LogEvent.Info, LogClass.Converter, $"Converted Hex is: {hex}");
 
         return hex;
     }
@@ -30,23 +30,23 @@ internal static partial class Converter
     /// <returns>The <seealso cref="Color"/> in RGB.</returns>
     internal static Color HexToRGB(string hex)
     {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, "Try to convert Hex into RGB");
+        Logging.Write(LogEvent.Info, LogClass.Converter, "Try to convert Hex into RGB");
 
         if (hex.Contains('#', StringComparison.OrdinalIgnoreCase))
         {
             hex = hex.Replace("#", string.Empty, StringComparison.OrdinalIgnoreCase);
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Converter, "Trailing # removed.");
+            Logging.Write(LogEvent.Info, LogClass.Converter, "Trailing # removed.");
         }
 
         // Set r g b to the correspodending values
         int r = int.Parse(hex.AsSpan(0, 2), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
         int g = int.Parse(hex.AsSpan(2, 2), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
         int b = int.Parse(hex.AsSpan(4, 2), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Converter, $"RGB is: {r}, {g}, {b}");
+        Logging.Write(LogEvent.Variable, LogClass.Converter, $"RGB is: {r}, {g}, {b}");
 
         // Convert the r g b to Color
         Color rgb = Color.FromArgb(r, g, b);
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Converter, $"Converted RGB is: {rgb}");
+        Logging.Write(LogEvent.Variable, LogClass.Converter, $"Converted RGB is: {rgb}");
 
         return rgb;
     }

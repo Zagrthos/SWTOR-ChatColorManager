@@ -9,7 +9,7 @@ internal sealed class FileExport
 {
     internal FileExport(string[] servers, string[] files)
     {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileExport, "FileExport Constructor created");
+        Logging.Write(LogEvent.Info, LogClass.FileExport, "FileExport Constructor created");
         GetNumberOfChangedFiles = 0;
         _selectedServers = servers;
         _fileNames = files;
@@ -27,34 +27,34 @@ internal sealed class FileExport
 
     internal void BackupFilesAndWrite(string[] content)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileExport, "BackupFilesAndWrite entered");
+        Logging.Write(LogEvent.Method, LogClass.FileExport, "BackupFilesAndWrite entered");
 
         // Check if backupDir exists and if not show a warning Box
         if (!BackupAvailability)
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
-            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_BackupDirMissing));
+            ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxWarn), localization.GetString(Enums.LocalizationStrings.Warn_BackupDirMissing));
         }
 
         // Check if the user selected any characters
         if (_fileNames.Length != 0)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileExport, "fileNames Array selected");
+            Logging.Write(LogEvent.Info, LogClass.FileExport, "fileNames Array selected");
 
             string timestamp = DateTimeOffset.Now.ToString("yyyy-MM-dd_HH-mm-ss", CultureInfo.InvariantCulture);
 
             string deeperBackup = Path.Combine(BackupPath, timestamp);
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Create new backup Folder with timestamp: {deeperBackup}");
+            Logging.Write(LogEvent.Variable, LogClass.FileExport, $"Create new backup Folder with timestamp: {deeperBackup}");
 
             Directory.CreateDirectory(deeperBackup);
 
             if (Directory.Exists(deeperBackup))
             {
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileExport, "Backup Folder created");
+                Logging.Write(LogEvent.Info, LogClass.FileExport, "Backup Folder created");
             }
             else
             {
-                Logging.Write(LogEventEnum.Error, ProgramClassEnum.FileExport, "Backup Folder could NOT be created!");
+                Logging.Write(LogEvent.Error, LogClass.FileExport, "Backup Folder could NOT be created!");
                 ShowMessageBox.ShowBug();
             }
 
@@ -64,7 +64,7 @@ internal sealed class FileExport
             // Loop through the arrayCounter and Copy all files in the array to the backup position
             for (int i = 0; i < GetNumberOfChangedFiles; i++)
             {
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current i is: {i}");
+                Logging.Write(LogEvent.Variable, LogClass.FileExport, $"Current i is: {i}");
 
                 if (!string.IsNullOrWhiteSpace(name[i, 0]) && !string.IsNullOrWhiteSpace(name[i, 1]))
                 {
@@ -81,7 +81,7 @@ internal sealed class FileExport
                     if (BackupAvailability)
                     {
                         File.Copy(path, newPath, true);
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"File {name[i, 0]} copied to: {newPath}");
+                        Logging.Write(LogEvent.Variable, LogClass.FileExport, $"File {name[i, 0]} copied to: {newPath}");
 
                         string[] lines = File.ReadAllLines(path);
 
@@ -99,7 +99,7 @@ internal sealed class FileExport
 
                         if (lineNumber == 0)
                         {
-                            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileExport, "No ChatColors line found!");
+                            Logging.Write(LogEvent.Warning, LogClass.FileExport, "No ChatColors line found!");
                             GetNumberOfChangedFiles--;
                             ShowMessageBox.ShowBug();
                             return;
@@ -109,12 +109,12 @@ internal sealed class FileExport
                         // It assumes it starts with a "ChatColors = "
                         string colorLine = lines[lineNumber].Split("=")[1].TrimStart();
 
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current ChatColors: {colorLine}");
+                        Logging.Write(LogEvent.Variable, LogClass.FileExport, $"Current ChatColors: {colorLine}");
 
                         // Split it again to the get colors in an array
                         string[] colorLines = colorLine.Split(";");
 
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"colorLines: {colorLines.Length}");
+                        Logging.Write(LogEvent.Variable, LogClass.FileExport, $"colorLines: {colorLines.Length}");
 
                         // Loop through the changed array and check if there's empty colors
                         // Check if the array is big enough else break
@@ -126,7 +126,7 @@ internal sealed class FileExport
                             {
                                 if (color >= colorLines.Length)
                                 {
-                                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, "End of content reached");
+                                    Logging.Write(LogEvent.Variable, LogClass.FileExport, "End of content reached");
                                     break;
                                 }
 
@@ -141,28 +141,28 @@ internal sealed class FileExport
                         // Change the line to the new Array of colors
                         lines[lineNumber] = $"ChatColors = {colorIndexes}";
 
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"New ChatColors: {lines[lineNumber]}");
+                        Logging.Write(LogEvent.Variable, LogClass.FileExport, $"New ChatColors: {lines[lineNumber]}");
 
                         // Write it all back
                         File.WriteAllLines(path, lines);
 
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"File {name[i, 0]} written back");
+                        Logging.Write(LogEvent.Variable, LogClass.FileExport, $"File {name[i, 0]} written back");
                     }
                     else
                     {
-                        Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileExport, $"File {name[i, 0]} NOT copied to: {newPath}!");
+                        Logging.Write(LogEvent.Warning, LogClass.FileExport, $"File {name[i, 0]} NOT copied to: {newPath}!");
                         ShowMessageBox.ShowBug();
                     }
                 }
                 else
                 {
-                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current i: {i} is null or empty");
+                    Logging.Write(LogEvent.Variable, LogClass.FileExport, $"Current i: {i} is null or empty");
                 }
             }
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileExport, "fileNames Array is empty!");
+            Logging.Write(LogEvent.Warning, LogClass.FileExport, "fileNames Array is empty!");
             ShowMessageBox.ShowBug();
         }
     }
@@ -173,7 +173,7 @@ internal sealed class FileExport
     /// <returns>The multidimensional <see langword="string"/> <seealso cref="Array"/>.</returns>
     private string[,] AssociateFileWithServer()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileExport, "AssociateFileWithServer entered");
+        Logging.Write(LogEvent.Method, LogClass.FileExport, "AssociateFileWithServer entered");
 
         string[,] namesWithServers = new string[1000, 3];
 
@@ -184,7 +184,7 @@ internal sealed class FileExport
             if (string.IsNullOrWhiteSpace(server))
                 break;
 
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current server is: {server}");
+            Logging.Write(LogEvent.Variable, LogClass.FileExport, $"Current server is: {server}");
 
             // Get the names from all characters on this server
             string[,] name = FileImport.GetArray(server);
@@ -201,8 +201,8 @@ internal sealed class FileExport
 
                     if (GetNumberOfChangedFiles > _fileNames.Length || GetNumberOfChangedFiles == _fileNames.Length)
                     {
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"arrayCounter is: {GetNumberOfChangedFiles}");
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"fileNames.Length is: {_fileNames.Length}");
+                        Logging.Write(LogEvent.Variable, LogClass.FileExport, $"arrayCounter is: {GetNumberOfChangedFiles}");
+                        Logging.Write(LogEvent.Variable, LogClass.FileExport, $"fileNames.Length is: {_fileNames.Length}");
 
                         break;
                     }
@@ -218,7 +218,7 @@ internal sealed class FileExport
                     // If file or fileName is null or empty stop it
                     if (string.IsNullOrWhiteSpace(name[j, 0]) && string.IsNullOrWhiteSpace(fileName))
                     {
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, "Current name and fileName is empty!");
+                        Logging.Write(LogEvent.Variable, LogClass.FileExport, "Current name and fileName is empty!");
                         break;
                     }
 
@@ -230,7 +230,7 @@ internal sealed class FileExport
                     // and check if the fileName starts with the server prefix
                     if (name[j, 0] == file && fileName.StartsWith(Converter.ServerNameIdentifier(server, true), StringComparison.OrdinalIgnoreCase))
                     {
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"arrayCounter is: {GetNumberOfChangedFiles}");
+                        Logging.Write(LogEvent.Variable, LogClass.FileExport, $"arrayCounter is: {GetNumberOfChangedFiles}");
 
                         // If the entry in the array is not null or empty do it,
                         // insert the data in the array, set the counter one up
@@ -246,14 +246,14 @@ internal sealed class FileExport
                             // the server
                             namesWithServers[GetNumberOfChangedFiles, 2] = server;
 
-                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"{_fileNames[GetNumberOfChangedFiles]}");
+                            Logging.Write(LogEvent.Variable, LogClass.FileExport, $"{_fileNames[GetNumberOfChangedFiles]}");
 
                             GetNumberOfChangedFiles++;
 
                             break;
                         }
 
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, "Already done or null");
+                        Logging.Write(LogEvent.Variable, LogClass.FileExport, "Already done or null");
                     }
                 }
             }

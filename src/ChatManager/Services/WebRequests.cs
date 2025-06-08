@@ -13,7 +13,7 @@ internal static class WebRequests
 
     internal static async Task<long?> GetLongAsync(Uri url)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetLongAsync entered");
+        Logging.Write(LogEvent.Method, LogClass.WebRequests, "GetLongAsync entered");
 
         long? getLong = 0;
 
@@ -25,8 +25,8 @@ internal static class WebRequests
         }
         catch (HttpRequestException ex)
         {
-            Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get long failed!");
-            Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
+            Logging.Write(LogEvent.Error, LogClass.WebRequests, "Get long failed!");
+            Logging.Write(LogEvent.ExMessage, LogClass.WebRequests, $"{ex.Message}");
 
             ShowMessageBox.ShowBug();
 
@@ -37,7 +37,7 @@ internal static class WebRequests
     [SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "We still need the object (sadly)")]
     internal static async Task<HttpResponseMessage> GetResponseMessageAsync(Uri url, string headers = "")
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetResponseMessageAsync entered");
+        Logging.Write(LogEvent.Method, LogClass.WebRequests, "GetResponseMessageAsync entered");
 
         HttpResponseMessage response = new();
 
@@ -49,8 +49,8 @@ internal static class WebRequests
         }
         catch (HttpRequestException ex)
         {
-            Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get string failed!");
-            Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
+            Logging.Write(LogEvent.Error, LogClass.WebRequests, "Get string failed!");
+            Logging.Write(LogEvent.ExMessage, LogClass.WebRequests, $"{ex.Message}");
 
             ShowMessageBox.ShowBug();
 
@@ -62,7 +62,7 @@ internal static class WebRequests
 
     internal static async Task<string> GetStringAsync(Uri url, string headers = "")
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetStringAsync entered");
+        Logging.Write(LogEvent.Method, LogClass.WebRequests, "GetStringAsync entered");
 
         string getString = string.Empty;
 
@@ -74,8 +74,8 @@ internal static class WebRequests
         }
         catch (HttpRequestException ex)
         {
-            Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get string failed!");
-            Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
+            Logging.Write(LogEvent.Error, LogClass.WebRequests, "Get string failed!");
+            Logging.Write(LogEvent.ExMessage, LogClass.WebRequests, $"{ex.Message}");
 
             ShowMessageBox.ShowBug();
 
@@ -85,7 +85,7 @@ internal static class WebRequests
 
     internal static async Task<Version> GetVersionAsync(Uri url)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.WebRequests, "GetVersionAsync entered");
+        Logging.Write(LogEvent.Method, LogClass.WebRequests, "GetVersionAsync entered");
 
         Version getVersion = new(0, 0, 0);
 
@@ -95,8 +95,8 @@ internal static class WebRequests
         }
         catch (HttpRequestException ex)
         {
-            Logging.Write(LogEventEnum.Error, ProgramClassEnum.WebRequests, "Get version failed!");
-            Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.WebRequests, $"{ex.Message}");
+            Logging.Write(LogEvent.Error, LogClass.WebRequests, "Get version failed!");
+            Logging.Write(LogEvent.ExMessage, LogClass.WebRequests, $"{ex.Message}");
 
             ShowMessageBox.ShowBug();
 

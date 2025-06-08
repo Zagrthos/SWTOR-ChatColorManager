@@ -76,19 +76,19 @@ internal sealed partial class AboutForm : Form
 
     private void LicencesButton_Click(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "LicensesButtonClick entered");
+        Logging.Write(LogEvent.Method, LogClass.AboutForm, "LicensesButtonClick entered");
         OpenWindows.OpenTextViewer();
     }
 
     private void GitHubLinkButton_Click(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "GitHubLinkButtonClick entered");
+        Logging.Write(LogEvent.Method, LogClass.AboutForm, "GitHubLinkButtonClick entered");
         OpenWindows.OpenLinksInBrowser(GetSetSettings.GetGitHubPath);
     }
 
     private void Localize()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.AboutForm, "Localize entered");
+        Logging.Write(LogEvent.Method, LogClass.AboutForm, "Localize entered");
 
         Localization localization = new(GetSetSettings.GetCurrentLocale);
 

@@ -13,11 +13,11 @@ internal static class OpenWindows
 {
     internal static string OpenColorPicker(string text, in Color color)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenColorPicker entered");
+        Logging.Write(LogEvent.Method, LogClass.OpenWindows, "OpenColorPicker entered");
 
         // Create new Form with the Text of the sender Button
         ColorPickerForm colorPicker = new(text, color);
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"Form {colorPicker.Text} created");
+        Logging.Write(LogEvent.Info, LogClass.OpenWindows, $"Form {colorPicker.Text} created");
         colorPicker.ShowDialog();
         string hexColor = colorPicker.GetHexColor;
 
@@ -28,7 +28,7 @@ internal static class OpenWindows
 
     internal static void OpenAbout()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenAbout entered");
+        Logging.Write(LogEvent.Method, LogClass.OpenWindows, "OpenAbout entered");
 
         AboutForm aboutForm = new();
         aboutForm.ShowDialog();
@@ -38,7 +38,7 @@ internal static class OpenWindows
 
     internal static (bool, bool) OpenSettings()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenSettings entered");
+        Logging.Write(LogEvent.Method, LogClass.OpenWindows, "OpenSettings entered");
 
         SettingsForm settingsForm = new();
         settingsForm.ShowDialog();
@@ -76,7 +76,7 @@ internal static class OpenWindows
 
     internal static (string, string) OpenFileImportSelector()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenFileImportSelector entered");
+        Logging.Write(LogEvent.Method, LogClass.OpenWindows, "OpenFileImportSelector entered");
 
         FileSelectorForm fileSelector = new(FileImport.GetServerList(), false);
         fileSelector.ShowDialog();
@@ -91,7 +91,7 @@ internal static class OpenWindows
 
     internal static void OpenFileExportSelector(string[] values)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenFileExportSelector entered");
+        Logging.Write(LogEvent.Method, LogClass.OpenWindows, "OpenFileExportSelector entered");
 
         FileSelectorForm fileSelector = new(FileImport.GetServerList(), true);
         DialogResult dialogResult = fileSelector.ShowDialog();
@@ -100,15 +100,15 @@ internal static class OpenWindows
 
         if (dialogResult != DialogResult.Cancel)
         {
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.OpenWindows, $"dialogResult = {dialogResult}");
+            Logging.Write(LogEvent.Variable, LogClass.OpenWindows, $"dialogResult = {dialogResult}");
             FileExport fileExport = new(fileSelector.GetSelectedServers, [.. fileSelector.GetListBoxMulti]);
             fileExport.BackupFilesAndWrite(values);
             fileCount = fileExport.GetNumberOfChangedFiles;
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.OpenWindows, $"fileCount = {fileCount}");
+            Logging.Write(LogEvent.Variable, LogClass.OpenWindows, $"fileCount = {fileCount}");
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.OpenWindows, $"dialogResult = {dialogResult}");
+            Logging.Write(LogEvent.Warning, LogClass.OpenWindows, $"dialogResult = {dialogResult}");
         }
 
         fileSelector.Dispose();
@@ -117,21 +117,21 @@ internal static class OpenWindows
             return;
 
         Localization localization = new(GetSetSettings.GetCurrentLocale);
-        string exportedFilesInfo = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
+        string exportedFilesInfo = localization.GetString(Enums.LocalizationStrings.Inf_ExportedFiles);
         exportedFilesInfo = exportedFilesInfo.Replace("FILECOUNT", fileCount.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
 
-        ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), exportedFilesInfo);
+        ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxInfo), exportedFilesInfo);
     }
 
     internal static void OpenBackupSelector()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenBackupSelector entered");
+        Logging.Write(LogEvent.Method, LogClass.OpenWindows, "OpenBackupSelector entered");
 
         if (!Checks.IsBackupDirEmpty())
         {
             Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), localization.GetString(LocalizationEnum.Inf_NoFilesInBackupDir));
+            ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxInfo), localization.GetString(Enums.LocalizationStrings.Inf_NoFilesInBackupDir));
             return;
         }
 
@@ -143,8 +143,8 @@ internal static class OpenWindows
 
     internal static void OpenTextViewer(bool isChangelog = false)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.OpenWindows, "OpenTextViewer entered");
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.OpenWindows, $"isChangelog = {isChangelog}");
+        Logging.Write(LogEvent.Method, LogClass.OpenWindows, "OpenTextViewer entered");
+        Logging.Write(LogEvent.Variable, LogClass.OpenWindows, $"isChangelog = {isChangelog}");
 
         TextViewerForm textViewer = new(isChangelog);
         textViewer.ShowDialog();
@@ -154,55 +154,55 @@ internal static class OpenWindows
 
     internal static void OpenExplorer(string path)
     {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"Trying to start explorer.exe with path: {path}");
+        Logging.Write(LogEvent.Info, LogClass.OpenWindows, $"Trying to start explorer.exe with path: {path}");
 
         try
         {
             Process.Start("explorer.exe", path);
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"explorer.exe started with path: {path}");
+            Logging.Write(LogEvent.Info, LogClass.OpenWindows, $"explorer.exe started with path: {path}");
         }
         catch (Win32Exception ex)
         {
-            Logging.Write(LogEventEnum.Error, ProgramClassEnum.OpenWindows, "explorer.exe failed to start!");
-            Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.OpenWindows, ex.Message);
+            Logging.Write(LogEvent.Error, LogClass.OpenWindows, "explorer.exe failed to start!");
+            Logging.Write(LogEvent.ExMessage, LogClass.OpenWindows, ex.Message);
             ShowMessageBox.ShowBug();
         }
     }
 
     internal static void OpenLinksInBrowser(string url)
     {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"Trying to start default Browser with url: {url}");
+        Logging.Write(LogEvent.Info, LogClass.OpenWindows, $"Trying to start default Browser with url: {url}");
 
         try
         {
             ProcessStartInfo info = new(url) { UseShellExecute = true };
             Process.Start(info);
 
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"Browser started with url: {url}");
+            Logging.Write(LogEvent.Info, LogClass.OpenWindows, $"Browser started with url: {url}");
         }
         catch (Win32Exception ex)
         {
-            Logging.Write(LogEventEnum.Error, ProgramClassEnum.OpenWindows, "Browser failed to start!");
-            Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.OpenWindows, ex.Message);
+            Logging.Write(LogEvent.Error, LogClass.OpenWindows, "Browser failed to start!");
+            Logging.Write(LogEvent.ExMessage, LogClass.OpenWindows, ex.Message);
             ShowMessageBox.ShowBug();
         }
     }
 
     internal static void OpenProcess(string path)
     {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"Trying to start process with path: {path}");
+        Logging.Write(LogEvent.Info, LogClass.OpenWindows, $"Trying to start process with path: {path}");
 
         try
         {
             ProcessStartInfo info = new(path) { UseShellExecute = true };
             Process.Start(info);
 
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.OpenWindows, $"Process started with path: {path}");
+            Logging.Write(LogEvent.Info, LogClass.OpenWindows, $"Process started with path: {path}");
         }
         catch (Win32Exception ex)
         {
-            Logging.Write(LogEventEnum.Error, ProgramClassEnum.OpenWindows, "Process failed to start!");
-            Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.OpenWindows, ex.Message);
+            Logging.Write(LogEvent.Error, LogClass.OpenWindows, "Process failed to start!");
+            Logging.Write(LogEvent.ExMessage, LogClass.OpenWindows, ex.Message);
             ShowMessageBox.ShowBug();
         }
     }

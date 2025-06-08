@@ -29,7 +29,7 @@ internal static class Program
         if (!string.IsNullOrWhiteSpace(GetSetSettings.GetLastUpdatePath))
         {
             File.Delete(GetSetSettings.GetLastUpdatePath);
-            GetSetSettings.SaveSettings(SettingsEnum.lastUpdatePath, string.Empty);
+            GetSetSettings.SaveSettings(SettingsNames.lastUpdatePath, string.Empty);
         }
 
         Application.Run(new MainForm());
@@ -37,15 +37,15 @@ internal static class Program
 
     private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
     {
-        Logging.Write(LogEventEnum.Error, ProgramClassEnum.ProgramConfig, "Global Application_ThreadExeption occured!");
-        Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.ProgramConfig, e.Exception.Message);
+        Logging.Write(LogEvent.Error, LogClass.ProgramConfig, "Global Application_ThreadExeption occured!");
+        Logging.Write(LogEvent.ExMessage, LogClass.ProgramConfig, e.Exception.Message);
         ShowMessageBox.ShowBug();
     }
 
     private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
-        Logging.Write(LogEventEnum.Error, ProgramClassEnum.ProgramConfig, "Global CurrentDomain_UnhandledException occured!");
-        Logging.Write(LogEventEnum.ExMessage, ProgramClassEnum.ProgramConfig, e.ExceptionObject.ToString()!);
+        Logging.Write(LogEvent.Error, LogClass.ProgramConfig, "Global CurrentDomain_UnhandledException occured!");
+        Logging.Write(LogEvent.ExMessage, LogClass.ProgramConfig, e.ExceptionObject.ToString()!);
         ShowMessageBox.ShowBug();
     }
 }

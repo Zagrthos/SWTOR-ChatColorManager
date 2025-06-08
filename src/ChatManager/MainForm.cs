@@ -23,18 +23,18 @@ internal sealed partial class MainForm : Form
     /// </summary>
     private void ClickChangeColorButton(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ClickChangeColorButton entered");
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"Sender is: {sender}");
+        Logging.Write(LogEvent.Method, LogClass.MainForm, "ClickChangeColorButton entered");
+        Logging.Write(LogEvent.Variable, LogClass.MainForm, $"Sender is: {sender}");
 
         // If the sender is a Button initialize it as button
         if (sender is Button button)
         {
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"Button is: {button.Name}");
+            Logging.Write(LogEvent.Variable, LogClass.MainForm, $"Button is: {button.Name}");
 
             // If the button has a Tag initialize it as targetTextBox
             if (button.Tag is string targetTextBox)
             {
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"Button Tag is: {button.Tag}");
+                Logging.Write(LogEvent.Variable, LogClass.MainForm, $"Button Tag is: {button.Tag}");
 
                 // Find the TextBox...
                 Control? control = null;
@@ -52,16 +52,16 @@ internal sealed partial class MainForm : Form
                 // ... and initialize it as textBox
                 if (control is TextBox textBox)
                 {
-                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"TextBox is: {textBox.Name}");
-                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"TextBox.Text is: {textBox.Text}");
+                    Logging.Write(LogEvent.Variable, LogClass.MainForm, $"TextBox is: {textBox.Name}");
+                    Logging.Write(LogEvent.Variable, LogClass.MainForm, $"TextBox.Text is: {textBox.Text}");
 
                     // Check if text is Hex
                     string textBoxText = string.Empty;
                     if (Checks.CheckHexString(textBox.Text))
                     {
                         textBoxText = textBox.Text;
-                        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "TextBox.Text is Hex");
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"Hex Text is: {textBoxText}");
+                        Logging.Write(LogEvent.Info, LogClass.MainForm, "TextBox.Text is Hex");
+                        Logging.Write(LogEvent.Variable, LogClass.MainForm, $"Hex Text is: {textBoxText}");
                     }
 
                     // Get the Text from it, if it is not Empty
@@ -69,30 +69,30 @@ internal sealed partial class MainForm : Form
                     {
                         Color color = Converter.HexToRGB(textBoxText);
                         textBox.Text = OpenWindows.OpenColorPicker(button.Text, color);
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"New hexColor is: {textBox.Text}");
+                        Logging.Write(LogEvent.Variable, LogClass.MainForm, $"New hexColor is: {textBox.Text}");
                     }
                     else
                     {
-                        Localization localization = new(GetSetSettings.GetCurrentLocale);
-                        Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "String is empty! Not starting conversion process");
-                        ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoImportFound));
+                        Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
+                        Logging.Write(LogEvent.Warning, LogClass.MainForm, "String is empty! Not starting conversion process");
+                        ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxWarn), localization.GetString(Enums.LocalizationStrings.Warn_NoImportFound));
                     }
                 }
                 else
                 {
-                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, $"TextBox: {targetTextBox} not found!");
+                    Logging.Write(LogEvent.Warning, LogClass.MainForm, $"TextBox: {targetTextBox} not found!");
                     ShowMessageBox.ShowBug();
                 }
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, $"Button: {button.Name} has no Tag!");
+                Logging.Write(LogEvent.Warning, LogClass.MainForm, $"Button: {button.Name} has no Tag!");
                 ShowMessageBox.ShowBug();
             }
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, $"Sender: {sender} is not a Button!");
+            Logging.Write(LogEvent.Warning, LogClass.MainForm, $"Sender: {sender} is not a Button!");
         }
     }
 
@@ -101,7 +101,7 @@ internal sealed partial class MainForm : Form
     /// </summary>
     private async void ToolStripMenuHandler(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ToolStripMainMenuHandler entered");
+        Logging.Write(LogEvent.Method, LogClass.MainForm, "ToolStripMainMenuHandler entered");
 
         // Check if sender is a ToolStripMenuItem
         if (sender is ToolStripMenuItem menuItem)
@@ -121,7 +121,7 @@ internal sealed partial class MainForm : Form
             switch (menuItem.Name)
             {
                 case nameof(settingsToolStripMenuItem):
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Settings Form requested");
+                    Logging.Write(LogEvent.Info, LogClass.MainForm, "Settings Form requested");
                     Hide();
                     (bool languageChanged, bool autosaveTimerChanged) = OpenWindows.OpenSettings();
 
@@ -135,73 +135,73 @@ internal sealed partial class MainForm : Form
                     return;
 
                 case nameof(supportToolStripMenuItem):
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Support Site requested");
+                    Logging.Write(LogEvent.Info, LogClass.MainForm, "Support Site requested");
                     OpenWindows.OpenLinksInBrowser(path);
                     return;
 
                 case nameof(bugToolStripMenuItem):
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Bug report Site requested");
+                    Logging.Write(LogEvent.Info, LogClass.MainForm, "Bug report Site requested");
                     OpenWindows.OpenLinksInBrowser(path);
                     return;
 
                 case nameof(bugMailToolStripMenuItem):
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Bug report Site requested");
+                    Logging.Write(LogEvent.Info, LogClass.MainForm, "Bug report Site requested");
                     OpenWindows.OpenProcess(path);
                     return;
 
                 case nameof(aboutToolStripMenuItem):
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "About Form requested");
+                    Logging.Write(LogEvent.Info, LogClass.MainForm, "About Form requested");
                     OpenWindows.OpenAbout();
                     return;
 
                 case nameof(updateToolStripMenuItem):
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Update Check requested");
+                    Logging.Write(LogEvent.Info, LogClass.MainForm, "Update Check requested");
                     if (Checks.CheckForInternetConnection(true))
                         await Updater.CheckForUpdatesAsync(true);
 
                     return;
 
                 case nameof(changelogToolStripMenuItem):
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Changelog requested");
+                    Logging.Write(LogEvent.Info, LogClass.MainForm, "Changelog requested");
                     OpenWindows.OpenTextViewer(true);
                     return;
 
                 case nameof(loadAutosaveToolStripMenuItem):
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Load Autosave requested");
+                    Logging.Write(LogEvent.Info, LogClass.MainForm, "Load Autosave requested");
                     ImportAutosave();
                     return;
 
                 case nameof(restoreBackupToolStripMenuItem):
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Restore Backup requested");
+                    Logging.Write(LogEvent.Info, LogClass.MainForm, "Restore Backup requested");
                     OpenWindows.OpenBackupSelector();
                     return;
 
                 case nameof(exitToolStripMenuItem):
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Application Exit requested");
+                    Logging.Write(LogEvent.Info, LogClass.MainForm, "Application Exit requested");
                     Application.Exit();
                     return;
 
                 default:
-                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, $"MenuItem: {menuItem.Name} does not exist!");
+                    Logging.Write(LogEvent.Warning, LogClass.MainForm, $"MenuItem: {menuItem.Name} does not exist!");
                     break;
             }
 
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Check if local Path exists");
+            Logging.Write(LogEvent.Info, LogClass.MainForm, "Check if local Path exists");
             if (Directory.Exists(path))
             {
                 // Open Explorer in given path
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Local Path exists!");
+                Logging.Write(LogEvent.Info, LogClass.MainForm, "Local Path exists!");
                 OpenWindows.OpenExplorer(path);
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "Local Path does not exist!");
+                Logging.Write(LogEvent.Warning, LogClass.MainForm, "Local Path does not exist!");
                 ShowMessageBox.ShowBug();
             }
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, $"Sender: {sender} is not a ToolStripMenuItem!");
+            Logging.Write(LogEvent.Warning, LogClass.MainForm, $"Sender: {sender} is not a ToolStripMenuItem!");
         }
     }
 
@@ -211,19 +211,19 @@ internal sealed partial class MainForm : Form
     /// <exception cref="InvalidOperationException">Throws when the file name is empty.</exception>
     private void ImportFile(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ImportFile entered");
+        Logging.Write(LogEvent.Method, LogClass.MainForm, "ImportFile entered");
 
         // Get the selectedFile and the selectedListBox from the tuple
         (string selectedFile, string selectedListBox) = OpenWindows.OpenFileImportSelector();
 
         if (string.IsNullOrWhiteSpace(selectedFile))
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "No file was selected!");
+            Logging.Write(LogEvent.Warning, LogClass.MainForm, "No file was selected!");
             return;
         }
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, $"selectedFile: {selectedFile}");
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, $"selectedListBox: {selectedListBox}");
+        Logging.Write(LogEvent.Info, LogClass.MainForm, $"selectedFile: {selectedFile}");
+        Logging.Write(LogEvent.Info, LogClass.MainForm, $"selectedListBox: {selectedListBox}");
 
         // Get the whole Character List for the requested name
         string[,] filePaths = FileImport.GetArray($"{selectedListBox.Substring(3)}");
@@ -241,9 +241,9 @@ internal sealed partial class MainForm : Form
                 if (CheckForEmptyTextboxes() != 0)
                     break;
 
-                Localization localization = new(GetSetSettings.GetCurrentLocale);
-                string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text), StringComparison.OrdinalIgnoreCase).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text), StringComparison.OrdinalIgnoreCase).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
-                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), message);
+                Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
+                string message = localization.GetString(Enums.LocalizationStrings.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text), StringComparison.OrdinalIgnoreCase).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text), StringComparison.OrdinalIgnoreCase).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
+                ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxInfo), message);
 
                 break;
             }
@@ -252,8 +252,8 @@ internal sealed partial class MainForm : Form
 
     private void ImportAutosave()
     {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "ImportAutosave entered");
-        Localization localization = new(GetSetSettings.GetCurrentLocale);
+        Logging.Write(LogEvent.Info, LogClass.MainForm, "ImportAutosave entered");
+        Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
         if (Directory.Exists(GetSetSettings.GetAutosavePath))
         {
             string filePath = Path.Combine(GetSetSettings.GetAutosavePath, "autosave.txt");
@@ -262,28 +262,28 @@ internal sealed partial class MainForm : Form
             {
                 GetFileColors(filePath, true);
 
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Autosave data imported");
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "ReloadOnStartup set");
+                Logging.Write(LogEvent.Info, LogClass.MainForm, "Autosave data imported");
+                Logging.Write(LogEvent.Info, LogClass.MainForm, "ReloadOnStartup set");
 
-                string message = localization.GetString(LocalizationEnum.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text), StringComparison.OrdinalIgnoreCase).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text), StringComparison.OrdinalIgnoreCase).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
-                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), message);
+                string message = localization.GetString(Enums.LocalizationStrings.Inf_AutosaveImport).Replace("CHARNAME", Converter.LabelToString(lblCharName.Text), StringComparison.OrdinalIgnoreCase).Replace("SERVERNAME", Converter.LabelToString(lblServerName.Text), StringComparison.OrdinalIgnoreCase).Replace("TIMESTAMP", File.GetLastWriteTime(filePath).ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
+                ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxInfo), message);
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "No Autosave data found!");
-                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_AutosaveImport));
+                Logging.Write(LogEvent.Warning, LogClass.MainForm, "No Autosave data found!");
+                ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxError), localization.GetString(Enums.LocalizationStrings.Err_AutosaveImport));
             }
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "No Autosave Directory found!");
-            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_AutosaveImport));
+            Logging.Write(LogEvent.Warning, LogClass.MainForm, "No Autosave Directory found!");
+            ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxError), localization.GetString(Enums.LocalizationStrings.Err_AutosaveImport));
         }
     }
 
     private void GetFileColors(string filePath, bool autosaveIntitiated)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "GetFileColors entered");
+        Logging.Write(LogEvent.Method, LogClass.MainForm, "GetFileColors entered");
 
         string[] content = FileImport.GetContentFromFile(filePath, autosaveIntitiated);
 
@@ -311,14 +311,14 @@ internal sealed partial class MainForm : Form
         _autosaveTimer.Elapsed += AutosaveTimer_Elapsed;
         _autosaveTimer.Start();
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "autosaveTimer set");
+        Logging.Write(LogEvent.Info, LogClass.MainForm, "autosaveTimer set");
     }
 
     private void SetCharServerText(string charText, string serverText, bool autosaveIntitiated)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "SetCharServerText entered");
+        Logging.Write(LogEvent.Method, LogClass.MainForm, "SetCharServerText entered");
 
-        Localization localization = new(GetSetSettings.GetCurrentLocale);
+        Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
 
         lblServerName.Visible = true;
 
@@ -333,7 +333,7 @@ internal sealed partial class MainForm : Form
     // TODO: Why is this there???
     private void SetAllColorData(string[] colorIndexes/*, bool autosaveIntitiated*/)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "SetAllColorData entered");
+        Logging.Write(LogEvent.Method, LogClass.MainForm, "SetAllColorData entered");
 
         tbTrade.Text = colorIndexes[2];
         tbPvP.Text = colorIndexes[3];
@@ -469,23 +469,23 @@ internal sealed partial class MainForm : Form
 
     private void ExportFiles(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ExportFiles entered");
+        Logging.Write(LogEvent.Method, LogClass.MainForm, "ExportFiles entered");
 
         int counter = CheckForEmptyTextboxes();
 
         if (counter != 0)
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, $"{counter} empty textBoxes found!");
-            Localization localization = new(GetSetSettings.GetCurrentLocale);
+            Logging.Write(LogEvent.Warning, LogClass.MainForm, $"{counter} empty textBoxes found!");
+            Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-            string exportedFilesInfo = localization.GetString(LocalizationEnum.Warn_TextBoxEmpty);
+            string exportedFilesInfo = localization.GetString(Enums.LocalizationStrings.Warn_TextBoxEmpty);
             exportedFilesInfo = exportedFilesInfo.Replace("TEXTBOXCOUNTER", counter.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
 
-            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), exportedFilesInfo);
+            ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxError), exportedFilesInfo);
             return;
         }
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "0 empty textboxes found!");
+        Logging.Write(LogEvent.Info, LogClass.MainForm, "0 empty textboxes found!");
 
         string[] colorIndexes = GetAllColorData();
 
@@ -494,7 +494,7 @@ internal sealed partial class MainForm : Form
 
     private void ResetColors(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "ResetColors entered");
+        Logging.Write(LogEvent.Method, LogClass.MainForm, "ResetColors entered");
 
         string[] tempIndexes = GetSetSettings.GetDefaultColors.Split(";");
 
@@ -525,23 +525,23 @@ internal sealed partial class MainForm : Form
 
         SetAllColorData(colorIndexes/*, false*/);
 
-        Localization localization = new(GetSetSettings.GetCurrentLocale);
+        Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-        ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), localization.GetString(LocalizationEnum.Inf_ColorsReset));
+        ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxInfo), localization.GetString(Enums.LocalizationStrings.Inf_ColorsReset));
     }
 
     private int CheckForEmptyTextboxes()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "CheckForEmptyTextboxes entered");
+        Logging.Write(LogEvent.Method, LogClass.MainForm, "CheckForEmptyTextboxes entered");
 
         List<TextBox> textBoxes = GetControls<TextBox>(this);
         int counter = 0;
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Checking for empty textBoxes...");
+        Logging.Write(LogEvent.Info, LogClass.MainForm, "Checking for empty textBoxes...");
         foreach (TextBox textBox in textBoxes.Where(static t => string.IsNullOrWhiteSpace(t.Text)))
         {
             counter++;
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"{textBox.Name} is empty, counter: {counter}");
+            Logging.Write(LogEvent.Variable, LogClass.MainForm, $"{textBox.Name} is empty, counter: {counter}");
         }
 
         return counter;
@@ -549,9 +549,9 @@ internal sealed partial class MainForm : Form
 
     private void Localize()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "Localize entered");
+        Logging.Write(LogEvent.Method, LogClass.MainForm, "Localize entered");
 
-        Localization localization = new(GetSetSettings.GetCurrentLocale);
+        Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
 
         List<TabControl> tabs = GetControls<TabControl>(this);
         List<Button> buttons = GetControls<Button>(this);
@@ -606,23 +606,23 @@ internal sealed partial class MainForm : Form
 
     private void InitializeCustomSettings()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "InitializeCustomSettings entered");
+        Logging.Write(LogEvent.Method, LogClass.MainForm, "InitializeCustomSettings entered");
 
         if (GetSetSettings.GetAutosave)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Autosave set to true");
+            Logging.Write(LogEvent.Info, LogClass.MainForm, "Autosave set to true");
             loadAutosaveToolStripMenuItem.Enabled = true;
         }
         else
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Autosave set to false");
+            Logging.Write(LogEvent.Info, LogClass.MainForm, "Autosave set to false");
             loadAutosaveToolStripMenuItem.Enabled = false;
         }
 
         if (!GetSetSettings.GetSaveOnClose)
             return;
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "SaveOnClose set");
+        Logging.Write(LogEvent.Info, LogClass.MainForm, "SaveOnClose set");
 
         if (!GetSetSettings.GetReloadOnStartup)
             return;
@@ -632,7 +632,7 @@ internal sealed partial class MainForm : Form
 
     private void DoSave()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.MainForm, "DoSave entered");
+        Logging.Write(LogEvent.Method, LogClass.MainForm, "DoSave entered");
 
         string[] colorIndexes = GetAllColorData();
 
@@ -662,7 +662,7 @@ internal sealed partial class MainForm : Form
 
     private void AutosaveTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
     {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "AutosaveTimer elapsed");
+        Logging.Write(LogEvent.Info, LogClass.MainForm, "AutosaveTimer elapsed");
 
         DoSave();
     }
@@ -676,8 +676,8 @@ internal sealed partial class MainForm : Form
     {
         if (string.IsNullOrWhiteSpace(GetSetSettings.GetCurrentLocale))
         {
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"CurrentCulture set to: {CultureInfo.CurrentCulture.TwoLetterISOLanguageName}");
-            GetSetSettings.SaveSettings(SettingsEnum.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            Logging.Write(LogEvent.Variable, LogClass.MainForm, $"CurrentCulture set to: {CultureInfo.CurrentCulture.TwoLetterISOLanguageName}");
+            GetSetSettings.SaveSettings(SettingsNames.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
         }
 
         Localize();
@@ -696,34 +696,34 @@ internal sealed partial class MainForm : Form
         }
 #endif
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Set BackupOption in Menu");
-        if (!Checks.DirectoryCheck(CheckFolderEnum.BackupFolder))
+        Logging.Write(LogEvent.Info, LogClass.MainForm, "Set BackupOption in Menu");
+        if (!Checks.DirectoryCheck(CheckFolder.BackupFolder))
         {
             backupToolStripMenuItem.Enabled = false;
             restoreBackupToolStripMenuItem.Enabled = false;
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "BackupOption is not available!");
+            Logging.Write(LogEvent.Warning, LogClass.MainForm, "BackupOption is not available!");
         }
         else
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "BackupOption is available!");
+            Logging.Write(LogEvent.Info, LogClass.MainForm, "BackupOption is available!");
         }
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "Set CharacterOption in Menu");
+        Logging.Write(LogEvent.Info, LogClass.MainForm, "Set CharacterOption in Menu");
         if (string.IsNullOrWhiteSpace(GetSetSettings.GetLocalPath))
         {
             charFolderToolStripMenuItem.Enabled = false;
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, "CharacterOption is not available!");
-            Localization localization = new(GetSetSettings.GetCurrentLocale);
-            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_SWTORpathNotFound));
+            Logging.Write(LogEvent.Warning, LogClass.MainForm, "CharacterOption is not available!");
+            Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
+            ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxWarn), localization.GetString(Enums.LocalizationStrings.Warn_SWTORpathNotFound));
         }
         else
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "CharacterOption is available!");
+            Logging.Write(LogEvent.Info, LogClass.MainForm, "CharacterOption is available!");
         }
 
         InitializeCustomSettings();
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "MainForm is loading");
+        Logging.Write(LogEvent.Info, LogClass.MainForm, "MainForm is loading");
 
         DownloadProgressReporter.DownloadProgressChanged += DownloadProgressReporter_DownloadProgressChanged;
 
@@ -766,7 +766,7 @@ internal sealed partial class MainForm : Form
     /// </summary>
     private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "MainForm closing");
+        Logging.Write(LogEvent.Info, LogClass.MainForm, "MainForm closing");
 
         DownloadProgressReporter.DownloadProgressChanged -= DownloadProgressReporter_DownloadProgressChanged;
 
@@ -783,7 +783,7 @@ internal sealed partial class MainForm : Form
     /// </summary>
     private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
     {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.MainForm, "MainForm closed");
+        Logging.Write(LogEvent.Info, LogClass.MainForm, "MainForm closed");
         Logging.Dispose();
     }
 

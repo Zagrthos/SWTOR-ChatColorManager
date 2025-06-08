@@ -9,13 +9,13 @@ internal static class Autosave
 
     internal static void DoAutosave(string charName, string serverName, string[] colorData)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Autosave, "DoAutosave entered");
+        Logging.Write(LogEvent.Method, LogClass.Autosave, "DoAutosave entered");
 
         string colorDataString = string.Join(";", colorData);
         string data = string.Join(";", serverName, charName, colorDataString);
 
         File.WriteAllText(AutosavePath, data);
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Autosave, "Autosave created");
+        Logging.Write(LogEvent.Info, LogClass.Autosave, "Autosave created");
     }
 }

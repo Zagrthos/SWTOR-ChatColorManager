@@ -1,6 +1,6 @@
 ﻿namespace ChatManager.Enums;
 
-internal enum ProgramClassEnum
+internal enum LogClass
 {
     MainForm,
     ProgramConfig,

@@ -1,6 +1,6 @@
 ﻿namespace ChatManager.Enums;
 
-internal enum UpdateEnum
+internal enum UpdateInterval
 {
     OnStartup,
     Daily,

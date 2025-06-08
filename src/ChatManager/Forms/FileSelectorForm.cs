@@ -33,7 +33,7 @@ internal sealed partial class FileSelectorForm : Form
     /// <param name="servers">The List of servers which should be removed.</param>
     private void SetTabs(List<string> servers)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "SetTabs entered");
+        Logging.Write(LogEvent.Method, LogClass.FileSelectorForm, "SetTabs entered");
 
         // Create a list of all current TabPages from the tabsFileSelector
         List<TabPage> tabPages = [];
@@ -52,11 +52,11 @@ internal sealed partial class FileSelectorForm : Form
             {
                 tabsFileSelector.TabPages.Remove(tabPage);
                 tabPage.Dispose();
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Server: {tabPage.Text} removed");
+                Logging.Write(LogEvent.Variable, LogClass.FileSelectorForm, $"Server: {tabPage.Text} removed");
             }
             else
             {
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Server: {tabPage.Text} found");
+                Logging.Write(LogEvent.Variable, LogClass.FileSelectorForm, $"Server: {tabPage.Text} found");
             }
         }
     }
@@ -67,7 +67,7 @@ internal sealed partial class FileSelectorForm : Form
     /// <param name="isSave">Sets if the ListBox should be used in saving mode.</param>
     private void SetListBox(bool isSave)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "SetListBox entered");
+        Logging.Write(LogEvent.Method, LogClass.FileSelectorForm, "SetListBox entered");
 
         // Create a list of all current TabPages from the tabsFileSelector
         List<TabPage> tabPages = [];
@@ -92,17 +92,17 @@ internal sealed partial class FileSelectorForm : Form
             // If there's a tlp go on
             if (tlp is not null)
             {
-                Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"Selected tlp is: {tlp.Name}");
+                Logging.Write(LogEvent.Control, LogClass.FileSelectorForm, $"Selected tlp is: {tlp.Name}");
 
                 // If the user wants to save it's config, use a different ListBox
                 // ListBox
                 if (!isSave)
                 {
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileSelectorForm, "ListBox is ListBox");
+                    Logging.Write(LogEvent.Info, LogClass.FileSelectorForm, "ListBox is ListBox");
 
                     // Set the name of the ListBox
                     string name = $"lbx{tabPage.Name.Substring(2)}";
-                    Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"ListBoxName is: {name}");
+                    Logging.Write(LogEvent.Control, LogClass.FileSelectorForm, $"ListBoxName is: {name}");
 
                     // Converting the MultiDimensionalArray into a List but remove every entry that is null
                     string[,] charactersMulti = FileImport.GetArray($"{name.Substring(3)}");
@@ -129,7 +129,7 @@ internal sealed partial class FileSelectorForm : Form
 
                     _newTabIndex++;
 
-                    Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"ListBox: {listBox.Name} created");
+                    Logging.Write(LogEvent.Control, LogClass.FileSelectorForm, $"ListBox: {listBox.Name} created");
 
                     // Add it to the tlp and adjust the position
                     tlp.Controls.Add(listBox);
@@ -137,14 +137,14 @@ internal sealed partial class FileSelectorForm : Form
                     tlp.SetColumnSpan(listBox, 2);
 
                     // Remove all useless Controls because we don't need them in this case
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileSelectorForm, "Start to remove useless Controls");
+                    Logging.Write(LogEvent.Info, LogClass.FileSelectorForm, "Start to remove useless Controls");
                     for (int columnIndex = 0; columnIndex < tlp.ColumnCount; columnIndex++)
                     {
                         Control? control = tlp.GetControlFromPosition(columnIndex, 1);
 
                         if (control is not null && control.Name != $"btn{name.Substring(3)}Select")
                         {
-                            Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"Control: {control.Name} removed");
+                            Logging.Write(LogEvent.Control, LogClass.FileSelectorForm, $"Control: {control.Name} removed");
                             tlp.Controls.Remove(control);
                             control.Dispose();
                         }
@@ -158,11 +158,11 @@ internal sealed partial class FileSelectorForm : Form
                 // CheckedListBox
                 else
                 {
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileSelectorForm, "ListBox is CheckedListBox");
+                    Logging.Write(LogEvent.Info, LogClass.FileSelectorForm, "ListBox is CheckedListBox");
 
                     // Set the name of the CheckedListBox
                     string name = $"clbx{tabPage.Name.Substring(2)}";
-                    Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"CheckedListBoxName is: {name}");
+                    Logging.Write(LogEvent.Control, LogClass.FileSelectorForm, $"CheckedListBoxName is: {name}");
 
                     // Converting the MultiDimensionalArray into a List but remove every entry that is null
                     string[,] charactersMulti = FileImport.GetArray($"{name.Substring(4)}");
@@ -190,7 +190,7 @@ internal sealed partial class FileSelectorForm : Form
 
                     _newTabIndex++;
 
-                    Logging.Write(LogEventEnum.Control, ProgramClassEnum.FileSelectorForm, $"CheckedListBox: {listBox.Name} created");
+                    Logging.Write(LogEvent.Control, LogClass.FileSelectorForm, $"CheckedListBox: {listBox.Name} created");
 
                     // Add it to the tlp and adjust the position
                     tlp.Controls.Add(listBox);
@@ -214,7 +214,7 @@ internal sealed partial class FileSelectorForm : Form
             else
             {
                 // If there's no tlp, log it
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileSelectorForm, $"No tlp found in TabPage: {tabPage.Name}!");
+                Logging.Write(LogEvent.Warning, LogClass.FileSelectorForm, $"No tlp found in TabPage: {tabPage.Name}!");
                 ShowMessageBox.ShowBug();
             }
         }
@@ -225,17 +225,17 @@ internal sealed partial class FileSelectorForm : Form
     /// </summary>
     private void ListBoxClick(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "ListBoxClick entered");
+        Logging.Write(LogEvent.Method, LogClass.FileSelectorForm, "ListBoxClick entered");
 
         // If the sender is a Button initialize it as button
         if (sender is Button button)
         {
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Button is: {button.Name}");
+            Logging.Write(LogEvent.Variable, LogClass.FileSelectorForm, $"Button is: {button.Name}");
 
             // If the button has a Tag initialize it as targetTextBox
             if (button.Tag is string targetListBox)
             {
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Button Tag is: {button.Tag}");
+                Logging.Write(LogEvent.Variable, LogClass.FileSelectorForm, $"Button Tag is: {button.Tag}");
 
                 // Find the Control...
                 Control? control = null;
@@ -261,14 +261,14 @@ internal sealed partial class FileSelectorForm : Form
                     // Loop all Controls and get the SelectedItems from them
                     foreach (CheckedListBox checkedListBox in checkedListBoxes)
                     {
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"CheckedListBox is: {checkedListBox.Name}");
+                        Logging.Write(LogEvent.Variable, LogClass.FileSelectorForm, $"CheckedListBox is: {checkedListBox.Name}");
 
                         // Check if the Controls have ANY checkedItem
                         if (checkedListBox.CheckedItems.Count > 0)
                         {
                             // Set the selectedServers to the correct name
                             GetSelectedServers[counter] = checkedListBox.Name.Substring(4);
-                            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"selectedServers[{counter}] is: {GetSelectedServers[counter]}");
+                            Logging.Write(LogEvent.Variable, LogClass.FileSelectorForm, $"selectedServers[{counter}] is: {GetSelectedServers[counter]}");
 
                             // Count the CheckedListBoxes
                             counter++;
@@ -276,7 +276,7 @@ internal sealed partial class FileSelectorForm : Form
                             // If yes get them all
                             foreach (object item in checkedListBox.CheckedItems)
                             {
-                                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"Current item is: {item}");
+                                Logging.Write(LogEvent.Variable, LogClass.FileSelectorForm, $"Current item is: {item}");
 
                                 string? objectString = item?.ToString();
                                 if (!string.IsNullOrWhiteSpace(objectString))
@@ -285,8 +285,8 @@ internal sealed partial class FileSelectorForm : Form
                         }
                         else if (checkedListBox.Name == button.Tag.ToString())
                         {
-                            Localization localization = new(GetSetSettings.GetCurrentLocale);
-                            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_NoExportFileSelected));
+                            Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
+                            ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxError), localization.GetString(Enums.LocalizationStrings.Err_NoExportFileSelected));
                             return;
                         }
                     }
@@ -294,7 +294,7 @@ internal sealed partial class FileSelectorForm : Form
                 // ... and if it is a ListBox initialize it as listBox
                 else if (control is ListBox listBox)
                 {
-                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"ListBox is: {listBox.Name}");
+                    Logging.Write(LogEvent.Variable, LogClass.FileSelectorForm, $"ListBox is: {listBox.Name}");
 
                     string? charName = listBox.SelectedItem?.ToString();
                     string listBoxNaming = listBox.Name;
@@ -307,13 +307,13 @@ internal sealed partial class FileSelectorForm : Form
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.MainForm, $"Button: {button.Name} has no Tag!");
+                Logging.Write(LogEvent.Warning, LogClass.MainForm, $"Button: {button.Name} has no Tag!");
                 ShowMessageBox.ShowBug();
             }
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileSelectorForm, $"Sender: {sender} is not a Button!");
+            Logging.Write(LogEvent.Warning, LogClass.FileSelectorForm, $"Sender: {sender} is not a Button!");
         }
 
         Close();
@@ -324,7 +324,7 @@ internal sealed partial class FileSelectorForm : Form
 
     private void SelectClick(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "SelectClick entered");
+        Logging.Write(LogEvent.Method, LogClass.FileSelectorForm, "SelectClick entered");
 
         if (sender is Button button)
         {
@@ -367,13 +367,13 @@ internal sealed partial class FileSelectorForm : Form
                         checkedListBox.SetItemChecked(i, isChecked);
                     }
 
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.FileSelectorForm, $"All Checks set to: {isChecked}");
+                    Logging.Write(LogEvent.Info, LogClass.FileSelectorForm, $"All Checks set to: {isChecked}");
                 }
             }
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.FileSelectorForm, $"Sender: {sender} is not a Button!");
+            Logging.Write(LogEvent.Warning, LogClass.FileSelectorForm, $"Sender: {sender} is not a Button!");
         }
     }
 
@@ -414,7 +414,7 @@ internal sealed partial class FileSelectorForm : Form
                 if (button.Name == $"btn{parent}Select")
                 {
                     button.Tag = $"c{button.Tag}";
-                    Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"New Tag of {button.Name}: {button.Tag}");
+                    Logging.Write(LogEvent.Variable, LogClass.FileSelectorForm, $"New Tag of {button.Name}: {button.Tag}");
                 }
             }
         }
@@ -424,9 +424,9 @@ internal sealed partial class FileSelectorForm : Form
 
     private void Localize()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.FileSelectorForm, "Localize entered");
+        Logging.Write(LogEvent.Method, LogClass.FileSelectorForm, "Localize entered");
 
-        Localization localization = new(GetSetSettings.GetCurrentLocale);
+        Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
 
         // Change the Text of the Form
         Text = localization.GetString(Name);

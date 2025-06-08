@@ -1,6 +1,6 @@
 ﻿namespace ChatManager.Enums;
 
-internal enum SettingsEnum
+internal enum SettingsNames
 {
     autosave,
     autosaveAvailability,

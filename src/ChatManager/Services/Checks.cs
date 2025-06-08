@@ -26,21 +26,21 @@ internal static partial class Checks
     internal static bool CheckSwtorProcessFound
         => Process.GetProcessesByName("swtor").Length is >= 1;
 
-    internal static bool DirectoryCheck(CheckFolderEnum folder)
+    internal static bool DirectoryCheck(CheckFolder folder)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Checks, "DirectoryCheck entered");
+        Logging.Write(LogEvent.Method, LogClass.Checks, "DirectoryCheck entered");
 
         string path = folder switch
         {
-            CheckFolderEnum.AutosaveFolder => GetSetSettings.GetAutosavePath,
-            CheckFolderEnum.BackupFolder => GetSetSettings.GetBackupPath,
+            CheckFolder.AutosaveFolder => GetSetSettings.GetAutosavePath,
+            CheckFolder.BackupFolder => GetSetSettings.GetBackupPath,
             _ => throw new InvalidOperationException($"{folder} does not exist!"),
         };
 
-        SettingsEnum setting = folder switch
+        SettingsNames setting = folder switch
         {
-            CheckFolderEnum.AutosaveFolder => SettingsEnum.autosaveAvailability,
-            CheckFolderEnum.BackupFolder => SettingsEnum.backupAvailability,
+            CheckFolder.AutosaveFolder => SettingsNames.autosaveAvailability,
+            CheckFolder.BackupFolder => SettingsNames.backupAvailability,
             _ => throw new InvalidOperationException($"{folder} does not exist!"),
         };
 
@@ -49,41 +49,41 @@ internal static partial class Checks
         if (!string.IsNullOrWhiteSpace(GetSetSettings.GetLocalPath))
             localPath = true;
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, $"Checking if {folder} exists");
+        Logging.Write(LogEvent.Info, LogClass.Checks, $"Checking if {folder} exists");
 
         if (!Directory.Exists(path) && localPath)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, $"{folder} does not exist, creating it");
+            Logging.Write(LogEvent.Info, LogClass.Checks, $"{folder} does not exist, creating it");
             Directory.CreateDirectory(path);
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, $"Checking again if {folder} exists");
+            Logging.Write(LogEvent.Info, LogClass.Checks, $"Checking again if {folder} exists");
 
             if (Directory.Exists(path))
             {
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Checks, $"{folder} created at: {path}");
+                Logging.Write(LogEvent.Variable, LogClass.Checks, $"{folder} created at: {path}");
                 GetSetSettings.SaveSettings(setting, true);
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Checks, $"Set {setting} to: {true}");
+                Logging.Write(LogEvent.Variable, LogClass.Checks, $"Set {setting} to: {true}");
             }
             else
             {
-                Logging.Write(LogEventEnum.Error, ProgramClassEnum.Checks, $"Could not create {folder}!");
+                Logging.Write(LogEvent.Error, LogClass.Checks, $"Could not create {folder}!");
                 ShowMessageBox.ShowBug();
             }
         }
         else if (!localPath)
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, $"Could not create {folder} because SWTOR is not installed!");
+            Logging.Write(LogEvent.Warning, LogClass.Checks, $"Could not create {folder} because SWTOR is not installed!");
         }
         else
         {
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Checks, $"{folder} exists at: {path}");
+            Logging.Write(LogEvent.Variable, LogClass.Checks, $"{folder} exists at: {path}");
             GetSetSettings.SaveSettings(setting, true);
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Checks, $"Set {setting} to: {true}");
+            Logging.Write(LogEvent.Variable, LogClass.Checks, $"Set {setting} to: {true}");
         }
 
         return folder switch
         {
-            CheckFolderEnum.AutosaveFolder => GetSetSettings.GetAutosaveAvailability,
-            CheckFolderEnum.BackupFolder => GetSetSettings.GetBackupAvailability,
+            CheckFolder.AutosaveFolder => GetSetSettings.GetAutosaveAvailability,
+            CheckFolder.BackupFolder => GetSetSettings.GetBackupAvailability,
             _ => throw new InvalidOperationException($"{folder} does not exist!"),
         };
     }
@@ -92,7 +92,7 @@ internal static partial class Checks
 
     internal static bool CheckForInternetConnection(bool fromUser = false)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Checks, "CheckForInternetConnection entered");
+        Logging.Write(LogEvent.Method, LogClass.Checks, "CheckForInternetConnection entered");
 
         bool isConnected;
 
@@ -102,10 +102,10 @@ internal static partial class Checks
         if (NetworkInformation.GetInternetConnectionProfile() is null)
         {
             isConnected = false;
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
+            Logging.Write(LogEvent.Warning, LogClass.Checks, "User is not connected to the internet!");
 
             if (fromUser)
-                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
+                ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxWarn), localization.GetString(Enums.LocalizationStrings.Warn_NoInternetConnection));
 
             return isConnected;
         }
@@ -122,37 +122,37 @@ internal static partial class Checks
 
         if (!isConnected)
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User is not connected to the internet!");
+            Logging.Write(LogEvent.Warning, LogClass.Checks, "User is not connected to the internet!");
 
             if (fromUser)
-                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxWarn), localization.GetString(LocalizationEnum.Warn_NoInternetConnection));
+                ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxWarn), localization.GetString(Enums.LocalizationStrings.Warn_NoInternetConnection));
 
             return isConnected;
         }
 
         if (isConnected)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "User is connected to the internet");
+            Logging.Write(LogEvent.Info, LogClass.Checks, "User is connected to the internet");
 
             // Check if connection is metered
             if (NetworkInformation.GetInternetConnectionProfile().GetConnectionCost().NetworkCostType != NetworkCostType.Unrestricted)
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "Connection is metered!");
+                Logging.Write(LogEvent.Warning, LogClass.Checks, "Connection is metered!");
                 // If yes ask the user if he wants to continue
-                if (!ShowMessageBox.ShowQuestion(localization.GetString(LocalizationEnum.Question_MeteredConnection)))
+                if (!ShowMessageBox.ShowQuestion(localization.GetString(Enums.LocalizationStrings.Question_MeteredConnection)))
                 {
-                    Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Checks, "User does not agree to download over metered connection!");
+                    Logging.Write(LogEvent.Warning, LogClass.Checks, "User does not agree to download over metered connection!");
                     isConnected = false;
                 }
                 else
                 {
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "User agree to download over metered connection");
+                    Logging.Write(LogEvent.Info, LogClass.Checks, "User agree to download over metered connection");
                     isConnected = true;
                 }
             }
             else
             {
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Checks, "Connection is not metered");
+                Logging.Write(LogEvent.Info, LogClass.Checks, "Connection is not metered");
                 isConnected = true;
             }
         }

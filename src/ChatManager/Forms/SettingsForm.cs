@@ -25,9 +25,9 @@ internal sealed partial class SettingsForm : Form
 
     private void Localize()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "Localize entered");
+        Logging.Write(LogEvent.Method, LogClass.SettingsForm, "Localize entered");
 
-        Localization localization = new(GetSetSettings.GetCurrentLocale);
+        Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
 
         // Change the Text of the Form
         Text = localization.GetString(Name);
@@ -70,9 +70,9 @@ internal sealed partial class SettingsForm : Form
         btnResetSettings.Text = localization.GetString(btnResetSettings.Name);
 
         cbUpdateInterval.Items.Clear();
-        cbUpdateInterval.Items.Add(localization.GetString(LocalizationEnum.UpdateIntervalOnStart));
-        cbUpdateInterval.Items.Add(localization.GetString(LocalizationEnum.UpdateIntervalDaily));
-        cbUpdateInterval.Items.Add(localization.GetString(LocalizationEnum.UpdateIntervalWeekly));
+        cbUpdateInterval.Items.Add(localization.GetString(Enums.LocalizationStrings.UpdateIntervalOnStart));
+        cbUpdateInterval.Items.Add(localization.GetString(Enums.LocalizationStrings.UpdateIntervalDaily));
+        cbUpdateInterval.Items.Add(localization.GetString(Enums.LocalizationStrings.UpdateIntervalWeekly));
     }
 
     private void SettingsForm_Load(object sender, EventArgs e)
@@ -83,7 +83,7 @@ internal sealed partial class SettingsForm : Form
 
     private void AdjustContentOnForm()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "AdjustContentOnForm entered");
+        Logging.Write(LogEvent.Method, LogClass.SettingsForm, "AdjustContentOnForm entered");
 
         string locale = GetSetSettings.GetCurrentLocale;
         switch (locale)
@@ -128,7 +128,7 @@ internal sealed partial class SettingsForm : Form
         if (numberAutosaveInterval.Enabled)
         {
             _currentAutosaveInterval = GetSetSettings.GetAutosaveInterval / 60000;
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"currentAutosaveInterval: {_currentAutosaveInterval}");
+            Logging.Write(LogEvent.Variable, LogClass.SettingsForm, $"currentAutosaveInterval: {_currentAutosaveInterval}");
 
             if (_currentAutosaveInterval == 0)
             {
@@ -166,17 +166,17 @@ internal sealed partial class SettingsForm : Form
         string updateInterval = GetSetSettings.GetUpdateInterval;
         switch (updateInterval)
         {
-            case nameof(UpdateEnum.OnStartup):
+            case nameof(Enums.UpdateInterval.OnStartup):
                 _cbUpdaterIntervallFalseAlarm = true;
                 cbUpdateInterval.SelectedIndex = 0;
                 break;
 
-            case nameof(UpdateEnum.Daily):
+            case nameof(Enums.UpdateInterval.Daily):
                 _cbUpdaterIntervallFalseAlarm = true;
                 cbUpdateInterval.SelectedIndex = 1;
                 break;
 
-            case nameof(UpdateEnum.Weekly):
+            case nameof(Enums.UpdateInterval.Weekly):
                 _cbUpdaterIntervallFalseAlarm = true;
                 cbUpdateInterval.SelectedIndex = 2;
                 break;
@@ -196,7 +196,7 @@ internal sealed partial class SettingsForm : Form
             return;
         }
 
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "SwitchCurrentLocale entered");
+        Logging.Write(LogEvent.Method, LogClass.SettingsForm, "SwitchCurrentLocale entered");
 
         string currLocale = GetSetSettings.GetCurrentLocale;
         string selectedLanguage = cbLanguage.SelectedItem?.ToString() ?? string.Empty;
@@ -212,8 +212,8 @@ internal sealed partial class SettingsForm : Form
         if (currLocale == newLanguage)
             return;
 
-        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, $"Saving new locale: {newLanguage}");
-        GetSetSettings.SaveSettings(SettingsEnum.locale, newLanguage);
+        Logging.Write(LogEvent.Setting, LogClass.SettingsForm, $"Saving new locale: {newLanguage}");
+        GetSetSettings.SaveSettings(SettingsNames.locale, newLanguage);
         int updateIntervall = cbUpdateInterval.SelectedIndex;
         Localize();
         cbUpdateInterval.SelectedIndex = updateIntervall;
@@ -228,35 +228,35 @@ internal sealed partial class SettingsForm : Form
             return;
         }
 
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "SwitchUpdateInterval entered");
+        Logging.Write(LogEvent.Method, LogClass.SettingsForm, "SwitchUpdateInterval entered");
 
         if (cbUpdateInterval.SelectedIndex != -1)
         {
             if (cbUpdateInterval.SelectedIndex == 0)
             {
-                GetSetSettings.SaveSettings(SettingsEnum.updateInterval, nameof(UpdateEnum.OnStartup));
+                GetSetSettings.SaveSettings(SettingsNames.updateInterval, nameof(Enums.UpdateInterval.OnStartup));
             }
             else if (cbUpdateInterval.SelectedIndex == 1)
             {
-                GetSetSettings.SaveSettings(SettingsEnum.updateInterval, nameof(UpdateEnum.Daily));
+                GetSetSettings.SaveSettings(SettingsNames.updateInterval, nameof(Enums.UpdateInterval.Daily));
             }
             else if (cbUpdateInterval.SelectedIndex == 2)
             {
-                GetSetSettings.SaveSettings(SettingsEnum.updateInterval, nameof(UpdateEnum.Weekly));
+                GetSetSettings.SaveSettings(SettingsNames.updateInterval, nameof(Enums.UpdateInterval.Weekly));
             }
 
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"updateInterval set to: {GetSetSettings.GetUpdateInterval}");
+            Logging.Write(LogEvent.Variable, LogClass.SettingsForm, $"updateInterval set to: {GetSetSettings.GetUpdateInterval}");
         }
         else
         {
-            Logging.Write(LogEventEnum.Error, ProgramClassEnum.SettingsForm, "cbUpdateInterval has no value!");
+            Logging.Write(LogEvent.Error, LogClass.SettingsForm, "cbUpdateInterval has no value!");
             ShowMessageBox.ShowBug();
         }
     }
 
     private void ComboBoxHandler(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "ComboBoxHandler triggered");
+        Logging.Write(LogEvent.Method, LogClass.SettingsForm, "ComboBoxHandler triggered");
 
         if (sender is ComboBox comboBox)
         {
@@ -276,13 +276,13 @@ internal sealed partial class SettingsForm : Form
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"Sender: {sender} is not a ComboBox!");
+            Logging.Write(LogEvent.Warning, LogClass.SettingsForm, $"Sender: {sender} is not a ComboBox!");
         }
     }
 
     private void ChangingCheckBoxes(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "ChangingSettings entered");
+        Logging.Write(LogEvent.Method, LogClass.SettingsForm, "ChangingSettings entered");
 
         if (sender is CheckBox checkBox)
         {
@@ -290,8 +290,8 @@ internal sealed partial class SettingsForm : Form
             {
                 if (checkBox.Checked)
                 {
-                    GetSetSettings.SaveSettings(SettingsEnum.saveOnClose, true);
-                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbSaveOnClose = true");
+                    GetSetSettings.SaveSettings(SettingsNames.saveOnClose, true);
+                    Logging.Write(LogEvent.Setting, LogClass.SettingsForm, "chbSaveOnClose = true");
                     if (!chbAutosave.Checked)
                     {
                         chbAutosave.Checked = true;
@@ -302,8 +302,8 @@ internal sealed partial class SettingsForm : Form
                 }
                 else
                 {
-                    GetSetSettings.SaveSettings(SettingsEnum.saveOnClose, false);
-                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbSaveOnClose = false");
+                    GetSetSettings.SaveSettings(SettingsNames.saveOnClose, false);
+                    Logging.Write(LogEvent.Setting, LogClass.SettingsForm, "chbSaveOnClose = false");
                     chbAutosave.Enabled = true;
                 }
             }
@@ -311,8 +311,8 @@ internal sealed partial class SettingsForm : Form
             {
                 if (checkBox.Checked)
                 {
-                    GetSetSettings.SaveSettings(SettingsEnum.reloadOnStartup, true);
-                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbReloadOnStartup = true");
+                    GetSetSettings.SaveSettings(SettingsNames.reloadOnStartup, true);
+                    Logging.Write(LogEvent.Setting, LogClass.SettingsForm, "chbReloadOnStartup = true");
                     if (!chbAutosave.Checked)
                     {
                         chbAutosave.Checked = true;
@@ -328,8 +328,8 @@ internal sealed partial class SettingsForm : Form
                 }
                 else
                 {
-                    GetSetSettings.SaveSettings(SettingsEnum.reloadOnStartup, false);
-                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "chbReloadOnStartup = false");
+                    GetSetSettings.SaveSettings(SettingsNames.reloadOnStartup, false);
+                    Logging.Write(LogEvent.Setting, LogClass.SettingsForm, "chbReloadOnStartup = false");
                     chbSaveOnClose.Enabled = true;
                 }
             }
@@ -337,8 +337,8 @@ internal sealed partial class SettingsForm : Form
             {
                 if (checkBox.Checked)
                 {
-                    GetSetSettings.SaveSettings(SettingsEnum.autosave, true);
-                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "Autosave = true");
+                    GetSetSettings.SaveSettings(SettingsNames.autosave, true);
+                    Logging.Write(LogEvent.Setting, LogClass.SettingsForm, "Autosave = true");
                     numberAutosaveInterval.Enabled = true;
                     numberAutosaveInterval.Visible = true;
                     lblAutosaveInterval.Enabled = true;
@@ -348,8 +348,8 @@ internal sealed partial class SettingsForm : Form
                 }
                 else
                 {
-                    GetSetSettings.SaveSettings(SettingsEnum.autosave, false);
-                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "Autosave = false");
+                    GetSetSettings.SaveSettings(SettingsNames.autosave, false);
+                    Logging.Write(LogEvent.Setting, LogClass.SettingsForm, "Autosave = false");
                     numberAutosaveInterval.Enabled = false;
                     numberAutosaveInterval.Visible = false;
                     lblAutosaveInterval.Enabled = false;
@@ -361,23 +361,23 @@ internal sealed partial class SettingsForm : Form
             {
                 if (checkBox.Checked)
                 {
-                    GetSetSettings.SaveSettings(SettingsEnum.updateDownload, true);
-                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "updateDownload = true");
+                    GetSetSettings.SaveSettings(SettingsNames.updateDownload, true);
+                    Logging.Write(LogEvent.Setting, LogClass.SettingsForm, "updateDownload = true");
                 }
                 else
                 {
-                    GetSetSettings.SaveSettings(SettingsEnum.updateDownload, false);
-                    Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, "updateDownload = false");
+                    GetSetSettings.SaveSettings(SettingsNames.updateDownload, false);
+                    Logging.Write(LogEvent.Setting, LogClass.SettingsForm, "updateDownload = false");
                 }
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"CheckBox: {checkBox.Name} is not listed!");
+                Logging.Write(LogEvent.Warning, LogClass.SettingsForm, $"CheckBox: {checkBox.Name} is not listed!");
             }
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"Sender: {sender} is not a CheckBox!");
+            Logging.Write(LogEvent.Warning, LogClass.SettingsForm, $"Sender: {sender} is not a CheckBox!");
         }
     }
 
@@ -386,14 +386,14 @@ internal sealed partial class SettingsForm : Form
     /// </summary>
     private void SetAutosaveInterval()
     {
-        GetSetSettings.SaveSettings(SettingsEnum.autosaveInterval, numberAutosaveInterval.Value * 60000);
-        Logging.Write(LogEventEnum.Setting, ProgramClassEnum.SettingsForm, $"AutosaveInterval = {numberAutosaveInterval.Value}");
+        GetSetSettings.SaveSettings(SettingsNames.autosaveInterval, numberAutosaveInterval.Value * 60000);
+        Logging.Write(LogEvent.Setting, LogClass.SettingsForm, $"AutosaveInterval = {numberAutosaveInterval.Value}");
 
         if (numberAutosaveInterval.Value == _currentAutosaveInterval)
             return;
 
         GetAutosaveTimerChanged = true;
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.SettingsForm, $"autosaveTimerChanged = {GetAutosaveTimerChanged}");
+        Logging.Write(LogEvent.Variable, LogClass.SettingsForm, $"autosaveTimerChanged = {GetAutosaveTimerChanged}");
     }
 
     /// <summary>
@@ -401,7 +401,7 @@ internal sealed partial class SettingsForm : Form
     /// </summary>
     private void SetAutosaveInterval(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "SetAutosaveInterval entered");
+        Logging.Write(LogEvent.Method, LogClass.SettingsForm, "SetAutosaveInterval entered");
 
         if (sender is NumericUpDown)
         {
@@ -409,13 +409,13 @@ internal sealed partial class SettingsForm : Form
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"Sender: {sender} is not a NumericUpDown!");
+            Logging.Write(LogEvent.Warning, LogClass.SettingsForm, $"Sender: {sender} is not a NumericUpDown!");
         }
     }
 
     private void ResetSettings(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.SettingsForm, "ResetSettings entered");
+        Logging.Write(LogEvent.Method, LogClass.SettingsForm, "ResetSettings entered");
 
         if (sender is Button)
         {
@@ -429,7 +429,7 @@ internal sealed partial class SettingsForm : Form
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.SettingsForm, $"Sender: {sender} is not a Button!");
+            Logging.Write(LogEvent.Warning, LogClass.SettingsForm, $"Sender: {sender} is not a Button!");
         }
     }
 }

@@ -28,31 +28,31 @@ internal static partial class Updater
         DateTime today = DateTime.Today;
         TimeSpan difference = today - lastCheck;
 
-        if (updateInterval == nameof(UpdateEnum.OnStartup))
+        if (updateInterval == nameof(UpdateInterval.OnStartup))
         {
             updateSearch = true;
         }
-        else if (updateInterval == nameof(UpdateEnum.Daily))
+        else if (updateInterval == nameof(UpdateInterval.Daily))
         {
             if (difference.Days >= 1)
                 updateSearch = true;
         }
-        else if (updateInterval == nameof(UpdateEnum.Weekly))
+        else if (updateInterval == nameof(UpdateInterval.Weekly))
         {
             if (difference.Days >= 7)
                 updateSearch = true;
         }
         else
         {
-            Logging.Write(LogEventEnum.Error, ProgramClassEnum.Updater, "updateInterval Setting not set!");
+            Logging.Write(LogEvent.Error, LogClass.Updater, "updateInterval Setting not set!");
             ShowMessageBox.ShowBug();
         }
 
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateInterval set to: {updateInterval}");
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"lastCheck set to: {lastCheck}");
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"today set to: {today}");
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"difference set to: {difference}");
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateSearch set to: {updateSearch}");
+        Logging.Write(LogEvent.Variable, LogClass.Updater, $"updateInterval set to: {updateInterval}");
+        Logging.Write(LogEvent.Variable, LogClass.Updater, $"lastCheck set to: {lastCheck}");
+        Logging.Write(LogEvent.Variable, LogClass.Updater, $"today set to: {today}");
+        Logging.Write(LogEvent.Variable, LogClass.Updater, $"difference set to: {difference}");
+        Logging.Write(LogEvent.Variable, LogClass.Updater, $"updateSearch set to: {updateSearch}");
 
         if (!updateSearch)
             return;
@@ -62,15 +62,15 @@ internal static partial class Updater
 
     internal static async Task CheckForUpdatesAsync(bool fromUser = false)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "CheckForUpdatesAsync entered");
+        Logging.Write(LogEvent.Method, LogClass.Updater, "CheckForUpdatesAsync entered");
 
         OnlineVersion = await WebRequests.GetVersionAsync(new(GetSetSettings.GetUpdateCheckURL));
 
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineVersion is: {OnlineVersion}");
+        Logging.Write(LogEvent.Variable, LogClass.Updater, $"onlineVersion is: {OnlineVersion}");
 
         if (OnlineVersion > CurrentVersion)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Update is available!");
+            Logging.Write(LogEvent.Info, LogClass.Updater, "Update is available!");
 
             long fileSize = await GetFileSizeAsync();
 
@@ -78,55 +78,55 @@ internal static partial class Updater
             {
                 if (GetSetSettings.GetUpdateDownload)
                 {
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Manual download initiated");
+                    Logging.Write(LogEvent.Info, LogClass.Updater, "Manual download initiated");
                     OpenWindows.OpenLinksInBrowser($"{UpdateURL}/tag/v{OnlineVersion}/");
                 }
                 else
                 {
-                    Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Background download initiated");
+                    Logging.Write(LogEvent.Info, LogClass.Updater, "Background download initiated");
                     await DownloadUpdateAsync();
                 }
             }
         }
         else
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "No Update available!");
+            Logging.Write(LogEvent.Info, LogClass.Updater, "No Update available!");
 
             if (fromUser)
             {
                 Localization localization = new(GetSetSettings.GetCurrentLocale);
-                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxNoUpdate), localization.GetString(LocalizationEnum.Update_IsNotAvailable));
+                ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxNoUpdate), localization.GetString(Enums.LocalizationStrings.Update_IsNotAvailable));
             }
         }
 
         // Save the date of the last update Check but only if the user has NOT initiated it
-        if (GetSetSettings.GetUpdateInterval == nameof(UpdateEnum.OnStartup) || fromUser)
+        if (GetSetSettings.GetUpdateInterval == nameof(UpdateInterval.OnStartup) || fromUser)
             return;
 
-        GetSetSettings.SaveSettings(SettingsEnum.lastUpdateCheck, DateTime.Today);
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Last Update Check: {DateTime.Today}");
+        GetSetSettings.SaveSettings(SettingsNames.lastUpdateCheck, DateTime.Today);
+        Logging.Write(LogEvent.Variable, LogClass.Updater, $"Last Update Check: {DateTime.Today}");
     }
 
     private static async Task<long> GetFileSizeAsync()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "GetFileSizeAsync entered");
+        Logging.Write(LogEvent.Method, LogClass.Updater, "GetFileSizeAsync entered");
 
         if (OnlineVersion is not null && !UpdateName.Contains(OnlineVersion.ToString(), StringComparison.OrdinalIgnoreCase))
         {
             if (UpdateName.Contains(".exe", StringComparison.OrdinalIgnoreCase))
             {
                 UpdateName = ReplaceVersionNumber().Replace(UpdateName, OnlineVersion.ToString());
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateName set to: {UpdateName}");
+                Logging.Write(LogEvent.Variable, LogClass.Updater, $"updateName set to: {UpdateName}");
 
                 UpdateURL = ReplaceVersionNumber().Replace(UpdateURL, OnlineVersion.ToString());
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateURL set to: {UpdateURL}");
+                Logging.Write(LogEvent.Variable, LogClass.Updater, $"updateURL set to: {UpdateURL}");
             }
 
             UpdateName += $"v{OnlineVersion}.exe";
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateName set to: {UpdateName}");
+            Logging.Write(LogEvent.Variable, LogClass.Updater, $"updateName set to: {UpdateName}");
 
             UpdateURL += $"download/v{OnlineVersion}/{UpdateName}";
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"updateURL set to: {UpdateURL}");
+            Logging.Write(LogEvent.Variable, LogClass.Updater, $"updateURL set to: {UpdateURL}");
         }
 
         // Count the length of the to download file
@@ -137,7 +137,7 @@ internal static partial class Updater
 
     private static async Task DownloadUpdateAsync()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "DownloadUpdateAsync entered");
+        Logging.Write(LogEvent.Method, LogClass.Updater, "DownloadUpdateAsync entered");
 
         HttpResponseMessage responseMessage = await WebRequests.GetResponseMessageAsync(new(UpdateURL));
 
@@ -148,10 +148,10 @@ internal static partial class Updater
         }
 
         UpdatePath = Path.Combine(Path.GetTempPath(), UpdateName);
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Download Path: {UpdatePath}");
+        Logging.Write(LogEvent.Variable, LogClass.Updater, $"Download Path: {UpdatePath}");
 
         Localization localization = new(GetSetSettings.GetCurrentLocale);
-        GetUpdateDownloadText = localization.GetString(LocalizationEnum.downloadProgressToolStripMenuItem);
+        GetUpdateDownloadText = localization.GetString(Enums.LocalizationStrings.downloadProgressToolStripMenuItem);
 
         // Download the file and then log the progress
         await using (FileStream filestream = new(UpdatePath, FileMode.Create, FileAccess.Write, FileShare.None))
@@ -177,7 +177,7 @@ internal static partial class Updater
                     if (Math.Abs(percent - lastLoggedPercent) >= 1)
                     {
                         DownloadProgressReporter.OnDownloadProgressChanged(percent);
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"progress: {percent}%");
+                        Logging.Write(LogEvent.Variable, LogClass.Updater, $"progress: {percent}%");
                         lastLoggedPercent = percent;
                     }
                 }
@@ -186,32 +186,32 @@ internal static partial class Updater
 
         responseMessage.Dispose();
 
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"Update downloaded to: {UpdatePath}");
+        Logging.Write(LogEvent.Variable, LogClass.Updater, $"Update downloaded to: {UpdatePath}");
 
         if (await VerifyUpdateHashAsync(UpdatePath, OnlineVersion!.ToString()))
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Application update started!");
-            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxUpdate), localization.GetString(LocalizationEnum.Update_IsInstallReady));
+            Logging.Write(LogEvent.Info, LogClass.Updater, "Application update started!");
+            ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxUpdate), localization.GetString(Enums.LocalizationStrings.Update_IsInstallReady));
             InstallUpdate();
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Updater, "Updating not started because of incorrect hashes!");
+            Logging.Write(LogEvent.Warning, LogClass.Updater, "Updating not started because of incorrect hashes!");
             ShowMessageBox.ShowBug();
         }
     }
 
     private static async Task<bool> VerifyUpdateHashAsync(string filePath, string version)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "VerifyUpdateHashAsync entered");
+        Logging.Write(LogEvent.Method, LogClass.Updater, "VerifyUpdateHashAsync entered");
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Downloading hash initiated");
+        Logging.Write(LogEvent.Info, LogClass.Updater, "Downloading hash initiated");
 
         string hashURL = GetSetSettings.GetHashCheckURL.Replace("VERSION", version, StringComparison.OrdinalIgnoreCase);
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"hashURL is: {hashURL}");
+        Logging.Write(LogEvent.Variable, LogClass.Updater, $"hashURL is: {hashURL}");
 
         string onlineHash = await WebRequests.GetStringAsync(new(hashURL));
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"onlineHash is: {onlineHash}");
+        Logging.Write(LogEvent.Variable, LogClass.Updater, $"onlineHash is: {onlineHash}");
 
         string localHash = string.Empty;
         await using (FileStream stream = File.OpenRead(filePath))
@@ -220,32 +220,32 @@ internal static partial class Updater
             byte[] byteHash = await sha256.ComputeHashAsync(stream);
             localHash = Convert.ToHexString(byteHash);
 
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.Updater, $"localHash is: {localHash}");
+            Logging.Write(LogEvent.Variable, LogClass.Updater, $"localHash is: {localHash}");
         }
 
         if (!string.IsNullOrWhiteSpace(onlineHash) && !string.IsNullOrWhiteSpace(localHash))
         {
             if (onlineHash == localHash)
             {
-                Logging.Write(LogEventEnum.Info, ProgramClassEnum.Updater, "Hashes are equal!");
+                Logging.Write(LogEvent.Info, LogClass.Updater, "Hashes are equal!");
                 return true;
             }
 
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Updater, "Hashes are not equal!");
+            Logging.Write(LogEvent.Warning, LogClass.Updater, "Hashes are not equal!");
 
             return false;
         }
 
-        Logging.Write(LogEventEnum.Warning, ProgramClassEnum.Updater, "Hashes are empty!");
+        Logging.Write(LogEvent.Warning, LogClass.Updater, "Hashes are empty!");
 
         return false;
     }
 
     private static void InstallUpdate()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.Updater, "InstallUpdate entered");
+        Logging.Write(LogEvent.Method, LogClass.Updater, "InstallUpdate entered");
 
-        GetSetSettings.SaveSettings(SettingsEnum.lastUpdatePath, UpdatePath);
+        GetSetSettings.SaveSettings(SettingsNames.lastUpdatePath, UpdatePath);
 
         OpenWindows.OpenProcess(UpdatePath);
 

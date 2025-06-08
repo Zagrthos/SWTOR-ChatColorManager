@@ -4,7 +4,7 @@ namespace ChatManager.Enums;
 
 [SuppressMessage("Roslynator", "RCS0036:Remove blank line between single-line declarations of same kind", Justification = "Code Style")]
 [SuppressMessage("Roslynator", "RCS1181:Convert comment to documentation comment", Justification = "Comments are for clarity!")]
-internal enum LocalizationEnum
+internal enum LocalizationStrings
 {
     // MainForm Strings
     downloadProgressToolStripMenuItem,

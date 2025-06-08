@@ -1,6 +1,6 @@
 ﻿namespace ChatManager.Enums;
 
-internal enum CheckFolderEnum
+internal enum CheckFolder
 {
     AutosaveFolder,
     BackupFolder

@@ -23,15 +23,15 @@ internal sealed partial class BackupSelectorForm : Form
 
     private void DisplayBackupDirs()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "DisplayBackupDirs entered");
+        Logging.Write(LogEvent.Method, LogClass.BackupSelector, "DisplayBackupDirs entered");
 
         // Search the given Path for Directories
         string[] backupDirs = Directory.GetDirectories(BackupPath);
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"backupDirs: {backupDirs.Length}");
+        Logging.Write(LogEvent.Variable, LogClass.BackupSelector, $"backupDirs: {backupDirs.Length}");
 
         // Create new Array with the size of the found Paths
         string[] backupDirsName = new string[backupDirs.Length];
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"backupDirsName: {backupDirsName.Length}");
+        Logging.Write(LogEvent.Variable, LogClass.BackupSelector, $"backupDirsName: {backupDirsName.Length}");
 
         // Fill the Array with the Directory names
         for (int i = 0; i < backupDirs.Length; i++)
@@ -50,14 +50,14 @@ internal sealed partial class BackupSelectorForm : Form
 
     private void DisplayBackupFiles(string dirName)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "DisplayBackupFiles entered");
+        Logging.Write(LogEvent.Method, LogClass.BackupSelector, "DisplayBackupFiles entered");
 
         // Clear the DataSource so the checked Items get unchecked
         clbxBackupFiles.DataSource = null;
 
         // Search the given Path for Files
         string[] dirContent = Directory.GetFiles(dirName);
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"fileNames: {dirContent.Length}");
+        Logging.Write(LogEvent.Variable, LogClass.BackupSelector, $"fileNames: {dirContent.Length}");
 
         if (dirContent.Length == 0)
         {
@@ -91,11 +91,11 @@ internal sealed partial class BackupSelectorForm : Form
 
                 // If not null or empty add the name and the server to the list
                 files[i] = $"{_filesInDir[i, 0]} - {Converter.AddWhitespace(Converter.ServerNameIdentifier(_filesInDir[i, 1], false))}";
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, files[i]);
+                Logging.Write(LogEvent.Variable, LogClass.BackupSelector, files[i]);
             }
             else
             {
-                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, "Already done or null");
+                Logging.Write(LogEvent.Variable, LogClass.BackupSelector, "Already done or null");
                 break;
             }
         }
@@ -106,7 +106,7 @@ internal sealed partial class BackupSelectorForm : Form
 
     private void AssociateFilesWithPaths(string[] paths)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "AssociateFilesWithPaths entered");
+        Logging.Write(LogEvent.Method, LogClass.BackupSelector, "AssociateFilesWithPaths entered");
 
         // Clear the Array
         _filesInDir = new string[1000, 3];
@@ -122,15 +122,15 @@ internal sealed partial class BackupSelectorForm : Form
             _filesInDir[i, 0] = parts[1];
             _filesInDir[i, 1] = parts[0];
             _filesInDir[i, 2] = paths[i];
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, _filesInDir[i, 0]);
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, _filesInDir[i, 1]);
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, _filesInDir[i, 2]);
+            Logging.Write(LogEvent.Variable, LogClass.BackupSelector, _filesInDir[i, 0]);
+            Logging.Write(LogEvent.Variable, LogClass.BackupSelector, _filesInDir[i, 1]);
+            Logging.Write(LogEvent.Variable, LogClass.BackupSelector, _filesInDir[i, 2]);
         }
     }
 
     private void SelectBackupDir(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "SelectBackupDir entered");
+        Logging.Write(LogEvent.Method, LogClass.BackupSelector, "SelectBackupDir entered");
 
         if (sender is ListBox listBox)
         {
@@ -142,18 +142,18 @@ internal sealed partial class BackupSelectorForm : Form
             }
             else
             {
-                Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, "dirName is null or empty!");
+                Logging.Write(LogEvent.Warning, LogClass.BackupSelector, "dirName is null or empty!");
             }
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, $"Sender: {sender} is not a ListBox!");
+            Logging.Write(LogEvent.Warning, LogClass.BackupSelector, $"Sender: {sender} is not a ListBox!");
         }
     }
 
     private void SelectClick(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "SelectClick entered");
+        Logging.Write(LogEvent.Method, LogClass.BackupSelector, "SelectClick entered");
 
         if (sender is Button button)
         {
@@ -161,28 +161,28 @@ internal sealed partial class BackupSelectorForm : Form
             for (int i = 0; i < clbxBackupFiles.Items.Count; i++)
                 clbxBackupFiles.SetItemChecked(i, isChecked);
 
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.BackupSelector, $"All Checked items are set to: {isChecked}");
+            Logging.Write(LogEvent.Info, LogClass.BackupSelector, $"All Checked items are set to: {isChecked}");
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, $"Sender: {sender} is not a Button!");
+            Logging.Write(LogEvent.Warning, LogClass.BackupSelector, $"Sender: {sender} is not a Button!");
         }
     }
 
     private void DeleteClick(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "DeleteClick entered");
+        Logging.Write(LogEvent.Method, LogClass.BackupSelector, "DeleteClick entered");
 
         if (sender is Button button)
         {
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"Button is: {button.Name}");
+            Logging.Write(LogEvent.Variable, LogClass.BackupSelector, $"Button is: {button.Name}");
 
             switch (button.Name)
             {
                 case "btnDeleteDir":
                     if (!string.IsNullOrWhiteSpace(lbxBackupDir.SelectedItem!.ToString()))
                     {
-                        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"DirToDelete: {lbxBackupDir.SelectedItem}");
+                        Logging.Write(LogEvent.Variable, LogClass.BackupSelector, $"DirToDelete: {lbxBackupDir.SelectedItem}");
 
                         // Convert DataSource to List if not null
                         if (lbxBackupDir.DataSource is not null)
@@ -212,14 +212,14 @@ internal sealed partial class BackupSelectorForm : Form
                         }
                         else
                         {
-                            Logging.Write(LogEventEnum.Error, ProgramClassEnum.BackupSelector, $"DataSource is missing from {lbxBackupDir.Name}!");
+                            Logging.Write(LogEvent.Error, LogClass.BackupSelector, $"DataSource is missing from {lbxBackupDir.Name}!");
                             ShowMessageBox.ShowBug();
                             return;
                         }
                     }
                     else
                     {
-                        Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, "SelectedItem is null or empty!");
+                        Logging.Write(LogEvent.Warning, LogClass.BackupSelector, "SelectedItem is null or empty!");
                         ShowMessageBox.ShowBug();
                         return;
                     }
@@ -236,7 +236,7 @@ internal sealed partial class BackupSelectorForm : Form
 
                             foreach (string item in clbxBackupFiles.CheckedItems)
                             {
-                                Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"FileToDelete: {item}");
+                                Logging.Write(LogEvent.Variable, LogClass.BackupSelector, $"FileToDelete: {item}");
 
                                 // Split the name in two parts
                                 string[] parts = item.Split(" - ");
@@ -272,9 +272,9 @@ internal sealed partial class BackupSelectorForm : Form
                     }
                     else
                     {
-                        Localization localization = new(GetSetSettings.GetCurrentLocale);
+                        Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-                        ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_NoFileToDeleteSelected));
+                        ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxError), localization.GetString(Enums.LocalizationStrings.Err_NoFileToDeleteSelected));
                         return;
                     }
 
@@ -286,21 +286,21 @@ internal sealed partial class BackupSelectorForm : Form
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, $"Sender: {sender} is not a Button!");
+            Logging.Write(LogEvent.Warning, LogClass.BackupSelector, $"Sender: {sender} is not a Button!");
         }
     }
 
     private void Restore(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "Restore entered");
+        Logging.Write(LogEvent.Method, LogClass.BackupSelector, "Restore entered");
 
         if (sender is Button button && button.Name == btnRestore.Name)
         {
-            Localization localization = new(GetSetSettings.GetCurrentLocale);
+            Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
 
             if (clbxBackupFiles.CheckedItems.Count == 0)
             {
-                ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxError), localization.GetString(LocalizationEnum.Err_NoExportFileSelected));
+                ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxError), localization.GetString(Enums.LocalizationStrings.Err_NoExportFileSelected));
                 return;
             }
 
@@ -313,7 +313,7 @@ internal sealed partial class BackupSelectorForm : Form
                 checkedItems[i] = (!string.IsNullOrWhiteSpace(item)) ? item : throw new InvalidOperationException($"{nameof(item)}[{i}] is null!");
             }
 
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"checkedItems: {checkedItems.Length}");
+            Logging.Write(LogEvent.Variable, LogClass.BackupSelector, $"checkedItems: {checkedItems.Length}");
 
             string localPath = GetSetSettings.GetLocalPath;
 
@@ -333,22 +333,22 @@ internal sealed partial class BackupSelectorForm : Form
                 File.Copy(path, Path.Combine(localPath, fileName), true);
             }
 
-            string changedFiles = localization.GetString(LocalizationEnum.Inf_ExportedFiles);
+            string changedFiles = localization.GetString(Enums.LocalizationStrings.Inf_ExportedFiles);
             changedFiles = changedFiles.Replace("FILECOUNT", checkedItems.Length.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
 
-            ShowMessageBox.Show(localization.GetString(LocalizationEnum.MessageBoxInfo), changedFiles);
+            ShowMessageBox.Show(localization.GetString(Enums.LocalizationStrings.MessageBoxInfo), changedFiles);
         }
         else
         {
-            Logging.Write(LogEventEnum.Warning, ProgramClassEnum.BackupSelector, $"Sender: {sender} is not a Button or {btnRestore.Name}!");
+            Logging.Write(LogEvent.Warning, LogClass.BackupSelector, $"Sender: {sender} is not a Button or {btnRestore.Name}!");
         }
     }
 
     private void Localize()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.BackupSelector, "Localize entered");
+        Logging.Write(LogEvent.Method, LogClass.BackupSelector, "Localize entered");
 
-        Localization localization = new(GetSetSettings.GetCurrentLocale);
+        Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
 
         Text = localization.GetString(Name);
 
@@ -380,7 +380,7 @@ internal sealed partial class BackupSelectorForm : Form
             label.Text = localization.GetString(label.Name);
         }
 
-        (string date, string time) = Localization.GetLocalDateTime();
+        (string date, string time) = Services.Localization.GetLocalDateTime();
 
         lblDateConvertion.Text = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss} = {date} - {time}";
     }

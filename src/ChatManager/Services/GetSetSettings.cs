@@ -14,25 +14,25 @@ internal static class GetSetSettings
     private static readonly string LogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Logs");
     private static readonly string AutosavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Zagrthos\\SWTOR-ChatManager\\Autosave");
 
-    internal static string GetCurrentLocale => Settings.Default._locale;
-    internal static string GetLocalPath => Settings.Default.localPath;
-    internal static string GetBackupPath => Settings.Default.backupPath;
-    internal static bool GetBackupAvailability => Settings.Default.backupAvailability;
-    internal static string GetLogPath => Settings.Default.logPath;
-    internal static string GetAutosavePath => Settings.Default.autosavePath;
-    internal static bool GetAutosaveAvailability => Settings.Default.autosaveAvailability;
+    internal static string GetCurrentLocale => Properties.Settings.Default._locale;
+    internal static string GetLocalPath => Properties.Settings.Default.localPath;
+    internal static string GetBackupPath => Properties.Settings.Default.backupPath;
+    internal static bool GetBackupAvailability => Properties.Settings.Default.backupAvailability;
+    internal static string GetLogPath => Properties.Settings.Default.logPath;
+    internal static string GetAutosavePath => Properties.Settings.Default.autosavePath;
+    internal static bool GetAutosaveAvailability => Properties.Settings.Default.autosaveAvailability;
     internal static string GetSupportPath => Resources.supportPath;
     internal static string GetBugPath => Resources.bugPath;
     internal static string GetBugMailpath => Resources.bugMailPath;
     internal static string GetLicences => Resources.Licences;
-    internal static bool GetSaveOnClose => Settings.Default._saveOnClose;
-    internal static bool GetReloadOnStartup => Settings.Default._reloadOnStartup;
-    internal static bool GetAutosave => Settings.Default._autosave;
-    internal static decimal GetAutosaveInterval => Settings.Default._autosaveInterval;
-    internal static string GetUpdateInterval => Settings.Default.updateInterval;
-    internal static DateTime GetLastUpdateCheck => Settings.Default.lastUpdateCheck;
-    internal static bool GetUpdateDownload => Settings.Default.updateDownload;
-    internal static string GetLastUpdatePath => Settings.Default.lastUpdatePath;
+    internal static bool GetSaveOnClose => Properties.Settings.Default._saveOnClose;
+    internal static bool GetReloadOnStartup => Properties.Settings.Default._reloadOnStartup;
+    internal static bool GetAutosave => Properties.Settings.Default._autosave;
+    internal static decimal GetAutosaveInterval => Properties.Settings.Default._autosaveInterval;
+    internal static string GetUpdateInterval => Properties.Settings.Default.updateInterval;
+    internal static DateTime GetLastUpdateCheck => Properties.Settings.Default.lastUpdateCheck;
+    internal static bool GetUpdateDownload => Properties.Settings.Default.updateDownload;
+    internal static string GetLastUpdatePath => Properties.Settings.Default.lastUpdatePath;
     internal static string GetGitHubPath => Resources.githubPath;
     internal static string GetReleaseApiPath => Resources.releaseApiPath;
     internal static string GetUpdateCheckURL => Resources.updateCheckURL;
@@ -41,125 +41,125 @@ internal static class GetSetSettings
 
     internal static void InitSettings()
     {
-        if (!Settings.Default._Initialized)
+        if (!Properties.Settings.Default._Initialized)
         {
             if (!Directory.Exists(LocalPath))
             {
-                Settings.Default.localPath = string.Empty;
-                Settings.Default.backupPath = string.Empty;
+                Properties.Settings.Default.localPath = string.Empty;
+                Properties.Settings.Default.backupPath = string.Empty;
             }
             else
             {
-                Settings.Default.localPath = LocalPath;
-                Settings.Default.backupPath = BackupPath;
+                Properties.Settings.Default.localPath = LocalPath;
+                Properties.Settings.Default.backupPath = BackupPath;
             }
 
-            Settings.Default.backupAvailability = false;
-            Settings.Default.logPath = LogPath;
-            Settings.Default.autosavePath = AutosavePath;
-            Settings.Default.autosaveAvailability = false;
-            Settings.Default._autosaveInterval = 0;
-            Settings.Default.updateInterval = nameof(UpdateEnum.OnStartup);
-            Settings.Default._Initialized = true;
-            Settings.Default.Save();
+            Properties.Settings.Default.backupAvailability = false;
+            Properties.Settings.Default.logPath = LogPath;
+            Properties.Settings.Default.autosavePath = AutosavePath;
+            Properties.Settings.Default.autosaveAvailability = false;
+            Properties.Settings.Default._autosaveInterval = 0;
+            Properties.Settings.Default.updateInterval = nameof(UpdateInterval.OnStartup);
+            Properties.Settings.Default._Initialized = true;
+            Properties.Settings.Default.Save();
         }
 
-        if (!Settings.Default._upgradeRequired)
+        if (!Properties.Settings.Default._upgradeRequired)
             return;
 
-        Settings.Default.Upgrade();
-        Settings.Default._upgradeRequired = false;
-        Settings.Default.Save();
+        Properties.Settings.Default.Upgrade();
+        Properties.Settings.Default._upgradeRequired = false;
+        Properties.Settings.Default.Save();
     }
 
     [SuppressMessage("Style", "IDE0010:Add missing cases", Justification = "Missing cases are not needed here.")]
-    internal static void SaveSettings(SettingsEnum settingName, string value)
+    internal static void SaveSettings(Enums.SettingsNames settingName, string value)
     {
         switch (settingName)
         {
-            case SettingsEnum.lastUpdatePath:
-                Settings.Default.lastUpdatePath = value;
+            case Enums.SettingsNames.lastUpdatePath:
+                Properties.Settings.Default.lastUpdatePath = value;
                 break;
 
-            case SettingsEnum.locale:
-                Settings.Default._locale = value;
+            case Enums.SettingsNames.locale:
+                Properties.Settings.Default._locale = value;
                 break;
 
-            case SettingsEnum.updateInterval:
-                Settings.Default.updateInterval = value;
+            case Enums.SettingsNames.updateInterval:
+                Properties.Settings.Default.updateInterval = value;
                 break;
 
             default:
                 throw new InvalidOperationException($"{settingName} does not exist!");
         }
 
-        Settings.Default.Save();
+        Properties.Settings.Default.Save();
     }
 
     [SuppressMessage("Style", "IDE0010:Add missing cases", Justification = "Missing cases are not needed here.")]
-    internal static void SaveSettings(SettingsEnum settingName, bool value)
+    internal static void SaveSettings(Enums.SettingsNames settingName, bool value)
     {
         switch (settingName)
         {
-            case SettingsEnum.autosaveAvailability:
-                Settings.Default.autosaveAvailability = value;
+            case Enums.SettingsNames.autosaveAvailability:
+                Properties.Settings.Default.autosaveAvailability = value;
                 break;
 
-            case SettingsEnum.autosave:
-                Settings.Default._autosave = value;
+            case Enums.SettingsNames.autosave:
+                Properties.Settings.Default._autosave = value;
                 break;
 
-            case SettingsEnum.backupAvailability:
-                Settings.Default.backupAvailability = value;
+            case Enums.SettingsNames.backupAvailability:
+                Properties.Settings.Default.backupAvailability = value;
                 break;
 
-            case SettingsEnum.reloadOnStartup:
-                Settings.Default._reloadOnStartup = value;
+            case Enums.SettingsNames.reloadOnStartup:
+                Properties.Settings.Default._reloadOnStartup = value;
                 break;
 
-            case SettingsEnum.saveOnClose:
-                Settings.Default._saveOnClose = value;
+            case Enums.SettingsNames.saveOnClose:
+                Properties.Settings.Default._saveOnClose = value;
                 break;
 
-            case SettingsEnum.settingsUpgradeRequired:
-                Settings.Default._upgradeRequired = value;
+            case Enums.SettingsNames.settingsUpgradeRequired:
+                Properties.Settings.Default._upgradeRequired = value;
                 break;
 
-            case SettingsEnum.updateDownload:
-                Settings.Default.updateDownload = value;
+            case Enums.SettingsNames.updateDownload:
+                Properties.Settings.Default.updateDownload = value;
                 break;
 
             default:
                 throw new InvalidOperationException($"{settingName} does not exist!");
         }
 
-        Settings.Default.Save();
+        Properties.Settings.Default.Save();
     }
 
-    internal static void SaveSettings(SettingsEnum settingName, decimal value)
+    internal static void SaveSettings(Enums.SettingsNames settingName, decimal value)
     {
-        if (settingName == SettingsEnum.autosaveInterval)
-            Settings.Default._autosaveInterval = value;
+        if (settingName == Enums.SettingsNames.autosaveInterval)
+            Properties.Settings.Default._autosaveInterval = value;
 
-        Settings.Default.Save();
+        Properties.Settings.Default.Save();
     }
 
-    internal static void SaveSettings(SettingsEnum settingName, in DateTime value)
+    internal static void SaveSettings(Enums.SettingsNames settingName, in DateTime value)
     {
-        if (settingName == SettingsEnum.lastUpdateCheck)
-            Settings.Default.lastUpdateCheck = value;
+        if (settingName == Enums.SettingsNames.lastUpdateCheck)
+            Properties.Settings.Default.lastUpdateCheck = value;
 
-        Settings.Default.Save();
+        Properties.Settings.Default.Save();
     }
 
     internal static void RestoreSettings()
     {
-        Settings.Default.Reset();
+        Properties.Settings.Default.Reset();
 
-        SaveSettings(SettingsEnum.settingsUpgradeRequired, false);
+        SaveSettings(Enums.SettingsNames.settingsUpgradeRequired, false);
 
         if (string.IsNullOrWhiteSpace(GetCurrentLocale))
-            SaveSettings(SettingsEnum.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            SaveSettings(Enums.SettingsNames.locale, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
 
         InitSettings();
     }

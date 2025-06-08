@@ -32,8 +32,8 @@ internal static class Logging
 
         string logfilePath = Path.Combine(LogPath, $"ChatManager_{LogSession}.log");
         LogWriter = new(logfilePath, true);
-        Write(LogEventEnum.Info, ProgramClassEnum.Logging, "Logging started");
-        Write(LogEventEnum.Info, ProgramClassEnum.Logging, $"Application version is: {Application.ProductVersion}");
+        Write(LogEvent.Info, LogClass.Logging, "Logging started");
+        Write(LogEvent.Info, LogClass.Logging, $"Application version is: {Application.ProductVersion}");
 
         // Add Timer to write any second all open entries in the log
         Timer = new(10000);
@@ -47,7 +47,7 @@ internal static class Logging
 
     private static void LogfilesCleaning()
     {
-        Write(LogEventEnum.Method, ProgramClassEnum.Logging, "LogfilesCleaning entered");
+        Write(LogEvent.Method, LogClass.Logging, "LogfilesCleaning entered");
 
         string logPath = GetSetSettings.GetLogPath;
 
@@ -62,7 +62,7 @@ internal static class Logging
             counter++;
         }
 
-        Write(LogEventEnum.Info, ProgramClassEnum.Logging, $"{counter} logs deleted");
+        Write(LogEvent.Info, LogClass.Logging, $"{counter} logs deleted");
     }
 
     private static void TimerElapsed(object? sender, ElapsedEventArgs e)
@@ -75,19 +75,19 @@ internal static class Logging
         LogWriter = new(Path.Combine(LogPath, $"ChatManager_{LogSession}.log"), true);
     }
 
-    internal static void Write(LogEventEnum Level, ProgramClassEnum ProgramClass, string Message)
+    internal static void Write(LogEvent Level, LogClass ProgramClass, string Message)
     {
         string Event = Level switch
         {
-            LogEventEnum.Info => "INFO",
-            LogEventEnum.Warning => "WARNING",
-            LogEventEnum.Error => "ERROR",
-            LogEventEnum.Variable => "VARIABLE",
-            LogEventEnum.Method => "METHOD",
-            LogEventEnum.Control => "CONTROL",
-            LogEventEnum.ExMessage => "EXECPTION",
-            LogEventEnum.BoxMessage => "MESSAGE-BOX",
-            LogEventEnum.Setting => "SETTING",
+            LogEvent.Info => "INFO",
+            LogEvent.Warning => "WARNING",
+            LogEvent.Error => "ERROR",
+            LogEvent.Variable => "VARIABLE",
+            LogEvent.Method => "METHOD",
+            LogEvent.Control => "CONTROL",
+            LogEvent.ExMessage => "EXECPTION",
+            LogEvent.BoxMessage => "MESSAGE-BOX",
+            LogEvent.Setting => "SETTING",
             _ => "UNCATEGORIZED"
         };
 
@@ -107,7 +107,7 @@ internal static class Logging
             return;
 
         Timer?.Stop();
-        Write(LogEventEnum.Info, ProgramClassEnum.Logging, "Logging stopped");
+        Write(LogEvent.Info, LogClass.Logging, "Logging stopped");
         LogWriter.Flush();
         LogWriter.Close();
     }

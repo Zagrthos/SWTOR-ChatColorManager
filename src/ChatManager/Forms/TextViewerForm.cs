@@ -18,38 +18,38 @@ internal sealed partial class TextViewerForm : Form
 
     private async void Localize(bool isChangelog = false)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.TextViewerForm, "Localize entered");
+        Logging.Write(LogEvent.Method, LogClass.TextViewerForm, "Localize entered");
 
-        Localization localization = new(GetSetSettings.GetCurrentLocale);
+        Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
 
         if (isChangelog)
         {
             if (!Checks.CheckForInternetConnection(true))
                 return;
 
-            Text = localization.GetString(LocalizationEnum.ChangelogFormName);
-            lblLicencesHead.Text = localization.GetString(LocalizationEnum.ChangelogLabelName);
+            Text = localization.GetString(Enums.LocalizationStrings.ChangelogFormName);
+            lblLicencesHead.Text = localization.GetString(Enums.LocalizationStrings.ChangelogLabelName);
 
             string content = await WebRequests.GetStringAsync(new($"{GetSetSettings.GetReleaseApiPath}v{await WebRequests.GetVersionAsync(new(GetSetSettings.GetUpdateCheckURL))}"), $"{Application.ProductName}/{Application.ProductVersion}");
             using JsonDocument jsonDoc = JsonDocument.Parse(content);
 
             string? body = jsonDoc.RootElement.GetProperty("body").GetString();
 
-            rtbLicences.Text = (!string.IsNullOrWhiteSpace(body)) ? body : localization.GetString(LocalizationEnum.ChangelogTryAgainLater);
+            rtbLicences.Text = (!string.IsNullOrWhiteSpace(body)) ? body : localization.GetString(Enums.LocalizationStrings.ChangelogTryAgainLater);
 
             jsonDoc.Dispose();
         }
         else
         {
-            Text = localization.GetString(LocalizationEnum.LicenceFormName);
-            lblLicencesHead.Text = localization.GetString(LocalizationEnum.LicenceLabelName);
+            Text = localization.GetString(Enums.LocalizationStrings.LicenceFormName);
+            lblLicencesHead.Text = localization.GetString(Enums.LocalizationStrings.LicenceLabelName);
             rtbLicences.Text = GetSetSettings.GetLicences;
         }
     }
 
     private void RtbLicences_LinkClicked(object sender, LinkClickedEventArgs e)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.TextViewerForm, "rtbLicencesLinkClicked entered");
+        Logging.Write(LogEvent.Method, LogClass.TextViewerForm, "rtbLicencesLinkClicked entered");
 
         if (!string.IsNullOrWhiteSpace(e.LinkText))
         {
@@ -57,7 +57,7 @@ internal sealed partial class TextViewerForm : Form
         }
         else
         {
-            Logging.Write(LogEventEnum.Error, ProgramClassEnum.TextViewerForm, "Link is null or empty!");
+            Logging.Write(LogEvent.Error, LogClass.TextViewerForm, "Link is null or empty!");
             ShowMessageBox.ShowBug();
         }
     }

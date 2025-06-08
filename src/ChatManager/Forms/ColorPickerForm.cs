@@ -25,8 +25,8 @@ internal partial class ColorPickerForm : Form
 
     private void ChangeFont(float fontSize)
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.ColorPickerForm, "ChangeFont entered");
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ColorPickerForm, $"FontSize: {fontSize}");
+        Logging.Write(LogEvent.Method, LogClass.ColorPickerForm, "ChangeFont entered");
+        Logging.Write(LogEvent.Variable, LogClass.ColorPickerForm, $"FontSize: {fontSize}");
 
         PrivateFontCollection fontCollection = new();
 
@@ -39,22 +39,22 @@ internal partial class ColorPickerForm : Form
 
     private void ColorPickerForm_Load(object sender, EventArgs e)
     {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm is starting as: {Text}");
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
+        Logging.Write(LogEvent.Info, LogClass.ColorPickerForm, $"ColorPickerForm is starting as: {Text}");
+        Logging.Write(LogEvent.Variable, LogClass.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
     }
 
     private void ColorPickerForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm: {Text} is closing");
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
+        Logging.Write(LogEvent.Info, LogClass.ColorPickerForm, $"ColorPickerForm: {Text} is closing");
+        Logging.Write(LogEvent.Variable, LogClass.ColorPickerForm, $"colorEditor.Color is: {colorEditor.Color}");
         GetHexColor = Converter.RGBtoHex(colorEditor.Color);
     }
 
-    private void ColorPickerForm_FormClosed(object sender, FormClosedEventArgs e) => Logging.Write(LogEventEnum.Info, ProgramClassEnum.ColorPickerForm, $"ColorPickerForm: {Text} closed");
+    private void ColorPickerForm_FormClosed(object sender, FormClosedEventArgs e) => Logging.Write(LogEvent.Info, LogClass.ColorPickerForm, $"ColorPickerForm: {Text} closed");
 
     private void Localize()
     {
-        Logging.Write(LogEventEnum.Method, ProgramClassEnum.ColorPickerForm, "Localize entered");
+        Logging.Write(LogEvent.Method, LogClass.ColorPickerForm, "Localize entered");
 
         Localization localization = new(GetSetSettings.GetCurrentLocale);
 

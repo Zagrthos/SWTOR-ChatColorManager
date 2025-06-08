@@ -12,37 +12,37 @@ internal static class ShowMessageBox
         Localization localization = new(GetSetSettings.GetCurrentLocale);
         MessageBoxIcon icon = caption switch
         {
-            string value when value == localization.GetString(LocalizationEnum.MessageBoxError) => MessageBoxIcon.Error,
-            string value when value == localization.GetString(LocalizationEnum.MessageBoxInfo) => MessageBoxIcon.Information,
-            string value when value == localization.GetString(LocalizationEnum.MessageBoxWarn) => MessageBoxIcon.Warning,
-            string value when value == localization.GetString(LocalizationEnum.MessageBoxUpdate) => MessageBoxIcon.Information,
-            string value when value == localization.GetString(LocalizationEnum.MessageBoxNoUpdate) => MessageBoxIcon.Information,
+            string value when value == localization.GetString(Enums.LocalizationStrings.MessageBoxError) => MessageBoxIcon.Error,
+            string value when value == localization.GetString(Enums.LocalizationStrings.MessageBoxInfo) => MessageBoxIcon.Information,
+            string value when value == localization.GetString(Enums.LocalizationStrings.MessageBoxWarn) => MessageBoxIcon.Warning,
+            string value when value == localization.GetString(Enums.LocalizationStrings.MessageBoxUpdate) => MessageBoxIcon.Information,
+            string value when value == localization.GetString(Enums.LocalizationStrings.MessageBoxNoUpdate) => MessageBoxIcon.Information,
             _ => MessageBoxIcon.None,
         };
 
-        Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox will be shown");
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ShowMessageBox, $"caption: {caption}");
-        Logging.Write(LogEventEnum.Variable, ProgramClassEnum.ShowMessageBox, $"message: {message}");
+        Logging.Write(LogEvent.BoxMessage, LogClass.ShowMessageBox, "MessageBox will be shown");
+        Logging.Write(LogEvent.Variable, LogClass.ShowMessageBox, $"caption: {caption}");
+        Logging.Write(LogEvent.Variable, LogClass.ShowMessageBox, $"message: {message}");
 
         MessageBox.Show(message, caption, MessageBoxButtons.OK, icon);
 
-        Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "MessageBox accepted");
+        Logging.Write(LogEvent.BoxMessage, LogClass.ShowMessageBox, "MessageBox accepted");
     }
 
     internal static bool ShowUpdate(string version, double fileSize)
     {
         Localization localization = new(GetSetSettings.GetCurrentLocale);
-        DialogResult result = MessageBox.Show($"{localization.GetString(LocalizationEnum.Update_IsAvailable)} {version}\n\n{localization.GetString(LocalizationEnum.Update_FileSize).Replace("FILESIZE", fileSize.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase)} MB", localization.GetString(LocalizationEnum.MessageBoxUpdate), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+        DialogResult result = MessageBox.Show($"{localization.GetString(Enums.LocalizationStrings.Update_IsAvailable)} {version}\n\n{localization.GetString(Enums.LocalizationStrings.Update_FileSize).Replace("FILESIZE", fileSize.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase)} MB", localization.GetString(Enums.LocalizationStrings.MessageBoxUpdate), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
-        Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Update MessageBox shown");
+        Logging.Write(LogEvent.BoxMessage, LogClass.ShowMessageBox, "Update MessageBox shown");
 
         if (result == DialogResult.Yes)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Update DialogResult is yes");
+            Logging.Write(LogEvent.Info, LogClass.ShowMessageBox, "Update DialogResult is yes");
             return true;
         }
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Update DialogResult is no");
+        Logging.Write(LogEvent.Info, LogClass.ShowMessageBox, "Update DialogResult is no");
 
         return false;
     }
@@ -50,18 +50,18 @@ internal static class ShowMessageBox
     internal static void ShowBug()
     {
         Localization localization = new(GetSetSettings.GetCurrentLocale);
-        DialogResult result = MessageBox.Show(localization.GetString(LocalizationEnum.Error_IsDetected), localization.GetString(LocalizationEnum.MessageBoxError), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+        DialogResult result = MessageBox.Show(localization.GetString(Enums.LocalizationStrings.Error_IsDetected), localization.GetString(Enums.LocalizationStrings.MessageBoxError), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
 
-        Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Bug MessageBox shown");
+        Logging.Write(LogEvent.BoxMessage, LogClass.ShowMessageBox, "Bug MessageBox shown");
 
         if (result == DialogResult.Yes)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Bug DialogResult is yes");
+            Logging.Write(LogEvent.Info, LogClass.ShowMessageBox, "Bug DialogResult is yes");
             OpenWindows.OpenLinksInBrowser(GetSetSettings.GetBugPath);
         }
         else
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Bug DialogResult is no");
+            Logging.Write(LogEvent.Info, LogClass.ShowMessageBox, "Bug DialogResult is no");
         }
     }
 
@@ -75,12 +75,12 @@ internal static class ShowMessageBox
     {
         Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-        Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Restart MessageBox shown");
+        Logging.Write(LogEvent.BoxMessage, LogClass.ShowMessageBox, "Restart MessageBox shown");
 
-        MessageBox.Show(localization.GetString(LocalizationEnum.Inf_RestartRequired), localization.GetString(LocalizationEnum.MessageBoxInfo), MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show(localization.GetString(Enums.LocalizationStrings.Inf_RestartRequired), localization.GetString(Enums.LocalizationStrings.MessageBoxInfo), MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-        Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Restart accepted");
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Restart initated");
+        Logging.Write(LogEvent.BoxMessage, LogClass.ShowMessageBox, "Restart accepted");
+        Logging.Write(LogEvent.Info, LogClass.ShowMessageBox, "Restart initated");
 
         Application.Restart();
     }
@@ -89,17 +89,17 @@ internal static class ShowMessageBox
     {
         Localization localization = new(GetSetSettings.GetCurrentLocale);
 
-        Logging.Write(LogEventEnum.BoxMessage, ProgramClassEnum.ShowMessageBox, "Question MessageBox shown");
+        Logging.Write(LogEvent.BoxMessage, LogClass.ShowMessageBox, "Question MessageBox shown");
 
-        DialogResult result = MessageBox.Show(message, localization.GetString(LocalizationEnum.MessageBoxInfo), MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+        DialogResult result = MessageBox.Show(message, localization.GetString(Enums.LocalizationStrings.MessageBoxInfo), MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
 
         if (result == DialogResult.Yes)
         {
-            Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Question DialogResult is yes");
+            Logging.Write(LogEvent.Info, LogClass.ShowMessageBox, "Question DialogResult is yes");
             return true;
         }
 
-        Logging.Write(LogEventEnum.Info, ProgramClassEnum.ShowMessageBox, "Question DialogResult is no");
+        Logging.Write(LogEvent.Info, LogClass.ShowMessageBox, "Question DialogResult is no");
 
         return false;
     }
