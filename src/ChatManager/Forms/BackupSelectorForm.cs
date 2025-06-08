@@ -37,7 +37,9 @@ internal sealed partial class BackupSelectorForm : Form
         for (int i = 0; i < backupDirs.Length; i++)
         {
             backupDirsName[i] = Path.GetFileName(backupDirs[i]);
-            //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, backupDirsName[i]);
+#if DEBUG
+            Logging.Write(LogEvent.Variable, LogClass.BackupSelector, backupDirsName[i]);
+#endif
         }
 
         // Reverse the names so the newest is first
@@ -81,13 +83,17 @@ internal sealed partial class BackupSelectorForm : Form
 
         for (int i = 0; i < _filesInDir.Length / 2; i++)
         {
-            //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{i}");
+#if DEBUG
+            Logging.Write(LogEvent.Variable, LogClass.BackupSelector, $"{i}");
+#endif
 
             // Check if all parts in array are NOT empty or null
             if (!string.IsNullOrWhiteSpace(_filesInDir[i, 0]) && !string.IsNullOrWhiteSpace(_filesInDir[i, 1]) && !string.IsNullOrWhiteSpace(_filesInDir[i, 2]))
             {
-                //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"{filesInDir[i, 0]} & {filesInDir[i, 1]} & {filesInDir[i, 2]}");
-                //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.BackupSelector, $"file[{i}]");
+#if DEBUG
+                Logging.Write(LogEvent.Variable, LogClass.BackupSelector, $"{_filesInDir[i, 0]} & {_filesInDir[i, 1]} & {_filesInDir[i, 2]}");
+                Logging.Write(LogEvent.Variable, LogClass.BackupSelector, $"file[{i}]");
+#endif
 
                 // If not null or empty add the name and the server to the list
                 files[i] = $"{_filesInDir[i, 0]} - {Converter.AddWhitespace(Converter.ServerNameIdentifier(_filesInDir[i, 1], false))}";

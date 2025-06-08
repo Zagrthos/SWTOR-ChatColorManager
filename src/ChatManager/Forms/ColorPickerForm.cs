@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
@@ -8,7 +9,7 @@ using ChatManager.Services;
 
 namespace ChatManager.Forms;
 
-internal partial class ColorPickerForm : Form
+internal sealed partial class ColorPickerForm : Form
 {
     internal ColorPickerForm(string text, in Color color)
     {
@@ -23,6 +24,7 @@ internal partial class ColorPickerForm : Form
 
     private void ColorChanged(object sender, EventArgs e) => lblExample.ForeColor = colorEditor.Color;
 
+    [SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Needed by WinForms.")]
     private void ChangeFont(float fontSize)
     {
         Logging.Write(LogEvent.Method, LogClass.ColorPickerForm, "ChangeFont entered");

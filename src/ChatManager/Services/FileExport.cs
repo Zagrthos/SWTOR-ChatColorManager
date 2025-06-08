@@ -69,13 +69,19 @@ internal sealed class FileExport
                 if (!string.IsNullOrWhiteSpace(name[i, 0]) && !string.IsNullOrWhiteSpace(name[i, 1]))
                 {
                     string path = name[i, 1];
-                    //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current path is: {path}");
+#if DEBUG
+                    Logging.Write(LogEvent.Variable, LogClass.FileExport, $"Current path is: {path}");
+#endif
 
                     string fileName = Path.GetFileName(name[i, 1]);
-                    //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current fileName is: {fileName}");
+#if DEBUG
+                    Logging.Write(LogEvent.Variable, LogClass.FileExport, $"Current fileName is: {fileName}");
+#endif
 
                     string newPath = $"{deeperBackup}\\{fileName}";
-                    //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current newPath is: {newPath}");
+#if DEBUG
+                    Logging.Write(LogEvent.Variable, LogClass.FileExport, $"Current newPath is: {newPath}");
+#endif
 
                     // Copy only if the dir is present
                     if (BackupAvailability)
@@ -209,11 +215,15 @@ internal sealed class FileExport
 
                     // Get the path
                     string file = _fileNames[GetNumberOfChangedFiles];
-                    //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current file is: {file}");
+#if DEBUG
+                    Logging.Write(LogEvent.Variable, LogClass.FileExport, $"Current file is: {file}");
+#endif
 
                     // Get the filename
                     string fileName = Path.GetFileName(name[j, 1]);
-                    //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileExport, $"Current fileName is: {fileName}");
+#if DEBUG
+                    Logging.Write(LogEvent.Variable, LogClass.FileExport, $"Current fileName is: {fileName}");
+#endif
 
                     // If file or fileName is null or empty stop it
                     if (string.IsNullOrWhiteSpace(name[j, 0]) && string.IsNullOrWhiteSpace(fileName))

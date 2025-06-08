@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using ChatManager.Enums;
 
 namespace ChatManager.Services;
@@ -74,7 +73,10 @@ internal static class FileImport
 
             for (int i = 0; i < charFileNames.Length; i++)
             {
-                //Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileImport, $"currentFile: {i}");
+#if DEBUG
+                Logging.Write(LogEvent.Variable, LogClass.FileImport, $"currentFile: {i}");
+#endif
+
                 string[] fileParts = charFileNames[i]!.Split("_");
 
                 if (fileParts.Length == 3 && fileParts[2] == "PlayerGUIState.ini")
@@ -168,10 +170,17 @@ internal static class FileImport
             colorIndex[1] = fileNameParts[1];
 
             // Search for the correct line in the File
-            foreach (string line in fileLines.Where(l => l.StartsWith("ChatColors", StringComparison.OrdinalIgnoreCase)))
+            for (int i = 0; i < fileLines.Length; i++)
             {
-                colorLine = line.Substring(line.IndexOf('=', StringComparison.OrdinalIgnoreCase) + 1).Trim();
-                break;
+                string line = fileLines[i];
+                if (line.StartsWith("ChatColors", StringComparison.OrdinalIgnoreCase))
+                {
+                    int idx = line.IndexOf('=', StringComparison.OrdinalIgnoreCase);
+                    if (idx >= 0 && idx + 1 < line.Length)
+                        colorLine = line.Substring(idx + 1).Trim();
+
+                    break;
+                }
             }
 
             if (colorLine.Length == 0)

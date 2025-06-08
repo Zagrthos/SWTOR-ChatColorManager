@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -13,6 +14,7 @@ internal static class Program
     ///  The main entry point for the application.
     /// </summary>
     [STAThread]
+    [SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Needed by WinForms.")]
     private static void Main()
     {
         // To customize application configuration such as set high DPI settings or default font,

@@ -16,7 +16,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <IsPublishable>True</IsPublishable>
     <JsonSerializerIsReflectionEnabledByDefault>False</JsonSerializerIsReflectionEnabledByDefault> <!-- JsonSourceGen -->
-    <NoWarn>$(NoWarn);CA2007</NoWarn>
+    <NoWarn>$(NoWarn);CA2007;S1135</NoWarn>
     <NuGetAuditMode>all</NuGetAuditMode>
     <Nullable>enable</Nullable>
     <PathMap>$(MSBuildProjectDirectory)=./$(MSBuildProjectName)</PathMap>

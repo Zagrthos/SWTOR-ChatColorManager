@@ -113,7 +113,9 @@ internal sealed partial class FileSelectorForm : Form
                         {
                             // TODO: Decide if logging to be removed or not
                             characters.Add(charactersMulti[i, 0]);
-                            //await Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"charakter {i+1} on {name.Substring(3)}: {characters[i]}");
+#if DEBUG
+                            Logging.Write(LogEvent.Variable, LogClass.FileSelectorForm, $"Character {i+1} on {name.Substring(3)}: {characters[i]}");
+#endif
                         }
                     }
 
@@ -173,7 +175,9 @@ internal sealed partial class FileSelectorForm : Form
                         {
                             // TODO: Decide if logging to be removed or not
                             characters.Add(charactersMulti[i, 0]);
-                            //await Logging.Write(LogEventEnum.Variable, ProgramClassEnum.FileSelectorForm, $"charakter {i} on {name.Substring(3)}: {characters[i]}");
+#if DEBUG
+                            Logging.Write(LogEvent.Variable, LogClass.FileSelectorForm, $"Character {i} on {name.Substring(3)}: {characters[i]}");
+#endif
                         }
                     }
 

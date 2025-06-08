@@ -11,7 +11,6 @@ using ChatManager.Services;
 
 namespace ChatManager;
 
-[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Right now there is no static needed.")]
 internal sealed partial class MainForm : Form
 {
     internal MainForm() => InitializeComponent();
@@ -281,25 +280,25 @@ internal sealed partial class MainForm : Form
         }
     }
 
-    private void GetFileColors(string filePath, bool autosaveIntitiated)
+    private void GetFileColors(string filePath, bool autosaveInitiated)
     {
         Logging.Write(LogEvent.Method, LogClass.MainForm, "GetFileColors entered");
 
-        string[] content = FileImport.GetContentFromFile(filePath, autosaveIntitiated);
+        string[] content = FileImport.GetContentFromFile(filePath, autosaveInitiated);
 
         if (content == Array.Empty<string>())
             return;
 
-        SetCharServerText(content[1], content[0], autosaveIntitiated);
+        SetCharServerText(content[1], content[0], autosaveInitiated);
 
-        SetAllColorData(content/*, autosaveIntitiated*/);
+        SetAllColorData(content/*, autosaveInitiated*/);
 
         btnResetColors.Visible = true;
 
         if (!GetSetSettings.GetAutosave)
             return;
 
-        // Stop previously intialized Timer
+        // Stop previously initialized Timer
         if (_autosaveTimer is not null)
         {
             _autosaveTimer.Stop();
@@ -314,7 +313,7 @@ internal sealed partial class MainForm : Form
         Logging.Write(LogEvent.Info, LogClass.MainForm, "autosaveTimer set");
     }
 
-    private void SetCharServerText(string charText, string serverText, bool autosaveIntitiated)
+    private void SetCharServerText(string charText, string serverText, bool autosaveInitiated)
     {
         Logging.Write(LogEvent.Method, LogClass.MainForm, "SetCharServerText entered");
 
@@ -322,7 +321,7 @@ internal sealed partial class MainForm : Form
 
         lblServerName.Visible = true;
 
-        lblServerName.Text = (autosaveIntitiated)
+        lblServerName.Text = (autosaveInitiated)
             ? $"{localization.GetString(lblServerName.Name)} {serverText}"
             : $"{localization.GetString(lblServerName.Name)} {Converter.AddWhitespace(Converter.ServerNameIdentifier(serverText, false))}";
 
@@ -331,7 +330,7 @@ internal sealed partial class MainForm : Form
     }
 
     // TODO: Why is this there???
-    private void SetAllColorData(string[] colorIndexes/*, bool autosaveIntitiated*/)
+    private void SetAllColorData(string[] colorIndexes/*, bool autosaveInitiated*/)
     {
         Logging.Write(LogEvent.Method, LogClass.MainForm, "SetAllColorData entered");
 
@@ -586,9 +585,9 @@ internal sealed partial class MainForm : Form
 
         foreach (TabControl tabControl in tabs)
         {
-            foreach (TabPage tab in tabControl.Controls)
+            foreach (Control control in tabControl.Controls)
             {
-                if (tab is not null)
+                if (control is TabPage tab)
                     tab.Text = localization.GetString(tab.Name);
             }
         }
@@ -667,12 +666,14 @@ internal sealed partial class MainForm : Form
         DoSave();
     }
 
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
     /// <summary>
     /// Perform basic Checks when the <seealso cref="Form"/> is loading.
     /// </summary>
+#if !DEBUG
     private async void MainForm_Load(object sender, EventArgs e)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+#else
+    private void MainForm_Load(object? sender, EventArgs e)
+#endif
     {
         if (string.IsNullOrWhiteSpace(GetSetSettings.GetCurrentLocale))
         {
@@ -790,6 +791,7 @@ internal sealed partial class MainForm : Form
     /// <summary>
     /// Draw the <seealso cref="TabPage"/>s on the left side.
     /// </summary>
+    [SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Needed by WinForms.")]
     private void TabsMainForm_DrawItem(object sender, DrawItemEventArgs e)
     {
         Graphics g = e.Graphics;
@@ -822,6 +824,7 @@ internal sealed partial class MainForm : Form
             Alignment = StringAlignment.Center,
             LineAlignment = StringAlignment.Center
         };
+
         g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
     }
 }

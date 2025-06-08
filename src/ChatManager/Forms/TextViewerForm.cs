@@ -20,29 +20,29 @@ internal sealed partial class TextViewerForm : Form
     {
         Logging.Write(LogEvent.Method, LogClass.TextViewerForm, "Localize entered");
 
-        Services.Localization localization = new(GetSetSettings.GetCurrentLocale);
+        Localization localization = new(GetSetSettings.GetCurrentLocale);
 
         if (isChangelog)
         {
             if (!Checks.CheckForInternetConnection(true))
                 return;
 
-            Text = localization.GetString(Enums.LocalizationStrings.ChangelogFormName);
-            lblLicencesHead.Text = localization.GetString(Enums.LocalizationStrings.ChangelogLabelName);
+            Text = localization.GetString(LocalizationStrings.ChangelogFormName);
+            lblLicencesHead.Text = localization.GetString(LocalizationStrings.ChangelogLabelName);
 
             string content = await WebRequests.GetStringAsync(new($"{GetSetSettings.GetReleaseApiPath}v{await WebRequests.GetVersionAsync(new(GetSetSettings.GetUpdateCheckURL))}"), $"{Application.ProductName}/{Application.ProductVersion}");
             using JsonDocument jsonDoc = JsonDocument.Parse(content);
 
             string? body = jsonDoc.RootElement.GetProperty("body").GetString();
 
-            rtbLicences.Text = (!string.IsNullOrWhiteSpace(body)) ? body : localization.GetString(Enums.LocalizationStrings.ChangelogTryAgainLater);
+            rtbLicences.Text = (!string.IsNullOrWhiteSpace(body)) ? body : localization.GetString(LocalizationStrings.ChangelogTryAgainLater);
 
             jsonDoc.Dispose();
         }
         else
         {
-            Text = localization.GetString(Enums.LocalizationStrings.LicenceFormName);
-            lblLicencesHead.Text = localization.GetString(Enums.LocalizationStrings.LicenceLabelName);
+            Text = localization.GetString(LocalizationStrings.LicenceFormName);
+            lblLicencesHead.Text = localization.GetString(LocalizationStrings.LicenceLabelName);
             rtbLicences.Text = GetSetSettings.GetLicences;
         }
     }
