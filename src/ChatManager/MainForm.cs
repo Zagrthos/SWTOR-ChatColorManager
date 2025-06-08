@@ -541,7 +541,7 @@ internal sealed partial class MainForm : Form
         foreach (TextBox textBox in textBoxes.Where(static t => string.IsNullOrWhiteSpace(t.Text)))
         {
             counter++;
-            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"counter: {counter}");
+            Logging.Write(LogEventEnum.Variable, ProgramClassEnum.MainForm, $"{textBox.Name} is empty, counter: {counter}");
         }
 
         return counter;
