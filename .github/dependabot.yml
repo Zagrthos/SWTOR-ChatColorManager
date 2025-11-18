@@ -30,7 +30,6 @@ updates:
         - "minor"
         - "patch"
     open-pull-requests-limit: 25
-    milestone: 2
 
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/" # Location of package manifests
